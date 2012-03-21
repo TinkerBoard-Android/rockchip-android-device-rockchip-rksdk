@@ -1,0 +1,4 @@
+
+   /dev/mali             0666    system    system
+   /dev/ump              0666    system    graphics
+   /dev/s3c-mfc          0666    system    system
