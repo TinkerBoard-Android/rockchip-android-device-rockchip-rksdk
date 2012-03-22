@@ -3,7 +3,8 @@
 # Product-specific compile-time definitions.
 #
 
-TARGET_BOARD_PLATFORM := rk30sdk
+TARGET_BOARD_PLATFORM := rockchip
+TARGET_ROCHCHIP_RECOVERY := true
 TARGET_NO_BOOTLOADER := true 
 #TARGET_NO_KERNEL := false
 TARGET_NO_KERNEL := true
