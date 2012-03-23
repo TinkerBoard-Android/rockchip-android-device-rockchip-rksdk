@@ -18,8 +18,8 @@ PRODUCT_COPY_FILES := \
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
-        device/rockchip/rk30sdk/init.rk30sdk.rc:root/init.rk30sdk.rc \
-        device/rockchip/rk30sdk/ueventd.rk30sdk.rc:root/ueventd.rk30sdk.rc  
+        device/rockchip/rk30sdk/init.rk30board.rc:root/init.rk30board.rc \
+        device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc  
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
