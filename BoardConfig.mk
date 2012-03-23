@@ -3,6 +3,7 @@
 # Product-specific compile-time definitions.
 #
 
+TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM := rockchip
 TARGET_ROCHCHIP_RECOVERY := true
 TARGET_NO_BOOTLOADER := true 

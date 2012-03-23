@@ -102,6 +102,8 @@ on fs
     mount ext3 mtd@userdata /data wait noatime nodiratime nosuid nodev
     mount ext3 mtd@cache /cache wait noatime nodiratime nosuid nodev
 
+    insmod /system/modules/ump.ko
+    insmod /system/modules/mali.ko
     chmod 0770 /cache
 
     # This may have been created by the recovery system with odd permissions

@@ -12,15 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 PRODUCT_COPY_FILES := \
         device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab \
         device/rockchip/rk30sdk/egl.cfg:system/lib/egl/egl.cfg
+
+########################################################
+# Kernel
+########################################################
+PRODUCT_COPY_FILES += \
+    $(TARGET_PREBUILT_KERNEL):kernel
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
         device/rockchip/rk30sdk/init.rk30board.rc:root/init.rk30board.rc \
         device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc  
 
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
+        
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:system/lib/libUMP.so \
