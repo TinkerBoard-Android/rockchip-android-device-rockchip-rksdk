@@ -39,7 +39,7 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/modules/mali.ko \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko \
-        device/rockchip/rk30sdk/proprietary/libmali/gralloc.rk30sdk.so:system/lib/hw/gralloc.rk30sdk.so
+        device/rockchip/rk30sdk/proprietary/libmali/gralloc.rk30board.so:system/lib/hw/gralloc.rk30board.so
 
 #########################################################
 #       vpu lib
