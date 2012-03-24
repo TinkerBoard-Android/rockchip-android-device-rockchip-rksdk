@@ -41,6 +41,10 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko \
         device/rockchip/rk30sdk/proprietary/libmali/gralloc.rk30board.so:system/lib/hw/gralloc.rk30board.so
 
+PRODUCT_COPY_FILES += \
+	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
+	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox 
+
 #########################################################
 #       vpu lib
 #########################################################        
