@@ -23,6 +23,41 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 
+###########################################################
+## Find all of the apk files under the named directories.
+## Meant to be used like:
+##    SRC_FILES := $(call all-apk-files-under,src tests)
+###########################################################
+define all-apk-files-under
+$(patsubst ./%,%, \
+  $(shell cd $(LOCAL_PATH)/$(1) ; \
+          find ./ -maxdepth 1  -name "*.apk" -and -not -name ".*") \
+ )
+endef
+
+#########################################################
+#  copy proprietary apk
+#########################################################
+COPY_APK_TARGET := $(call all-apk-files-under,apk)
+PRODUCT_COPY_FILES += $(foreach apkName, $(COPY_APK_TARGET), \
+	$(addprefix $(LOCAL_PATH)/apk/, $(apkName)):$(addprefix system/app/, $(apkName)))
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/apk/flashplayer:system/app/flashplayer
+
+
+########################################################
+#  RKUpdateService: RKUpdateService.apk
+########################################################
+rk_apps_files := $(shell ls $(LOCAL_PATH)/apk/RKUpdateService | grep .apk)
+PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
+        $(LOCAL_PATH)/apk/RKUpdateService/$(file):system/app/$(file))
+
+########################################################
+#  RKUpdateService: librockchip_update_jni.so
+########################################################
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.so:system/lib/librockchip_update_jni.so
+
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
         device/rockchip/rk30sdk/init.rk30board.rc:root/init.rk30board.rc \
@@ -63,17 +98,32 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES := \
         hwui.render_dirty_regions=false \
         vold.encrypt_progress=close
+# Live Wallpapers
+PRODUCT_PACKAGES += \
+        LiveWallpapersPicker \
+        NoiseField \
+        PhaseBeam \
+        librs_jni \
+        libjni_pinyinime \
+		charger \
+		charger_res_images \
+		hostapd_rtl
 
 PRODUCT_CHARACTERISTICS := tablet
+
+# Filesystem management tools
+# EXT3/4 support
+PRODUCT_PACKAGES += \
+	mke2fs \
+	e2fsck \
+	tune2fs \
+	resize2fs \
+	mkdosfs
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_PACKAGES += \
-        librs_jni \
         com.android.future.usb.accessory
 
-# Filesystem management tools
-#PRODUCT_PACKAGES += \
-#        make_ext4fs
 
-$(call inherit-product, frameworks/base/build/tablet-dalvik-heap.mk)
+$(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
