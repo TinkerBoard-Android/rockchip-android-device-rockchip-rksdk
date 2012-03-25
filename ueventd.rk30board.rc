@@ -47,3 +47,4 @@
 
 # for mali
 /dev/mali           	  0666   system   	 system
+/dev/ump           	  0666   system   	 system

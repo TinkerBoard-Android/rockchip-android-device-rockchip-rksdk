@@ -90,11 +90,19 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         $(foreach file, $(targetFile), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
 
-
-
+# These are the hardware-specific features
 PRODUCT_COPY_FILES += \
-        frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml 
-        
+        frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+        frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+		frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+        frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+        frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+        frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+        packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
+         frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+         frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+         frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+	 frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 PRODUCT_PROPERTY_OVERRIDES := \
         hwui.render_dirty_regions=false \
         vold.encrypt_progress=close
@@ -120,10 +128,26 @@ PRODUCT_PACKAGES += \
 	resize2fs \
 	mkdosfs
 
+
+PRODUCT_PROPERTY_OVERRIDES += \
+        persist.sys.usb.config=mtp \
+        persist.sys.strictmode.visual=false \
+        dalvik.vm.jniopts=warnonly \
+        ro.sf.hwrotation=270 \
+        ro.sf.fakerotation=true \
+
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+# NTFS support
+PRODUCT_PACKAGES += \
+    ntfs-3g
 
 PRODUCT_PACKAGES += \
         com.android.future.usb.accessory
 
+# for bugreport
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_COPY_FILES += device/rockchip/rk30sdk/bugreport.sh:system/bin/bugreport.sh
+endif
 
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)

@@ -1,4 +1,4 @@
-import init.rk29board.usb.rc
+import init.rk30board.usb.rc
 
 on early-init
     export EXTERNAL_STORAGE /mnt/sdcard
@@ -12,7 +12,7 @@ on early-init
     mkdir /mnt/usb_storage 0000 system system
 
 on fs
-    mount vfat mtd@user /mnt/sdcard wait noatime nodiratime  nosuid nodev uid=1000,gid=1015,fmask=0702,dmask=0702
+    #mount vfat mtd@user /mnt/sdcard wait noatime nodiratime  nosuid nodev uid=1000,gid=1015,fmask=0702,dmask=0702
 
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool

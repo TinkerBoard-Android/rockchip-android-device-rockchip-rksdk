@@ -104,6 +104,12 @@ on fs
 
     insmod /system/modules/ump.ko
     insmod /system/modules/mali.ko
+on post-fs
+    # once everything is setup, no need to modify /
+    mount rootfs rootfs / ro remount
+
+    # We chown/chmod /cache again so because mount is run as root + defaults
+    chown system cache /cache
     chmod 0770 /cache
 
     # This may have been created by the recovery system with odd permissions
@@ -192,6 +198,7 @@ on boot
     ifup lo
     hostname localhost
     domainname localdomain
+    setprop UserVolumeLabel "RockChips"
 
 # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
