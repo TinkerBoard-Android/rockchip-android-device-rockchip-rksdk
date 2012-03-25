@@ -61,6 +61,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.s
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
         device/rockchip/rk30sdk/init.rk30board.rc:root/init.rk30board.rc \
+        device/rockchip/rk30sdk/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
         device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc  
 
 PRODUCT_COPY_FILES += \
@@ -103,9 +104,7 @@ PRODUCT_COPY_FILES += \
          frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
          frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
 	 frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
-PRODUCT_PROPERTY_OVERRIDES := \
-        hwui.render_dirty_regions=false \
-        vold.encrypt_progress=close
+
 # Live Wallpapers
 PRODUCT_PACKAGES += \
         LiveWallpapersPicker \
