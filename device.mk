@@ -61,7 +61,8 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
         device/rockchip/rk30sdk/init.rk30board.rc:root/init.rk30board.rc \
         device/rockchip/rk30sdk/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
-        device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc  
+        device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc \
+	device/rockchip/rk30sdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
