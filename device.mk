@@ -14,8 +14,7 @@
 
 
 PRODUCT_COPY_FILES := \
-        device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab \
-        device/rockchip/rk30sdk/egl.cfg:system/lib/egl/egl.cfg
+       device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
 
 ########################################################
 # Kernel
@@ -118,6 +117,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_CHARACTERISTICS := tablet
 
+# audio lib
+PRODUCT_PACKAGES += \
+		audio_policy.rk30sdk \
+		audio.primary.rk30sdk \
+        audio.a2dp.default
+
 # Filesystem management tools
 # EXT3/4 support
 PRODUCT_PACKAGES += \
@@ -126,6 +131,13 @@ PRODUCT_PACKAGES += \
 	tune2fs \
 	resize2fs \
 	mkdosfs
+# audio lib
+ifeq ($(strip $(BOARD_USES_ALSA_AUDIO)),true)
+PRODUCT_PACKAGES += \
+    libasound \
+    alsa.default \
+		acoustics.default
+endif
 
 
 PRODUCT_PROPERTY_OVERRIDES += \

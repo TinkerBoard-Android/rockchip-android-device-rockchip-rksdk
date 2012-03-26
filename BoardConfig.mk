@@ -5,21 +5,20 @@
 
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM := rockchip
-TARGET_ROCHCHIP_RECOVERY := true
 TARGET_NO_BOOTLOADER := true 
-#TARGET_NO_KERNEL := false
-TARGET_NO_KERNEL := true
-#KERNEL_CONFIG := android_origen_defconfig
 #TARGET_USE_UBOOT := true
 #UBOOT_CONFIG := origen_config
 
-# uboot
-#TARGET_USE_XLOADER := false
-#XLOADER_BINARY := out/target/product/origen/obj/u-boot/mmc_spl/u-boot-mmc-spl.bin
+DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk29sdk/overlay
 
-TARGET_NO_RECOVERY := false
-#TARGET_NO_RADIOIMAGE := true
+BOARD_EGL_CFG := device/rockchip/rk30sdk/egl.cfg
+
 TARGET_PROVIDES_INIT_RC := true
+
+TARGET_NO_KERNEL := false
+TARGET_NO_RECOVERY := false
+TARGET_ROCHCHIP_RECOVERY := true
+TARGET_RECOVERY_UI_LIB := librecovery_ui_rk30sdk
 TARGET_CPU_SMP := true
 BOARD_USES_GENERIC_AUDIO := true
 #BOARD_USES_ALSA_AUDIO := true
@@ -44,10 +43,13 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-#EXTRA_PACKAGE_MANAGEMENT := false
+BOARD_LIB_DUMPSTATE := libdumpstate.$(TARGET_BOARD_PLATFORM)
 
-#TARGET_USERIMAGES_USE_EXT4 := true
-#TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+# google apps
+BUILD_WITH_GOOGLE_MARKET := true
+
+# face lock
+BUILD_WITH_FACELOCK := true
 
 USE_OPENGL_RENDERER := true
 
@@ -62,7 +64,3 @@ TARGET_EXTRA_CFLAGS += $(call cc-option,-mtune=cortex-a9,$(call cc-option,-mtune
 
 #BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
 
-DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
-
-BOARD_LIB_DUMPSTATE := 
-TARGET_RECOVERY_UI_LIB :=
