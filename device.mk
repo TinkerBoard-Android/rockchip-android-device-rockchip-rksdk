@@ -148,6 +148,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
         dalvik.vm.jniopts=warnonly \
         ro.sf.hwrotation=270 \
         ro.sf.fakerotation=true \
+        wifi.interface=wlan0 \
+        wifi.supplicant_scan_interval=15 \
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -164,3 +166,5 @@ PRODUCT_COPY_FILES += device/rockchip/rk30sdk/bugreport.sh:system/bin/bugreport.
 endif
 
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
+
+$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
