@@ -68,13 +68,14 @@ PRODUCT_COPY_FILES += \
         
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libMali.so:obj/lib/libMali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:system/lib/libUMP.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:obj/lib/libUMP.so \
         device/rockchip/rk30sdk/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/modules/mali.ko \
-        device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko \
-        device/rockchip/rk30sdk/proprietary/libmali/gralloc.rk30board.so:system/lib/hw/gralloc.rk30board.so
+        device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko
 
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
