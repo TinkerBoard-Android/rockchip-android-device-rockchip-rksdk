@@ -9,7 +9,7 @@ TARGET_NO_BOOTLOADER := true
 #TARGET_USE_UBOOT := true
 #UBOOT_CONFIG := origen_config
 
-DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk29sdk/overlay
+DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 
 BOARD_EGL_CFG := device/rockchip/rk30sdk/egl.cfg
 

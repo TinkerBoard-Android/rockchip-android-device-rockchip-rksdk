@@ -121,8 +121,8 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # audio lib
 PRODUCT_PACKAGES += \
-		audio_policy.rk30sdk \
-		audio.primary.rk30sdk \
+		audio_policy.rk30board \
+		audio.primary.rk30board \
         audio.a2dp.default
 
 # Filesystem management tools
