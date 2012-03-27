@@ -6,8 +6,6 @@
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM := rockchip
 TARGET_NO_BOOTLOADER := true 
-#TARGET_USE_UBOOT := true
-#UBOOT_CONFIG := origen_config
 
 DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 
@@ -21,14 +19,6 @@ TARGET_ROCHCHIP_RECOVERY := true
 TARGET_RECOVERY_UI_LIB := librecovery_ui_rk30sdk
 TARGET_CPU_SMP := true
 BOARD_USES_GENERIC_AUDIO := true
-#BOARD_USES_ALSA_AUDIO := true
-#OMAP_ENHANCEMENT := false
-#HARDWARE_OMX := false
-#USE_CAMERA_STUB := true
-
-#BOARD_HAVE_BLUETOOTH := true
-#BOARD_HAVE_BLUETOOTH_BCM := false
-#BOARD_HAVE_BLUETOOTH_CSR := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
@@ -59,14 +49,8 @@ BUILD_WITH_FACELOCK := true
 
 USE_OPENGL_RENDERER := true
 
-# bootargs
-#BOARD_KERNEL_CMDLINE := console=ttySAC2 root=/dev/mmcblk0p2
-
-# Origen uses an Exynos4 -- Cortex A9
+# rk30sdk uses Cortex A9
 TARGET_EXTRA_CFLAGS += $(call cc-option,-mtune=cortex-a9,$(call cc-option,-mtune=cortex-a8)) $(call cc-option,-mcpu=cortex-a9,$(call cc-option,-mcpu=cortex-a8))
 
-# ARMs gator (DS-5)
-#TARGET_USE_GATOR := true
-
-#BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
+BOARD_SENSOR_ST := true
 

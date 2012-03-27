@@ -113,6 +113,7 @@ PRODUCT_PACKAGES += \
         PhaseBeam \
         librs_jni \
         libjni_pinyinime \
+		sensors.rk30board \
 		charger \
 		charger_res_images \
 		hostapd_rtl
