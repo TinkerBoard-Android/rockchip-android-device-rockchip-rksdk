@@ -2,6 +2,7 @@
 /dev/mma8452_daemon       0666   system     system
 /dev/akm8975_dev          0666   system     system
 /dev/akm8975_aot          0666   system     system
+/dev/gyrosensor           0666   system     system
 
 /dev/ion                  0666   system     system
 /dev/galcore              0666   system     graphics
