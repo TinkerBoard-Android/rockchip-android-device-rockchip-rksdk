@@ -115,9 +115,10 @@ PRODUCT_PACKAGES += \
         libjni_pinyinime \
 	hostapd_rtl
 
-# sensors
+# HAL
 PRODUCT_PACKAGES += \
 		sensors.rk30board \
+		gralloc.rk30board \
 		akmd8975 
 
 # charge
