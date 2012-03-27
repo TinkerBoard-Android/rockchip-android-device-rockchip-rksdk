@@ -168,7 +168,7 @@ endif
 
 # wifi
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk29sdk/wlan.ko:system/lib/modules/wlan.ko
+        device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko
 
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 
