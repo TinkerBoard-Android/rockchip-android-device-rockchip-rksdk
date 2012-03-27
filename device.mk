@@ -166,6 +166,10 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_COPY_FILES += device/rockchip/rk30sdk/bugreport.sh:system/bin/bugreport.sh
 endif
 
+# wifi
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk29sdk/wlan.ko:system/lib/modules/wlan.ko
+
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
