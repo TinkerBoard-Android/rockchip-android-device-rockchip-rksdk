@@ -113,10 +113,17 @@ PRODUCT_PACKAGES += \
         PhaseBeam \
         librs_jni \
         libjni_pinyinime \
+	hostapd_rtl
+
+# sensors
+PRODUCT_PACKAGES += \
 		sensors.rk30board \
+		akmd8975 
+
+# charge
+PRODUCT_PACKAGES += \
 		charger \
-		charger_res_images \
-		hostapd_rtl
+		charger_res_images 
 
 PRODUCT_CHARACTERISTICS := tablet
 
