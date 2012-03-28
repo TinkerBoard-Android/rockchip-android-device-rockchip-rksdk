@@ -117,8 +117,8 @@ PRODUCT_PACKAGES += \
 
 # HAL
 PRODUCT_PACKAGES += \
-		sensors.rk30board \
-		gralloc.rk30board \
+		sensors.$(TARGET_BOARD_HARDWARE) \
+		gralloc.$(TARGET_BOARD_HARDWARE) \
 		akmd8975 
 
 # charge

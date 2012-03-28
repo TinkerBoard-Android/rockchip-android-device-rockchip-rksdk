@@ -5,6 +5,7 @@
 
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM := rockchip
+TARGET_BOARD_HARDWARE := rk30board
 TARGET_NO_BOOTLOADER := true 
 
 DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
