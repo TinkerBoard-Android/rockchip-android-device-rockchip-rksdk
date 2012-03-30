@@ -59,9 +59,10 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.s
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
-        device/rockchip/rk30sdk/init.rk30board.rc:root/init.rk30board.rc \
-        device/rockchip/rk30sdk/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
-        device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc \
+        device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
+        device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+        device/rockchip/rk30sdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+        device/rockchip/rk30sdk/media_profiles.xml:system/etc/media_profiles.xml \
 	device/rockchip/rk30sdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
 # Bluetooth configuration files
@@ -81,6 +82,10 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/modules/mali.ko \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko
+
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libion/libion.so:system/lib/libion.so \
+        device/rockchip/rk30sdk/proprietary/libion/libion.so:obj/lib/libion.so 
 
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
@@ -134,8 +139,8 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # audio lib
 PRODUCT_PACKAGES += \
-		audio_policy.rk30board \
-		audio.primary.rk30board \
+		audio_policy.$(TARGET_BOARD_HARDWARE) \
+		audio.primary.$(TARGET_BOARD_HARDWARE) \
         audio.a2dp.default
 
 # Filesystem management tools
