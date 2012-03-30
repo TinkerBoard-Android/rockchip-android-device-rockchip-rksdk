@@ -98,9 +98,9 @@ loglevel 3
 on fs
     insmod /rk30xxnand_ko.ko
 # mount mtd partitions
-    mount ext3 mtd@system /system wait ro noatime nodiratime
-    mount ext3 mtd@userdata /data wait noatime nodiratime nosuid nodev
-    mount ext3 mtd@cache /cache wait noatime nodiratime nosuid nodev
+    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
+    mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
+    mount ext4 mtd@cache /cache wait noatime nodiratime nosuid nodev noauto_da_alloc
 
     insmod /system/modules/ump.ko
     insmod /system/modules/mali.ko
