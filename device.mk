@@ -234,6 +234,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ril.function.dataonly=1 
 endif
 
+# Get the long list of APNs 
+PRODUCT_COPY_FILES += device/rockchip/$(TARGET_PRODUCT)/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
