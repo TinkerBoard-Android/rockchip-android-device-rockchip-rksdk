@@ -1,0 +1,12 @@
+
+DefaultVendor= 0x20a6
+DefaultProduct=0xf00e
+
+TargetClass=0xff
+
+CheckSuccess=20
+
+MessageContent="55534243a064a688000000000001061b100000180000000000000000000000"
+
+
+

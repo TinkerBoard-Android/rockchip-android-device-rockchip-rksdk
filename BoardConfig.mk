@@ -33,6 +33,11 @@ WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcm4329.bin"
 WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/firmware/fw_bcm4329_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcm4329_apsta.bin"
 
+# bluetooth support
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+# bluetooth end
+
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 
@@ -55,3 +60,19 @@ TARGET_EXTRA_CFLAGS += $(call cc-option,-mtune=cortex-a9,$(call cc-option,-mtune
 
 BOARD_SENSOR_ST := true
 
+#whether device has call function
+BOARD_WITH_CALL_FUNCTION := false
+
+
+ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)),true)
+#phone pad modem list
+BOARD_RADIO_MU509 := true
+
+else
+# radio only support data:
+#      true - only support data
+#      false - support full function, data, voice, sms, mms ...
+# default is false
+BOARD_RADIO_DATAONLY := true
+
+endif

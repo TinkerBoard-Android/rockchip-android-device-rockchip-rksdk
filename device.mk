@@ -64,6 +64,10 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/ueventd.rk30board.rc:root/ueventd.rk30board.rc \
 	device/rockchip/rk30sdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
+# Bluetooth configuration files
+PRODUCT_COPY_FILES += \
+	system/bluetooth/data/main.nonsmartphone.le.conf:system/etc/bluetooth/main.conf
+
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
         
@@ -178,6 +182,54 @@ endif
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko
 
+#########################################################
+#	Phone
+#########################################################
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/phone/etc/ppp/ip-down:system/etc/ppp/ip-down \
+        $(LOCAL_PATH)/phone/etc/ppp/ip-up:system/etc/ppp/ip-up \
+        $(LOCAL_PATH)/phone/etc/ppp/call-pppd:system/etc/ppp/call-pppd \
+        $(LOCAL_PATH)/phone/etc/operator_table:system/etc/operator_table 
+
+
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/phone/bin/usb_modeswitch.sh:system/bin/usb_modeswitch.sh \
+        $(LOCAL_PATH)/phone/bin/usb_modeswitch:system/bin/usb_modeswitch
+
+    modeswitch_files := $(shell ls $(LOCAL_PATH)/phone/etc/usb_modeswitch.d)
+    PRODUCT_COPY_FILES += $(foreach file, $(modeswitch_files), \
+                          $(LOCAL_PATH)/phone/etc/usb_modeswitch.d/$(file):system/etc/usb_modeswitch.d/$(file))
+
+ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)), true)
+		
+    PRODUCT_PACKAGES += \
+	chat \
+	libreference-ril-mu509
+	
+######################################
+# 	phonepad modem list
+######################################
+ifeq ($(strip $(BOARD_RADIO_MU509)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+				ril.function.dataonly=0 
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath=/system/lib/libreference-ril-mu509.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libargs=-d_/dev/ttyUSB2
+
+PRODUCT_COPY_FILES += \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-mu509.so:system/lib/libreference-ril-mu509.so
+endif
+
+else
+#Use external 3G dongle
+PRODUCT_PROPERTY_OVERRIDES += \
+        rild.libargs=-d_/dev/ttyUSB1 \
+        ril.pppchannel=/dev/ttyUSB2 \
+        rild.libpath=/system/lib/libril-rk29-dataonly.so \
+        ril.function.dataonly=1 
+endif
+
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
+
+$(call inherit-product, system/bluetooth/brcm_patchram_plus/hcd.mk)

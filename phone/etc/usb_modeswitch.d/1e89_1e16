@@ -1,0 +1,22 @@
+########################################################
+# Vtion  E1916  EVDO
+
+
+DefaultVendor= 0x1e89
+DefaultProduct=0x1e16
+
+#TargetVendor=  0x1e89
+#TargetProduct= 0x1a20
+
+
+MessageContent="55534243709129870000000000000600000000000000000000000000000000"
+
+
+
+MessageContent2="55534243709129870000000000"
+
+
+NeedResponse=1
+
+
+CheckSuccess=20
