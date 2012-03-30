@@ -14,6 +14,7 @@
 /dev/vpu_service          0666   system     system
 /dev/vpu_mem              0666   system     system
 /dev/rk29-ipp             0666   system     system   
+/dev/rga                  0666   system     system
 
 # for Sensor HAL
 /dev/akm8973              0660   system     system
