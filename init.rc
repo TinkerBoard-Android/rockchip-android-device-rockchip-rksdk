@@ -104,6 +104,8 @@ on fs
 
     insmod /system/modules/ump.ko
     insmod /system/modules/mali.ko
+    insmod /system/modules/rk29-ipp.ko
+
 on post-fs
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount

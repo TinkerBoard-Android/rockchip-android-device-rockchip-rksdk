@@ -134,6 +134,9 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko
 
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko:system/modules/rk29-ipp.ko
+
+PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libion/libion.so:system/lib/libion.so \
         device/rockchip/rk30sdk/proprietary/libion/libion.so:obj/lib/libion.so 
 
