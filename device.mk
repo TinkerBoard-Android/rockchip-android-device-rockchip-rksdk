@@ -11,10 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-
-PRODUCT_COPY_FILES := \
-       device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
+# This file includes all definitions that apply to ALL rk30sdk devices, and
+# are also specific to rk30sdk devices
+#
+# Everything in this directory will become public
 
 ########################################################
 # Kernel
@@ -44,6 +46,50 @@ PRODUCT_COPY_FILES += $(foreach apkName, $(COPY_APK_TARGET), \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/apk/flashplayer:system/app/flashplayer
 
+########################################################
+# Google applications
+########################################################
+ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)),true)
+gapps_files := $(shell ls $(LOCAL_PATH)/googleapps/app )
+PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
+        $(LOCAL_PATH)/googleapps/app/$(file):system/app/$(file))
+
+gapps_files := $(shell ls $(LOCAL_PATH)/googleapps/lib )
+PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
+        $(LOCAL_PATH)/googleapps/lib/$(file):system/lib/$(file))
+
+gapps_files := $(shell ls $(LOCAL_PATH)/googleapps/framework )
+PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
+        $(LOCAL_PATH)/googleapps/framework/$(file):system/framework/$(file))
+
+gapps_files := $(shell ls $(LOCAL_PATH)/googleapps/etc/permissions )
+PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
+        $(LOCAL_PATH)/googleapps/etc/permissions/$(file):system/etc/permissions/$(file))
+endif
+
+########################################################
+# Face lock
+########################################################
+# copy all model files
+define all-models-files-under
+$(patsubst ./%,%, \
+  $(shell cd $(LOCAL_PATH)/$(1) ; \
+          find ./ -type f -and -not -name "*.apk" -and -not -name "*.so") \
+ )
+endef
+
+COPY_FILES := $(call all-models-files-under,facelock)
+PRODUCT_COPY_FILES += $(foreach files, $(COPY_FILES), \
+	$(addprefix $(LOCAL_PATH)/facelock/, $(files)):$(addprefix system/, $(files)))
+
+ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
+    PRODUCT_COPY_FILES += $(LOCAL_PATH)/facelock/FaceLock.apk:system/app/FaceLock.apk
+    PRODUCT_COPY_FILES += $(LOCAL_PATH)/facelock/libfacelock_jni.so:system/lib/libfacelock_jni.so
+endif
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.facelock = enable_facelock \
+    persist.facelock.detect_cutoff=5000 \
+    persist.facelock.recog_cutoff=5000
 
 ########################################################
 #  RKUpdateService: RKUpdateService.apk
@@ -58,6 +104,8 @@ PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.so:system/lib/librockchip_update_jni.so
 
 PRODUCT_COPY_FILES += \
+	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
+	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
@@ -71,6 +119,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
+PRODUCT_COPY_FILES += \
+       device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
         
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
@@ -87,9 +137,6 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libion/libion.so:system/lib/libion.so \
         device/rockchip/rk30sdk/proprietary/libion/libion.so:obj/lib/libion.so 
 
-PRODUCT_COPY_FILES += \
-	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
-	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox 
 
 #########################################################
 #       vpu lib
@@ -114,6 +161,24 @@ PRODUCT_COPY_FILES += \
          frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
          frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
 	 frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+
+ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rkbook/apk/BooksProvider.apk:system/app/BooksProvider.apk \
+    $(LOCAL_PATH)/rkbook/apk/RKEBookReader.apk:system/app/RKEBookReader.apk \
+    $(LOCAL_PATH)/rkbook/bin/adobedevchk:system/bin/adobedevchk \
+    $(LOCAL_PATH)/rkbook/lib/libadobe_rmsdk.so:system/lib/libadobe_rmsdk.so \
+    $(LOCAL_PATH)/rkbook/lib/libRkDeflatingDecompressor.so:system/lib/libRkDeflatingDecompressor.so \
+    $(LOCAL_PATH)/rkbook/lib/librm_ssl.so:system/lib/librm_ssl.so \
+    $(LOCAL_PATH)/rkbook/lib/libflip.so:system/lib/libflip.so \
+    $(LOCAL_PATH)/rkbook/lib/librm_crypto.so:system/lib/librm_crypto.so \
+    $(LOCAL_PATH)/rkbook/lib/rmsdk.ver:system/lib/rmsdk.ver \
+    $(LOCAL_PATH)/rkbook/fonts/adobefonts/AdobeMyungjoStd.bin:system/fonts/adobefonts/AdobeMyungjoStd.bin \
+    $(LOCAL_PATH)/rkbook/fonts/adobefonts/CRengine.ttf:system/fonts/adobefonts/CRengine.ttf \
+    $(LOCAL_PATH)/rkbook/fonts/adobefonts/RyoGothicPlusN.bin:system/fonts/adobefonts/RyoGothicPlusN.bin \
+    $(LOCAL_PATH)/rkbook/fonts/adobefonts/AdobeHeitiStd.bin:system/fonts/adobefonts/AdobeHeitiStd.bin \
+    $(LOCAL_PATH)/rkbook/fonts/adobefonts/AdobeMingStd.bin:system/fonts/adobefonts/AdobeMingStd.bin
+endif
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
