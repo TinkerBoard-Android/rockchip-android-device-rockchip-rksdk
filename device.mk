@@ -237,6 +237,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         dalvik.vm.jniopts=warnonly \
         ro.sf.hwrotation=270 \
         ro.sf.fakerotation=true \
+	ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
         wifi.supplicant_scan_interval=15 \
 
