@@ -129,6 +129,7 @@ PRODUCT_PACKAGES += \
 		sensors.$(TARGET_BOARD_HARDWARE) \
 		gralloc.$(TARGET_BOARD_HARDWARE) \
 		camera.$(TARGET_BOARD_HARDWARE) \
+		Camera \
 		akmd8975 
 
 # charge
