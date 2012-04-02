@@ -196,6 +196,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 		sensors.$(TARGET_BOARD_HARDWARE) \
 		gralloc.$(TARGET_BOARD_HARDWARE) \
+		hwcomposer.$(TARGET_BOARD_HARDWARE) \
 		lights.$(TARGET_BOARD_HARDWARE) \
 		camera.$(TARGET_BOARD_HARDWARE) \
 		Camera \
