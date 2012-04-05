@@ -130,11 +130,11 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
-        device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/modules/mali.ko \
-        device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/modules/ump.ko
+        device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
+        device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/lib/modules/ump.ko
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko:system/modules/rk29-ipp.ko
+        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko:system/lib/modules/rk29-ipp.ko
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libion/libion.so:system/lib/libion.so \
