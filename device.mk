@@ -319,10 +319,13 @@ endif
 else
 #Use external 3G dongle
 PRODUCT_PROPERTY_OVERRIDES += \
-        rild.libargs=-d_/dev/ttyUSB1 \
-        ril.pppchannel=/dev/ttyUSB2 \
-        rild.libpath=/system/lib/libril-rk29-dataonly.so \
-        ril.function.dataonly=1 
+	rild.libargs=-d_/dev/ttyUSB1 \
+	ril.pppchannel=/dev/ttyUSB2 \
+	rild.libpath=/system/lib/libril-rk29-dataonly.so \
+	ril.function.dataonly=1
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/phone/lib/libril-rk29-dataonly.so:system/lib/libril-rk29-dataonly.so
 endif
 
 # Get the long list of APNs 
