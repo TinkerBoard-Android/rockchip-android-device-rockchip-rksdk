@@ -251,7 +251,7 @@ endif
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-        persist.sys.usb.config=mtp \
+        persist.sys.usb.config=mass_storage \
         persist.sys.strictmode.visual=false \
         dalvik.vm.jniopts=warnonly \
         ro.sf.hwrotation=270 \
