@@ -51,7 +51,7 @@ BOARD_LIB_DUMPSTATE := libdumpstate.$(TARGET_BOARD_PLATFORM)
 BUILD_WITH_GOOGLE_MARKET := true
 
 # face lock
-#BUILD_WITH_FACELOCK := true
+BUILD_WITH_FACELOCK := true
 
 # ebook
 #BUILD_WITH_RK_EBOOK := true
