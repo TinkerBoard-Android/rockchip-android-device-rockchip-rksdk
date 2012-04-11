@@ -1,2 +1,2 @@
-this is android 4.0.3 stagefright ver 1261 for rk30 2012-04-09_14:00 by csy
-fix adbe flash smooth play
+this is android 4.0.4 stagefright ver 1268 for rk30 2012-04-11_10:00 by csy 
+fix adode flash player skip the decoder error frame 
