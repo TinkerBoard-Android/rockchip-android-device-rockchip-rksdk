@@ -169,6 +169,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         $(foreach file, $(targetFile), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
 
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
         frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
