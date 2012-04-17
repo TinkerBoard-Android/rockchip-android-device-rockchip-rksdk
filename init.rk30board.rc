@@ -35,7 +35,6 @@ on init
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
-    insmod /system/lib/modules/vpu_service.ko
 
 #backlight
     chown system system /sys/class/backlight/rk28_bl/brightness
