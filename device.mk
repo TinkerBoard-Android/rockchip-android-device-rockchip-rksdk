@@ -152,6 +152,13 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/etc/.videoBlock:system/etc/.videoBlock 
 
 #########################################################
+#       copybit
+#########################################################        
+PRODUCT_COPY_FILES += \
+	device/rockchip/rk30sdk/proprietary/libcopybit/copybit.rk30board.so:system/lib/hw/copybit.rk30board.so \
+	device/rockchip/rk30sdk/proprietary/libcopybit/copybit.rk30board.so:obj/lib/hw/copybit.rk30board.so
+
+#########################################################
 #       webkit
 #########################################################        
 PRODUCT_COPY_FILES += \
