@@ -94,7 +94,7 @@ service hostapd_rtl /system/bin/hostapd_rtl /data/misc/wifi/hostapd.conf
     disabled
     oneshot
 
-service hciattach /system/bin/brcm_patchram_plus --patchram /etc/bluez/bcm4330.hcd --baudrate 1500000 --enable_lpm --enable_hci /dev/ttyS0
+service hciattach /system/bin/brcm_patchram_plus --patchram bychip --baudrate 1500000 --enable_lpm --enable_hci /dev/ttyS0
     console
     user bluetooth
     group bluetooth net_bt_admin
