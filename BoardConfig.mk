@@ -56,6 +56,9 @@ BUILD_WITH_FACELOCK := true
 # ebook
 #BUILD_WITH_RK_EBOOK := true
 
+# hdmi apk
+BUILD_WITH_HDMI_APK :=false
+
 USE_OPENGL_RENDERER := true
 
 # rk30sdk uses Cortex A9
