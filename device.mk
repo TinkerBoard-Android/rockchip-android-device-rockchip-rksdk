@@ -269,12 +269,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
         persist.sys.strictmode.visual=false \
         dalvik.vm.jniopts=warnonly \
         ro.sf.hwrotation=270 \
-	ro.rksdk.version=rk30sdk \
+	    ro.rksdk.version=rk30sdk \
         sys.hwc.compose_policy=6 \
         ro.sf.fakerotation=true \
-	ro.rk.MassStorage=false \
+	    ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
         wifi.supplicant_scan_interval=15 \
+        ro.opengles.version=131072
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
