@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<hardwareAcc-package>
+<app package="bench" mode="3"/>
+<app package="mark" mode="3"/>
+<app package="browser" mode="0"/>
+<app package="setting" mode = "1">
+<app package="result" mode = "1">
+<app package="calculator" mode = "1">
+<app package="clock" mode = "1">
+<app package="music" mode = "1">
+<app package="explorer" mode = "1">
+</hardwareAcc-package>

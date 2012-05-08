@@ -55,3 +55,5 @@
 /sys/class/display/HDMI/enable   0664     root       system
 /sys/class/display/HDMI/mode     0664     root       system
 /sys/class/display/HDMI/scale    0664     root       system
+
+/sys/mali400_utility/utility     0666     root     system
