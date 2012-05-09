@@ -297,7 +297,8 @@ endif
 
 # wifi
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko
+        device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko \
+        device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko
 
 #########################################################
 #	Phone
