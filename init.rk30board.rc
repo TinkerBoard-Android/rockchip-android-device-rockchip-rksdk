@@ -150,5 +150,5 @@ on property:sys.gmali.performance=video
     start performance
 
 service performance /system/bin/performance
-    disable
+    disabled
     oneshot
