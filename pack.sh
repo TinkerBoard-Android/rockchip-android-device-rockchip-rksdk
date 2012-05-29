@@ -39,12 +39,14 @@ $outpath="out/target/product";
 # TODO : get so file from mk file.
 foreach $path (@so_package)
 {
+	system("cd $path ; git checkout -f Android.mk ; cd -");
 	system("grep LOCAL_MODULE[^_] $path -r >> _tmp");
 	system("sed -i 's/\$(TARGET_BOARD_HARDWARE)/rk30board/g' _tmp");
 }
 # TODO : get bin file from mk file.
 foreach $path (@bin_package)
 {
+	system("cd $path ; git checkout -f Android.mk ; cd -");
 	system("grep LOCAL_MODULE[^_] $path -r >> _tmp_bin");
 }
 
