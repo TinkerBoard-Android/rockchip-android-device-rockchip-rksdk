@@ -2,6 +2,8 @@
 <hardwareAcc-package>
 <app package="bench" mode="3"/>
 <app package="mark" mode="3"/>
+<app package="aurorasoftworks" mode="3" />
+<app package="rightware" mode="3" />
 <app package="browser" mode="0"/>
 <app package="setting" mode = "1"/>
 <app package="result" mode = "1"/>
@@ -11,4 +13,6 @@
 <app package="explorer" mode = "1"/>
 <app package="home" mode = "2"/>
 <app package="launcher" mode = "2"/>
+<app package="com.replica.replicaisland" mode="2"/>
+<app package="com.android.cts" mode="2" />
 </hardwareAcc-package>

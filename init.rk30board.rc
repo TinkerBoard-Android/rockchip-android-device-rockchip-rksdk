@@ -147,9 +147,17 @@ service akmd /system/bin/akmd8975
         user system
         group system
         oneshot
-on property:sys.gmali.performance=video
-    start performance
 
-service performance /system/bin/performance
+on property:sys.gmali.performance=ui
+    start pat_ui
+
+service pat_ui /system/bin/performance ui
+    disabled
+    oneshot
+
+on property:sys.gmali.performance=video
+    start pat_video
+
+service pat_video /system/bin/performance video
     disabled
     oneshot
