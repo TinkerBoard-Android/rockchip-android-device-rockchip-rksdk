@@ -81,6 +81,6 @@ else
 # default is false
 BOARD_RADIO_DATAONLY := true
 
-TARGET_BOOTLOADER_BOARD_NAME := rk30sdk
-
 endif
+
+TARGET_BOOTLOADER_BOARD_NAME := rk30sdk
