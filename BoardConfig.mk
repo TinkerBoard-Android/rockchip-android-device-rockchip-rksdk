@@ -84,3 +84,6 @@ BOARD_RADIO_DATAONLY := true
 endif
 
 TARGET_BOOTLOADER_BOARD_NAME := rk30sdk
+
+# readahead files to improve boot time
+BOARD_BOOT_READAHEAD := true

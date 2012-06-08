@@ -353,6 +353,12 @@ endif
 # Get the long list of APNs 
 PRODUCT_COPY_FILES += device/rockchip/$(TARGET_PRODUCT)/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
+ifeq ($(strip $(BOARD_BOOT_READAHEAD)),true)
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/proprietary/readahead/readahead:root/sbin/readahead \
+	$(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
+endif
+
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)

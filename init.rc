@@ -99,6 +99,7 @@ on fs
     insmod /rk30xxnand_ko.ko
 # mount mtd partitions
     mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
+    start readahead
     mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
     mount ext4 mtd@cache /cache wait noatime nodiratime nosuid nodev noauto_da_alloc
 
@@ -493,5 +494,9 @@ service keystore /system/bin/keystore /data/misc/keystore
 service dumpstate /system/bin/dumpstate -s
     class main
     socket dumpstate stream 0660 shell log
+    disabled
+    oneshot
+
+service readahead /sbin/readahead -f
     disabled
     oneshot
