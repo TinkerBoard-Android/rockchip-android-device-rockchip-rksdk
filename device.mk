@@ -346,6 +346,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	rild.libpath=/system/lib/libril-rk29-dataonly.so \
 	ril.function.dataonly=1
 
+PRODUCT_PACKAGES += chat
+
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/phone/lib/libril-rk29-dataonly.so:system/lib/libril-rk29-dataonly.so
 endif
