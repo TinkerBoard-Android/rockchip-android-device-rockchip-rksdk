@@ -13,6 +13,6 @@
 <app package="explorer" mode = "1"/>
 <app package="home" mode = "2"/>
 <app package="launcher" mode = "2"/>
-<app package="com.replica.replicaisland" mode="5"/>
-<app package="com.android.cts" mode="5" />
+<app package="com.replica.replicaisland" mode="4"/>
+<app package="com.android.cts" mode="4" />
 </hardwareAcc-package>
