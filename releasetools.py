@@ -36,6 +36,18 @@ def AddBootloaderAssertion(info, input_zip):
       info.script.AssertSomeBootloader(*bootloaders)
     info.metadata["pre-bootloader"] = m.group(1)
 
+def Install_Parameter(info):
+  try:
+    parameter_bin = info.input_zip.read("PARAMETER/parameter");
+  except KeyError:
+    print "warning: no parameter in input target_files; not flashing parameter"
+    return
+    
+  print "find parameter, should add to package"
+  common.ZipWriteStr(info.output_zip, "parameter", parameter_bin)
+  info.script.Print("start update parameter...")
+  info.script.WriteRawParameterImage("/parameter", "parameter")
+  info.script.Print("end update parameter")
 
 def InstallRKLoader(loader_bin, input_zip, info):
   common.ZipWriteStr(info.output_zip, "RK30xxLoader.img", loader_bin)
@@ -48,6 +60,8 @@ def FullOTA_InstallEnd(info):
     loader_bin = info.input_zip.read("LOADER/RK30xxLoader.img")
   except KeyError:
     print "warning: no rk30xx loader bin in input target_files; not flashing loader"
+    print "clear misc command"
+    info.script.ClearMiscCommand()
     return
 
   InstallRKLoader(loader_bin, info.input_zip, info)
@@ -58,6 +72,8 @@ def IncrementalOTA_InstallEnd(info):
     target_loader = info.target_zip.read("LOADER/RK30xxLoader.img")
   except KeyError:
     print "warning: rk30xx loader bin missing from target; not flashing loader"
+    print "clear misc command"
+    info.script.ClearMiscCommand()
     return
 
   try:
