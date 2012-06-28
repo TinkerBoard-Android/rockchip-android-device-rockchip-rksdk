@@ -7,6 +7,7 @@ TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM := rk30xx
 TARGET_BOARD_HARDWARE := rk30board
 TARGET_NO_BOOTLOADER := true 
+TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 
 DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 
@@ -20,6 +21,7 @@ TARGET_ROCHCHIP_RECOVERY := true
 TARGET_RECOVERY_UI_LIB := librecovery_ui_rk30sdk
 TARGET_CPU_SMP := true
 BOARD_USES_GENERIC_AUDIO := true
+
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
