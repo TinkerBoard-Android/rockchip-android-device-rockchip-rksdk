@@ -50,16 +50,16 @@ def Install_Parameter(info):
   info.script.Print("end update parameter")
 
 def InstallRKLoader(loader_bin, input_zip, info):
-  common.ZipWriteStr(info.output_zip, "RK30xxLoader.img", loader_bin)
-  info.script.Print("Writing rk30xx loader bin...")
-  info.script.WriteRawImage("/misc", "RK30xxLoader.img")
+  common.ZipWriteStr(info.output_zip, "RKLoader.img", loader_bin)
+  info.script.Print("Writing rk loader bin...")
+  info.script.WriteRawImage("/misc", "RKLoader.img")
 
 
 def FullOTA_InstallEnd(info):
   try:
-    loader_bin = info.input_zip.read("LOADER/RK30xxLoader.img")
+    loader_bin = info.input_zip.read("LOADER/RKLoader.img")
   except KeyError:
-    print "warning: no rk30xx loader bin in input target_files; not flashing loader"
+    print "warning: no rk loader bin in input target_files; not flashing loader"
     print "clear misc command"
     info.script.ClearMiscCommand()
     return
@@ -69,20 +69,20 @@ def FullOTA_InstallEnd(info):
 
 def IncrementalOTA_InstallEnd(info):
   try:
-    target_loader = info.target_zip.read("LOADER/RK30xxLoader.img")
+    target_loader = info.target_zip.read("LOADER/RKLoader.img")
   except KeyError:
-    print "warning: rk30xx loader bin missing from target; not flashing loader"
+    print "warning: rk loader bin missing from target; not flashing loader"
     print "clear misc command"
     info.script.ClearMiscCommand()
     return
 
   try:
-    source_loader = info.source_zip.read("LOADER/RK30xxLoader.img")
+    source_loader = info.source_zip.read("LOADER/RKLoader.img")
   except KeyError:
     source_loader = None
 
   if source_loader == target_loader:
-    print "RK30xx loader bin unchanged; skipping"
+    print "RK loader bin unchanged; skipping"
     return
 
   InstallRKLoader(target_loader, info.target_zip, info)
