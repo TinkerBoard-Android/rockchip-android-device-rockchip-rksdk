@@ -155,34 +155,6 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/etc/.allBlock:system/etc/.allBlock \
 	device/rockchip/rk30sdk/proprietary/etc/.videoBlock:system/etc/.videoBlock 
 
-#########################################################
-#       copybit
-#########################################################        
-PRODUCT_COPY_FILES += \
-	device/rockchip/rk30sdk/proprietary/libcopybit/copybit.rk30board.so:system/lib/hw/copybit.rk30board.so \
-	device/rockchip/rk30sdk/proprietary/libcopybit/copybit.rk30board.so:obj/lib/hw/copybit.rk30board.so
-
-#########################################################
-#       webkit
-#########################################################        
-PRODUCT_COPY_FILES += \
-	device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
-        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
-	device/rockchip/rk30sdk/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
-
-#########################################################
-#       vpu lib
-#########################################################        
-targetFile := $(shell ls $(LOCAL_PATH)/proprietary/libvpu )
-PRODUCT_COPY_FILES += \
-        $(foreach file, $(targetFile), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
-
-PRODUCT_COPY_FILES += \
-        $(foreach file, $(targetFile), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
-
-PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
-
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rkbook/apk/BooksProvider.apk:system/app/BooksProvider.apk \
