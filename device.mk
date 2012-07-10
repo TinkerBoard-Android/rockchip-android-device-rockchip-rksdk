@@ -360,4 +360,3 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
 endif
 
-$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
