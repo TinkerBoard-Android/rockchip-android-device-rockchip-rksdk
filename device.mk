@@ -230,7 +230,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
         persist.sys.usb.config=mass_storage \
         persist.sys.strictmode.visual=false \
         dalvik.vm.jniopts=warnonly \
-        ro.sf.hwrotation=270 \
 	    ro.rksdk.version=rk30_ics_v2.23.00 \
         sys.hwc.compose_policy=6 \
         ro.sf.fakerotation=true \
