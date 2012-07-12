@@ -24,6 +24,8 @@
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 
+include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
+
 ###########################################################
 ## Find all of the apk files under the named directories.
 ## Meant to be used like:
