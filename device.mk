@@ -267,7 +267,9 @@ endif
 # wifi
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko \
-        device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko
+        device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
+	
 
 #########################################################
 #	Phone
@@ -329,3 +331,5 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
 endif
 
+
+$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
