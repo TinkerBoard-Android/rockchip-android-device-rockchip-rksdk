@@ -132,6 +132,15 @@ PRODUCT_PACKAGES += \
         mali.ko \
         ump.ko 
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libMali.so:obj/lib/libMali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:system/lib/libUMP.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:obj/lib/libUMP.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
+        device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
         device/rockchip/rk30sdk/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
         device/rockchip/rk30sdk/gpu_performance/performance:system/bin/performance \
         device/rockchip/rk30sdk/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
