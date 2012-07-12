@@ -241,11 +241,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
         persist.sys.usb.config=mass_storage \
         persist.sys.strictmode.visual=false \
         dalvik.vm.jniopts=warnonly \
-	    ro.rksdk.version=rk30_ics_v2.23.00 \
+	ro.rksdk.version=rk30_ics_v2.23.00 \
         sys.hwc.compose_policy=6 \
         ro.sf.fakerotation=true \
-	    ro.rk.MassStorage=false \
+	ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
+	ro.sf.lcd_density=160 \
         wifi.supplicant_scan_interval=15 \
         ro.opengles.version=131072
 
