@@ -177,7 +177,7 @@ PRODUCT_COPY_FILES += \
         $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:/etc/media_codecs.xml \
+        device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
         device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
