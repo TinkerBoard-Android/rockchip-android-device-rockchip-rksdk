@@ -120,6 +120,7 @@ PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.nonsmartphone.le.conf:system/etc/bluetooth/main.conf
 
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
         device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
 PRODUCT_COPY_FILES += \
        device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
@@ -141,7 +142,9 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/mali.ko.3.0.36+:system/lib/modules/mali.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
+        device/rockchip/rk30sdk/proprietary/libmali/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
         device/rockchip/rk30sdk/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
         device/rockchip/rk30sdk/gpu_performance/performance:system/bin/performance \
@@ -149,6 +152,7 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/gpu_performance/gpu.rk30board.so:system/lib/hw/gpu.rk30board.so
 
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko:system/lib/modules/rk29-ipp.ko
 
 PRODUCT_COPY_FILES += \
@@ -280,7 +284,9 @@ endif
 
 # wifi
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
         device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko \
+        device/rockchip/rk30sdk/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
         device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 	
