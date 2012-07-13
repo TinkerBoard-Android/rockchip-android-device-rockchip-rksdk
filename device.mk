@@ -166,6 +166,20 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/etc/.allBlock:system/etc/.allBlock \
 	device/rockchip/rk30sdk/proprietary/etc/.videoBlock:system/etc/.videoBlock 
 
+#########################################################
+#       vpu lib
+#########################################################        
+sf_lib_files := $(shell ls $(LOCAL_PATH)/proprietary/libvpu | grep .so)
+PRODUCT_COPY_FILES += \
+        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
+
+PRODUCT_COPY_FILES += \
+        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
+
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:/etc/media_codecs.xml \
+        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
+
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rkbook/apk/BooksProvider.apk:system/app/BooksProvider.apk \
