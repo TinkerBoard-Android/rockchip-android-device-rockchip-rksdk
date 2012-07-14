@@ -109,6 +109,7 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
+        device/rockchip/rk30sdk/mkdosfs:root/sbin/mkdosfs \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
         device/rockchip/rk30sdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
