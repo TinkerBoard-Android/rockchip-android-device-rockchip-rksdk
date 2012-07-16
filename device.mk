@@ -24,6 +24,8 @@
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 
+include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
+
 ###########################################################
 ## Find all of the apk files under the named directories.
 ## Meant to be used like:
@@ -107,6 +109,7 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
+        device/rockchip/rk30sdk/mkdosfs:root/sbin/mkdosfs \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
         device/rockchip/rk30sdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
@@ -118,10 +121,20 @@ PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.nonsmartphone.le.conf:system/etc/bluetooth/main.conf
 
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
         device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
 PRODUCT_COPY_FILES += \
        device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
-        
+
+# GPU-MALI        
+PRODUCT_PACKAGES += \
+        libEGL_mali.so \
+        libGLESv1_CM_mali.so \
+        libGLESv2_mali.so \
+        libMali.so \
+        libUMP.so \
+        mali.ko \
+        ump.ko 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libMali.so:obj/lib/libMali.so \
@@ -130,7 +143,9 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
         device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
+        device/rockchip/rk30sdk/proprietary/libmali/mali.ko.3.0.36+:system/lib/modules/mali.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
+        device/rockchip/rk30sdk/proprietary/libmali/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
         device/rockchip/rk30sdk/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
         device/rockchip/rk30sdk/gpu_performance/performance:system/bin/performance \
@@ -138,6 +153,7 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/gpu_performance/gpu.rk30board.so:system/lib/hw/gpu.rk30board.so
 
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko:system/lib/modules/rk29-ipp.ko
 
 PRODUCT_COPY_FILES += \
@@ -154,6 +170,33 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/etc/.allBlock:system/etc/.allBlock \
 	device/rockchip/rk30sdk/proprietary/etc/.videoBlock:system/etc/.videoBlock 
+
+#########################################################
+#       vpu lib
+#########################################################        
+sf_lib_files := $(shell ls $(LOCAL_PATH)/proprietary/libvpu | grep .so)
+PRODUCT_COPY_FILES += \
+        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
+
+PRODUCT_COPY_FILES += \
+        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
+
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
+	device/rockchip/rk30sdk/proprietary/libvpu/registry:system/lib/registry \
+        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
+
+PRODUCT_PACKAGES += \
+        ilibapedec.so \
+        libjesancache.so                  \
+        libjpeghwdec.so                   \
+        libjpeghwenc.so                   \
+        libOMX_Core.so                    \
+        libomxvpu.so                      \
+        librkswscale.so                   \
+        librkwmapro.so                    \
+        libyuvtorgb.so                    \
+        libvpu.so
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 PRODUCT_COPY_FILES += \
@@ -230,12 +273,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
         persist.sys.usb.config=mass_storage \
         persist.sys.strictmode.visual=false \
         dalvik.vm.jniopts=warnonly \
-        ro.sf.hwrotation=270 \
-	    ro.rksdk.version=rk30_ics_v2.23.00 \
+	ro.rksdk.version=rk30_ics_v2.23.00 \
         sys.hwc.compose_policy=6 \
         ro.sf.fakerotation=true \
-	    ro.rk.MassStorage=false \
+	ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
+	ro.sf.lcd_density=160 \
         wifi.supplicant_scan_interval=15 \
         ro.opengles.version=131072
 
@@ -255,8 +298,12 @@ endif
 
 # wifi
 PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
         device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko \
-        device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko
+        device/rockchip/rk30sdk/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
+        device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
+	
 
 #########################################################
 #	Phone
@@ -318,3 +365,5 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
 endif
 
+
+$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
