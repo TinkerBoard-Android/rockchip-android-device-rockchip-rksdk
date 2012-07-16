@@ -33,11 +33,6 @@ LOCAL_MODULE_TAGS := optional
 include $(BUILD_MULTI_PREBUILT)
   
 include $(CLEAR_VARS)
-LOCAL_PREBUILT_LIBS := librkswscale.so               
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_MULTI_PREBUILT)
-  
-include $(CLEAR_VARS)
 LOCAL_PREBUILT_LIBS := librkwmapro.so                
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_MULTI_PREBUILT)
