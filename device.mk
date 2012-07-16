@@ -186,6 +186,17 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/libvpu/registry:system/lib/registry \
         device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
 
+PRODUCT_PACKAGES += \
+        ilibapedec.so \
+        libjesancache.so                  \
+        libjpeghwdec.so                   \
+        libjpeghwenc.so                   \
+        libOMX_Core.so                    \
+        libomxvpu.so                      \
+        librkswscale.so                   \
+        librkwmapro.so                    \
+        libvpu.so
+
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rkbook/apk/BooksProvider.apk:system/app/BooksProvider.apk \
