@@ -109,6 +109,7 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
         device/rockchip/rk30sdk/init.rc:root/init.rc \
+        device/rockchip/rk30sdk/mkdosfs:root/sbin/mkdosfs \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
         device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
         device/rockchip/rk30sdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
@@ -184,6 +185,17 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
 	device/rockchip/rk30sdk/proprietary/libvpu/registry:system/lib/registry \
         device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
+
+PRODUCT_PACKAGES += \
+        ilibapedec.so \
+        libjesancache.so                  \
+        libjpeghwdec.so                   \
+        libjpeghwenc.so                   \
+        libOMX_Core.so                    \
+        libomxvpu.so                      \
+        librkswscale.so                   \
+        librkwmapro.so                    \
+        libvpu.so
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 PRODUCT_COPY_FILES += \
