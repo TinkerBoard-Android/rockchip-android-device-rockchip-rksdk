@@ -195,6 +195,7 @@ PRODUCT_PACKAGES += \
         libomxvpu.so                      \
         librkswscale.so                   \
         librkwmapro.so                    \
+        libyuvtorgb.so                    \
         libvpu.so
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
