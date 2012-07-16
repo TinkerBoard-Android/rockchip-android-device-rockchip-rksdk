@@ -274,6 +274,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         persist.sys.strictmode.visual=false \
         dalvik.vm.jniopts=warnonly \
 	ro.rksdk.version=rk30_ics_v2.23.00 \
+	persist.sys.strictmode.visual=false \
         sys.hwc.compose_policy=6 \
         ro.sf.fakerotation=true \
 	ro.rk.MassStorage=false \
