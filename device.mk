@@ -119,7 +119,8 @@ PRODUCT_COPY_FILES += \
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.nonsmartphone.le.conf:system/etc/bluetooth/main.conf \
-	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
