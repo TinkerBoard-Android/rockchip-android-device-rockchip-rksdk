@@ -293,6 +293,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
         com.android.future.usb.accessory
 
+PRODUCT_PACKAGES += \
+        librecovery_ui_$(TARGET_PRODUCT)
+
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_COPY_FILES += device/rockchip/rk30sdk/bugreport.sh:system/bin/bugreport.sh
