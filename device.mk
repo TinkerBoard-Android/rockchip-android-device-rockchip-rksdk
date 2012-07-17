@@ -325,10 +325,13 @@ PRODUCT_COPY_FILES += \
     PRODUCT_COPY_FILES += $(foreach file, $(modeswitch_files), \
                           $(LOCAL_PATH)/phone/etc/usb_modeswitch.d/$(file):system/etc/usb_modeswitch.d/$(file))
 
+PRODUCT_PACKAGES += \
+	rild \
+	chat
+
 ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)), true)
 		
     PRODUCT_PACKAGES += \
-	chat \
 	libreference-ril-mu509
 	
 ######################################
@@ -351,8 +354,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ril.pppchannel=/dev/ttyUSB2 \
 	rild.libpath=/system/lib/libril-rk29-dataonly.so \
 	ril.function.dataonly=1
-
-PRODUCT_PACKAGES += chat
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/phone/lib/libril-rk29-dataonly.so:system/lib/libril-rk29-dataonly.so
