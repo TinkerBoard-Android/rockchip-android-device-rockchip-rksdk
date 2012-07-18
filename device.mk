@@ -105,6 +105,9 @@ PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
 ########################################################
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.so:system/lib/librockchip_update_jni.so
 
+# support Chrome
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/chromeLib/libchromeview.so:system/lib/libchromeview.so
+
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
