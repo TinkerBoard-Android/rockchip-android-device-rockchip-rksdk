@@ -106,7 +106,9 @@ PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.so:system/lib/librockchip_update_jni.so
 
 # support Chrome
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/chromeLib/libchromeview.so:system/lib/libchromeview.so
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/chromeLib/libchromeview.so:system/lib/libchromeview.so \
+	$(LOCAL_PATH)/apk/chromeLib/chrome-command-line:system/etc/chrome-command-line \
+	$(LOCAL_PATH)/apk/chromeLib/chrome.sh:system/bin/chrome.sh
 
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
@@ -123,6 +125,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.nonsmartphone.le.conf:system/etc/bluetooth/main.conf \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+	frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
+	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
