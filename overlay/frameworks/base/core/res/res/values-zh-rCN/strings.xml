@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="extmedia_format_title" 存储设备msgid="8663247929551095854">"格式化存储设备"</string>
+    <string name="extmedia_format_message" 存储设备msgid="3621369962433523619">"确定要将存储设备格式化吗？该卡上的所有数据都将丢失。"</string>
+    <string name="extmedia_format_button_format" msgid="4131064560127478695">"格式化"</string>
+    <string name="ext_media_checking_notification_title" 存储设备msgid="5457603418970994050">"正在准备存储设备"</string>
+    <string name="ext_media_checking_notification_message" msgid="8287319882926737053">"正在检查是否有错误。"</string>
+    <string name="ext_media_nofs_notification_title" 存储设备msgid="780477838241212997">"空存储设备"</string>
+    <string name="ext_media_nofs_notification_message" 存储设备msgid="3817704088027829380">"存储设备无文件系统，或文件系统不受支持。"</string>
+    <string name="ext_media_unmountable_notification_title" 存储设备msgid="6410723906019100189">"存储设备受损"</string>
+    <string name="ext_media_unmountable_notification_message" 存储设备msgid="6902531775948238989">"存储设备已损坏。您可能必须将其重新格式化。"</string>
+    <string name="ext_media_badremoval_notification_title" 存储设备msgid="6872152882604407837">"存储设备未正常移除"</string>
+    <string name="ext_media_badremoval_notification_message" 存储设备msgid="7260183293747448241">"请先卸载存储设备，再将其移除，以防数据丢失。"</string>
+    <string name="ext_media_safe_unmount_notification_title" 存储设备msgid="6729801130790616200">"存储设备已安全移除"</string>
+    <string name="ext_media_safe_unmount_notification_message" 存储设备msgid="568841278138377604">"您现在可以安全移除存储设备。"</string>
+    <string name="ext_media_nomedia_notification_title" 存储设备msgid="8902518030404381318">"已移除存储设备"</string>
+    <string name="ext_media_nomedia_notification_message" 存储设备msgid="3870120652983659641">"存储设备已移除。请插入新的存储设备。"</string>
+    <string name="progress_unmounting" 存储设备msgid="5556813978958789471">"正在卸载存储设备..."</string>
+    <string name="progress_erasing" 存储设备msgid="2115214724367534095">"正在格式化存储设备..."</string>
+    <string name="format_error" 存储设备msgid="7315248696644510935">"无法清除存储设备。"</string>
+    <string name="media_bad_removal" msgid="7960864061016603281">"存储设备尚未卸载就被移除。"</string>
+    <string name="media_checking" 存储设备msgid="7334762503904827481">"目前正在检查存储设备。"</string>
+    <string name="media_removed" msgid="7001526905057952097">"存储设备已移除。"</string>
+    <string name="media_shared" 存储设备msgid="5706130568133540435">"目前有计算机正在使用存储设备。"</string>
+
+    <add-resource type="string" name="flashmedia_format_title"/>
+    <string name="flashmedia_format_title" product="default" msgid="8663247929551095854">"格式化 NAND flash"</string>
+    <add-resource type="string" name="flashmedia_format_message"/>
+    <string name="flashmedia_format_message" product="default" msgid="3621369962433523619">"确定要将 NAND flash 格式化吗？该卡上的所有数据都将丢失。"</string>
+
+</resources>
