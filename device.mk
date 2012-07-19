@@ -129,6 +129,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
 	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
@@ -291,7 +292,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
         wifi.interface=wlan0 \
 	ro.sf.lcd_density=160 \
         wifi.supplicant_scan_interval=15 \
-        ro.opengles.version=131072
+        ro.opengles.version=131072 \
+        testing.mediascanner.skiplist = /mnt/sdcard/Android/ \
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
