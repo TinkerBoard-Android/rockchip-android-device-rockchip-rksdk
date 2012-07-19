@@ -138,6 +138,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
        device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
 
+# For audio-recoard 
+PRODUCT_PACKAGES += \
+        libsrec_jni 
+
 # GPU-MALI        
 PRODUCT_PACKAGES += \
         libEGL_mali.so \
