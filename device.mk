@@ -200,6 +200,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
 	device/rockchip/rk30sdk/proprietary/libvpu/registry:system/lib/registry \
+        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
 
 PRODUCT_PACKAGES += \
