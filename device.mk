@@ -293,6 +293,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-beta-v4.00.00 \
         sys.hwc.compose_policy=6 \
         ro.sf.fakerotation=true \
+        ro.sf.hwrotation=270 \
 	ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
 	ro.sf.lcd_density=160 \
