@@ -67,6 +67,10 @@ PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
 gapps_files := $(shell ls $(LOCAL_PATH)/googleapps/etc/permissions )
 PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
         $(LOCAL_PATH)/googleapps/etc/permissions/$(file):system/etc/permissions/$(file))
+
+gapps_files := $(shell ls $(LOCAL_PATH)/googleapps/usr/srec/en-US )
+PRODUCT_COPY_FILES += $(foreach file, $(gapps_files), \
+        $(LOCAL_PATH)/googleapps/usr/srec/en-US/$(file):system/usr/srec/en-US/$(file))
 endif
 
 ########################################################
