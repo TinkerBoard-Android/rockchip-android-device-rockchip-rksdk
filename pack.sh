@@ -175,7 +175,7 @@ foreach $path (@bin_package)
 $kernelpath="kernel/";
 -d "kernel" || die "no kernel found!";
 chdir $kernelpath;
-#system("bash pack-kernel-rk30.sh");
+system("bash pack-kernel-rk30.sh");
 chdir("../");
 
 ##############################################################n
@@ -195,17 +195,17 @@ foreach $path (@exclude)
 system("sed -i '\$a\$(call inherit-product, device/rockchip/rk30_common/common.mk)'  device/rockchip/$product/device.mk");
 system("sed -i '\$a\PRODUCT_PACKAGES += @files_so'  device/rockchip/$product/device.mk");
 print "\nexclude = @exclude\n";
-#system(".repo/repo/repo manifest -r -o version-tag.xml");
+system(".repo/repo/repo manifest -r -o version-tag.xml");
 system("mv out ../rkTmpOut");
 system("mv kernel ../rkTmpKernel");
-#system("tar zxvf kernel.tar.gz kernel/");
-#system("mv kernel.tar* ../");
+system("tar zxvf kernel.tar.gz kernel/");
+system("mv kernel.tar* ../");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf device/rockchip/rk29sdk/asound-for-rt5625.conf.bak");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf.env device/rockchip/rk29sdk/asound-for-rt5625.conf");
-#system("tar -zcf ../jellybean.tar @exclude --exclude=device/rockchip/rk29sdk/asound-for-rt5625.conf.bak  ../jb");
+system("tar -zcf ../jellybean.tar @exclude --exclude=device/rockchip/rk29sdk/asound-for-rt5625.conf.bak  ../jb");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf device/rockchip/rk29sdk/asound-for-rt5625.conf.env");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf.bak device/rockchip/rk29sdk/asound-for-rt5625.conf");
-#system("rm -r kernel");
+system("rm -r kernel");
 system("mv ../rkTmpOut out");
 system("mv ../rkTmpKernel kernel");
 print "\n---pack done, see ../jellybean.tar file --\n"
