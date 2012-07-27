@@ -185,10 +185,10 @@ system("tar zxvf kernel.tar.gz kernel/");
 system("mv kernel.tar* ../");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf device/rockchip/rk29sdk/asound-for-rt5625.conf.bak");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf.env device/rockchip/rk29sdk/asound-for-rt5625.conf");
-system("tar -zcf ../ics.tar @exclude --exclude=device/rockchip/rk29sdk/asound-for-rt5625.conf.bak  ../ics");
+system("tar -zcf ../jellybean.tar @exclude --exclude=device/rockchip/rk29sdk/asound-for-rt5625.conf.bak  ../jb");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf device/rockchip/rk29sdk/asound-for-rt5625.conf.env");
 #system("mv device/rockchip/rk29sdk/asound-for-rt5625.conf.bak device/rockchip/rk29sdk/asound-for-rt5625.conf");
 system("rm -r kernel");
 system("mv ../rkTmpOut out");
 system("mv ../rkTmpKernel kernel");
-print "\n---pack done, see ../ics.tar file --\n"
+print "\n---pack done, see ../jellybean.tar file --\n"
