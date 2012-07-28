@@ -302,6 +302,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
 	ro.sf.lcd_density=160 \
+        ro.rk.screenoff_time=60000 \
+        ro.rk.def_brightness=200\
+        ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home\
+        ro.rk.install_non_market_apps=false\
+        ro.default.size=100\
+        persist.sys.timezone=Asia/Shanghai\
+        ro.product.usbfactory=rockchip_usb \
         wifi.supplicant_scan_interval=15 \
         ro.opengles.version=131072 \
         testing.mediascanner.skiplist = /mnt/sdcard/Android/ \
@@ -393,6 +400,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
 endif
 
+#whtest for bin
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/whtest.sh:system/bin/whtest.sh
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
