@@ -78,6 +78,10 @@ Only the three quirks included above are recognized at this point:
 <MediaCodecs>
     <Decoders>
 	<MediaCodec name="OMX.rk.video_decoder.avc" type="video/avc" />
+	<MediaCodec name="OMX.rk.video_decoder.vpx" type="video/x-vnd.on2.vp8" />
+	<MediaCodec name="OMX.rk.video_decoder.h263" type="video/3gpp" />
+	<MediaCodec name="OMX.rk.video_decoder.m4v" type="video/mp4v-es" />
+
         <MediaCodec name="OMX.google.amrnb.decoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.decoder" type="audio/amr-wb" />
         <MediaCodec name="OMX.google.aac.decoder" type="audio/mp4a-latm" />
@@ -88,10 +92,7 @@ Only the three quirks included above are recognized at this point:
     </Decoders>
 
     <Encoders>
-        <MediaCodec name="OMX.Nvidia.mp4.encoder" type="video/mp4v-es" />
-        <MediaCodec name="OMX.Nvidia.h263.encoder" type="video/3gpp" />
-        <MediaCodec name="OMX.Nvidia.h264.encoder" type="video/avc" />
-
+        <MediaCodec name="OMX.rk.video_encoder.vpx" type="video/x-vnd.on2.vp8" />
         <MediaCodec name="OMX.google.amrnb.encoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.encoder" type="audio/amr-wb" />
         <MediaCodec name="OMX.google.aac.encoder" type="audio/mp4a-latm" />
