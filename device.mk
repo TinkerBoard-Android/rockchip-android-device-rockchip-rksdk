@@ -337,7 +337,9 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
         device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko \
         device/rockchip/rk30sdk/8188eu.ko:system/lib/modules/8188eu.ko \
+        device/rockchip/rk30sdk/8188eu.ko.3.0.36+:system/lib/modules/8188eu.ko.3.0.36+ \
         device/rockchip/rk30sdk/8192cu.ko:system/lib/modules/8192cu.ko \
+        device/rockchip/rk30sdk/8192cu.ko.3.0.36+:system/lib/modules/8192cu.ko.3.0.36+ \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 	
 
