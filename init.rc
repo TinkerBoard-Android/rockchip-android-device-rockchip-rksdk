@@ -124,7 +124,7 @@ on fs
     mount ext4 mtd@cache /cache wait noatime nodiratime nosuid nodev noauto_da_alloc
 
     insmod /system/lib/modules/ump.ko
-    insmod /system/lib/modules/mali.ko
+    insmod /system/lib/modules/mali.ko mali_dvfs=50,100,133,160,200,266,400 mali_init_clock=50
     insmod /system/lib/modules/rk29-ipp.ko
 
 on post-fs
