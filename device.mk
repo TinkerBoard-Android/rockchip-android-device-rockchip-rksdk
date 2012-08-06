@@ -192,6 +192,14 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/etc/.videoBlock:system/etc/.videoBlock 
 
 #########################################################
+#       webkit
+#########################################################        
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk29sdk/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
+        device/rockchip/rk29sdk/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
+        device/rockchip/rk29sdk/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
+
+#########################################################
 #       vpu lib
 #########################################################        
 sf_lib_files := $(shell ls $(LOCAL_PATH)/proprietary/libvpu | grep .so)
