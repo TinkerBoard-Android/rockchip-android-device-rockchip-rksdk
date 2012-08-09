@@ -225,7 +225,8 @@ PRODUCT_PACKAGES += \
         librkswscale.so                   \
         librkwmapro.so                    \
         libyuvtorgb.so                    \
-        libvpu.so
+        libvpu.so		        \
+	libhtml5_check.so
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 PRODUCT_COPY_FILES += \
