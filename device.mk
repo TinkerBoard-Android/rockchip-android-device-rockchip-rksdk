@@ -321,6 +321,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         wifi.supplicant_scan_interval=15 \
         ro.opengles.version=131072 \
         testing.mediascanner.skiplist = /mnt/sdcard/Android/ \
+	 ro.factory.tool=0 \
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
