@@ -48,7 +48,7 @@ service ueventd /sbin/ueventd
 service recovery /sbin/recovery
 		console
 
-service console /system/bin/busybox sh
+service console /sbin/busybox sh
     console
 service adbd /sbin/adbd recovery
     disabled

@@ -182,7 +182,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
-	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox 
+	device/rockchip/rk30sdk/proprietary/bin/busybox:root/sbin/busybox
 	
 #########################################################
 #       adblock rule
