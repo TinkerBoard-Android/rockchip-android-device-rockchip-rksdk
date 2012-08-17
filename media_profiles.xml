@@ -472,7 +472,7 @@
         minSampleRate="8000" maxSampleRate="44100"
         minChannels="1" maxChannels="1" />
 
-    <AudioEncoderCap name="amrwb" enabled="false"
+    <AudioEncoderCap name="amrwb" enabled="true"
         minBitRate="6600" maxBitRate="23050"
         minSampleRate="16000" maxSampleRate="16000"
         minChannels="1" maxChannels="1" />
