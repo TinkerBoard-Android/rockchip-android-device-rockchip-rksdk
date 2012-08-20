@@ -179,7 +179,7 @@ on property:sys.gmali.performance=video
 
 #factory
 on property:ro.factory.tool=1     
-    write /sys/class/gsensor/oratiention gsensor={0,-1,0,0,0,1,1,0,0}
+    write /sys/class/gsensor_class/orientation gsensor={-1,0,0,0,0,1,0,-1,0}
     write /sys/devices/platform/rk29-keypad/rk29key {menu:MENU,home:HOME,vol+:VOLUP,vol-:VOLDOWN,play:PLAY,esc:ESC,sensor:CAMERA}
     write /sys/devices/platform/rk29_backlight/rk29backlight 100
 
