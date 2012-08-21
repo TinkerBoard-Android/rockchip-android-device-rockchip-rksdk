@@ -3,9 +3,6 @@
 # Product-specific compile-time definitions.
 #
 
-DISABLE_DEXPREOPT:= true
-WITH_DEXPREOPT := false 
-
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM := rk30xx
 TARGET_BOARD_HARDWARE := rk30board
