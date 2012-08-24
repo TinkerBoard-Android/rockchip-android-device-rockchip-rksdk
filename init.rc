@@ -550,6 +550,10 @@ service dumpstate /system/bin/dumpstate -s
 service readahead /sbin/readahead -f
     disabled
 
+service drmservice /system/bin/drmservice
+	class main
+	oneshot
+
 service sshd /system/bin/start-ssh
     class main
     disabled
