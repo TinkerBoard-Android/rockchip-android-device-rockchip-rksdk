@@ -269,6 +269,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 		charger \
 		charger_res_images 
+		
+# drmservice
+PRODUCT_PACKAGES += \
+		drmservice
 
 PRODUCT_CHARACTERISTICS := tablet
 
