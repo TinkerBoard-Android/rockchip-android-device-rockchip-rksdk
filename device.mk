@@ -141,6 +141,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
         libsrec_jni 
 
+ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
 # GPU-MALI        
 PRODUCT_PACKAGES += \
         libEGL_mali.so \
@@ -166,6 +167,8 @@ PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/gpu_performance/performance:system/bin/performance \
         device/rockchip/rk30sdk/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
         device/rockchip/rk30sdk/gpu_performance/gpu.rk30board.so:system/lib/hw/gpu.rk30board.so
+else
+endif
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \

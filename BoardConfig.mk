@@ -4,14 +4,18 @@
 #
 
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/Image
-TARGET_BOARD_PLATFORM := rk30xx
+TARGET_BOARD_PLATFORM ?= rk30xx
 TARGET_BOARD_HARDWARE := rk30board
 TARGET_NO_BOOTLOADER := true 
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 
 DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 
+ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
 BOARD_EGL_CFG := device/rockchip/rk30sdk/egl.cfg
+else
+BOARD_EGL_CFG := device/rockchip/rk30sdk/proprietary/pvr/egl.cfg
+endif
 
 TARGET_PROVIDES_INIT_RC := true
 
