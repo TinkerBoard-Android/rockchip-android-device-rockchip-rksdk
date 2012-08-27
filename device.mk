@@ -13,8 +13,8 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL rk30sdk devices, and
-# are also specific to rk30sdk devices
+# This file includes all definitions that apply to ALL $(TARGET_PRODUCT) devices, and
+# are also specific to $(TARGET_PRODUCT) devices
 #
 # Everything in this directory will become public
 
@@ -115,15 +115,15 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/chromeLib/libchromeview.so:system/lib/li
 	$(LOCAL_PATH)/apk/chromeLib/chrome.sh:system/bin/chrome.sh
 
 PRODUCT_COPY_FILES += \
-	device/rockchip/rk30sdk/proprietary/bin/busybox:system/bin/busybox \
-	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
-        device/rockchip/rk30sdk/init.rc:root/init.rc \
-        device/rockchip/rk30sdk/mkdosfs:root/sbin/mkdosfs \
-        device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-        device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
-        device/rockchip/rk30sdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
-        device/rockchip/rk30sdk/media_profiles.xml:system/etc/media_profiles.xml \
-	device/rockchip/rk30sdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/bin/busybox:system/bin/busybox \
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/bin/io:system/xbin/io \
+        device/rockchip/$(TARGET_PRODUCT)/init.rc:root/init.rc \
+        device/rockchip/$(TARGET_PRODUCT)/mkdosfs:root/sbin/mkdosfs \
+        device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
+        device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+        device/rockchip/$(TARGET_PRODUCT)/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+        device/rockchip/$(TARGET_PRODUCT)/media_profiles.xml:system/etc/media_profiles.xml \
+	device/rockchip/$(TARGET_PRODUCT)/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
@@ -132,10 +132,25 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
-        device/rockchip/rk30sdk/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
+        device/rockchip/$(TARGET_PRODUCT)/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
+
+######################################
+#      for support 3.0.36+
+######################################
 PRODUCT_COPY_FILES += \
-       device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/8188eu.ko.3.0.36+:system/lib/modules/8188eu.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/mali.ko.3.0.36+:system/lib/modules/mali.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/8192cu.ko.3.0.36+:system/lib/modules/8192cu.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
+       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ 
+
+PRODUCT_COPY_FILES += \
+       device/rockchip/$(TARGET_PRODUCT)/vold.fstab:system/etc/vold.fstab 
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -152,50 +167,50 @@ PRODUCT_PACKAGES += \
         mali.ko \
         ump.ko 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libmali/libMali.so:system/lib/libMali.so \
-        device/rockchip/rk30sdk/proprietary/libmali/libMali.so:obj/lib/libMali.so \
-        device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:system/lib/libUMP.so \
-        device/rockchip/rk30sdk/proprietary/libmali/libUMP.so:obj/lib/libUMP.so \
-        device/rockchip/rk30sdk/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
-        device/rockchip/rk30sdk/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
-        device/rockchip/rk30sdk/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
-        device/rockchip/rk30sdk/proprietary/libmali/mali.ko.3.0.36+:system/lib/modules/mali.ko.3.0.36+ \
-        device/rockchip/rk30sdk/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
-        device/rockchip/rk30sdk/proprietary/libmali/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
-        device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
-        device/rockchip/rk30sdk/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
-        device/rockchip/rk30sdk/gpu_performance/performance:system/bin/performance \
-        device/rockchip/rk30sdk/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
-        device/rockchip/rk30sdk/gpu_performance/gpu.rk30board.so:system/lib/hw/gpu.rk30board.so
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libMali.so:system/lib/libMali.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libMali.so:obj/lib/libMali.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libUMP.so:system/lib/libUMP.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libUMP.so:obj/lib/libUMP.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/mali.ko.3.0.36+:system/lib/modules/mali.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
+        device/rockchip/$(TARGET_PRODUCT)/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
+        device/rockchip/$(TARGET_PRODUCT)/gpu_performance/performance:system/bin/performance \
+        device/rockchip/$(TARGET_PRODUCT)/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
+        device/rockchip/$(TARGET_PRODUCT)/gpu_performance/gpu.$(TARGET_BOARD_HARDWARE).so:system/lib/hw/gpu.$(TARGET_BOARD_HARDWARE).so
 else
 endif
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \
-        device/rockchip/rk30sdk/proprietary/libipp/rk29-ipp.ko:system/lib/modules/rk29-ipp.ko
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libipp/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libipp/rk29-ipp.ko:system/lib/modules/rk29-ipp.ko
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libion/libion.so:system/lib/libion.so \
-        device/rockchip/rk30sdk/proprietary/libion/libion.so:obj/lib/libion.so 
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libion/libion.so:system/lib/libion.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libion/libion.so:obj/lib/libion.so 
 
 PRODUCT_COPY_FILES += \
-	device/rockchip/rk30sdk/proprietary/bin/io:system/xbin/io \
-	device/rockchip/rk30sdk/proprietary/bin/busybox:root/sbin/busybox
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/bin/io:system/xbin/io \
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/bin/busybox:root/sbin/busybox
 	
 #########################################################
 #       adblock rule
 #########################################################        
 PRODUCT_COPY_FILES += \
-	device/rockchip/rk30sdk/proprietary/etc/.allBlock:system/etc/.allBlock \
-	device/rockchip/rk30sdk/proprietary/etc/.videoBlock:system/etc/.videoBlock 
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/etc/.allBlock:system/etc/.allBlock \
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/etc/.videoBlock:system/etc/.videoBlock 
 
 #########################################################
 #       webkit
 #########################################################        
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
-        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
-        device/rockchip/rk30sdk/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
 
 #########################################################
 #       vpu lib
@@ -208,10 +223,10 @@ PRODUCT_COPY_FILES += \
         $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
-	device/rockchip/rk30sdk/proprietary/libvpu/registry:system/lib/registry \
-        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ \
-        device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
+	device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/registry:system/lib/registry \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
 
 PRODUCT_PACKAGES += \
         ilibapedec.so \
@@ -338,19 +353,19 @@ PRODUCT_PACKAGES += \
 
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)
-PRODUCT_COPY_FILES += device/rockchip/rk30sdk/bugreport.sh:system/bin/bugreport.sh
+PRODUCT_COPY_FILES += device/rockchip/$(TARGET_PRODUCT)/bugreport.sh:system/bin/bugreport.sh
 endif
 
 # wifi
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
-        device/rockchip/rk30sdk/wlan.ko:system/lib/modules/wlan.ko \
-        device/rockchip/rk30sdk/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
-        device/rockchip/rk30sdk/rkwifi.ko:system/lib/modules/rkwifi.ko \
-        device/rockchip/rk30sdk/8188eu.ko:system/lib/modules/8188eu.ko \
-        device/rockchip/rk30sdk/8188eu.ko.3.0.36+:system/lib/modules/8188eu.ko.3.0.36+ \
-        device/rockchip/rk30sdk/8192cu.ko:system/lib/modules/8192cu.ko \
-        device/rockchip/rk30sdk/8192cu.ko.3.0.36+:system/lib/modules/8192cu.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/wlan.ko:system/lib/modules/wlan.ko \
+        device/rockchip/$(TARGET_PRODUCT)/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/rkwifi.ko:system/lib/modules/rkwifi.ko \
+        device/rockchip/$(TARGET_PRODUCT)/8188eu.ko:system/lib/modules/8188eu.ko \
+        device/rockchip/$(TARGET_PRODUCT)/8188eu.ko.3.0.36+:system/lib/modules/8188eu.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/8192cu.ko:system/lib/modules/8192cu.ko \
+        device/rockchip/$(TARGET_PRODUCT)/8192cu.ko.3.0.36+:system/lib/modules/8192cu.ko.3.0.36+ \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 	
 
@@ -417,7 +432,7 @@ endif
 
 #whtest for bin
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk30sdk/whtest.sh:system/bin/whtest.sh
+        device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
