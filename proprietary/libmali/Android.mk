@@ -1,3 +1,5 @@
+ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
+
 LOCAL_PATH := $(call my-dir)
 
 # Use BUILD_PREBUILT instead of PRODUCT_COPY_FILES to bring in the NOTICE file.
@@ -36,4 +38,4 @@ LOCAL_PREBUILT_LIBS := ump.ko
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_MULTI_PREBUILT)
 
-
+endif
