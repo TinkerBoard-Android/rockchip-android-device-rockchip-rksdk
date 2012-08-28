@@ -1,7 +1,10 @@
 # The rockchip rk30sdk board
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-
 include device/rockchip/rk30sdk/BoardConfig.mk
+ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)), true)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+else
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+endif
 $(call inherit-product, device/rockchip/rk30sdk/device.mk)
 
 PRODUCT_BRAND := rk30sdk

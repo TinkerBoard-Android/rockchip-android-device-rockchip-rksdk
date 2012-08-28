@@ -81,14 +81,12 @@ BOARD_WITH_CALL_FUNCTION := false
 
 
 ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)),true)
-#phone pad modem list
-BOARD_RADIO_MU509 := true
-
-else
 # radio only support data:
 #      true - only support data
 #      false - support full function, data, voice, sms, mms ...
 # default is false
+BOARD_RADIO_DATAONLY := false
+else
 BOARD_RADIO_DATAONLY := true
 
 endif
@@ -97,3 +95,25 @@ TARGET_BOOTLOADER_BOARD_NAME := rk30sdk
 
 # readahead files to improve boot time
 BOARD_BOOT_READAHEAD := true
+#for ALSA
+ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)),true)
+BOARD_USES_ALSA_AUDIO := true
+BUILD_WITH_ALSA_UTILS := true
+else
+BOARD_USES_ALSA_AUDIO := false
+BUILD_WITH_ALSA_UTILS := false
+endif
+
+#phone pad modem list
+BOARD_RADIO_MU509 := false
+BOARD_RADIO_MW100 := false
+BOARD_RADIO_MT6229 := false
+BOARD_RADIO_SEW868 := false
+BOARD_RADIO_MI700 := false
+
+#phone pad codec list
+BOARD_CODEC_WM8994 := false
+BOARD_CODEC_RT5625_SPK_FROM_SPKOUT := false
+BOARD_CODEC_RT5625_SPK_FROM_HPOUT := false
+BOARD_CODEC_RT3261 := true
+
