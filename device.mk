@@ -135,20 +135,6 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
         device/rockchip/$(TARGET_PRODUCT)/rk30xxnand_ko.ko.3.0.8+:root/rk30xxnand_ko.ko.3.0.8+ 
 
-######################################
-#      for support 3.0.36+
-######################################
-PRODUCT_COPY_FILES += \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/rk30xxnand_ko.ko.3.0.36+:root/rk30xxnand_ko.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/8188eu.ko.3.0.36+:system/lib/modules/8188eu.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/mali.ko.3.0.36+:system/lib/modules/mali.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/8192cu.ko.3.0.36+:system/lib/modules/8192cu.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/rk29-ipp.ko.3.0.36+:system/lib/modules/rk29-ipp.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
-       device/rockchip/$(TARGET_PRODUCT)/ko.3.0.36+/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ 
-
 PRODUCT_COPY_FILES += \
        device/rockchip/$(TARGET_PRODUCT)/vold.fstab:system/etc/vold.fstab 
 
