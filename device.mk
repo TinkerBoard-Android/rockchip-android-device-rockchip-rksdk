@@ -169,6 +169,24 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/gpu.$(TARGET_BOARD_HARDWARE).so:system/lib/hw/gpu.$(TARGET_BOARD_HARDWARE).so
 else
+
+#SGX540       
+PRODUCT_COPY_FILES += \
+				device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvctl:/system/vendor/bin/pvrsrvctl\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/gralloc.rk30xxb.so:system/vendor/lib/hw/gralloc.rk30xxb.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libEGL_POWERVR_SGX540_130.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_130.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libGLESv1_CM_POWERVR_SGX540_130.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_130.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libGLESv2_POWERVR_SGX540_130.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_130.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libIMGegl.so:system/vendor/lib/libIMGegl.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libPVRScopeServices.so:system/vendor/lib/libPVRScopeServices.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libglslcompiler.so:system/vendor/lib/libglslcompiler.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libpvr2d.so:system/vendor/lib/libpvr2d.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libpvrANDROID_WSEGL.so:system/vendor/lib/libpvrANDROID_WSEGL.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libsrv_init.so:system/vendor/lib/libsrv_init.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libsrv_um.so:system/vendor/lib/libsrv_um.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libusc.so:system/vendor/lib/libusc.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/omaplfb.ko:system/modules/omaplfb.ko\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvkm.ko:system/modules/pvrsrvkm.ko
 endif
 
 PRODUCT_COPY_FILES += \

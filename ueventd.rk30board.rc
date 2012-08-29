@@ -51,6 +51,9 @@
 /dev/mali           	  0666   system   	 system
 /dev/ump           	  0666   system   	 system
 
+# for sgx
+/dev/pvrsrvkm         0666   system      system
+
 #for hdmi
 /sys/class/display/HDMI/enable   0664     root       system
 /sys/class/display/HDMI/mode     0664     root       system
