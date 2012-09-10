@@ -185,8 +185,8 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libsrv_init.so:system/vendor/lib/libsrv_init.so\
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libsrv_um.so:system/vendor/lib/libsrv_um.so\
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libusc.so:system/vendor/lib/libusc.so\
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/rklfb.ko:system/modules/rklfb.ko\
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvkm.ko:system/modules/pvrsrvkm.ko\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/rklfb.ko:system/lib/modules/rklfb.ko\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvkm.ko:system/lib/modules/pvrsrvkm.ko\
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libperformance_runtime.so:system/lib/libperformance_runtime.so
 endif
 
