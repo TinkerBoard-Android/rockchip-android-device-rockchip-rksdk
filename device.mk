@@ -368,6 +368,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home\
         ro.rk.install_non_market_apps=false\
         ro.default.size=100\
+        persist.sys.timezone=Atlantic/Azores\
         ro.product.usbfactory=rockchip_usb \
         wifi.supplicant_scan_interval=15 \
         ro.opengles.version=131072 \
