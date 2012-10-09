@@ -129,6 +129,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.nonsmartphone.le.conf:system/etc/bluetooth/main.conf \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
@@ -169,6 +171,25 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/gpu.$(TARGET_BOARD_HARDWARE).so:system/lib/hw/gpu.$(TARGET_BOARD_HARDWARE).so
 else
+
+#SGX540       
+PRODUCT_COPY_FILES += \
+				device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvctl:/system/vendor/bin/pvrsrvctl\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/gralloc.rk30xxb.so:system/vendor/lib/hw/gralloc.rk30xxb.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libEGL_POWERVR_SGX540_130.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_130.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libGLESv1_CM_POWERVR_SGX540_130.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_130.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libGLESv2_POWERVR_SGX540_130.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_130.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libIMGegl.so:system/vendor/lib/libIMGegl.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libPVRScopeServices.so:system/vendor/lib/libPVRScopeServices.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libglslcompiler.so:system/vendor/lib/libglslcompiler.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libpvr2d.so:system/vendor/lib/libpvr2d.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libpvrANDROID_WSEGL.so:system/vendor/lib/libpvrANDROID_WSEGL.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libsrv_init.so:system/vendor/lib/libsrv_init.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libsrv_um.so:system/vendor/lib/libsrv_um.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libusc.so:system/vendor/lib/libusc.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/rklfb.ko:system/lib/modules/rklfb.ko\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvkm.ko:system/lib/modules/pvrsrvkm.ko\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libperformance_runtime.so:system/lib/libperformance_runtime.so
 endif
 
 PRODUCT_COPY_FILES += \
@@ -349,6 +370,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home\
         ro.rk.install_non_market_apps=false\
         ro.default.size=100\
+        persist.sys.timezone=Atlantic/Azores\
         ro.product.usbfactory=rockchip_usb \
         wifi.supplicant_scan_interval=15 \
         ro.opengles.version=131072 \

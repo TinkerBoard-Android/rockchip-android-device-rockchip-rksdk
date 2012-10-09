@@ -14,7 +14,7 @@ DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
 BOARD_EGL_CFG := device/rockchip/rk30sdk/egl.cfg
 else
-BOARD_EGL_CFG := device/rockchip/rk30sdk/proprietary/pvr/egl.cfg
+BOARD_EGL_CFG := device/rockchip/rk30sdk/proprietary/libpvr/egl.cfg
 endif
 
 TARGET_PROVIDES_INIT_RC := true

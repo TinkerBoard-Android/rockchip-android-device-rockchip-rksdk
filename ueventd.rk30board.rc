@@ -51,11 +51,14 @@
 /dev/mali           	  0666   system   	 system
 /dev/ump           	  0666   system   	 system
 
+# for sgx
+/dev/pvrsrvkm         0666   system      system
+
 #for hdmi
 /sys/class/display/HDMI/enable   0664     root       system
 /sys/class/display/HDMI/mode     0664     root       system
 /sys/class/display/HDMI/scale    0664     root       system
-
+/sys/class/graphics/fb0/blank    0664     root    system
 
 #for DRM
 /dev/rknand_sys_storage   0660   system     system 
