@@ -376,6 +376,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.opengles.version=131072 \
         testing.mediascanner.skiplist = /mnt/sdcard/Android/ \
 	 ro.factory.tool=0 \
+        ro.kernel.android.checkjni=0
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
