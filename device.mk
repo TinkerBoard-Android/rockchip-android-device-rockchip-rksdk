@@ -233,7 +233,8 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
 	device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/registry:system/lib/registry \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ \
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko\
+        device/rockchip/rk30sdk/proprietary/libvpu/rk30_mirroring_3.0.8+.ko:system/lib/modules/rk30_mirroring_3.0.8+.ko
 
 PRODUCT_PACKAGES += \
         ilibapedec.so \
