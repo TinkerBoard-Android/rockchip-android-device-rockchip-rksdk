@@ -65,8 +65,4 @@
         <item>"9,1"</item>
     </string-array>
 
-    <!-- Wifi driver stop delay, in milliseconds.
-         Default value is 2 minutes. -->
-    <integer translatable="false" name="config_wifi_driver_stop_delay">0</integer>
-
 </resources>
