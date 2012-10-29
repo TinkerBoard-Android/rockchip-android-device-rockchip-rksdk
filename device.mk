@@ -192,7 +192,9 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libusc.so:system/vendor/lib/libusc.so\
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/rklfb.ko:system/lib/modules/rklfb.ko\
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/pvrsrvkm.ko:system/lib/modules/pvrsrvkm.ko\
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libperformance_runtime.so:system/lib/libperformance_runtime.so
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/libperformance_runtime.so:system/lib/libperformance_runtime.so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/gpu.$(TARGET_BOARD_HARDWARE).so:system/lib/hw/gpu.$(TARGET_BOARD_HARDWARE).so\
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libpvr/performance_info.xml:system/etc/performance_info.xml
 endif
 
 PRODUCT_COPY_FILES += \
