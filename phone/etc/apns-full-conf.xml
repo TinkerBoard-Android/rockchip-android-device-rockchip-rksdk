@@ -840,6 +840,10 @@
   <apn carrier="Airtel" mcc="404" mnc="96" apn="airtelgprs.com" mmsc="http://100.1.201.171:10021/mmsc" mmsproxy="100.1.201.172" mmsport="8799" type="default,supl,mms" />
   <apn carrier="Airtel" mcc="404" mnc="97" apn="airtelgprs.com" mmsc="http://100.1.201.171:10021/mmsc" mmsproxy="100.1.201.172" mmsport="8799" type="default,supl,mms" />
   <apn carrier="Airtel" mcc="404" mnc="98" apn="airtelgprs.com" mmsc="http://100.1.201.171:10021/mmsc" mmsproxy="100.1.201.172" mmsport="8799" type="default,supl,mms" />
+  <apn carrier="TATA"   mcc="404" mnc="00" apn="none" user="internet" password="internet" type="default,supl,mms" />
+  <apn carrier="Reliance" mcc="404" mnc="00" apn="rcomnet" user="9310090723" password="9310090723" type="default,supl,mms" />
+  <apn carrier="MTS" mcc="405" mnc="89" apn="#777" user="internet@internet.mtsindia.in" password="mts" type="default,supl,mms" />
+  <apn carrier="Airtel" mcc="404" mnc="10" apn="airtelgprs.com"  type="default,supl,mms" />
   <apn carrier="TA TA DoCoMo" mcc="405" mnc="03" apn="TATA.DOCOMO.INTERNET" type="default,supl" />
   <apn carrier="TA TA DoCoMo MMS" mcc="405" mnc="03" apn="TATA.DOCOMO.MMS" mmsc="http://mmsc/" mmsproxy="10.124.26.94" mmsport="8799" type="mms" />
   <apn carrier="TA TA DoCoMo" mcc="405" mnc="025" apn="TATA.DOCOMO.INTERNET" type="default,supl" />
@@ -1337,21 +1341,22 @@
   <apn carrier="CTI MMS" mcc="722" mnc="310" apn="mms.ctimovil.com.ar" user="ctimms" password="ctimms999" mmsc="http://mms.ctimovil.com.ar" mmsproxy="170.051.255.240" mmsport="9201" type="mms" />
   <apn carrier="Personal" mcc="722" mnc="341" apn="gprs.personal.com" user="gprs" password="gprs" proxy="172.16.0.20" port="8080" type="default,supl" />
   <apn carrier="Personal MMS" mcc="722" mnc="341" apn="mms.personal.com" user="mms" password="mms" mmsc="http://mms.personal.com/" mmsproxy="172.25.7.31" mmsport="8080" type="mms" />
-  <apn carrier="TIM BR MMS" mcc="724" mnc="02" apn="mms.tim.br" user="tim" password="tim" mmsc="http://mms.tim.br" mmsproxy="200.179.66.242" mmsport="8080" type="mms" />
+  <apn carrier="TIM" mcc="724" mnc="02" apn="tim.br" user="tim" password="tim" mmsc="http://mms.tim.br" mmsproxy="200.179.66.242" mmsport="8080" type="default,supl,mms" />
   <apn carrier="TIM BR CONNECT FAST" mcc="724" mnc="02" apn="tim.br" user="tim" password="tim" mmsc="null" type="default,supl" />
   <apn carrier="TIM BR MMS" mcc="724" mnc="03" apn="mms.tim.br" user="tim" password="tim" mmsc="http://mms.tim.br" mmsproxy="200.179.66.242" mmsport="8080" type="mms" />
   <apn carrier="TIM BR CONNECT FAST" mcc="724" mnc="03" apn="tim.br" user="tim" password="tim" mmsc="null" type="default,supl" />
   <apn carrier="TIM BR MMS" mcc="724" mnc="04" apn="mms.tim.br" user="tim" password="tim" mmsc="http://mms.tim.br" mmsproxy="200.179.66.242" mmsport="8080" type="mms" />
   <apn carrier="TIM BR CONNECT FAST" mcc="724" mnc="04" apn="tim.br" user="tim" password="tim" mmsc="null" type="default,supl" />
-  <apn carrier="Claro BR" mcc="724" mnc="05" apn="claro.com.br" user="claro" password="claro" type="default,supl" />
+  <apn carrier="Claro" mcc="724" mnc="05" apn="bandalarga.claro.com.br" user="claro" password="claro" type="default,supl" />
   <apn carrier="Claro BR MMS" mcc="724" mnc="05" apn="mms.claro.com.br" user="claro" password="claro" mmsc="http://mms.claro.com.br" mmsproxy="200.169.126.10" mmsport="8799" type="mms" />
   <apn carrier="Portal Claro" mcc="724" mnc="05" apn="wap.claro.com.br" user="claro" password="claro" proxy="200.169.126.11" port="8799" type="default,supl" />
   <apn carrier="VIVO MMS" mcc="724" mnc="06" apn="mms.vivo.com.br" user="vivo" password="vivo" mmsc="http://termnat.vivomms.com.br:8088/mms" mmsproxy="200.142.130.104" mmsport="80" type="mms" />
   <apn carrier="VIVO ZAP" mcc="724" mnc="06" apn="zap.vivo.com.br" user="vivo" password="vivo" mmsc="null" type="default,supl" />
+  <apn carrier="Sercomtel" mcc="724" mnc="15" apn="sercomtel.com.br" user="sercomtel" password="sercomtel" type="default,supl" />
   <apn carrier="SCTL MMS" mcc="724" mnc="07" apn="mms.sercomtel.com.br" user="sercomtel" password="sercomtel" mmsc="http://mms.claro.com.br" mmsproxy="200.169.126.10" mmsport="8799" type="mms" />
   <apn carrier="SCTL GPRS" mcc="724" mnc="07" apn="sercomtel.com.br" user="sercomtel" password="sercomtel" mmsc="null" type="default,supl" />
   <apn carrier="VIVO MMS" mcc="724" mnc="10" apn="mms.vivo.com.br" user="vivo" password="vivo" mmsc="http://termnat.vivomms.com.br:8088/mms" mmsproxy="200.142.130.104" mmsport="80" type="mms" />
-  <apn carrier="VIVO ZAP" mcc="724" mnc="10" apn="zap.vivo.com.br" user="vivo" password="vivo" mmsc="null" type="default,supl" />
+  <apn carrier="VIVO ZAP" mcc="724" mnc="10" apn="zap.vivo.com.br"  type="default,supl" />
   <apn carrier="VIVO MMS" mcc="724" mnc="11" apn="mms.vivo.com.br" user="vivo" password="vivo" mmsc="http://termnat.vivomms.com.br:8088/mms" mmsproxy="200.142.130.104" mmsport="80" type="mms" />
   <apn carrier="VIVO ZAP" mcc="724" mnc="11" apn="zap.vivo.com.br" user="vivo" password="vivo" mmsc="null" type="default,supl" />
   <apn carrier="BrT Internet" mcc="724" mnc="16" apn="brt.br" user="brt" password="brt" mmsc="null" type="default,supl" />
@@ -1364,7 +1369,7 @@
   <apn carrier="Amazonia MMS" mcc="724" mnc="24" apn="mmsgprs.amazoniacelular.com.br" user="celular" password="celular" mmsc="http://mms.amazoniacelular.com.br" mmsproxy="200.192.230.142" mmsport="8080" type="mms" />
   <apn carrier="Oi" mcc="724" mnc="31" apn="gprs.oi.com.br" user="oi" password="oi" mmsc="null" type="default,supl" />
   <apn carrier="Oi MMS" mcc="724" mnc="31" apn="mmsgprs.oi.com.br" user="oimms" password="oioioi" mmsc="http://200.222.042.204:8002" mmsproxy="192.168.10.50" mmsport="3128" type="mms" />
-  <apn carrier="CTBC MMS" mcc="724" mnc="32" apn="mms.ctbc.br" user="ctbc" password="1212" mmsc="http://mms.ctbccelular.com.br/was" mmsproxy="172.29.7.70" mmsport="8080" type="mms" />
+  <apn carrier="CTBC" mcc="724" mnc="32" apn="wap.ctbc.br" type="default,supl,mms"/>
   <apn carrier="CTBC MMS" mcc="724" mnc="33" apn="mms.ctbc.br" user="ctbc" password="1212" mmsc="http://mms.ctbccelular.com.br/was" mmsproxy="172.29.7.70" mmsport="8080" type="mms" />
   <apn carrier="CTBC MMS" mcc="724" mnc="34" apn="mms.ctbc.br" user="ctbc" password="1212" mmsc="http://mms.ctbccelular.com.br/was" mmsproxy="172.29.7.70" mmsport="8080" type="mms" />
   <apn carrier="Entel PCS" mcc="730" mnc="01" apn="bam.entelpcs.cl" user="entelpcs" password="entelpcs" proxy="10.99.0.10" port="8080" type="default,supl" />
