@@ -544,3 +544,5 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
 $(call inherit-product, system/bluetooth/brcm_patchram_plus/hcd.mk)
+
+$(call inherit-product,external/rk-pcba-test/res.mk)
