@@ -508,6 +508,13 @@ service bootanim /system/bin/bootanimation
     disabled
     oneshot
 
+service shutdownanim /system/bin/bootanimation -shutdown
+    class main
+    user graphics
+    group graphics
+    disabled
+    oneshot
+
 service dbus /system/bin/dbus-daemon --system --nofork
     class main
     socket dbus stream 660 bluetooth bluetooth
