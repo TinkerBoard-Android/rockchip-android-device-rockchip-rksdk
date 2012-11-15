@@ -9,7 +9,7 @@ TARGET_BOARD_HARDWARE := rk30board
 TARGET_NO_BOOTLOADER := true 
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 
-DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
+#DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 
 ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
 BOARD_EGL_CFG := device/rockchip/rk30sdk/egl.cfg
@@ -21,8 +21,8 @@ TARGET_PROVIDES_INIT_RC := true
 
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := false
-TARGET_ROCHCHIP_RECOVERY := true
-TARGET_RECOVERY_UI_LIB := librecovery_ui_rk30sdk
+#TARGET_ROCHCHIP_RECOVERY := true
+#TARGET_RECOVERY_UI_LIB := librecovery_ui_rk30sdk
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_CPU_SMP := true
 BOARD_USES_GENERIC_AUDIO := true
@@ -58,7 +58,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 #BOARD_LIB_DUMPSTATE := libdumpstate.$(TARGET_BOARD_PLATFORM)
 
 # google apps
-BUILD_WITH_GOOGLE_MARKET := true
+BUILD_WITH_GOOGLE_MARKET := false
 
 # face lock
 BUILD_WITH_FACELOCK := true
