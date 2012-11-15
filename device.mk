@@ -42,8 +42,8 @@ endef
 #  copy proprietary apk
 #########################################################
 COPY_APK_TARGET := $(call all-apk-files-under,apk)
-PRODUCT_COPY_FILES += $(foreach apkName, $(COPY_APK_TARGET), \
-	$(addprefix $(LOCAL_PATH)/apk/, $(apkName)):$(addprefix system/app/, $(apkName)))
+#PRODUCT_COPY_FILES += $(foreach apkName, $(COPY_APK_TARGET), \
+#	$(addprefix $(LOCAL_PATH)/apk/, $(apkName)):$(addprefix system/app/, $(apkName)))
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/apk/flashplayer:system/app/flashplayer
@@ -101,8 +101,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #  RKUpdateService: RKUpdateService.apk
 ########################################################
 rk_apps_files := $(shell ls $(LOCAL_PATH)/apk/RKUpdateService | grep .apk)
-PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
-        $(LOCAL_PATH)/apk/RKUpdateService/$(file):system/app/$(file))
+#PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
+#        $(LOCAL_PATH)/apk/RKUpdateService/$(file):system/app/$(file))
 
 ########################################################
 #  RKUpdateService: librockchip_update_jni.so

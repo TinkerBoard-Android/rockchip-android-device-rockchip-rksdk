@@ -52,6 +52,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 
 # Enable NEON feature
+TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
@@ -61,7 +62,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 BUILD_WITH_GOOGLE_MARKET := false
 
 # face lock
-BUILD_WITH_FACELOCK := true
+#BUILD_WITH_FACELOCK := true
 
 # ebook
 #BUILD_WITH_RK_EBOOK := true
