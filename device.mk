@@ -224,20 +224,20 @@ PRODUCT_COPY_FILES += \
 #########################################################
 #       webkit
 #########################################################        
-PRODUCT_COPY_FILES += \
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
-        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
+#PRODUCT_COPY_FILES += \
+#        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
+#        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
+#        device/rockchip/$(TARGET_PRODUCT)/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
 
 #########################################################
 #       vpu lib
 #########################################################        
-sf_lib_files := $(shell ls $(LOCAL_PATH)/proprietary/libvpu | grep .so)
-PRODUCT_COPY_FILES += \
-        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
+#sf_lib_files := $(shell ls $(LOCAL_PATH)/proprietary/libvpu | grep .so)
+#PRODUCT_COPY_FILES += \
+#        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
 
-PRODUCT_COPY_FILES += \
-        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
+#PRODUCT_COPY_FILES += \
+#        $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
 
 PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
