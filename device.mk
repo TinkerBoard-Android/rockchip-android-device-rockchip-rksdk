@@ -85,8 +85,8 @@ $(patsubst ./%,%, \
 endef
 
 COPY_FILES := $(call all-models-files-under,facelock)
-PRODUCT_COPY_FILES += $(foreach files, $(COPY_FILES), \
-	$(addprefix $(LOCAL_PATH)/facelock/, $(files)):$(addprefix system/, $(files)))
+#PRODUCT_COPY_FILES += $(foreach files, $(COPY_FILES), \
+#	$(addprefix $(LOCAL_PATH)/facelock/, $(files)):$(addprefix system/, $(files)))
 
 ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
     PRODUCT_COPY_FILES += $(LOCAL_PATH)/facelock/FaceLock.apk:system/app/FaceLock.apk
@@ -545,8 +545,4 @@ endif
 PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
 
-$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
-$(call inherit-product, system/bluetooth/brcm_patchram_plus/hcd.mk)
-
-$(call inherit-product,external/rk-pcba-test/res.mk)
