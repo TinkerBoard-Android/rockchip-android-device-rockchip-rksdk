@@ -174,6 +174,7 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/mali.ko:system/lib/modules/mali.ko \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
         device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
+        device/rockchip/$(TARGET_PRODUCT)/proprietary/libmali/gralloc.rk30board.so:system/lib/hw/gralloc.rk30board.so \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/performance:system/bin/performance \
         device/rockchip/$(TARGET_PRODUCT)/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
