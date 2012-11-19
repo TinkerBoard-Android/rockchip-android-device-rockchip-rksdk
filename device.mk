@@ -409,18 +409,18 @@ endif
 
 # wifi
 PRODUCT_COPY_FILES += \
-        device/rockchip/$(TARGET_PRODUCT)/wlan.ko.3.0.36+:system/lib/modules/wlan.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/wlan.ko.3.0.8+:system/lib/modules/wlan.ko.3.0.8+ \
         device/rockchip/$(TARGET_PRODUCT)/wlan.ko:system/lib/modules/wlan.ko \
-        device/rockchip/$(TARGET_PRODUCT)/rkwifi.ko.3.0.36+:system/lib/modules/rkwifi.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/rkwifi.ko.3.0.8+:system/lib/modules/rkwifi.ko.3.0.8+ \
         device/rockchip/$(TARGET_PRODUCT)/rkwifi.ko:system/lib/modules/rkwifi.ko \
         device/rockchip/$(TARGET_PRODUCT)/8188eu.ko:system/lib/modules/8188eu.ko \
-        device/rockchip/$(TARGET_PRODUCT)/8188eu.ko.3.0.36+:system/lib/modules/8188eu.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/8188eu.ko.3.0.8+:system/lib/modules/8188eu.ko.3.0.8+ \
         device/rockchip/$(TARGET_PRODUCT)/8192cu.ko:system/lib/modules/8192cu.ko \
-        device/rockchip/$(TARGET_PRODUCT)/8192cu.ko.3.0.36+:system/lib/modules/8192cu.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/8192cu.ko.3.0.8+:system/lib/modules/8192cu.ko.3.0.8+ \
         device/rockchip/$(TARGET_PRODUCT)/rt5370sta.ko:system/lib/modules/rt5370sta.ko \
-        device/rockchip/$(TARGET_PRODUCT)/rt5370sta.ko.3.0.36+:system/lib/modules/rt5370sta.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/rt5370sta.ko.3.0.8+:system/lib/modules/rt5370sta.ko.3.0.8+ \
         device/rockchip/$(TARGET_PRODUCT)/rt5370ap.ko:system/lib/modules/rt5370ap.ko \
-        device/rockchip/$(TARGET_PRODUCT)/rt5370ap.ko.3.0.36+:system/lib/modules/rt5370ap.ko.3.0.36+ \
+        device/rockchip/$(TARGET_PRODUCT)/rt5370ap.ko.3.0.8+:system/lib/modules/rt5370ap.ko.3.0.8+ \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 	
 
@@ -546,4 +546,4 @@ endif
 PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
 
-
+$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
