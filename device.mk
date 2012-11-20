@@ -399,8 +399,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
         com.android.future.usb.accessory
 
-#PRODUCT_PACKAGES += \
-#        librecovery_ui_$(TARGET_PRODUCT)
+PRODUCT_PACKAGES += \
+        librecovery_ui_$(TARGET_PRODUCT)
 
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -546,4 +546,4 @@ endif
 PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
 
-$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
+#$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
