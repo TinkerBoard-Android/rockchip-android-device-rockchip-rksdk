@@ -9,7 +9,7 @@ TARGET_BOARD_HARDWARE := rk30board
 TARGET_NO_BOOTLOADER := true 
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 
-#DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
+DEVICE_PACKAGE_OVERLAYS := device/rockchip/rk30sdk/overlay
 
 ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
 BOARD_EGL_CFG := device/rockchip/rk30sdk/egl.cfg
