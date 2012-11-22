@@ -19,4 +19,7 @@
 <resources>
     <!-- Screen timeout default = 120 seconds -->
     <integer name="def_screen_off_timeout">120000</integer>
+
+    <!-- Default for Settings.Secure.USER_SETUP_COMPLETE -->
+    <bool name="def_user_setup_complete">true</bool>
 </resources>
