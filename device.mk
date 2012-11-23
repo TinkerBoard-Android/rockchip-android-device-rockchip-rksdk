@@ -255,7 +255,7 @@ PRODUCT_PACKAGES += \
         libomxvpu.so                      \
         librkswscale.so                   \
         librkwmapro.so                    \
-        libyuvtorgb.so                    \
+        libyuvtorgb                    \
         libvpu.so		        \
 	libhtml5_check.so
 
