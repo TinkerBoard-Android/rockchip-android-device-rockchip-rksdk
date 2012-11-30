@@ -547,3 +547,9 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
+#$(call inherit-product, $(LOCAL_PATH)/bluetooth/firmware/bt-firmware.mk)
+
+BT_FIRMWARE_FILES := $(shell ls $(LOCAL_PATH)/bluetooth/firmware)
+PRODUCT_COPY_FILES += \
+        $(foreach file, $(BT_FIRMWARE_FILES), $(LOCAL_PATH)/bluetooth/firmware/$(file):system/vendor/firmware/$(file))
+
