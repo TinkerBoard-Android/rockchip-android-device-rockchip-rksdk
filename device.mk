@@ -421,7 +421,8 @@ PRODUCT_COPY_FILES += \
         device/rockchip/$(TARGET_PRODUCT)/rt5370sta.ko.3.0.8+:system/lib/modules/rt5370sta.ko.3.0.8+ \
         device/rockchip/$(TARGET_PRODUCT)/rt5370ap.ko:system/lib/modules/rt5370ap.ko \
         device/rockchip/$(TARGET_PRODUCT)/rt5370ap.ko.3.0.8+:system/lib/modules/rt5370ap.ko.3.0.8+ \
-	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 	
 
 #########################################################
