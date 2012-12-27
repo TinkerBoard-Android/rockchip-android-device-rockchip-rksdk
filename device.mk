@@ -376,6 +376,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.sf.hwrotation=270 \
 	ro.rk.MassStorage=false \
         wifi.interface=wlan0 \
+		ro.tether.denied=false \
 	ro.sf.lcd_density=160 \
         ro.rk.screenoff_time=60000 \
         ro.rk.def_brightness=200\
