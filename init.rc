@@ -411,6 +411,12 @@ service adbd /sbin/adbd
 on property:ro.kernel.qemu=1
     start adbd
 
+#SGX540
+service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
+ 		oneshot
+    class core
+    group graphics
+    
 service servicemanager /system/bin/servicemanager
     class core
     user system
