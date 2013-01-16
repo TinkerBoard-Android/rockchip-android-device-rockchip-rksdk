@@ -98,7 +98,8 @@ endif
 TARGET_BOOTLOADER_BOARD_NAME := rk30sdk
 
 # readahead files to improve boot time
-BOARD_BOOT_READAHEAD := true
+# BOARD_BOOT_READAHEAD := true
+
 #for ALSA
 ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)),true)
 BOARD_USES_ALSA_AUDIO := true
