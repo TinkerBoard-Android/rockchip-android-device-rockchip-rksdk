@@ -68,7 +68,7 @@ BUILD_WITH_GOOGLE_MARKET ?= true
 BUILD_WITH_FACELOCK ?= true
 
 # ebook
-#BUILD_WITH_RK_EBOOK := true
+BUILD_WITH_RK_EBOOK ?= true
 
 # hdmi apk
 BUILD_WITH_HDMI_APK :=false
