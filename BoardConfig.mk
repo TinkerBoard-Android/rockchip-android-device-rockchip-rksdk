@@ -65,7 +65,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 BUILD_WITH_GOOGLE_MARKET ?= true
 
 # face lock
-#BUILD_WITH_FACELOCK := true
+BUILD_WITH_FACELOCK ?= true
 
 # ebook
 #BUILD_WITH_RK_EBOOK := true

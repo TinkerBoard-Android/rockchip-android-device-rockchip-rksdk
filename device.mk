@@ -95,26 +95,30 @@ endif
 ########################################################
 # Face lock
 ########################################################
-# copy all model files
-define all-models-files-under
-$(patsubst ./%,%, \
-  $(shell cd $(LOCAL_PATH)/$(1) ; \
-          find ./ -type f -and -not -name "*.apk" -and -not -name "*.so") \
- )
-endef
-
-COPY_FILES := $(call all-models-files-under,facelock)
-#PRODUCT_COPY_FILES += $(foreach files, $(COPY_FILES), \
-#	$(addprefix $(LOCAL_PATH)/facelock/, $(files)):$(addprefix system/, $(files)))
-
 ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
-    PRODUCT_COPY_FILES += $(LOCAL_PATH)/facelock/FaceLock.apk:system/app/FaceLock.apk
-    PRODUCT_COPY_FILES += $(LOCAL_PATH)/facelock/libfacelock_jni.so:system/lib/libfacelock_jni.so
+    # copy all model files
+    define all-models-files-under
+    $(patsubst ./%,%, \
+      $(shell cd $(LOCAL_PATH)/$(1) ; \
+              find ./ -type f -and -not -name "*.apk" -and -not -name "*.so" -and -not -name "*.mk") \
+     )
+    endef
+
+    COPY_FILES := $(call all-models-files-under,facelock)
+    PRODUCT_COPY_FILES += $(foreach files, $(COPY_FILES), \
+        $(addprefix $(LOCAL_PATH)/facelock/, $(files)):$(addprefix system/, $(files)))
+
+    PRODUCT_PACKAGES += \
+        FaceLock
+
+    PRODUCT_COPY_FILES += \
+        device/rockchip/$(TARGET_PRODUCT)/facelock/libfacelock_jni.so:system/lib/libfacelock_jni.so
+
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.config.facelock = enable_facelock \
+        persist.facelock.detect_cutoff=5000 \
+        persist.facelock.recog_cutoff=5000
 endif
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.facelock = enable_facelock \
-    persist.facelock.detect_cutoff=5000 \
-    persist.facelock.recog_cutoff=5000
 
 ########################################################
 #  RKUpdateService: RKUpdateService.apk
