@@ -140,7 +140,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/sdtool:root/sbin/sdtool
 
 # support Chrome
-PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/chromeLib/libchromeview.so:system/lib/libchromeview.so \
 	$(LOCAL_PATH)/apk/chromeLib/chrome-command-line:system/etc/chrome-command-line \
 	$(LOCAL_PATH)/apk/chromeLib/chrome.sh:system/bin/chrome.sh
 
