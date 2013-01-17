@@ -10,7 +10,12 @@
 
 tag-semantics <literal>;
 
-$root = /1/ $VOICE_DIALING | /5/ $OTHER;
+// TODO: We need to determine the weights of $CANCEL and $CONFIRM.
+$root = /1/ $VOICE_DIALING | /5/ $OTHER | /5/ $CANCEL | /5/ $CONFIRM;
+
+$CANCEL = cancel {_exit};
+
+$CONFIRM = okay {_confirm};
 
 $CONTACT_AND_DIGIT_DIALING = /100/ $CONTACT_CALLING | /1/ $DIGIT_DIALING;
 
