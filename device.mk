@@ -304,10 +304,6 @@ ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
         $(LOCAL_PATH)/rkbook/fonts/adobefonts/AdobeMingStd.bin:system/fonts/adobefonts/AdobeMingStd.bin
 endif
 
-ifeq ($(strip $(BUILD_WITH_HDMI_APK)),true)
-PRODUCT_COPY_FILES +=\
-    $(LOCAL_PATH)/hdmi/HdmiController.apk:system/app/HdmiController.apk
-endif
 # Live Wallpapers
 PRODUCT_PACKAGES += \
         LiveWallpapersPicker \
