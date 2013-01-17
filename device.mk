@@ -26,6 +26,8 @@ PRODUCT_COPY_FILES += \
 
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 
+PRODUCT_PACKAGES += Email
+
 ###########################################################
 ## Find all of the apk files under the named directories.
 ## Meant to be used like:
@@ -44,9 +46,13 @@ endef
 COPY_APK_TARGET := $(call all-apk-files-under,apk)
 #PRODUCT_COPY_FILES += $(foreach apkName, $(COPY_APK_TARGET), \
 #	$(addprefix $(LOCAL_PATH)/apk/, $(apkName)):$(addprefix system/app/, $(apkName)))
-
+PRODUCT_PACKAGES += Chromium \
+    MediaFloat \
+    RkApkinstaller \
+    RkExplorer \
+    RkVideoPlayer
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/apk/flashplayer:system/app/flashplayer
+    $(LOCAL_PATH)/apk/flashplayer:system/app/flashplayer
 
 ########################################################
 # Google applications
@@ -121,17 +127,13 @@ ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
 endif
 
 ########################################################
-#  RKUpdateService: RKUpdateService.apk
+#  RKUpdateService
 ########################################################
-rk_apps_files := $(shell ls $(LOCAL_PATH)/apk/RKUpdateService | grep .apk)
-#PRODUCT_COPY_FILES += $(foreach file, $(rk_apps_files), \
-#        $(LOCAL_PATH)/apk/RKUpdateService/$(file):system/app/$(file))
+PRODUCT_PACKAGES += \
+    RKUpdateService
 
-########################################################
-#  RKUpdateService: librockchip_update_jni.so
-########################################################
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/apk/RKUpdateService/librockchip_update_jni.so:system/lib/librockchip_update_jni.so
-
+    PRODUCT_COPY_FILES += \
+        device/rockchip/$(TARGET_PRODUCT)/apk/RKUpdateService/librockchip_update_jni.so:system/lib/librockchip_update_jni.so
 ########################################################
 #   sdcard boot tool
 ########################################################
