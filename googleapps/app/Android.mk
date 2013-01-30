@@ -42,8 +42,8 @@ include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := GoogleCalendar
-#We borrow this app to remove DevTools&SpeechRecorder
-LOCAL_OVERRIDES_PACKAGES := Calendar Development SpeechRecorder
+# We use this app to remove Calendar
+LOCAL_OVERRIDES_PACKAGES := Calendar
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_PATH := $(TARGET_OUT_APPS)
 LOCAL_SRC_FILES := $(LOCAL_MODULE)$(COMMON_ANDROID_PACKAGE_SUFFIX)
