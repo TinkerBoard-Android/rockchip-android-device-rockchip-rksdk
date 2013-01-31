@@ -382,6 +382,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.jniopts=warnonly \
     ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00 \
     sys.hwc.compose_policy=0 \
+    sf.power.control=2073600 \
     ro.sf.fakerotation=true \
     ro.sf.hwrotation=270 \
     ro.rk.MassStorage=false \
