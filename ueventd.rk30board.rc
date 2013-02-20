@@ -16,6 +16,7 @@
 /dev/rk29-ipp             0666   system     system   
 /dev/rga                  0666   system     system
 /dev/video_state          0666   system     system
+/dev/mirroring            0664   media      media
 
 # for Sensor HAL
 /dev/akm8973              0660   system     system
