@@ -238,10 +238,10 @@ PRODUCT_COPY_FILES += \
 #########################################################
 #       webkit
 #########################################################        
-#PRODUCT_COPY_FILES += \
-#        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
-#        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
-#        device/rockchip/rk30sdk/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:system/lib/libwebcore.so \
+        device/rockchip/rk30sdk/proprietary/libwebkit/libwebcore.so:obj/lib/libwebcore.so \
+        device/rockchip/rk30sdk/proprietary/libwebkit/webkit_ver:system/lib/webkit_ver
 
 #########################################################
 #       vpu lib
