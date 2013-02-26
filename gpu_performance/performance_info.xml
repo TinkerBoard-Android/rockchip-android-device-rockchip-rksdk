@@ -15,4 +15,5 @@
 <app package="launcher" mode = "2"/>
 <app package="com.replica.replicaisland" mode="4"/>
 <app package="com.android.cts" mode="4" />
+<app package="com.tactel.electopia" mode="4" />
 </hardwareAcc-package>
