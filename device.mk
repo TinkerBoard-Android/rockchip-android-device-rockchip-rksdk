@@ -190,6 +190,7 @@ ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko.3.0.36+:system/lib/modules/ump.ko.3.0.36+ \
         device/rockchip/rk30sdk/proprietary/libmali/ump.ko:system/lib/modules/ump.ko \
         device/rockchip/rk30sdk/gpu_performance/performance_info.xml:system/etc/performance_info.xml \
+        device/rockchip/rk30sdk/gpu_performance/packages-compat.xml:system/etc/packages-compat.xml \
         device/rockchip/rk30sdk/gpu_performance/performance:system/bin/performance \
         device/rockchip/rk30sdk/gpu_performance/libperformance_runtime.so:system/lib/libperformance_runtime.so \
         device/rockchip/rk30sdk/gpu_performance/gpu.$(TARGET_BOARD_HARDWARE).so:system/lib/hw/gpu.$(TARGET_BOARD_HARDWARE).so
