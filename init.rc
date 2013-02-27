@@ -515,6 +515,10 @@ service dumpstate /system/bin/dumpstate -s
     disabled
     oneshot
 
+service drmservice /system/bin/drmservice
+	class main
+	oneshot
+
 service sshd /system/bin/start-ssh
     class main
     disabled

@@ -16,7 +16,7 @@ on fs
 
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
+    mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
 on init
