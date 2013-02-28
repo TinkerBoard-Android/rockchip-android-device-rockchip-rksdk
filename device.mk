@@ -387,6 +387,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.fakerotation=true \
     ro.sf.hwrotation=270 \
     ro.rk.MassStorage=false \
+    ro.rk.systembar.voiceicon=false \
     wifi.interface=wlan0 \
     ro.tether.denied=false \
     ro.sf.lcd_density=160 \
