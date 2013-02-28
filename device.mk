@@ -249,10 +249,10 @@ PRODUCT_COPY_FILES += \
 #########################################################        
 sf_lib_files := $(shell ls $(LOCAL_PATH)/proprietary/libvpu | grep .so)
 PRODUCT_COPY_FILES += \
-    $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
+       $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):system/lib/$(file))
 
 PRODUCT_COPY_FILES += \
-    $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
+       $(foreach file, $(sf_lib_files), $(LOCAL_PATH)/proprietary/libvpu/$(file):obj/lib/$(file))
 
 PRODUCT_COPY_FILES += \
     device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
@@ -329,7 +329,8 @@ PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_PACKAGES += \
     audio_policy.$(TARGET_BOARD_HARDWARE) \
     audio.primary.$(TARGET_BOARD_HARDWARE) \
-    audio.a2dp.default
+    audio.a2dp.default\
+    audio.r_submix.$(TARGET_BOARD_HARDWARE)
 
 # Filesystem management tools
 # EXT3/4 support
