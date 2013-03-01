@@ -441,6 +441,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 
+# Bluetooth bplus
+PRODUCT_COPY_FILES += \
+       device/rockchip/$(TARGET_PRODUCT)/bluetooth/bplus.default.so:system/lib/hw/bplus.default.so \
+       device/rockchip/$(TARGET_PRODUCT)/bluetooth/libbt-codec.so:system/lib/libbt-codec.so
+
+PRODUCT_PACKAGES += \
+	bt_stack.conf \
+	auto_pair_devlist.conf \
+	libbt-client-api \
+	com.broadcom.bt \
+	com.broadcom.bt.xml
+
 #########################################################
 #	Phone
 #########################################################

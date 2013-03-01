@@ -32,9 +32,6 @@ BOARD_USES_GENERIC_AUDIO ?= true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 536870912
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
-# Default value, if not overridden else where.
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/rk30sdk/bluetooth
-
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER ?= WEXT
 WPA_SUPPLICANT_VERSION      ?= VER_0_8_X
@@ -50,6 +47,7 @@ WIFI_DRIVER_FW_PATH_AP      ?= "/system/etc/firmware/fw_bcm4329_apsta.bin"
 # bluetooth support
 BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
+BLUETOOTH_USE_BPLUS ?= true
 # bluetooth end
 
 TARGET_CPU_ABI := armeabi-v7a
