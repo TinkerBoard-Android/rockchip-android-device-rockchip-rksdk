@@ -257,6 +257,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/rockchip/rk30sdk/proprietary/libvpu/media_codecs.xml:system/etc/media_codecs.xml \
     device/rockchip/rk30sdk/proprietary/libvpu/registry:system/lib/registry \
+	device/rockchip/rk30sdk/proprietary/libvpu/wfd:system/bin/wfd \
     device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko.3.0.36+:system/lib/modules/vpu_service.ko.3.0.36+ \
     device/rockchip/rk30sdk/proprietary/libvpu/vpu_service.ko:system/lib/modules/vpu_service.ko\
     device/rockchip/rk30sdk/proprietary/libvpu/rk30_mirroring.ko.3.0.8+:system/lib/modules/rk30_mirroring.ko.3.0.8+\
