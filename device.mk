@@ -502,7 +502,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath8=/system/lib/libreference-ril-mt6250.so
 	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath9=/system/lib/libreference-ril-c66a.so
 	ADDITIONAL_DEFAULT_PROPERTIES += rild1.libpath=/system/lib/libreference-ril-sc6610-1.so
-#PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \
 				$(LOCAL_PATH)/phone/bin/gsm0710muxd:system/bin/gsm0710muxd \
 				$(LOCAL_PATH)/phone/bin/gsm0710muxd_m51:system/bin/gsm0710muxd_m51 \
 				$(LOCAL_PATH)/phone/bin/gsm0710muxd_mt6250:system/bin/gsm0710muxd_mt6250 \
