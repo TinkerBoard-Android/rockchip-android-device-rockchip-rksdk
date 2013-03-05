@@ -70,8 +70,9 @@ fi
 	echo "done."
 
 	echo -n "create misc.img.... "
-	cp -a rkst/Image/misc.img rockdev/Image/misc.img	    
-	cp -a rkst/Image/misc_factory_test.img rockdev/Image/misc_factory_test.img	
+	cp -a rkst/Image/misc.img rockdev/Image/misc.img
+	cp -a rkst/Image/pcba_small_misc.img rockdev/Image/pcba_small_misc.img
+	cp -a rkst/Image/pcba_whole_misc.img rockdev/Image/pcba_whole_misc.img
 	echo "done."
 
 if [ -d $OUT/system ]
