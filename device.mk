@@ -15,11 +15,9 @@
 
 # Everything in this directory will become public
 
-ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)), true)
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-else
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-endif
+
 
 ########################################################
 # Kernel
@@ -342,15 +340,22 @@ PRODUCT_PACKAGES += \
     resize2fs \
     mkdosfs
 # audio lib
-ifeq ($(strip $(BOARD_USES_ALSA_AUDIO)),true)
 PRODUCT_PACKAGES += \
     libasound \
     alsa.default \
     acoustics.default
 
+PRODUCT_PACKAGES += \
+	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
+	alsa.audio_policy.$(TARGET_BOARD_HARDWARE)
 ######################################
 # 	phonepad codec list
 ######################################
+
+ifeq ($(strip $(BOARD_CODEC_RT5631)),true)
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/phone/codec/asound_phonepad_rt5631.conf:system/etc/asound.conf
+endif
 ifeq ($(strip $(BOARD_CODEC_WM8994)),true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/phone/codec/asound_phonepad_wm8994.conf:system/etc/asound.conf
@@ -371,13 +376,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/phone/codec/asound_phonepad_rt3261.conf:system/etc/asound.conf
 endif
 
+ifeq ($(strip $(BOARD_CODEC_RT3224)),true)
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/phone/codec/asound_phonepad_rt3224.conf:system/etc/asound.conf
+endif
+
+
 $(call inherit-product-if-exists, external/alsa-lib/copy.mk)
 
-ifeq ($(strip $(BUILD_WITH_ALSA_UTILS)),true)
-    $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
-endif
 
-endif
+    $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
+
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mass_storage \
@@ -474,92 +484,39 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     rild \
-    chat
-
-ifeq ($(strip $(BOARD_WITH_CALL_FUNCTION)), true)
-    PRODUCT_PACKAGES += Mms
-endif
+    chat \
+	Mms
 
 ######################################
 # 	phonepad modem list
 ######################################
-ifeq ($(strip $(BOARD_RADIO_MU509)), true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ril.function.dataonly=0 
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath=/system/lib/libreference-ril-mu509.so
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libargs=-d_/dev/ttyUSB2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.atchannel=/dev/ttyS1
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.pppchannel=/dev/ttyUSB244
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.microphone=2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.loudspeaker=5
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.switch.sound.path=0
 
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/lib/libreference-ril-mu509.so:system/lib/libreference-ril-mu509.so
+ifeq ($(strip $(BOARD_BP_AUTO)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+				ril.function.dataonly=0
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath1=/system/lib/libreference-ril-mt6229.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath2=/system/lib/libreference-ril-mu509.so 
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath4=/system/lib/libreference-ril-mw100.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath6=/system/lib/libreference-ril-sc6610.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath7=/system/lib/libreference-ril-m51.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath8=/system/lib/libreference-ril-mt6250.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath9=/system/lib/libreference-ril-c66a.so
+	ADDITIONAL_DEFAULT_PROPERTIES += rild1.libpath=/system/lib/libreference-ril-sc6610-1.so
+#PRODUCT_COPY_FILES += \
+				$(LOCAL_PATH)/phone/bin/gsm0710muxd:system/bin/gsm0710muxd \
+				$(LOCAL_PATH)/phone/bin/gsm0710muxd_m51:system/bin/gsm0710muxd_m51 \
+				$(LOCAL_PATH)/phone/bin/gsm0710muxd_mt6250:system/bin/gsm0710muxd_mt6250 \
+				$(LOCAL_PATH)/phone/bin/gsm0710muxd_c66a:system/bin/gsm0710muxd_c66a \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-sc6610.so:system/lib/libreference-ril-sc6610.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-sc6610-1.so:system/lib/libreference-ril-sc6610-1.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-m51.so:system/lib/libreference-ril-m51.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-mw100.so:system/lib/libreference-ril-mw100.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-mu509.so:system/lib/libreference-ril-mu509.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-mt6229.so:system/lib/libreference-ril-mt6229.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-mt6250.so:system/lib/libreference-ril-mt6250.so \
+				$(LOCAL_PATH)/phone/lib/libreference-ril-c66a.so:system/lib/libreference-ril-c66a.so 
+				
 endif
-
-ifeq ($(strip $(BOARD_RADIO_MW100)), true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ril.function.dataonly=0
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath=/system/lib/libreference-ril-mw100.so
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libargs=-d_/dev/ttyUSB2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.atchannel=/dev/ttyUSB246
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.pppchannel=/dev/ttyUSB247
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.headset=4
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.switch.sound.path=3
-
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/lib/libreference-ril-mw100.so:system/lib/libreference-ril-mw100.so
-endif
-
-ifeq ($(strip $(BOARD_RADIO_MT6229)), true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ril.function.dataonly=0
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath=/system/lib/libreference-ril-mt6229.so
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libargs=-d_/dev/ttyUSB2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.atchannel=/dev/ttyUSB244
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.pppchannel=/dev/ttyACM0
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/lib/libreference-ril-mt6229.so:system/lib/libreference-ril-mt6229.so
-endif
-
-ifeq ($(strip $(BOARD_RADIO_SEW868)), true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ril.function.dataonly=0
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath=/system/lib/libreference-ril-sew868.so
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libargs=-d_/dev/ttyUSB2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.atchannel=/dev/ttyUSBS244
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.pppchannel=/dev/ttyUSB247
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/lib/libreference-ril-sew868.so:system/lib/libreference-ril-sew868.so
-endif
-
-ifeq ($(strip $(BOARD_RADIO_MI700)), true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ril.function.dataonly=0 
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath=/system/lib/libreference-ril-MI700.so
-    ADDITIONAL_DEFAULT_PROPERTIES += rild.libargs=-d_/dev/ttyUSB2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.atchannel=/dev/ttyUSB1
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.pppchannel=/dev/ttyUSB3
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.microphone=2
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.loudspeaker=5
-    ADDITIONAL_DEFAULT_PROPERTIES += ril.switch.sound.path=0
-
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/lib/libreference-ril-MI700.so:system/lib/libreference-ril-MI700.so
-endif
-
-ifeq ($(strip $(BOARD_RADIO_DATAONLY)), true)
-    #Use external 3G dongle
-    PRODUCT_PROPERTY_OVERRIDES += \
-        rild.libargs=-d_/dev/ttyUSB1 \
-        ril.pppchannel=/dev/ttyUSB2 \
-        rild.libpath=/system/lib/libril-rk29-dataonly.so \
-        ril.function.dataonly=1
-endif
-
-# Get the long list of APNs 
-PRODUCT_COPY_FILES += device/rockchip/rk30sdk/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
 ifeq ($(strip $(BOARD_BOOT_READAHEAD)),true)
     PRODUCT_COPY_FILES += \

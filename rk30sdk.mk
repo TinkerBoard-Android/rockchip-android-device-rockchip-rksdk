@@ -1,3 +1,6 @@
+# Get the long list of APNs
+PRODUCT_COPY_FILES += device/rockchip/rk30sdk/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES += device/rockchip/rk30sdk/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 # The rockchip rk30sdk board
 include device/rockchip/rk30sdk/BoardConfig.mk
 $(call inherit-product, device/rockchip/rk30sdk/device.mk)

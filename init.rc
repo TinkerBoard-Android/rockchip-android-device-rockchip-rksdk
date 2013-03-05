@@ -440,6 +440,25 @@ service netd /system/bin/netd
 service debuggerd /system/bin/debuggerd
     class main
 
+service muxd6 /system/bin/gsm0710muxd
+    class main
+    user root
+    disabled 
+
+service muxd7 /system/bin/gsm0710muxd_m51 -p "/dev/ttyS1" -b 115200 -f 2047 -s /dev/mux -w /dev/ptmx /dev/ptmx /dev/ptmx /dev/ptmx
+    class main
+    user root
+    disabled 
+
+service muxd8 /system/bin/gsm0710muxd_mt6250
+    class main
+    user root
+    disabled
+
+service muxd9 /system/bin/gsm0710muxd_c66a
+    class main
+    user root
+    disabled 
 service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
