@@ -1,11 +1,16 @@
 import init.rk30board.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/sdcard
-    mkdir /mnt/sdcard 0000 system system
+    # mkdir /mnt/sdcard 0000 system system
     # for backwards compatibility
-    symlink /mnt/sdcard /sdcard
 
+    # for united data storage
+    mkdir /storage 0050 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
+
+    # this property is used for external_storage when not flash partition
+    export EXTERNAL_STORAGE_USE_DATA /storage/sdcard0
+    export EXTERNAL_STORAGE /mnt/sdcard
     export SECOND_VOLUME_STORAGE /mnt/external_sd
     mkdir /mnt/external_sd 0000 system system
     export THIRD_VOLUME_STORAGE /mnt/usb_storage
@@ -75,8 +80,21 @@ on boot
 # create virtual SD card at /mnt/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)
-#service sdcard /system/bin/sdcard /data/media 1023 1023
-#    class late_start
+service sdcard /system/bin/sdcard /data/media /storage/sdcard0 1023 1023
+    class late_start
+    disabled
+
+on property:ro.factory.storage_policy=1
+    symlink /storage/sdcard0 /mnt/sdcard
+    symlink /storage/sdcard0 /sdcard
+    mount rootfs rootfs / ro remount
+    start sdcard
+
+on property:ro.factory.storage_policy=0
+    mkdir /mnt/sdcard 0000 system system
+    symlink /mnt/sdcard /sdcard
+    mount rootfs rootfs / ro remount
+    stop sdcard
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf

@@ -91,3 +91,5 @@ BOARD_CODEC_RT3261 := false
 BOARD_CODEC_RT3224 := true
 BOARD_CODEC_RT5631 := false
 
+# merge partition data and flash together
+BUILD_WITH_NOFLASH := false

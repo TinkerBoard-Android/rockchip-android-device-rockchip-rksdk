@@ -194,7 +194,6 @@ $(call inherit-product-if-exists, external/alsa-lib/copy.mk)
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mass_storage \
     persist.sys.strictmode.visual=false \
     dalvik.vm.jniopts=warnonly \
     ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00 \
@@ -216,11 +215,25 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.usbfactory=rockchip_usb \
     wifi.supplicant_scan_interval=15 \
     ro.opengles.version=131072 \
-    testing.mediascanner.skiplist = /mnt/sdcard/Android/ \
     ro.factory.tool=0 \
     ro.kernel.android.checkjni=0
 
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+
+# if no flash partition,set this property
+ifeq ($(strip $(BUILD_WITH_NOFLASH)),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.factory.storage_policy=1 \
+       persist.sys.usb.config=mtp \
+       testing.mediascanner.skiplist = /storage/sdcard0/Android/
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.factory.storage_policy=0 \
+       persist.sys.usb.config=mass_storage \
+       testing.mediascanner.skiplist = /mnt/sdcard/Android/
+endif
+
 
 # NTFS support
 PRODUCT_PACKAGES += \
