@@ -32,6 +32,8 @@ on init
 on fs
     insmod /rk30xxnand_ko.ko
 
+    insmod /rk29-ipp.ko
+
 on boot
     setprop UserVolumeLabel "RockChips"
     setprop InternalSD_ROOT "/mnt/sdcard"
