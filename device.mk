@@ -45,7 +45,7 @@ endif
 # Face lock
 ########################################################
 ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
-include device/rockchip/commom/app/facelock.mk
+include device/rockchip/common/app/facelock.mk
 endif
 
 
