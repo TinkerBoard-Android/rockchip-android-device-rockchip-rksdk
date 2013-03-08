@@ -330,6 +330,9 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_min
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
+    chown root system /sys/class/display/HDMI/enable
+    chown root system /sys/class/display/HDMI/mode
+    chown root system /sys/class/display/HDMI/scale
     chown root radio /proc/cmdline
 
 # Define TCP buffer sizes for various networks
