@@ -501,6 +501,13 @@ service bootanim /system/bin/bootanimation
     disabled
     oneshot
 
+service shutdownanim /system/bin/bootanimation -shutdown
+    class main
+    user graphics
+    group graphics
+    disabled
+    oneshot
+
 service installd /system/bin/installd
     class main
     socket installd stream 600 system system
