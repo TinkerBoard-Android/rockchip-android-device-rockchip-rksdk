@@ -86,7 +86,7 @@ include device/rockchip/common/bluetooth/rk30_bt.mk
 include device/rockchip/common/app/rkupdateservice.mk
 include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
-#include device/rockchip/common/phone/rk30_phone.mk
+include device/rockchip/common/phone/rk30_phone.mk
 include device/rockchip/common/features/rk-core.mk
 include device/rockchip/common/features/rk-ex.mk
 
