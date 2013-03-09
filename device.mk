@@ -58,14 +58,7 @@ PRODUCT_COPY_FILES += \
     device/rockchip/rk30sdk/alarm_filter.xml:system/etc/alarm_filter.xml \
     device/rockchip/rk30sdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
-# Bluetooth configuration files
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 
@@ -94,6 +87,8 @@ include device/rockchip/common/app/rkupdateservice.mk
 include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
 #include device/rockchip/common/phone/rk30_phone.mk
+include device/rockchip/common/features/rk-core.mk
+include device/rockchip/common/features/rk-ex.mk
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 include device/rockchip/common/app/rkbook.mk
