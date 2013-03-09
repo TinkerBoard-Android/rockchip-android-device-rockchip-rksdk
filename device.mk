@@ -16,7 +16,7 @@
 # Everything in this directory will become public
 
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 
 ########################################################
@@ -93,6 +93,7 @@ include device/rockchip/common/bluetooth/rk30_bt.mk
 include device/rockchip/common/app/rkupdateservice.mk
 include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
+#include device/rockchip/common/phone/rk30_phone.mk
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 include device/rockchip/common/app/rkbook.mk
@@ -144,6 +145,7 @@ PRODUCT_PACKAGES += \
     tune2fs \
     resize2fs \
     mkdosfs
+
 # audio lib
 PRODUCT_PACKAGES += \
     libasound \
@@ -153,45 +155,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
 	alsa.audio_policy.$(TARGET_BOARD_HARDWARE)
-######################################
-# 	phonepad codec list
-######################################
-
-ifeq ($(strip $(BOARD_CODEC_RT5631)),true)
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/codec/asound_phonepad_rt5631.conf:system/etc/asound.conf
-endif
-ifeq ($(strip $(BOARD_CODEC_WM8994)),true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/phone/codec/asound_phonepad_wm8994.conf:system/etc/asound.conf
-endif
-
-ifeq ($(strip $(BOARD_CODEC_RT5625_SPK_FROM_SPKOUT)),true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/phone/codec/asound_phonepad_rt5625.conf:system/etc/asound.conf
-endif
-
-ifeq ($(strip $(BOARD_CODEC_RT5625_SPK_FROM_HPOUT)),true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/phone/codec/asound_phonepad_rt5625_spk_from_hpout.conf:system/etc/asound.conf
-endif
-
-ifeq ($(strip $(BOARD_CODEC_RT3261)),true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/phone/codec/asound_phonepad_rt3261.conf:system/etc/asound.conf
-endif
-
-ifeq ($(strip $(BOARD_CODEC_RT3224)),true)
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/phone/codec/asound_phonepad_rt3224.conf:system/etc/asound.conf
-endif
-
 
 $(call inherit-product-if-exists, external/alsa-lib/copy.mk)
-
-
-    $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
-
+$(call inherit-product-if-exists, external/alsa-utils/copy.mk)
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -259,60 +225,6 @@ PRODUCT_PACKAGES += \
 	com.broadcom.bt \
 	com.broadcom.bt.xml
 
-#########################################################
-#	Phone
-#########################################################
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/phone/etc/ppp/ip-down:system/etc/ppp/ip-down \
-    $(LOCAL_PATH)/phone/etc/ppp/ip-up:system/etc/ppp/ip-up \
-    $(LOCAL_PATH)/phone/etc/ppp/call-pppd:system/etc/ppp/call-pppd \
-    $(LOCAL_PATH)/phone/etc/operator_table:system/etc/operator_table 
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/phone/bin/usb_modeswitch.sh:system/bin/usb_modeswitch.sh \
-    $(LOCAL_PATH)/phone/bin/usb_modeswitch:system/bin/usb_modeswitch \
-    $(LOCAL_PATH)/phone/lib/libril-rk29-dataonly.so:system/lib/libril-rk29-dataonly.so
-
-modeswitch_files := $(shell ls $(LOCAL_PATH)/phone/etc/usb_modeswitch.d)
-PRODUCT_COPY_FILES += \
-    $(foreach file, $(modeswitch_files), \
-    $(LOCAL_PATH)/phone/etc/usb_modeswitch.d/$(file):system/etc/usb_modeswitch.d/$(file))
-
-PRODUCT_PACKAGES += \
-    rild \
-    chat \
-	Mms
-
-######################################
-# 	phonepad modem list
-######################################
-
-ifeq ($(strip $(BOARD_BP_AUTO)), true)
-PRODUCT_PROPERTY_OVERRIDES += \
-				ril.function.dataonly=0
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath1=/system/lib/libreference-ril-mt6229.so
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath2=/system/lib/libreference-ril-mu509.so 
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath4=/system/lib/libreference-ril-mw100.so
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath6=/system/lib/libreference-ril-sc6610.so
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath7=/system/lib/libreference-ril-m51.so
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath8=/system/lib/libreference-ril-mt6250.so
-	ADDITIONAL_DEFAULT_PROPERTIES += rild.libpath9=/system/lib/libreference-ril-c66a.so
-	ADDITIONAL_DEFAULT_PROPERTIES += rild1.libpath=/system/lib/libreference-ril-sc6610-1.so
-PRODUCT_COPY_FILES += \
-				$(LOCAL_PATH)/phone/bin/gsm0710muxd:system/bin/gsm0710muxd \
-				$(LOCAL_PATH)/phone/bin/gsm0710muxd_m51:system/bin/gsm0710muxd_m51 \
-				$(LOCAL_PATH)/phone/bin/gsm0710muxd_mt6250:system/bin/gsm0710muxd_mt6250 \
-				$(LOCAL_PATH)/phone/bin/gsm0710muxd_c66a:system/bin/gsm0710muxd_c66a \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-sc6610.so:system/lib/libreference-ril-sc6610.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-sc6610-1.so:system/lib/libreference-ril-sc6610-1.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-m51.so:system/lib/libreference-ril-m51.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-mw100.so:system/lib/libreference-ril-mw100.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-mu509.so:system/lib/libreference-ril-mu509.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-mt6229.so:system/lib/libreference-ril-mt6229.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-mt6250.so:system/lib/libreference-ril-mt6250.so \
-				$(LOCAL_PATH)/phone/lib/libreference-ril-c66a.so:system/lib/libreference-ril-c66a.so 
-				
-endif
 
 ifeq ($(strip $(BOARD_BOOT_READAHEAD)),true)
     PRODUCT_COPY_FILES += \
