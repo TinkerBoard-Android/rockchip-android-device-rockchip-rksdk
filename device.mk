@@ -213,14 +213,6 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 endif
 
 
-PRODUCT_PACKAGES += \
-	bt_stack.conf \
-	auto_pair_devlist.conf \
-	libbt-client-api \
-	com.broadcom.bt \
-	com.broadcom.bt.xml
-
-
 ifeq ($(strip $(BOARD_BOOT_READAHEAD)),true)
     PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/proprietary/readahead/readahead:root/sbin/readahead \
