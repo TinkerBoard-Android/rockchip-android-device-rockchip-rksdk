@@ -82,7 +82,9 @@ include device/rockchip/common/nand/rk30_nand.mk
 include device/rockchip/common/webkit/rk31_webkit.mk
 include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/wifi/rk30_wifi.mk
-include device/rockchip/common/bluetooth/rk30_bt.mk
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
+    include device/rockchip/common/bluetooth/rk30_bt.mk
+endif
 include device/rockchip/common/app/rkupdateservice.mk
 include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
@@ -179,6 +181,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072 \
     ro.factory.tool=0 \
     ro.kernel.android.checkjni=0
+
+
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
+else
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=false
+endif
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
