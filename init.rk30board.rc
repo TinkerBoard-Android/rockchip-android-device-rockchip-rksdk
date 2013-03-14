@@ -194,7 +194,7 @@ service iprenew_eth0 system/bin/dhcpcd -n
 service battery_charger /charger
     class charger
 
-service akmd /system/bin/akmd8975
+service akmd /system/bin/akmd
         class main
         user system
         group system

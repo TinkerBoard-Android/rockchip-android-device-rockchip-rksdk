@@ -112,7 +112,7 @@ PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_HARDWARE) \
     camera.$(TARGET_BOARD_HARDWARE) \
     Camera \
-    akmd8975 
+    akmd 
 
 # charge
 PRODUCT_PACKAGES += \

@@ -1,8 +1,16 @@
-#for gensors
-/dev/mma8452_daemon       0666   system     system
-/dev/akm8975_dev          0666   system     system
-/dev/akm8975_aot          0666   system     system
-/dev/gyrosensor           0666   system     system
+#for sensors
+/dev/mma8452_daemon       0660   system     system
+/dev/akm8975_dev          0660   system     system
+/dev/akm8975_aot          0660   system     system
+/dev/akm8963_dev          0660   system     system
+/dev/akm_dev              0660   system     system
+/dev/gyrosensor           0660   system     system
+/dev/accel                0660   system     system
+/dev/compass              0660   system     system
+/dev/lightsensor          0660   system     system
+/dev/psensor              0660   system     system
+/dev/temperature          0660   system     system
+/dev/pressure             0660   system     system
 
 /dev/ion                  0666   system     system
 /dev/galcore              0666   system     graphics
