@@ -360,6 +360,21 @@ on nonencrypted
     class_start late_start
 
 on charger
+    insmod /rk30xxnand_ko.ko
+    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
+    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    export LD_LIBRARY_PATH /vendor/lib:/system/lib
+    start console
+
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 0bb4
+    write /sys/class/android_usb/android0/idProduct 0c01
+    write /sys/class/android_usb/android0/functions adb
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+
+    mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
+
     class_start charger
 
 on property:vold.decrypt=trigger_reset_main
