@@ -12,7 +12,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk30sdk/overlay
 
 ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
-BOARD_EGL_CFG := device/rockchip/common/gpu/libmali/egl.cfg
+BOARD_EGL_CFG := device/rockchip/common/gpu/libmali_smp/egl.cfg
 else
 BOARD_EGL_CFG := device/rockchip/common/gpu/libpvr/egl.cfg
 endif
