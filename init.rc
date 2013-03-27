@@ -484,6 +484,12 @@ service ril-daemon /system/bin/rild
     socket rild-debug stream 660 radio system
     user root
     group radio cache inet misc audio log
+service ril-daemon3 /system/bin/rild3
+    class main
+    socket rild3 stream 660 root radio
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio log
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
