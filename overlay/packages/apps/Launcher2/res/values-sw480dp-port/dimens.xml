@@ -16,13 +16,13 @@
 
 <resources>
 <!-- AppsCustomize -->
-    <dimen name="apps_customize_cell_width">80dp</dimen>
+    <dimen name="apps_customize_cell_width">96dp</dimen>
     <!-- The width can be 76dp because we don't have B padding -->
-    <dimen name="apps_customize_cell_height">86dp</dimen>
+    <dimen name="apps_customize_cell_height">102dp</dimen>
     <dimen name="apps_customize_pageLayoutWidthGap">-1dp</dimen>
     <dimen name="apps_customize_pageLayoutHeightGap">-1dp</dimen>
     <dimen name="apps_customize_pageLayoutPaddingTop">5dp</dimen>
-    <dimen name="apps_customize_pageLayoutPaddingBottom">5dp</dimen>
+    <dimen name="apps_customize_pageLayoutPaddingBottom">24dp</dimen>
     <dimen name="apps_customize_pageLayoutPaddingLeft">5dp</dimen>
     <dimen name="apps_customize_pageLayoutPaddingRight">5dp</dimen>
     <dimen name="apps_customize_tab_bar_height">42dp</dimen>
