@@ -50,45 +50,59 @@ endif
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/rk30sdk/init.rc:root/init.rc \
-    device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/rk30sdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
-    device/rockchip/rk30sdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/rk30sdk/media_profiles.xml:system/etc/media_profiles.xml \
-    device/rockchip/rk30sdk/alarm_filter.xml:system/etc/alarm_filter.xml \
-    device/rockchip/rk30sdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
+    device/rockchip/$(TARGET_PRODUCT)/init.rc:root/init.rc \
+    device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+    device/rockchip/$(TARGET_PRODUCT)/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/$(TARGET_PRODUCT)/media_profiles.xml:system/etc/media_profiles.xml \
+    device/rockchip/$(TARGET_PRODUCT)/alarm_filter.xml:system/etc/alarm_filter.xml \
+    device/rockchip/$(TARGET_PRODUCT)/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/rk30sdk/vold.fstab:system/etc/vold.fstab 
+    device/rockchip/$(TARGET_PRODUCT)/vold.fstab:system/etc/vold.fstab 
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
     libsrec_jni
 
-ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk30xx)
 include device/rockchip/common/gpu/rk30xx_gpu.mk  
-else
-include device/rockchip/common/gpu/rk3168_gpu.mk
-endif
-
-include device/rockchip/common/ipp/rk29_ipp.mk
-include device/rockchip/common/ion/rk30_ion.mk
-include device/rockchip/common/bin/rk30_bin.mk
-include device/rockchip/common/nand/rk30_nand.mk
-include device/rockchip/common/webkit/rk31_webkit.mk
 include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/wifi/rk30_wifi.mk
+include device/rockchip/common/nand/rk30_nand.mk
+include device/rockchip/common/ipp/rk29_ipp.mk
+else
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk2928)
+include device/rockchip/common/gpu/rk2928_gpu.mk
+include device/rockchip/common/vpu/rk2928_vpu.mk
+include device/rockchip/common/wifi/rk2928_wifi.mk
+include device/rockchip/common/nand/rk2928_nand.mk
+else
+include device/rockchip/common/gpu/rk3168_gpu.mk
+include device/rockchip/common/vpu/rk30_vpu.mk
+include device/rockchip/common/wifi/rk30_wifi.mk
+include device/rockchip/common/nand/rk30_nand.mk
+include device/rockchip/common/ipp/rk29_ipp.mk
+endif
+endif
+
+include device/rockchip/common/ion/rk30_ion.mk
+include device/rockchip/common/bin/rk30_bin.mk
+include device/rockchip/common/webkit/rk31_webkit.mk
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     include device/rockchip/common/bluetooth/rk30_bt.mk
 endif
 include device/rockchip/common/app/rkupdateservice.mk
 include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
-include device/rockchip/common/phone/rk30_phone.mk
+
+# uncomment the line bellow to enable phone functions
+#include device/rockchip/common/phone/rk30_phone.mk
+
 include device/rockchip/common/features/rk-core.mk
 include device/rockchip/common/features/rk-camera.mk
 include device/rockchip/common/features/rk-camera-front.mk
@@ -215,11 +229,11 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 PRODUCT_PACKAGES += \
-    librecovery_ui_rk30sdk
+    librecovery_ui_$(TARGET_PRODUCT)
 
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)
-    PRODUCT_COPY_FILES += device/rockchip/rk30sdk/bugreport.sh:system/bin/bugreport.sh
+    PRODUCT_COPY_FILES += device/rockchip/$(TARGET_PRODUCT)/bugreport.sh:system/bin/bugreport.sh
 endif
 
 
@@ -231,7 +245,7 @@ endif
 
 #whtest for bin
 PRODUCT_COPY_FILES += \
-    device/rockchip/rk30sdk/whtest.sh:system/bin/whtest.sh
+    device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
