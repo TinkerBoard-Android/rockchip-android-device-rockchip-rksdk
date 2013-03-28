@@ -101,7 +101,7 @@ include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
 
 # uncomment the line bellow to enable phone functions
-#include device/rockchip/common/phone/rk30_phone.mk
+include device/rockchip/common/phone/rk30_phone.mk
 
 include device/rockchip/common/features/rk-core.mk
 include device/rockchip/common/features/rk-camera.mk
