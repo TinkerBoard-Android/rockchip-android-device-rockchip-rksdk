@@ -90,7 +90,8 @@ include device/rockchip/common/app/chrome.mk
 include device/rockchip/common/etc/adblock.mk
 include device/rockchip/common/phone/rk30_phone.mk
 include device/rockchip/common/features/rk-core.mk
-include device/rockchip/common/features/rk-ex.mk
+include device/rockchip/common/features/rk-camera.mk
+include device/rockchip/common/features/rk-camera-front.mk
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 include device/rockchip/common/app/rkbook.mk
