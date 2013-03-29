@@ -65,10 +65,10 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 #BOARD_LIB_DUMPSTATE := libdumpstate.$(TARGET_BOARD_PLATFORM)
 
 # google apps
-BUILD_WITH_GOOGLE_MARKET ?= false
+BUILD_WITH_GOOGLE_MARKET ?= true
 
 # face lock
-BUILD_WITH_FACELOCK ?= false
+BUILD_WITH_FACELOCK ?= true
 
 # ebook
 BUILD_WITH_RK_EBOOK ?= false
