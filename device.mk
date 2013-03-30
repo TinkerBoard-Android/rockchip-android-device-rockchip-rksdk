@@ -48,6 +48,13 @@ ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
 include device/rockchip/common/app/facelock.mk
 endif
 
+########################################################
+#rksu
+########################################################
+ifeq ($(strip $(BUILD_WITH_RKSU)),true)
+PRODUCT_COPY_FILES += \
+	device/rockchip/$(TARGET_PRODUCT)/rksu:system/xbin/rksu
+endif
 
 PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/init.rc:root/init.rc \

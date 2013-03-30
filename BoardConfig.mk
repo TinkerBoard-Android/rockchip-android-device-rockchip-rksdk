@@ -73,6 +73,9 @@ BUILD_WITH_FACELOCK ?= true
 # ebook
 BUILD_WITH_RK_EBOOK ?= false
 
+# rksu
+BUILD_WITH_RKSU ?= false
+
 USE_OPENGL_RENDERER ?= true
 
 # rk30sdk uses Cortex A9
