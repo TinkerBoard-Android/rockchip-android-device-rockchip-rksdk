@@ -231,7 +231,7 @@ function generate_mk () {
     if [ "$dedicated1" == "dedicated" ] ; then
         echo "ifeq (\$(strip \$(BOARD_USE_LCDC_COMPOSER)), true)"
     else
-        echo "ifeq (\$(strip \$(BOARD_USE_LCDC_COMPOSER)), )"
+        echo "ifeq (\$(strip \$(BOARD_USE_LCDC_COMPOSER)), false)"
     fi
     for so in ${so_libs1[*]}
     do
