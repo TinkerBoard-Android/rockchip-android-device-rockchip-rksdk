@@ -87,6 +87,12 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
 
+    chmod 0660 /dev/ttyS0
+    chown bluetooth radio /dev/ttyS0
+    chmod 0660 /dev/bthwctl
+    chown bluetooth radio /dev/bthwctl
+    mkdir /data/bluetooth 0711 bluetooth bluetooth 
+
 # create virtual SD card at /mnt/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)

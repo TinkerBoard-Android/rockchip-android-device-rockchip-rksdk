@@ -32,9 +32,7 @@ BOARD_USES_GENERIC_AUDIO ?= true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 536870912
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
-# wifi chip define
-MT5931_WIFI_SUPPORT := false
-MT6622_BT_SUPPORT   := false
+include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER ?= WEXT
@@ -49,9 +47,20 @@ WIFI_DRIVER_FW_PATH_P2P     ?= "/system/etc/firmware/fw_bcm4329_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP      ?= "/system/etc/firmware/fw_bcm4329_apsta.bin"
 
 # bluetooth support
+ifeq ($(strip $(BROADCOM_BT_SUPPORT)),true)
 BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
 BLUETOOTH_USE_BPLUS ?= true
+else
+ifeq ($(strip $(MT6622_BT_SUPPORT)),true)
+BOARD_HAVE_BLUETOOTH ?= true
+BOARD_HAVE_BLUETOOTH_BCM ?= false
+BLUETOOTH_USE_BPLUS ?= false
+# Default value, if not overridden else where.
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
+else
+endif # MT6622_BT_SUPPORT 
+endif # BROADCOM_BT_SUPPORT
 # bluetooth end
 
 TARGET_CPU_ABI := armeabi-v7a

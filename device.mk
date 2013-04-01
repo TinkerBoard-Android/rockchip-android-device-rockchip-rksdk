@@ -212,6 +212,11 @@ else
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=false
 endif
 
+ifeq ($(strip $(MT6622_BT_SUPPORT)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=mt6622
+else
+endif
+
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
