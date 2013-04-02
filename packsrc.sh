@@ -220,7 +220,7 @@ function copy_libs () {
 function generate_mk () {
     local dedicated1=$1
     shift
-    local so_libs1=(`echo $@`)
+    local so_paths=(`echo $@`)
 
     echo "# File   : AUTO GENERATED MAKE FILE"
     echo "# Date   : `date`"
@@ -233,14 +233,17 @@ function generate_mk () {
     else
         echo "ifeq (\$(strip \$(BOARD_USE_LCDC_COMPOSER)), false)"
     fi
-    for so in ${so_libs1[*]}
+    local i=0
+    for so in ${so_paths[*]}
     do
         echo ""
         echo "include \$(CLEAR_VARS)"
-        echo "LOCAL_PREBUILT_LIBS := $so"
+        echo "LOCAL_PREBUILT_LIBS := `basename ${so_paths[$i]}`"
+        echo "LOCAL_MODULE_PATH := \$(PRODUCT_OUT)/`dirname ${so_paths[$i]}`"
         echo "LOCAL_MODULE_TAGS := optional"
         echo "include \$(BUILD_MULTI_PREBUILT)"
         echo ""
+        i=$(($i+1))
     done
     echo "endif"
     echo ""
@@ -341,7 +344,7 @@ function tar_all () {
         echo "--exclude=$d " >> ../_tmp
     done
     local excludes=(`cat ../_tmp`)
-    tar -zcvf ../"$TARGET_PLATFORM"_release.tar ${excludes[*]} --exclude=device/rockchip/rk29sdk/asound-for-rt5625.conf.bak  ../`basename $TOPDIR`
+    tar -zcf ../"$TARGET_PLATFORM"_release.tar ${excludes[*]} --exclude=device/rockchip/rk29sdk/asound-for-rt5625.conf.bak  ../`basename $TOPDIR`
     rm -f ../_tmp
 
     rm -r kernel
@@ -379,9 +382,11 @@ function my_main () {
     generate_copy_mk ${so_array[*]} ${so_paths[*]} > $COMMON_PATH/proprietary/rk_proprietary.mk
 
     if [ "$TARGET_PLATFORM" == "rk3188" ] ; then
-        generate_mk "dedicated" ${so_array[*]} > $COMMON_PATH/proprietary/lib/dedicated/Android.mk
+        #generate_mk "dedicated" ${so_array[*]} > $COMMON_PATH/proprietary/lib/dedicated/Android.mk
+        generate_mk "dedicated" ${so_paths[*]} > $COMMON_PATH/proprietary/lib/dedicated/Android.mk
     fi
-    generate_mk "osmem" ${so_array[*]} > $COMMON_PATH/proprietary/lib/osmem/Android.mk
+    #generate_mk "osmem" ${so_array[*]} > $COMMON_PATH/proprietary/lib/osmem/Android.mk
+    generate_mk "osmem" ${so_paths[*]} > $COMMON_PATH/proprietary/lib/osmem/Android.mk
 
     modify_device_mk $TOPDIR/device/rockchip/$TARGET_PRODUCT/device.mk
 
