@@ -331,7 +331,7 @@ function tar_all () {
     for d in ${LIBSRCDIRS[*]}
     do
         pushd $d
-        find -regex '.*\.\(cpp\|mk\)' | xargs rm -f
+        find -regex '.*\.\(c\|cpp\|cxx\|mk\)' | xargs rm -f
         popd
     done
 
