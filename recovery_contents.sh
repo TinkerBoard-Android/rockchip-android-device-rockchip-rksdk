@@ -1,7 +1,8 @@
 #!/bin/bash
-echo $1 $2
+echo $1 $2 $3
 TARGET_PRODUCT=$1
 PRODUCT_OUT=$2
+TARGET_BOARD_PLATFORM=$3
 PCBA_PATH=external/rk-pcba-test
 
 ############################################################################################
@@ -17,6 +18,6 @@ cp -f $PRODUCT_OUT/obj/EXECUTABLES/pcba_core_intermediates/pcba_core $PRODUCT_OU
 cp -rf $PCBA_PATH/bin/* $PRODUCT_OUT/recovery/root/sbin/
 cp -rf $PCBA_PATH/res/* $PRODUCT_OUT/recovery/root/res/
 
-echo "rk-pcba-test/res.sh"
-$PCBA_PATH/res.sh $TARGET_PRODUCT $PRODUCT_OUT
+echo "rk-pcba-test/res.sh $TARGET_PRODUCT $PRODUCT_OUT $TARGET_BOARD_PLATFORM"
+$PCBA_PATH/res.sh $TARGET_PRODUCT $PRODUCT_OUT $TARGET_BOARD_PLATFORM
 
