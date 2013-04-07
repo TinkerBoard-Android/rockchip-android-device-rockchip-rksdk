@@ -50,7 +50,9 @@ WIFI_DRIVER_FW_PATH_AP      ?= "/system/etc/firmware/fw_bcm4329_apsta.bin"
 ifeq ($(strip $(BROADCOM_BT_SUPPORT)),true)
 BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
-BLUETOOTH_USE_BPLUS ?= true
+BLUETOOTH_USE_BPLUS ?= false
+# Default value, if not overridden else where. 
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
 else
 ifeq ($(strip $(MT6622_BT_SUPPORT)),true)
 BOARD_HAVE_BLUETOOTH ?= true
