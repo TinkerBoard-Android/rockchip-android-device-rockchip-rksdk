@@ -32,20 +32,20 @@ PRODUCT_PACKAGES += Email
 #########################################################
 # Copy proprietary apk
 #########################################################
-include device/rockchip/common/app/rkapk.mk
+#include device/rockchip/common/app/rkapk.mk
 
 ########################################################
 # Google applications
 ########################################################
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)),true)
-include device/rockchip/common/app/googleapp.mk
+include vendor/google/googleapp.mk
 endif
 
 ########################################################
 # Face lock
 ########################################################
 ifeq ($(strip $(BUILD_WITH_FACELOCK)),true)
-include device/rockchip/common/app/facelock.mk
+include vendor/google/facelock.mk
 endif
 
 ########################################################
@@ -104,7 +104,7 @@ ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     include device/rockchip/common/bluetooth/rk30_bt.mk
 endif
 include device/rockchip/common/app/rkupdateservice.mk
-include device/rockchip/common/app/chrome.mk
+include vendor/google/chrome.mk
 include device/rockchip/common/etc/adblock.mk
 
 # uncomment the line bellow to enable phone functions
