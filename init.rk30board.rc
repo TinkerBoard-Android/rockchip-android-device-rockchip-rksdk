@@ -19,6 +19,15 @@ on early-init
 on fs
     #mount vfat mtd@user /mnt/sdcard wait noatime nodiratime  nosuid nodev uid=1000,gid=1015,fmask=0702,dmask=0702
 
+# AP6476 GPS permission
+    chmod 777 /system/bin/glgps
+    chown root system /system/bin/glgps
+    chmod 777 /system/lib/hw/gps.default.so
+    chown root system /system/lib/hw/gps.default.so
+    mkdir /data/gps
+    chmod 777 /data/gps
+    chown root system /data/gps
+
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0770 media_rw media_rw
@@ -46,6 +55,11 @@ on boot
 
 #backlight
     chown system system /sys/class/backlight/rk28_bl/brightness
+
+# permissions for bluetooth.
+    mkdir /data/misc/bluetoothd 0775 bluetooth bluetooth
+    setprop ro.bt.bdaddr_path "/data/misc/bluetoothd/bt_addr"
+    chown bluetooth bluetooth ro.bt.bdaddr_path
 
 # for wifi
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -269,3 +283,14 @@ on property:ro.factory.tool=1
 service pat_video /system/bin/performance video
     disabled
     oneshot
+
+service gpsd  /system/bin/glgps -c /system/etc/gpsconfig.xml
+    class main
+    disabled
+    user root
+    group system
+
+service bplus_helper  /system/bin/bplus_helper
+    class main
+    oneshot
+

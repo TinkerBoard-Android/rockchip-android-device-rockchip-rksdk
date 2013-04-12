@@ -103,6 +103,7 @@ include device/rockchip/common/webkit/rk31_webkit.mk
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     include device/rockchip/common/bluetooth/rk30_bt.mk
 endif
+include device/rockchip/common/gps/rk30_gps.mk
 include device/rockchip/common/app/rkupdateservice.mk
 include vendor/google/chrome.mk
 include device/rockchip/common/etc/adblock.mk
@@ -214,7 +215,10 @@ endif
 
 ifeq ($(strip $(MT6622_BT_SUPPORT)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=mt6622
-else
+endif
+
+ifeq ($(strip $(BLUETOOTH_USE_BPLUS)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=broadcom.bplus
 endif
 
 PRODUCT_TAGS += dalvik.gc.type-precise
