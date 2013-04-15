@@ -25,7 +25,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 
+ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
+include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
+else
+ifeq ($(strip $(BOARD_USE_LOW_MEM)), true)
+include frameworks/native/build/tablet-dalvik-heap.mk
+else
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
+endif
+endif
 
 PRODUCT_PACKAGES += Email
 
