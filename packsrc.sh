@@ -161,6 +161,8 @@ function checkout_file () {
 function rebuild_files () {
     local dedicated=$1
 
+    local original = $(sed -n '/BOARD_USE_LCDC_COMPOSER/p' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk)
+
     if [ "$dedicated" == "dedicated" ] ; then
         sed -i '/BOARD_USE_LCDC_COMPOSER/s/false/true/' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
         for d in ${LIBSRCDIRS[*]}
@@ -177,6 +179,8 @@ function rebuild_files () {
         mm -B
         popd
     done
+
+    sed -i "/BOARD_USE_LCDC_COMPOSER/c $original" device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
 }
 
 function get_so_outpath () {
@@ -314,6 +318,7 @@ function recover_files () {
     rm -f _tmp
     rm -rf $COMMON_PATH/proprietary/
     sed -i '/rk_proprietary/d' $TOPDIR/device/rockchip/$TARGET_PRODUCT/device.mk
+    [ -d out ] || mv ../rkTmpOut out
     checkout_file
 }
 
