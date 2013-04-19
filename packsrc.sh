@@ -161,10 +161,16 @@ function checkout_file () {
 function rebuild_files () {
     local dedicated=$1
 
-    local original = $(sed -n '/BOARD_USE_LCDC_COMPOSER/p' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk)
-
     if [ "$dedicated" == "dedicated" ] ; then
-        sed -i '/BOARD_USE_LCDC_COMPOSER/s/false/true/' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
+        sed -i '/BOARD_USE_LCDC_COMPOSER/c BOARD_USE_LCDC_COMPOSER ?= true' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
+        for d in ${LIBSRCDIRS[*]}
+        do
+            pushd $d
+            mm -B
+            popd
+        done
+    else
+        sed -i '/BOARD_USE_LCDC_COMPOSER/c BOARD_USE_LCDC_COMPOSER ?= false' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
         for d in ${LIBSRCDIRS[*]}
         do
             pushd $d
@@ -172,15 +178,7 @@ function rebuild_files () {
             popd
         done
     fi
-    sed -i '/BOARD_USE_LCDC_COMPOSER/s/true/false/' device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
-    for d in ${LIBSRCDIRS[*]}
-    do
-        pushd $d
-        mm -B
-        popd
-    done
 
-    sed -i "/BOARD_USE_LCDC_COMPOSER/c $original" device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
 }
 
 function get_so_outpath () {
@@ -365,10 +363,6 @@ function my_main () {
         exit;
     fi
 
-    if [ "$TARGET_PLATFORM" == "rk3188" ] ; then
-        rebuild_files "dedicated"
-    fi
-    rebuild_files "osmem"
     so_array=(`get_soarray`)
     if [ $? -eq 1 ] ; then
         echo "no file"
@@ -376,13 +370,16 @@ function my_main () {
     fi
     so_paths=(`get_so_outpath ${so_array[*]}`)
 
+    local original=`sed -n "/BOARD_USE_LCDC_COMPOSER/p" device/rockchip/$TARGET_PRODUCT/BoardConfig.mk`
+    echo "ORIGNAL is $original"
 #   TODO : add support bin
-
-
     if [ "$TARGET_PLATFORM" == "rk3188" ] ; then
+        rebuild_files "dedicated"
         copy_libs "dedicated" ${so_paths[*]}
     fi
+    rebuild_files "osmem"
     copy_libs "osmem" ${so_paths[*]}
+    sed -i "/BOARD_USE_LCDC_COMPOSER/c $original" device/rockchip/$TARGET_PRODUCT/BoardConfig.mk
 
     generate_copy_mk ${so_array[*]} ${so_paths[*]} > $COMMON_PATH/proprietary/rk_proprietary.mk
 
