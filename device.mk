@@ -40,7 +40,7 @@ PRODUCT_PACKAGES += Email
 #########################################################
 # Copy proprietary apk
 #########################################################
-#include device/rockchip/common/app/rkapk.mk
+include device/rockchip/common/app/rkapk.mk
 
 ########################################################
 # Google applications
