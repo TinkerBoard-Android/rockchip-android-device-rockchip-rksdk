@@ -10,5 +10,6 @@ BROADCOM_BT_SUPPORT   := true
 MT5931_WIFI_SUPPORT   := false
 MT6622_BT_SUPPORT     := false
 
-
+# rtl8723
+RTL8723_BT_SUPPORT    := false
 
