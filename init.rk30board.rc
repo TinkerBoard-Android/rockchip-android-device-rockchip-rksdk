@@ -107,6 +107,10 @@ on boot
     chown bluetooth radio /dev/bthwctl
     mkdir /data/bluetooth 0711 bluetooth bluetooth 
 
+#for rda bt
+    chmod 0664 /dev/tcc_bt_dev
+    chown bluetooth bluetooth /dev/tcc_bt_dev
+
 # create virtual SD card at /mnt/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)

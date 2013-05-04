@@ -13,3 +13,6 @@ MT6622_BT_SUPPORT     := false
 # rtl8723
 RTL8723_BT_SUPPORT    := false
 
+# rda5876
+RDA587X_BT_SUPPORT   := false
+
