@@ -241,10 +241,6 @@ service bugreport /system/bin/bugreport.sh
     oneshot
     keycodes 114 115 116
 
-service chrome /system/bin/chrome.sh
-    class main
-    oneshot
-
 service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     class main
 	disabled
