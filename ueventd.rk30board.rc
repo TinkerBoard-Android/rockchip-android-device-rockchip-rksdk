@@ -46,6 +46,7 @@
 /dev/vflash               0660   bluetooth  bluetooth
 /dev/ttyS0                0660   bluetooth  bluetooth
 /dev/ttyS2                0660   bluetooth  bluetooth
+/dev/rtk_btusb            0660   bluetooth  bluetooth
 
 # for radio
 /dev/ttyUSB0              0660   radio		radio

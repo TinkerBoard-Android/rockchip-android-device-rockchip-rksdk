@@ -75,6 +75,13 @@ BOARD_HAVE_BLUETOOTH_BCM ?= false
 BLUETOOTH_USE_BPLUS ?= false
 # Default value, if not overridden else where.
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/common/libbt_rda/
+else
+ifeq ($(strip $(RTL8723_BTUSB_SUPPORT)),true)
+BOARD_HAVE_BLUETOOTH ?= true
+BOARD_HAVE_BLUETOOTH_BCM ?= false
+BLUETOOTH_USE_BPLUS ?= false
+else
+endif # RTL8723_BTUSB_SUPPORT
 endif # RDA587x_BT_SUPPORT
 endif # RTL8723_BT_SUPPORT
 endif # MT6622_BT_SUPPORT 
