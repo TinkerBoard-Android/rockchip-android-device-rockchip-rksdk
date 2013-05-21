@@ -19,3 +19,5 @@ RDA587X_BT_SUPPORT   := false
 # rtl8723au(USB interface)
 RTL8723_BTUSB_SUPPORT := false
 
+# mt7601U
+MT7601U_WIFI_SUPPORT  := false

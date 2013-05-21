@@ -246,6 +246,10 @@ ifeq ($(strip $(BLUETOOTH_USE_BPLUS)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=broadcom.bplus
 endif
 
+ifeq ($(strip $(MT7601U_WIFI_SUPPORT)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.wifichip=mt7601u
+endif
+
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
