@@ -63,10 +63,8 @@ on boot
     chown bluetooth bluetooth ro.bt.bdaddr_path
 
 # for wifi
-		# mt7601u
-		chmod 0644 /system/lib/modules/mtprealloc7601Usta.ko
-		on property:ro.rk.wifichip=mt7601u
-		insmod /system/lib/modules/mtprealloc7601Usta.ko
+    # mt7601u
+    chmod 0644 /system/lib/modules/mtprealloc7601Usta.ko
 
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -300,3 +298,5 @@ service bplus_helper  /system/bin/bplus_helper
     class main
     oneshot
 
+on property:ro.rk.wifichip=mt7601u
+    insmod /system/lib/modules/mtprealloc7601Usta.ko
