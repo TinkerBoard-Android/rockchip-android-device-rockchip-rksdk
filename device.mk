@@ -42,7 +42,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_small_cache_height=1024 \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024 \
-    ro.hwui.disable_scissor_opt=true
+    ro.hwui.disable_scissor_opt=true \
+    persist.sys.ui.hw=true
 
 else
 ifeq ($(strip $(BOARD_USE_LOW_MEM)), true)
