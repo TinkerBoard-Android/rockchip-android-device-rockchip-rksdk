@@ -20,12 +20,12 @@ on fs
     #mount vfat mtd@user /mnt/sdcard wait noatime nodiratime  nosuid nodev uid=1000,gid=1015,fmask=0702,dmask=0702
 
 # AP6476 GPS permission
-    chmod 777 /system/bin/glgps
+    chmod 755 /system/bin/glgps
     chown root system /system/bin/glgps
-    chmod 777 /system/lib/hw/gps.default.so
+    chmod 644 /system/lib/hw/gps.default.so
     chown root system /system/lib/hw/gps.default.so
     mkdir /data/gps
-    chmod 777 /data/gps
+    chmod 771 /data/gps
     chown root system /data/gps
 
 on post-fs-data
