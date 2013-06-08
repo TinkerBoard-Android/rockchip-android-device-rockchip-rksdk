@@ -18,7 +18,6 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME	"rk30sdk"
-#define HCILP_INCLUDED		FALSE
 
 #endif
 
