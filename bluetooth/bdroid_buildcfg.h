@@ -18,6 +18,7 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME	"rk30sdk"
+#define BTA_DM_COD {0x1A, 0x01, 0x10}
 
 #endif
 
