@@ -112,10 +112,10 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
 
     chmod 0660 /dev/ttyS0
-    chown bluetooth radio /dev/ttyS0
+    chown bluetooth system /dev/ttyS0
     chmod 0660 /dev/bthwctl
-    chown bluetooth radio /dev/bthwctl
-    mkdir /data/bluetooth 0711 bluetooth bluetooth 
+    chown bluetooth system /dev/bthwctl
+    mkdir /data/bluetooth 0771 bluetooth system
 
 #for rda bt
     chmod 0664 /dev/tcc_bt_dev
