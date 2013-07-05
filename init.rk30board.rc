@@ -92,9 +92,15 @@ on boot
    chmod 0664 /sys/class/graphics/fb0/blank
 
 # bluetooth power up/down interface
+    chmod 0660 /dev/ttyS0
+    chmod 0660 /dev/ttyS2
+    chmod 0660 /dev/vflash
+    chown bluetooth bluetooth /dev/vflash
+    chown bluetooth bluetooth /dev/ttyS2
+    chown bluetooth bluetooth /dev/ttyS0
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chmod 0666 /sys/class/rfkill/rfkill0/state
+    chmod 0664 /sys/class/rfkill/rfkill0/state
 
     chown system system /sys/mali400_utility/utility
     chmod 0664 /sys/mali400_utility/utility
@@ -105,6 +111,8 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
 
+    chmod 0660 /dev/ttyS0
+    chown bluetooth system /dev/ttyS0
     chmod 0660 /dev/bthwctl
     chown bluetooth system /dev/bthwctl
     mkdir /data/bluetooth 0771 bluetooth system
