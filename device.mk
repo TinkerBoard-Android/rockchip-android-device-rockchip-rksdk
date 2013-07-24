@@ -299,8 +299,7 @@ PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
     
 # for data clone
-PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/packdata.sh:system/bin/packdata.sh
+include device/rockchip/common/data_clone/packdata.mk
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
