@@ -255,6 +255,10 @@ ifeq ($(strip $(MT7601U_WIFI_SUPPORT)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.wifichip=mt7601u
 endif
 
+ifeq ($(strip $(ESP8089_WIFI_SUPPORT)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.wifichip=esp8089
+endif
+
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
