@@ -142,6 +142,7 @@ include device/rockchip/common/phone/rk30_phone.mk
 include device/rockchip/common/features/rk-core.mk
 include device/rockchip/common/features/rk-camera.mk
 include device/rockchip/common/features/rk-camera-front.mk
+include device/rockchip/common/features/rk-gms.mk
 
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 include device/rockchip/common/app/rkbook.mk
