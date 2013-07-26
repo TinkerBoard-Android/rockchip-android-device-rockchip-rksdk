@@ -232,7 +232,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.timezone=Atlantic/Azores\
     ro.product.usbfactory=rockchip_usb \
     wifi.supplicant_scan_interval=15 \
-    ro.opengles.version=131072 \
+    wifi.chip.type=broadcom\
+	ro.opengles.version=131072 \
     ro.factory.tool=0 \
     ro.kernel.android.checkjni=0
 
@@ -255,9 +256,6 @@ ifeq ($(strip $(MT7601U_WIFI_SUPPORT)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.wifichip=mt7601u
 endif
 
-ifeq ($(strip $(ESP8089_WIFI_SUPPORT)),true)
-    PRODUCT_PROPERTY_OVERRIDES += ro.rk.wifichip=esp8089
-endif
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 

@@ -22,5 +22,3 @@ RDA587X_BT_SUPPORT   := false
 # mt7601U
 MT7601U_WIFI_SUPPORT  := false
 
-# esp8089
-ESP8089_WIFI_SUPPORT  := false
