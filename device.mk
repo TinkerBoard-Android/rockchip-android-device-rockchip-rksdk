@@ -184,7 +184,8 @@ PRODUCT_PACKAGES += \
     audio_policy.$(TARGET_BOARD_HARDWARE) \
     audio.primary.$(TARGET_BOARD_HARDWARE) \
     audio.a2dp.default\
-    audio.r_submix.default
+    audio.r_submix.default\
+    audio.usb.default
 
 # Filesystem management tools
 # EXT3/4 support
