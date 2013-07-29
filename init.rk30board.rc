@@ -1,4 +1,5 @@
 import init.rk30board.usb.rc
+import init.${ro.hardware}.bootmode.${ro.bootmode}.rc
 
 on early-init
     # mkdir /mnt/sdcard 0000 system system
@@ -22,8 +23,11 @@ on early-init
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
 
-on fs
-    #mount vfat mtd@user /mnt/sdcard wait noatime nodiratime  nosuid nodev uid=1000,gid=1015,fmask=0702,dmask=0702
+on post-fs
+    insmod /system/lib/modules/ump.ko
+    insmod /system/lib/modules/mali.ko mali_dvfs=50,100,133,160,200,266,400 mali_init_clock=50
+    insmod /system/lib/modules/rk30_mirroring.ko
+    insmod /system/lib/modules/rk29-ipp.ko
 
 # AP6476 GPS permission
     chmod 755 /system/bin/glgps
@@ -281,8 +285,27 @@ service iprenew_eth0 system/bin/dhcpcd -n
     disabled
     oneshot
 
-service battery_charger /charger
-    class charger
+on property:ro.boot.charger.emmc=1
+    mount ext4 /dev/block/platform/emmc/by-name/system /system wait ro noatime nodiratime
+    start console
+    mount ext4 /dev/block/platform/emmc/by-name/userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc,discard
+    start charger
+
+on property:ro.boot.charger.emmc=0
+    insmod /rk30xxnand_ko.ko
+    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
+    start console
+    mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
+    start charger
+
+on charger
+    setprop ro.boot.charger.emmc 0
+    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    export LD_LIBRARY_PATH /vendor/lib:/system/lib
+    setprop sys.usb.config adb
+
+service charger /charger
+    disabled
 
 service akmd /system/bin/akmd
         class main

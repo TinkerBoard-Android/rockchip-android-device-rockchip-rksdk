@@ -124,19 +124,6 @@ loglevel 3
 # This is needed by any process that uses socket tagging.
     chmod 0644 /dev/xt_qtaguid
 
-on fs
-    insmod /rk30xxnand_ko.ko
-# mount mtd partitions
-    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
-    start readahead
-    mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
-    mount ext4 mtd@cache /cache wait noatime nodiratime nosuid nodev noauto_da_alloc
-
-    insmod /system/lib/modules/ump.ko
-    insmod /system/lib/modules/mali.ko mali_dvfs=50,100,133,160,200,266,400 mali_init_clock=50
-    insmod /system/lib/modules/rk30_mirroring.ko
-    insmod /system/lib/modules/rk29-ipp.ko
-
 on post-fs
     # once everything is setup, no need to modify /
     # mount rootfs rootfs / ro remount
@@ -360,21 +347,6 @@ on nonencrypted
     class_start late_start
 
 on charger
-    insmod /rk30xxnand_ko.ko
-    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
-    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
-    export LD_LIBRARY_PATH /vendor/lib:/system/lib
-    start console
-
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0c01
-    write /sys/class/android_usb/android0/functions adb
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-
-    mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
-
     class_start charger
 
 on property:vold.decrypt=trigger_reset_main

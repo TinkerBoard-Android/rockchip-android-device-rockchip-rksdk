@@ -86,6 +86,8 @@ PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/init.rc:root/init.rc \
     device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
     device/rockchip/$(TARGET_PRODUCT)/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/$(TARGET_PRODUCT)/media_profiles_default.xml:system/etc/media_profiles_default.xml \
     device/rockchip/$(TARGET_PRODUCT)/alarm_filter.xml:system/etc/alarm_filter.xml \
