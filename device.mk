@@ -111,6 +111,13 @@ include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk30_nand.mk
 include device/rockchip/common/ipp/rk29_ipp.mk
 else
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3188)
+include device/rockchip/common/gpu/rk30xx_gpu.mk
+include device/rockchip/common/vpu/rk30_vpu.mk
+include device/rockchip/common/wifi/rk30_wifi.mk
+include device/rockchip/common/nand/rk30_nand.mk
+include device/rockchip/common/ipp/rk29_ipp.mk
+else
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk2928)
 include device/rockchip/common/gpu/rk2928_gpu.mk
 include device/rockchip/common/vpu/rk2928_vpu.mk
@@ -122,6 +129,7 @@ include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk30_nand.mk
 include device/rockchip/common/ipp/rk29_ipp.mk
+endif
 endif
 endif
 

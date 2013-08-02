@@ -4,6 +4,7 @@
 #
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM ?= rk30xx
+TARGET_BOARD_PLATFORM_GPU ?= mali400
 TARGET_BOARD_HARDWARE ?= rk30board
 BOARD_USE_LCDC_COMPOSER ?= false
 BOARD_USE_LOW_MEM ?= false
@@ -12,8 +13,12 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk30sdk/overlay
 
-ifeq ($(TARGET_BOARD_PLATFORM),rk30xx)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
+ifeq ($(TARGET_BOARD_PLATFORM),rk2928)
+BOARD_EGL_CFG := device/rockchip/common/gpu/libmali/egl.cfg
+else
 BOARD_EGL_CFG := device/rockchip/common/gpu/libmali_smp/egl.cfg
+endif
 else
 BOARD_EGL_CFG := device/rockchip/common/gpu/libpvr/egl.cfg
 endif
