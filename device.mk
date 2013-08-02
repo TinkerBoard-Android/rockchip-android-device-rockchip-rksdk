@@ -104,15 +104,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libsrec_jni
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk30xx)
-include device/rockchip/common/gpu/rk30xx_gpu.mk  
-include device/rockchip/common/vpu/rk30_vpu.mk
-include device/rockchip/common/wifi/rk30_wifi.mk
-include device/rockchip/common/nand/rk30_nand.mk
-include device/rockchip/common/ipp/rk29_ipp.mk
-else
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3188)
-include device/rockchip/common/gpu/rk30xx_gpu.mk
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), pvr)
+include device/rockchip/common/gpu/rk3168_gpu.mk
 include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk30_nand.mk
@@ -124,7 +117,14 @@ include device/rockchip/common/vpu/rk2928_vpu.mk
 include device/rockchip/common/wifi/rk2928_wifi.mk
 include device/rockchip/common/nand/rk2928_nand.mk
 else
-include device/rockchip/common/gpu/rk3168_gpu.mk
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
+include device/rockchip/common/gpu/rk30xx_gpu.mk
+include device/rockchip/common/vpu/rk3026_vpu.mk
+include device/rockchip/common/wifi/rk30_wifi.mk
+include device/rockchip/common/nand/rk3026_nand.mk
+include device/rockchip/common/ipp/rk29_ipp.mk
+else
+include device/rockchip/common/gpu/rk30xx_gpu.mk  
 include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk30_nand.mk
