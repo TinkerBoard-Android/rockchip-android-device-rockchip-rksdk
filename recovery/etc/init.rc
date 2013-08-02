@@ -1,3 +1,5 @@
+import init.bootmode.${ro.bootmode}.rc
+
 on early-init
     start ueventd
 
@@ -29,11 +31,6 @@ on init
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
-
-on fs
-    insmod /rk30xxnand_ko.ko
-    mount ext4 mtd@cache /cache wait noatime nodiratime nosuid nodev noauto_da_alloc discard
-    insmod /rk29-ipp.ko
 
 on boot
     setprop UserVolumeLabel "RockChips"

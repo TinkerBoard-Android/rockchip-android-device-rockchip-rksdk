@@ -5,6 +5,7 @@
 /cache		ext4		/dev/block/mtd/by-name/cache
 /data		ext4		/dev/block/mtd/by-name/userdata
 /cust		ext4		/dev/block/mtd/by-name/cust
+/custom		ext4		/dev/block/mtd/by-name/custom
 /misc		mtd 		misc
 /parameter	mtd		parameter
 /boot		mtd		boot
