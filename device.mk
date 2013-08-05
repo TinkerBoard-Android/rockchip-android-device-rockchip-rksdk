@@ -242,7 +242,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.timezone=Atlantic/Azores\
     ro.product.usbfactory=rockchip_usb \
     wifi.supplicant_scan_interval=15 \
-    wifi.chip.type=broadcom\
 	ro.opengles.version=131072 \
     ro.factory.tool=0 \
     ro.kernel.android.checkjni=0
