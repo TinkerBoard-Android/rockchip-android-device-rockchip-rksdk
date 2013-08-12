@@ -22,3 +22,5 @@ RDA587X_BT_SUPPORT   := false
 # mt7601U
 MT7601U_WIFI_SUPPORT  := false
 
+# BK3515
+BK3515_BT_SUPPORT      := false
