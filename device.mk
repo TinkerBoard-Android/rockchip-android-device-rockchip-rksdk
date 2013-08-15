@@ -209,7 +209,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libasound \
     alsa.default \
-    acoustics.default
+    acoustics.default \
+    libtinyalsa
 
 PRODUCT_PACKAGES += \
 	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
