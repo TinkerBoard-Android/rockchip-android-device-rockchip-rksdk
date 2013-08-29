@@ -55,6 +55,7 @@ endif
 
 PRODUCT_PACKAGES += WifiDisplay
 PRODUCT_PACKAGES += Email
+PRODUCT_PACKAGES += StressTest
 
 #########################################################
 # Copy proprietary apk
