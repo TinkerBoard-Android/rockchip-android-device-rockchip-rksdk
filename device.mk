@@ -237,6 +237,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
     ro.tether.denied=false \
     ro.sf.lcd_density=160 \
+	sys.resolution.changed=false \
     ro.rk.screenoff_time=60000 \
     ro.rk.def_brightness=200\
     ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home\
