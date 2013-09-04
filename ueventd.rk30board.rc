@@ -5,6 +5,7 @@
 /dev/akm8963_dev          0660   system     system
 /dev/akm_dev              0660   system     system
 /dev/gyrosensor           0660   system     system
+/dev/angle                0660   system     system
 /dev/accel                0660   system     system
 /dev/compass              0660   system     system
 /dev/lightsensor          0660   system     system

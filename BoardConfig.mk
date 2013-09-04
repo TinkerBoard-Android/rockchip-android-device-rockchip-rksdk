@@ -129,8 +129,11 @@ USE_OPENGL_RENDERER ?= true
 # rk30sdk uses Cortex A9
 TARGET_EXTRA_CFLAGS += $(call cc-option,-mtune=cortex-a9,$(call cc-option,-mtune=cortex-a8)) $(call cc-option,-mcpu=cortex-a9,$(call cc-option,-mcpu=cortex-a8))
 
+# sensors
 BOARD_SENSOR_ST := true
 #BOARD_SENSOR_COMPASS_AK8963 := true    #if use akm8963
+#BOARD_SENSOR_ANGLE := true		#if need calculation angle between two gsensors
+#BOARD_SENSOR_CALIBRATION := true	#if need calibration
 
 TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 
