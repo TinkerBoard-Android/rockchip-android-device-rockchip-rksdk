@@ -35,8 +35,8 @@ on post-fs
     chmod 644 /system/lib/hw/gps.default.so
     chown root system /system/lib/hw/gps.default.so
     mkdir /data/gps
-    chmod 771 /data/gps
-    chown root system /data/gps
+    chmod 770 /data/gps
+    chown system net_bt_stack /data/gps
 
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
@@ -337,7 +337,7 @@ service gpsd  /system/bin/glgps -c /system/etc/gpsconfig.xml
     class main
     disabled
     user root
-    group system
+    group net_bt_stack
 
 service bplus_helper  /system/bin/bplus_helper
     class main
