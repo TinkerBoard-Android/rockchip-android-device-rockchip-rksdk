@@ -554,6 +554,10 @@ service mdnsd /system/bin/mdnsd
     disabled
     oneshot
 
+service preinst_clr /system/bin/preinstall_cleanup.sh
+    disabled
+    oneshot
+
 service whtest /system/bin/whtest.sh
     disabled
     oneshot

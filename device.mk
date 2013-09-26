@@ -311,8 +311,8 @@ endif
 
 #whtest for bin
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
-    
+    device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh \
+    device/rockchip/$(TARGET_PRODUCT)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
 # for data clone
 include device/rockchip/common/data_clone/packdata.mk
 
