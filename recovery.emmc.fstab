@@ -7,6 +7,8 @@
 /cust		ext4		/dev/block/platform/emmc/by-name/cust
 /custom		ext4		/dev/block/platform/emmc/by-name/custom
 /misc		emmc 		/dev/block/platform/emmc/by-name/misc
+/uboot      emmc		/dev/block/platform/emmc/by-name/uboot
+/charge     emmc        /dev/block/platform/emmc/by-name/charge
 /parameter	emmc		/dev/block/platform/emmc/by-name/parameter
 /boot		emmc		/dev/block/platform/emmc/by-name/boot
 /recovery	emmc		/dev/block/platform/emmc/by-name/recovery
