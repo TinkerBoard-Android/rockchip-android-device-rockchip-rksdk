@@ -68,9 +68,9 @@ on boot
     chown system system /sys/class/backlight/rk28_bl/brightness
 
 # permissions for bluetooth.
-    mkdir /data/misc/bluetoothd 0775 bluetooth bluetooth
+    mkdir /data/misc/bluetoothd 0775 bluetooth net_bt_stack
     setprop ro.bt.bdaddr_path "/data/misc/bluetoothd/bt_addr"
-    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown bluetooth net_bt_stack ro.bt.bdaddr_path
 
 # for wifi
     # mt7601u
@@ -99,11 +99,11 @@ on boot
     chmod 0660 /dev/ttyS0
     chmod 0660 /dev/ttyS2
     chmod 0660 /dev/vflash
-    chown bluetooth bluetooth /dev/vflash
-    chown bluetooth bluetooth /dev/ttyS2
-    chown bluetooth bluetooth /dev/ttyS0
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_stack /dev/vflash
+    chown bluetooth net_bt_stack /dev/ttyS2
+    chown bluetooth net_bt_stack /dev/ttyS0
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chmod 0664 /sys/class/rfkill/rfkill0/state
 
     chown system system /sys/mali400_utility/utility
@@ -115,18 +115,16 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
 
-    chmod 0660 /dev/ttyS0
-    chown bluetooth system /dev/ttyS0
     chmod 0660 /dev/bthwctl
-    chown bluetooth system /dev/bthwctl
-    mkdir /data/bluetooth 0771 bluetooth system
+    chown bluetooth net_bt_stack /dev/bthwctl
+    mkdir /data/bluetooth 0771 bluetooth net_bt_stack
 
 #for rda bt
     chmod 0664 /dev/tcc_bt_dev
-    chown bluetooth bluetooth /dev/tcc_bt_dev
+    chown bluetooth net_bt_stack /dev/tcc_bt_dev
 
     chmod 0664 /dev/voice_modem
-    chown bluetooth bluetooth /dev/voice_modem
+    chown bluetooth net_bt_stack /dev/voice_modem
 
 # create virtual SD card at /mnt/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
