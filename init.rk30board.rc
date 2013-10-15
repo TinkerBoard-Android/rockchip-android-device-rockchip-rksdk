@@ -334,7 +334,7 @@ service pat_video /system/bin/performance video
 service gpsd  /system/bin/glgps -c /system/etc/gpsconfig.xml
     class main
     disabled
-    user root
+    user system
     group net_bt_stack
 
 service bplus_helper  /system/bin/bplus_helper
