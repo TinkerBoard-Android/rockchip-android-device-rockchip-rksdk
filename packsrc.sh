@@ -30,7 +30,7 @@ fi
 RECOVER_ONLY=0
 # check all parameters
 if [ $# -lt 1 ] ; then
-    echo "usage : $0 -p [rk2928,rk3066,rk3168,rk3188] [-r]"
+    echo "usage : $0 -p [rk2928,rk3066,rk3026,rk3168,rk3188] [-r]"
     echo "        -r - for recover files"
     exit 1
 else
@@ -47,7 +47,7 @@ else
         RECOVER_ONLY=1
         ;;
         \?)
-        echo "usage : $0 -p [rk2928,rk3066,rk3168,rk3188] [-r]"
+        echo "usage : $0 -p [rk2928,rk3066,rk3026,rk3168,rk3188] [-r]"
         echo "        -r - for recover files"
         exit 1
         ;;
@@ -62,6 +62,10 @@ else
     TARGET_PRODUCT=rk30sdk
     TARGET_BOARD=rk30board
     ;;
+    "rk3026")
+    TARGET_PRODUCT=rk30sdk
+    TARGET_BOARD=rk30board
+    ;;
     "rk3168")
     TARGET_PRODUCT=rk30sdk
     TARGET_BOARD=rk30board
@@ -69,6 +73,11 @@ else
     "rk2928")
     TARGET_PRODUCT=rk2928sdk
     TARGET_BOARD=rk2928board
+    ;;
+	*)
+	echo "usage : $0 -p [rk2928,rk3066,rk3026,rk3168,rk3188] [-r]"
+    echo "        -r - for recover files"
+    exit 1
     ;;
     esac
 fi
