@@ -54,31 +54,8 @@ def InstallRKLoader(loader_bin, input_zip, info):
   info.script.Print("Writing rk loader bin...")
   info.script.WriteRawImage("/misc", "RKLoader.img")
 
-def InstallUboot(loader_bin, input_zip, info):
-  common.ZipWriteStr(info.output_zip, "uboot.img", loader_bin)
-  info.script.Print("Writing uboot loader img...")
-  info.script.WriteRawImage("/uboot", "uboot.img")
-
-def InstallCharge(charge_bin, input_zip, info):
-  common.ZipWriteStr(info.output_zip, "charge.img", charge_bin)
-  info.script.Print("Writing charge img..")
-  info.script.WriteRawImage("/charge", "charge.img")
 
 def FullOTA_InstallEnd(info):
-  try:
-    uboot = info.input_zip.read("uboot.img")
-    print "write uboot now..."
-    InstallUboot(uboot, info.input_zip, info)
-  except KeyError:
-    print "warning: no uboot.img in input target_files; not flashing uboot"
-  
-  try:
-    charge = info.input_zip.read("charge.img")
-    print "wirte charge now..."
-    InstallCharge(charge, info.input_zip, info)
-  except KeyError:
-    print "info: no charge img; ignore it."
-
   try:
     loader_bin = info.input_zip.read("LOADER/RKLoader.img")
   except KeyError:
@@ -91,38 +68,6 @@ def FullOTA_InstallEnd(info):
 
 
 def IncrementalOTA_InstallEnd(info):
-  try:
-    loader_uboot_target = info.target_zip.read("uboot.img")
-  except KeyError:
-    loader_uboot_target = None
-
-  try:
-    loader_uboot_source = info.source_zip.read("uboot.img")
-  except KeyError:
-    loader_uboot_source = None
-	
-  if (loader_uboot_target != None) and (loader_uboot_target != loader_uboot_source):
-    print "write uboot now..."
-    InstallUboot(loader_uboot_target, info.input_zip, info)
-  else:
-    print "uboot unchanged; skipping"
-	
-  try:
-    charge_target = info.target_zip.read("charge.img")
-  except KeyError:
-    charge_target = None
-	
-  try:
-    charge_source = info.source_zip.read("charge.img")
-  except KeyError:
-    charge_source = None
-	
-  if (charge_target != None) and (charge_target != charge_source):
-    print "write charge now..."
-    InstallCharge(charge_target, info.input_zip, info)
-  else:
-    print "charge unchanged; skipping"
-
   try:
     target_loader = info.target_zip.read("LOADER/RKLoader.img")
   except KeyError:
@@ -138,8 +83,6 @@ def IncrementalOTA_InstallEnd(info):
 
   if source_loader == target_loader:
     print "RK loader bin unchanged; skipping"
-    print "clear misc command"
-    info.script.ClearMiscCommand()
     return
 
   InstallRKLoader(target_loader, info.target_zip, info)

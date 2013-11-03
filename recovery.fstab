@@ -7,8 +7,6 @@
 /cust		ext4		/dev/block/mtd/by-name/cust
 /custom		ext4		/dev/block/mtd/by-name/custom
 /misc		mtd 		misc
-/uboot      mtd		uboot
-/charge     mtd     charge
 /parameter	mtd		parameter
 /boot		mtd		boot
 /recovery	mtd		recovery

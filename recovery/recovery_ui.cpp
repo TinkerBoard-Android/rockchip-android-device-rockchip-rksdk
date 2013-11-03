@@ -29,12 +29,13 @@ const char* HEADERS[] = { "Volume up/down to move highlight;",
                          NULL };
 
 const char* ITEMS[] ={ "reboot system now",
-					   "apply update from ADB",
+                       "apply update from ADB",
                        "apply update from external storage",
                        "update rkimage from external storage",
                        "apply update from cache",
                        "wipe data/factory reset",
                        "wipe cache partition",
+                       "recovery system from backup",
                        NULL };
 
 class RkUI : public ScreenRecoveryUI {
@@ -94,12 +95,13 @@ class RkDevice : public Device {
     BuiltinAction InvokeMenuItem(int menu_position) {
         switch (menu_position) {
           case 0: return REBOOT;
-		  case 1: return APPLY_ADB_SIDELOAD;
+          case 1: return APPLY_ADB_SIDELOAD;
           case 2: return APPLY_EXT;
           case 3: return APPLY_INT_RKIMG;
           case 4: return APPLY_CACHE;
           case 5: return WIPE_DATA;
           case 6: return WIPE_CACHE;
+          case 7: return RECOVER_SYSTEM;
           default: return NO_ACTION;
         }
     }

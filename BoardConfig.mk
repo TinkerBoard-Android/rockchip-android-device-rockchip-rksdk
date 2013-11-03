@@ -9,6 +9,7 @@ TARGET_BOARD_HARDWARE ?= rk30board
 BOARD_USE_LCDC_COMPOSER ?= false
 BOARD_USE_LOW_MEM ?= false
 TARGET_NO_BOOTLOADER ?= true
+TARGET_CPU_VARIANT := cortex-a9
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
 
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk30sdk/overlay
@@ -35,7 +36,7 @@ BOARD_HAS_FLIPPED_SCREEN := false
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_ROCKCHIP_PCBATEST ?= true
-TARGET_RECOVERY_UI_LIB ?= librecovery_ui_rk30sdk
+#TARGET_RECOVERY_UI_LIB ?= librecovery_ui_rk30sdk
 TARGET_USERIMAGES_USE_EXT4 ?= true
 RECOVERY_UPDATEIMG_RSA_CHECK ?= false
 RECOVERY_BOARD_ID ?= false
@@ -120,10 +121,10 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 #BOARD_LIB_DUMPSTATE := libdumpstate.$(TARGET_BOARD_PLATFORM)
 
 # google apps
-BUILD_WITH_GOOGLE_MARKET ?= true
+BUILD_WITH_GOOGLE_MARKET ?= false
 
 # face lock
-BUILD_WITH_FACELOCK ?= true
+BUILD_WITH_FACELOCK ?= false
 
 # ebook
 BUILD_WITH_RK_EBOOK ?= false

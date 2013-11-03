@@ -1,0 +1,14 @@
+
+#dev_mount flash /mnt/sdcard auto /dev/block/mtd/by-name/user /dev/block/platform/emmc/by-name/user
+#dev_mount sdcard /mnt/external_sd auto /devices/platform/rk29_sdmmc.0/mmc_host/mmc
+#dev_mount udisk /mnt/usb_storage auto /devices/platform/usb20_host/usb /devices/platform/usb20_otg/usb
+
+
+# Android fstab file.
+#<src>                                                  <mnt_point>         <type>    <mnt_flags and options>                       <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+#/dev/block/mtd/by-name/user                            /mnt/sdcard             vfat    defaults                                        voldmanaged=flash:auto
+/devices/virtual/mtd/mtd9/mtdblock9                     /mnt/sdcard             vfat    defaults                                        voldmanaged=flash:auto
+/devices/platform/rk29_sdmmc.0/mmc_host/mmc		/mnt/external_sd	vfat	defaults					voldmanaged=sdcard:auto
+/devices/platform/usb20_host/usb			/mnt/usb_storage	vfat	defaults					voldmanaged=udisk:auto

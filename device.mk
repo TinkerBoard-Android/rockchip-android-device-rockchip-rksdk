@@ -86,6 +86,7 @@ endif
 
 PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/init.rc:root/init.rc \
+    device/rockchip/$(TARGET_PRODUCT)/init.environ.rc:root/init.environ.rc \
     device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
     $(call add-to-product-copy-files-if-exists,device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
@@ -100,7 +101,7 @@ PRODUCT_COPY_FILES += \
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/vold.fstab:system/etc/vold.fstab 
+    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board:root/fstab.rk30board 
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -295,7 +296,7 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 PRODUCT_PACKAGES += \
-    librecovery_ui_$(TARGET_PRODUCT)
+#    librecovery_ui_$(TARGET_PRODUCT)
 
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -311,10 +312,10 @@ endif
 
 #whtest for bin
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh \
-    device/rockchip/$(TARGET_PRODUCT)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
+    device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
+    
 # for data clone
 include device/rockchip/common/data_clone/packdata.mk
 
-$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
+#$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
