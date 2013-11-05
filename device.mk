@@ -224,33 +224,7 @@ $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=false \
-    dalvik.vm.jniopts=warnonly \
-    ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00 \
-    sys.hwc.compose_policy=6 \
-    sys.wallpaper.rgb565=0 \
-    sf.power.control=2073600 \
-    sys.rkadb.root=0 \
-    ro.sf.fakerotation=true \
-    ro.sf.hwrotation=270 \
-    ro.rk.MassStorage=false \
-    ro.rk.systembar.voiceicon=false \
-    ro.rk.systembar.tabletUI=false \
-	wifi.interface=wlan0 \
-    ro.tether.denied=false \
-    ro.sf.lcd_density=160 \
-	sys.resolution.changed=false \
-    ro.rk.screenoff_time=60000 \
-    ro.rk.def_brightness=200\
-    ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home\
-    ro.rk.install_non_market_apps=false\
-    ro.default.size=100\
-    persist.sys.timezone=Atlantic/Azores\
-    ro.product.usbfactory=rockchip_usb \
-    wifi.supplicant_scan_interval=15 \
-	ro.opengles.version=131072 \
-    ro.factory.tool=0 \
-    ro.kernel.android.checkjni=0
-
+    dalvik.vm.jniopts=warnonly
 
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
