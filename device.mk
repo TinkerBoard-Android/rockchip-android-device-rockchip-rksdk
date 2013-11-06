@@ -282,5 +282,5 @@ PRODUCT_COPY_FILES += \
 # for data clone
 include device/rockchip/common/data_clone/packdata.mk
 
-#$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
+$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
