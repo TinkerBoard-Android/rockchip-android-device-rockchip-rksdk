@@ -47,15 +47,17 @@ on init
     export RK_ADEPT_DEVICE_SALT_FILE /mnt/sdcard/.adobe-digital-editions/devicesalt
     export ADOBE_FONTS_DIR  /system/fonts/adobefonts/
 
-    mkdir /mnt/sdcard 0000 system system
+    mkdir /mnt/internal_sd 0000 system system
     mkdir /storage 0050 system sdcard_r
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
+    mkdir /storage/emulated/legacy 0555 root root
+
     export EXTERNAL_STORAGE_USE_DATA /storage/emulated/legacy
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
-    export EXTERNAL_STORAGE_FLASH /mnt/sdcard
+    export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
@@ -135,6 +137,11 @@ on boot
 # underlying files in /data/media will be created with user and group media_rw (1023)
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class main
+
+# Binding fuse mount point to /storage/emulated/legacy
+on property:init.svc.sdcard=running
+    wait /mnt/shell/emulated/0
+    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
 
 
 service wfd /system/bin/wfd
