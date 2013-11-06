@@ -248,18 +248,9 @@ endif
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
-# if no flash partition,set this property
-ifeq ($(strip $(BUILD_WITH_NOFLASH)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
-       ro.factory.storage_policy=1 \
-       persist.sys.usb.config=mtp \
+       persist.sys.usb.config=mtp,adb \
        testing.mediascanner.skiplist = /storage/sdcard0/Android/
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-       ro.factory.storage_policy=0 \
-       persist.sys.usb.config=mass_storage \
-       testing.mediascanner.skiplist = /mnt/sdcard/Android/
-endif
 
 
 # NTFS support
