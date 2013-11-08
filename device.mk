@@ -253,6 +253,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
        testing.mediascanner.skiplist = /storage/sdcard0/Android/
 
 
+########################################################
+# build with UMS?
+########################################################
+ifeq ($(strip $(BUILD_WITH_UMS)),true)
+	PRODUCT_PROPERTY_OVERRIDES += \
+		ro.factory.hasUMS=true
+else
+	PRODUCT_PROPERTY_OVERRIDES += \
+		ro.factory.hasUMS=false
+endif
+
+
 # NTFS support
 PRODUCT_PACKAGES += \
     ntfs-3g
