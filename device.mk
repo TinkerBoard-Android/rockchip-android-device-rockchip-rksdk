@@ -128,7 +128,7 @@ include device/rockchip/common/nand/rk3026_nand.mk
 include device/rockchip/common/ipp/rk29_ipp.mk
 else
 include device/rockchip/common/gpu/rk30xx_gpu.mk  
-#include device/rockchip/common/vpu/rk30_vpu.mk
+include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk30_nand.mk
 include device/rockchip/common/ipp/rk29_ipp.mk
