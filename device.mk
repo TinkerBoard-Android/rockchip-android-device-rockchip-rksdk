@@ -101,7 +101,8 @@ PRODUCT_COPY_FILES += \
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board:root/fstab.rk30board 
+    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -225,6 +226,10 @@ $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=false \
     dalvik.vm.jniopts=warnonly
+
+#ifeq ($(strip $(BUILD_WITH_CRYPTO)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.crypto.state=unencrypted
+#endif
 
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
