@@ -2,6 +2,9 @@
 # wifi bt chip config
 #
 
+#force wifi to work use android 4.2's way(gwl)
+FORCE_WIFI_WORK_AS_ANDROID4_2 := false
+
 # broadcom
 BROADCOM_WIFI_SUPPORT := true
 BROADCOM_BT_SUPPORT   := true
