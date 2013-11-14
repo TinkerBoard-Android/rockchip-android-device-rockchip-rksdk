@@ -3,7 +3,7 @@
 #
 
 #force wifi to work use android 4.2's way(gwl)
-FORCE_WIFI_WORK_AS_ANDROID4_2 := false
+FORCE_WIFI_WORK_AS_ANDROID4_2 := true
 
 # broadcom
 BROADCOM_WIFI_SUPPORT := true
