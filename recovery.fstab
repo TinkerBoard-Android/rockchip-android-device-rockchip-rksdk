@@ -1,13 +1,16 @@
-# mount point	fstype		device			[device2]
-/mnt/sdcard          vfat            /dev/block/mtd/by-name/user
-/mnt/external_sd		vfat		/dev/block/mmcblk0p1	/dev/block/mmcblk0
-/system		ext4		/dev/block/mtd/by-name/system
-/cache		ext4		/dev/block/mtd/by-name/cache
-/data		ext4		/dev/block/mtd/by-name/userdata
-/cust		ext4		/dev/block/mtd/by-name/cust
-/custom		ext4		/dev/block/mtd/by-name/custom
-/misc		mtd 		misc
-/parameter	mtd		parameter
-/boot		mtd		boot
-/recovery	mtd		recovery
-/backup		mtd		backup
+# Android fstab file.
+#<src>                                       <mnt_point>         <type>    <mnt_flags and options>       <fs_mgr_flags>
+/dev/block/mtd/by-name/user                  /mnt/sdcard          vfat            defaults                  defaults            
+/dev/block/mmcblk0p1                         /mnt/external_sd     vfat            defaults                  defaults
+/dev/block/mtd/by-name/system                /system              ext4            defaults                  defaults
+/dev/block/mtd/by-name/cache                 /cache               ext4            defaults                  defaults
+/dev/block/mtd/by-name/userdata              /data                ext4            defaults                  defaults
+/dev/block/mtd/by-name/cust                  /cust                ext4            defaults                  defaults
+/dev/block/mtd/by-name/custom                /custom              ext4            defaults                  defaults
+misc                                         /misc                mtd             defaults                  defaults
+uboot                                        /uboot               mtd             defaults                  defaults
+charge                                       /charge              mtd             defaults                  defaults
+parameter                                    /parameter           mtd             defaults                  defaults
+boot                                         /boot                mtd             defaults                  defaults
+recovery                                     /recovery            mtd             defaults                  defaults
+backup                                       /backup              mtd             defaults                  defaults

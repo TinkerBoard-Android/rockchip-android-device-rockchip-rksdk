@@ -278,7 +278,7 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 PRODUCT_PACKAGES += \
-#    librecovery_ui_$(TARGET_PRODUCT)
+    librecovery_ui_$(TARGET_PRODUCT)
 
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)

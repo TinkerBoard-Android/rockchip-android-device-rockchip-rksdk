@@ -1,4 +1,3 @@
-ifeq ($(TARGET_DEVICE),rk29sdk)
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
@@ -8,8 +7,7 @@ LOCAL_C_INCLUDES += bootable/recovery
 LOCAL_SRC_FILES := recovery_ui.cpp
 
 # should match TARGET_RECOVERY_UI_LIB set in BoardConfig.mk
-LOCAL_MODULE := librecovery_ui_rk29sdk
+LOCAL_MODULE := librecovery_ui_rk30sdk
 
 include $(BUILD_STATIC_LIBRARY)
 
-endif
