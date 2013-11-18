@@ -119,7 +119,7 @@ else
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk2928)
 include device/rockchip/common/gpu/rk2928_gpu.mk
 include device/rockchip/common/vpu/rk2928_vpu.mk
-include device/rockchip/common/wifi/rk2928_wifi.mk
+include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk2928_nand.mk
 else
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
