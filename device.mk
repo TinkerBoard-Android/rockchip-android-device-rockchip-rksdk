@@ -186,9 +186,6 @@ PRODUCT_PACKAGES += \
     charger \
     charger_res_images 
 
-# drmservice
-PRODUCT_PACKAGES += \
-    drmservice
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -268,6 +265,14 @@ ifeq ($(strip $(BUILD_WITH_UMS)),true)
 else
 	PRODUCT_PROPERTY_OVERRIDES += \
 		ro.factory.hasUMS=false
+endif
+
+########################################################
+# build with drmservice
+########################################################
+ifeq ($(strip $(BUILD_WITH_DRMSERVICE)),true)
+	PRODUCT_PACKAGES += \
+	               drmservice
 endif
 
 

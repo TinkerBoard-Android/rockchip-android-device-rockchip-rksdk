@@ -162,5 +162,8 @@ BOARD_CODEC_RK616 := false
 #Do not use UMS
 BUILD_WITH_UMS := true
 
+# for drmservice
+BUILD_WITH_DRMSERVICE :=true
+
 # for tablet encryption
 BUILD_WITH_CRYPTO := false
