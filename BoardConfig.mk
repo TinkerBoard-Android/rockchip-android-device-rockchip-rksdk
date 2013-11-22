@@ -167,3 +167,6 @@ BUILD_WITH_DRMSERVICE :=true
 
 # for tablet encryption
 BUILD_WITH_CRYPTO := false
+
+# for update nand 2.1
+NAND_UPDATE :=true
