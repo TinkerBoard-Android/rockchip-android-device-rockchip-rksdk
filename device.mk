@@ -225,9 +225,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=false \
     dalvik.vm.jniopts=warnonly
 
-#ifeq ($(strip $(BUILD_WITH_CRYPTO)),true)
+ifeq ($(strip $(BUILD_WITH_CRYPTO)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.crypto.state=unencrypted
-#endif
+endif
 
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
