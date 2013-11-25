@@ -276,6 +276,17 @@ ifeq ($(strip $(BUILD_WITH_DRMSERVICE)),true)
 endif
 
 
+#######################################################
+#build system support ntfs?
+########################################################
+ifeq ($(strip $(BOARD_IS_SUPPORT_NTFS)),true)
+     PRODUCT_PROPERTY_OVERRIDES += \
+         ro.factory.storage_suppntfs=true
+else
+     PRODUCT_PROPERTY_OVERRIDES += \
+         ro.factory.storage_suppntfs=false
+endif
+ 
 # NTFS support
 PRODUCT_PACKAGES += \
     ntfs-3g

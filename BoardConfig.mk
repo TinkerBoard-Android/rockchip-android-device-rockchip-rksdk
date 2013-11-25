@@ -170,3 +170,6 @@ BUILD_WITH_CRYPTO := false
 
 # for update nand 2.1
 NAND_UPDATE :=true
+
+# define tablet support NTFS 
+BOARD_IS_SUPPORT_NTFS := true
