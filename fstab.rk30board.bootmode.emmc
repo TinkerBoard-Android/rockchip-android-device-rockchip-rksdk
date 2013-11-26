@@ -8,4 +8,4 @@
 
 /dev/block/platform/emmc/by-name/user                    /mnt/internal_sd     vfat      defaults        voldmanaged=internal_sd:auto,noemulatedsd
 /devices/platform/rk29_sdmmc.0/mmc_host/mmc    /mnt/external_sd     vfat      defaults        voldmanaged=external_sd:auto
-/devices/platform/usb20_host/usb               /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+/devices/platform/usb20               /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
