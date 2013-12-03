@@ -97,6 +97,11 @@ PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/alarm_filter.xml:system/etc/alarm_filter.xml \
     device/rockchip/$(TARGET_PRODUCT)/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
+ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
+PRODUCT_COPY_FILES += \
+    device/rockchip/$(TARGET_PRODUCT)/init.connectivity.rc:root/init.connectivity.rc
+endif
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
@@ -317,4 +322,13 @@ PRODUCT_COPY_FILES += \
 include device/rockchip/common/data_clone/packdata.mk
 
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
+
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), combo_mt66xx)
+$(call inherit-product, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
+endif
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), mt5931_6622)
+$(call inherit-product, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
+endif
+endif
 

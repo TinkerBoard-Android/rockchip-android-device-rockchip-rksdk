@@ -49,67 +49,6 @@ BOARD_FLASH_BLOCK_SIZE ?= 131072
 
 include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 
-# Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER ?= WEXT
-WPA_SUPPLICANT_VERSION      ?= VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB ?= lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        ?= NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   ?= lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           ?= bcmdhd
-#WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     ?= "/system/etc/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_PATH_P2P     ?= "/system/etc/firmware/fw_bcm4329_p2p.bin"
-WIFI_DRIVER_FW_PATH_AP      ?= "/system/etc/firmware/fw_bcm4329_apsta.bin"
-
-# bluetooth support
-ifeq ($(strip $(BROADCOM_BT_SUPPORT)),true)
-BOARD_HAVE_BLUETOOTH ?= true
-BOARD_HAVE_BLUETOOTH_BCM ?= true
-BLUETOOTH_USE_BPLUS ?= false
-# Default value, if not overridden else where. 
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
-else
-ifeq ($(strip $(MT6622_BT_SUPPORT)),true)
-BOARD_HAVE_BLUETOOTH ?= true
-BOARD_HAVE_BLUETOOTH_BCM ?= false
-BLUETOOTH_USE_BPLUS ?= false
-# Default value, if not overridden else where.
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/common/libbt_mtk6622
-else
-ifeq ($(strip $(RTL8723AS_BT_SUPPORT)),true)
-BOARD_HAVE_BLUETOOTH ?= true
-BOARD_HAVE_BLUETOOTH_BCM ?= false
-BLUETOOTH_HCI_USE_RTK_H5 ?= true
-BLUETOOTH_USE_BPLUS ?= false
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
-else
-ifeq ($(strip $(RDA587X_BT_SUPPORT)),true)
-BOARD_HAVE_BLUETOOTH ?= true
-BOARD_HAVE_BLUETOOTH_BCM ?= false
-BLUETOOTH_USE_BPLUS ?= false
-# Default value, if not overridden else where.
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/common/libbt_rda/
-else
-ifeq ($(strip $(RTL8723AS_VAU_BT_SUPPORT)),true)
-BOARD_HAVE_BLUETOOTH ?= true
-BOARD_HAVE_BLUETOOTH_BCM ?= false
-BLUETOOTH_USE_BPLUS ?= false
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
-else
-ifeq ($(strip $(BK3515_BT_SUPPORT)),true)
-BOARD_HAVE_BLUETOOTH ?= true
-BOARD_HAVE_BLUETOOTH_BCM ?= false
-BLUETOOTH_USE_BPLUS ?= false
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
-else
-endif # BK3515_BT_SUPPORT
-endif # RTL8723AS_VAU_BT_SUPPORT
-endif # RDA587x_BT_SUPPORT
-endif # RTL8723AS_BT_SUPPORT
-endif # MT6622_BT_SUPPORT 
-endif # BROADCOM_BT_SUPPORT
-# bluetooth end
-
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 
