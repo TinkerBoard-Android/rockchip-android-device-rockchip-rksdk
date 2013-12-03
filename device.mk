@@ -44,7 +44,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=1024 \
     ro.hwui.disable_scissor_opt=true \
     ro.rk.screenshot_enable=true   \
-    debug.hwui.render_dirty_regions=false  \
     persist.sys.ui.hw=true
 
 else
