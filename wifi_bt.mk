@@ -14,8 +14,8 @@
 #           combo_mt66xx,
 #           mt5931_6622,   
 #
-BOARD_CONNECTIVITY_VENDOR := MediaTek
-BOARD_CONNECTIVITY_MODULE := mt5931_6622
+BOARD_CONNECTIVITY_VENDOR := Broadcom
+BOARD_CONNECTIVITY_MODULE := ap6xxx
 
 # Wifi related defines
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
