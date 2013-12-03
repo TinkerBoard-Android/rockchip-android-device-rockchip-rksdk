@@ -44,6 +44,4 @@ ro.factory.tool=0
 ro.kernel.android.checkjni=0
 #set default lcd density to Rockchip tablet
 ro.sf.lcd_density=160
-# don't preload OpenGL in Zygote, the Tegra drivers do not like it
-ro.zygote.disable_gl_preload=true
 ro.adb.secure =1
