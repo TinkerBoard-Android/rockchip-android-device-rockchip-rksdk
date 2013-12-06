@@ -183,6 +183,9 @@ PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \
     lights.$(TARGET_BOARD_HARDWARE) \
     camera.$(TARGET_BOARD_HARDWARE) \
+    libMcClient \
+    mcDriverDaemon \
+    keystore.$(TARGET_BOARD_PLATFORM) \
     Camera \
     akmd 
 
