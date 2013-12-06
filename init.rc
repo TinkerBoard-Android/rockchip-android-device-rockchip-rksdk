@@ -131,6 +131,10 @@ loglevel 3
 # This is needed by any process that uses socket tagging.
     chmod 0644 /dev/xt_qtaguid
 
+# ICMPv6 group id range from 0~0x7fffffff for passing cts loopback ping
+	write /proc/sys/net/ipv4/ping_group_range "0 2147483647"
+
+
 # Create location for fs_mgr to store abbreviated output from filesystem
 # checker programs.
     mkdir /dev/fscklogs 0770 root system
