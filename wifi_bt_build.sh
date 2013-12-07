@@ -16,7 +16,5 @@ mmm external/bluetooth/bluedroid/ -B
 mmm device/common/bluetooth/libbt/ -B
 mmm hardware/libhardware_legacy/ -B
 mmm system/netd/ -B
-mmm frameworks/base/core/jni/ -B
-touch frameworks/base/wifi/
-touch frameworks/base/wifi_old/
-mmm frameworks/base/
+mmm frameworks/base/core/res/ -B
+mmm frameworks/base/ -B
