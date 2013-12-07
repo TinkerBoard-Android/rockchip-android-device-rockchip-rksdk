@@ -88,30 +88,14 @@ then
 		mksquashfs $OUT/system rockdev/Image/system.img -all-root >/dev/null
 	elif [ "$FSTYPE" = "ext3" ] || [ "$FSTYPE" = "ext4" ]
 	then
-		delta=5120
-		num_blocks=`du -sk $OUT/system | tail -n1 | awk '{print $1;}'`
-		num_blocks=$(($num_blocks + $delta))
-
-		num_inodes=`find $OUT/system | wc -l`
-		num_inodes=$(($num_inodes + 500))
-
-		ok=0
-		while [ "$ok" = "0" ]; do
-			genext2fs -a -d $OUT/system -b $num_blocks -N $num_inodes -m 0 rockdev/Image/system.img >/dev/null 2>&1 && \
-			tune2fs -j -L system -c -1 -i 0 rockdev/Image/system.img >/dev/null 2>&1 && \
-			ok=1 || num_blocks=$(($num_blocks + $delta))
-		done
-		e2fsck -fy rockdev/Image/system.img >/dev/null 2>&1 || true
-
-		delta=1024
-		num_blocks=`resize2fs -P rockdev/Image/system.img 2>&1 | tail -n1 | awk '{print $7;}'`
-		rm -f rockdev/Image/system.img
-		ok=0
-		while [ "$ok" = "0" ]; do
-			genext2fs -a -d $OUT/system -b $num_blocks -N $num_inodes -m 0 rockdev/Image/system.img >/dev/null 2>&1 && \
-			tune2fs -O dir_index,filetype,sparse_super -j -L system -c -1 -i 0 rockdev/Image/system.img >/dev/null 2>&1 && \
-			ok=1 || num_blocks=$(($num_blocks + $delta))
-		done
+                system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
+                [ $system_size -gt "0" ] || { echo "Please make first!!!" && exit 1; }
+                MAKE_EXT4FS_CMD="make_ext4fs -l $system_size -L system -S $OUT/root/file_contexts -a system rockdev/Image/system.img $OUT/system"
+                echo ""
+                echo -n "$MAKE_EXT4FS_CMD"
+                echo ""
+                $MAKE_EXT4FS_CMD
+                tune2fs -L system -c -1 -i 0 rockdev/Image/system.img
 		e2fsck -fyD rockdev/Image/system.img >/dev/null 2>&1 || true
 	else
 		mkdir -p rockdev/Image/2k rockdev/Image/4k
