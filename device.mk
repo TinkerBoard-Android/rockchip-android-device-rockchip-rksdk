@@ -259,20 +259,19 @@ endif
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
-PRODUCT_PROPERTY_OVERRIDES += \
-       persist.sys.usb.config=mtp,adb \
-       testing.mediascanner.skiplist = /storage/sdcard0/Android/
-
-
 ########################################################
 # build with UMS?
 ########################################################
 ifeq ($(strip $(BUILD_WITH_UMS)),true)
 	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.factory.hasUMS=true
+		ro.factory.hasUMS=true \
+		persist.sys.usb.config=mass_storage,adb 
+       		#testing.mediascanner.skiplist = /mnt/internal_sd/Android/
 else
 	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.factory.hasUMS=false
+		ro.factory.hasUMS=false \
+		persist.sys.usb.config=mtp,adb 
+       		#testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
 endif
 
 ########################################################

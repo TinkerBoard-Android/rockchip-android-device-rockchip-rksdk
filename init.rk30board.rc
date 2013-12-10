@@ -46,17 +46,6 @@ on init
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
-    export EXTERNAL_STORAGE_USE_DATA /storage/emulated/legacy
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-    export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    mount rootfs rootfs / ro remount
-
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     chown system system /sys/devices/system/cpu/cpu1/online
@@ -84,6 +73,31 @@ on boot
 # underlying files in /data/media will be created with user and group media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class main
+    disabled
+    
+
+on property:ro.factory.hasUMS=false
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+    export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    mount rootfs rootfs / ro remount
+    start sdcard
+    start vold
+
+on property:ro.factory.hasUMS=true
+    export EXTERNAL_STORAGE /mnt/internal_sd
+    export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
+    export EMULATED_STORAGE_SOURCE /mnt/internal_sd
+    symlink /mnt/internal_sd /sdcard
+    symlink /mnt/internal_sd /mnt/sdcard
+    mount rootfs rootfs / ro remount
+    stop sdcard
+    start vold
 
 
 # Binding fuse mount point to /storage/emulated/legacy

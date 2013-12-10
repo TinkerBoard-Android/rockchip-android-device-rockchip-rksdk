@@ -98,7 +98,7 @@ BOARD_CODEC_RT3224 := true
 BOARD_CODEC_RT5631 := false
 BOARD_CODEC_RK616 := false
 
-#Do not use UMS
+#if set to true m-user would be disabled and UMS enabled, if set to disable UMS would be disabled and m-user enabled
 BUILD_WITH_UMS := true
 
 # for drmservice
