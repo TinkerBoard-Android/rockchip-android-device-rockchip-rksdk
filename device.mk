@@ -97,6 +97,10 @@ PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/alarm_filter.xml:system/etc/alarm_filter.xml \
     device/rockchip/$(TARGET_PRODUCT)/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
+PRODUCT_COPY_FILES += \
+    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
 PRODUCT_COPY_FILES += \
