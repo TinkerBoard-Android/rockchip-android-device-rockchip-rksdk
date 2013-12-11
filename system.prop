@@ -44,4 +44,4 @@ ro.factory.tool=0
 ro.kernel.android.checkjni=0
 #set default lcd density to Rockchip tablet
 ro.sf.lcd_density=160
-ro.adb.secure =1
+ro.adb.secure =0
