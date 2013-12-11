@@ -1,1 +1,1 @@
-add_lunch_combo rk30sdk-eng
+add_lunch_combo rksdk-eng

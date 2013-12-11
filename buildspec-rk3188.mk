@@ -27,7 +27,7 @@ TARGET_BOARD_PLATFORM_GPU ?= mali400
 # Choose a product to build for.  Look in the products directory for ones
 # that work.
 ifndef TARGET_PRODUCT
-TARGET_PRODUCT:=rk30sdk
+TARGET_PRODUCT:=rk3188
 endif
 
 # Choose a variant to build.  If you don't pick one, the default is eng.

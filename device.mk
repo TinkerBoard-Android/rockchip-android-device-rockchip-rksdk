@@ -82,24 +82,24 @@ endif
 ########################################################
 ifeq ($(strip $(BUILD_WITH_RKSU)),true)
 PRODUCT_COPY_FILES += \
-	device/rockchip/$(TARGET_PRODUCT)/rksu:system/xbin/rksu
+	device/rockchip/rksdk/rksu:system/xbin/rksu
 endif
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/init.rc:root/init.rc \
-    device/rockchip/$(TARGET_PRODUCT)/init.environ.rc:root/init.environ.rc \
-    device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/$(TARGET_PRODUCT)/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
-    device/rockchip/$(TARGET_PRODUCT)/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/$(TARGET_PRODUCT)/media_profiles_default.xml:system/etc/media_profiles_default.xml \
-    device/rockchip/$(TARGET_PRODUCT)/alarm_filter.xml:system/etc/alarm_filter.xml \
-    device/rockchip/$(TARGET_PRODUCT)/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
+    device/rockchip/rksdk/init.rc:root/init.rc \
+    device/rockchip/rksdk/init.environ.rc:root/init.environ.rc \
+    device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
+    device/rockchip/rksdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/rksdk/media_profiles_default.xml:system/etc/media_profiles_default.xml \
+    device/rockchip/rksdk/alarm_filter.xml:system/etc/alarm_filter.xml \
+    device/rockchip/rksdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/init.connectivity.rc:root/init.connectivity.rc
+    device/rockchip/rksdk/init.connectivity.rc:root/init.connectivity.rc
 endif
 
 PRODUCT_COPY_FILES += \
@@ -107,8 +107,8 @@ PRODUCT_COPY_FILES += \
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+    device/rockchip/rksdk/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+    device/rockchip/rksdk/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -306,7 +306,7 @@ PRODUCT_PACKAGES += \
 
 # for bugreport
 ifneq ($(TARGET_BUILD_VARIANT),user)
-    PRODUCT_COPY_FILES += device/rockchip/$(TARGET_PRODUCT)/bugreport.sh:system/bin/bugreport.sh
+    PRODUCT_COPY_FILES += device/rockchip/rksdk/bugreport.sh:system/bin/bugreport.sh
 endif
 
 
@@ -318,7 +318,7 @@ endif
 
 #whtest for bin
 PRODUCT_COPY_FILES += \
-    device/rockchip/$(TARGET_PRODUCT)/whtest.sh:system/bin/whtest.sh
+    device/rockchip/rksdk/whtest.sh:system/bin/whtest.sh
     
 # for data clone
 include device/rockchip/common/data_clone/packdata.mk

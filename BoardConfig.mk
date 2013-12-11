@@ -8,11 +8,12 @@ TARGET_BOARD_PLATFORM_GPU ?= mali400
 TARGET_BOARD_HARDWARE ?= rk30board
 BOARD_USE_LCDC_COMPOSER ?= false
 BOARD_USE_LOW_MEM ?= false
+$(warning rksdk boradconfig BOARD_USE_LOW_MEM=$(BOARD_USE_LOW_MEM))
 TARGET_NO_BOOTLOADER ?= true
 TARGET_CPU_VARIANT := cortex-a9
-TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rk30sdk
+TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rksdk
 
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk30sdk/overlay
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/rksdk/overlay
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
 ifeq ($(TARGET_BOARD_PLATFORM),rk2928)
@@ -36,7 +37,7 @@ BOARD_HAS_FLIPPED_SCREEN := false
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_ROCKCHIP_PCBATEST ?= false
-TARGET_RECOVERY_UI_LIB ?= librecovery_ui_rk30sdk
+TARGET_RECOVERY_UI_LIB ?= librecovery_ui_rksdk
 TARGET_USERIMAGES_USE_EXT4 ?= true
 RECOVERY_UPDATEIMG_RSA_CHECK ?= false
 RECOVERY_BOARD_ID ?= false
@@ -47,7 +48,7 @@ BOARD_USES_GENERIC_AUDIO ?= true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 536870912
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
-include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
+include device/rockchip/rksdk/wifi_bt.mk
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi

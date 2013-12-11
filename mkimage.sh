@@ -18,7 +18,7 @@ if [ "$FSTYPE" = "" ]; then
 fi
 echo system filesysystem is $FSTYPE
 
-BOARD_CONFIG=device/rockchip/rk30sdk/device.mk
+BOARD_CONFIG=device/rockchip/rksdk/device.mk
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
