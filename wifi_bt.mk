@@ -14,6 +14,11 @@
 #           combo_mt66xx,
 #           mt5931_6622,   
 #
+# for realtek wifi, bt
+# RealTek:
+#           rtl81xx
+#           rtl872x
+#
 BOARD_CONNECTIVITY_VENDOR := Broadcom
 BOARD_CONNECTIVITY_MODULE := ap6xxx
 
@@ -30,7 +35,9 @@ ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), mt5931_6622)
 combo_config := hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/board_config.mk
 include $(combo_config)
 endif
-else
+endif
+
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), Broadcom)
 FORCE_WIFI_WORK_AS_ANDROID4_2 := true
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -42,6 +49,20 @@ BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcm4329.bin"
 WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/firmware/fw_bcm4329_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcm4329_apsta.bin"
+endif
+
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
+FORCE_WIFI_WORK_AS_ANDROID4_2 := false
+BOARD_WIFI_VENDOR := realtek
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_rtl
+BOARD_HOSTAPD_DRIVER        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_rtl
+BOARD_WLAN_DEVICE           := realtek
+WIFI_DRIVER_FW_PATH_STA     := ""
+WIFI_DRIVER_FW_PATH_P2P     := ""
+WIFI_DRIVER_FW_PATH_AP      := ""
 endif
 
 # bluetooth support

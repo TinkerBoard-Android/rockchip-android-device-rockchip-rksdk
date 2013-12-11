@@ -98,8 +98,10 @@ PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
+ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
 PRODUCT_COPY_FILES += \
     device/rockchip/$(TARGET_PRODUCT)/init.connectivity.rc:root/init.connectivity.rc
+endif
 endif
 
 PRODUCT_COPY_FILES += \
