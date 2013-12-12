@@ -48,7 +48,7 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
 include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
-include device/rockchip/$(TARGET_PRODUCT)/wifi_bt_common.mk
+include device/rockchip/rk30sdk/wifi_bt_common.mk
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
