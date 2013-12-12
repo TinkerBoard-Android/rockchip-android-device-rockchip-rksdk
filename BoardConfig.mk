@@ -37,7 +37,7 @@ BOARD_HAS_FLIPPED_SCREEN := false
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_ROCKCHIP_PCBATEST ?= false
-TARGET_RECOVERY_UI_LIB ?= librecovery_ui_rksdk
+TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_PRODUCT)
 TARGET_USERIMAGES_USE_EXT4 ?= true
 RECOVERY_UPDATEIMG_RSA_CHECK ?= false
 RECOVERY_BOARD_ID ?= false
