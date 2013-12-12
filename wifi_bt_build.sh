@@ -13,6 +13,7 @@ mmm device/common/bluetooth/libbt/ -B -j4
 mmm hardware/libhardware_legacy/ -B -j4
 mmm system/netd/ -B -j4
 mmm frameworks/base/core/jni/ -B -j4
+mmm frameworks/base/core/res -B -j4
 mmm frameworks/base/ -B -j4
 
 echo "---- make -j4 ----"
