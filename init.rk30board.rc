@@ -50,7 +50,7 @@ on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     chown system system /sys/devices/system/cpu/cpu1/online
     chmod 0660 /sys/devices/system/cpu/cpu1/online
-    insmod /system/lib/modules/vpu_service.ko
+#    insmod /system/lib/modules/vpu_service.ko
 
 #backlight
     chown system system /sys/class/backlight/rk28_bl/brightness
