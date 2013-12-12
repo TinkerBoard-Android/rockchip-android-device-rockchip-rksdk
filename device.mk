@@ -340,3 +340,6 @@ $(call inherit-product, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MO
 endif
 endif
 
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
+include hardware/realtek/wlan/config/config-rtl.mk
+endif
