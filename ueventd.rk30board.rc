@@ -45,7 +45,7 @@
 
 # for BT
 /dev/vflash               0660   bluetooth  net_bt_stack
-/dev/ttyS0                0660   bluetooth  net_bt_stack
+#/dev/ttyS0                0660   bluetooth  net_bt_stack
 /dev/ttyS2                0660   bluetooth  net_bt_stack
 /dev/rtk_btusb            0660   bluetooth  net_bt_stack
 
