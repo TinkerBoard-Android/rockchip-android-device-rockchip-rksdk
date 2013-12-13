@@ -171,7 +171,7 @@ on property:ro.boot.charger.emmc=0
     insmod /rk30xxnand_ko.ko
     mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
     start console
-    mount ext4 mtd@userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc
+    mount ext4 mtd@metadata /metadata wait noatime nodiratime nosuid nodev noauto_da_alloc
     start charger
 
 on charger
