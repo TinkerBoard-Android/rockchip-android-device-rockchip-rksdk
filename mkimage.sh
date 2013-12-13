@@ -90,12 +90,13 @@ then
 	then
                 system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
                 [ $system_size -gt "0" ] || { echo "Please make first!!!" && exit 1; }
-                MAKE_EXT4FS_CMD="make_ext4fs -l $system_size -L system -S $OUT/root/file_contexts -a system rockdev/Image/system.img $OUT/system"
-                echo ""
-                echo -n "$MAKE_EXT4FS_CMD"
-                echo ""
-                $MAKE_EXT4FS_CMD
-                tune2fs -L system -c -1 -i 0 rockdev/Image/system.img
+                MAKE_EXT4FS_ARGS=" -L system -S $OUT/root/file_contexts -a system rockdev/Image/system.img $OUT/system"
+		ok=0
+		while [ "$ok" = "0" ]; do
+			make_ext4fs -l $system_size $MAKE_EXT4FS_ARGS >/dev/null 2>&1 &&
+			tune2fs -c -1 -i 0 rockdev/Image/system.img >/dev/null 2>&1 &&
+			ok=1 || system_size=$(($system_size + 5242880))
+		done
 		e2fsck -fyD rockdev/Image/system.img >/dev/null 2>&1 || true
 	else
 		mkdir -p rockdev/Image/2k rockdev/Image/4k
