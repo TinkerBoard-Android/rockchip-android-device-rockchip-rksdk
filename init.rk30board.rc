@@ -164,7 +164,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 on property:ro.boot.charger.emmc=1
     mount ext4 /dev/block/platform/emmc/by-name/system /system wait ro noatime nodiratime
     start console
-    mount ext4 /dev/block/platform/emmc/by-name/userdata /data wait noatime nodiratime nosuid nodev noauto_da_alloc,discard
+    mount ext4 /dev/block/platform/emmc/by-name/metadata /metadata wait noatime nodiratime nosuid nodev noauto_da_alloc,discard
     start charger
 
 on property:ro.boot.charger.emmc=0
