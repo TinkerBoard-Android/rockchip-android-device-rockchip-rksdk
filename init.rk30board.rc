@@ -1,5 +1,6 @@
 import init.rk30board.usb.rc
 import init.${ro.hardware}.bootmode.${ro.bootmode}.rc
+import init.${ro.hardware}.environment.rc
 import init.connectivity.rc
 
 on early-init
@@ -77,27 +78,19 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
     
 
 on property:ro.factory.hasUMS=false
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-    export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     mount rootfs rootfs / ro remount
     start sdcard
-    start vold
 
 on property:ro.factory.hasUMS=true
-    export EXTERNAL_STORAGE /mnt/internal_sd
-    export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
-    export EMULATED_STORAGE_SOURCE /mnt/internal_sd
     symlink /mnt/internal_sd /sdcard
     symlink /mnt/internal_sd /mnt/sdcard
+    symlink /mnt/internal_sd /storage/sdcard0
     mount rootfs rootfs / ro remount
     stop sdcard
-    start vold
 
 
 # Binding fuse mount point to /storage/emulated/legacy
