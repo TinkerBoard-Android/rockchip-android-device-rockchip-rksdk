@@ -55,8 +55,19 @@ BOARD_HAVE_BLUETOOTH_BCM ?= false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= hardware/mediatek/bt/mt5931_6622/
 endif
 else
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
+BOARD_HAVE_BLUETOOTH ?= true
+BOARD_HAVE_BLUETOOTH_BCM ?= false
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), rtl872x)
+BLUETOOTH_HCI_USE_RTK_H5 ?= true
+endif
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), rtl872xU)
+endif
+else
 BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
-endif
+endif # RealTek
+endif # MediaTek
 # bluetooth end

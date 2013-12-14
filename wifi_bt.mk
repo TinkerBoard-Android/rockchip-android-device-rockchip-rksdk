@@ -18,6 +18,7 @@
 # RealTek:
 #           rtl81xx
 #           rtl872x
+#           rtl872xU
 #
 BOARD_CONNECTIVITY_VENDOR := Broadcom
 BOARD_CONNECTIVITY_MODULE := ap6xxx
