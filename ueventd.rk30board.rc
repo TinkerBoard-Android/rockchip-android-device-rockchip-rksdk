@@ -27,6 +27,7 @@
 /dev/video_state          0666   system     system
 /dev/sys_state            0660   system     system
 /dev/mirroring            0664   media      media
+/dev/iep                  0660   system     system
 
 # for Sensor HAL
 /dev/akm8973              0660   system     system
