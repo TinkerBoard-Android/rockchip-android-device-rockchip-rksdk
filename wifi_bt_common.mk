@@ -65,9 +65,17 @@ endif
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), rtl872xU)
 endif
 else
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), ESP_BK)
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), esp8089_bk3515)
+BOARD_HAVE_BLUETOOTH ?= true
+BOARD_HAVE_BLUETOOTH_BCM ?= false
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
+endif
+else
 BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
+endif # ESP_BK
 endif # RealTek
 endif # MediaTek
 # bluetooth end

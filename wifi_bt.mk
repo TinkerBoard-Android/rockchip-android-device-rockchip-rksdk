@@ -20,5 +20,10 @@
 #           rtl872x
 #           rtl872xU
 #
+# for Espressif wifi & Beken bt
+# ESP_BK:
+#           esp8089_bk3515
+#           esp8089          only wifi
+#
 BOARD_CONNECTIVITY_VENDOR := Broadcom
 BOARD_CONNECTIVITY_MODULE := ap6xxx
