@@ -207,6 +207,7 @@ PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_PACKAGES += \
     audio_policy.$(TARGET_BOARD_HARDWARE) \
     audio.primary.$(TARGET_BOARD_HARDWARE) \
+    audio.alsa_usb.$(TARGET_BOARD_HARDWARE) \
     audio.a2dp.default\
     audio.r_submix.default\
     audio.usb.default
