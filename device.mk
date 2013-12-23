@@ -67,7 +67,7 @@ include device/rockchip/common/app/rkapk.mk
 # Google applications
 ########################################################
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)),true)
-include vendor/google/googleapp.mk
+include vendor/google/gapps_kk_mini.mk
 endif
 
 ########################################################
