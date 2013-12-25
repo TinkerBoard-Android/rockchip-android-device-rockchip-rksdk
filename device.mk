@@ -309,6 +309,12 @@ else
                 ro.factory.hasGPS=false
 endif
 
+########################################################
+# this product has Ethernet or not
+########################################################
+ifneq ($(strip $(BOARD_HS_ETHERNET)),true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.ethernet_enable=false
+endif
 
 #######################################################
 #build system support ntfs?

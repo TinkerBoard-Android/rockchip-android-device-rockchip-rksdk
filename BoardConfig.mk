@@ -116,3 +116,7 @@ BOARD_IS_SUPPORT_NTFS := true
 
 # product has GPS or not
 BOARD_HAS_GPS := false
+
+# ethernet
+BOARD_HS_ETHERNET := false
+
