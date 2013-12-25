@@ -113,3 +113,6 @@ NAND_UPDATE :=true
 
 # define tablet support NTFS 
 BOARD_IS_SUPPORT_NTFS := true
+
+# product has GPS or not
+BOARD_HAS_GPS := false

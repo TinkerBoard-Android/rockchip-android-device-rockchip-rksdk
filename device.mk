@@ -297,6 +297,19 @@ ifeq ($(strip $(BUILD_WITH_DRMSERVICE)),true)
 endif
 
 
+
+########################################################
+# this product has GPS or not
+########################################################
+ifeq ($(strip $(BOARD_HAS_GPS)),true)
+	PRODUCT_PROPERTY_OVERRIDES += \
+		ro.factory.hasGPS=true
+else
+	PRODUCT_PROPERTY_OVERRIDES += \
+                ro.factory.hasGPS=false
+endif
+
+
 #######################################################
 #build system support ntfs?
 ########################################################
