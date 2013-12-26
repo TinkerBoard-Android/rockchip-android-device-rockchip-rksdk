@@ -118,5 +118,5 @@ BOARD_IS_SUPPORT_NTFS := true
 BOARD_HAS_GPS := false
 
 # ethernet
-BOARD_HS_ETHERNET := false
+BOARD_HS_ETHERNET := true
 
