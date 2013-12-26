@@ -14,11 +14,13 @@
 #           combo_mt66xx,
 #           mt5931_6622,   
 #
-# for realtek wifi, bt
-# RealTek:
-#           rtl81xx
+# for realtek wifi, bt & rda587x bt
+# RealTek:    
+#         
+#           rtl81xx          only wifi
 #           rtl872x
 #           rtl872xU
+#           rtl81xx_rda587x 
 #
 # for Espressif wifi & Beken bt
 # ESP_BK:
