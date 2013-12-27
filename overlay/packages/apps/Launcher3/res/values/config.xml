@@ -1,3 +1,5 @@
 <resources>
     <bool name="allow_rotation">true</bool>
+	<!-- Out of 100, the percent to shrink the workspace during spring loaded mode. -->
+    <integer name="config_workspaceSpringLoadShrinkPercentage">70</integer>
 </resources>

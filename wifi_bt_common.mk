@@ -64,6 +64,8 @@ BLUETOOTH_HCI_USE_RTK_H5 ?= true
 endif
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), rtl872xU)
 endif
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), rtl81xx_rda587x)
+endif
 else
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), ESP_BK)
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), esp8089_bk3515)
