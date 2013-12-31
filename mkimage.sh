@@ -5,7 +5,9 @@ set -e
 
 export PATH=$ANDROID_BUILD_PATHS:$PATH
 TARGET_PRODUCT=`get_build_var TARGET_PRODUCT`
+TARGET_HARDWARE=`get_build_var TARGET_BOARD_HARDWARE`
 echo TARGET_PRODUCT=$TARGET_PRODUCT
+echo TARGET_HARDWARE=$TARGET_HARDWARE
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -16,7 +18,7 @@ IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
 
-FSTYPE=`grep 'mtd@system' $OUT/root/init.rk30board.rc | head -n 1 | awk '{ print $2 }'`
+FSTYPE=`grep 'mtd@system' $OUT/root/init.$TARGET_HARDWARE.rc | head -n 1 | awk '{ print $2 }'`
 if [ "$FSTYPE" = "" ]; then
        FSTYPE=`grep 'mtd@system' $OUT/root/init.rc | head -n 1 | awk '{ print $2 }'`
 fi
