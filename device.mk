@@ -113,8 +113,8 @@ PRODUCT_COPY_FILES += \
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-    device/rockchip/rksdk/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+    device/rockchip/rksdk/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown \
+    device/rockchip/rksdk/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
