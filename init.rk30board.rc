@@ -74,7 +74,6 @@ on boot
 # underlying files in /data/media will be created with user and group media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class main
-    disabled
     
 
 on property:ro.factory.hasUMS=false
@@ -83,7 +82,6 @@ on property:ro.factory.hasUMS=false
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     mount rootfs rootfs / ro remount
-    start sdcard
 
 on property:ro.factory.hasUMS=true
     symlink /mnt/internal_sd /sdcard
