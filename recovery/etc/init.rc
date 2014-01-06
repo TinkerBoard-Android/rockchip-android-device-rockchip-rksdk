@@ -1,3 +1,5 @@
+import init.bootmode.${ro.bootmode}.rc
+
 on early-init
     start ueventd
 
@@ -12,7 +14,7 @@ on init
 	symlink /sbin/busybox /system/bin/sh
 
 	mkdir /mnt
-	mkdir /mnt/sdcard
+	mkdir /mnt/internal_sd
 	mkdir /mnt/external_sd
 	mkdir /mnt/usb_storage
     mkdir /system
@@ -31,12 +33,9 @@ on init
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     
-on fs
-    insmod /rk30xxnand_ko.ko
-
 on boot
     setprop UserVolumeLabel "RockChips"
-    setprop InternalSD_ROOT "/mnt/sdcard"
+    setprop InternalSD_ROOT "/mnt/internal_sd"
     setprop ExternalSD_ROOT	"/mnt/external_sd"
     ifup lo
     hostname localhost

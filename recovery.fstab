@@ -1,6 +1,6 @@
 # Android fstab file.
 #<src>                                       <mnt_point>         <type>    <mnt_flags and options>       <fs_mgr_flags>
-/dev/block/mtd/by-name/user                  /mnt/sdcard          vfat            defaults                  defaults            
+/dev/block/mtd/by-name/user                  /mnt/internal_sd     vfat            defaults                  defaults            
 /dev/block/mmcblk0p1                         /mnt/external_sd     vfat            defaults                  defaults
 /dev/block/mtd/by-name/system                /system              ext4            defaults                  defaults
 /dev/block/mtd/by-name/cache                 /cache               ext4            defaults                  defaults
