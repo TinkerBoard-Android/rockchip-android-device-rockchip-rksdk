@@ -18,6 +18,7 @@ on init
 	mkdir /mnt/external_sd
 	mkdir /mnt/usb_storage
     mkdir /system
+    mkdir /metadata
     mkdir /data
     mkdir /cache
     mount /tmp /tmp tmpfs
