@@ -15,9 +15,12 @@
 
 # Everything in this directory will become public
 
+$(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinstall)
+$(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinstall_del)
+-include device/rockchip/$(TARGET_PRODUCT)/preinstall/preinstall.mk
+-include device/rockchip/$(TARGET_PRODUCT)/preinstall_del/preinstall.mk
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-
 
 ########################################################
 # Kernel
@@ -352,6 +355,10 @@ endif
 #whtest for bin
 PRODUCT_COPY_FILES += \
     device/rockchip/rksdk/whtest.sh:system/bin/whtest.sh
+
+# for preinstall
+PRODUCT_COPY_FILES += \
+    device/rockchip/rksdk/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
     
 # for data clone
 include device/rockchip/common/data_clone/packdata.mk

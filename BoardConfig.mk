@@ -2,6 +2,17 @@
 # 
 # Product-specific compile-time definitions.
 #
+
+#DO CLEAN
+ifdef PRODUCT_OUT
+    $(shell rm -f $(PRODUCT_OUT)/root/default.prop)
+    $(shell rm -rf $(PRODUCT_OUT)/system/preinstall)
+    $(shell rm -rf $(PRODUCT_OUT)/system/preinstall_del)
+endif
+ifdef TARGET_OUT
+    $(shell rm -f $(TARGET_OUT)/build.prop)
+endif
+
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/Image
 TARGET_BOARD_PLATFORM ?= rk30xx
 TARGET_BOARD_PLATFORM_GPU ?= mali400
