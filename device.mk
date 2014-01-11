@@ -380,7 +380,6 @@ endif
 
 # Copy manifest to system/
 ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
-    $(shell test -d .repo && .repo/repo/repo manifest -r -o manifest.xml)
     PRODUCT_COPY_FILES += \
         manifest.xml:system/manifest.xml
 endif
