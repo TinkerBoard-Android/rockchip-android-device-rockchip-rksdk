@@ -11,6 +11,7 @@ ifdef PRODUCT_OUT
 endif
 ifdef TARGET_OUT
     $(shell rm -f $(TARGET_OUT)/build.prop)
+    $(shell rm -f $(TARGET_OUT)/manifest.xml)
 endif
 
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/Image
@@ -131,3 +132,5 @@ BOARD_HAS_GPS := false
 # ethernet
 BOARD_HS_ETHERNET := true
 
+# manifest
+SYSTEM_WITH_MANIFEST := true
