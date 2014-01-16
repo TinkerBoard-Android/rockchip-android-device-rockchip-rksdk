@@ -44,4 +44,13 @@
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
+
+	<!-- Control the behavior when the user long presses the home button.
+	        0 - Nothing
+			1 - Recent apps view in SystemUI
+			2 - Launch assist intent
+		This needs to match the constants in
+        policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+	-->
+	<integer name="config_longPressOnHomeBehavior">0</integer>
 </resources>
