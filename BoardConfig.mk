@@ -125,3 +125,6 @@ BOARD_HS_ETHERNET := true
 
 # manifest
 SYSTEM_WITH_MANIFEST := true
+
+# multi usb partitions
+BUILD_WITH_MULTI_USB_PARTITIONS := false

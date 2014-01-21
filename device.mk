@@ -387,3 +387,10 @@ ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
     PRODUCT_COPY_FILES += \
         manifest.xml:system/manifest.xml
 endif
+
+# Copy init.usbstorage.rc to root
+ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
+    PRODUCT_COPY_FILES += \
+        device/rockchip/rksdk/init.usbstorage.rc:root/init.usbstorage.rc
+endif
+
