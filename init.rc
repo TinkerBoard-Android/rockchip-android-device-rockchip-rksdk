@@ -614,3 +614,7 @@ service whtest /system/bin/whtest.sh
 service preinst_clr /system/bin/preinstall_cleanup.sh
     disabled
     oneshot
+
+service getbootmode /system/bin/getbootmode.sh
+    disabled
+	oneshot

@@ -363,6 +363,10 @@ PRODUCT_COPY_FILES += \
 # for data clone
 include device/rockchip/common/data_clone/packdata.mk
 
+#getbootmode.sh for stresstest
+PRODUCT_COPY_FILES += \
+    device/rockchip/rksdk/getbootmode.sh:system/bin/getbootmode.sh \
+
 $(call inherit-product, external/wlan_loader/wifi-firmware.mk)
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
