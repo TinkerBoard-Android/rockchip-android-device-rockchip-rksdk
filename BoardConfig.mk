@@ -30,6 +30,8 @@ TARGET_PROVIDES_INIT_RC ?= true
 TARGET_NO_KERNEL ?= false
 TARGET_NO_RECOVERY ?= false
 TARGET_ROCHCHIP_RECOVERY ?= true
+#for widevine drm
+BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
 
 # to flip screen in recovery 
 BOARD_HAS_FLIPPED_SCREEN := false
