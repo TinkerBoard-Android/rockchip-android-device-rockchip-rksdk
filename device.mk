@@ -22,6 +22,8 @@ $(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinst
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
+PRODUCT_AAPT_CONFIG += large
+
 ########################################################
 # Kernel
 ########################################################
