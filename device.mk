@@ -125,6 +125,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libsrec_jni
 
+# For tts test
+PRODUCT_PACKAGES += \
+    libwebrtc_audio_coding
+
+
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), pvr)
 include device/rockchip/common/gpu/rk3168_gpu.mk
 include device/rockchip/common/vpu/rk30_vpu.mk
@@ -194,9 +200,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \
     lights.$(TARGET_BOARD_HARDWARE) \
     camera.$(TARGET_BOARD_HARDWARE) \
-    libMcClient \
-    mcDriverDaemon \
-    keystore.$(TARGET_BOARD_PLATFORM) \
     Camera \
     akmd 
 
