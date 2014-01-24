@@ -168,6 +168,7 @@ ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
 endif
 include device/rockchip/common/gps/rk30_gps.mk
 include device/rockchip/common/app/rkupdateservice.mk
+include device/rockchip/common/app/rkUserExperienceService.mk
 #include vendor/google/chrome.mk
 include device/rockchip/common/etc/adblock.mk
 
