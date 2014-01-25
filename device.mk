@@ -125,6 +125,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libsrec_jni
 
+# For tts test
+PRODUCT_PACKAGES += \
+    libwebrtc_audio_coding
+
+
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), pvr)
 include device/rockchip/common/gpu/rk3168_gpu.mk
 include device/rockchip/common/vpu/rk30_vpu.mk
@@ -162,6 +168,7 @@ ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
 endif
 include device/rockchip/common/gps/rk30_gps.mk
 include device/rockchip/common/app/rkupdateservice.mk
+include device/rockchip/common/app/rkUserExperienceService.mk
 #include vendor/google/chrome.mk
 include device/rockchip/common/etc/adblock.mk
 
@@ -194,9 +201,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \
     lights.$(TARGET_BOARD_HARDWARE) \
     camera.$(TARGET_BOARD_HARDWARE) \
-    libMcClient \
-    mcDriverDaemon \
-    keystore.$(TARGET_BOARD_PLATFORM) \
     Camera \
     akmd 
 
