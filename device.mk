@@ -335,6 +335,17 @@ else
      PRODUCT_PROPERTY_OVERRIDES += \
          ro.factory.storage_suppntfs=false
 endif
+
+########################################################
+# build without barrery
+########################################################
+ifeq ($(strip $(BUILD_WITHOUT_BATTERY)),true)
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.factory.without_battery=true
+else
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.factory.without_battery=false
+endif
  
 # NTFS support
 PRODUCT_PACKAGES += \
