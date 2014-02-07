@@ -47,7 +47,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-		android:onClick="onClickSearchButton"
+		android:onClick="onClickVoiceButton"
 		android:focusable="true"
 		android:clickable="true"
 		android:contentDescription="@string/accessibility_search_button">
