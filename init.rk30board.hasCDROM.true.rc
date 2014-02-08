@@ -5,21 +5,8 @@ on init
     export EXTERNAL_STORAGE_FLASH /mnt/internal_sd
 
 on property:sys.usb.config=mass_storage
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 2207
-    write /sys/class/android_usb/android0/idProduct 0000
-    write /sys/class/android_usb/android0/functions ${sys.usb.config}
-    write /sys/class/android_usb/android0/enable 1
-    write /sys/class/android_usb/f_mass_storage/lun/file $ro.factory.cdrom
-    setprop sys.usb.state ${sys.usb.config}
+    write /sys/class/android_usb/f_mass_storage/lun/file ${ro.factory.cdrom}
 
 on property:sys.usb.config=mass_storage,adb
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 2207
-    write /sys/class/android_usb/android0/idProduct 0010
-    write /sys/class/android_usb/android0/functions ${sys.usb.config}
-    write /sys/class/android_usb/android0/enable 1
-    write /sys/class/android_usb/f_mass_storage/lun/file $ro.factory.cdrom
-    start adbd
-    setprop sys.usb.state ${sys.usb.config}
+    write /sys/class/android_usb/f_mass_storage/lun/file ${ro.factory.cdrom}
 
