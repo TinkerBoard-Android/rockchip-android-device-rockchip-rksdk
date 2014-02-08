@@ -201,8 +201,11 @@ service pat_video /system/bin/performance video
     disabled
     oneshot
 
-service gpsd  /system/bin/glgps -c /system/etc/gpsconfig.xml
+on property:ro.rk.btchip=broadcom.bplus
+    start gpsd
+
+service gpsd  /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
     class main
     disabled
-    user system
-    group net_bt_stack
+    user root
+    group system

@@ -73,10 +73,16 @@ BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
 endif
-else
+else # Broadcom
 BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_gps)
+BLUETOOTH_USE_BPLUS ?= true
+BLUETOOTH_ENABLE_FM ?= false
+else
+BLUETOOTH_USE_BPLUS ?= false
+endif
 endif # ESP_BK
 endif # RealTek
 endif # MediaTek
