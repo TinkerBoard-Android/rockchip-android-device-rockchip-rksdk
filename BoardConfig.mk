@@ -103,10 +103,10 @@ BOARD_CODEC_RT5631 := false
 BOARD_CODEC_RK616 := false
 
 #if set to true m-user would be disabled and UMS enabled, if set to disable UMS would be disabled and m-user enabled
-BUILD_WITH_UMS := false
+BUILD_WITH_UMS := true
 
 #if set to true BUILD_WITH_UMS must be false.
-BUILD_WITH_CDROM := true
+BUILD_WITH_CDROM := false
 BUILD_WITH_CDROM_PATH ?= /system/etc/cd.iso
 
 # for drmservice
