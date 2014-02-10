@@ -83,6 +83,13 @@ on property:ro.factory.hasUMS=false
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     mount rootfs rootfs / ro remount
 
+on property:ro.factory.hasUMS=cdrom
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    mount rootfs rootfs / ro remount
+
 on property:ro.factory.hasUMS=true
     symlink /mnt/internal_sd /sdcard
     symlink /mnt/internal_sd /mnt/sdcard
