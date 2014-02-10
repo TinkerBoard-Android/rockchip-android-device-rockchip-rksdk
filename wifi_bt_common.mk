@@ -43,6 +43,7 @@ WIFI_DRIVER_FW_PATH_AP      := ""
 endif
 
 # bluetooth support
+BLUETOOTH_USE_BPLUS ?= false
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), combo_mt66xx)
 BOARD_HAVE_BLUETOOTH ?= true
@@ -78,10 +79,8 @@ BOARD_HAVE_BLUETOOTH ?= true
 BOARD_HAVE_BLUETOOTH_BCM ?= true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_gps)
-BLUETOOTH_USE_BPLUS ?= true
+BLUETOOTH_USE_BPLUS := true
 BLUETOOTH_ENABLE_FM ?= false
-else
-BLUETOOTH_USE_BPLUS ?= false
 endif
 endif # ESP_BK
 endif # RealTek
