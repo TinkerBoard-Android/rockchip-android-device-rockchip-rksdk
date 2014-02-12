@@ -160,7 +160,7 @@ endif
 endif
 endif
 
-#include device/rockchip/common/ion/rk30_ion.mk
+include device/rockchip/common/ion/rk30_ion.mk
 include device/rockchip/common/bin/rk30_bin.mk
 include device/rockchip/common/webkit/rk31_webkit.mk
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
