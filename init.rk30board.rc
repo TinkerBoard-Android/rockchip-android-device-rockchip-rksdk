@@ -11,7 +11,7 @@ on early-init
 
 on post-fs
     insmod /system/lib/modules/ump.ko
-    insmod /system/lib/modules/mali.ko mali_dvfs=50,100,133,160,200,266,400 mali_init_clock=50
+    insmod /system/lib/modules/mali.ko
     insmod /system/lib/modules/rk30_mirroring.ko
     insmod /system/lib/modules/rk29-ipp.ko
 
