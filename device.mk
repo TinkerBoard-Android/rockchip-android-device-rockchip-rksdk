@@ -131,35 +131,29 @@ PRODUCT_PACKAGES += \
 
 
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), pvr)
-include device/rockchip/common/gpu/rk3168_gpu.mk
-include device/rockchip/common/vpu/rk30_vpu.mk
-include device/rockchip/common/wifi/rk30_wifi.mk
-include device/rockchip/common/nand/rk30_nand.mk
-include device/rockchip/common/ipp/rk29_ipp.mk
-else
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
+include device/rockchip/common/gpu/PVR540.mk
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), Mali-400MP)
+include device/rockchip/common/gpu/Mali-400MP.mk
+endif
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk2928)
-include device/rockchip/common/gpu/rk2928_gpu.mk
 include device/rockchip/common/vpu/rk2928_vpu.mk
-include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk2928_nand.mk
 else
+include device/rockchip/common/ipp/rk29_ipp.mk
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
-include device/rockchip/common/gpu/rk30xx_gpu.mk
 include device/rockchip/common/vpu/rk3026_vpu.mk
-include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk3026_nand.mk
-include device/rockchip/common/ipp/rk29_ipp.mk
 else
-include device/rockchip/common/gpu/rk30xx_gpu.mk  
 include device/rockchip/common/vpu/rk30_vpu.mk
-include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/nand/rk30_nand.mk
-include device/rockchip/common/ipp/rk29_ipp.mk
-endif
 endif
 endif
 
+include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/ion/rk30_ion.mk
 include device/rockchip/common/bin/rk30_bin.mk
 include device/rockchip/common/webkit/rk31_webkit.mk

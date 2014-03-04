@@ -22,7 +22,7 @@
 ######################################################################
 
 TARGET_BOARD_PLATFORM ?= rk30xxb
-TARGET_BOARD_PLATFORM_GPU ?= pvr
+TARGET_BOARD_PLATFORM_GPU ?= PVR540
 
 # Choose a product to build for.  Look in the products directory for ones
 # that work.

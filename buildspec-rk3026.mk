@@ -22,7 +22,7 @@
 ######################################################################
 
 TARGET_BOARD_PLATFORM ?= rk3026
-TARGET_BOARD_PLATFORM_GPU ?= mali400
+TARGET_BOARD_PLATFORM_GPU ?= Mali-400MP
 BOARD_USE_LOW_MEM ?= true
 
 # Choose a product to build for.  Look in the products directory for ones
