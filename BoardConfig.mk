@@ -23,6 +23,10 @@ BOARD_EGL_CFG := device/rockchip/common/gpu/libMali-400MP/egl.cfg
 endif
 endif
 
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), Mali-T760)
+BOARD_EGL_CFG := device/rockchip/common/gpu/libMali-T760/egl.cfg
+endif
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
 BOARD_EGL_CFG := device/rockchip/common/gpu/libPVR540/egl.cfg
 endif
