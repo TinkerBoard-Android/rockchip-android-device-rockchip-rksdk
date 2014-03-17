@@ -7,6 +7,7 @@
 /dev/block/mtd/by-name/metadata       /metadata           ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard          wait
 /dev/block/mtd/by-name/userdata       /data               ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard          wait,encryptable=/metadata/key_file
 
-/dev/block/mtd/by-name/user                     /mnt/internal_sd    vfat      defaults        voldmanaged=internal_sd:auto,noemulatedsd
+/devices/1021c000.rksdmmc/mmc_host/mmc          /mnt/internal_sd     vfat      defaults        voldmanaged=internal_sd:13,noemulatedsd
 /devices/10214000.rksdmmc/mmc_host/mmc          /mnt/external_sd     vfat      defaults        voldmanaged=external_sd:auto
 /devices/101c0000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+/devices/10180000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
