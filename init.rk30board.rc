@@ -52,6 +52,8 @@ on boot
     chown system system /sys/devices/system/cpu/cpu1/online
     chmod 0660 /sys/devices/system/cpu/cpu1/online
 #    insmod /system/lib/modules/vpu_service.ko
+    chown wifi wifi /sys/class/rkwifi/driver 
+    chown wifi wifi /sys/class/rkwifi/power
 
 #backlight
     chown system system /sys/class/backlight/rk28_bl/brightness
