@@ -68,12 +68,21 @@ else
 	echo "done."
 fi
 
+if [ $TARGET == $BOOT_OTA ]
+then
 	echo -n "create recovery.img with kernel... "
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
 	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --output $OUT/recovery.img && \
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
+else
+	echo -n "create recovery.img without kernel... "
+	[ -d $OUT/root ] && \
+	mkbootfs $OUT/root | minigzip > $OUT/ramdisk.img && \
+	rkst/mkkrnlimg $OUT/ramdisk-recovery.img $IMAGE_PATH/recovery.img >/dev/null
+	echo "done."
+fi
 
 	echo -n "create misc.img.... "
 	cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
