@@ -24,6 +24,8 @@ on boot
     chown bluetooth net_bt_stack ro.bt.bdaddr_path
 
 # for wifi
+    chown wifi wifi /sys/class/rkwifi/driver 
+    chown wifi wifi /sys/class/rkwifi/power
     # mt7601u
     chmod 0644 /system/lib/modules/mtprealloc7601Usta.ko
 
