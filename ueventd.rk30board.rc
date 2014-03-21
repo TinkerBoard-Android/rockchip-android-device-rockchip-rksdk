@@ -62,9 +62,12 @@
 /dev/ttyUSB8              0660   radio		radio
 /dev/ttyUSB9              0660   radio		radio
 
+# for mali-t764
+/dev/mali0           	  0660   system   	 system
+
 # for mali
 /dev/mali           	  0666   system   	 system
-/dev/ump           	  0666   system   	 system
+/dev/ump            	  0666   system   	 system
 
 # for sgx
 /dev/pvrsrvkm         0666   system      system
