@@ -9,6 +9,7 @@
 
 /devices/ff0f0000.rksdmmc/mmc_host/mmc          /mnt/internal_sd     vfat      defaults        voldmanaged=internal_sd:13,noemulatedsd
 /devices/ff0c0000.rksdmmc/mmc_host/mmc          /mnt/external_sd     vfat      defaults        voldmanaged=external_sd:auto
-/devices/ff580000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
-/devices/ff500000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+# Vold does not support multi device path yet
+# /devices/ff580000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+# /devices/ff500000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
 /devices/ff540000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
