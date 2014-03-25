@@ -202,6 +202,25 @@ PRODUCT_PACKAGES += \
     Camera \
     akmd 
 
+# iep
+BUILD_IEP := false
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3288)
+    BUILD_IEP := true
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3190)
+    BUILD_IEP := true
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
+    BUILD_IEP := true
+endif
+
+ifeq ($(BUILD_IEP), true)
+PRODUCT_PACKAGES += \
+    libiep
+endif
+
 # charge
 PRODUCT_PACKAGES += \
     charger \
