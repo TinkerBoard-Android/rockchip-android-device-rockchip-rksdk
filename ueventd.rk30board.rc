@@ -82,3 +82,6 @@
 
 #for DRM
 /dev/rknand_sys_storage   0660   system     system 
+
+# for Camera
+/dev/camsys_marvin        0664        system        system
