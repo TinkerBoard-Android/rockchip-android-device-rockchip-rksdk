@@ -99,8 +99,6 @@ PRODUCT_COPY_FILES += \
     $(call add-to-product-copy-files-if-exists,device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
     device/rockchip/rksdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/rksdk/media_profiles_default.xml:system/etc/media_profiles_default.xml \
-    device/rockchip/rksdk/cam_board.xml:system/etc/cam_board.xml \
-    device/rockchip/rksdk/OV8825.xml:system/etc/OV8825.xml \
     device/rockchip/rksdk/alarm_filter.xml:system/etc/alarm_filter.xml \
     device/rockchip/rksdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl
 
@@ -133,6 +131,7 @@ PRODUCT_PACKAGES += \
 
 
 include device/rockchip/common/camera/rk32xx_camera.mk
+include device/rockchip/common/camera/user.mk
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
 include device/rockchip/common/gpu/PVR540.mk
