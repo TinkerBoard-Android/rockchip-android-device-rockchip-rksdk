@@ -301,7 +301,7 @@ ifeq ($(strip $(BUILD_WITH_UMS)),true)
 	PRODUCT_PROPERTY_OVERRIDES += \
 		ro.factory.hasUMS=true \
 		persist.sys.usb.config=mass_storage,adb 
-       		#testing.mediascanner.skiplist = /mnt/internal_sd/Android/
+       		testing.mediascanner.skiplist = /mnt/internal_sd/Android/
 
 
 	PRODUCT_COPY_FILES += \
@@ -320,7 +320,7 @@ else
 	PRODUCT_PROPERTY_OVERRIDES += \
 		ro.factory.hasUMS=false \
 		persist.sys.usb.config=mtp,adb 
-       		#testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
+       		testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
 
         PRODUCT_COPY_FILES += \
                 device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).hasUMS.false.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
