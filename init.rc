@@ -460,6 +460,12 @@ service adbd /sbin/adbd
 on property:ro.kernel.qemu=1
     start adbd
 
+# cpu min freq must change to 126M when boot completed
+on property:sys.boot_completed=1
+write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${ro.rk.cpu_min_freq}
+setprop persist.sys.first_booting false
+
+
 #SGX540
 service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
  		oneshot
