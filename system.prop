@@ -33,6 +33,7 @@ ro.sf.hwrotation=0
 ro.rk.MassStorage=false
 ro.rk.systembar.voiceicon=true
 ro.rk.systembar.tabletUI=false
+ro.rk.LowBatteryBrightness=false
 wifi.interface=wlan0
 ro.tether.denied=false
 sys.resolution.changed=false
