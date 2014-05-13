@@ -3,7 +3,8 @@
 # Product-specific compile-time definitions.
 #
 
-TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/Image
+TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
+TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 TARGET_BOARD_PLATFORM ?= rk30xx
 TARGET_BOARD_PLATFORM_GPU ?= Mali-400MP
 TARGET_BOARD_HARDWARE ?= rk30board

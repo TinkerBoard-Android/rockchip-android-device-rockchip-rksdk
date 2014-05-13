@@ -11,6 +11,7 @@
 /dev/block/platform/ff0f0000.rksdmmc/by-name/misc                  /misc                emmc             defaults                  defaults
 /dev/block/platform/ff0f0000.rksdmmc/by-name/uboot                 /uboot               emmc             defaults                  defaults
 /dev/block/platform/ff0f0000.rksdmmc/by-name/charge                /charge              emmc             defaults                  defaults
+/dev/block/platform/ff0f0000.rksdmmc/by-name/resource			   /resource		    emmc			 defaults				   defaults
 /dev/block/platform/ff0f0000.rksdmmc/by-name/parameter             /parameter           emmc             defaults                  defaults
 /dev/block/platform/ff0f0000.rksdmmc/by-name/boot                  /boot                emmc             defaults                  defaults
 /dev/block/platform/ff0f0000.rksdmmc/by-name/recovery              /recovery            emmc             defaults                  defaults

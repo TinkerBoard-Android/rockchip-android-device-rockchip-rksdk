@@ -64,6 +64,11 @@ def InstallCharge(charge_bin, input_zip, info):
   info.script.Print("Writing charge img..")
   info.script.WriteRawImage("/charge", "charge.img")
 
+def InstallResource(resource_bin, input_zip, info):
+  common.ZipWriteStr(info.output_zip, "resource.img", resource_bin)
+  info.script.Print("Writing resource image..")
+  info.script.WriteRawImage("/resource", "resource.img")
+
 def FullOTA_InstallEnd(info):
   try:
     uboot = info.input_zip.read("uboot.img")
@@ -78,6 +83,13 @@ def FullOTA_InstallEnd(info):
     InstallCharge(charge, info.input_zip, info)
   except KeyError:
     print "info: no charge img; ignore it."
+
+  try:
+    resource = info.input_zip.read("resource.img")
+    print "wirte resource now..."
+    InstallResource(resource, info.input_zip, info)
+  except KeyError:
+    print "info: no resource image; ignore it."
 
   try:
     loader_bin = info.input_zip.read("LOADER/RKLoader.img")
@@ -103,7 +115,7 @@ def IncrementalOTA_InstallEnd(info):
 	
   if (loader_uboot_target != None) and (loader_uboot_target != loader_uboot_source):
     print "write uboot now..."
-    InstallUboot(loader_uboot_target, info.input_zip, info)
+    InstallUboot(loader_uboot_target, info.target_zip, info)
   else:
     print "uboot unchanged; skipping"
 	
@@ -119,9 +131,25 @@ def IncrementalOTA_InstallEnd(info):
 	
   if (charge_target != None) and (charge_target != charge_source):
     print "write charge now..."
-    InstallCharge(charge_target, info.input_zip, info)
+    InstallCharge(charge_target, info.target_zip, info)
   else:
     print "charge unchanged; skipping"
+
+  try:
+    resource_target = info.target_zip.read("resource.img")
+  except KeyError:
+    resource_target = None
+
+  try:
+    resource_source = info.source_zip.read("resource.img")
+  except KeyError:
+    resource_source = None
+
+  if (resource_target != None) and (resource_target != resource_source):
+    print "write resource now..."
+    InstallResource(resource_target, info.target_zip, info)
+  else:
+    print "resource unchanged; skipping"
 
   try:
     target_loader = info.target_zip.read("LOADER/RKLoader.img")
