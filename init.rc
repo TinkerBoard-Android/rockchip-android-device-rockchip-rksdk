@@ -632,3 +632,6 @@ service preinst_clr /system/bin/preinstall_cleanup.sh
 service getbootmode /system/bin/getbootmode.sh
     disabled
 	oneshot
+service bmd /system/bin/bmd
+    class main
+    socket bmd stream 660 root system
