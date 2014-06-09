@@ -57,6 +57,16 @@ on boot
     chown bluetooth net_bt_stack /dev/bthwctl
     mkdir /data/bluetooth 0771 bluetooth net_bt_stack
 
+#for nfc
+    chmod 0660 /dev/bcm2079x
+    chown nfc nfc /dev/bcm2079x
+    mkdir /data/nfc
+    mkdir /data/nfc/param
+    chmod 0700 /data/nfc
+    chmod 0700 /data/nfc/param
+    chown nfc nfc /data/nfc
+    chown nfc nfc /data/nfc/param
+
 #for rda bt
     chmod 0664 /dev/tcc_bt_dev
     chown bluetooth net_bt_stack /dev/tcc_bt_dev

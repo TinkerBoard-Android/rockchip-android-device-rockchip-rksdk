@@ -445,3 +445,36 @@ ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
         device/rockchip/rksdk/init.usbstorage.rc:root/init.usbstorage.rc
 endif
 
+ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_nfc)
+#NFC packages
+PRODUCT_PACKAGES += \
+    nfc_nci.$(TARGET_BOARD_HARDWARE) \
+    NfcNci \
+    Tag \
+    com.android.nfc_extras
+
+# NFCEE access control
+ifeq ($(TARGET_BUILD_VARIANT),user)
+    NFCEE_ACCESS_PATH := device/rockchip/rksdk/nfc/nfcee_access.xml
+else
+    NFCEE_ACCESS_PATH := device/rockchip/rksdk/nfc/nfcee_access_debug.xml
+endif
+
+copyNfcFirmware = $(subst XXXX,$(strip $(1)),hardware/broadcom/nfc/firmware/XXXX:/system/vendor/firmware/XXXX)
+# NFC access control + feature files + configuration
+PRODUCT_COPY_FILES += \
+    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    device/rockchip/rksdk/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    device/rockchip/rksdk/nfc/libnfc-brcm-20791b03.conf:system/etc/libnfc-brcm-20791b03.conf \
+    device/rockchip/rksdk/nfc/libnfc-brcm-20791b04.conf:system/etc/libnfc-brcm-20791b04.conf \
+    device/rockchip/rksdk/nfc/libnfc-brcm-20791b05.conf:system/etc/libnfc-brcm-20791b05.conf \
+    device/rockchip/rksdk/nfc/libnfc-brcm-43341b00.conf:system/etc/libnfc-brcm-43341b00.conf \
+    $(call copyNfcFirmware, BCM20791B3_002.004.010.0161.0000_Generic_I2CLite_NCD_Signed_configdata.ncd) \
+    $(call copyNfcFirmware, BCM20791B3_002.004.010.0161.0000_Generic_PreI2C_NCD_Signed_configdata.ncd) \
+    $(call copyNfcFirmware, BCM20791B5_002.006.013.0011.0000_Generic_I2C_NCD_Unsigned_configdata.ncd) \
+    $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_I2C_NCD_Signed_configdata.ncd) \
+    $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_PreI2C_NCD_Signed_configdata.ncd)
+endif
