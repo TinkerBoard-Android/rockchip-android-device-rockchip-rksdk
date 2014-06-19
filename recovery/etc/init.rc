@@ -19,6 +19,7 @@ on init
 	mkdir /mnt/usb_storage
     mkdir /system
     mkdir /metadata
+    mkdir /radical_update
     mkdir /data
     mkdir /cache
     mount /tmp /tmp tmpfs

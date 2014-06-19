@@ -7,6 +7,7 @@
 /dev/block/rknand_cache                    /cache              ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard          wait
 /dev/block/rknand_metadata                 /metadata           ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard          wait
 /dev/block/rknand_userdata                 /data               ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard          wait,encryptable=/metadata/key_file
+# /dev/block/rknand_radical_update           /radical_update     ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard          wait
 
 /devices/virtual/block/rknand_user              /mnt/internal_sd     vfat      defaults        voldmanaged=internal_sd:auto,noemulatedsd
 /devices/ff0c0000.rksdmmc/mmc_host/mmc          /mnt/external_sd     vfat      defaults        voldmanaged=external_sd:auto

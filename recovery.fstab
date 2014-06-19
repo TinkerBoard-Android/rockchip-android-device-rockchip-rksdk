@@ -8,6 +8,7 @@
 /dev/block/rknand_userdata              /data                ext4            defaults                  defaults
 /dev/block/rknand_cust                  /cust                ext4            defaults                  defaults
 /dev/block/rknand_custom                /custom              ext4            defaults                  defaults
+/dev/block/rknand_radical_update        /radical_update      ext4            defaults                  defaults
 misc                                         /misc                mtd             defaults                  defaults
 uboot                                        /uboot               mtd             defaults                  defaults
 charge                                       /charge              mtd             defaults                  defaults
