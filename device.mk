@@ -30,6 +30,11 @@ PRODUCT_AAPT_CONFIG += large
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 
+#SDK Version
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00
+
+
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES += \
