@@ -85,3 +85,6 @@
 
 # for Camera
 /dev/camsys_marvin        0664        system        system
+
+#for ddr freq
+/dev/ddr_freq        0664        system        graphics

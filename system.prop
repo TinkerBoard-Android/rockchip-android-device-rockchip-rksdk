@@ -18,7 +18,6 @@ debug.nfc.fw_download=false
 debug.nfc.se=false
 
 #add Rockchip properties here
-ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00 \
 ro.rk.screenoff_time=60000
 ro.rk.screenshot_enable=true
 ro.rk.def_brightness=200
