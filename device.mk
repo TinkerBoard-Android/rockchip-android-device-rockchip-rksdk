@@ -115,13 +115,16 @@ PRODUCT_COPY_FILES += \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
+ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek_mt7601)
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
+ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), Espressif)
 PRODUCT_COPY_FILES += \
     device/rockchip/rksdk/init.connectivity.rc:root/init.connectivity.rc
 endif
 endif
-
+endif
+endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
@@ -436,6 +439,10 @@ endif
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
 include hardware/realtek/wlan/config/config-rtl.mk
+endif
+
+ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), Espressif)
+include hardware/esp/wlan/config/config-espressif.mk
 endif
 
 # Copy manifest to system/
