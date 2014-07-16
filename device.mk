@@ -149,7 +149,7 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
 include device/rockchip/common/gpu/PVR540.mk
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), Mali-400MP)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
 include device/rockchip/common/gpu/Mali-400MP.mk
 endif
 
