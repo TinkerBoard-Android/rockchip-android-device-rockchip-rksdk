@@ -167,8 +167,12 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
 include device/rockchip/common/vpu/rk3026_vpu.mk
 include device/rockchip/common/nand/rk3026_nand.mk
 else
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3036)
+include device/rockchip/common/nand/rk3036_nand.mk
+else
 include device/rockchip/common/vpu/rk30_vpu.mk
 include device/rockchip/common/nand/rk30_nand.mk
+endif
 endif
 endif
 
