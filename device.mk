@@ -236,6 +236,10 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
     BUILD_IEP := true
 endif
 
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk312x)
+	BUILD_IEP := true
+endif
+
 ifeq ($(BUILD_IEP), true)
 PRODUCT_PACKAGES += \
     libiep
