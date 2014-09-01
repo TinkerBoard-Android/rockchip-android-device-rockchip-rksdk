@@ -84,12 +84,16 @@ def FullOTA_InstallEnd(info):
   except KeyError:
     print "info: no charge img; ignore it."
 
-  try:
-    resource = info.input_zip.read("resource.img")
-    print "wirte resource now..."
-    InstallResource(resource, info.input_zip, info)
-  except KeyError:
-    print "info: no resource image; ignore it."
+#**************************************************************************************************
+#resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
+#**************************************************************************************************
+#
+#  try:
+#    resource = info.input_zip.read("resource.img")
+#    print "wirte resource now..."
+#    InstallResource(resource, info.input_zip, info)
+#  except KeyError:
+#    print "info: no resource image; ignore it."
 
   try:
     loader_bin = info.input_zip.read("LOADER/RKLoader.img")
@@ -135,21 +139,24 @@ def IncrementalOTA_InstallEnd(info):
   else:
     print "charge unchanged; skipping"
 
-  try:
-    resource_target = info.target_zip.read("resource.img")
-  except KeyError:
-    resource_target = None
+#**************************************************************************************************
+#resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
+#**************************************************************************************************
+#  try:
+#    resource_target = info.target_zip.read("resource.img")
+#  except KeyError:
+#    resource_target = None
 
-  try:
-    resource_source = info.source_zip.read("resource.img")
-  except KeyError:
-    resource_source = None
+#  try:
+#    resource_source = info.source_zip.read("resource.img")
+#  except KeyError:
+#    resource_source = None
 
-  if (resource_target != None) and (resource_target != resource_source):
-    print "write resource now..."
-    InstallResource(resource_target, info.target_zip, info)
-  else:
-    print "resource unchanged; skipping"
+#  if (resource_target != None) and (resource_target != resource_source):
+#    print "write resource now..."
+#    InstallResource(resource_target, info.target_zip, info)
+#  else:
+#    print "resource unchanged; skipping"
 
   try:
     target_loader = info.target_zip.read("LOADER/RKLoader.img")

@@ -44,7 +44,6 @@ BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
 # to flip screen in recovery 
 BOARD_HAS_FLIPPED_SCREEN := false
 
-BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE)
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_ROCKCHIP_PCBATEST ?= false
