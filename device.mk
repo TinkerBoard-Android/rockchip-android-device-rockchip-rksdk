@@ -71,7 +71,11 @@ PRODUCT_PACKAGES += StressTest
 #########################################################
 # Copy proprietary apk
 #########################################################
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk312x)
+include device/rockchip/common/app/rkapk_312x.mk
+else
 include device/rockchip/common/app/rkapk.mk
+endif
 
 ########################################################
 # Google applications
