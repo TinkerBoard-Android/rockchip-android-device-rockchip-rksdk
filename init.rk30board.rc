@@ -62,6 +62,7 @@ on boot
 #for hdmi timem out
    chown root system /sys/class/graphics/fb0/blank
    chmod 0664 /sys/class/graphics/fb0/blank
+   chmod 0664 /dev/graphics/fb0
 
     chown system system /sys/mali400_utility/utility
     chmod 0664 /sys/mali400_utility/utility
