@@ -18,6 +18,9 @@
 import common
 import re
 
+from custom_log import D
+from custom_log import I
+from custom_log import W
 
 def FullOTA_Assertions(info):
   AddBootloaderAssertion(info, info.input_zip)
@@ -30,6 +33,7 @@ def IncrementalOTA_Assertions(info):
 def AddBootloaderAssertion(info, input_zip):
   android_info = input_zip.read("OTA/android-info.txt")
   m = re.search(r"require\s+version-bootloader\s*=\s*(\S+)", android_info)
+  D("m : " +  str(m) )
   if m:
     bootloaders = m.group(1).split("|")
     if "*" not in bootloaders:
@@ -42,7 +46,7 @@ def Install_Parameter(info):
   except KeyError:
     print "warning: no parameter in input target_files; not flashing parameter"
     return
-    
+
   print "find parameter, should add to package"
   common.ZipWriteStr(info.output_zip, "parameter", parameter_bin)
   info.script.Print("start update parameter...")
@@ -75,14 +79,15 @@ def FullOTA_InstallEnd(info):
     print "write uboot now..."
     InstallUboot(uboot, info.input_zip, info)
   except KeyError:
-    print "warning: no uboot.img in input target_files; not flashing uboot"
-  
+    W("warning: no uboot.img in input target_files; not flashing uboot")
+
   try:
     charge = info.input_zip.read("charge.img")
     print "wirte charge now..."
     InstallCharge(charge, info.input_zip, info)
   except KeyError:
-    print "info: no charge img; ignore it."
+    # print "info: no charge img; ignore it."
+    I("no charge img; ignore it.")
 
 #**************************************************************************************************
 #resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
@@ -98,8 +103,9 @@ def FullOTA_InstallEnd(info):
   try:
     loader_bin = info.input_zip.read("LOADER/RKLoader.img")
   except KeyError:
-    print "warning: no rk loader bin in input target_files; not flashing loader"
-    print "clear misc command"
+    # print "warning: no rk loader bin in input target_files; not flashing loader"
+    W("no rk loader bin in input target_files; not flashing loader")
+    I("to add clear misc command")
     info.script.ClearMiscCommand()
     return
 
@@ -116,23 +122,23 @@ def IncrementalOTA_InstallEnd(info):
     loader_uboot_source = info.source_zip.read("uboot.img")
   except KeyError:
     loader_uboot_source = None
-	
+
   if (loader_uboot_target != None) and (loader_uboot_target != loader_uboot_source):
     print "write uboot now..."
     InstallUboot(loader_uboot_target, info.target_zip, info)
   else:
     print "uboot unchanged; skipping"
-	
+
   try:
     charge_target = info.target_zip.read("charge.img")
   except KeyError:
     charge_target = None
-	
+
   try:
     charge_source = info.source_zip.read("charge.img")
   except KeyError:
     charge_source = None
-	
+
   if (charge_target != None) and (charge_target != charge_source):
     print "write charge now..."
     InstallCharge(charge_target, info.target_zip, info)

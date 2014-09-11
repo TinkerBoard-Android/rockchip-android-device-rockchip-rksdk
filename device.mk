@@ -185,11 +185,14 @@ include device/rockchip/common/wifi/rk30_wifi.mk
 include device/rockchip/common/ion/rk30_ion.mk
 include device/rockchip/common/bin/rk30_bin.mk
 include device/rockchip/common/webkit/rk31_webkit.mk
+
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     include device/rockchip/common/bluetooth/rk30_bt.mk
 endif
+
 include device/rockchip/common/gps/rk30_gps.mk
 include device/rockchip/common/app/rkupdateservice.mk
+include device/rockchip/common/app/rkexpe.mk
 include device/rockchip/common/app/rkUserExperienceService.mk
 #include vendor/google/chrome.mk
 include device/rockchip/common/etc/adblock.mk
