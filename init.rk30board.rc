@@ -64,6 +64,11 @@ on boot
    chmod 0664 /sys/class/graphics/fb0/blank
    chmod 0664 /dev/graphics/fb0
 
+   chown root system /sys/class/graphics/fb0/bcsh
+   chown root system /sys/class/graphics/fb0/dsp_lut
+   chmod 0664 /sys/class/graphics/fb0/bcsh
+   chmod 0664 /sys/class/graphics/fb0/dsp_lut
+
     chown system system /sys/mali400_utility/utility
     chmod 0664 /sys/mali400_utility/utility
 
