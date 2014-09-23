@@ -15,7 +15,6 @@ on post-fs
     insmod /system/lib/modules/mali_kbase.ko
     insmod /system/lib/modules/rk30_mirroring.ko
     insmod /system/lib/modules/rk29-ipp.ko
-    insmod /drmboot.ko
 
 # AP6476 GPS permission
     chmod 755 /system/bin/glgps
