@@ -104,7 +104,7 @@
         </EncoderProfile>
         
          <EncoderProfile quality="qvga" fileFormat="mp4" duration="30">
-            <Video codec="m4v"
+            <Video codec="h264"
                    bitRate="128000"
                    width="320"
                    height="240"
@@ -218,7 +218,7 @@
         </EncoderProfile>
         
         <EncoderProfile quality="timelapseqvga" fileFormat="mp4" duration="30">
-            <Video codec="m4v"
+            <Video codec="h264"
                    bitRate="128000"
                    width="320"
                    height="240"
@@ -358,7 +358,7 @@
         </EncoderProfile>
         
          <EncoderProfile quality="qvga" fileFormat="mp4" duration="30">
-            <Video codec="m4v"
+            <Video codec="h264"
                    bitRate="128000"
                    width="320"
                    height="240"
@@ -468,7 +468,7 @@
         </EncoderProfile>
         
         <EncoderProfile quality="timelapseqvga" fileFormat="mp4" duration="30">
-            <Video codec="m4v"
+            <Video codec="h264"
                    bitRate="128000"
                    width="320"
                    height="240"
