@@ -1,21 +1,44 @@
-# config.mk
-# 
-# Product-specific compile-time definitions.
+#
+# Copyright 2014 The Android Open-Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
+# Use the non-open-source parts, if they're present
+-include vendor/rockchip/rksdk/BoardConfigVendor.mk
+
+TARGET_NO_KERNEL ?= false
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
+
 TARGET_BOARD_PLATFORM ?= rk30xx
+
+# CPU feature configration
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := cortex-a9
+TARGET_CPU_SMP ?= true
+# rk30sdk uses Cortex A9
+TARGET_EXTRA_CFLAGS += $(call cc-option,-mtune=cortex-a9,$(call cc-option,-mtune=cortex-a8)) $(call cc-option,-mcpu=cortex-a9,$(call cc-option,-mcpu=cortex-a8))
+
+# GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= mali400
-TARGET_BOARD_HARDWARE ?= rk30board
 BOARD_USE_LCDC_COMPOSER ?= false
 GRAPHIC_MEMORY_PROVIDER ?= ump
-BOARD_USE_LOW_MEM ?= false
-TARGET_NO_BOOTLOADER ?= true
-TARGET_CPU_VARIANT := cortex-a9
-TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rksdk
-
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/rksdk/overlay
+USE_OPENGL_RENDERER ?= true
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
 ifeq ($(TARGET_BOARD_PLATFORM),rk2928)
@@ -33,10 +56,20 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
 BOARD_EGL_CFG := device/rockchip/common/gpu/libPVR540/egl.cfg
 endif
 
+TARGET_BOARD_HARDWARE ?= rk30board
+TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
+TARGET_NO_BOOTLOADER ?= true
+BOARD_USE_LOW_MEM ?= false
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/rksdk/overlay
+TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rksdk
 TARGET_PROVIDES_INIT_RC ?= true
-
 BOARD_HAL_STATIC_LIBRARIES := libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
 
+//MAX-SIZE=512M, for generate out/.../system.img
+BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
+BOARD_FLASH_BLOCK_SIZE ?= 131072
+
+# Sepolicy
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
         bluetooth.te \
@@ -48,11 +81,10 @@ BOARD_SEPOLICY_UNION := \
         surfaceflinger.te \
         system_server.te
 
-TARGET_NO_KERNEL ?= false
+
+# Recovery
 TARGET_NO_RECOVERY ?= false
 TARGET_ROCHCHIP_RECOVERY ?= true
-#for widevine drm
-BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
 
 # to flip screen in recovery 
 BOARD_HAS_FLIPPED_SCREEN := false
@@ -80,25 +112,23 @@ RADICAL_UPDATE_CERT :=
 endif
 # ------------ #
 
-TARGET_CPU_SMP ?= true
+
+# for widevine drm
+BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
+
+# for drmservice
+BUILD_WITH_DRMSERVICE :=true
+
+# for tablet encryption
+BUILD_WITH_CRYPTO := false
+
+
+# Audio
 BOARD_USES_GENERIC_AUDIO ?= true
 
-//MAX-SIZE=512M, for generate out/.../system.img
-BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
-BOARD_FLASH_BLOCK_SIZE ?= 131072
-
+# Wifi&Bluetooth
 include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 include device/rockchip/rksdk/wifi_bt_common.mk
-
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-
-# Enable NEON feature
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
-
-#BOARD_LIB_DUMPSTATE := libdumpstate.$(TARGET_BOARD_PLATFORM)
 
 # google apps
 BUILD_WITH_GOOGLE_MARKET ?= false
@@ -112,27 +142,24 @@ BUILD_WITH_RK_EBOOK ?= false
 # rksu
 BUILD_WITH_RKSU ?= false
 
-USE_OPENGL_RENDERER ?= true
-
-# rk30sdk uses Cortex A9
-TARGET_EXTRA_CFLAGS += $(call cc-option,-mtune=cortex-a9,$(call cc-option,-mtune=cortex-a8)) $(call cc-option,-mcpu=cortex-a9,$(call cc-option,-mcpu=cortex-a8))
-
-# sensors
+# Sensors
 BOARD_SENSOR_ST := true
-#BOARD_SENSOR_COMPASS_AK8963 := true    #if use akm8963
-#BOARD_SENSOR_ANGLE := true		#if need calculation angle between two gsensors
-#BOARD_SENSOR_CALIBRATION := true	#if need calibration
-#BOARD_SENSOR_MPU := true               #if use mpu
-#BOARD_USES_GENERIC_INVENSENSE := false #if use mpu
-
-TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
+# if use akm8963
+#BOARD_SENSOR_COMPASS_AK8963 := true
+# if need calculation angle between two gsensors
+#BOARD_SENSOR_ANGLE := true
+# if need calibration
+#BOARD_SENSOR_CALIBRATION := true
+# if use mpu
+#BOARD_SENSOR_MPU := true
+#BOARD_USES_GENERIC_INVENSENSE := false
 
 # readahead files to improve boot time
 # BOARD_BOOT_READAHEAD ?= true
 
 BOARD_BP_AUTO := true
 
-#phone pad codec list
+# phone pad codec list
 BOARD_CODEC_WM8994 := false
 BOARD_CODEC_RT5625_SPK_FROM_SPKOUT := false
 BOARD_CODEC_RT5625_SPK_FROM_HPOUT := false
@@ -141,24 +168,20 @@ BOARD_CODEC_RT3224 := true
 BOARD_CODEC_RT5631 := false
 BOARD_CODEC_RK616 := false
 
-#if set to true m-user would be disabled and UMS enabled, if set to disable UMS would be disabled and m-user enabled
+# Vold configrations
+# if set to true m-user would be disabled and UMS enabled, if set to disable UMS would be disabled and m-user enabled
 BUILD_WITH_UMS := true
-
-#if set to true BUILD_WITH_UMS must be false.
+# if set to true BUILD_WITH_UMS must be false.
 BUILD_WITH_CDROM := false
 BUILD_WITH_CDROM_PATH ?= /system/etc/cd.iso
+# multi usb partitions
+BUILD_WITH_MULTI_USB_PARTITIONS := false
+# define tablet support NTFS
+BOARD_IS_SUPPORT_NTFS := true
 
-# for drmservice
-BUILD_WITH_DRMSERVICE :=true
-
-# for tablet encryption
-BUILD_WITH_CRYPTO := false
 
 # for update nand 2.1
 NAND_UPDATE :=true
-
-# define tablet support NTFS 
-BOARD_IS_SUPPORT_NTFS := true
 
 # product has GPS or not
 BOARD_HAS_GPS := false
@@ -168,9 +191,6 @@ BOARD_HS_ETHERNET := true
 
 # manifest
 SYSTEM_WITH_MANIFEST := true
-
-# multi usb partitions
-BUILD_WITH_MULTI_USB_PARTITIONS := false
 
 # no battery
 BUILD_WITHOUT_BATTERY := false
