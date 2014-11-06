@@ -35,6 +35,8 @@ endif
 
 TARGET_PROVIDES_INIT_RC ?= true
 
+BOARD_HAL_STATIC_LIBRARIES := libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
+
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
         bluetooth.te \
