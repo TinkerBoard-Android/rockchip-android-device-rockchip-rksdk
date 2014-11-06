@@ -35,6 +35,17 @@ endif
 
 TARGET_PROVIDES_INIT_RC ?= true
 
+BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
+BOARD_SEPOLICY_UNION := \
+        bluetooth.te \
+        drmserver.te \
+        genfs_contexts \
+        gpsd.te \
+        mediaserver.te \
+        netd.te \
+        surfaceflinger.te \
+        system_server.te
+
 TARGET_NO_KERNEL ?= false
 TARGET_NO_RECOVERY ?= false
 TARGET_ROCHCHIP_RECOVERY ?= true
