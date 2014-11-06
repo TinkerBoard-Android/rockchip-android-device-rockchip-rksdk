@@ -97,11 +97,11 @@ class RkDevice : public Device {
           case 0: return REBOOT;
           case 1: return APPLY_ADB_SIDELOAD;
           case 2: return APPLY_EXT;
-          case 3: return APPLY_INT_RKIMG;
+          //case 3: return APPLY_INT_RKIMG;
           case 4: return APPLY_CACHE;
           case 5: return WIPE_DATA;
           case 6: return WIPE_CACHE;
-          case 7: return RECOVER_SYSTEM;
+          //case 7: return RECOVER_SYSTEM;
           default: return NO_ACTION;
         }
     }
