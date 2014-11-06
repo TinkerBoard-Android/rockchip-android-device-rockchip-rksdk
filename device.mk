@@ -104,7 +104,7 @@ PRODUCT_COPY_FILES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/init.rc:root/init.rc \
+    system/core/rootdir/init.rc:root/init.rc \
     device/rockchip/rksdk/init.environ.rc:root/init.environ.rc \
     device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
