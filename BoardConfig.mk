@@ -69,6 +69,17 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+  ifeq ($(TARGET_BUILD_VARIANT),user)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
+
+ART_USE_HSPACE_COMPACT=true
+
 # Sepolicy
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
