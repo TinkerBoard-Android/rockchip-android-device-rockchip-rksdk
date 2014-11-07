@@ -1,4 +1,5 @@
-# Copyright (C) 2011 rockchip Limited
+#
+# Copyright 2014 Rockchip Limited
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +14,6 @@
 # limitations under the License.
 #
 
-# Everything in this directory will become public
 
 $(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinstall)
 $(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinstall_del)
@@ -22,7 +22,8 @@ $(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinst
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
-PRODUCT_AAPT_CONFIG += large
+PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 ########################################################
 # Kernel
@@ -34,20 +35,32 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00
 
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+
+# This ensures the needed build tools are available.
+# TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
+ifeq ($(HOST_OS),linux)
+TARGET_USERIMAGES_USE_F2FS := true
+endif
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    fsck.f2fs mkfs.f2fs
+
+
 
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
-include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
+# setup dalvik vm configs.
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y \
-    dalvik.vm.stack-trace-file=/data/anr/traces.txt \
     ro.hwui.texture_cache_size=72 \
     ro.hwui.layer_cache_size=48 \
-    ro.hwui.path_cache_size=16 \
-    ro.hwui.shape_cache_size=4 \
+    ro.hwui.r_buffer_cache_size=8 \
+    ro.hwui.path_cache_size=32 \
     ro.hwui.gradient_cache_size=1 \
     ro.hwui.drop_shadow_cache_size=6 \
-    ro.hwui.texture_cache_flush_rate=0.4 \
+    ro.hwui.texture_cache_flushrate=0.4 \
     ro.hwui.text_small_cache_width=1024 \
     ro.hwui.text_small_cache_height=1024 \
     ro.hwui.text_large_cache_width=2048 \
@@ -255,8 +268,11 @@ endif
 # charge
 PRODUCT_PACKAGES += \
     charger \
-    charger_res_images 
+    charger_res_images
 
+# Allows healthd to boot directly from charger mode rather than initiating a reboot.
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.enable_boot_charger_mode=0
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -507,3 +523,5 @@ PRODUCT_COPY_FILES += \
     $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_I2C_NCD_Signed_configdata.ncd) \
     $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_PreI2C_NCD_Signed_configdata.ncd)
 endif
+
+$(call inherit-product-if-exists, vendor/rockchip/rksdk/device-vendor.mk)
