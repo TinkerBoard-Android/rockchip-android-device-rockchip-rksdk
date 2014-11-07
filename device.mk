@@ -118,7 +118,6 @@ endif
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.rc:root/init.rc \
-    device/rockchip/rksdk/init.environ.rc:root/init.environ.rc \
     device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
     $(call add-to-product-copy-files-if-exists,device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \

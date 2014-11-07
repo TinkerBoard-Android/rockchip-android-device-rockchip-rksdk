@@ -62,7 +62,7 @@ TARGET_NO_BOOTLOADER ?= true
 BOARD_USE_LOW_MEM ?= false
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/rksdk/overlay
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/rksdk
-TARGET_PROVIDES_INIT_RC ?= true
+TARGET_PROVIDES_INIT_RC ?= false
 BOARD_HAL_STATIC_LIBRARIES := libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
 
 //MAX-SIZE=512M, for generate out/.../system.img
