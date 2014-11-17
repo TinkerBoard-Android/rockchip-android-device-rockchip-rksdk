@@ -85,14 +85,21 @@ TARGET_USES_LOGD ?= true
 # Sepolicy
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
+        device.te \
         bluetooth.te \
         drmserver.te \
+        file_contexts \
         genfs_contexts \
         gpsd.te \
+        init.te \
+        kernel.te \
         mediaserver.te \
         netd.te \
+        shell.te \
         surfaceflinger.te \
-        system_server.te
+        system_server.te \
+        untrusted_app.te \
+        vold.te
 
 
 # Recovery

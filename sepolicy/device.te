@@ -1,0 +1,2 @@
+type ddr_device, dev_type;
+type rga_device, dev_type;

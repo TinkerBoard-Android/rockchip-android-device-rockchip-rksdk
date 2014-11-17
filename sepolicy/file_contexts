@@ -1,0 +1,5 @@
+/dev/ttyFIQ[0-9]*    u:object_r:serial_device:s0
+/dev/mali[0-9]       u:object_r:gpu_device:s0
+/dev/ddr_freq        u:object_r:ddr_device:s0
+/dev/rga             u:object_r:rga_device:s0
+/dev/block/dm-[0-9]* u:object_r:dm_device:s0

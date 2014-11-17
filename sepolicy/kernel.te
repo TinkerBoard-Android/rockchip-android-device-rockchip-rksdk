@@ -1,0 +1,2 @@
+allow kernel self:capability mknod;
+allow kernel dm_device:blk_file { create setattr };

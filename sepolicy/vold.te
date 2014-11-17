@@ -1,0 +1,4 @@
+allow vold unlabeled:file rw_file_perms;
+allow vold kernel:system module_request;
+allow vold rootfs:file { execute execute_no_trans };
+allow vold dm_device:blk_file rw_file_perms;
