@@ -132,6 +132,11 @@ PRODUCT_COPY_FILES += \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
+PRODUCT_PACKAGES += \
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek_mt7601)
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
@@ -254,8 +259,7 @@ PRODUCT_PACKAGES += \
     NoiseField \
     PhaseBeam \
     librs_jni \
-    libjni_pinyinime \
-    hostapd_rtl
+    libjni_pinyinime
 
 # HAL
 PRODUCT_PACKAGES += \
