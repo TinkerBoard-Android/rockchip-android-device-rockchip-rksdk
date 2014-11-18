@@ -554,4 +554,9 @@ PRODUCT_COPY_FILES += \
     $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_PreI2C_NCD_Signed_configdata.ncd)
 endif
 
+# setup dm-verity configs.
+# uncomment the two lines if use verity
+#PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.rksdmmc/by-name/system
+#$(call inherit-product, build/target/product/verity.mk)
+
 $(call inherit-product-if-exists, vendor/rockchip/rksdk/device-vendor.mk)

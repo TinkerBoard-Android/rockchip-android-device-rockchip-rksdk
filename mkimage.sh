@@ -18,10 +18,7 @@ IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
 
-FSTYPE=`grep 'mtd@system' $OUT/root/init.$TARGET_HARDWARE.rc | head -n 1 | awk '{ print $2 }'`
-if [ "$FSTYPE" = "" ]; then
-       FSTYPE=`grep 'mtd@system' $OUT/root/init.rc | head -n 1 | awk '{ print $2 }'`
-fi
+FSTYPE=ext4
 echo system filesysystem is $FSTYPE
 
 BOARD_CONFIG=device/rockchip/rksdk/device.mk
