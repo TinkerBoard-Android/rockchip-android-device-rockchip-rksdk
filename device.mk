@@ -135,7 +135,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    dhcpcd.conf
 
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek_mt7601)
 ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
