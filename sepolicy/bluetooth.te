@@ -1,2 +1,3 @@
 # /sys/class/rfkill/rfkill0/state
 allow bluetooth sysfs:file write;
+allow bluetooth serial_device:chr_file rw_file_perms;
