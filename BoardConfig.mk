@@ -85,6 +85,7 @@ TARGET_USES_LOGD ?= true
 # Sepolicy
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
+        akmd.te \
         device.te \
         bluetooth.te \
         drmserver.te \
