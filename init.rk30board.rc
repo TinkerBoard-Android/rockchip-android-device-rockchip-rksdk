@@ -263,6 +263,7 @@ service akmd /system/bin/akmd
     user system
     group system
     oneshot
+    seclabel u:r:akmd:s0
 
 on property:sys.gmali.performance=ui
     start pat_ui
