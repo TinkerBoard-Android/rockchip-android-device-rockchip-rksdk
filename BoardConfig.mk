@@ -85,8 +85,9 @@ TARGET_USES_LOGD ?= true
 # Sepolicy
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
-        device.te \
         bluetooth.te \
+        debuggerd.te \
+        device.te \
         drmserver.te \
         file_contexts \
         genfs_contexts \
