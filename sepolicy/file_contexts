@@ -4,5 +4,6 @@
 /dev/rga             u:object_r:rga_device:s0
 /dev/block/dm-[0-9]* u:object_r:dm_device:s0
 /dev/vflash          u:object_r:vflash_device:s0
+/dev/timerirq        u:object_r:timer_device:s0
 
 /system/bin/akmd     u:object_r:akmd_exec:s0
