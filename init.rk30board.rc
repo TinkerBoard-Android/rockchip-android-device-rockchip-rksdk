@@ -118,10 +118,10 @@ on boot
     # backlight
     chown system system /sys/class/backlight/rk28_bl/brightness
     
-    # for hdmi timem out
-    chown root system /sys/class/graphics/fb0/blank
-    chmod 0664 /sys/class/graphics/fb0/blank
-    chmod 0664 /dev/graphics/fb0
+    # for hdmi
+    chown root system /sys/class/display/HDMI/enable
+    chown root system /sys/class/display/HDMI/mode
+    chown root system /sys/class/display/HDMI/scale
 
     chown root system /sys/class/graphics/fb0/bcsh
     chown root system /sys/class/graphics/fb0/dsp_lut
