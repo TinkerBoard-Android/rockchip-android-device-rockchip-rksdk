@@ -94,7 +94,18 @@ endif
 # Google applications
 ########################################################
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)),true)
-include vendor/google/VendorGoogle.mk
+PRODUCT_GOOGLE_PREBUILT_MODULES :=
+ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)),true)
+# For GalleryGoogle
+#PRODUCT_GOOGLE_PREBUILT_MODULES += GalleryGoogle
+#PRODUCT_GOOGLE_PREBUILT_MODULES += librsjni libjni_eglfence libjni_filtershow_filters
+# For Google Camera
+#PRODUCT_GOOGLE_PREBUILT_MODULES += GoogleCamera
+#PRODUCT_GOOGLE_PREBUILT_MODULES += libjni_mosaic libjni_tinyplanet libjpeg libnativehelper_compat
+include vendor/google/googleapp.mk
+else
+include vendor/google/gapps_kk_mini.mk
+endif
 endif
 
 ########################################################
