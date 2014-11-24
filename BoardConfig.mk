@@ -152,7 +152,7 @@ include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 include device/rockchip/rksdk/wifi_bt_common.mk
 
 # google apps
-BUILD_WITH_GOOGLE_MARKET ?= false
+BUILD_WITH_GOOGLE_MARKET ?= true
 
 # face lock
 BUILD_WITH_FACELOCK ?= false
