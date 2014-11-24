@@ -2,3 +2,4 @@ type ddr_device, dev_type;
 type rga_device, dev_type;
 type vflash_device, dev_type;
 type timer_device, dev_type;
+type vpu_device, dev_type;
