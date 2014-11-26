@@ -96,6 +96,7 @@ BOARD_SEPOLICY_UNION := \
         kernel.te \
         mediaserver.te \
         netd.te \
+	 rild.te \
         platform_app.te \
         shell.te \
         surfaceflinger.te \
