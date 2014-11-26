@@ -89,7 +89,6 @@ include device/rockchip/common/app/rkapk_312x.mk
 else
 include device/rockchip/common/app/rkapk.mk
 endif
-
 ########################################################
 # Google applications
 ########################################################
@@ -102,9 +101,9 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)),true)
 # For Google Camera
 #PRODUCT_GOOGLE_PREBUILT_MODULES += GoogleCamera
 #PRODUCT_GOOGLE_PREBUILT_MODULES += libjni_mosaic libjni_tinyplanet libjpeg libnativehelper_compat
-include vendor/google/googleapp.mk
+include vendor/google/products/gms.mk
 else
-include vendor/google/gapps_kk_mini.mk
+include vendor/google/products/gms_mini.mk
 endif
 endif
 
