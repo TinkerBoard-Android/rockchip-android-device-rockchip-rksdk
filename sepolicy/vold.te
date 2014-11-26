@@ -5,3 +5,4 @@ allow vold dm_device:blk_file rw_file_perms;
 allow vold system_prop:property_service set;
 allow vold self:capability { setuid setgid };
 allow vold fuse_device:chr_file getattr;
+allow vold proc:file rw_file_perms;
