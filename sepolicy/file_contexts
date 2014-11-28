@@ -13,3 +13,5 @@
 /dev/camsys_marvin   u:object_r:camera_device:s0
 
 /system/bin/akmd     u:object_r:akmd_exec:s0
+
+/metadata(/.*)?      u:object_r:metadata_file:s0

@@ -89,6 +89,7 @@ BOARD_SEPOLICY_UNION := \
         device.te \
         bluetooth.te \
         drmserver.te \
+        file.te \
         file_contexts \
         genfs_contexts \
         gpsd.te \
