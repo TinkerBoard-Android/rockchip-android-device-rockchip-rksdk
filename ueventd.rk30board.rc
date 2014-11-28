@@ -15,9 +15,9 @@
 
 /dev/ion                  0666   system     system
 /dev/galcore              0666   system     graphics
-/dev/video0               0660   system     camera
-/dev/video1               0660   system     camera
-/dev/video2               0660   system     camera
+/dev/video0               0660   media      camera
+/dev/video1               0660   media      camera
+/dev/video2               0660   media      camera
 /dev/pmem_cam             0660   system     camera
 /dev/vpu                  0660   system     system
 /dev/vpu_service          0666   system     system
@@ -79,7 +79,7 @@
 /dev/rknand_sys_storage   0660   system     system 
 
 # for Camera
-/dev/camsys_marvin        0664        system        system
+/dev/camsys_marvin        0664        media        camera
 
 #for ddr freq
 /dev/ddr_freq        0664        system        graphics
