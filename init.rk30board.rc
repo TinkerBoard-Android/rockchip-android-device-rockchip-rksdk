@@ -53,7 +53,7 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
-    mkdir /data/camera 0770 media camera
+    mkdir /data/camera 0775 media camera
   
     # AP6476 GPS permission
     chmod 755 /system/bin/glgps
