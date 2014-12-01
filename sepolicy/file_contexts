@@ -1,6 +1,7 @@
 /dev/ttyFIQ[0-9]*    u:object_r:serial_device:s0
 /dev/ttyUSB[0-9]*    u:object_r:tty_device:s0
 /dev/mali[0-9]       u:object_r:gpu_device:s0
+/dev/mali            u:object_r:gpu_device:s0
 /dev/ddr_freq        u:object_r:ddr_device:s0
 /dev/rga             u:object_r:rga_device:s0
 /dev/block/dm-[0-9]* u:object_r:dm_device:s0
@@ -15,3 +16,4 @@
 /system/bin/akmd     u:object_r:akmd_exec:s0
 
 /metadata(/.*)?      u:object_r:metadata_file:s0
+/dev/mma8452_daemon  u:object_r:sensors_device:s0
