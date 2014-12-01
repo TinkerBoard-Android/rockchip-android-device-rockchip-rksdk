@@ -104,7 +104,8 @@ BOARD_SEPOLICY_UNION := \
         shell.te \
         surfaceflinger.te \
         system_server.te \
-        vold.te
+        vold.te \
+        zygote.te
 
 
 # Recovery
