@@ -1,1 +1,2 @@
 type metadata_file, file_type;
+type camdata_file, file_type;

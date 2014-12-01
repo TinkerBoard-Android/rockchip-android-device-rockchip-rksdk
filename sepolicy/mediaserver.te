@@ -4,3 +4,5 @@ allow mediaserver system_prop:property_service set;
 allow mediaserver default_prop:property_service set;
 allow mediaserver video_device:chr_file rw_file_perms;
 allow mediaserver rga_device:chr_file rw_file_perms;
+allow mediaserver camdata_file:dir create_dir_perms;
+allow mediaserver camdata_file:file create_file_perms;
