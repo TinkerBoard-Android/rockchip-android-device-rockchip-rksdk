@@ -86,6 +86,7 @@ TARGET_USES_LOGD ?= true
 BOARD_SEPOLICY_DIRS := device/rockchip/rksdk/sepolicy
 BOARD_SEPOLICY_UNION := \
         akmd.te \
+        app.te \
         device.te \
         bluetooth.te \
         drmserver.te \
@@ -103,7 +104,6 @@ BOARD_SEPOLICY_UNION := \
         shell.te \
         surfaceflinger.te \
         system_server.te \
-        untrusted_app.te \
         vold.te
 
 
