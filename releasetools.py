@@ -18,22 +18,16 @@
 import common
 import re
 
-from custom_log import D
-from custom_log import I
-from custom_log import W
 
 def FullOTA_Assertions(info):
   AddBootloaderAssertion(info, info.input_zip)
 
-
 def IncrementalOTA_Assertions(info):
   AddBootloaderAssertion(info, info.target_zip)
-
 
 def AddBootloaderAssertion(info, input_zip):
   android_info = input_zip.read("OTA/android-info.txt")
   m = re.search(r"require\s+version-bootloader\s*=\s*(\S+)", android_info)
-  D("m : " +  str(m) )
   if m:
     bootloaders = m.group(1).split("|")
     if "*" not in bootloaders:
@@ -79,7 +73,7 @@ def FullOTA_InstallEnd(info):
     print "write uboot now..."
     InstallUboot(uboot, info.input_zip, info)
   except KeyError:
-    W("warning: no uboot.img in input target_files; not flashing uboot")
+    print "warning: no uboot.img in input target_files; not flashing uboot"
 
   try:
     charge = info.input_zip.read("charge.img")
@@ -87,7 +81,7 @@ def FullOTA_InstallEnd(info):
     InstallCharge(charge, info.input_zip, info)
   except KeyError:
     # print "info: no charge img; ignore it."
-    I("no charge img; ignore it.")
+    print "no charge img; ignore it."
 
 #**************************************************************************************************
 #resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
@@ -104,8 +98,8 @@ def FullOTA_InstallEnd(info):
     loader_bin = info.input_zip.read("LOADER/RKLoader.img")
   except KeyError:
     # print "warning: no rk loader bin in input target_files; not flashing loader"
-    W("no rk loader bin in input target_files; not flashing loader")
-    I("to add clear misc command")
+    print "no rk loader bin in input target_files; not flashing loader"
+    print "to add clear misc command"
     info.script.ClearMiscCommand()
     return
 
