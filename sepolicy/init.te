@@ -1,1 +1,5 @@
 allow init self:capability sys_module;
+
+recovery_only(`
+  domain_trans(init, rootfs, busybox)
+')
