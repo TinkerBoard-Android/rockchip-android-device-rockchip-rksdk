@@ -127,8 +127,8 @@ RECOVERY_BOARD_ID ?= false
 
 # ------------ #
 # radical_update
-# RECOVERY_WITH_RADICAL_UPDATE ?= false
-RECOVERY_WITH_RADICAL_UPDATE ?= true
+RECOVERY_WITH_RADICAL_UPDATE ?= false
+# RECOVERY_WITH_RADICAL_UPDATE ?= true
 
 ifeq ($(RECOVERY_WITH_RADICAL_UPDATE),true)
 # cert to verify radical_update_pkg.
