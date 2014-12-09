@@ -24,7 +24,7 @@
 # Choose a product to build for.  Look in the products directory for ones
 # that work.
 ifndef TARGET_PRODUCT
-TARGET_PRODUCT:=rksdk
+TARGET_PRODUCT:=common
 endif
 
 # Choose a variant to build.  If you don't pick one, the default is eng.

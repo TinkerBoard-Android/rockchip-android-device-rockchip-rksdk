@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/rksdk.mk
+	$(LOCAL_DIR)/common.mk

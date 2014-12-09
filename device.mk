@@ -13,10 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-
-$(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinstall)
-$(shell python device/rockchip/rksdk/auto_generator.py $(TARGET_PRODUCT) preinstall_del)
+$(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_PRODUCT) preinstall)
+$(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_PRODUCT) preinstall_del)
 -include device/rockchip/$(TARGET_PRODUCT)/preinstall/preinstall.mk
 -include device/rockchip/$(TARGET_PRODUCT)/preinstall_del/preinstall.mk
 
@@ -47,8 +45,6 @@ endif
 PRODUCT_PACKAGES += \
     fsck.f2fs mkfs.f2fs
 
-
-
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
@@ -77,55 +73,15 @@ include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 endif
 endif
 
-PRODUCT_PACKAGES += WifiDisplay
-PRODUCT_PACKAGES += Email
-PRODUCT_PACKAGES += StressTest
-
-#########################################################
-# Copy proprietary apk
-#########################################################
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk312x)
-include device/rockchip/common/app/rkapk_312x.mk
-else
-include device/rockchip/common/app/rkapk.mk
-endif
-########################################################
-# Google applications
-########################################################
-ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)),true)
-PRODUCT_GOOGLE_PREBUILT_MODULES :=
-ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)),true)
-# For GalleryGoogle
-#PRODUCT_GOOGLE_PREBUILT_MODULES += GalleryGoogle
-#PRODUCT_GOOGLE_PREBUILT_MODULES += librsjni libjni_eglfence libjni_filtershow_filters
-# For Google Camera
-#PRODUCT_GOOGLE_PREBUILT_MODULES += GoogleCamera
-#PRODUCT_GOOGLE_PREBUILT_MODULES += libjni_mosaic libjni_tinyplanet libjpeg libnativehelper_compat
-include vendor/google/products/gms.mk
-else
-include vendor/google/products/gms_mini.mk
-endif
-endif
-
-########################################################
-#rksu
-########################################################
-ifeq ($(strip $(BUILD_WITH_RKSU)),true)
 PRODUCT_COPY_FILES += \
-	device/rockchip/rksdk/rksu:system/xbin/rksu
-endif
-
-PRODUCT_COPY_FILES += \
-    system/core/rootdir/init.rc:root/init.rc \
-    device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
-    device/rockchip/rksdk/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/rksdk/media_profiles_default.xml:system/etc/media_profiles_default.xml \
-    device/rockchip/rksdk/alarm_filter.xml:system/etc/alarm_filter.xml \
-    device/rockchip/rksdk/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
-    device/rockchip/rksdk/20050030_pwm.kl:system/usr/keylayout/20050030_pwm.kl \
+    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
+    device/rockchip/common/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/common/media_profiles_default.xml:system/etc/media_profiles_default.xml \
+    device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
+    device/rockchip/common/20050030_pwm.kl:system/usr/keylayout/20050030_pwm.kl \
 
 PRODUCT_COPY_FILES += \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
@@ -137,23 +93,19 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
-ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek_mt7601)
-ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
-ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
-ifneq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), Espressif)
+
+ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
 PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/init.connectivity.rc:root/init.connectivity.rc
+    $(LOCAL_PATH)/init.connectivity.rc:root/init.connectivity.rc
 endif
-endif
-endif
-endif
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
 
 
 PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown \
-    device/rockchip/rksdk/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc
+    $(LOCAL_PATH)/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown \
+    $(LOCAL_PATH)/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -163,60 +115,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libwebrtc_audio_coding
 
-
-include hardware/rockchip/camera/Config/rk32xx_camera.mk
-include hardware/rockchip/camera/Config/user.mk
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
-include device/rockchip/common/gpu/PVR540.mk
-endif
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
-include device/rockchip/common/gpu/Mali-400MP.mk
-endif
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), Mali-T760)
-include device/rockchip/common/gpu/Mali-T760.mk
-endif
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk2928)
-include device/rockchip/common/vpu/rk2928_vpu.mk
-include device/rockchip/common/nand/rk2928_nand.mk
-else
-include device/rockchip/common/ipp/rk29_ipp.mk
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
-include device/rockchip/common/vpu/rk3026_vpu.mk
-include device/rockchip/common/nand/rk3026_nand.mk
-else
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3036)
-include device/rockchip/common/nand/rk3036_nand.mk
-include device/rockchip/common/vpu/rk30_vpu.mk
-else
-include device/rockchip/common/vpu/rk30_vpu.mk
-include device/rockchip/common/nand/rk30_nand.mk
-endif
-endif
-endif
-
-include device/rockchip/common/wifi/rk30_wifi.mk
-include device/rockchip/common/ion/rk30_ion.mk
-include device/rockchip/common/bin/rk30_bin.mk
-include device/rockchip/common/webkit/rk31_webkit.mk
-
-ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
-    include device/rockchip/common/bluetooth/rk30_bt.mk
-endif
-
-include device/rockchip/common/gps/rk30_gps.mk
-include device/rockchip/common/app/rkupdateservice.mk
-include device/rockchip/common/app/rkexpe.mk
-include device/rockchip/common/app/rkUserExperienceService.mk
-#include vendor/google/chrome.mk
-include device/rockchip/common/etc/adblock.mk
-
-# uncomment the line bellow to enable phone functions
-include device/rockchip/common/phone/rk30_phone.mk
-
+$(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
+$(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
@@ -244,15 +144,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
 
-#include device/rockchip/common/features/rk-core.mk
-#include device/rockchip/common/features/rk-camera.mk
-#include device/rockchip/common/features/rk-camera-front.mk
-include device/rockchip/common/features/rk-gms.mk
-
-ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
-include device/rockchip/common/app/rkbook.mk
-endif
-
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
@@ -273,26 +164,12 @@ PRODUCT_PACKAGES += \
     akmd 
 
 # iep
-BUILD_IEP := false
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3288)
-    BUILD_IEP := true
-endif
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3190)
-    BUILD_IEP := true
-endif
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3026)
-    BUILD_IEP := true
-endif
-
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk312x)
-	BUILD_IEP := true
-endif
-
-ifeq ($(BUILD_IEP), true)
+ifneq ($(filter rk3190 rk3026 rk3288 rk312x, $(strip $(TARGET_BOARD_PLATFORM))), )
+BUILD_IEP := true
 PRODUCT_PACKAGES += \
     libiep
+else
+BUILD_IEP := false
 endif
 
 # charge
@@ -343,10 +220,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=false \
     dalvik.vm.jniopts=warnonly
 
-ifeq ($(strip $(BUILD_WITH_CRYPTO)),true)
-    PRODUCT_PROPERTY_OVERRIDES += ro.crypto.state=unencrypted
-endif
-
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
 else
@@ -373,32 +246,30 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # build with UMS? CDROM?
 ########################################################
 ifeq ($(strip $(BUILD_WITH_UMS)),true)
-	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.factory.hasUMS=true \
-		persist.sys.usb.config=mass_storage,adb \
- 		testing.mediascanner.skiplist = /mnt/internal_sd/Android/
+PRODUCT_PROPERTY_OVERRIDES +=               \
+    ro.factory.hasUMS=true                  \
+    persist.sys.usb.config=mass_storage,adb \
+    testing.mediascanner.skiplist = /mnt/internal_sd/Android/
 
-
-	PRODUCT_COPY_FILES += \
-    		device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).hasUMS.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.$(TARGET_BOARD_HARDWARE).hasUMS.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
 else
 ifeq ($(strip $(BUILD_WITH_CDROM)),true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.factory.hasUMS=cdrom \
-        ro.factory.cdrom=$(BUILD_WITH_CDROM_PATH) \
-        persist.sys.usb.config=mass_storage,adb 
-        
+PRODUCT_PROPERTY_OVERRIDES +=                 \
+    ro.factory.hasUMS=cdrom                   \
+    ro.factory.cdrom=$(BUILD_WITH_CDROM_PATH) \
+    persist.sys.usb.config=mass_storage,adb 
 
-    PRODUCT_COPY_FILES += \
-        device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).hasCDROM.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.$(TARGET_BOARD_HARDWARE).hasCDROM.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
 else
-	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.factory.hasUMS=false \
-		persist.sys.usb.config=mtp,adb \
-       		testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
+PRODUCT_PROPERTY_OVERRIDES +=       \
+    ro.factory.hasUMS=false         \
+    persist.sys.usb.config=mtp,adb  \
+    testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
 
-        PRODUCT_COPY_FILES += \
-                device/rockchip/rksdk/init.$(TARGET_BOARD_HARDWARE).hasUMS.false.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.$(TARGET_BOARD_HARDWARE).hasUMS.false.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
 endif
 endif
 
@@ -406,50 +277,47 @@ endif
 # build with drmservice
 ########################################################
 ifeq ($(strip $(BUILD_WITH_DRMSERVICE)),true)
-	PRODUCT_PACKAGES += \
-	               drmservice
+PRODUCT_PACKAGES += drmservice
 endif
-
-
 
 ########################################################
 # this product has GPS or not
 ########################################################
 ifeq ($(strip $(BOARD_HAS_GPS)),true)
-	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.factory.hasGPS=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.factory.hasGPS=true
 else
-	PRODUCT_PROPERTY_OVERRIDES += \
-                ro.factory.hasGPS=false
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.factory.hasGPS=false
 endif
 
 ########################################################
 # this product has Ethernet or not
 ########################################################
 ifneq ($(strip $(BOARD_HS_ETHERNET)),true)
-    PRODUCT_PROPERTY_OVERRIDES += ro.rk.ethernet_enable=false
+PRODUCT_PROPERTY_OVERRIDES += ro.rk.ethernet_enable=false
 endif
 
 #######################################################
 #build system support ntfs?
 ########################################################
 ifeq ($(strip $(BOARD_IS_SUPPORT_NTFS)),true)
-     PRODUCT_PROPERTY_OVERRIDES += \
-         ro.factory.storage_suppntfs=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.factory.storage_suppntfs=true
 else
-     PRODUCT_PROPERTY_OVERRIDES += \
-         ro.factory.storage_suppntfs=false
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.factory.storage_suppntfs=false
 endif
 
 ########################################################
 # build without barrery
 ########################################################
-ifeq ($(strip $(BUILD_WITHOUT_BATTERY)),true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.factory.without_battery=true
+ifeq ($(strip $(BUILD_WITHOUT_BATTERY)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.factory.without_battery=true
 else
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.factory.without_battery=false
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.factory.without_battery=false
 endif
  
 # NTFS support
@@ -463,61 +331,53 @@ PRODUCT_PACKAGES += \
     librecovery_ui_$(TARGET_PRODUCT)
 
 # for bugreport
-ifneq ($(TARGET_BUILD_VARIANT),user)
-    PRODUCT_COPY_FILES += device/rockchip/rksdk/bugreport.sh:system/bin/bugreport.sh
+ifneq ($(TARGET_BUILD_VARIANT), user)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bugreport.sh:system/bin/bugreport.sh
 endif
 
-
-ifeq ($(strip $(BOARD_BOOT_READAHEAD)),true)
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/proprietary/readahead/readahead:root/sbin/readahead \
-        $(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
+ifeq ($(strip $(BOARD_BOOT_READAHEAD)), true)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/proprietary/readahead/readahead:root/sbin/readahead \
+    $(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
 endif
 
 #whtest for bin
 PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/whtest.sh:system/bin/whtest.sh
+    $(LOCAL_PATH)/whtest.sh:system/bin/whtest.sh
 
 # for preinstall
 PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
+    $(LOCAL_PATH)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
     
-# for data clone
-include device/rockchip/common/data_clone/packdata.mk
+$(call inherit-product-if-exists, external/wlan_loader/wifi-firmware.mk)
 
-#getbootmode.sh for stresstest
-PRODUCT_COPY_FILES += \
-    device/rockchip/rksdk/getbootmode.sh:system/bin/getbootmode.sh \
-
-$(call inherit-product, external/wlan_loader/wifi-firmware.mk)
-
-ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
-ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), combo_mt66xx)
-$(call inherit-product, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
+ifneq ($(filter MediaTek combo_mt66xx, $(strip $(BOARD_CONNECTIVITY_MODULE))), )
+$(call inherit-product-if-exists, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
 endif
+
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), mt5931_6622)
-$(call inherit-product, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
-endif
+$(call inherit-product-if-exists, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
 endif
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
-include hardware/realtek/wlan/config/config-rtl.mk
+$(call inherit-product-if-exists, hardware/realtek/wlan/config/config-rtl.mk)
 endif
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), Espressif)
-include hardware/esp/wlan/config/config-espressif.mk
+$(call inherit-product-if-exists, hardware/esp/wlan/config/config-espressif.mk)
 endif
 
 # Copy manifest to system/
 ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
-    PRODUCT_COPY_FILES += \
-        manifest.xml:system/manifest.xml
+PRODUCT_COPY_FILES += \
+    manifest.xml:system/manifest.xml
 endif
 
 # Copy init.usbstorage.rc to root
 ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
-    PRODUCT_COPY_FILES += \
-        device/rockchip/rksdk/init.usbstorage.rc:root/init.usbstorage.rc
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.usbstorage.rc:root/init.usbstorage.rc
 endif
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_nfc)
@@ -530,9 +390,9 @@ PRODUCT_PACKAGES += \
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/rockchip/rksdk/nfc/nfcee_access.xml
+NFCEE_ACCESS_PATH := $(LOCAL_PATH)/nfc/nfcee_access.xml
 else
-    NFCEE_ACCESS_PATH := device/rockchip/rksdk/nfc/nfcee_access_debug.xml
+NFCEE_ACCESS_PATH := $(LOCAL_PATH)/nfc/nfcee_access_debug.xml
 endif
 
 copyNfcFirmware = $(subst XXXX,$(strip $(1)),hardware/broadcom/nfc/firmware/XXXX:/system/vendor/firmware/XXXX)
@@ -542,11 +402,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
-    device/rockchip/rksdk/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    device/rockchip/rksdk/nfc/libnfc-brcm-20791b03.conf:system/etc/libnfc-brcm-20791b03.conf \
-    device/rockchip/rksdk/nfc/libnfc-brcm-20791b04.conf:system/etc/libnfc-brcm-20791b04.conf \
-    device/rockchip/rksdk/nfc/libnfc-brcm-20791b05.conf:system/etc/libnfc-brcm-20791b05.conf \
-    device/rockchip/rksdk/nfc/libnfc-brcm-43341b00.conf:system/etc/libnfc-brcm-43341b00.conf \
+    $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/nfc/libnfc-brcm-20791b03.conf:system/etc/libnfc-brcm-20791b03.conf \
+    $(LOCAL_PATH)/nfc/libnfc-brcm-20791b04.conf:system/etc/libnfc-brcm-20791b04.conf \
+    $(LOCAL_PATH)/nfc/libnfc-brcm-20791b05.conf:system/etc/libnfc-brcm-20791b05.conf \
+    $(LOCAL_PATH)/nfc/libnfc-brcm-43341b00.conf:system/etc/libnfc-brcm-43341b00.conf \
     $(call copyNfcFirmware, BCM20791B3_002.004.010.0161.0000_Generic_I2CLite_NCD_Signed_configdata.ncd) \
     $(call copyNfcFirmware, BCM20791B3_002.004.010.0161.0000_Generic_PreI2C_NCD_Signed_configdata.ncd) \
     $(call copyNfcFirmware, BCM20791B5_002.006.013.0011.0000_Generic_I2C_NCD_Unsigned_configdata.ncd) \
@@ -559,4 +419,4 @@ endif
 #PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.rksdmmc/by-name/system
 #$(call inherit-product, build/target/product/verity.mk)
 
-$(call inherit-product-if-exists, vendor/rockchip/rksdk/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/rockchip/common/device-vendor.mk)
