@@ -164,8 +164,8 @@ PRODUCT_PACKAGES += \
     libwebrtc_audio_coding
 
 
-include hardware/rk29/camera/Config/rk32xx_camera.mk
-include hardware/rk29/camera/Config/user.mk
+include hardware/rockchip/camera/Config/rk32xx_camera.mk
+include hardware/rockchip/camera/Config/user.mk
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
 include device/rockchip/common/gpu/PVR540.mk
