@@ -161,6 +161,7 @@ PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_HARDWARE) \
     camera.$(TARGET_BOARD_HARDWARE) \
     Camera \
+	libvpu \
     akmd 
 
 # iep
