@@ -21,7 +21,7 @@ mkdir -p $IMAGE_PATH
 FSTYPE=ext4
 echo system filesysystem is $FSTYPE
 
-BOARD_CONFIG=device/rockchip/rksdk/device.mk
+BOARD_CONFIG=device/rockchip/common/device.mk
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
