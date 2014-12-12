@@ -420,8 +420,8 @@ endif
 #PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.rksdmmc/by-name/system
 #$(call inherit-product, build/target/product/verity.mk)
 
-ifeq ($(strip BUILD_WITH_GOOGLE_MARKET), true)
-ifeq ($(strip BUILD_WITH_GOOGLE_MARKET_ALL), true)
+ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 else
 $(call inherit-product-if-exists, vendor/google/products/gms_mini.mk)
