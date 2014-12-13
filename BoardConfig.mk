@@ -38,6 +38,8 @@ BOARD_USE_LCDC_COMPOSER ?= false
 GRAPHIC_MEMORY_PROVIDER ?= ump
 USE_OPENGL_RENDERER ?= true
 
+DEVICE_HAVE_LIBRKVPU ?= true
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/Mali400/lib/arm/egl.cfg
 endif
