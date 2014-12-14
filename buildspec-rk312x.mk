@@ -35,7 +35,7 @@ endif
 # for debugging.  Eng has lots of extra tools for development.
 ifndef TARGET_BUILD_VARIANT
 #TARGET_BUILD_VARIANT:=user
-#TARGET_BUILD_VARIANT:=userdebug
+TARGET_BUILD_VARIANT:=userdebug
 #TARGET_BUILD_VARIANT:=eng
 endif
 
