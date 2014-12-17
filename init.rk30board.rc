@@ -308,3 +308,8 @@ service gpsd  /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
     disabled
     user root
     group system
+
+#stresstest
+service getbootmode /system/bin/getbootmode.sh
+    disabled
+        oneshot
