@@ -74,8 +74,9 @@ endif
 endif
 
 PRODUCT_COPY_FILES += \
+	device/rockchip/common/init.rockchip.rc:root/init.rockchip.rc \
     device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+    device/rockchip/common/init.rockchip.usb.rc:root/init.rockchip.usb.rc \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
     device/rockchip/common/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
@@ -254,7 +255,7 @@ PRODUCT_PROPERTY_OVERRIDES +=               \
     testing.mediascanner.skiplist = /mnt/internal_sd/Android/
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.$(TARGET_BOARD_HARDWARE).hasUMS.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+    $(LOCAL_PATH)/init.rockchip.hasUMS.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
 else
 ifeq ($(strip $(BUILD_WITH_CDROM)),true)
 PRODUCT_PROPERTY_OVERRIDES +=                 \
@@ -263,7 +264,7 @@ PRODUCT_PROPERTY_OVERRIDES +=                 \
     persist.sys.usb.config=mass_storage,adb 
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.$(TARGET_BOARD_HARDWARE).hasCDROM.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+    $(LOCAL_PATH)/init.rockchip.hasCDROM.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
 else
 PRODUCT_PROPERTY_OVERRIDES +=       \
     ro.factory.hasUMS=false         \
@@ -271,7 +272,7 @@ PRODUCT_PROPERTY_OVERRIDES +=       \
     testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.$(TARGET_BOARD_HARDWARE).hasUMS.false.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+    $(LOCAL_PATH)/init.rockchip.hasUMS.false.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
 endif
 endif
 

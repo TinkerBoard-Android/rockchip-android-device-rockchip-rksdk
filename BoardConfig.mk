@@ -37,11 +37,17 @@ TARGET_BOARD_PLATFORM_GPU ?= MaliT760
 BOARD_USE_LCDC_COMPOSER ?= false
 GRAPHIC_MEMORY_PROVIDER ?= ump
 USE_OPENGL_RENDERER ?= true
+TARGET_DISABLE_TRIPLE_BUFFERING ?= false
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK ?= false
 
 DEVICE_HAVE_LIBRKVPU ?= true
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/Mali400/lib/arm/egl.cfg
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali450)
+BOARD_EGL_CFG := vendor/rockchip/common/gpu/Mali450/lib/x86/egl.cfg
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), Mali-T760)
@@ -148,6 +154,9 @@ BUILD_WITH_CRYPTO := false
 BOARD_USES_GENERIC_AUDIO ?= true
 
 # Wifi&Bluetooth
+BOARD_HAVE_BLUETOOTH ?= true
+BLUETOOTH_USE_BPLUS ?= false
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
 include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 include device/rockchip/common/wifi_bt_common.mk
 
