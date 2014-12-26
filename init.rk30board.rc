@@ -1,7 +1,7 @@
 import init.${ro.hardware}.bootmode.${ro.bootmode}.rc
 import init.${ro.hardware}.environment.rc
 import init.rockchip.rc
-
+import init.connectivity.rc
 
 on post-fs
     insmod /system/lib/modules/ump.ko

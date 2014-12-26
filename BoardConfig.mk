@@ -22,8 +22,10 @@ TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 
 TARGET_BOARD_PLATFORM ?= rk3288
+TARGET_BOARD_HARDWARE ?= rk30board
 
 # CPU feature configration
+ifeq ($(strip $(TARGET_BOARD_HARDWARE)), rk30board)
 TARGET_ARCH ?= arm
 TARGET_ARCH_VARIANT ?= armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER ?= true
@@ -31,6 +33,12 @@ TARGET_CPU_ABI ?= armeabi-v7a
 TARGET_CPU_ABI2 ?= armeabi
 TARGET_CPU_VARIANT ?= cortex-a9
 TARGET_CPU_SMP ?= true
+else
+TARGET_ARCH ?= x86
+TARGET_ARCH_VARIANT ?= silvermont
+TARGET_CPU_ABI ?= x86
+TARGET_CPU_SMP ?= true
+endif
 
 # GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= MaliT760
@@ -58,7 +66,6 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
 BOARD_EGL_CFG ?= vendor/rockchip/common/gpu/PVR540/egl.cfg
 endif
 
-TARGET_BOARD_HARDWARE ?= rk30board
 TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
 BOARD_USE_LOW_MEM ?= false

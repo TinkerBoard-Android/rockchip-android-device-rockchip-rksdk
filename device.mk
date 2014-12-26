@@ -76,10 +76,10 @@ endif
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/init.rockchip.rc:root/init.rockchip.rc \
     device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/common/init.rockchip.usb.rc:root/init.rockchip.usb.rc \
+    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.rockchip.usb.rc \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
-    device/rockchip/common/ueventd.$(TARGET_BOARD_HARDWARE).rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/common/ueventd.rockchip.rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/common/media_profiles_default.xml:system/etc/media_profiles_default.xml \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/20050030_pwm.kl:system/usr/keylayout/20050030_pwm.kl \
