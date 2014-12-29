@@ -214,7 +214,7 @@ BOARD_HAS_GPS ?= false
 BOARD_HS_ETHERNET ?= true
 
 # manifest
-SYSTEM_WITH_MANIFEST ?= false
+SYSTEM_WITH_MANIFEST ?= true
 
 # no battery
 BUILD_WITHOUT_BATTERY ?= false
