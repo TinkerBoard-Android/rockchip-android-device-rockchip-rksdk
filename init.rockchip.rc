@@ -153,6 +153,7 @@ on property:ro.factory.hasUMS=true
     symlink /mnt/internal_sd /sdcard
     symlink /mnt/internal_sd /mnt/sdcard
     symlink /mnt/internal_sd /storage/sdcard0
+    symlink /mnt/internal_sd /storage/emulated/legacy
     mount rootfs rootfs / ro remount
     stop sdcard
 
