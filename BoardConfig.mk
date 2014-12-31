@@ -164,7 +164,7 @@ BOARD_USES_GENERIC_AUDIO ?= true
 BOARD_HAVE_BLUETOOTH ?= true
 BLUETOOTH_USE_BPLUS ?= false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
-include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
+-include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 include device/rockchip/common/wifi_bt_common.mk
 
 # google apps
