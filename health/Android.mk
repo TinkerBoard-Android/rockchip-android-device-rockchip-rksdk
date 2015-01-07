@@ -19,7 +19,7 @@ LOCAL_C_INCLUDES := system/core/healthd
 
 LOCAL_SRC_FILES := healthd-rockchip.cpp
 
-LOCAL_MODULE := libhealthd.$(TARGET_PRODUCT)
+LOCAL_MODULE := libhealthd.$(TARGET_DEVICE)
 
 LOCAL_MODULE_TAGS := optional
 
