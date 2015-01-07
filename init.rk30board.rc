@@ -102,4 +102,7 @@ on property:ro.boot.baseband=N/A
     setprop ro.radio.noril true
     stop ril-daemon
 
+service drmservice /system/bin/drmservice
+        class main
+        oneshot
 
