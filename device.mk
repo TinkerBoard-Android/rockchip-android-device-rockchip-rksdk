@@ -33,12 +33,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00
 
-# This ensures the needed build tools are available.
-# TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
-ifeq ($(HOST_OS),linux)
-TARGET_USERIMAGES_USE_F2FS := true
-endif
-
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     fsck.f2fs mkfs.f2fs
