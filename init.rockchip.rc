@@ -1,6 +1,5 @@
-import init.rockchip.usb.rc
+import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.environment.rc
-import init.connectivity.rc
 
 on early-init
     export SECOND_VOLUME_STORAGE /mnt/external_sd

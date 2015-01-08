@@ -33,8 +33,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rksdk.version=RK30_ANDROID$(PLATFORM_VERSION)-SDK-v1.00.00
 
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-
 # This ensures the needed build tools are available.
 # TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
 ifeq ($(HOST_OS),linux)
@@ -76,7 +74,7 @@ endif
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/init.rockchip.rc:root/init.rockchip.rc \
     device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.rockchip.usb.rc \
+    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
     device/rockchip/common/ueventd.rockchip.rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
@@ -101,12 +99,12 @@ PRODUCT_COPY_FILES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/audio_policy_$(TARGET_BOARD_HARDWARE).conf:system/etc/audio_policy.conf
 
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.unknown \
-    $(LOCAL_PATH)/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc:root/fstab.$(TARGET_BOARD_HARDWARE).bootmode.emmc
+    $(LOCAL_PATH)/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+    $(LOCAL_PATH)/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -202,8 +200,7 @@ PRODUCT_PACKAGES += \
     mke2fs \
     e2fsck \
     tune2fs \
-    resize2fs \
-    mkdosfs
+    resize2fs
 
 # audio lib
 PRODUCT_PACKAGES += \
@@ -379,10 +376,10 @@ PRODUCT_COPY_FILES += \
 endif
 
 # Copy init.usbstorage.rc to root
-ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.usbstorage.rc:root/init.usbstorage.rc
-endif
+#ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/init.usbstorage.rc:root/init.usbstorage.rc
+#endif
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_nfc)
 #NFC packages

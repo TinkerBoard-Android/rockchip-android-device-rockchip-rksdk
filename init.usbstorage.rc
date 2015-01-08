@@ -1,4 +1,0 @@
-on init
-    # Directory for multi usb storage
-    mkdir /mnt/usb_storage 0700 root system
-    mount tmpfs tmpfs /mnt/usb_storage mode=0555,uid=1013,gid=1023
