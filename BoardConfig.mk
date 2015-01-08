@@ -74,7 +74,7 @@ BOARD_USE_LOW_MEM ?= false
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
 TARGET_PROVIDES_INIT_RC ?= false
-BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_DEVICE) libhealthd.$(TARGET_DEVICE)
+BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
 
 //MAX-SIZE=512M, for generate out/.../system.img
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
@@ -129,7 +129,7 @@ BOARD_HAS_FLIPPED_SCREEN ?= false
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_ROCKCHIP_PCBATEST ?= false
-TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_DEVICE)
+TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_PRODUCT)
 TARGET_USERIMAGES_USE_EXT4 ?= true
 TARGET_USERIMAGES_USE_F2FS ?= false
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE ?= ext4
@@ -168,8 +168,8 @@ BOARD_USES_GENERIC_AUDIO ?= true
 BOARD_HAVE_BLUETOOTH ?= true
 BLUETOOTH_USE_BPLUS ?= false
 BOARD_HAVE_BLUETOOTH_BCM ?= false
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_DEVICE)/bluetooth
--include device/rockchip/$(TARGET_DEVICE)/wifi_bt.mk
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_PRODUCT)/bluetooth
+-include device/rockchip/$(TARGET_PRODUCT)/wifi_bt.mk
 include device/rockchip/common/wifi_bt_common.mk
 
 # google apps
