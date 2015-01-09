@@ -54,7 +54,7 @@ on boot
     chown bluetooth net_bt_stack /data/misc/bluetooth
 
     # power down interface
-    write /sys/class/rfkill/rfkill0/state 0
+    # write /sys/class/rfkill/rfkill0/state 0
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
