@@ -20,8 +20,8 @@ $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_PRODUCT) preinstall_del)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
-PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi xxhdpi
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 
 ########################################################
 # Kernel
