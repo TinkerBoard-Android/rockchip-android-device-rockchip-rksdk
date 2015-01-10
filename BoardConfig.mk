@@ -114,7 +114,9 @@ BOARD_SEPOLICY_UNION ?=     \
         rild.te             \
         shell.te            \
         surfaceflinger.te   \
+        system_app.te       \
         system_server.te    \
+        uncrypt.te          \
         vold.te             \
         zygote.te
 
