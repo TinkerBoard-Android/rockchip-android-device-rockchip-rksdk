@@ -17,6 +17,7 @@ on fs
 on init
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
 on boot
+	write /sys/class/android_usb/android0/f_mass_storage/inquiry_string $ro.product.usbfactory
 
 # Configurations specifically added (or modified) for Intel Mobile Communications
 # ===============================================================================
@@ -132,6 +133,29 @@ on property:sys.usb.config=rndis
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
 
+# 0x8087:0x093A	
+# --------------------------------------------------
+
+on property:sys.usb.config=mass_storage
+	write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 8087
+    write /sys/class/android_usb/android0/idProduct 093A
+    write /sys/class/android_usb/android0/functions mass_storage,acm
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+# 0x8087:0x093B
+#---------------------------------------------------
+on property:sys.usb.config=mass_storage,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 8087
+    write /sys/class/android_usb/android0/idProduct 093B
+    write /sys/class/android_usb/android0/functions mass_storage,adb,acm
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
+
 on charger
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 8087
@@ -140,4 +164,5 @@ on charger
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state ${sys.usb.config}
+
 
