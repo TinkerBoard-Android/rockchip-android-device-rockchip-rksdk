@@ -140,20 +140,6 @@ RECOVERY_UPDATEIMG_RSA_CHECK ?= false
 RECOVERY_BOARD_ID ?= false
 # RECOVERY_BOARD_ID ?= true
 
-# ------------ #
-# radical_update
-RECOVERY_WITH_RADICAL_UPDATE ?= false
-# RECOVERY_WITH_RADICAL_UPDATE ?= true
-
-ifeq ($(RECOVERY_WITH_RADICAL_UPDATE),true)
-# cert to verify radical_update_pkg.
-RADICAL_UPDATE_CERT := $(TARGET_RELEASETOOLS_EXTENSIONS)/radical_update/certs/radical_update.x509.pem
-else
-RADICAL_UPDATE_CERT :=
-endif
-# ------------ #
-
-
 # for widevine drm
 BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
 

@@ -18,3 +18,5 @@
 /metadata(/.*)?      u:object_r:metadata_file:s0
 /dev/mma8452_daemon  u:object_r:sensors_device:s0
 /data/camera(/.*)?   u:object_r:camdata_file:s0
+
+/radical_update(/.*)? u:object_r:ru_file:s0
