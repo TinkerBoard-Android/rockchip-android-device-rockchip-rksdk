@@ -8,7 +8,7 @@ import /init.${ro.hardware}.environment.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug mode=0755
-    setprop persist.tool_enable 1
+    #setprop persist.tool_enable 0
     
 	#houdini
     mount binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc
@@ -37,8 +37,14 @@ on property:init.svc.setup_fs_nvm=stopped
 
 on property:persist.tool_enable=1
     start ipcsd
-
+    start phonetool_btapp
 on post-fs-data
+    chown root root /sys/devices/3c000000.vmodem/modem_state
+    chmod 777 /sys/devices/3c000000.vmodem/modem_state
+    chown root root /sys/bus/platform/drivers/vmodem/3c000000.vmodem/modem_state
+    chmod 777 /sys/bus/platform/drivers/vmodem/3c000000.vmodem/modem_state
+    mkdir /data/rpcd
+    chmod 777 /data/rpcd
     mkdir /data/media 0770 media_rw media_rw
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     mkdir /data/fmd 0770 root root
@@ -267,6 +273,10 @@ service ipcsd /system/bin/ipcsd --apint=UDSOCKS_,gateway --ext=TTY,/dev/ttyGS2 -
     user root
     group root
 
+service rpcServer /system/bin/rpcServer
+    class main
+    user root
+
 service setup_fs_nvm /system/bin/setup_fs_nvm /dev/block/platform/soc0/e0000000.noc/by-name/ImcPartID076 /nvm_fs_partition
     class core
     user root
@@ -279,9 +289,17 @@ service nvm_uagent /system/bin/nvm_useragent
     user root
     group root
 
+service rpcNotifier /system/bin/rpcNotifier
+    class main
+    user root
+
 service rpc-daemon /system/bin/rpc-daemon
     class main
     user root
+    disabled
+
+on property:rpcd.start=1
+    start rpc-daemon
 
 service ril-daemon2 /system/bin/rild -c 2
    class main
