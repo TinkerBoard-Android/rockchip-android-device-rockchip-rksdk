@@ -108,8 +108,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libwebrtc_audio_coding
 
+#camera
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
+
+#audio
+$(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_config/rk_audio.mk)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
@@ -186,6 +190,7 @@ PRODUCT_PACKAGES += \
     audio.alsa_usb.$(TARGET_BOARD_HARDWARE) \
     audio.a2dp.default\
     audio.r_submix.default\
+    libaudioroute\
     audio.usb.default
 
 # Filesystem management tools
