@@ -1,4 +1,5 @@
-import init.bootmode.${ro.bootmode}.rc
+import /init.bootmode.${ro.bootmode}.rc
+import /init.recovery.${ro.hardware}.rc
 
 on early-init
     # Apply strict SELinux checking of PROT_EXEC on mmap/mprotect calls.
