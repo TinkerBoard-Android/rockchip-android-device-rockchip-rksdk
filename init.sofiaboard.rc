@@ -40,9 +40,9 @@ on property:persist.tool_enable=1
     start phonetool_btapp
 on post-fs-data
     chown root root /sys/devices/3c000000.vmodem/modem_state
-    chmod 777 /sys/devices/3c000000.vmodem/modem_state
+    chmod 660 /sys/devices/3c000000.vmodem/modem_state
     chown root root /sys/bus/platform/drivers/vmodem/3c000000.vmodem/modem_state
-    chmod 777 /sys/bus/platform/drivers/vmodem/3c000000.vmodem/modem_state
+    chmod 660 /sys/bus/platform/drivers/vmodem/3c000000.vmodem/modem_state
     mkdir /data/rpcd
     chmod 777 /data/rpcd
     mkdir /data/media 0770 media_rw media_rw
@@ -98,6 +98,10 @@ on post-fs-data
     chown system system /sys/class/thermal/thermal_zone8/emul_temp
     chown system system /sys/class/thermal/thermal_zone9/emul_temp
     chown system system /sys/class/thermal/thermal_zone10/emul_temp
+
+	# TEE RPC
+    chown system system /dev/tee_rpc
+    chmod 0666 /dev/tee_rpc
 
 on boot
 # Define TCP buffer sizes for various networks
@@ -267,7 +271,7 @@ on charger
 #    class late_start
 #    disabled
 
-service ipcsd /system/bin/ipcsd --apint=UDSOCKS_,gateway --ext=TTY,/dev/ttyGS2 --mex=TTY,/dev/vbpipe15
+service ipcsd /system/bin/ipcsd --apint=UDSOCKS_,gateway --ext=TTY,/dev/ttyGS2 --mex=TTY,/dev/mvpipe-GTI
     class main
     disabled
     user root

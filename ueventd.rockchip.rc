@@ -88,17 +88,14 @@
 #sofia 
 /dev/dcc    0666    system  system
 /dev/pmem_gfx   0666    system  system
-/dev/vbpipe0    0666    system  system
-/dev/vbpipe1    0666    system  system
-/dev/vbpipe3    0666    system  system
-/dev/vbpipe5    0666    media   media
-/dev/vbpipe6    0666    system  system
+/dev/mvpipe-vpu 0660   media   graphics
+/dev/mvpipe-oec_dat 0660       media   media
 /dev/vpu-enc    0600    media   media
-/dev/vpu-dec    0666    media   media
+/dev/vpu-dec    0660    media   graphics
 /dev/mem    0600    media   media
 /dev/ttyBT0 0660    bluetooth   bluetooth
 /dev/ttyGNSS0   0600    gps gps 
 /dev/radio0     0660    audio   audio
 /dev/tadi       0660    system  trace
-/dev/voemcrypto 0666    system  system
-
+/dev/voemcrypto 0660    media	media
+/dev/tee_rpc   0666    system  system
