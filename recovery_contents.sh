@@ -11,7 +11,6 @@ PCBA_PATH=external/rk-pcba-test
 ############################################################################################
 #rk recovery contents
 ############################################################################################
-cp -f vendor/rockchip/common/bin/$TARGET_ARCH/sdtool $PRODUCT_OUT/recovery/root/sbin/
 cp -f vendor/rockchip/common/bin/$TARGET_ARCH/busybox $PRODUCT_OUT/recovery/root/sbin/
 
 if [ $TARGET_ROCKCHIP_PCBATEST = "true" ];then

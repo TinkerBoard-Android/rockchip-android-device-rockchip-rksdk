@@ -54,7 +54,7 @@ on fs
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     
 on boot
-    setprop UserVolumeLabel "RockChips"
+    setprop UserVolumeLabel "RockChip"
     setprop InternalSD_ROOT "/mnt/internal_sd"
     setprop ExternalSD_ROOT	"/mnt/external_sd"
     ifup lo
@@ -99,6 +99,7 @@ service recovery /sbin/recovery
 
 service console /sbin/busybox sh
     console
+    disabled
     seclabel u:r:busybox:s0
 
 service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
@@ -116,6 +117,7 @@ on property:ro.debuggable=1
     write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
     write /sys/class/android_usb/android0/iProduct $ro.product.model
     write /sys/class/android_usb/android0/iSerial $ro.serialno
+    start console
     start adbd
 
 # Restart adbd so it can run as root
