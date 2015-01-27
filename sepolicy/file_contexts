@@ -20,3 +20,4 @@
 /data/camera(/.*)?   u:object_r:camdata_file:s0
 
 /radical_update(/.*)? u:object_r:ru_file:s0
+/dev/rtk_btusb       u:object_r:rtkbt_device:s0

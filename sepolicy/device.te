@@ -4,3 +4,4 @@ type vflash_device, dev_type;
 type timer_device, dev_type;
 type vpu_device, dev_type;
 type hevc_device, dev_type;
+type rtkbt_device, dev_type;
