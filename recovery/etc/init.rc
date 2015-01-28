@@ -20,7 +20,7 @@ on init
     export EXTERNAL_STORAGE /sdcard
 
     symlink /system/etc /etc
-    symlink /sbin/busybox /system/bin/sh
+#    symlink /sbin/busybox /system/bin/sh
 
     mkdir /mnt
     mkdir /mnt/internal_sd
@@ -97,10 +97,10 @@ service recovery /sbin/recovery
     console
     seclabel u:r:recovery:s0
 
-service console /sbin/busybox sh
+service console /sbin/sh
     console
     disabled
-    seclabel u:r:busybox:s0
+    seclabel u:r:sh:s0
 
 service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
     disabled
