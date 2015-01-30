@@ -297,6 +297,11 @@ service rpcNotifier /system/bin/rpcNotifier
     class main
     user root
 
+service rpc-daemon /system/bin/rpc-daemon
+    class main
+    user root
+    disabled
+
 on property:rpcd.start=1
     start rpc-daemon
 
@@ -338,4 +343,4 @@ service init_wlan_nvm /system/bin/sh /system/etc/wifi/wlan_nvm_init.sh
 service fmd /system/bin/fmd -c /dev/fmdev_device -l /data/fmd/fmd.log -p /data/fmd/fmd.log.prev
     class main
     user root
-/   oneshot
+    oneshot
