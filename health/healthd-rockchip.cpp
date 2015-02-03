@@ -38,6 +38,9 @@
 #define CRITICAL_LOW_FORCE_SOC_DROP (6)
 #define UPDATE_PERIOD_MINIMUM_S (55)
 
+extern int put_old_adc_cap(int bat_cap);
+extern int load_old_adc_cap(void);
+
 using namespace android;
 static bool first_update_done;
 static int lasttime_soc;
@@ -245,7 +248,7 @@ int healthd_board_battery_update(struct BatteryProperties *props)
 {
 
     rk3288_bat_monitor(props);
-
+    put_old_adc_cap(props->batteryLevel);
     // return 0 to log periodic polled battery status to kernel log
     return 0;
 }
@@ -262,4 +265,5 @@ static int rk3288_energy_counter(int64_t *energy)
 void healthd_board_init(struct healthd_config *config)
 {
     //config->energyCounter = rk3288_energy_counter;
+    load_old_adc_cap();
 }

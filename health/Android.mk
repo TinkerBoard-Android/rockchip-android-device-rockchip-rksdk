@@ -17,7 +17,8 @@ include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := system/core/healthd
 
-LOCAL_SRC_FILES := healthd-rockchip.cpp
+LOCAL_SRC_FILES := healthd-rockchip.cpp \
+		   bat_cap.cpp
 
 LOCAL_MODULE := libhealthd.$(TARGET_PRODUCT)
 
