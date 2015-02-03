@@ -162,6 +162,7 @@ PRODUCT_PACKAGES += \
     Camera \
     libvpu \
     libstagefrighthw \
+    libgralloc_priv_omx \
     akmd 
 
 # iep
