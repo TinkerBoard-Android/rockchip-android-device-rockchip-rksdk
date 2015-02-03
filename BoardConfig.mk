@@ -99,7 +99,6 @@ BOARD_SEPOLICY_UNION ?=     \
         akmd.te             \
         app.te              \
         device.te           \
-        cts.te              \
         bluetooth.te        \
         drmserver.te        \
         file.te             \
