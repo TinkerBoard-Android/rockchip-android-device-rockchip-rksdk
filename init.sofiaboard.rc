@@ -344,3 +344,11 @@ service fmd /system/bin/fmd -c /dev/fmdev_device -l /data/fmd/fmd.log -p /data/f
     class main
     user root
     oneshot
+
+on property:ro.debuggable=1
+    start apk_logfs
+
+service apk_logfs /system/bin/logcat -b all -n 20 -v threadtime -f /data/logs/aplog -r5000
+    class main
+    user root
+    disabled
