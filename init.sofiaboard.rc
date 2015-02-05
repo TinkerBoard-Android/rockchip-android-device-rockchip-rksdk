@@ -345,10 +345,16 @@ service fmd /system/bin/fmd -c /dev/fmdev_device -l /data/fmd/fmd.log -p /data/f
     user root
     oneshot
 
+#for aplog
+on early-boot
+    mkdir /data/logs
+    chown system log /data/logs
+    chmod 0770 /data/logs 
+
 on property:ro.debuggable=1
     start apk_logfs
 
-service apk_logfs /system/bin/logcat -b all -n 20 -v threadtime -f /data/logs/aplog -r5000
+service apk_logfs /system/bin/logcat -b system -b events -b main -b radio -b kernel -n 20 -v threadtime -f /data/logs/aplog -r5000
     class main
     user root
     disabled
