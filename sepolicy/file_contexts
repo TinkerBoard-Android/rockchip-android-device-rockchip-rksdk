@@ -4,6 +4,7 @@
 /dev/mali            u:object_r:gpu_device:s0
 /dev/ddr_freq        u:object_r:ddr_device:s0
 /dev/rga             u:object_r:rga_device:s0
+/dev/pvr_sync        u:object_r:gpu_device:s0
 /dev/block/dm-[0-9]* u:object_r:dm_device:s0
 /dev/vflash          u:object_r:vflash_device:s0
 /dev/timerirq        u:object_r:timer_device:s0
