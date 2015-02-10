@@ -82,7 +82,7 @@ BOARD_FLASH_BLOCK_SIZE ?= 131072
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
-  ifneq ($(filter user userdebug , $(TARGET_BUILD_VARIANT)),)
+  ifeq ($(TARGET_BUILD_VARIANT),user)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT ?= true
     endif
