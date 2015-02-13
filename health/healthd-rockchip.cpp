@@ -250,7 +250,7 @@ int healthd_board_battery_update(struct BatteryProperties *props)
 {
 
     rk3288_bat_monitor(props);
-#ifndef FEATURE_SAVE_CAPACITY
+#ifdef FEATURE_SAVE_CAPACITY
     put_old_adc_cap(props->batteryLevel);
 #endif
     // return 0 to log periodic polled battery status to kernel log
@@ -269,7 +269,7 @@ static int rk3288_energy_counter(int64_t *energy)
 void healthd_board_init(struct healthd_config *config)
 {
     //config->energyCounter = rk3288_energy_counter;
-#ifndef FEATURE_SAVE_CAPACITY
+#ifdef FEATURE_SAVE_CAPACITY
     load_old_adc_cap();
 #endif
 }

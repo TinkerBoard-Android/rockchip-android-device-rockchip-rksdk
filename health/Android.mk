@@ -17,7 +17,7 @@ include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := system/core/healthd
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), sofia3gr)
-LOCAL_SRC_FILE := \
+LOCAL_SRC_FILES := \
     healthd-rockchip.cpp
 else
 LOCAL_CFLAGS += -DFEATURE_SAVE_CAPACITY
