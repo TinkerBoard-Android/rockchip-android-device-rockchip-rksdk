@@ -16,9 +16,15 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := system/core/healthd
-
-LOCAL_SRC_FILES := healthd-rockchip.cpp \
-		   bat_cap.cpp
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), sofia3gr)
+LOCAL_SRC_FILE := \
+    healthd-rockchip.cpp
+else
+LOCAL_CFLAGS += -DFEATURE_SAVE_CAPACITY
+LOCAL_SRC_FILES := \
+    healthd-rockchip.cpp \
+    bat_cap.cpp
+endif
 
 LOCAL_MODULE := libhealthd.$(TARGET_PRODUCT)
 
