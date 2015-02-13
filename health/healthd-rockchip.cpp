@@ -239,11 +239,15 @@ done:
 
 static void rk3288_bat_monitor(struct BatteryProperties *props)
 {
-    rk3288_soc_adjust(props);
-    rk3288_health_check(props);
-    rk3288_status_check(props);
-    //There is no monitor implement in rk-bat
-    //rk3288_voltage_monitor_check(props);
+    if (props->batteryPresent) {
+        rk3288_soc_adjust(props);
+        rk3288_health_check(props);
+        rk3288_status_check(props);
+    } else {
+        // Fake to make android fun.
+        props->batteryLevel = BATTERY_FULL;
+        props->batteryStatus = BATTERY_STATUS_NOT_CHARGING;
+    }
 }
 
 int healthd_board_battery_update(struct BatteryProperties *props)
