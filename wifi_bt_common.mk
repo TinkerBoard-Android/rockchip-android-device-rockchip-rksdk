@@ -1,4 +1,7 @@
 
+BOARD_CONNECTIVITY_VENDOR := Broadcom
+BOARD_CONNECTIVITY_MODULE := ap6xxx
+
 # Wifi related defines
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
 FORCE_WIFI_WORK_AS_ANDROID4_2 := false

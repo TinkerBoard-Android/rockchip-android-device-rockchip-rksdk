@@ -417,6 +417,19 @@ PRODUCT_COPY_FILES += \
     $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_PreI2C_NCD_Signed_configdata.ncd)
 endif
 
+# for realtek bluetooth
+PRODUCT_PACKAGES += \
+    bluetooth_rtk.default \
+    libbt-vendor-rtl8723bs \
+    libbt-vendor-rtl8723bu
+
+# for realtek and esp8089 wifi
+PRODUCT_PACKAGES += \
+    wpa_supplicant_rtl \
+    wpa_supplicant_esp \
+    hostapd_rtl \
+    hostapd_esp
+
 # setup dm-verity configs.
 # uncomment the two lines if use verity
 #PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.rksdmmc/by-name/system
