@@ -1,6 +1,8 @@
 
+ifneq ($(strip $(TARGET_BOARD_PLATFORM)), sofia3gr)
 BOARD_CONNECTIVITY_VENDOR := Broadcom
 BOARD_CONNECTIVITY_MODULE := ap6xxx
+endif
 
 # Wifi related defines
 ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), MediaTek)
