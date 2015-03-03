@@ -23,6 +23,7 @@ TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 
 TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
+TARGET_BOARD_PLATFORM_TABLET ?= true
 
 # CPU feature configration
 ifeq ($(strip $(TARGET_BOARD_HARDWARE)), rk30board)
