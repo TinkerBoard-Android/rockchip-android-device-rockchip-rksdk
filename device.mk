@@ -88,6 +88,10 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc
+endif
 
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
 PRODUCT_COPY_FILES += \
@@ -429,6 +433,10 @@ PRODUCT_PACKAGES += \
     wpa_supplicant_esp \
     hostapd_rtl \
     hostapd_esp
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+include device/rockchip/common/samba/rk31_samba.mk
+endif
 
 # setup dm-verity configs.
 # uncomment the two lines if use verity
