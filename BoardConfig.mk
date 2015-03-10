@@ -75,6 +75,11 @@ TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
 BOARD_USE_LOW_MEM ?= false
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
+endif
+
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
 TARGET_PROVIDES_INIT_RC ?= false
 BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
