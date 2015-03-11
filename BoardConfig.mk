@@ -76,8 +76,15 @@ TARGET_NO_BOOTLOADER ?= true
 BOARD_USE_LOW_MEM ?= false
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 
+#######for target product ########
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
+
+PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=box
+else
+  PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=tablet
 endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
