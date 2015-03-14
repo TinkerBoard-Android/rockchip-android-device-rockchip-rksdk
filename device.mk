@@ -77,6 +77,7 @@ PRODUCT_COPY_FILES += \
     device/rockchip/common/media_profiles_default.xml:system/etc/media_profiles_default.xml \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/20050030_pwm.kl:system/usr/keylayout/20050030_pwm.kl \
+    device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
 
 PRODUCT_COPY_FILES += \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
