@@ -281,6 +281,10 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
+#$_rbox_$_modify_$_zhengyang: add displayd
+PRODUCT_PACKAGES += \
+    displayd
+
 ########################################################
 # build with drmservice
 ########################################################
