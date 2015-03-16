@@ -17,5 +17,14 @@
 # Vold does not support multi device path yet
 # /devices/ff580000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
 # /devices/ff500000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+#/devices/ff540000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+
+# non box product,configuration to the first item, will filter out left
+/devices/ff580000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+/devices/ff500000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
 /devices/ff540000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+/devices/ff540000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+/devices/ff540000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+/devices/ff540000.usb                           /mnt/usb_storage     vfat      defaults        voldmanaged=usb_storage:auto
+
 /dev/block/zram0                                none                swap      defaults                                              zramsize=533413200
