@@ -441,6 +441,11 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 include device/rockchip/common/samba/rk31_samba.mk
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.rk.screenoff_time=2147483647
+else 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.rk.screenoff_time=60000
 endif
 
 # setup dm-verity configs.
