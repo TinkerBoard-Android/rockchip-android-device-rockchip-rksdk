@@ -89,20 +89,18 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
-ifeq ($(strip $(TARGET_ARCH)), arm)
-
+#$_rbox_$_modify_$_blb_20150321_for_pppoe
+ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
 PRODUCT_PACKAGES += \
     libpppoe-jni \
     pppoe-service
 PRODUCT_SYSTEM_SERVER_JARS += \
     pppoe-service
-#$_rbox_$_modify_$_chenzhi_20120309: add android.software.pppoe.xml
 PRODUCT_COPY_FILES += \
        frameworks/native/data/etc/android.software.pppoe.xml:system/etc/permissions/android.software.pppoe.xml
-#$_rbox_$_modify_$_chenzhi_20120309
     $(call inherit-product, external/rp-pppoe/pppoe-copy.mk)
-
 endif
+#$_rbox_$_modify_$_blb_$_end
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_COPY_FILES += \
