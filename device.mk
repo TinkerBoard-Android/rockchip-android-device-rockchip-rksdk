@@ -91,6 +91,12 @@ PRODUCT_PACKAGES += \
 
 #$_rbox_$_modify_$_blb_20150321_for_pppoe
 ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
+
+PRODUCT_PACKAGES += \
+    pppoe \
+    pppoe-sniff \
+    pppoe-repay \
+
 PRODUCT_PACKAGES += \
     libpppoe-jni \
     pppoe-service

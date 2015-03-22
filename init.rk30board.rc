@@ -23,6 +23,14 @@ on post-fs-data
     chown root system /system/lib/hw/gps.default.so
     mkdir /data/gps 0770 system net_bt_stack
 
+    ##$_rbox_$_modify_$_chenzhi_20120309
+    ##$_rbox_$_modify_$_begin
+    mkdir /data/misc/ppp 777 system system
+    chmod 777 /data/misc/ppp
+    copy /etc/ppp/pap-secrets /data/misc/ppp/pap-secrets
+    copy /etc/ppp/pppoe.conf /data/misc/ppp/pppoe.conf
+    ##$_rbox_$_modify_$_end
+
 
 on boot
 
@@ -106,4 +114,24 @@ on property:ro.boot.baseband=N/A
 service drmservice /system/bin/drmservice
         class main
         oneshot
+
+##$_rbox_$_modify_$_chenzhi_20120309
+##$_rbox_$_modify_$_begin
+service pppoe_setup /system/bin/pppoe-setup
+    disabled
+    oneshot
+
+service pppoe_start /system/bin/pppoe-start
+    disabled
+    oneshot
+
+service bplus_helper  /system/bin/bplus_helper
+    class main
+    oneshot
+
+service pppoe_stop /system/bin/pppoe-stop
+    disabled
+    oneshot
+##$_rbox_$_modify_$_end
+
 
