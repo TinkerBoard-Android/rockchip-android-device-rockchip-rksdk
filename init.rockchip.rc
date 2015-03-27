@@ -139,12 +139,6 @@ on property:ro.target.product=box
     mount tmpfs tmpfs /mnt/usb_storage mode=0555,uid=1013,gid=1023
     export THIRD_VOLUME_STORAGE /mnt/USB_DISK0
     mkdir /mnt/usb_storage 0755 system system
-    mkdir /mnt/usb_storage/USB_DISK0 0755 system system
-    mkdir /mnt/usb_storage/USB_DISK1 0755 system system
-    mkdir /mnt/usb_storage/USB_DISK2 0755 system system
-    mkdir /mnt/usb_storage/USB_DISK3 0755 system system
-    mkdir /mnt/usb_storage/USB_DISK4 0755 system system
-    mkdir /mnt/usb_storage/USB_DISK5 0755 system system
 on property:ro.factory.hasUMS=false
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
