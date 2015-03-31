@@ -54,6 +54,7 @@ then
 	echo -n "create boot.img with kernel... "
 	[ -d $OUT/root ] && \
 	mkbootfs $OUT/root | minigzip > $OUT/ramdisk.img && \
+        truncate -s "%4" $OUT/ramdisk.img && \
 	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk.img --second kernel/resource.img --output $OUT/boot.img && \
 	cp -a $OUT/boot.img $IMAGE_PATH/
 	echo "done."
@@ -61,6 +62,7 @@ else
 	echo -n "create boot.img without kernel... "
 	[ -d $OUT/root ] && \
 	mkbootfs $OUT/root | minigzip > $OUT/ramdisk.img && \
+        truncate -s "%4" $OUT/ramdisk.img && \
 	rkst/mkkrnlimg $OUT/ramdisk.img $IMAGE_PATH/boot.img >/dev/null
 	echo "done."
 fi
@@ -69,6 +71,7 @@ then
 	echo -n "create recovery.img with kernel... "
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
+        truncate -s "%4" $OUT/ramdisk-recovery.img && \
 	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img  --output $OUT/recovery.img && \
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
@@ -76,6 +79,7 @@ else
 	echo -n "create recovery.img with kernel and with out resource... "
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
+        truncate -s "%4" $OUT/ramdisk-recovery.img && \
 	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --output $OUT/recovery.img && \
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
