@@ -74,6 +74,8 @@ on boot
 
     chown wifi wifi /sys/class/rkwifi/driver 
     chown wifi wifi /sys/class/rkwifi/power
+    chown wifi wifi /sys/class/rkwifi/chip
+    chown wifi wifi /sys/class/rkwifi/preload
 
     write /proc/sys/net/core/rmem_max 1048576
     write /proc/sys/net/core/wmem_max 1048576
