@@ -25,7 +25,11 @@ TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
 # value: tablet,box,phone
 # It indicates whether to be tablet platform or not
+ifneq ($(filter %box, $(TARGET_PRODUCT)), )
+TARGET_BOARD_PLATFORM_PRODUCT ?= box
+else
 TARGET_BOARD_PLATFORM_PRODUCT ?= tablet
+endif
 
 # CPU feature configration
 ifeq ($(strip $(TARGET_BOARD_HARDWARE)), rk30board)
