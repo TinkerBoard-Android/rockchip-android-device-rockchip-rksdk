@@ -240,7 +240,7 @@ done:
 static void rk3288_bat_monitor(struct BatteryProperties *props)
 {
     if (props->batteryPresent) {
-        rk3288_soc_adjust(props);
+        //rk3288_soc_adjust(props);
         rk3288_health_check(props);
         rk3288_status_check(props);
     } else {
