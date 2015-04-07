@@ -93,6 +93,9 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/bcsh
     chmod 0664 /sys/class/graphics/fb0/dsp_lut
 
+	chown system graphics /sys/class/graphics/fb0/scale
+	chmod 0664 /sys/class/graphics/fb0/scale
+
     chown system system /sys/mali400_utility/utility
     chmod 0664 /sys/mali400_utility/utility
 
