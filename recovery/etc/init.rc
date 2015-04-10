@@ -100,7 +100,6 @@ service recovery /sbin/recovery
 service console /sbin/sh
     console
     disabled
-    seclabel u:r:sh:s0
 
 service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
     disabled
