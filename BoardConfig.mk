@@ -147,6 +147,9 @@ TARGET_ROCHCHIP_RECOVERY ?= true
 # to flip screen in recovery 
 BOARD_HAS_FLIPPED_SCREEN ?= false
 
+# Auto update package from USB
+RECOVERY_AUTO_USB_UPDATE ?= false
+
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_ROCKCHIP_PCBATEST ?= false
