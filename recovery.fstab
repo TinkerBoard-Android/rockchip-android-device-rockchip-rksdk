@@ -17,3 +17,5 @@ parameter                                    /parameter           mtd           
 boot                                         /boot                mtd             defaults                  defaults
 recovery                                     /recovery            mtd             defaults                  defaults
 backup                                       /backup              mtd             defaults                  defaults
+trust                                        /trust               mtd             defaults                  defaults
+baseparamer                                  /baseparamer         mtd             defaults                  defaults
