@@ -190,6 +190,7 @@ service akmd /system/bin/akmd
     class main
     user system
     group system
+    disabled
     oneshot
     seclabel u:r:akmd:s0
 
