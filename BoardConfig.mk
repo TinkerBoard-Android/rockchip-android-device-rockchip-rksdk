@@ -232,6 +232,9 @@ BOARD_IS_SUPPORT_NTFS ?= true
 # product has GPS or not
 BOARD_HAS_GPS ?= false
 
+# pppoe for cts, you should set this true during pass CTS and which will disable  pppoe function.
+BOARD_PPPOE_PASS_CTS ?= false
+
 # ethernet
 BOARD_HS_ETHERNET ?= true
 

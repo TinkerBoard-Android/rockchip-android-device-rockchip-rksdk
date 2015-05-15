@@ -107,6 +107,15 @@ PRODUCT_COPY_FILES += \
     $(call inherit-product, external/rp-pppoe/pppoe-copy.mk)
 endif
 #$_rbox_$_modify_$_blb_$_end
+#$_rbox_$_modify_$_blb_20150514_for_pppoe_pass_cts
+ifeq ($(strip $(BOARD_PPPOE_PASS_CTS)),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.pppoe.cts=true
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.pppoe.cts=false
+endif
+#$_rbox_$_modify_$_blb_$_end
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_COPY_FILES += \
@@ -321,7 +330,6 @@ else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.hasGPS=false
 endif
-
 ########################################################
 # this product has Ethernet or not
 ########################################################
