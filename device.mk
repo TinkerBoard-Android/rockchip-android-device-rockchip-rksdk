@@ -488,3 +488,24 @@ $(call inherit-product-if-exists, vendor/google/products/gms_mini.mk)
 endif
 endif
 $(call inherit-product-if-exists, vendor/rockchip/common/device-vendor.mk)
+
+########################################################
+# this product has support remotecontrol or not
+########################################################
+ifeq ($(strip $(BOARD_HAS_REMOTECONTROL)),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.enable.remotecontrol=true
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.enable.remotecontrol=false
+endif
+
+ifeq ($(strip $(BUILD_WITH_SKIPVERIFY)),true)
+PRODUCT_PROPERTY_OVERRIDES +=               \
+    ro.config.enable.skipverify=true
+endif
+
+ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
+PRODUCT_COPY_FILES += \
+        device/rockchip/common/performance_info.xml:system/etc/performance_info.xml
+endif
