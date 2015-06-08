@@ -55,7 +55,7 @@ on boot
     chown wifi wifi /data/misc/wifi 
     chown system wifi /data/misc/wifi/entropy.bin
     chown wifi wifi /data/misc/wifi/p2p_supplicant.conf
-    chown wifi wifi /data/misc/wifi/wpa_supplicantant.conf
+    chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
 
 # bluetooth power up/down interface
     chmod 0660 /dev/ttyS0
