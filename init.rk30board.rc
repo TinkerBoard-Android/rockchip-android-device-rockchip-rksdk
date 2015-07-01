@@ -141,8 +141,8 @@ on property:sys.boot_completed=1
 
 # for telephony function
 on property:ro.boot.baseband=N/A
-    setprop ro.radio.noril true
-    stop ril-daemon
+    setprop ro.radio.noril false
+    start ril-daemon
 
 service drmservice /system/bin/drmservice
         class main
