@@ -509,3 +509,12 @@ ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
 PRODUCT_COPY_FILES += \
         device/rockchip/common/performance_info.xml:system/etc/performance_info.xml
 endif
+
+# hdmi cec
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
+PRODUCT_PACKAGES += \
+	hdmi_cec.$(TARGET_BOARD_HARDWARE)
+endif

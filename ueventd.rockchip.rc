@@ -85,6 +85,8 @@
 #for ddr freq
 /dev/ddr_freq        0664        system        graphics
 
+#for hdmi cec
+/dev/cec	0666	system	system
 #sofia 
 /dev/dcc    0666    system  system
 /dev/pmem_gfx   0666    system  system
