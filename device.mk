@@ -520,10 +520,11 @@ PRODUCT_PACKAGES += \
 endif
 
 # boot optimization
+PRODUCT_COPY_FILES += \
+        device/rockchip/common/boot_boost/libboot_optimization.so:system/lib/libboot_optimization.so
 ifeq ($(strip $(BOARD_WITH_BOOT_BOOST)),true)
 PRODUCT_COPY_FILES += \
-        device/rockchip/common/boot_boost/prescan_packages.xml:system/etc/prescan_packages.xml \
-        device/rockchip/common/boot_boost/libboot_optimization.so:system/lib/libboot_optimization.so
+        device/rockchip/common/boot_boost/prescan_packages.xml:system/etc/prescan_packages.xml
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.boot_boost.enable=true
 endif
