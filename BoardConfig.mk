@@ -251,3 +251,6 @@ BOARD_CHARGER_DISABLE_INIT_BLANK ?= true
 
 #stress test
 BOARD_HAS_STRESSTEST_APP ?= true
+
+#boot optimization
+BOARD_WITH_BOOT_BOOST ?= false

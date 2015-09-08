@@ -518,3 +518,12 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 PRODUCT_PACKAGES += \
 	hdmi_cec.$(TARGET_BOARD_HARDWARE)
 endif
+
+# boot optimization
+ifeq ($(strip $(BOARD_WITH_BOOT_BOOST)),true)
+PRODUCT_COPY_FILES += \
+        device/rockchip/common/boot_boost/prescan_packages.xml:system/etc/prescan_packages.xml \
+        device/rockchip/common/boot_boost/libboot_optimization.so:system/lib/libboot_optimization.so
+PRODUCT_PROPERTY_OVERRIDES += \
+        ro.boot_boost.enable=true
+endif
