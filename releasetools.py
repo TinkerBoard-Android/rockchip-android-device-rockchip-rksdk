@@ -57,6 +57,11 @@ def InstallUboot(loader_bin, input_zip, info):
   info.script.Print("Writing uboot loader img...")
   info.script.WriteRawImage("/uboot", "uboot.img")
 
+def InstallTrust(trust_bin, input_zip, info):
+  common.ZipWriteStr(info.output_zip, "trust.img", trust_bin)
+  info.script.Print("Writing trust img...")
+  info.script.WriteRawImage("/trust", "trust.img")
+
 def InstallCharge(charge_bin, input_zip, info):
   common.ZipWriteStr(info.output_zip, "charge.img", charge_bin)
   info.script.Print("Writing charge img..")
@@ -68,6 +73,13 @@ def InstallResource(resource_bin, input_zip, info):
   info.script.WriteRawImage("/resource", "resource.img")
 
 def FullOTA_InstallEnd(info):
+  try:
+    trust = info.input_zip.read("trust.img")
+    print "write trust now..."
+    InstallTrust(trust, info.input_zip, info)
+  except KeyError:
+    print "warning: no trust.img in input target_files; not flashing trust"
+
   try:
     uboot = info.input_zip.read("uboot.img")
     print "write uboot now..."
