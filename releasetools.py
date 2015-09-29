@@ -120,6 +120,22 @@ def FullOTA_InstallEnd(info):
 
 def IncrementalOTA_InstallEnd(info):
   try:
+    trust_target = info.target_zip.read("trust.img")
+  except KeyError:
+    trust_target = None
+
+  try:
+    trust_source = info.source_zip.read("trust.img")
+  except KeyError:
+    trust_source = None
+
+  if (trust_target != None) and (trust_target != trust_source):
+    print "write trust now..."
+    InstallTrust(trust_target, info.target_zip, info)
+  else:
+    print "trust unchanged; skipping"
+
+ try:
     loader_uboot_target = info.target_zip.read("uboot.img")
   except KeyError:
     loader_uboot_target = None
