@@ -57,6 +57,7 @@
              android:allowMassStorage="true"
              android:removable="true"
              android:mtpReserve="100" />   
+         <!--
     <storage android:mountPoint="/mnt/usb_storage/USB_DISK0"
              android:storageDescription="@string/storage_usb0"
              android:primary="false"
@@ -93,5 +94,5 @@
              android:allowMassStorage="true"
              android:removable="true"
              android:mtpReserve="100" />                                                                                                                             
-<!--$_rbox_$_modify_$_end-->
+             -->
     </StorageList>

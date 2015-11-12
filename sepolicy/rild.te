@@ -7,5 +7,5 @@ allow rild ppp_exec:file { read };
 allow rild self:capability { setuid setgid dac_override };
 # 3G dongle in userdubg mode
 allow rild system_data_file:dir {write add_name};
-allow rild system_data_file:file {create write};
+#allow rild system_data_file:file {create write};
 allow rild self:capability { sys_admin };

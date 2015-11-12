@@ -90,31 +90,31 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf
 
 #$_rbox_$_modify_$_blb_20150321_for_pppoe
-ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
+#ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     pppoe \
     pppoe-sniff \
     pppoe-repay \
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     libpppoe-jni \
     pppoe-service
-PRODUCT_SYSTEM_SERVER_JARS += \
+#PRODUCT_SYSTEM_SERVER_JARS += \
     pppoe-service
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
        frameworks/native/data/etc/android.software.pppoe.xml:system/etc/permissions/android.software.pppoe.xml
-    $(call inherit-product, external/rp-pppoe/pppoe-copy.mk)
-endif
+#    $(call inherit-product, external/rp-pppoe/pppoe-copy.mk)
+#endif
 #$_rbox_$_modify_$_blb_$_end
 #$_rbox_$_modify_$_blb_20150514_for_pppoe_pass_cts
-ifeq ($(strip $(BOARD_PPPOE_PASS_CTS)),true)
-PRODUCT_PROPERTY_OVERRIDES += \
+#ifeq ($(strip $(BOARD_PPPOE_PASS_CTS)),true)
+#PRODUCT_PROPERTY_OVERRIDES += \
     net.pppoe.cts=true
-else
-PRODUCT_PROPERTY_OVERRIDES += \
+#else
+#PRODUCT_PROPERTY_OVERRIDES += \
     net.pppoe.cts=false
-endif
+#endif
 #$_rbox_$_modify_$_blb_$_end
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
@@ -366,7 +366,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-PRODUCT_PACKAGES += \
+#device recovery ui
+#PRODUCT_PACKAGES += \
     librecovery_ui_$(TARGET_PRODUCT)
 
 # for bugreport
