@@ -75,6 +75,7 @@
 /dev/pvrsrvkm         0666   system      system
 /dev/pvr_sync         0666   system      system
 
+/dev/sw_sync          0666   system      system
 
 #for DRM
 /dev/rknand_sys_storage   0660   system     system 

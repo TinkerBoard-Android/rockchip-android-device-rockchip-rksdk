@@ -253,8 +253,7 @@ $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.strictmode.visual=false \
-    dalvik.vm.jniopts=warnonly
+    persist.sys.strictmode.visual=false 
 
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true

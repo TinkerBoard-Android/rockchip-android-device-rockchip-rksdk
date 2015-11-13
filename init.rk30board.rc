@@ -144,6 +144,13 @@ on property:ro.boot.baseband=N/A
     setprop ro.radio.noril false
     start ril-daemon
 
+#Rogue
+service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
+    oneshot
+    class core
+    user root
+    group root
+
 service drmservice /system/bin/drmservice
         class main
         oneshot
