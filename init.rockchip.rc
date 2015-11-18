@@ -1,12 +1,6 @@
 import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.environment.rc
 
-on early-init
-    export SECOND_VOLUME_STORAGE /mnt/external_sd
-    mkdir /mnt/external_sd 0000 system system
-    export THIRD_VOLUME_STORAGE /mnt/usb_storage
-    mkdir /mnt/usb_storage 0000 system system
-
 on init
     # start watchdogd
     mkdir /metadata 0770 root root
@@ -22,9 +16,7 @@ on init
     export ADOBE_FONTS_DIR  /system/fonts/adobefonts/
 
     # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/internal_sd 0000 system system
     mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
 
 
 on post-fs
@@ -61,14 +53,6 @@ on boot
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
-
-
-# create virtual SD card at /mnt/sdcard, based on the /data/media directory
-# daemon will drop to user/group system/media_rw after initializing
-# underlying files in /data/media will be created with user and group media_rw (1023)
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
 
 service charger /charger
     class charger
@@ -134,38 +118,15 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-# $_rbox_$_modify_$_lly: added 2015-03-10, for adding the mass storage supporting.
-on property:ro.target.product=box
-    mount tmpfs tmpfs /mnt/usb_storage mode=0555,uid=1013,gid=1023
-    export THIRD_VOLUME_STORAGE /mnt/USB_DISK0
-    mkdir /mnt/usb_storage 0755 system system
 on property:ro.factory.hasUMS=false
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     mount rootfs rootfs / ro remount
 
 on property:ro.factory.hasUMS=cdrom
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     mount rootfs rootfs / ro remount
 
 on property:ro.factory.hasUMS=true
-    symlink /mnt/internal_sd /sdcard
-    symlink /mnt/internal_sd /mnt/sdcard
-    symlink /mnt/internal_sd /storage/sdcard0
-    symlink /mnt/internal_sd /storage/emulated/legacy
     mount rootfs rootfs / ro remount
     stop sdcard
-
-
-# Binding fuse mount point to /storage/emulated/legacy
-#on property:init.svc.sdcard=running
-#    wait /mnt/shell/emulated/0
-#    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
 
 on property:ro.boot.charger.emmc=1
     mount ext4 /dev/block/platform/emmc/by-name/system /system wait ro noatime nodiratime

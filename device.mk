@@ -283,8 +283,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 ifeq ($(strip $(BUILD_WITH_UMS)),true)
 PRODUCT_PROPERTY_OVERRIDES +=               \
     ro.factory.hasUMS=true                  \
-    persist.sys.usb.config=mass_storage,adb \
-    testing.mediascanner.skiplist = /mnt/internal_sd/Android/
+    persist.sys.usb.config=mass_storage,adb
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.rockchip.hasUMS.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
