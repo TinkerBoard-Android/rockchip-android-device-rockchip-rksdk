@@ -17,8 +17,7 @@ on init
 
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /mnt/sdcard 0777 root root
-
+    symlink /sdcard /mnt/sdcard
 
 on post-fs
     # Swap in only 1 page at a time
@@ -120,15 +119,12 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     oneshot
 
 on property:ro.factory.hasUMS=false
-    symlink /mnt/sdcard /sdcard
     mount rootfs rootfs / ro remount
 
 on property:ro.factory.hasUMS=cdrom
-    symlink /mnt/sdcard /sdcard
     mount rootfs rootfs / ro remount
 
 on property:ro.factory.hasUMS=true
-    symlink /mnt/sdcard /sdcard
     mount rootfs rootfs / ro remount
     stop sdcard
 
