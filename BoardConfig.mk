@@ -152,7 +152,7 @@ RECOVERY_AUTO_USB_UPDATE ?= false
 
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_ROCKCHIP_PCBATEST ?= false
+TARGET_ROCKCHIP_PCBATEST ?= true
 #TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_PRODUCT)
 TARGET_USERIMAGES_USE_EXT4 ?= true
 TARGET_USERIMAGES_USE_F2FS ?= false
