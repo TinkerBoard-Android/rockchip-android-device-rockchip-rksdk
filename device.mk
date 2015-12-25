@@ -456,7 +456,8 @@ endif
 PRODUCT_PACKAGES += \
     bluetooth_rtk.default \
     libbt-vendor-rtl8723bs \
-    libbt-vendor-rtl8723bu
+    libbt-vendor-rtl8723bu \
+    bt_vendor.conf
 
 # for realtek and esp8089 wifi
 PRODUCT_PACKAGES += \
