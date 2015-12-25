@@ -9,35 +9,20 @@ on early-init
 
 on init
 
-    symlink /etc/bluez/bcm432x/BCM4329B1_TestOnly_0237_26MHz_SEMCO_B23.hcd /bcm4329_samsung.hcd
-    symlink /etc/bluez/bcm432x/BCM4329B1_USI_WM-BN-BM-01.hcd /bcm4329_usi.hcd
-    symlink /etc/bluez/bcm432x/BCM4329B1_002.002.023.0389.0000_Cybertan-Foxconn_Cls2_extLNA_EDRmaxInputLev+PeakDEVM_NT.hcd /bcm4329_cybertan.hcd
+#    symlink /etc/bluez/bcm432x/BCM4329B1_TestOnly_0237_26MHz_SEMCO_B23.hcd /bcm4329_samsung.hcd
+#    symlink /etc/bluez/bcm432x/BCM4329B1_USI_WM-BN-BM-01.hcd /bcm4329_usi.hcd
+#    symlink /etc/bluez/bcm432x/BCM4329B1_002.002.023.0389.0000_Cybertan-Foxconn_Cls2_extLNA_EDRmaxInputLev+PeakDEVM_NT.hcd /bcm4329_cybertan.hcd
 
 on boot
-
-#    insmod /system/lib/modules/rtk_btusb.ko
-
-
-# permissions for bluetooth.
-    mkdir /data/misc/bluetoothd 0775 bluetooth net_bt_stack
-    setprop ro.bt.bdaddr_path "/data/misc/bluetoothd/bt_addr"
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
     
 # for rtl bluetooth
-    chown bluetooth net_bt_stack /data/misc/Bluetooth
-    mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
-
+#   insmod /system/lib/modules/rtk_btusb.ko
     chmod 0660 /dev/rtk_btusb
     chown bluetooth net_bt_stack /dev/rtk_btusb
 
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown bluetooth net_bt_stack /system/etc/bluetooth
-    chown bluetooth net_bt_stack /data/misc/bluetooth
-    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"    
-
 # for wifi
-    # mt7601u
-    chmod 0644 /system/lib/modules/mtprealloc7601Usta.ko
+#   mt7601u
+#   chmod 0644 /system/lib/modules/mtprealloc7601Usta.ko
 
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -68,10 +53,6 @@ on boot
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chmod 0664 /sys/class/rfkill/rfkill0/state
 
-    chmod 0660 /dev/bthwctl
-    chown bluetooth net_bt_stack /dev/bthwctl
-    mkdir /data/bluetooth 0771 bluetooth net_bt_stack
-
 #for nfc
     chmod 0660 /dev/bcm2079x
     chown nfc nfc /dev/bcm2079x
@@ -83,11 +64,11 @@ on boot
     chown nfc nfc /data/nfc/param
 
 #for rda bt
-    chmod 0664 /dev/tcc_bt_dev
-    chown bluetooth net_bt_stack /dev/tcc_bt_dev
+#    chmod 0664 /dev/tcc_bt_dev
+#    chown bluetooth net_bt_stack /dev/tcc_bt_dev
 
-    chmod 0664 /dev/voice_modem
-    chown bluetooth net_bt_stack /dev/voice_modem
+#    chmod 0664 /dev/voice_modem
+#    chown bluetooth net_bt_stack /dev/voice_modem
 
 # for bcm wifi
 ########## 3.0.x <= kernel version <= 3.4.x ##########
@@ -145,7 +126,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 ########## kernel version >= 3.10.x ##########
 	
 # for rtl wifi
-service rtw_suppl_con /system/bin/wpa_supplicant_rtl \
+service p2p_supp_rtl /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -156,17 +137,8 @@ service rtw_suppl_con /system/bin/wpa_supplicant_rtl \
     disabled
     oneshot
 
-service rtw_suppl /system/bin/wpa_supplicant_rtl \
-    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-    -O/data/misc/wifi/sockets \
-    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    class main
-    socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
 # for esp wifi
-service esp_supplicant /system/bin/wpa_supplicant_esp \
+service p2p_supp_esp /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf -N \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
