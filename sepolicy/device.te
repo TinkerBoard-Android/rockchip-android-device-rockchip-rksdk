@@ -5,3 +5,4 @@ type timer_device, dev_type;
 type vpu_device, dev_type;
 type hevc_device, dev_type;
 type rtkbt_device, dev_type;
+type nvm_block_device, dev_type;
