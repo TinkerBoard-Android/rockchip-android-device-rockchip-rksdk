@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<lowmem-filter-package>
+<app package="com.google.process.location"/>
+<app package="com.google.android.calendar"/>
+<app package="com.android.calendar"/>
+<!--
+<app package="com.google.android.googlequicksearchbox:search"/>
+-->
+<app package="com.google.android.talk"/>
+<app package="com.google.android.keep"/>
+<app package="com.google.android.gms.ui"/>
+<app package="com.google.android.apps.maps"/>
+<app package="com.google.android.gms.wearable"/>
+<app package="com.google.android.apps.magazines"/>
+<app package="com.google.android.apps.walletnfcrel"/>
+<app package="com.google.android.apps.plus"/>
+<app package="com.google.android.gms"/>
+<!--
+<app package="com.google.process.gapps"/>
+-->
+<app package="com.google.android.inputmethod.latin"/>
+<app package="com.android.printspooler"/>
+<app package="com.google.android.gms:car"/>
+<app package="com.google.android.partnersetup"/>
+<app package="com.google.android.music:main"/>
+<app package="com.google.android.apps.genie.geniewidget"/>
+<!--
+<app package="com.android.phone"/>
+-->
+<app package="com.phone.wolf.live"/>
+<app package="com.android.smspush"/>
+<app package="com.android.vending"/>
+<app package="com.cghs.stresstest"/>
+<app package="com.android.gallery3d"/>
+<app package="android.rk.RockVideoPlayer"/>
+<app package="com.android.rk"/>
+<app package="com.google.android.gms.persistent"/>
+<app package="com.google.android.youtube"/>
+<app package="com.android.email"/>
+
+<service package="com.google.android.apps.docs.editors.slides"/>
+<service package="com.google.android.apps.docs"/>
+<service package="com.google.android.apps.docs.editors.docs"/>
+<service package="com.google.android.apps.plus"/>
+<service package="com.google.android.keep"/>
+
+<game package="com.imangi.templerun2"/>
+<game package="com.kiloo.subwaysurf"/>
+
+<prev package="com.android.launcher"/>
+<prev package="com.google.android.launcher"/>
+<prev package="com.android.settings"/>
+<prev package="com.android.systemui"/>
+<prev package="com.android.rk"/>
+<prev package="com.antutu.ABenchMark"/>
+<prev package="com.google.android.setupwizard"/>
+<prev package="packageinstaller"/>
+<prev package="apkinstaller"/>
+<prev package="com.android.bluetooth"/>
+<prev package="com.android.music"/>
+<prev package="com.android.camera2"/>
+<prev package="com.google.android.GoogleCamera"/>
+
+<next package="com.qihoo"/>
+<next package="com.dragon.android.pandaspace"/>
+<next package=".auth.gsf.AccountIntroActivity"/>
+<next package=".auth.login."/>
+<next package="com.android.systemui"/>
+</lowmem-filter-package>
