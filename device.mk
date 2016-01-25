@@ -528,3 +528,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.boot_boost.enable=true
 endif
+
+# mem optimization
+ifeq ($(strip $(BOARD_WITH_MEM_OPTIMISE)),true)
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.mem_optimise.enable=true
+endif

@@ -254,3 +254,6 @@ BOARD_HAS_STRESSTEST_APP ?= true
 
 #boot optimization
 BOARD_WITH_BOOT_BOOST ?= false
+
+#optimise mem
+BOARD_WITH_MEM_OPTIMISE ?= false
