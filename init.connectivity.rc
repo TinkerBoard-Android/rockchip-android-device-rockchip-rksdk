@@ -15,10 +15,20 @@ on init
 
 on boot
     
-# for rtl bluetooth
+# for realtek bluetooth
 #   insmod /system/lib/modules/rtk_btusb.ko
     chmod 0660 /dev/rtk_btusb
     chown bluetooth net_bt_stack /dev/rtk_btusb
+
+    # change back to bluetooth from system
+    chown bluetooth net_bt_stack /data/misc/bluetooth
+    mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
+
+    # bluetooth MAC address programming
+    chown bluetooth net_bt_stack ro.bt.bdaddr_path
+    chown bluetooth net_bt_stack /system/etc/bluetooth
+    chown bluetooth net_bt_stack /data/misc/bluetooth
+    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
 # for wifi
 #   mt7601u
