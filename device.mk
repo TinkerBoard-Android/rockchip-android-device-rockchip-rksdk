@@ -390,22 +390,6 @@ PRODUCT_COPY_FILES += \
     
 $(call inherit-product-if-exists, external/wlan_loader/wifi-firmware.mk)
 
-ifneq ($(filter MediaTek combo_mt66xx, $(strip $(BOARD_CONNECTIVITY_MODULE))), )
-$(call inherit-product-if-exists, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
-endif
-
-ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), mt5931_6622)
-$(call inherit-product-if-exists, hardware/mediatek/config/$(strip $(BOARD_CONNECTIVITY_MODULE))/product_package.mk)
-endif
-
-ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), RealTek)
-$(call inherit-product-if-exists, hardware/realtek/wlan/config/config-rtl.mk)
-endif
-
-ifeq ($(strip $(BOARD_CONNECTIVITY_VENDOR)), Espressif)
-$(call inherit-product-if-exists, hardware/esp/wlan/config/config-espressif.mk)
-endif
-
 # Copy manifest to system/
 ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
 PRODUCT_COPY_FILES += \
@@ -454,17 +438,10 @@ endif
 
 # for realtek bluetooth
 PRODUCT_PACKAGES += \
-    bluetooth_rtk.default \
-    libbt-vendor-rtl8723bs \
-    libbt-vendor-rtl8723bu \
+    libbt-vendor.so \
+    libbt-vendor_uart.so \
+    libbt-vendor_usb.so \
     bt_vendor.conf
-
-# for realtek and esp8089 wifi
-PRODUCT_PACKAGES += \
-    wpa_supplicant_rtl \
-    wpa_supplicant_esp \
-    hostapd_rtl \
-    hostapd_esp
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 include device/rockchip/common/samba/rk31_samba.mk
