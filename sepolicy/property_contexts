@@ -1,3 +1,4 @@
 sys_graphic.            u:object_r:graphic_prop:s0
 ro.serialno             u:object_r:serialno_prop:s0
 drm.                    u:object_r:drm_prop:s0
+media.                  u:object_r:media_prop:s0

@@ -18,6 +18,6 @@ allow init init:capability { sys_module };
 allow init nvm_block_device:blk_file { write };
 allow init gpu_device:chr_file { write  ioctl };
 allow init property_socket:sock_file { write };
-
+allow init zram_device:blk_file { write open read };
 
 #allow init ext4_exec:file { execute_no_trans };

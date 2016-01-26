@@ -4,3 +4,4 @@ allow system_server timer_device:chr_file rw_file_perms;
 
 allow system_server surfaceflinger:fifo_file rw_file_perms;
 allow system_server swsync_device:chr_file rw_file_perms;
+allow system_server serial_device:chr_file rw_file_perms;

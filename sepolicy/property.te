@@ -1,3 +1,4 @@
 type graphic_prop, property_type;
 type serialno_prop, property_type;
 type drm_prop, property_type;
+type media_prop, property_type;
