@@ -1,5 +1,20 @@
+# Additional rules for init
 #allow init self:capability sys_module;
-
 #recovery_only(`
 #  domain_trans(init, rootfs, busybox)
 #')
+
+domain_trans(init, pvrsrvctl_exec, pvrsrvctl)
+
+allow init serial_device:chr_file { write ioctl };
+allow init kernel:system { module_request };
+
+allow init tmpfs:lnk_file { create };
+allow init devpts:chr_file { ioctl };
+allow init block_device:blk_file { getattr read write };
+
+allow init init:capability { sys_module };
+allow init nvm_block_device:blk_file { write };
+allow init gpu_device:chr_file { write  ioctl };
+allow init property_socket:sock_file { write };
+

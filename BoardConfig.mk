@@ -137,7 +137,8 @@ BOARD_SEPOLICY_UNION ?=     \
         system_server.te    \
         uncrypt.te          \
         vold.te             \
-        zygote.te
+        zygote.te	    \
+	pvrsrvctl.te 
 
 
 # Recovery

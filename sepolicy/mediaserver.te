@@ -9,3 +9,12 @@ allow mediaserver camdata_file:dir create_dir_perms;
 allow mediaserver camdata_file:file create_file_perms;
 allow mediaserver untrusted_app:dir search;
 allow mediaserver untrusted_app:file { open read };
+
+
+allow mediaserver system_file:file { execmod };
+allow mediaserver storage_file:dir { search };
+allow mediaserver storage_file:lnk_file { read };
+allow mediaserver mnt_user_file:dir { search };
+allow mediaserver mnt_user_file:lnk_file { read };
+allow mediaserver sensorservice_service:service_manager { find };
+allow mediaserver graphic_prop:property_service  { set };

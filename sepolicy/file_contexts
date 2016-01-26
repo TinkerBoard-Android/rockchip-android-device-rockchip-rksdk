@@ -23,3 +23,4 @@
 /radical_update(/.*)? u:object_r:ru_file:s0
 /dev/rtk_btusb       u:object_r:rtkbt_device:s0
 /dev/rknand_sys_storage                u:object_r:rknand_device:s0
+/system/vendor/bin/pvrsrvctl           u:object_r:pvrsrvctl_exec:s0
