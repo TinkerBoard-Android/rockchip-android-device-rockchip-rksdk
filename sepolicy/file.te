@@ -1,3 +1,7 @@
 type metadata_file, file_type;
 type camdata_file, file_type;
 type ru_file, file_type;
+type ext4_exec, exec_type, file_type;
+type sysfs_usb, fs_type, sysfs_type;
+type zram_device, dev_type;
+type swsync_device, dev_type;

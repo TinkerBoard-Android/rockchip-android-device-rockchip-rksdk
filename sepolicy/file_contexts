@@ -13,6 +13,8 @@
 /dev/video_state     u:object_r:video_device:s0
 /dev/iep             u:object_r:video_device:s0
 /dev/camsys_marvin   u:object_r:camera_device:s0
+/dev/block/zram0     u:object_r:zram_device:s0
+/dev/sw_sync         u:object_r:swsync_device:s0
 
 /system/bin/akmd     u:object_r:akmd_exec:s0
 
@@ -24,3 +26,9 @@
 /dev/rtk_btusb       u:object_r:rtkbt_device:s0
 /dev/rknand_sys_storage                u:object_r:rknand_device:s0
 /system/vendor/bin/pvrsrvctl           u:object_r:pvrsrvctl_exec:s0
+/system/bin/drmservice                 u:object_r:drmservice_exec:s0
+/sbin/e2fsck                           u:object_r:ext4_exec:s0
+/sbin/resize2fs                        u:object_r:ext4_exec:s0
+
+
+/sys/devices/virtual/android_usb/android0/(/.*)? -- u:object_r:sysfs_usb:s0

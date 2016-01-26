@@ -114,32 +114,6 @@ TARGET_USES_LOGD ?= true
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy
-BOARD_SEPOLICY_UNION ?=     \
-        akmd.te             \
-        app.te              \
-        device.te           \
-        bluetooth.te        \
-        drmserver.te        \
-        file.te             \
-        file_contexts       \
-        genfs_contexts      \
-        gpsd.te             \
-        init.te             \
-        kernel.te           \
-        mediaserver.te      \
-        netd.te             \
-        platform_app.te     \
-        recovery.te         \
-        rild.te             \
-        shell.te            \
-        surfaceflinger.te   \
-        system_app.te       \
-        system_server.te    \
-        uncrypt.te          \
-        vold.te             \
-        zygote.te	    \
-	pvrsrvctl.te 
-
 
 # Recovery
 TARGET_NO_RECOVERY ?= false
