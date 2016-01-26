@@ -144,6 +144,10 @@ on property:ro.boot.baseband=N/A
     setprop ro.radio.noril false
     start ril-daemon
 
+# set ro.serialno
+on property:sys.serialno=*
+    setprop ro.serialno ${sys.serialno}
+
 #Rogue
 service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
     oneshot
