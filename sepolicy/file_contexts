@@ -32,3 +32,6 @@
 
 
 /sys/devices/virtual/android_usb/android0/(/.*)? -- u:object_r:sysfs_usb:s0
+
+#add for glgps
+/system/bin/glgps    u:object_r:gpsd_exec:s0
