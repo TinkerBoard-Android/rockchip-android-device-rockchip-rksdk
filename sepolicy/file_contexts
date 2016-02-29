@@ -14,7 +14,7 @@
 /dev/iep             u:object_r:video_device:s0
 /dev/camsys_marvin   u:object_r:camera_device:s0
 /dev/block/zram0     u:object_r:zram_device:s0
-/dev/sw_sync         u:object_r:swsync_device:s0
+/dev/sw_sync         u:object_r:gpu_device:s0
 
 /system/bin/akmd     u:object_r:akmd_exec:s0
 
