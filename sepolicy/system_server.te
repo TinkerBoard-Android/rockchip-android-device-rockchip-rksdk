@@ -7,3 +7,4 @@ allow system_server serial_device:chr_file rw_file_perms;
 
 allow system_server gps_data_file:dir { search write read open add_name };
 allow system_server gps_data_file:fifo_file { write open read };
+allow system_server dumpstate:unix_stream_socket { ioctl };
