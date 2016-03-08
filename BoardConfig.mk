@@ -50,7 +50,7 @@ endif
 
 
 # GPU configration
-TARGET_BOARD_PLATFORM_GPU ?= MaliT760
+TARGET_BOARD_PLATFORM_GPU ?= mali-t760
 BOARD_USE_LCDC_COMPOSER ?= false
 GRAPHIC_MEMORY_PROVIDER ?= ump
 USE_OPENGL_RENDERER ?= true
@@ -67,8 +67,12 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali450)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/Mali450/lib/x86/egl.cfg
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), Mali-T760)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali-t760)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/MaliT760/etc/egl.cfg
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali-t720)
+BOARD_EGL_CFG := vendor/rockchip/common/gpu/MaliT720/etc/egl.cfg
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), PVR540)
