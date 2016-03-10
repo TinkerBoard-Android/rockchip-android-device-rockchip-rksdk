@@ -23,6 +23,7 @@
 /dev/vpu                  0660   system     system
 /dev/vpu_service          0666   media      media
 /dev/hevc_service         0666   media      media
+/dev/rkvdec               0666   media      media
 /dev/vpu_mem              0666   system     system
 /dev/rk29-ipp             0666   system     system   
 /dev/rga                  0666   system     system
