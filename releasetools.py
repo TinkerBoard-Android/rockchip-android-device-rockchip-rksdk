@@ -135,7 +135,7 @@ def IncrementalOTA_InstallEnd(info):
   else:
     print "trust unchanged; skipping"
 
- try:
+  try:
     loader_uboot_target = info.target_zip.read("uboot.img")
   except KeyError:
     loader_uboot_target = None
