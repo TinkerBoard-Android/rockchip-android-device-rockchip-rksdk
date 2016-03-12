@@ -160,6 +160,13 @@ service drmservice /system/bin/drmservice
         class main
         oneshot
 
+##$_rbox_$_modify_$_shenzhenyi_20160312
+##$_rbox_$_modify_$_begin
+service displayd /system/bin/displayd
+    class core
+    socket displayd stream 0760 system system
+##$_rbox_$_modify_$_end
+
 ##$_rbox_$_modify_$_chenzhi_20120309
 ##$_rbox_$_modify_$_begin
 service pppoe_setup /system/bin/pppoe-setup
