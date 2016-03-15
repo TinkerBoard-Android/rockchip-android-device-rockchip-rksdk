@@ -513,3 +513,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.mem_optimise.enable=true
 endif
+
+#if force app can see udisk
+ifeq ($(strip $(BOARD_FORCE_UDISK_VISIBLE)),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.udisk.visible=true
+endif

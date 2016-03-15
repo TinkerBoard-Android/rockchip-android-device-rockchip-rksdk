@@ -236,3 +236,6 @@ BOARD_WITH_BOOT_BOOST ?= false
 
 #optimise mem
 BOARD_WITH_MEM_OPTIMISE ?= false
+
+#force app can see udisk
+BOARD_FORCE_UDISK_VISIBLE ?= false
