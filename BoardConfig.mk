@@ -239,3 +239,6 @@ BOARD_WITH_MEM_OPTIMISE ?= false
 
 #force app can see udisk
 BOARD_FORCE_UDISK_VISIBLE ?= false
+
+# set security patch date,this date should be update if security patch apply
+PLATFORM_SECURITY_PATCH := 2016-03-01
