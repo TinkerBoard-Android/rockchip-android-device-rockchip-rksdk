@@ -67,6 +67,10 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali450)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/Mali450/lib/x86/egl.cfg
 endif
 
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali-t860)
+BOARD_EGL_CFG := vendor/rockchip/common/gpu/MaliT860/etc/egl.cfg
+endif
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali-t760)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/MaliT760/etc/egl.cfg
 endif
