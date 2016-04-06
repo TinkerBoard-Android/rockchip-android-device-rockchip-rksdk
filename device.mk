@@ -89,33 +89,36 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
-#$_rbox_$_modify_$_blb_20150321_for_pppoe
-#ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
-
-#PRODUCT_PACKAGES += \
+ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
+PRODUCT_PACKAGES += \
     pppoe \
     pppoe-sniff \
     pppoe-repay \
 
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     libpppoe-jni \
     pppoe-service
-#PRODUCT_SYSTEM_SERVER_JARS += \
+
+PRODUCT_SYSTEM_SERVER_JARS += \
     pppoe-service
-#PRODUCT_COPY_FILES += \
+
+PRODUCT_COPY_FILES += \
        frameworks/native/data/etc/android.software.pppoe.xml:system/etc/permissions/android.software.pppoe.xml
-#    $(call inherit-product, external/rp-pppoe/pppoe-copy.mk)
-#endif
-#$_rbox_$_modify_$_blb_$_end
-#$_rbox_$_modify_$_blb_20150514_for_pppoe_pass_cts
-#ifeq ($(strip $(BOARD_PPPOE_PASS_CTS)),true)
-#PRODUCT_PROPERTY_OVERRIDES += \
+
+ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+PRODUCT_PROPERTY_OVERRIDES += \
+       net.pppoe.cts=true
+endif
+
+$(call inherit-product-if-exists, external/rp-pppoe/pppoe-copy.mk)
+endif
+ifeq ($(strip $(BOARD_PPPOE_PASS_CTS)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
     net.pppoe.cts=true
-#else
-#PRODUCT_PROPERTY_OVERRIDES += \
+else
+PRODUCT_PROPERTY_OVERRIDES += \
     net.pppoe.cts=false
-#endif
-#$_rbox_$_modify_$_blb_$_end
+endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_COPY_FILES += \
