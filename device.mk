@@ -522,3 +522,9 @@ ifeq ($(strip $(BOARD_FORCE_UDISK_VISIBLE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.udisk.visible=true
 endif
+
+#if box platform force app can see udisk
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.udisk.visible=true
+endif
