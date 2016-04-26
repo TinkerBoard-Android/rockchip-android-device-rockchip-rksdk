@@ -186,4 +186,7 @@ service pppoe_stop /system/bin/pppoe-stop
     oneshot
 ##$_rbox_$_modify_$_end
 
+service up_eth0 /system/bin/busybox ifconfig eth0 up
+    class main
+    oneshot
 
