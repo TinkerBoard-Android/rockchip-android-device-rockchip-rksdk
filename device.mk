@@ -203,7 +203,7 @@ PRODUCT_PACKAGES += \
     akmd 
 
 # iep
-ifneq ($(filter rk3190 rk3026 rk3288 rk312x rk3368 rk3366, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk3190 rk3026 rk3288 rk312x rk3368 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
 BUILD_IEP := true
 PRODUCT_PACKAGES += \
     libiep
