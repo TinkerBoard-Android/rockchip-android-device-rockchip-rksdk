@@ -23,4 +23,7 @@ recovery_only(`
 	allow recovery ru_file:file execute_no_trans;
 	allow recovery ru_file:{ file lnk_file } { create_file_perms relabelfrom relabelto };
 	allow recovery ru_file:dir { create_dir_perms relabelfrom relabelto };
+
+    allow recovery vfat:file {create append};
+    allow recovery rknand_device:chr_file {read write open ioctl};
 ')
