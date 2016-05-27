@@ -38,3 +38,6 @@
 
 #lcdcscale
 /sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
+
+#for support ntfs
+/system/bin/ntfs-3g  u:object_r:ntfs3g_exec:s0

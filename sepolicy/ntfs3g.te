@@ -1,0 +1,19 @@
+type ntfs3g, domain, mlstrustedsubject;
+type ntfs3g_exec, exec_type, file_type;
+
+#init_daemon_domain(ntfs3g)
+
+
+allow ntfs3g vold:fd { use };
+allow ntfs3g fuse_device:blk_file { open read write getattr };
+allow ntfs3g unlabeled:dir { mounton };
+allow ntfs3g devpts:chr_file rw_file_perms;
+allow ntfs3g vold:fifo_file rw_file_perms;
+allow ntfs3g ntfs3g:capability { setgid setuid sys_admin };
+allow ntfs3g block_device:dir { getattr search };
+allow ntfs3g vold_device:blk_file rw_file_perms;
+allow ntfs3g block_device:blk_file { lock  getattr };
+allow ntfs3g fuse_device:chr_file rw_file_perms;
+allow ntfs3g mnt_media_rw_stub_file:dir { getattr search mounton };
+allow ntfs3g unlabeled:filesystem { mount };
+allow ntfs3g mnt_media_rw_file:dir { getattr search };

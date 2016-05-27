@@ -12,3 +12,4 @@ allow kernel device:chr_file { create setattr };
 allow kernel kernel:system { module_request };
 allow kernel metadata_file:dir rw_dir_perms;
 allow kernel metadata_file:file rw_file_perms;
+allow kernel device:dir { remove_name };

@@ -1,3 +1,6 @@
+
+domain_auto_trans(vold, ntfs3g_exec, ntfs3g);
+
 allow vold unlabeled:file rw_file_perms;
 allow vold kernel:system module_request;
 allow vold rootfs:file { execute execute_no_trans };
@@ -11,3 +14,9 @@ allow vold usb_device:chr_file rw_file_perms;
 allow vold metadata_file:dir rw_dir_perms;
 allow vold metadata_file:file create_file_perms;
 allow vold zram_device:blk_file { open read write getattr };
+
+allow vold ntfs3g_exec:file { execute execute_no_trans r_file_perms };
+allow vold unlabeled:filesystem { unmount };
+allow vold block_device:blk_file { getattr };
+allow vold unlabeled:dir { mounton };
+allow vold mnt_media_rw_stub_file:dir { search };
