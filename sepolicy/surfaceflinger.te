@@ -1,3 +1,4 @@
 allow surfaceflinger device:dir r_dir_perms;
 allow surfaceflinger ddr_device:chr_file rw_file_perms;
 allow surfaceflinger rga_device:chr_file rw_file_perms;
+allow surfaceflinger sysfs_lcdc:file rw_file_perms;
