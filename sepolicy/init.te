@@ -6,6 +6,7 @@
 
 domain_trans(init, pvrsrvctl_exec, pvrsrvctl)
 domain_trans(init, drmservice_exec, drmservice)
+domain_trans(init, displayd_exec, displayd)
 
 allow init serial_device:chr_file { write ioctl };
 allow init kernel:system { module_request };
@@ -21,3 +22,7 @@ allow init property_socket:sock_file { write };
 allow init zram_device:blk_file { write open read };
 
 #allow init ext4_exec:file { execute_no_trans };
+
+allow init socket_device:sock_file { create setattr };
+allow init sysfs_hdmi:file rw_file_perms;
+allow init init:netlink_kobject_uevent_socket { create setopt bind getopt read };

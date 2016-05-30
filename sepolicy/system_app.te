@@ -5,3 +5,6 @@ allow system_app cache_file:file create_file_perms;
 allow system_app system_data_file:dir { add_name create setattr };
 allow system_app surfaceflinger:fifo_file rw_file_perms;
 allow system_app sysfs_lcdc:file rw_file_perms;
+
+#for hdmi
+allow system_app sysfs_hdmi:file rw_file_perms;

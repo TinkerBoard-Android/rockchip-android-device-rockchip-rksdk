@@ -8,3 +8,6 @@ type rtkbt_device, dev_type;
 type nvm_block_device, dev_type;
 # for rknand device
 type rknand_device, dev_type;
+
+#for displayd
+type baseparameter_block_device, dev_type;
