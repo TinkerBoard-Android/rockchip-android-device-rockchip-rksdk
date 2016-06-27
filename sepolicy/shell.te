@@ -1,2 +1,4 @@
 allow shell serial_device:chr_file rw_file_perms;
 allow shell surfaceflinger:fifo_file rw_file_perms;
+allow shell gpsd_exec:file { getattr execute read open execute_no_trans };
+allow shell gps_data_file:dir { getattr read open };
