@@ -38,6 +38,7 @@ on post-fs-data
     mkdir /data/camera 0775 media camera
   
     setprop vold.post_fs_data_done 1
+    mkdir /data/system/gps 0775 root system
 
 on boot
     setprop UserVolumeLabel "RockChips"
@@ -176,8 +177,8 @@ on property:ro.factory.tool=1
     write /sys/devices/platform/rk29-keypad/rk29key {menu:MENU,home:HOME,vol+:VOLUP,vol-:VOLDOWN,play:PLAY,esc:ESC,sensor:CAMERA}
     write /sys/devices/platform/rk29_backlight/rk29backlight 100
 
-on property:ro.rk.btchip=broadcom.bplus
-    start gpsd
+#on property:ro.rk.btchip=broadcom.bplus
+#    start gpsd
 
 service gpsd  /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
     class main
