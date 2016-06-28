@@ -183,7 +183,7 @@ on property:ro.factory.tool=1
 service gpsd  /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
     class main
     disabled
-    user root
+    user gps
     group system
 
 #stresstest
