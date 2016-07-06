@@ -38,6 +38,7 @@
 <app package="com.google.android.youtube"/>
 <app package="com.android.email"/>
 
+
 <service package="com.google.android.apps.docs.editors.slides"/>
 <service package="com.google.android.apps.docs"/>
 <service package="com.google.android.apps.docs.editors.docs"/>
@@ -46,6 +47,19 @@
 
 <game package="com.imangi.templerun2"/>
 <game package="com.kiloo.subwaysurf"/>
+<game package="com.qiyi.video"/>
+<game package="com.qiyi.video.pad" />
+<game package="com.qiyi.video.pad.intel"/>
+<game package="com.sohu.tv"/>
+<game package="com.sohu.sohuvideo"/>
+<game package="com.youku.phone"/>
+<game package="com.letv.android.client.pad"/>
+<game package="com.letv.android.client"/>
+<game package="com.tudou.android"/>
+<game package="com.pplive.androidphone"/>
+<game package="com.baidu.video"/>
+<game package="tv.pps.mobile"/>
+<game package="com.tencent.qqlive"/>
 
 <prev package="com.android.launcher"/>
 <prev package="com.google.android.launcher"/>
@@ -60,10 +74,19 @@
 <prev package="com.android.music"/>
 <prev package="com.android.camera2"/>
 <prev package="com.google.android.GoogleCamera"/>
+<prev package="com.cghs.stresstest"/>
+<prev package="com.android.cts.verifier"/>
 
 <next package="com.qihoo"/>
 <next package="com.dragon.android.pandaspace"/>
 <next package=".auth.gsf.AccountIntroActivity"/>
 <next package=".auth.login."/>
 <next package="com.android.systemui"/>
+
+<empty package="com.android.phone"/>
+<empty package="android.process.media"/>
+<empty package="com.cghs.stresstest"/>
+<empty package="com.android.cts.verifier"/>
+
+<hardware package="com.android.camera2"/>
 </lowmem-filter-package>
