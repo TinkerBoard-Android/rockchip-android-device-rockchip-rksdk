@@ -3,7 +3,7 @@ type drmservice_exec, exec_type, file_type;
 
 init_daemon_domain(drmservice)
 
-allow drmservice drmservice:capability { dac_override dac_read_search net_raw net_admin };
+allow drmservice drmservice:capability { dac_override dac_read_search net_raw net_admin sys_module };
 allow drmservice drmservice:udp_socket { create };
 allow drmservice property_socket:sock_file { write };
 allow drmservice sysfs:file { write };
