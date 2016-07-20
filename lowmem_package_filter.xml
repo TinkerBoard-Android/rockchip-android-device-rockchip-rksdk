@@ -76,6 +76,7 @@
 <prev package="com.google.android.GoogleCamera"/>
 <prev package="com.cghs.stresstest"/>
 <prev package="com.android.cts.verifier"/>
+<prev package="com.google.android.exoplayer.playbacktests"/>
 
 <next package="com.qihoo"/>
 <next package="com.dragon.android.pandaspace"/>
