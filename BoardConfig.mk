@@ -25,14 +25,20 @@ TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
 # value: tablet,box,phone
 # It indicates whether to be tablet platform or not
+
 ifneq ($(filter %box, $(TARGET_PRODUCT)), )
 TARGET_BOARD_PLATFORM_PRODUCT ?= box
 else
+ifneq ($(filter %vr, $(TARGET_PRODUCT)), )
+TARGET_BOARD_PLATFORM_PRODUCT ?= vr
+else
 TARGET_BOARD_PLATFORM_PRODUCT ?= tablet
+endif
 endif
 
 # CPU feature configration
 ifeq ($(strip $(TARGET_BOARD_HARDWARE)), rk30board)
+
 TARGET_ARCH ?= arm
 TARGET_ARCH_VARIANT ?= armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER ?= true
@@ -89,16 +95,20 @@ BOARD_USE_LOW_MEM ?= false
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 
 #######for target product ########
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
 
 PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=box
+	ro.target.product=box
+else
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
+  PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=vr
 else
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=tablet
 endif
-
+endif
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
 TARGET_PROVIDES_INIT_RC ?= false
 BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
