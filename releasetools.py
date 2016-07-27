@@ -20,6 +20,7 @@ import re
 
 
 def FullOTA_Assertions(info):
+  Install_Parameter(info)
   AddBootloaderAssertion(info, info.input_zip)
 
 def IncrementalOTA_Assertions(info):
