@@ -14,7 +14,8 @@ if [ "$1"x != ""x  ]; then
 fi
 
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
-
+UBOOT_PATH=u-boot
+KERNEL_PATH=kernel
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
 
@@ -22,6 +23,7 @@ FSTYPE=ext4
 echo system filesysystem is $FSTYPE
 
 BOARD_CONFIG=device/rockchip/common/device.mk
+PARAMETER=device/rockchip/rk3399/parameter.txt
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
@@ -120,5 +122,57 @@ then
 	fi
 	echo "done."
 fi
+if [ -f $UBOOT_PATH/uboot.img ]
+then
+	echo -n "create uboot.img..."
+	cp -a $UBOOT_PATH/uboot.img $IMAGE_PATH/uboot.img
+	echo "done."
+else
+	echo "$UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first!"
+fi
 
+if [ -f $UBOOT_PATH/trust.img ]
+then
+        echo -n "create trust.img..."
+        cp -a $UBOOT_PATH/trust.img $IMAGE_PATH/trust.img
+        echo "done."
+else    
+        echo "$UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first!"
+fi
+
+if [ -f $UBOOT_PATH/*MiniLoaderAll_*.bin ]
+then
+        echo -n "create loader..."
+        cp -a $UBOOT_PATH/*MiniLoaderAll_*.bin $IMAGE_PATH/
+        echo "done."
+else    
+        echo "$UBOOT_PATH/*MiniLoaderAll_*.bin not fount! Please make it from $UBOOT_PATH first!"
+fi
+
+if [ -f $KERNEL_PATH/resource.img ]
+then
+        echo -n "create resource.img..."
+        cp -a $KERNEL_PATH/resource.img $IMAGE_PATH/resource.img
+        echo "done."
+else
+        echo "$KERNEL_PATH/resource.img not fount!"
+fi
+
+if [ -f $KERNEL_PATH/kernel.img ]
+then
+        echo -n "create kernel.img..."
+        cp -a $KERNEL_PATH/kernel.img $IMAGE_PATH/kernel.img
+        echo "done."
+else
+        echo "$KERNEL_PATH/kernel.img not fount!"
+fi
+
+if [ -f $PARAMETER ]
+then
+        echo -n "create parameter..."
+        cp -a $PARAMETER $IMAGE_PATH/
+        echo "done."
+else
+        echo "$PARAMETER not fount!"
+fi
 chmod a+r -R $IMAGE_PATH/
