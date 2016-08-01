@@ -191,6 +191,7 @@ include device/rockchip/common/wifi_bt_common.mk
 # google apps
 BUILD_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET_ALL ?= false
+BUILD_WITH_GOOGLE_FRP ?= false
 
 # face lock
 BUILD_WITH_FACELOCK ?= false

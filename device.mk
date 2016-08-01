@@ -471,6 +471,10 @@ $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 else
 $(call inherit-product-if-exists, vendor/google/products/gms_mini.mk)
 endif
+ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/platform/fe330000.sdhci/by-name/frp
+endif
 endif
 $(call inherit-product-if-exists, vendor/rockchip/common/device-vendor.mk)
 

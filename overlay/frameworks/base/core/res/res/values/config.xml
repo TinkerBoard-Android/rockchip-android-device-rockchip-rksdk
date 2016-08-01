@@ -224,4 +224,8 @@
         <item>com.google.android.gms</item>
         <item>com.android.location.fused</item>
     </string-array>
+
+    <!-- Flag indicating which package name can access the persistent data partition -->
+    <string name="config_persistentDataPackageName" translatable="false">Google Play Services</string>
+
 </resources>

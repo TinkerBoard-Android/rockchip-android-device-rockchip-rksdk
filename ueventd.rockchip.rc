@@ -201,3 +201,5 @@
 /sys/devices/platform/ff1d0000.spi/spi_master/spi32766/spi32766.0/iio:device* smd_delay_threshold2        0660 system system
 /sys/devices/platform/ff1d0000.spi/spi_master/spi32766/spi32766.0/iio:device* smd_threshold           0660 system system
 
+#for frp function
+/dev/block/platform/fe330000.sdhci/by-name/frp 0660 system system
