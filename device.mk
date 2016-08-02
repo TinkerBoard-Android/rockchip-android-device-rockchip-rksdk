@@ -37,6 +37,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     fsck.f2fs mkfs.f2fs
 
+# PCBA tools
+PRODUCT_PACKAGES += \
+    pcba_core
+
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
