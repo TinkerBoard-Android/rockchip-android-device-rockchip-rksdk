@@ -23,7 +23,7 @@ FSTYPE=ext4
 echo system filesysystem is $FSTYPE
 
 BOARD_CONFIG=device/rockchip/common/device.mk
-PARAMETER=device/rockchip/rk3399/parameter.txt
+PARAMETER=device/rockchip/rk3399/$TARGET_PRODUCT/parameter.txt
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
