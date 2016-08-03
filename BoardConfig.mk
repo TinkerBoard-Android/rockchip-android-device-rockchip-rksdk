@@ -272,3 +272,6 @@ PLATFORM_SECURITY_PATCH := 2016-03-01
 
 # disable safe mode to speed up boot time
 BOARD_DISABLE_SAFE_MODE ?= true
+
+#enable 3g dongle
+BOARD_ENABLE_3G_DONGLE := true
