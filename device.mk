@@ -250,7 +250,10 @@ PRODUCT_PACKAGES += \
     libasound \
     alsa.default \
     acoustics.default \
-    libtinyalsa
+    libtinyalsa \
+    tinymix \
+    tinyplay \
+    tinypcminfo
 
 PRODUCT_PACKAGES += \
 	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
@@ -548,4 +551,13 @@ ifeq ($(strip $(BOARD_ENABLE_3G_DONGLE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.enable.3g.dongle=true \
     rild.libpath=/system/lib64/libril-rk29-dataonly.so
+endif
+
+#boot and shutdown animation, ringing
+ifeq ($(strip $(BOOT_SHUTDOWN_ANIMATION_RINGING)),true)
+PRODUCT_COPY_FILES += \
+       $(LOCAL_PATH)/startup.wav:system/media/audio/startup.wav \
+       $(LOCAL_PATH)/shutdown.wav:system/media/audio/shutdown.wav \
+       $(LOCAL_PATH)/bootanimation.zip:system/media/bootanimation.zip \
+       $(LOCAL_PATH)/shutdownanimation.zip:system/media/shutdownanmation.zip
 endif
