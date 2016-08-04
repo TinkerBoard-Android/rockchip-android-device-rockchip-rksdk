@@ -1,0 +1,5 @@
+type resize2fs, domain;
+type resize2fs_exec, exec_type, file_type;
+
+init_daemon_domain(resize2fs)
+

@@ -6,3 +6,6 @@ type sysfs_usb, fs_type, sysfs_type;
 type zram_device, dev_type;
 type sysfs_lcdc, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
+type akmd_device, dev_type;
+type configfs, fs_type;
+type tracefs, fs_type;
