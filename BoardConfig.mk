@@ -276,3 +276,6 @@ BOARD_DISABLE_SAFE_MODE ?= true
 
 #enable 3g dongle
 BOARD_ENABLE_3G_DONGLE := true
+
+#for boot and shutdown animation ringing
+BOOT_SHUTDOWN_ANIMATION_RINGING ?= false

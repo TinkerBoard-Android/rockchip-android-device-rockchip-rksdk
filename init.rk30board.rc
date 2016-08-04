@@ -203,3 +203,16 @@ service up_eth0 /system/bin/busybox ifconfig eth0 up
     class main
     oneshot
 
+service shutdownanim /system/bin/bootanimation shutdown
+    class core
+    user graphics
+    group graphics audio
+    disabled
+    oneshot
+
+service startup_rington /system/bin/tinyplay /system/media/audio/startup.wav 3
+    class core
+    user system
+    group graphics audio system
+    disabled
+    oneshot
