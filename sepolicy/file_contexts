@@ -12,13 +12,10 @@
 /dev/hevc_service    u:object_r:video_device:s0
 /dev/video_state     u:object_r:video_device:s0
 /dev/iep             u:object_r:video_device:s0
-/dev/camsys_marvin[0-9]*   u:object_r:camera_device:s0
 /dev/camsys_marvin   u:object_r:camera_device:s0
 /dev/block/zram0     u:object_r:zram_device:s0
 /dev/sw_sync         u:object_r:gpu_device:s0
 
-#akmd
-/dev/akm8963_dev     u:object_r:akmd_device:s0
 /system/bin/akmd     u:object_r:akmd_exec:s0
 
 /metadata(/.*)?      u:object_r:metadata_file:s0
@@ -31,7 +28,7 @@
 /system/vendor/bin/pvrsrvctl           u:object_r:pvrsrvctl_exec:s0
 /system/bin/drmservice                 u:object_r:drmservice_exec:s0
 /sbin/e2fsck                           u:object_r:ext4_exec:s0
-/sbin/resize2fs                        u:object_r:resize2fs_exec:s0
+/sbin/resize2fs                        u:object_r:ext4_exec:s0
 
 
 /sys/devices/virtual/android_usb/android0/(/.*)? -- u:object_r:sysfs_usb:s0
@@ -58,9 +55,3 @@
 /dev/block/mmcblk0p13                u:object_r:frp_block_device:s0
 /dev/block/platform/fe330000.sdhci/by-name/frp  u:object_r:frp_block_device:s0
 
-# sensor
-/dev/lightsensor                u:object_r:sensor_device:s0
-/dev/psensor                    u:object_r:sensor_device:s0
-/dev/compass                    u:object_r:sensor_device:s0
-/dev/gyrosensor                 u:object_r:sensor_device:s0
-/dev/pressure                   u:object_r:sensor_device:s0
