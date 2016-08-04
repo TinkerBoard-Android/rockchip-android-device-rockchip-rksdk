@@ -21,4 +21,3 @@ allow displayd displayd:netlink_nflog_socket { create setopt bind getopt read };
 allow displayd displayd:unix_stream_socket { connectto };
 allow displayd shell_exec:file { execute read open execute_no_trans };
 allow displayd block_device:dir { search };
-allow displayd sysfs:file { write };
