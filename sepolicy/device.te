@@ -11,3 +11,4 @@ type rknand_device, dev_type;
 
 #for displayd
 type baseparameter_block_device, dev_type;
+type sensor_device, dev_type;
