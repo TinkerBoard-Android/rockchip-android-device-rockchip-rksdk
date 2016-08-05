@@ -1,0 +1,6 @@
+recovery_only(`
+allow healthd device:dir { write add_name remove_name };
+allow healthd device:chr_file { create };
+#allow healthd device:chr_file { write open };
+#allow healthd self:capability { mknod };
+')
