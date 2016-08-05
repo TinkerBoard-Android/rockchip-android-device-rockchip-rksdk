@@ -479,6 +479,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/platform/fe330000.sdhci/by-name/frp
 endif
 endif
+
+#ro.product.first_api_level indicates the first api level, device has been commercially launced on.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.first_api_level=23
+
 $(call inherit-product-if-exists, vendor/rockchip/common/device-vendor.mk)
 
 ########################################################
