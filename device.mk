@@ -207,8 +207,11 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 # HAL
+ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
 PRODUCT_PACKAGES += \
-    power.$(TARGET_BOARD_PLATFORM) \
+    power.$(TARGET_BOARD_PLATFORM) 
+endif
+PRODUCT_PACKAGES += \
     sensors.$(TARGET_BOARD_HARDWARE) \
     gralloc.$(TARGET_BOARD_HARDWARE) \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \
