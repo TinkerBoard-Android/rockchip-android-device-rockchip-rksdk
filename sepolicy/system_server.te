@@ -17,3 +17,10 @@ allow system_server gps_data_file:fifo_file { create rw_file_perms setattr };
 allow system_server system_server:capability { sys_module };
 allow system_server sensor_device:chr_file rw_file_perms;
 allow system_server system_server:unix_stream_socket { ioctl };
+
+# map with latest kernel security/selinux/include/classmap.h
+allow system_server system_server:netlink_netfilter_socket { create setopt bind write read getopt };
+allow system_server system_server:netlink_generic_socket { create setopt bind write read getopt getattr };
+allow system_server system_server:netlink_scsitransport_socket { create setopt bind write read getopt getattr };
+allow system_server system_server:netlink_rdma_socket { create setopt bind write read getopt getattr };
+allow system_server system_server:netlink_crypto_socket { create setopt bind write read getopt getattr };

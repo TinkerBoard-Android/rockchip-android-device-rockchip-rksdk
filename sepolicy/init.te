@@ -33,7 +33,7 @@ allow init cache_file:dir { mounton };
 allow init metadata_file:dir { mounton };
 allow init storage_file:dir mounton;
 allow init baseparameter_block_device:blk_file { write };
-#allow init self:system { module_load };
+allow init self:system { module_load };
 allow init configfs:dir { write remove_name add_name  create };
 allow init configfs:file { write };
 allow init configfs:lnk_file { unlink create };
