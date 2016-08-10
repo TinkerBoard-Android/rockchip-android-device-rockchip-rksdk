@@ -63,6 +63,7 @@
 
 <prev package="com.android.launcher"/>
 <prev package="com.google.android.launcher"/>
+<prev package="com.rockchip.vr.home"/>
 <prev package="com.android.settings"/>
 <prev package="com.android.systemui"/>
 <prev package="com.android.rk"/>
