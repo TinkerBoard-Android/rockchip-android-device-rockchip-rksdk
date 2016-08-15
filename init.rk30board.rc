@@ -65,6 +65,7 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chown system system  /sys/devices/ffa30000.gpu/dvfs
+    chmod 0777 /sys/devices/platform/ff9a0000.gpu/devfreq/ff9a0000.gpu/governor
 
     chown system system /sys/devices/system/cpu/cpu1/online
     chmod 0660 /sys/devices/system/cpu/cpu1/online
