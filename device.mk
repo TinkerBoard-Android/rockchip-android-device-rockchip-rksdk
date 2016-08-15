@@ -566,3 +566,8 @@ PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/bootanimation.zip:system/media/bootanimation.zip \
        $(LOCAL_PATH)/shutdownanimation.zip:system/media/shutdownanmation.zip
 endif
+
+ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.pms.multithreadscan=true		
+endif
