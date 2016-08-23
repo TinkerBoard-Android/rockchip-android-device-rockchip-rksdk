@@ -20,10 +20,10 @@
 #akmd
 /dev/akm8963_dev     u:object_r:akmd_device:s0
 /system/bin/akmd     u:object_r:akmd_exec:s0
-/data/misc/akmd_set.txt     u:object_r:akmd_file:s0
+/data/misc/akmd(/.*)?     u:object_r:akmd_file:s0
 
 /metadata(/.*)?      u:object_r:metadata_file:s0
-/dev/mma8452_daemon  u:object_r:sensors_device:s0
+/dev/mma8452_daemon  u:object_r:sensor_device:s0
 /data/camera(/.*)?   u:object_r:camdata_file:s0
 
 /radical_update(/.*)? u:object_r:ru_file:s0
@@ -65,3 +65,5 @@
 /dev/compass                    u:object_r:sensor_device:s0
 /dev/gyrosensor                 u:object_r:sensor_device:s0
 /dev/pressure                   u:object_r:sensor_device:s0
+
+/dev/block/platform/fe330000.sdhci/by-name/userdata u:object_r:userdata_block_device:s0
