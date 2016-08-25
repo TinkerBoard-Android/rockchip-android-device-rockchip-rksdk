@@ -16,3 +16,4 @@ allow drmservice serialno_prop:property_service { set };
 allow drmservice drm_prop:property_service { set };
 allow drmservice rknand_device:chr_file rw_file_perms;
 allow drmservice configfs:file rw_file_perms;
+allow drmservice configfs:dir { rw_dir_perms search };
