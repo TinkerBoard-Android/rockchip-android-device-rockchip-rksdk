@@ -236,9 +236,6 @@ BUILD_WITH_MULTI_USB_PARTITIONS ?= false
 # define tablet support NTFS
 BOARD_IS_SUPPORT_NTFS ?= true
 
-# product has GPS or not
-BOARD_HAS_GPS ?= false
-
 # pppoe for cts, you should set this true during pass CTS and which will disable  pppoe function.
 BOARD_PPPOE_PASS_CTS ?= false
 
@@ -282,3 +279,14 @@ BOOT_SHUTDOWN_ANIMATION_RINGING ?= false
 
 #for pms multi thead scan
 BOARD_ENABLE_PMS_MULTI_THREAD_SCAN ?= false
+
+# product has follow sensors or not,if had override it in product's BoardConfig
+BOARD_HAS_GPS ?= false   
+BOARD_NFC_SUPPORT ?= false
+BOARD_GRAVITY_SENSOR_SUPPORT ?= false
+BOARD_COMPASS_SENSOR_SUPPORT ?= false
+BOARD_GYROSCOPE_SENSOR_SUPPORT ?= false
+BOARD_PROXIMITY_SENSOR_SUPPORT ?= false
+BOARD_LIGHT_SENSOR_SUPPORT ?= false
+BOARD_PRESSURE_SENSOR_SUPPORT ?= false
+BOARD_TEMPERATURE_SENSOR_SUPPORT ?= false
