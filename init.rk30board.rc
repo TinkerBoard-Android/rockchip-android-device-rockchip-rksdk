@@ -3,6 +3,7 @@ import init.${ro.hardware}.environment.rc
 import init.rockchip.rc
 import init.connectivity.rc
 import init.box.samba.rc
+import init.${ro.target.product}.rc
 
 on post-fs
     insmod /system/lib/modules/ump.ko

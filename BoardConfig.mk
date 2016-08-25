@@ -111,14 +111,14 @@ DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
 
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.target.product=box
 else
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
-  PRODUCT_PROPERTY_OVERRIDES += \
+  ADDITIONAL_DEFAULT_PROPERTIES += \
         ro.target.product=vr
 else
-  PRODUCT_PROPERTY_OVERRIDES += \
+  ADDITIONAL_DEFAULT_PROPERTIES += \
         ro.target.product=tablet
 endif
 endif
