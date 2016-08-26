@@ -38,7 +38,6 @@ allow init configfs:dir { write remove_name add_name  create };
 allow init configfs:file { write };
 allow init configfs:lnk_file { unlink create };
 allow init frp_block_device:blk_file { write };
-allow init tracefs:file rw_file_perms;
 #allow init rootfs:file { execute_no_trans };
 allow init devpts:chr_file { getattr };
 allow init debugfs:dir mounton;

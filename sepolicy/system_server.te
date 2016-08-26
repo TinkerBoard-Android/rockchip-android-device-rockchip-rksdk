@@ -24,5 +24,3 @@ allow system_server system_server:netlink_generic_socket { create setopt bind wr
 allow system_server system_server:netlink_scsitransport_socket { create setopt bind write read getopt getattr };
 allow system_server system_server:netlink_rdma_socket { create setopt bind write read getopt getattr };
 allow system_server system_server:netlink_crypto_socket { create setopt bind write read getopt getattr };
-
-allow system_server tracefs:file rw_file_perms;

@@ -8,5 +8,4 @@ type sysfs_lcdc, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
 type akmd_device, dev_type;
 type configfs, fs_type;
-type tracefs, fs_type;
 type akmd_file, file_type, data_file_type;
