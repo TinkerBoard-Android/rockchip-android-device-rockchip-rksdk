@@ -207,8 +207,11 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 # HAL
+ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
 PRODUCT_PACKAGES += \
-    power.$(TARGET_BOARD_PLATFORM) \
+    power.$(TARGET_BOARD_PLATFORM) 
+endif
+PRODUCT_PACKAGES += \
     sensors.$(TARGET_BOARD_HARDWARE) \
     gralloc.$(TARGET_BOARD_HARDWARE) \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \
@@ -545,6 +548,11 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.mem_optimise.enable=true
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
+PRODUCT_COPY_FILES += \
+       device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
 endif
 
 #if force app can see udisk
