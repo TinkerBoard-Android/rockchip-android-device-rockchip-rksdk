@@ -165,3 +165,15 @@ service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
     class main
     disabled
     oneshot
+
+service wifiservice /system/bin/wifiservice
+    class main
+    user root
+    disabled
+    oneshot
+
+service btservice /system/bin/btservice
+    class main
+    user root
+    disabled
+    oneshot
