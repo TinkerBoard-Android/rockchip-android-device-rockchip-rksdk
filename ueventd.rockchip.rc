@@ -203,3 +203,5 @@
 
 #for frp function
 /dev/block/platform/fe330000.sdhci/by-name/frp 0660 system system
+
+/dev/cpu_state 0666 system system
