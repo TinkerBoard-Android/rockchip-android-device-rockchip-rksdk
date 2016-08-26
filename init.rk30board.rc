@@ -148,6 +148,19 @@ on boot
     chmod 0664 /sys/devices/virtual/display/HDMI/mode
     chmod 0664 /sys/devices/virtual/display/HDMI/scale
   
+    #add for cts
+    chmod 0660 /sys/bus/platform/drivers/usb20_otg/dwc_otg_conn_en
+    chmod 0660 /sys/bus/platform/drivers/usb20_otg/force_usb_mode
+    chmod 0660 /sys/bus/platform/drivers/usb20_otg/vbus_status
+    chmod 0660 /sys/devices/platform/fb/graphics/fb5/enable
+    chmod 0660 /sys/devices/platform/fb/graphics/fb6/cursor
+    chmod 0660 /sys/devices/platform/fb/graphics/fb6/enable
+    chmod 0660 /sys/devices/platform/fb/graphics/fb7/enable
+    chmod 0660 /sys/devices/platform/fb/graphics/fb8/enable
+    chmod 0660 /sys/devices/platform/fb/graphics/fb9/enable
+    chmod 0660 /sys/devices/platform/fb/graphics/fb9/bits_per_pixel
+    chmod 0660 /sys/devices/platform/fb/graphics/fb9/win_property
+
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
