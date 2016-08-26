@@ -51,6 +51,8 @@ on boot
     # write /sys/class/rfkill/rfkill0/state 0
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+    mount tracefs /sys/kernel/debug/tracing /sys/kernel/debug/tracing mode=755
+    chown system root /sys/kernel/debug/tracing
 
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker

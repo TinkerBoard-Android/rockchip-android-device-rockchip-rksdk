@@ -41,3 +41,4 @@ allow init frp_block_device:blk_file { write };
 allow init tracefs:file rw_file_perms;
 #allow init rootfs:file { execute_no_trans };
 allow init devpts:chr_file { getattr };
+allow init debugfs:dir mounton;
