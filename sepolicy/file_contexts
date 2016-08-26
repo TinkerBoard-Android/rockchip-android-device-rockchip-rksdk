@@ -31,8 +31,8 @@
 /dev/rknand_sys_storage                u:object_r:rknand_device:s0
 /system/vendor/bin/pvrsrvctl           u:object_r:pvrsrvctl_exec:s0
 /system/bin/drmservice                 u:object_r:drmservice_exec:s0
-/sbin/e2fsck                           u:object_r:ext4_exec:s0
-/sbin/resize2fs                        u:object_r:resize2fs_exec:s0
+#/system/bin/e2fsck                     u:object_r:ext4_exec:s0
+#/sbin/resize2fs                        u:object_r:resize2fs_exec:s0
 
 
 /sys/devices/virtual/android_usb/android0/(/.*)? -- u:object_r:sysfs_usb:s0
@@ -56,8 +56,12 @@
 /data/system/gps(/.*)?     u:object_r:gps_data_file:s0
 
 #for frp funtions
-/dev/block/mmcblk0p13                u:object_r:frp_block_device:s0
+#/dev/block/mmcblk0p13                u:object_r:frp_block_device:s0
 /dev/block/platform/fe330000.sdhci/by-name/frp  u:object_r:frp_block_device:s0
+/dev/block/platform/fe330000.sdhci/by-name/system u:object_r:resize_block_device:s0
+/dev/block/platform/fe330000.sdhci/by-name/cache u:object_r:e2fsck_cache_block_device:s0
+/dev/block/platform/fe330000.sdhci/by-name/metadata u:object_r:e2fsck_metadata_block_device:s0
+/dev/block/mmcblk0p13 u:object_r:e2fsck_frp_block_device:s0
 
 # sensor
 /dev/lightsensor                u:object_r:sensor_device:s0
