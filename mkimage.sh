@@ -6,6 +6,8 @@ set -e
 export PATH=$ANDROID_BUILD_PATHS:$PATH
 TARGET_PRODUCT=`get_build_var TARGET_PRODUCT`
 TARGET_HARDWARE=`get_build_var TARGET_BOARD_HARDWARE`
+TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
+echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_HARDWARE=$TARGET_HARDWARE
 TARGET="withoutkernel"
@@ -23,7 +25,11 @@ FSTYPE=ext4
 echo system filesysystem is $FSTYPE
 
 BOARD_CONFIG=device/rockchip/common/device.mk
+if [[ $TARGET_BOARD_PLATFORM = "rk3399" ]]; then
+PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter.txt
+else
 PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter.txt
+fi
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
