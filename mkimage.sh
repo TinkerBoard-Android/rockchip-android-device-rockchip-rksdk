@@ -28,7 +28,11 @@ BOARD_CONFIG=device/rockchip/common/device.mk
 if [[ $TARGET_BOARD_PLATFORM = "rk3399" ]]; then
 PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter.txt
 else
+if [[ $TARGET_PRODUCT = "px5" ]]; then
+PARAMETER=device/rockchip/$TARGET_PRODUCT/parameter.txt
+else
 PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter.txt
+fi
 fi
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
