@@ -6,3 +6,5 @@ allow surfaceflinger sysfs_lcdc:file rw_file_perms;
 #for hdmi
 allow surfaceflinger sysfs_hdmi:file rw_file_perms;
 allow surfaceflinger surfaceflinger:unix_stream_socket { ioctl };
+
+allow surfaceflinger sysfs:file rw_file_perms;

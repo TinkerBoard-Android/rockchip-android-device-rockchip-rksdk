@@ -24,3 +24,7 @@ allow system_server system_server:netlink_generic_socket { create setopt bind wr
 allow system_server system_server:netlink_scsitransport_socket { create setopt bind write read getopt getattr };
 allow system_server system_server:netlink_rdma_socket { create setopt bind write read getopt getattr };
 allow system_server system_server:netlink_crypto_socket { create setopt bind write read getopt getattr };
+
+allow system_server storage_stub_file:dir rw_dir_perms;
+allow system_server storage_stub_file:file rw_file_perms;
+allow system_server devicemanager_service:service_manager { find add };

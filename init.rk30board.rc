@@ -164,6 +164,8 @@ on boot
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/bits_per_pixel
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/win_property
 
+    restorecon_recursive /dev/block/platform/fe330000.sdhci/by-name/
+
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
