@@ -13,10 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-$(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_BOARD_PLATFORM) preinstall)
-$(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_BOARD_PLATFORM) preinstall_del)
--include device/rockchip/$(TARGET_BOARD_PLATFORM)/preinstall/preinstall.mk
--include device/rockchip/$(TARGET_BOARD_PLATFORM)/preinstall_del/preinstall.mk
+
+# Prebuild apps
+ifneq ($(strip $(TARGET_PRODUCT)), )
+    TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
+    TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(TARGET_DEVICE_DIR)))
+    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall)
+    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del)
+    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
+    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
+endif
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
