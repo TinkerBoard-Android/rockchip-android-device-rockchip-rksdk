@@ -17,7 +17,7 @@ include $(BUILD_PREBUILT)
 """
 def main(argv):
     preinstall_dir = os.path.dirname(argv[0])
-    preinstall_dir = os.path.join(preinstall_dir, '../' + argv[1] + '/' + argv[2])
+    preinstall_dir = os.path.join(preinstall_dir, '../../../' + argv[1] + '/' + argv[2])
     if os.path.exists(preinstall_dir):
         #Use to define modules for install
         makefile_path = preinstall_dir + '/Android.mk'
