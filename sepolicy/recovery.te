@@ -27,4 +27,5 @@ recovery_only(`
     allow recovery vfat:file {create append};
     allow recovery rknand_device:chr_file {read write open ioctl};
     allow recovery metadata_file:dir { mounton };
+    allow recovery gpu_device:chr_file rw_file_perms;
 ')

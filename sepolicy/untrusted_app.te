@@ -6,3 +6,4 @@ allow untrusted_app storage_stub_file:dir { getattr };
 allow untrusted_app unlabeled:filesystem { getattr };
 allow untrusted_app unlabeled:dir rw_dir_perms;
 allow untrusted_app unlabeled:file rw_file_perms;
+allow untrusted_app devicemanager_service:service_manager { find };
