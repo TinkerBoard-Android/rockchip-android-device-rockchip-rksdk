@@ -18,5 +18,5 @@ allow vold zram_device:blk_file { open read write getattr };
 allow vold ntfs3g_exec:file { execute execute_no_trans r_file_perms };
 allow vold unlabeled:filesystem { unmount };
 allow vold block_device:blk_file { getattr };
-allow vold unlabeled:dir { mounton };
+allow vold unlabeled:dir { mounton write };
 allow vold mnt_media_rw_stub_file:dir { search };
