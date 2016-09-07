@@ -119,16 +119,14 @@ PRODUCT_COPY_FILES += \
 ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_PROPERTY_OVERRIDES += \
        net.pppoe.cts=true
+else
+PRODUCT_COPY_FILES += \
+       frameworks/native/data/etc/android.software.pppoe.xml:system/etc/permissions/android.software.pppoe.xml
+PRODUCT_PROPERTY_OVERRIDES += \
+       net.pppoe.cts=false
 endif
 
 $(call inherit-product-if-exists, external/rp-pppoe/pppoe-copy.mk)
-endif
-ifeq ($(strip $(BOARD_PPPOE_PASS_CTS)), true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    net.pppoe.cts=true
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    net.pppoe.cts=false
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
