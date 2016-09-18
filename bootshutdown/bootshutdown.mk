@@ -10,13 +10,12 @@ PRODUCT_COPY_FILES += $(CUR_PATH)/startup.wav:system/media/audio/startup.wav
 endif
 
 ifeq ($(HAVE_SHUTDOWN_RING), yes)
-PRODUCT_COPY_FILES += $(CUR_PATH)/startup.wav:system/media/audio/shutdown.wav
+PRODUCT_COPY_FILES += $(CUR_PATH)/shutdown.wav:system/media/audio/shutdown.wav
 endif
 
 ifeq ($(HAVE_BOOT_ANIMATION), yes)
-PRODUCT_COPY_FILES += $(CUR_PATH)/startup.wav:system/media/bootanimation.zip
+PRODUCT_COPY_FILES += $(CUR_PATH)/bootanimation.zip:system/media/bootanimation.zip
 endif
-
 ifeq ($(HAVE_SHUTDOWN_ANIMATION), yes)
-PRODUCT_COPY_FILES += $(CUR_PATH)/startup.wav:system/media/shutdownanimation.zip
+PRODUCT_COPY_FILES += $(CUR_PATH)/shutdownanimation.zip:system/media/shutdownanimation.zip
 endif

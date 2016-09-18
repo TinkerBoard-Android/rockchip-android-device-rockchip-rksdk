@@ -70,12 +70,12 @@ DEVICE_HAVE_LIBRKVPU ?= true
 #90:  rotate_90
 #180: rotate_180
 #270: rotate_270
-ROTATE_SCREEN := rotate_0
+ROTATE_SCREEN ?= rotate_0
 
 #Screen to Double, Single
 #YES: Screen to Double
 #NO: Screen to single
-DOUBLE_SCREEN := NO
+DOUBLE_SCREEN ?= NO
 
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
