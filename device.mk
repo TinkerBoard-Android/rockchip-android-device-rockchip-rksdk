@@ -136,8 +136,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.connectivity.rc:root/init.connectivity.rc
 endif
 
+ifeq ($(findstring car,$(PRODUCT_BUILD_MODULE)),car)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio_policy_$(PRODUCT_BUILD_MODULE).conf:system/etc/audio_policy.conf
+else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_$(TARGET_BOARD_HARDWARE).conf:system/etc/audio_policy.conf
+endif
 
 
 PRODUCT_COPY_FILES += \
