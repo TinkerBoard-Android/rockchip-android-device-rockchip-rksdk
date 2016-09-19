@@ -7,3 +7,6 @@ allow untrusted_app unlabeled:filesystem { getattr };
 allow untrusted_app unlabeled:dir rw_dir_perms;
 allow untrusted_app unlabeled:file rw_file_perms;
 allow untrusted_app devicemanager_service:service_manager { find };
+
+allow untrusted_app { domain -init -kernel}:dir { getattr search };
+allow untrusted_app { domain -init -kernel}:file { read getattr open };
