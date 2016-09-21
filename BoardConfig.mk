@@ -128,6 +128,7 @@ BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET
 
 //MAX-SIZE=512M, for generate out/.../system.img
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
+BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
 # Enable dex-preoptimization to speed up first boot sequence
