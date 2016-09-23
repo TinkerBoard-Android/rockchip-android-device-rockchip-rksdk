@@ -341,8 +341,10 @@ endif
 endif
 
 #$_rbox_$_modify_$_zhengyang: add displayd
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_PACKAGES += \
     displayd
+endif
 
 ########################################################
 # build with drmservice
