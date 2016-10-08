@@ -24,6 +24,8 @@ ifneq ($(strip $(TARGET_PRODUCT)), )
     -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
 endif
 
+#add for Nougat Bring Up
+$(call inherit-product, device/rockchip/common/copy.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi

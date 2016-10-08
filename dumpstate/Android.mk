@@ -17,7 +17,7 @@ include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := frameworks/native/cmds/dumpstate
 
-LOCAL_SRC_FILES := dumpstate.c
+LOCAL_SRC_FILES := dumpstate.cpp
 
 LOCAL_MODULE := libdumpstate.$(TARGET_PRODUCT)
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3399)

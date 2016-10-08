@@ -145,7 +145,7 @@ ART_USE_HSPACE_COMPACT ?= true
 TARGET_USES_LOGD ?= true
 
 # Sepolicy
-BOARD_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy
+#BOARD_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy
 
 # Recovery
 TARGET_NO_RECOVERY ?= false
@@ -244,7 +244,7 @@ BOARD_PPPOE_PASS_CTS ?= false
 BOARD_HS_ETHERNET ?= true
 
 # manifest
-SYSTEM_WITH_MANIFEST ?= true
+SYSTEM_WITH_MANIFEST ?= false
 
 # no battery
 BUILD_WITHOUT_BATTERY ?= false

@@ -15,7 +15,7 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES := system/core/healthd
+LOCAL_C_INCLUDES := system/core/healthd/include/healthd
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)), sofia3gr)
 LOCAL_SRC_FILES := \
     healthd-rockchip.cpp
