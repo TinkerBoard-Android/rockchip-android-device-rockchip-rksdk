@@ -13,6 +13,7 @@
 # limitations under the License.
 
 LOCAL_PATH:= $(call my-dir)
+ifeq (foo, )
 include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := frameworks/native/cmds/dumpstate
@@ -26,3 +27,4 @@ endif
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_STATIC_LIBRARY)
+endif
