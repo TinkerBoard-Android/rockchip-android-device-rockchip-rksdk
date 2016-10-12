@@ -102,7 +102,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
-ifneq ($(filter rk%, $(TARGET_BOARD_PLATFORM)), )
+ifneq ($(filter rkrk%, $(TARGET_BOARD_PLATFORM)), )
 PRODUCT_PACKAGES += \
     pppoe \
     pppoe-sniff \
