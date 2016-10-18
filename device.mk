@@ -197,13 +197,33 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml
 endif
 
+# CAMERA
+ifeq ($(BOARD_CAMERA_SUPPORT),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
+endif
+
+# USB HOST
+ifeq ($(BOARD_USB_HOST_SUPPORT),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+endif
+
+# USB ACCESSORY
+ifeq ($(BOARD_USB_ACCESSORY_SUPPORT),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-	PRODUCT_COPY_FILES += \
-		frameworks/native/data/etc/box_core_hardware.xml:system/etc/permissions/box_core_hardware.xml 
-else
-	PRODUCT_COPY_FILES += \
-		frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml 
+    PRODUCT_COPY_FILES += \
+        frameworks/native/data/etc/box_core_hardware.xml:system/etc/permissions/box_core_hardware.xml 
+else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
+    PRODUCT_COPY_FILES += \
+        frameworks/native/data/etc/vr_core_hardware.xml:system/etc/permissions/vr_core_hardware.xml 
+else # tablet
+    PRODUCT_COPY_FILES += \
+        frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml 
 endif
 
 # Live Wallpapers
