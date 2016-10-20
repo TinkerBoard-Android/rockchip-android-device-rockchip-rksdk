@@ -2,6 +2,7 @@ import init.${ro.hardware}.bootmode.${ro.bootmode}.rc
 import init.rockchip.rc
 import init.connectivity.rc
 import init.box.samba.rc
+import init.${ro.board.platform}.rc
 import init.${ro.target.product}.rc
 import init.car.rc
 

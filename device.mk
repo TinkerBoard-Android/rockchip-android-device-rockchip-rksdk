@@ -269,6 +269,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.enable_boot_charger_mode=0
 
+# Add board.platform default property to parsing related rc
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM))
+
 PRODUCT_CHARACTERISTICS := tablet
 
 # audio lib
