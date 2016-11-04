@@ -1,0 +1,3 @@
+allow priv_app drm_prop:file read;
+allow priv_app system_prop:file read;
+allow priv_app gpu_device:dir { search };

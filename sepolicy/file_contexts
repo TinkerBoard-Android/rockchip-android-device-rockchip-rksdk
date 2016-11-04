@@ -73,3 +73,4 @@
 
 #for vpu
 /dev/rkvdec                u:object_r:video_device:s0
+/dev/dri(/.*)?       u:object_r:gpu_device:s0

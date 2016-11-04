@@ -11,7 +11,6 @@ allow mediaserver untrusted_app:dir search;
 allow mediaserver untrusted_app:file { open read };
 
 
-allow mediaserver system_file:file { execmod };
 allow mediaserver storage_file:dir { search };
 allow mediaserver storage_file:lnk_file { read };
 allow mediaserver mnt_user_file:dir { search };
@@ -23,3 +22,5 @@ allow mediaserver surfaceflinger:fifo_file rw_file_perms;
 
 allow mediaserver sysfs_hdmi:file rw_file_perms;
 allow mediaserver camera_device:chr_file rw_file_perms;
+set_prop(mediaserver,media_prop)
+set_prop(mediaserver,drm_prop)

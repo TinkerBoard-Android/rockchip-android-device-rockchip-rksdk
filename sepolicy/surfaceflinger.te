@@ -8,3 +8,7 @@ allow surfaceflinger sysfs_hdmi:file rw_file_perms;
 allow surfaceflinger surfaceflinger:unix_stream_socket { ioctl };
 
 allow surfaceflinger sysfs:file rw_file_perms;
+allow surfaceflinger system_data_file:dir create_dir_perms;
+allow surfaceflinger gpu_device:chr_file { ioctl };
+allow surfaceflinger gpu_device:dir { search rw_dir_perms };
+allow surfaceflinger debugfs_tracing:file rw_file_perms;

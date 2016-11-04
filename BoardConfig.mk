@@ -145,7 +145,7 @@ ART_USE_HSPACE_COMPACT ?= true
 TARGET_USES_LOGD ?= true
 
 # Sepolicy
-#BOARD_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy
+BOARD_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy
 
 # Recovery
 TARGET_NO_RECOVERY ?= false
