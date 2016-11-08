@@ -74,3 +74,7 @@
 #for vpu
 /dev/rkvdec                u:object_r:video_device:s0
 /dev/dri(/.*)?       u:object_r:gpu_device:s0
+
+#for aplog
+(/system)?/vendor/bin/start_log_srv.sh     u:object_r:ap_log_srv_script_exec:s0
+(/system)?/vendor/bin/logcat_ep.sh     u:object_r:apk_logfs_exec:s0

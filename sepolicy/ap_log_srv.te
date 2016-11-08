@@ -1,0 +1,6 @@
+type ap_log_srv_script, domain;
+type ap_log_srv_script_exec, exec_type, file_type;
+
+userdebug_or_eng(`
+init_daemon_domain(ap_log_srv_script)
+')
