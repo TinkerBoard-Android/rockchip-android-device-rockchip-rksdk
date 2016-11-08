@@ -78,3 +78,9 @@
 #for aplog
 (/system)?/vendor/bin/start_log_srv.sh     u:object_r:ap_log_srv_script_exec:s0
 (/system)?/vendor/bin/logcat_ep.sh     u:object_r:apk_logfs_exec:s0
+(/system)?/vendor/bin/log-watch     u:object_r:log-watch_exec:s0
+(/system)?/vendor/etc/log-watch-kmsg.cfg u:object_r:log-watch-cnf:s0
+# Crashlogd executable
+(/system)?/vendor/bin/crashlogd u:object_r:crashlogd_exec:s0
+(/system)?/vendor/bin/elogs.sh u:object_r:earlylogs_exec:s0
+
