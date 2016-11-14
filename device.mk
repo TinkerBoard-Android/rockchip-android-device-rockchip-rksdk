@@ -520,9 +520,9 @@ endif
 
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
-$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
 else
-$(call inherit-product-if-exists, vendor/google/products/gms_mini.mk)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
 endif
 ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
