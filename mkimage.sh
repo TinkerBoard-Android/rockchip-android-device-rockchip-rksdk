@@ -9,9 +9,11 @@ TARGET_HARDWARE=`get_build_var TARGET_BOARD_HARDWARE`
 TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
 PLATFORM_VERSION=`get_build_var PLATFORM_VERSION`
 PLATFORM_SECURITY_PATCH=`get_build_var PLATFORM_SECURITY_PATCH`
+TARGET_BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_HARDWARE=$TARGET_HARDWARE
+echo TARGET_BUILD_VARIANT=$TARGET_BUILD_VARIANT
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -69,7 +71,7 @@ then
 	[ -d $OUT/root ] && \
 	mkbootfs $OUT/root | minigzip > $OUT/ramdisk.img && \
         truncate -s "%4" $OUT/ramdisk.img && \
-	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk.img --second kernel/resource.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --output $OUT/boot.img && \
+        mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk.img --second kernel/resource.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/boot.img && \
 	cp -a $OUT/boot.img $IMAGE_PATH/
 	echo "done."
 else
@@ -86,7 +88,7 @@ then
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
         truncate -s "%4" $OUT/ramdisk-recovery.img && \
-	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --output $OUT/recovery.img && \
+        mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/recovery.img && \
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
 else
@@ -94,7 +96,7 @@ else
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
         truncate -s "%4" $OUT/ramdisk-recovery.img && \
-	mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --output $OUT/recovery.img && \
+        mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/recovery.img && \
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
 fi
