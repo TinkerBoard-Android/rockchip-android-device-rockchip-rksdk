@@ -10,10 +10,12 @@ TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
 PLATFORM_VERSION=`get_build_var PLATFORM_VERSION`
 PLATFORM_SECURITY_PATCH=`get_build_var PLATFORM_SECURITY_PATCH`
 TARGET_BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
+BOARD_SYSTEMIMAGE_PARTITION_SIZE=`get_build_var BOARD_SYSTEMIMAGE_PARTITION_SIZE`
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_HARDWARE=$TARGET_HARDWARE
 echo TARGET_BUILD_VARIANT=$TARGET_BUILD_VARIANT
+echo BOARD_SYSTEMIMAGE_PARTITION_SIZE=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -119,7 +121,8 @@ then
 		mksquashfs $OUT/system $IMAGE_PATH/system.img -all-root >/dev/null
 	elif [ "$FSTYPE" = "ext3" ] || [ "$FSTYPE" = "ext4" ]
 	then
-                system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
+                #system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
+                system_size=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
                 [ $system_size -gt "0" ] || { echo "Please make first!!!" && exit 1; }
                 MAKE_EXT4FS_ARGS=" -L system -S $OUT/root/file_contexts -a system $IMAGE_PATH/system.img $OUT/system"
 		ok=0
