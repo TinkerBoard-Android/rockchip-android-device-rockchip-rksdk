@@ -107,17 +107,22 @@ def FullOTA_InstallEnd(info):
 #  except KeyError:
 #    print "info: no resource image; ignore it."
 
+#  try:
+#    loader_bin = info.input_zip.read("LOADER/RKLoader.img")
+#  except KeyError:
+#    # print "warning: no rk loader bin in input target_files; not flashing loader"
+#    print "no rk loader bin in input target_files; not flashing loader"
+#    print "to add clear misc command"
+#    info.script.ClearMiscCommand()
+#    return
+
+#  InstallRKLoader(loader_bin, info.input_zip, info)
   try:
-    loader_bin = info.input_zip.read("LOADER/RKLoader.img")
+    loader_bin = info.input_zip.read("RKLoader.bin")
+    print "wirte RKLoader.bin now..."
+    common.ZipWriteStr(info.output_zip, "RKLoader.bin", loader_bin)
   except KeyError:
-    # print "warning: no rk loader bin in input target_files; not flashing loader"
-    print "no rk loader bin in input target_files; not flashing loader"
-    print "to add clear misc command"
-    info.script.ClearMiscCommand()
-    return
-
-  InstallRKLoader(loader_bin, info.input_zip, info)
-
+    print "no RKLoader.bin, ignore it."
 
 def IncrementalOTA_InstallEnd(info):
   try:
@@ -188,7 +193,7 @@ def IncrementalOTA_InstallEnd(info):
 #    print "resource unchanged; skipping"
 
   try:
-    target_loader = info.target_zip.read("LOADER/RKLoader.img")
+    target_loader = info.target_zip.read("RKLoader.bin")
   except KeyError:
     print "warning: rk loader bin missing from target; not flashing loader"
     print "clear misc command"
@@ -196,7 +201,7 @@ def IncrementalOTA_InstallEnd(info):
     return
 
   try:
-    source_loader = info.source_zip.read("LOADER/RKLoader.img")
+    source_loader = info.source_zip.read("RKLoader.bin")
   except KeyError:
     source_loader = None
 
