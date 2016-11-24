@@ -420,6 +420,11 @@ endif
 ifeq ($(strip $(BOARD_IS_SUPPORT_NTFS)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.storage_suppntfs=true
+
+PRODUCT_PACKAGES += \
+   ntfs-3g \
+   ntfsfix \
+   mkntfs
 else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.storage_suppntfs=false
@@ -436,10 +441,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.without_battery=false
 endif
  
-# NTFS support
-PRODUCT_PACKAGES += \
-    ntfs-3g
-
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
