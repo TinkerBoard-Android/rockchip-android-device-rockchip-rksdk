@@ -14,4 +14,6 @@ allow system_app cache_file:file { ioctl rw_file_perms };
 allow system_app cache_file:dir { remove_name rw_dir_perms };
 allow system_app gpu_device:dir { search };
 allow system_app radio_data_file:dir {  getattr };
+allow system_app vfat:dir create_dir_perms;
+allow system_app vfat:file create_file_perms;
 set_prop(system_app,system_prop)

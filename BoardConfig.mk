@@ -296,3 +296,10 @@ BOARD_USB_ACCESSORY_SUPPORT ?= true
 BOARD_CAMERA_SUPPORT ?= false
 
 USE_CLANG_PLATFORM_BUILD ?= true
+
+ifeq ($(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS),true)
+BOARD_SEPOLICY_DIRS += \
+  device/rockchip/common/sepolicy/execmod
+
+
+endif

@@ -1,2 +1,0 @@
-allow appdomain vfat:dir create_dir_perms;
-allow appdomain vfat:file create_file_perms;
