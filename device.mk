@@ -18,10 +18,12 @@
 ifneq ($(strip $(TARGET_PRODUCT)), )
     TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
     TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(TARGET_DEVICE_DIR)))
-    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall)
-    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del)
-    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
-    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_BOARD_PLATFORM) preinstall bundled_persist-app)
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_BOARD_PLATFORM) preinstall_del bundled_uninstall_back-app)
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_BOARD_PLATFORM) preinstall_del_forever bundled_uninstall_gone-app)
+    -include device/rockchip/$(TARGET_BOARD_PLATFORM)/preinstall/preinstall.mk
+    -include device/rockchip/$(TARGET_BOARD_PLATFORM)/preinstall_del/preinstall.mk
+    -include device/rockchip/$(TARGET_BOARD_PLATFORM)/preinstall_del_forever/preinstall.mk
 endif
 
 #add for Nougat Bring Up
