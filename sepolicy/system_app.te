@@ -16,4 +16,6 @@ allow system_app gpu_device:dir { search };
 allow system_app radio_data_file:dir {  getattr };
 allow system_app vfat:dir create_dir_perms;
 allow system_app vfat:file create_file_perms;
+#allow system_app system_data_file:dir { rw_dir_perms };
+allow system_app cache_recovery_file:dir { search };
 set_prop(system_app,system_prop)
