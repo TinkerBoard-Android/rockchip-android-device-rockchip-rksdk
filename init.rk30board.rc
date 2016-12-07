@@ -175,7 +175,7 @@ on property:sys.boot_completed=1
     start gpsd
 
 # for telephony function
-on property:ro.boot.baseband=N/A
+on property:ro.boot.noril=true
     setprop ro.radio.noril true
     stop ril-daemon
 
