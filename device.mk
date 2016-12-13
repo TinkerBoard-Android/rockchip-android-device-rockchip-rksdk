@@ -104,30 +104,14 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
-ifneq ($(filter rkrk%, $(TARGET_BOARD_PLATFORM)), )
-PRODUCT_PACKAGES += \
-    pppoe \
-    pppoe-sniff \
-    pppoe-repay \
-
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_PACKAGES += \
     libpppoe-jni \
-    pppoe-service
+    pppoe-service \
+    librp-pppoe
 
 PRODUCT_SYSTEM_SERVER_JARS += \
     pppoe-service
-
-ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-PRODUCT_PROPERTY_OVERRIDES += \
-       net.pppoe.cts=true
-else
-PRODUCT_COPY_FILES += \
-       frameworks/native/data/etc/android.software.pppoe.xml:system/etc/permissions/android.software.pppoe.xml
-PRODUCT_PROPERTY_OVERRIDES += \
-       net.pppoe.cts=false
-endif
-
-$(call inherit-product-if-exists, external/rp-pppoe/pppoe-copy.mk)
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
