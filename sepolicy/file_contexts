@@ -84,3 +84,9 @@
 (/system)?/vendor/bin/crashlogd u:object_r:crashlogd_exec:s0
 (/system)?/vendor/bin/elogs.sh u:object_r:earlylogs_exec:s0
 
+/system/bin/pppoe-setup          u:object_r:pppoe_exec:s0
+/system/bin/pppoe-start          u:object_r:pppoe_exec:s0
+/system/bin/pppoe-stop           u:object_r:pppoe_exec:s0
+/system/bin/pppoe-connect        u:object_r:pppoe_exec:s0
+/system/bin/pppoe-status         u:object_r:pppoe_exec:s0
+
