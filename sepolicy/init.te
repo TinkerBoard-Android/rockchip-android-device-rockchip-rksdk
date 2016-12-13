@@ -53,3 +53,4 @@ allow init configfs:file rw_file_perms;
 allow init configfs:lnk_file create_file_perms;
 allow init perfprofd_exec:file getattr;
 allow init rootfs:system { module_load };
+allow init sysfs:dir write;

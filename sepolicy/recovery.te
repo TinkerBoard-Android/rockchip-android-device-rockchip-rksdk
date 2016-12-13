@@ -30,4 +30,11 @@ recovery_only(`
     allow recovery gpu_device:chr_file rw_file_perms;
     allow recovery gpu_device:dir { search };
     allow recovery kmsg_device:chr_file rw_file_perms;
+    allow recovery drm_prop:file { getattr open };
+    allow recovery graphic_prop:file { getattr open };
+    allow recovery media_prop:file { getattr open };
+    allow recovery mmc_prop:file { getattr open };
+    allow recovery safemode_prop:file { getattr open };
+    allow recovery device_logging_prop:file { getattr open };
+    allow recovery logpersistd_logging_prop:file { getattr open };
 ')

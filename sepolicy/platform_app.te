@@ -14,6 +14,7 @@ allow platform_app gpu_device:dir { search };
 #allow platform_app property_socket:sock_file { write }
 allow platform_app vfat:dir create_dir_perms;
 allow platform_app vfat:file create_file_perms;
+allow platform_app property_socket:sock_file write;
 set_prop(platform_app,system_prop)
 set_prop(platform_app,media_prop)
 set_prop(platform_app,drm_prop)
