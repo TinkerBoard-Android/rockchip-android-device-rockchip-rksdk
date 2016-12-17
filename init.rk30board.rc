@@ -25,6 +25,8 @@ on post-fs-data
     chown root system /system/lib/hw/gps.default.so
     mkdir /data/gps 0770 system net_bt_stack
 
+    chmod 666 /sys/class/display/HDMI/color
+
     ##$_rbox_$_modify_$_chenzhi_20120309
     ##$_rbox_$_modify_$_begin
     mkdir /data/misc/ppp 777 system system
