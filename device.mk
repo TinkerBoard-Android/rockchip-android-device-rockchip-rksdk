@@ -485,10 +485,13 @@ endif
 
 # for realtek bluetooth
 PRODUCT_PACKAGES += \
+    bluetooth_rtk.default \
     libbt-vendor.so \
     libbt-vendor_uart.so \
     libbt-vendor_usb.so \
     bt_vendor.conf
+#include hardware/realtek/rtkbt/rtkbt.mk
+$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 include device/rockchip/common/samba/rk31_samba.mk

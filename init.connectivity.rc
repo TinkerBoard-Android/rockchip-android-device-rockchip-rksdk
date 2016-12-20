@@ -1,34 +1,33 @@
 
-on early-init
-
-    # bluetooth LPM
-    chmod 0220 /proc/bluetooth/sleep/lpm
-    chmod 0220 /proc/bluetooth/sleep/btwrite
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
-
-on init
-
-#    symlink /etc/bluez/bcm432x/BCM4329B1_TestOnly_0237_26MHz_SEMCO_B23.hcd /bcm4329_samsung.hcd
-#    symlink /etc/bluez/bcm432x/BCM4329B1_USI_WM-BN-BM-01.hcd /bcm4329_usi.hcd
-#    symlink /etc/bluez/bcm432x/BCM4329B1_002.002.023.0389.0000_Cybertan-Foxconn_Cls2_extLNA_EDRmaxInputLev+PeakDEVM_NT.hcd /bcm4329_cybertan.hcd
-
 on boot
-    
-# for realtek bluetooth
-#   insmod /system/lib/modules/rtk_btusb.ko
-    chmod 0660 /dev/rtk_btusb
-    chown bluetooth net_bt_stack /dev/rtk_btusb
 
+# for bluetooth
     # change back to bluetooth from system
     chown bluetooth net_bt_stack /data/misc/bluetooth
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
+    # bluetooth LPM
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite    
+
+#   insmod /system/lib/modules/rtk_btusb.ko
+    chmod 0660 /dev/rtk_btusb
+    chown bluetooth net_bt_stack /dev/rtk_btusb
 
     # bluetooth MAC address programming
     chown bluetooth net_bt_stack ro.bt.bdaddr_path
     chown bluetooth net_bt_stack /system/etc/bluetooth
     chown bluetooth net_bt_stack /data/misc/bluetooth
     setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
+
+    chmod 0660 /dev/ttyS0
+    chmod 0660 /dev/ttyS1
+    chmod 0660 /dev/vflash
+    chown bluetooth net_bt_stack /dev/vflash
+    chown bluetooth net_bt_stack /dev/ttyS1
+    chown bluetooth net_bt_stack /dev/ttyS0
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    chmod 0664 /sys/class/rfkill/rfkill0/state
 
 # for wifi
 #   mt7601u
@@ -52,17 +51,6 @@ on boot
     chown wifi wifi /data/misc/wifi/p2p_supplicant.conf
     chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
 
-# bluetooth power up/down interface
-    chmod 0660 /dev/ttyS0
-    chmod 0660 /dev/ttyS1
-    chmod 0660 /dev/vflash
-    chown bluetooth net_bt_stack /dev/vflash
-    chown bluetooth net_bt_stack /dev/ttyS1
-    chown bluetooth net_bt_stack /dev/ttyS0
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chmod 0664 /sys/class/rfkill/rfkill0/state
-
 #for nfc
     chmod 0660 /dev/bcm2079x
     chown nfc nfc /dev/bcm2079x
@@ -72,13 +60,6 @@ on boot
     chmod 0700 /data/nfc/param
     chown nfc nfc /data/nfc
     chown nfc nfc /data/nfc/param
-
-#for rda bt
-#    chmod 0664 /dev/tcc_bt_dev
-#    chown bluetooth net_bt_stack /dev/tcc_bt_dev
-
-#    chmod 0664 /dev/voice_modem
-#    chown bluetooth net_bt_stack /dev/voice_modem
 
 # for bcm wifi
 ########## 3.0.x <= kernel version <= 3.4.x ##########
