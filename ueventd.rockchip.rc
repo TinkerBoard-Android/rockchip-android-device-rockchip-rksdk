@@ -31,6 +31,9 @@
 /dev/sys_state            0660   system     system
 /dev/mirroring            0664   media      media
 /dev/iep                  0666   media      media
+/dev/vepu                 0666   system     system
+/dev/h265e                0666   system     system
+/dev/avsd                 0666   system     system
 
 # for Sensor HAL
 /dev/akm8973              0660   system     system
