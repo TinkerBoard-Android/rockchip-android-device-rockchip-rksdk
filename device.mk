@@ -207,6 +207,9 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/vr_core_hardware.xml:system/etc/permissions/vr_core_hardware.xml 
+else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
+    PRODUCT_COPY_FILES += \
+        frameworks/native/data/etc/laptop_core_hardware.xml:system/etc/permissions/laptop_core_hardware.xml
 else # tablet
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml 
