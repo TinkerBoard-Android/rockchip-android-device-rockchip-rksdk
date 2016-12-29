@@ -4,5 +4,6 @@ allow cameraserver camdata_file:dir search;
 allow cameraserver camera_device:chr_file { rw_file_perms ioctl };
 allow cameraserver gpu_device:chr_file { rw_file_perms ioctl };
 allow cameraserver system_server:unix_stream_socket { read write };
+allow cameraserver rga_device:chr_file { ioctl };
 set_prop(cameraserver,graphic_prop)
 set_prop(cameraserver,system_prop)
