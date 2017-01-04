@@ -301,3 +301,8 @@ BOARD_SEPOLICY_DIRS += \
 
 
 endif
+
+# Zoom out recovery ui of box by two percent.
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
+    TARGET_RECOVERY_OVERSCAN_PERCENT := 2
+endif
