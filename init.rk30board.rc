@@ -72,7 +72,7 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chown system system  /sys/devices/ffa30000.gpu/dvfs
-    chmod 0777 /sys/devices/platform/ff9a0000.gpu/devfreq/ff9a0000.gpu/governor
+    chmod 0660 /sys/devices/platform/ff9a0000.gpu/devfreq/ff9a0000.gpu/governor
 
     chown system system /sys/devices/system/cpu/cpu1/online
     chmod 0660 /sys/devices/system/cpu/cpu1/online
@@ -166,6 +166,7 @@ on boot
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/bits_per_pixel
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/win_property
 
+    chmod 0660 /dev/dri/controlD64
     restorecon_recursive /dev/block/platform/fe330000.sdhci/by-name/
 
 # cpu min freq must change to 126M when boot completed
