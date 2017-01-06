@@ -21,12 +21,12 @@
 /dev/video3               0660   media      camera
 /dev/pmem_cam             0660   system     camera
 /dev/vpu                  0660   system     system
-/dev/vpu_service          0660   media      media
+/dev/vpu_service          0666   media      media
 /dev/hevc_service         0666   media      media
-/dev/rkvdec               0660   media      media
+/dev/rkvdec               0666   media      media
 /dev/vpu_mem              0666   system     system
 /dev/rk29-ipp             0666   system     system   
-/dev/rga                  0660   system     system
+/dev/rga                  0666   system     system
 /dev/video_state          0666   system     system
 /dev/sys_state            0660   system     system
 /dev/mirroring            0664   media      media
@@ -80,7 +80,7 @@
 /dev/pvrsrvkm         0666   system      system
 /dev/pvr_sync         0666   system      system
 
-/dev/sw_sync          0660   system      system
+/dev/sw_sync          0666   system      system
 
 #for DRM
 /dev/rknand_sys_storage   0660   system     system 
