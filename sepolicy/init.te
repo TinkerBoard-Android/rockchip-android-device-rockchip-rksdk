@@ -9,6 +9,7 @@ domain_trans(init, drmservice_exec, drmservice)
 domain_trans(init, displayd_exec, displayd)
 domain_auto_trans(init, rootfs, resize2fs)
 domain_auto_trans(init, gpsd_exec, gpsd)
+domain_trans(init, iso_exec, iso)
 
 allow init serial_device:chr_file { write ioctl };
 allow init kernel:system { module_request };

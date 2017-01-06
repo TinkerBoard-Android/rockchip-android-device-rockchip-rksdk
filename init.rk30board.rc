@@ -167,6 +167,9 @@ on boot
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/win_property
 
     restorecon_recursive /dev/block/platform/fe330000.sdhci/by-name/
+	
+    # for bd  
+    mkdir /mnt/iso 0660 system system
 
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
@@ -239,3 +242,9 @@ service startup_rington /system/bin/tinyplay /system/media/audio/startup.wav 3
     group graphics audio system
     disabled
     oneshot
+	
+#for bd	
+service iso_operate /system/bin/iso
+    class main
+    disabled
+    oneshot		
