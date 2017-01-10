@@ -10,7 +10,7 @@ on early-init
     setcon u:r:init:s0
 
     start ueventd
-    start healthd
+    #start healthd
 
 on init
     export PATH /sbin:/system/bin
