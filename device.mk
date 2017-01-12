@@ -28,7 +28,11 @@ endif
 
 #add for Nougat Bring Up
 #$(call inherit-product, device/rockchip/common/copy.mk)
+
+# Box product use device/rockchip/common/tv/tv_base.mk instead
+ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+endif
 
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
