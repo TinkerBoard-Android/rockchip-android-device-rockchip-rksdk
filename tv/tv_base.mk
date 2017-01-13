@@ -92,7 +92,8 @@ PRODUCT_PACKAGES += \
     clatd.conf \
     local_time.default \
     screenrecord \
-    Camera2
+    Camera2 \
+    Provision
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf
