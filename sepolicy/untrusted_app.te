@@ -12,3 +12,4 @@ allow untrusted_app gpu_device:dir { search };
 
 allow untrusted_app { domain -init -kernel}:dir { getattr search };
 allow untrusted_app { domain -init -kernel}:file { read getattr open };
+get_prop(untrusted_app,ctsgts_prop)

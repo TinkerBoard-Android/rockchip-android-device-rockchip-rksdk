@@ -27,3 +27,5 @@ allow mediaserver gpu_device:dir { search };
 allow mediaserver graphic_prop:file { read getattr open };
 set_prop(mediaserver,media_prop)
 set_prop(mediaserver,drm_prop)
+set_prop(mediaserver,ctsgts_prop)
+get_prop(mediaserver,ctsgts_prop)

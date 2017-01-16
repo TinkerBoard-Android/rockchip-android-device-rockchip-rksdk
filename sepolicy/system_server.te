@@ -38,3 +38,5 @@ allow system_server bluetooth:file rw_file_perms;
 set_prop(system_server,wifi_log_prop)
 set_prop(system_server,media_prop)
 set_prop(system_server,drm_prop)
+set_prop(system_server,ctsgts_prop)
+get_prop(system_server,ctsgts_prop)

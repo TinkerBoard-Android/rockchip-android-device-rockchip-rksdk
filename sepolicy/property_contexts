@@ -4,3 +4,5 @@ sys_graphic.            u:object_r:graphic_prop:s0
 drm.                    u:object_r:drm_prop:s0
 media.                  u:object_r:media_prop:s0
 mediaplayer.            u:object_r:media_prop:s0
+cts_gts.                u:object_r:ctsgts_prop:s0
+persist.cts_gts.        u:object_r:ctsgts_prop:s0

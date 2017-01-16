@@ -13,3 +13,5 @@ allow cameraserver rga_device:chr_file { read write open ioctl };
 allow cameraserver rootfs:lnk_file getattr;
 set_prop(cameraserver,graphic_prop)
 set_prop(cameraserver,system_prop)
+set_prop(cameraserver,ctsgts_prop)
+get_prop(cameraserver,ctsgts_prop)

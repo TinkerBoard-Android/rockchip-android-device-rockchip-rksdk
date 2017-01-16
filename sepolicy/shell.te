@@ -4,3 +4,11 @@ allow shell gpsd_exec:file { getattr execute read open execute_no_trans };
 allow shell gps_data_file:dir { getattr read open };
 allow shell proc_cpuinfo:file mounton;
 #allow shell device:chr_file rw_file_perms;
+
+get_prop(shell,media_prop)
+get_prop(shell,drm_prop)
+get_prop(shell,graphic_prop)
+get_prop(shell,safemode_prop)
+get_prop(shell,mmc_prop)
+get_prop(shell,device_logging_prop)
+get_prop(shell,ctsgts_prop)
