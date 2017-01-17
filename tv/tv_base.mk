@@ -65,8 +65,6 @@ PRODUCT_PACKAGES += \
     ExactCalculator \
     CaptivePortalLogin \
     CertInstaller \
-    DocumentsUI \
-    DownloadProviderUi \
     ExternalStorageProvider \
     FusedLocation \
     InputDevices \
