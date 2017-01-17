@@ -35,6 +35,8 @@ on post-fs-data
     copy /etc/ppp/pppoe.conf /data/misc/ppp/pppoe.conf
     ##$_rbox_$_modify_$_end
 
+    mkdir /data/cifsmanager 777 system system
+
 on init
     # set temperature control policy as normal mode
     write /sys/module/rockchip_pm/parameters/policy 1

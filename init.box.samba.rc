@@ -1,7 +1,8 @@
 
-service cifsmanager /data/etc/cifsmanager.sh
+service cifsmanager /data/cifsmanager/cifsmanager.sh
      disabled
      oneshot
+
 service startsamba /system/bin/rksmbd
     disabled
     oneshot
