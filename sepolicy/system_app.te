@@ -18,5 +18,8 @@ allow system_app vfat:dir create_dir_perms;
 allow system_app vfat:file create_file_perms;
 #allow system_app system_data_file:dir { rw_dir_perms };
 allow system_app cache_recovery_file:dir { search };
+
+get_prop(system_app,drm_prop)
+get_prop(system_app,media_prop)
 set_prop(system_app,system_prop)
 get_prop(system_app,ctsgts_prop)
