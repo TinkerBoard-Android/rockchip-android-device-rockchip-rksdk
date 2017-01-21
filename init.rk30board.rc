@@ -119,6 +119,9 @@ on boot
     chown root system /sys/class/display/HDMI/enable
     chown root system /sys/class/display/HDMI/mode
     chown root system /sys/class/display/HDMI/scale
+    chown root system /sys/class/display/HDMI/3dmode
+    chmod 0666 /sys/class/display/HDMI/mode
+    chmod 0666 /sys/class/display/HDMI/3dmode
 
     chown root system /sys/class/graphics/fb0/bcsh
     chown root system /sys/class/graphics/fb0/dsp_lut
