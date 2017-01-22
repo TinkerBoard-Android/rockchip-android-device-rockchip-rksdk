@@ -57,6 +57,7 @@ on boot
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
+    restorecon /sys/kernel/debug/tracing/trace_marker
 
 service charger /charger
     class charger
