@@ -92,4 +92,6 @@
 /system/bin/pppoe-connect        u:object_r:pppoe_exec:s0
 /system/bin/pppoe-status         u:object_r:pppoe_exec:s0
 
+/system/bin/wfd                  u:object_r:wfd_exec:s0
+
 /dev/vendor_storage              u:object_r:storage_device:s0
