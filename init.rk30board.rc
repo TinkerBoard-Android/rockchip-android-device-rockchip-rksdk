@@ -147,6 +147,16 @@ on boot
     chown system system /sys/bus/platform/drivers/usb20_otg/force_usb_mode
     chmod 0664 /sys/bus/platform/drivers/usb20_otg/force_usb_mode
 
+    #add for wakeup to reboot by huangjc
+    chown system system /sys/devices/virtual/resume_reboot/resume_reboot/resume_reboot
+    chmod 0664 /sys/devices/virtual/resume_reboot/resume_reboot/resume_reboot
+
+    #add for leds by huangjc
+    chown system system /sys/class/leds/net-green/brightness
+    chmod 0664 /sys/class/leds/net-green/brightness
+    chown system system /sys/class/leds/net-red/brightness
+    chmod 0664 /sys/class/leds/net-red/brightness
+
     chown root system /sys/class/graphics/fb0/map
     chmod 0666 /sys/class/graphics/fb0/map
 
