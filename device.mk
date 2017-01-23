@@ -96,6 +96,7 @@ PRODUCT_COPY_FILES += \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/20050030_pwm.kl:system/usr/keylayout/20050030_pwm.kl \
     device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
+     device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
 	device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
 
 PRODUCT_COPY_FILES += \
