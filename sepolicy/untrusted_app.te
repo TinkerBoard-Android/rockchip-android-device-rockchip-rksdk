@@ -9,6 +9,8 @@ allow untrusted_app unlabeled:file rw_file_perms;
 allow untrusted_app devicemanager_service:service_manager { find };
 allow untrusted_app sysfs_zram:dir { search };
 allow untrusted_app gpu_device:dir { search };
+allow untrusted_app dm_device:blk_file { getattr };
+allow untrusted_app block_device:dir { getattr };
 
 allow untrusted_app { domain -init -kernel}:dir { getattr search };
 allow untrusted_app { domain -init -kernel}:file { read getattr open };
