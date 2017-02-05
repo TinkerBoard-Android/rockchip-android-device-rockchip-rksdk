@@ -95,3 +95,5 @@
 /system/bin/wfd                  u:object_r:wfd_exec:s0
 
 /dev/vendor_storage              u:object_r:storage_device:s0
+
+/data/logs(/.*)? u:object_r:aplog_data_file:s0
