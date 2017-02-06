@@ -3,3 +3,4 @@ type serialno_prop, property_type;
 type drm_prop, property_type;
 type media_prop, property_type;
 type ctsgts_prop, property_type;
+type pppoe_prop, property_type;
