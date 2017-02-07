@@ -27,6 +27,10 @@ ifeq ($(strip $(PRODUCT_BUILD_MODULE)), px5car)
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/rockchip/px5/bluetooth
 endif
 
+ifeq ($(strip $(PRODUCT_BUILD_MODULE)), px3car)
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/rockchip/px3/bluetooth
+endif
+
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_gps)
 BLUETOOTH_USE_BPLUS := true
 BLUETOOTH_ENABLE_FM := false
