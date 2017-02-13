@@ -17,6 +17,7 @@
 PRODUCT_PACKAGES := \
     TvProvider \
     TvSettings \
+    Settings \
     tv_input.default
 
 PRODUCT_COPY_FILES := \
