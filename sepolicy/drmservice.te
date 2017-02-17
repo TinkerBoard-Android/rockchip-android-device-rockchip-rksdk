@@ -20,3 +20,5 @@ allow drmservice configfs:dir { rw_dir_perms search };
 allow drmservice rootfs:lnk_file getattr;
 allow drmservice sysfs:file { read getattr open };
 allow drmservice storage_device:chr_file rw_file_perms;
+allow drmservice proc:file { read open };
+set_prop(drmservice,secureboot_prop)

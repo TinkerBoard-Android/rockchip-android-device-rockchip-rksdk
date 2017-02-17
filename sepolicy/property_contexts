@@ -8,3 +8,4 @@ cts_gts.                u:object_r:ctsgts_prop:s0
 persist.cts_gts.        u:object_r:ctsgts_prop:s0
 pppoe.                  u:object_r:pppoe_prop:s0
 persist.ppp             u:object_r:pppoe_prop:s0
+ro.secureboot           u:object_r:secureboot_prop:s0
