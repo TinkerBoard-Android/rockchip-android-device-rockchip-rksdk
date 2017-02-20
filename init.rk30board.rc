@@ -251,13 +251,6 @@ service shutdownanim /system/bin/bootanimation shutdown
     disabled
     oneshot
 
-service startup_rington /system/bin/tinyplay /system/media/audio/startup.wav 3
-    class core
-    user system
-    group graphics audio system
-    disabled
-    oneshot
-	
 #for bd	
 service iso_operate /system/bin/iso
     class main
