@@ -44,7 +44,7 @@ else
 PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter.txt
 fi
 else
-if [[ $TARGET_PRODUCT = "px5" ]]; then
+if [[ $TARGET_PRODUCT = "px5" || $TARGET_PRODUCT = "px3" ]]; then
 PARAMETER=device/rockchip/$TARGET_PRODUCT/parameter.txt
 else
 PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter.txt
@@ -181,7 +181,13 @@ then
         cp -a $UBOOT_PATH/*MiniLoaderAll_*.bin $IMAGE_PATH/MiniLoaderAll.bin
         echo "done."
 else    
+	if [ "$TARGET_PRODUCT" == "px3" -a -f $UBOOT_PATH/RKPX3Loader_miniall.bin ];then
+        echo -n "create loader..."
+        cp -a $UBOOT_PATH/RKPX3Loader_miniall.bin $IMAGE_PATH/MiniLoaderAll.bin
+        echo "done."
+	else
         echo "$UBOOT_PATH/*MiniLoaderAll_*.bin not fount! Please make it from $UBOOT_PATH first!"
+	fi
 fi
 
 if [ -f $KERNEL_PATH/resource.img ]
