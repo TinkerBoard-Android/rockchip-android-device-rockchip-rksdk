@@ -46,3 +46,5 @@ ro.sf.lcd_density=160
 ro.adb.secure =0
 #force camera API 1
 camera2.portability.force_api=1
+#set wifi contry code
+ro.boot.wificountrycode=CN
