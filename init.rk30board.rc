@@ -194,6 +194,14 @@ on property:sys.boot_completed=1
     # if data is encrypt, when start gps too early, gpsd crashed
     start gpsd
 
+# for Internet adb
+on property:service.adb.tcp.port=5555
+    restart adbd
+
+# for Internet adb
+on property:service.adb.tcp.port=0
+    restart adbd
+
 # for telephony function
 on property:ro.boot.noril=true
     setprop ro.radio.noril true
