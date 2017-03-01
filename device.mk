@@ -49,7 +49,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    fsck.f2fs mkfs.f2fs
+    fsck.f2fs \
+    mkfs.f2fs \
+    fsck_f2fs
 
 # PCBA tools
 PRODUCT_PACKAGES += \
