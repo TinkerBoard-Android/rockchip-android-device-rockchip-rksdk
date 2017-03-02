@@ -587,6 +587,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.mem_optimise.enable=true
 endif
 
+
+# lowmem mode
+ifeq ($(strip $(BOARD_USE_LOW_MEM)),true)
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.config.low_ram=true
+endif
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
 PRODUCT_COPY_FILES += \
        device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
