@@ -211,7 +211,7 @@ fi
 if [ -f $PARAMETER ]
 then
         echo -n "create parameter..."
-        cp -a $PARAMETER $IMAGE_PATH/
+        cp -a $PARAMETER $IMAGE_PATH/parameter.txt
         echo "done."
 else
         echo "$PARAMETER not fount!"
