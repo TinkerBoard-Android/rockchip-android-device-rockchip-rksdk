@@ -92,6 +92,7 @@
 <empty package="com.android.externalstorage"/>
 <empty package="com.google.android.gms"/>
 <empty package="com.google.process.gapps"/>
+<empty package="com.android.defcontainer"/>
 
 <hardware package="com.android.camera2"/>
 </lowmem-filter-package>
