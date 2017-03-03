@@ -106,6 +106,10 @@ PRODUCT_COPY_FILES += \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
+#for ssv6051
+PRODUCT_COPY_FILES += \
+    vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+
 PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant \
