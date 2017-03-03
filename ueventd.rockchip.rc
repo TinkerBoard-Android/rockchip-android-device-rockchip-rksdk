@@ -255,7 +255,7 @@
 /dev/block/platform/fe330000.sdhci/by-name/frp 0660 system system
 
 /dev/cpu_state 0666 system system
-/dev/chip_state 0660 system system
+/dev/chip_state 0666 system system
 /dev/i2c-1 0660 system system
 #for ovr
 /dev/ovr0		  0664   system          system
