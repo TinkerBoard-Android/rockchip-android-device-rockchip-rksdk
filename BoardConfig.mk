@@ -189,6 +189,9 @@ BOARD_HAVE_BLUETOOTH_BCM ?= false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_BOARD_PLATFORM)/bluetooth
 include device/rockchip/common/wifi_bt_common.mk
 
+#Camera flash
+BOARD_HAVE_FLASH ?= true
+
 # google apps
 BUILD_BOX_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET ?= false

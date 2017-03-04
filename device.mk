@@ -323,6 +323,12 @@ ifeq ($(strip $(BLUETOOTH_USE_BPLUS)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=broadcom.bplus
 endif
 
+ifeq ($(strip $(BOARD_HAVE_FLASH)), true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=true
+else
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=false
+endif
+
 ifeq ($(strip $(MT7601U_WIFI_SUPPORT)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.wifichip=mt7601u
 endif
