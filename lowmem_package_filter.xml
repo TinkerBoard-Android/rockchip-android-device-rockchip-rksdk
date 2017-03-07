@@ -36,8 +36,13 @@
 <app package="com.android.rk"/>
 <app package="com.google.android.gms.persistent"/>
 <app package="com.google.android.youtube"/>
+<app package="com.google.android.youtube.tv"/>
 <app package="com.android.email"/>
-
+<app package="com.netflix.ninja"/>
+<app package="com.android.rockchip"/>
+<app package="com.android.tv.settings"/>
+<app package="com.ktcp.video"/>
+<app package="com.rk_itvui.allapp"/>
 
 <service package="com.google.android.apps.docs.editors.slides"/>
 <service package="com.google.android.apps.docs"/>
@@ -78,6 +83,7 @@
 <prev package="com.cghs.stresstest"/>
 <prev package="com.android.cts.verifier"/>
 <prev package="com.google.android.exoplayer.playbacktests"/>
+<prev package="com.rockchip.itvbox"/>
 
 <next package="com.qihoo"/>
 <next package="com.dragon.android.pandaspace"/>
