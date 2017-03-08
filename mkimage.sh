@@ -175,10 +175,10 @@ else
         echo "$UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first!"
 fi
 
-if [ -f $UBOOT_PATH/*MiniLoaderAll_*.bin ]
+if [ -f $UBOOT_PATH/*_loader_*.bin ]
 then
         echo -n "create loader..."
-        cp -a $UBOOT_PATH/*MiniLoaderAll_*.bin $IMAGE_PATH/MiniLoaderAll.bin
+        cp -a $UBOOT_PATH/*_loader_*.bin $IMAGE_PATH/MiniLoaderAll.bin
         echo "done."
 else    
 	if [ "$TARGET_PRODUCT" == "px3" -a -f $UBOOT_PATH/RKPX3Loader_miniall.bin ];then
