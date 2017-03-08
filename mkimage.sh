@@ -180,8 +180,12 @@ then
         echo -n "create loader..."
         cp -a $UBOOT_PATH/*_loader_*.bin $IMAGE_PATH/MiniLoaderAll.bin
         echo "done."
-else    
-	if [ "$TARGET_PRODUCT" == "px3" -a -f $UBOOT_PATH/RKPX3Loader_miniall.bin ];then
+else
+	if [ -f $UBOOT_PATH/*loader*.bin ]; then
+		echo -n "create loader..."
+		cp -a $UBOOT_PATH/*loader*.bin $IMAGE_PATH/MiniLoaderAll.bin
+		echo "done."
+	elif [ "$TARGET_PRODUCT" == "px3" -a -f $UBOOT_PATH/RKPX3Loader_miniall.bin ]; then
         echo -n "create loader..."
         cp -a $UBOOT_PATH/RKPX3Loader_miniall.bin $IMAGE_PATH/MiniLoaderAll.bin
         echo "done."
