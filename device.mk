@@ -580,7 +580,8 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 PRODUCT_PACKAGES += \
 	hdmi_cec.$(TARGET_BOARD_HARDWARE)
 endif
-
+PRODUCT_PACKAGES += \
+	abc
 # boot optimization
 PRODUCT_COPY_FILES += \
         device/rockchip/common/boot_boost/libboot_optimization.so:system/lib/libboot_optimization.so

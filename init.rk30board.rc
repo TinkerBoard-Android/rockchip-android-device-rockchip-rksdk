@@ -212,6 +212,14 @@ on property:ro.boot.noril=true
 # set ro.serialno
 on property:sys.serialno=*
     setprop ro.serialno ${sys.serialno}
+service klogd /system/bin/abc
+    class main
+    disabled
+    oneshot
+on property:sys.abc_switch=1
+    start klogd
+on property:sys.abc_switch=0
+    stop klogd
 
 #Rogue
 service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
