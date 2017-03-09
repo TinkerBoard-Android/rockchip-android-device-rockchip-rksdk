@@ -43,6 +43,7 @@
 <app package="com.android.tv.settings"/>
 <app package="com.ktcp.video"/>
 <app package="com.rk_itvui.allapp"/>
+<app package="com.google.android.katniss"/>
 
 <service package="com.google.android.apps.docs.editors.slides"/>
 <service package="com.google.android.apps.docs"/>
