@@ -30,7 +30,6 @@
 <app package="com.phone.wolf.live"/>
 <app package="com.android.smspush"/>
 <app package="com.android.vending"/>
-<app package="com.cghs.stresstest"/>
 <app package="com.android.gallery3d"/>
 <app package="android.rk.RockVideoPlayer"/>
 <app package="com.android.rk"/>
