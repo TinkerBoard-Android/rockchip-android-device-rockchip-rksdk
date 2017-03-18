@@ -216,9 +216,9 @@ service klogd /system/bin/abc
     class main
     disabled
     oneshot
-on property:sys.abc_switch=1
+on property:persist.rk.abc_switch=1
     start klogd
-on property:sys.abc_switch=0
+on property:persist.rk.abc_switch=0
     stop klogd
 
 #Rogue
