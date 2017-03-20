@@ -57,4 +57,7 @@
     <!-- Package of the unbundled tv remote service which can connect to tv remote provider -->
     <string translatable="false" name="config_tvRemoteServicePackage">com.google.android.tv.remote.service</string>
 
+    <!-- True if WallpaperService is enabled -->
+    <bool name="config_enableWallpaperService">false</bool>
+
 </resources>
