@@ -54,8 +54,11 @@ PRODUCT_PACKAGES += \
     fsck_f2fs
 
 # PCBA tools
+ifeq ($(strip $(TARGET_ROCKCHIP_PCBATEST)), true)
 PRODUCT_PACKAGES += \
-    pcba_core
+    pcba_core \
+    bdt
+endif
 
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
