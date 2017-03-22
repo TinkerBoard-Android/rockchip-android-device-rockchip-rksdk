@@ -11,6 +11,7 @@ domain_auto_trans(init, rootfs, resize2fs)
 domain_auto_trans(init, gpsd_exec, gpsd)
 domain_trans(init, iso_exec, iso)
 domain_trans(init, cifsmanager_exec, cifsmanager)
+domain_trans(init, abc_exec, abc)
 
 allow init serial_device:chr_file { write ioctl };
 allow init kernel:system { module_request };

@@ -1,0 +1,7 @@
+type abc, domain, mlstrustedsubject;
+type abc_exec, exec_type, file_type;
+
+init_daemon_domain(abc)
+
+allow abc abc:capability { sys_module sys_admin };
+allow abc adb_data_file:chr_file rw_file_perms;

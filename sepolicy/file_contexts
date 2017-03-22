@@ -103,3 +103,5 @@
 
 #for tee
 /system/bin/tee-supplican     u:object_r:tee-supplicant_exec:s0
+#for abc
+/system/bin/abc             u:object_r:abc_exec:s0
