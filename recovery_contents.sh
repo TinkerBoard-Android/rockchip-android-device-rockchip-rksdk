@@ -11,9 +11,12 @@ PCBA_PATH=external/rk-pcba-test
 ############################################################################################
 #rk recovery contents
 ############################################################################################
+mkdir -p $PRODUCT_OUT/recovery/root/system/bin/
+
 cp -f vendor/rockchip/common/bin/$TARGET_ARCH/busybox $PRODUCT_OUT/recovery/root/sbin/
 cp -f vendor/rockchip/common/bin/$TARGET_ARCH/newfs_msdos $PRODUCT_OUT/recovery/root/sbin/
 cp -f vendor/rockchip/common/bin/$TARGET_ARCH/sh $PRODUCT_OUT/recovery/root/sbin/
+cp -f vendor/rockchip/common/bin/$TARGET_ARCH/sh $PRODUCT_OUT/recovery/root/system/bin/
 cp -f vendor/rockchip/common/bin/$TARGET_ARCH/e2fsck $PRODUCT_OUT/recovery/root/sbin/
 cp -f vendor/rockchip/common/bin/$TARGET_ARCH/resize2fs $PRODUCT_OUT/recovery/root/sbin/
 
