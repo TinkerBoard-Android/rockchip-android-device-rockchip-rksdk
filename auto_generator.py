@@ -27,8 +27,7 @@ include $(BUILD_PREBUILT)
 
 """
 def main(argv):
-    preinstall_dir = os.path.dirname(argv[0])
-    preinstall_dir = os.path.join(preinstall_dir, '../' + argv[1] + '/' + argv[2])
+    preinstall_dir = os.path.join(argv[1],argv[2])
     if os.path.exists(preinstall_dir):
         #Use to include modules
         isfound = 'not_found_lib'
