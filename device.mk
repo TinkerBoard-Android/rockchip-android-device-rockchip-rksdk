@@ -617,6 +617,11 @@ PRODUCT_COPY_FILES += \
        device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
 endif
 
+# neon transform library by djw
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/neon_transform/lib/librockchipxxx.so:system/lib/librockchipxxx.so \
+	device/rockchip/common/neon_transform/lib64/librockchipxxx.so:system/lib64/librockchipxxx.so
+
 #if force app can see udisk
 ifeq ($(strip $(BOARD_FORCE_UDISK_VISIBLE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
