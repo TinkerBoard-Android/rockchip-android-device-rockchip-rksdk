@@ -49,9 +49,14 @@ def Install_Parameter(info):
   info.script.Print("end update parameter")
 
 def InstallRKLoader(loader_bin, input_zip, info):
-  common.ZipWriteStr(info.output_zip, "RKLoader.img", loader_bin)
-  info.script.Print("Writing rk loader bin...")
-  info.script.WriteRawImage("/misc", "RKLoader.img")
+  try:
+    print "wirte RKLoader.bin now..."
+    info.script.Print("Writing rk loader bin...")
+    common.ZipWriteStr(info.output_zip, "RKLoader.bin", loader_bin)
+    info.script.WriteRawLoaderImage()
+  except KeyError:
+    print "no RKLoader.bin, ignore it."
+
 
 def InstallUboot(loader_bin, input_zip, info):
   common.ZipWriteStr(info.output_zip, "uboot.img", loader_bin)
@@ -116,11 +121,9 @@ def FullOTA_InstallEnd(info):
 #    info.script.ClearMiscCommand()
 #    return
 
-#  InstallRKLoader(loader_bin, info.input_zip, info)
   try:
     loader_bin = info.input_zip.read("RKLoader.bin")
-    print "wirte RKLoader.bin now..."
-    common.ZipWriteStr(info.output_zip, "RKLoader.bin", loader_bin)
+    InstallRKLoader(loader_bin, info.input_zip, info)
   except KeyError:
     print "no RKLoader.bin, ignore it."
 
