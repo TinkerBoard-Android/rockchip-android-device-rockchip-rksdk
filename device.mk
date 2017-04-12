@@ -115,6 +115,7 @@ PRODUCT_COPY_FILES += \
     vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
 
 PRODUCT_PACKAGES += \
+    libiconv \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf \
