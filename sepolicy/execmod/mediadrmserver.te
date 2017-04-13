@@ -1,1 +1,0 @@
-allow mediadrmserver system_file:file { execmod };

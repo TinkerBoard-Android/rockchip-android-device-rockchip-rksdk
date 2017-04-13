@@ -302,13 +302,6 @@ BOARD_CAMERA_SUPPORT ?= false
 
 USE_CLANG_PLATFORM_BUILD ?= true
 
-ifeq ($(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS),true)
-BOARD_SEPOLICY_DIRS += \
-  device/rockchip/common/sepolicy/execmod
-
-
-endif
-
 # Zoom out recovery ui of box by two percent.
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     TARGET_RECOVERY_OVERSCAN_PERCENT := 2
