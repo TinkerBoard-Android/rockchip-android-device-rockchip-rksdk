@@ -2,3 +2,6 @@
 type tee-supplicant, domain;
 type tee-supplicant_exec, exec_type, file_type;
 init_daemon_domain(tee-supplicant)
+allow tee-supplicant tee_device:chr_file { read write ioctl open };
+allow tee-supplicant rootfs:lnk_file getattr;
+allow tee-supplicant tee-supplicant_exec:file entrypoint;
