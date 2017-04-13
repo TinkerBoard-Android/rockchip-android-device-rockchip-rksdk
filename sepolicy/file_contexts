@@ -101,6 +101,9 @@
 
 /dev/vendor_storage              u:object_r:storage_device:s0
 
+#for tee
+/system/bin/tee-supplicant     u:object_r:tee-supplicant_exec:s0
+
 /data/logs(/.*)? u:object_r:aplog_data_file:s0
 
 #for tee

@@ -659,6 +659,12 @@ ifeq ($(strip $(BOOT_SHUTDOWN_ANIMATION_RINGING)),true)
 include device/rockchip/common/bootshutdown/bootshutdown.mk
 endif
 
+#for enable optee support
+ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.enable.optee=true		
+endif
+
 ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.pms.multithreadscan=true		
