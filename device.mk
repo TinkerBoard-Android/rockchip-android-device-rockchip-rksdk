@@ -200,6 +200,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml
 endif
 
+# opengl aep feature
+ifeq ($(BOARD_OPENGL_AEP),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+endif
+
 # CAMERA
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
 PRODUCT_COPY_FILES += \
