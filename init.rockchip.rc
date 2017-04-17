@@ -58,6 +58,7 @@ on boot
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
     restorecon /sys/kernel/debug/tracing/trace_marker
+    restorecon_recursive /sys/kernel/debug/tracing/
 
 service charger /charger
     class charger
