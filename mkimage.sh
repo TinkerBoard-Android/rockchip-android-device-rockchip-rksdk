@@ -106,7 +106,7 @@ else
 fi
 if [ $TARGET == $BOOT_OTA ]
 then
-	echo -n "create recovery.img with kernel... "
+	echo -n "create recovery.img with kernel and resource... "
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
         truncate -s "%4" $OUT/ramdisk-recovery.img && \
@@ -114,11 +114,12 @@ then
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
 else
-	echo -n "create recovery.img with kernel and with out resource... "
+	echo -n "create recovery.img without kernel and resource... "
 	[ -d $OUT/recovery/root ] && \
 	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
         truncate -s "%4" $OUT/ramdisk-recovery.img && \
-        mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/recovery.img && \
+        #mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/recovery.img && \
+        rkst/mkkrnlimg $OUT/ramdisk-recovery.img $OUT/recovery.img
 	cp -a $OUT/recovery.img $IMAGE_PATH/
 	echo "done."
 fi
