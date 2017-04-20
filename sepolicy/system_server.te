@@ -37,6 +37,7 @@ allow system_server devicemanager_service:service_manager { find add };
 allow system_server gpu_device:dir { search };
 allow system_server platform_app:file { write };
 allow system_server system_app:file { write };
+allow system_server ctl_bootanim_prop:property_service { set };
 allow system_server priv_app:file { write };
 allow system_server audioserver:file { write };
 allow system_server untrusted_app:file { write };

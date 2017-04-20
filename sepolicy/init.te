@@ -6,6 +6,7 @@
 
 domain_trans(init, pvrsrvctl_exec, pvrsrvctl)
 domain_trans(init, drmservice_exec, drmservice)
+domain_trans(init, tinyplaywav_exec, tinyplaywav)
 domain_trans(init, displayd_exec, displayd)
 domain_auto_trans(init, rootfs, resize2fs)
 domain_auto_trans(init, gpsd_exec, gpsd)
@@ -19,6 +20,7 @@ allow init kernel:system { module_request };
 allow init tmpfs:lnk_file { create };
 allow init devpts:chr_file { ioctl };
 allow init block_device:blk_file { getattr read write };
+allow init video_device:chr_file { write };
 
 allow init init:capability { sys_module };
 allow init nvm_block_device:blk_file { write };
@@ -43,6 +45,7 @@ allow init frp_block_device:blk_file { write };
 #allow init rootfs:file { execute_no_trans };
 allow init devpts:chr_file { getattr };
 allow init debugfs:dir mounton;
+allow init debugfs:file { write };
 
 allow init block_device:lnk_file { relabelfrom };
 allow init userdata_block_device:lnk_file { relabelto };

@@ -4,3 +4,4 @@ allow uncrypt media_rw_data_file:file r_file_perms;
 allow uncrypt storage_file:dir { getattr rw_dir_perms };
 allow uncrypt storage_file:file { getattr rw_file_perms };
 allow uncrypt kmsg_device:chr_file { write open };
+allow uncrypt block_device:blk_file { write open };

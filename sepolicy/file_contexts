@@ -35,6 +35,9 @@
 /system/bin/drmservice                 u:object_r:drmservice_exec:s0
 /system/bin/iso                        u:object_r:iso_exec:s0
 /data/cifsmanager(/.*)?                u:object_r:cifsmanager_exec:s0
+/system/bin/tinyplaywav                u:object_r:tinyplaywav_exec:s0
+/system/bin/tinyplay                   u:object_r:tinyplay_exec:s0
+/system/bin/tinymix                    u:object_r:tinymix_exec:s0
 #/system/bin/e2fsck                     u:object_r:ext4_exec:s0
 #/sbin/resize2fs                        u:object_r:resize2fs_exec:s0
 

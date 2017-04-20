@@ -10,7 +10,11 @@ allow mediaserver camdata_file:file create_file_perms;
 allow mediaserver untrusted_app:dir search;
 allow mediaserver untrusted_app:file { open read };
 
-
+allow mediaserver bootanim:binder { call };
+allow mediaserver bootanim:binder { transfer };
+allow mediaserver system_data_file:dir { write };
+allow mediaserver system_data_file:dir { add_name };
+#allow mediaserver system_data_file:file { create };
 allow mediaserver storage_file:dir { search };
 allow mediaserver storage_file:lnk_file { read };
 allow mediaserver mnt_user_file:dir { search };
