@@ -62,7 +62,7 @@
 #for glgps
 /data/system/gps(/.*)?     u:object_r:gps_data_file:s0
 
-#for frp funtions
+#for3399 device frp funtions
 /dev/block/platform/fe330000\.sdhci/by-name/frp  u:object_r:frp_block_device:s0
 /dev/block/platform/fe330000\.sdhci/by-name/system u:object_r:resize_block_device:s0
 /dev/block/platform/fe330000\.sdhci/by-name/cache u:object_r:e2fsck_cache_block_device:s0
@@ -76,12 +76,19 @@
 /dev/block/rknand_metadata u:object_r:e2fsck_metadata_block_device:s0
 /dev/block/rknand_userdata u:object_r:userdata_block_device:s0
 
-# for rk3368H emmc device
+# for rk3368H/3288 emmc device
 /dev/block/platform/ff0f0000.dwmmc/by-name/frp u:object_r:frp_block_device:s0
 /dev/block/platform/ff0f0000.dwmmc/by-name/system/ u:object_r:resize_block_device:s0
 /dev/block/platform/ff0f0000.dwmmc/by-name/cache u:object_r:e2fsck_cache_block_device:s0
 /dev/block/platform/ff0f0000.dwmmc/by-name/metadata u:object_r:e2fsck_metadata_block_device:s0
 /dev/block/platform/ff0f0000.dwmmc/by-name/userdata u:object_r:userdata_block_device:s0
+
+#for 312x emmc device
+/dev/block/platform/1021c000.rksdmmc/by-name/frp u:object_r:frp_block_device:s0
+/dev/block/platform/1021c000.rksdmmc/by-name/system/ u:object_r:resize_block_device:s0
+/dev/block/platform/1021c000.rksdmmc/by-name/cache u:object_r:e2fsck_cache_block_device:s0
+/dev/block/platform/1021c000.rksdmmc/by-name/metadata u:object_r:e2fsck_metadata_block_device:s0
+/dev/block/platform/1021c000.rksdmmc/by-name/userdata u:object_r:userdata_block_device:s0
 
 # sensor
 /dev/lightsensor                u:object_r:sensor_device:s0
