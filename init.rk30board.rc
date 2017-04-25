@@ -12,6 +12,7 @@ on post-fs
     insmod /system/lib/modules/mali_kbase.ko
     insmod /system/lib/modules/rk30_mirroring.ko
     insmod /system/lib/modules/rk29-ipp.ko
+    insmod /system/lib/modules/pvrsrvkm.ko
 
     # Turn on swap
     swapon_all /fstab.rk30board
@@ -230,13 +231,6 @@ on property:persist.rk.abc_switch=1
     start klogd
 on property:persist.rk.abc_switch=0
     stop klogd
-
-#Rogue
-service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
-    oneshot
-    class core
-    user root
-    group root
 
 service drmservice /system/bin/drmservice
         class main
