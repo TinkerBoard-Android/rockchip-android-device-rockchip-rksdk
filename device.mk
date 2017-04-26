@@ -551,10 +551,6 @@ $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
 else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
 endif
-ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.frp.pst=/dev/block/platform/fe330000.sdhci/by-name/frp
-endif
 endif
 
 #ro.product.first_api_level indicates the first api level, device has been commercially launced on.
