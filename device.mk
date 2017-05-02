@@ -79,7 +79,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=1024 \
     ro.hwui.disable_scissor_opt=true \
     ro.rk.screenshot_enable=true   \
-    ro.rk.hdmi_enable=true   \
     sys.status.hidebar_enable=false   \
     persist.sys.ui.hw=true
 
@@ -344,6 +343,12 @@ ifeq ($(strip $(BOARD_HAVE_FLASH)), true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=true
 else
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=false
+endif
+
+ifeq ($(strip $(BOARD_SUPPORT_HDMI)), true)
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.hdmi_enable=true
+else
+    PRODUCT_PROPERTY_OVERRIDES += ro.rk.hdmi_enable=false
 endif
 
 ifeq ($(strip $(MT7601U_WIFI_SUPPORT)),true)

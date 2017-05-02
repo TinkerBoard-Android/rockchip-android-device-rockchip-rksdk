@@ -192,6 +192,9 @@ include device/rockchip/common/wifi_bt_common.mk
 #Camera flash
 BOARD_HAVE_FLASH ?= true
 
+#HDMI support
+BOARD_SUPPORT_HDMI ?= true
+
 # google apps
 BUILD_BOX_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET ?= false
