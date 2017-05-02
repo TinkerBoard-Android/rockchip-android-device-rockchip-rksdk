@@ -303,6 +303,8 @@
 
 #for frp function
 /dev/block/platform/fe330000.sdhci/by-name/frp 0660 system system
+/dev/block/platform/ff0f0000.dwmmc/by-name/frp 0660 system system
+/dev/block/rknand_frp 0660 system system
 
 /dev/cpu_state 0666 system system
 /dev/chip_state 0666 system system
