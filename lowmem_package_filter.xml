@@ -99,6 +99,7 @@
 <empty package="com.google.android.gms"/>
 <empty package="com.google.process.gapps"/>
 <empty package="com.android.defcontainer"/>
+<empty package="android.rockchip.update.service"/>
 
 <hardware package="com.android.camera2"/>
 </lowmem-filter-package>
