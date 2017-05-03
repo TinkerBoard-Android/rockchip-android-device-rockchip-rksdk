@@ -11,3 +11,4 @@ type pppoe_data_file, file_type, data_file_type;
 type sysfs_fb, fs_type, sysfs_type;
 type storage_device, dev_type;
 type aplog_data_file, file_type, data_file_type;
+type tee_supplicant_data_file, file_type, data_file_type;

@@ -36,6 +36,8 @@ on post-fs
     write /proc/sys/vm/page-cluster 0
 
 on post-fs-data
+    # for optee data storage 
+    mkdir /data/tee 0700 root root
     # Now that are booted all the way and out of mount panics, ensure that we panic on later errors.
     # This is a hack to work around the fact that we can't recover from all errors that would lead to a panic
     # during the initial mount (http://b/17382778), yet we need to panic on emmc errors (http://b/17640053)

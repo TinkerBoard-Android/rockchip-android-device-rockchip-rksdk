@@ -1,7 +1,12 @@
-
-type tee-supplicant, domain;
+type tee-supplicant, domain,domain_deprecated;
 type tee-supplicant_exec, exec_type, file_type;
+type tee-supplicant_device, dev_type;
+type tee-supplicant_data_file, file_type, data_file_type;
+
 init_daemon_domain(tee-supplicant)
 allow tee-supplicant tee_device:chr_file { read write ioctl open };
 allow tee-supplicant rootfs:lnk_file getattr;
 allow tee-supplicant tee-supplicant_exec:file entrypoint;
+allow tee-supplicant tee-supplicant:capability { dac_override dac_read_search};
+allow tee-supplicant tee_supplicant_data_file:file {create open read write unlink link};
+allow tee-supplicant tee_supplicant_data_file:dir {create add_name open read write remove_name rmdir  search getattr};
