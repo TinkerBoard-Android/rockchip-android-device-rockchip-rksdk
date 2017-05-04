@@ -44,9 +44,6 @@ on init
     write /sys/module/rockchip_pm/parameters/policy 1
 
 
-#on early-boot
-#	start tee-supplicant
-
 on boot
 
     restorecon_recursive /sys/devices/system/cpu/cpufreq/interactive
@@ -202,9 +199,6 @@ on property:sys.boot_completed=1
     # if data is encrypt, when start gps too early, gpsd crashed
     start gpsd
 
-on property:ro.enable.optee=true
-    start tee-supplicant
-
 
 # for Internet adb
 on property:persist.internet.adb.enable=1
@@ -281,7 +275,6 @@ service iso_operate /system/bin/iso
     oneshot		
 
 service tee-supplicant /system/bin/tee-supplicant
-    class main
-    disabled
+    class core
     oneshot
     seclabel u:r:tee-supplicant:s0
