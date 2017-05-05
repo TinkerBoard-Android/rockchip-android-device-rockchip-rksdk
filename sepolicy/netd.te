@@ -9,3 +9,7 @@ allow netd netd:netlink_scsitransport_socket { create setopt bind write read get
 allow netd netd:netlink_rdma_socket { create setopt bind write read getopt getattr };
 allow netd netd:netlink_crypto_socket { create setopt bind write read getopt getattr };
 
+# wfd 
+allow netd wfd:fd use;
+allow netd wfd:tcp_socket { read write getopt setopt};
+

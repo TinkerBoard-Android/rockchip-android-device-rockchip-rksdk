@@ -29,6 +29,9 @@ allow mediaserver camera_device:chr_file rw_file_perms;
 allow mediaserver debugfs_tracing:file rw_file_perms;
 allow mediaserver gpu_device:dir { search };
 allow mediaserver graphic_prop:file { read getattr open };
+# wfd
+allow mediaserver storage_device:chr_file { open read ioctl};
+allow mediaserver wfd:binder { transfer call };
 set_prop(mediaserver,media_prop)
 set_prop(mediaserver,drm_prop)
 set_prop(mediaserver,ctsgts_prop)
