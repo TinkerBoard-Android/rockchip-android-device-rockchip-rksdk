@@ -43,6 +43,8 @@ on init
     # set temperature control policy as normal mode
     write /sys/module/rockchip_pm/parameters/policy 1
 
+on early-boot
+    start tee-supplicant
 
 on boot
 
@@ -276,5 +278,4 @@ service iso_operate /system/bin/iso
 
 service tee-supplicant /system/bin/tee-supplicant
     class core
-    oneshot
     seclabel u:r:tee-supplicant:s0
