@@ -10,3 +10,7 @@ allow tee-supplicant tee-supplicant_exec:file entrypoint;
 allow tee-supplicant tee-supplicant:capability { dac_override dac_read_search};
 allow tee-supplicant tee_supplicant_data_file:file {create open read write unlink link};
 allow tee-supplicant tee_supplicant_data_file:dir {create add_name open read write remove_name rmdir  search getattr};
+allow tee-supplicant system_data_file:dir { add_name create write };
+allow tee-supplicant uboot_block_device:blk_file { ioctl open read write };
+allow tee-supplicant rpmb_block_device:blk_file { ioctl open read write };
+allow tee-supplicant self:capability sys_rawio;
