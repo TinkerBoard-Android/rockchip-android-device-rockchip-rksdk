@@ -32,6 +32,12 @@ allow mediaserver graphic_prop:file { read getattr open };
 # wfd
 allow mediaserver storage_device:chr_file { open read ioctl};
 allow mediaserver wfd:binder { transfer call };
+# obtain calling info
+allow mediaserver platform_app:dir { search };
+allow mediaserver platform_app:file { read open };
+allow mediaserver untrusted_app:dir { search };
+allow mediaserver untrusted_app:file { read open };
+
 set_prop(mediaserver,media_prop)
 set_prop(mediaserver,drm_prop)
 set_prop(mediaserver,ctsgts_prop)
