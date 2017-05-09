@@ -278,4 +278,4 @@ service iso_operate /system/bin/iso
 
 service tee-supplicant /system/bin/tee-supplicant
     class core
-    seclabel u:r:tee-supplicant:s0
+    seclabel u:r:tee:s0
