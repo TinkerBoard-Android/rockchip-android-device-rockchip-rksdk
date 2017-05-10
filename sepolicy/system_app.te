@@ -19,7 +19,7 @@ allow system_app vfat:file create_file_perms;
 #allow system_app system_data_file:dir { rw_dir_perms };
 allow system_app cache_recovery_file:dir { search write add_name remove_name };
 allow system_app cache_recovery_file:file { create write open read getattr unlink };
-allow system_app media_rw_data_file:file { unlink };
+allow system_app media_rw_data_file:file { create unlink };
 
 get_prop(system_app,drm_prop)
 get_prop(system_app,media_prop)
