@@ -1,0 +1,4 @@
+service tee-supplicant /system/bin/tee-supplicant
+    class core
+    oneshot
+    seclabel u:r:tee:s0

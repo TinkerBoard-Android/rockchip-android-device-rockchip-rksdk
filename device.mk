@@ -671,6 +671,15 @@ endif
 ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.enable.optee=true		
+ifeq ($(strip $(PRODUCT_SYSTEM_VERITY)),true)
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/init.optee_verify.rc:root/init.optee.rc
+else
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/init.optee.rc:root/init.optee.rc
+
+endif
+
 endif
 
 ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)

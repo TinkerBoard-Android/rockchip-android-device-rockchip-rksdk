@@ -5,7 +5,7 @@ import init.box.samba.rc
 import init.${ro.board.platform}.rc
 import init.${ro.target.product}.rc
 import init.car.rc
-
+import init.optee.rc
 on post-fs
     insmod /system/lib/modules/ump.ko
     insmod /system/lib/modules/mali.ko
@@ -43,8 +43,6 @@ on init
     # set temperature control policy as normal mode
     write /sys/module/rockchip_pm/parameters/policy 1
 
-on early-boot
-    start tee-supplicant
 
 on boot
 
@@ -276,6 +274,3 @@ service iso_operate /system/bin/iso
     disabled
     oneshot		
 
-service tee-supplicant /system/bin/tee-supplicant
-    class core
-    seclabel u:r:tee:s0
