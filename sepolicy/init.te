@@ -13,6 +13,7 @@ domain_auto_trans(init, gpsd_exec, gpsd)
 domain_trans(init, iso_exec, iso)
 domain_trans(init, cifsmanager_exec, cifsmanager)
 domain_trans(init, abc_exec, abc)
+domain_trans(init, rk_store_keybox_exec, rk_store_keybox)
 
 allow init serial_device:chr_file { write ioctl };
 allow init kernel:system { module_request };

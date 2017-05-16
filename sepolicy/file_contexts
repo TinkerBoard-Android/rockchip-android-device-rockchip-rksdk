@@ -142,6 +142,7 @@
 /dev/opteearmtz[0-9]*         u:object_r:tee_device:s0
 /data/tee(/.*)?        		u:object_r:tee_data_file:s0
 
+/system/bin/rk_store_keybox     u:object_r:rk_store_keybox_exec:s0
 #for abc
 /system/bin/abc             u:object_r:abc_exec:s0
 
