@@ -15,5 +15,4 @@ allow rk_store_keybox rpmb_block_device:blk_file { ioctl open read write };
 allow rk_store_keybox shell_exec:file { execute read open execute_no_trans getattr};
 allow rk_store_keybox powerctl_prop:property_service { set };
 allow rk_store_keybox init:unix_stream_socket { connectto };
-allow rk_store_keybox self:capability sys_rawio;
 
