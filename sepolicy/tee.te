@@ -9,3 +9,5 @@ allow tee uboot_block_device:blk_file { ioctl open read write };
 allow tee rpmb_block_device:blk_file { ioctl open read write };
 allow tee self:capability sys_rawio;
 allow tee block_device:dir { search write open };
+allow tee metadata_file:file {create open read write unlink link};
+allow tee metadata_file:dir {create add_name open read write remove_name rmdir  search getattr};
