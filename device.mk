@@ -100,7 +100,6 @@ PRODUCT_COPY_FILES += \
     device/rockchip/common/ueventd.rockchip.rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
     device/rockchip/common/media_profiles_default.xml:system/etc/media_profiles_default.xml \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
-    device/rockchip/common/20050030_pwm.kl:system/usr/keylayout/20050030_pwm.kl \
     device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
      device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
 	device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
@@ -263,7 +262,7 @@ PRODUCT_PACKAGES += \
     akmd 
 
 # iep
-ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3368 rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3128 rk3368 rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
 BUILD_IEP := true
 PRODUCT_PACKAGES += \
     libiep
@@ -670,17 +669,16 @@ endif
 #for enable optee support
 ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.enable.optee=true		
+       ro.enable.optee=true
 ifeq ($(strip $(PRODUCT_SYSTEM_VERITY)),true)
 PRODUCT_COPY_FILES += \
-	device/rockchip/common/init.optee_verify.rc:root/init.optee.rc
+       device/rockchip/common/init.optee_verify.rc:root/init.optee.rc
 else
 PRODUCT_COPY_FILES += \
-	device/rockchip/common/init.optee.rc:root/init.optee.rc
-
+       device/rockchip/common/init.optee.rc:root/init.optee.rc
+endif
 endif
 
-endif
 
 ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
