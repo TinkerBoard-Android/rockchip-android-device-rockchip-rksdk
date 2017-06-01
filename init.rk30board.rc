@@ -39,6 +39,8 @@ on post-fs-data
 
     mkdir /data/cifsmanager 777 system system
     chmod 0666 /dev/opteearmtz00
+
+    mkdir /data/logs 0700 root root
 on init
     # set temperature control policy as normal mode
     write /sys/module/rockchip_pm/parameters/policy 1
@@ -220,14 +222,14 @@ on property:ro.boot.noril=true
 # set ro.serialno
 on property:sys.serialno=*
     setprop ro.serialno ${sys.serialno}
-service klogd /system/bin/abc
+service abc /system/bin/abc
     class main
     disabled
     oneshot
-on property:persist.rk.abc_switch=1
-    start klogd
-on property:persist.rk.abc_switch=0
-    stop klogd
+on property:persist.sys.abc_switch=1
+    start abc
+on property:persist.sys.abc_switch=0
+    stop abc
 
 service drmservice /system/bin/drmservice
         class main
