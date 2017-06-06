@@ -286,9 +286,6 @@ BOOT_SHUTDOWN_ANIMATION_RINGING ?= false
 #for pms multi thead scan
 BOARD_ENABLE_PMS_MULTI_THREAD_SCAN ?= false
 
-#for optee support
-PRODUCT_HAVE_OPTEE ?= true
-
 #for WV keybox provision
 ENABLE_KEYBOX_PROVISION ?= false
 
