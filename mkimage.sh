@@ -57,6 +57,8 @@ elif [[ $TARGET_BOARD_PLATFORM = "rk3126c" ]]; then
     PARAMETER=device/rockchip/rk312x/rk3126c/parameter.txt
 elif [[ $TARGET_BOARD_PLATFORM = "rk3128" ]]; then
     PARAMETER=device/rockchip/rk312x/rk3128_box/parameter.txt
+elif [[ $TARGET_BOARD_PLATFORM = "px3se" ]]; then
+    PARAMETER=device/rockchip/rk312x/px3se/parameter.txt
 else
 	if [[ $TARGET_PRODUCT = "px5" || $TARGET_PRODUCT = "px3" ]]; then
 		PARAMETER=device/rockchip/$TARGET_PRODUCT/parameter.txt
