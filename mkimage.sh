@@ -149,11 +149,16 @@ then
 	elif [ "$FSTYPE" = "ext3" ] || [ "$FSTYPE" = "ext4" ]
 	then
         if [ "$PRODUCT_SYSTEM_VERITY" = "true" ]; then
+            if [ $TARGET == $BOOT_OTA ]
+            then
+                mv unsparse_system-*.img $IMAGE_PATH/system.img
+            else
                 python ./build/tools/releasetools/build_image.py \
                     $OUT/system $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
                     $OUT/system.img $OUT/system
                 echo -n "translate verified sparse image to raw image... "
                 simg2img $OUT/system.img $IMAGE_PATH/system.img
+            fi
         else
                 #system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
                 system_size=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
