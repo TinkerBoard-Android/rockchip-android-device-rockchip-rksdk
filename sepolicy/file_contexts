@@ -50,6 +50,9 @@
 #lcdcscale
 /sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
 
+#lut
+/sys/devices/fb.11/graphics/fb0/dsp_lut -- u:object_r:sysfs_lut:s0
+
 #for support ntfs
 /system/bin/ntfs-3g  u:object_r:vold_exec:s0
 /system/bin/mkntfs   u:object_r:vold_exec:s0

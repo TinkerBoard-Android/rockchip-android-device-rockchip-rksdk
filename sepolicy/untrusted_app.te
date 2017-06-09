@@ -16,3 +16,4 @@ allow untrusted_app { domain -init -kernel}:dir { getattr search };
 allow untrusted_app { domain -init -kernel}:file { read getattr open };
 get_prop(untrusted_app,ctsgts_prop)
 allow untrusted_app system_data_file:file r_file_perms;
+allow untrusted_app sysfs_lut:file { getattr setattr open write };
