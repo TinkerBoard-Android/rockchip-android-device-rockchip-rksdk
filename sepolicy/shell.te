@@ -18,3 +18,7 @@ get_prop(shell,safemode_prop)
 get_prop(shell,mmc_prop)
 get_prop(shell,device_logging_prop)
 get_prop(shell,ctsgts_prop)
+
+# read files in /data/logs
+allow shell aplog_data_file:dir r_dir_perms;
+allow shell aplog_data_file:file r_file_perms;
