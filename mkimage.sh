@@ -12,12 +12,14 @@ PLATFORM_SECURITY_PATCH=`get_build_var PLATFORM_SECURITY_PATCH`
 TARGET_BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
 BOARD_SYSTEMIMAGE_PARTITION_SIZE=`get_build_var BOARD_SYSTEMIMAGE_PARTITION_SIZE`
 PRODUCT_SYSTEM_VERITY=`get_build_var PRODUCT_SYSTEM_VERITY`
+BOARD_USE_SPARSE_SYSTEM_IMAGE=`get_build_var BOARD_USE_SPARSE_SYSTEM_IMAGE`
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_HARDWARE=$TARGET_HARDWARE
 echo TARGET_BUILD_VARIANT=$TARGET_BUILD_VARIANT
 echo BOARD_SYSTEMIMAGE_PARTITION_SIZE=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
 echo PRODUCT_SYSTEM_VERITY=$PRODUCT_SYSTEM_VERITY
+echo BOARD_USE_SPARSE_SYSTEM_IMAGE=$BOARD_USE_SPARSE_SYSTEM_IMAGE
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -135,42 +137,50 @@ fi
 	cp -a rkst/Image/pcba_whole_misc.img $IMAGE_PATH/pcba_whole_misc.img
 	echo "done."
 
-if [ -d $OUT/system ]
-then
-	echo -n "create system.img... "
-	if [ "$FSTYPE" = "cramfs" ]
-	then
-		chmod -R 777 $OUT/system
-		$FAKEROOT mkfs.cramfs $OUT/system $IMAGE_PATH/system.img
-	elif [ "$FSTYPE" = "squashfs" ]
-	then
-		chmod -R 777 $OUT/system
-		mksquashfs $OUT/system $IMAGE_PATH/system.img -all-root >/dev/null
-	elif [ "$FSTYPE" = "ext3" ] || [ "$FSTYPE" = "ext4" ]
-	then
-        if [ "$PRODUCT_SYSTEM_VERITY" = "true" ]; then
-            if [ $TARGET == $BOOT_OTA ]
-            then
-                mv unsparse_system-*.img $IMAGE_PATH/system.img
-            else
-                python ./build/tools/releasetools/build_image.py \
-                    $OUT/system $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-                    $OUT/system.img $OUT/system
-                echo -n "translate verified sparse image to raw image... "
-                simg2img $OUT/system.img $IMAGE_PATH/system.img
-            fi
+if [ -d $OUT/system ]; then
+  echo -n "create system.img..."
+  if [ "$FSTYPE" = "cramfs" ]; then
+    chmod -R 777 $OUT/system
+      $FAKEROOT mkfs.cramfs $OUT/system $IMAGE_PATH/system.img
+  elif [ "$FSTYPE" = "squashfs" ]; then
+    chmod -R 777 $OUT/system
+      mksquashfs $OUT/system $IMAGE_PATH/system.img -all-root >/dev/null
+  elif [ "$FSTYPE" = "ext3" ] || [ "$FSTYPE" = "ext4" ]; then
+    if [ "$BOARD_USE_SPARSE_SYSTEM_IMAGE" = "true" ]; then
+      python device/rockchip/common/sparse_tool.py $OUT/system.img
+      mv $OUT/system.img.out $OUT/system.img
+    fi
+    if [ "$PRODUCT_SYSTEM_VERITY" = "true" ]; then
+      if [ $TARGET == $BOOT_OTA ]; then
+        mv unsparse_system-*.img $IMAGE_PATH/system.img
+      else
+        python ./build/tools/releasetools/build_image.py \
+        $OUT/system $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
+        $OUT/system.img $OUT/system
+        if [ "$BOARD_USE_SPARSE_SYSTEM_IMAGE" = "true" ]; then
+          echo "Copy verified sparse image to $IMAGE_PATH/system.img... "
+          cp -f $OUT/system.img $IMAGE_PATH/system.img
         else
-                #system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
-                system_size=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
-                [ $system_size -gt "0" ] || { echo "Please make first!!!" && exit 1; }
-                MAKE_EXT4FS_ARGS=" -L system -S $OUT/root/file_contexts -a system $IMAGE_PATH/system.img $OUT/system"
-                ok=0
-                while [ "$ok" = "0" ]; do
-                    make_ext4fs -l $system_size $MAKE_EXT4FS_ARGS >/dev/null 2>&1 &&
-                    tune2fs -c -1 -i 0 $IMAGE_PATH/system.img >/dev/null 2>&1 &&
-                    ok=1 || system_size=$(($system_size + 5242880))
-                done
-                e2fsck -fyD $IMAGE_PATH/system.img >/dev/null 2>&1 || true
+          echo -n "translate verified sparse image to raw image... "
+          simg2img $OUT/system.img $IMAGE_PATH/system.img
+        fi
+      fi
+    else
+      if [ "$BOARD_USE_SPARSE_SYSTEM_IMAGE" = "true" ]; then
+        cp -f $OUT/system.img $IMAGE_PATH/system.img
+      else
+        #system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
+        system_size=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
+        [ $system_size -gt "0" ] || { echo "Please make first!!!" && exit 1; }
+        MAKE_EXT4FS_ARGS=" -L system -S $OUT/root/file_contexts -a system $IMAGE_PATH/system.img $OUT/system"
+        ok=0
+        while [ "$ok" = "0" ]; do
+          make_ext4fs -l $system_size $MAKE_EXT4FS_ARGS >/dev/null 2>&1 &&
+          tune2fs -c -1 -i 0 $IMAGE_PATH/system.img >/dev/null 2>&1 &&
+          ok=1 || system_size=$(($system_size + 5242880))
+          done
+          e2fsck -fyD $IMAGE_PATH/system.img >/dev/null 2>&1 || true
+      fi
 		fi
 	else
 		mkdir -p $IMAGE_PATH/2k $IMAGE_PATH/4k

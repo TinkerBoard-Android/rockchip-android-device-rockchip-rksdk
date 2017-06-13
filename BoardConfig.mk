@@ -313,3 +313,6 @@ endif
 
 #enable cpusets sched policy
 ENABLE_CPUSETS := true
+
+# Enable sparse system image
+BOARD_USE_SPARSE_SYSTEM_IMAGE ?= false
