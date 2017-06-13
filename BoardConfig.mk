@@ -310,3 +310,6 @@ USE_CLANG_PLATFORM_BUILD ?= true
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     TARGET_RECOVERY_OVERSCAN_PERCENT := 2
 endif
+
+#enable cpusets sched policy
+ENABLE_CPUSETS := true
