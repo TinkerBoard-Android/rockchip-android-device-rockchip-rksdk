@@ -26,6 +26,13 @@ endif
 include $(BUILD_PREBUILT)
 
 """
+
+copy_app_templet = """LOCAL_PATH := $(my-dir)
+include $(CLEAR_VARS)
+LOCAL_APK_NAME := %s
+LOCAL_POST_PROCESS_COMMAND := $(shell mkdir -p $(TARGET_OUT)/vendor/%s/$(LOCAL_APK_NAME) && cp $(LOCAL_PATH)/$(LOCAL_APK_NAME).apk $(TARGET_OUT)/vendor/%s/$(LOCAL_APK_NAME)/)
+"""
+
 def main(argv):
     preinstall_dir = os.path.join(argv[1],argv[2])
     if os.path.exists(preinstall_dir):
@@ -115,7 +122,7 @@ def main(argv):
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     else:
                         if argv[2]=='preinstall_del' or argv[2]=='preinstall_del_forever':
-                            makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
+                            makefile.write(copy_app_templet % (found.group(), argv[3], argv[3]))
                         else:
                             makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     shutil.move(apk,apkpath)
