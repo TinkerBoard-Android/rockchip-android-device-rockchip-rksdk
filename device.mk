@@ -672,12 +672,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.pms.multithreadscan=true		
 endif
 
-#Add prop for drm
-ifeq ($(strip $(BUILD_WITH_WIDEVINE)), true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    drm.service.enabled=true
-endif
-
 #add for hwui property
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=72 \
