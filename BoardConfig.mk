@@ -201,6 +201,9 @@ BUILD_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET_ALL ?= false
 BUILD_WITH_GOOGLE_FRP ?= false
 
+#widevine configuration
+BUILD_WITH_WIDEVINE ?= false
+
 # face lock
 BUILD_WITH_FACELOCK ?= false
 
