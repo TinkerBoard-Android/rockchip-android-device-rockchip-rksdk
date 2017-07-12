@@ -81,6 +81,9 @@ on boot
     chown system system  /sys/devices/ffa30000.gpu/dvfs
     chmod 0777 /sys/devices/platform/ff9a0000.gpu/devfreq/ff9a0000.gpu/governor
 
+    chown system system /sys/devices/system/cpu/cpu0/online
+    chmod 0660 /sys/devices/system/cpu/cpu0/online
+
     chown system system /sys/devices/system/cpu/cpu1/online
     chmod 0660 /sys/devices/system/cpu/cpu1/online
 
@@ -104,6 +107,10 @@ on boot
 
     chown system system /sys/module/rockchip_pm/parameters/policy
     chmod 0660 /sys/module/rockchip_pm/parameters/policy
+
+    # Vop bandwidth for ddr dvfs
+    chown system system /sys/class/devfreq/dmc/vop_bandwidth
+    chmod 0660 /sys/class/devfreq/dmc/vop_bandwidth
 
     # b/13568411: make lazy vfree flush thresholds match flush_tlb_range
     write /proc/sys/vm/lazy_vfree_tlb_flush_all_threshold 524288
