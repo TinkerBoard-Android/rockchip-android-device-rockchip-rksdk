@@ -475,10 +475,10 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product-if-exists, external/wlan_loader/wifi-firmware.mk)
 
 # Copy manifest to system/
-ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
-PRODUCT_COPY_FILES += \
-    manifest.xml:system/manifest.xml
-endif
+#ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
+#PRODUCT_COPY_FILES += \
+#    manifest.xml:system/manifest.xml
+#endif
 
 # Copy init.usbstorage.rc to root
 #ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
@@ -528,7 +528,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor_usb.so \
     bt_vendor.conf
 #include hardware/realtek/rtkbt/rtkbt.mk
-$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
+#$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 include device/rockchip/common/samba/rk31_samba.mk
@@ -694,3 +694,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.hdmi_enable=true   \
     sys.status.hidebar_enable=false   \
     persist.sys.ui.hw=true
+
+#######for target product ########
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
+
+  PRODUCT_PROPERTY_OVERRIDES += \
+       ro.target.product=box
+else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
+  PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=vr
+else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),laptop)
+  PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=laptop
+else
+  PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=tablet
+endif

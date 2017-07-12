@@ -1,3 +1,0 @@
-get_prop(appdomain,system_prop)
-allow appdomain app_data_file:dir getattr;
-
