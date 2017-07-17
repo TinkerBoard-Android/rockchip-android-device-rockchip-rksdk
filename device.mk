@@ -113,8 +113,11 @@ PRODUCT_COPY_FILES += \
     vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
 
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     libiconv \
     hostapd \
+    wificond \
+    wifilogd \
     wpa_supplicant \
     wpa_supplicant.conf \
     dhcpcd.conf
@@ -250,16 +253,52 @@ PRODUCT_PACKAGES += \
     power.$(TARGET_BOARD_PLATFORM) 
 endif
 PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.power@1.0-impl \
     sensors.$(TARGET_BOARD_HARDWARE) \
-    gralloc.$(TARGET_BOARD_HARDWARE) \
-    hwcomposer.$(TARGET_BOARD_HARDWARE) \
-    lights.$(TARGET_BOARD_PLATFORM) \
     camera.$(TARGET_BOARD_HARDWARE) \
     Camera \
     libvpu \
     libstagefrighthw \
     libgralloc_priv_omx \
     akmd 
+
+# Health HAL
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl
+
+# Light HAL
+PRODUCT_PACKAGES += \
+    lights.$(TARGET_BOARD_PLATFORM) \
+    android.hardware.light@2.0-impl    
+
+# Keymaster HAL
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
+
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+# Gatekeeper HAL
+#PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl \
+
+# Dumpstate HAL
+PRODUCT_PACKAGES += \
+    android.hardware.dumpstate@1.0-service.dragon
+
+# Gralloc HAL
+PRODUCT_PACKAGES += \
+    gralloc.$(TARGET_BOARD_HARDWARE) \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service
+
+# HWC
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.1-impl \
+    hwcomposer.$(TARGET_BOARD_HARDWARE) \
 
 # iep
 ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3128 px3se rk3368 rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
@@ -294,6 +333,16 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default\
     libaudioroute\
     audio.usb.default
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl
+
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
+
 
 # Filesystem management tools
 # EXT3/4 support
@@ -520,6 +569,11 @@ PRODUCT_COPY_FILES += \
     $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_PreI2C_NCD_Signed_configdata.ncd)
 endif
 
+# Bluetooth HAL
+PRODUCT_PACKAGES += \
+    libbt-vendor \
+    android.hardware.bluetooth@1.0-impl
+
 # for realtek bluetooth
 PRODUCT_PACKAGES += \
     bluetooth_rtk.default \
@@ -711,3 +765,7 @@ else
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=tablet
 endif
+
+# Vendor Interface Manifest
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
