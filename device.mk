@@ -763,6 +763,11 @@ ifeq ($(strip $(OEM_PRESET)),true)
 include device/rockchip/common/oem_preset/oem_preset.mk
 endif
 
+#boot video enable 
+ifeq ($(strip $(BOOT_VIDEO_ENABLE)),true)
+include device/rockchip/common/bootvideo/bootvideo.mk
+endif
+
 ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.pms.multithreadscan=true		
