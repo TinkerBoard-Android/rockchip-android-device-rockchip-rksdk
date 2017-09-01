@@ -97,7 +97,7 @@ service p2p_supplicant1 /system/bin/wpa_supplicant \
 ########## 3.0.x <= kernel version <= 3.4.x ##########
 
 ########## kernel version >= 3.10.x ##########
-service wpa_supplicant /system/bin/wpa_supplicant \
+service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
     -e/data/misc/wifi/entropy.bin -O/data/misc/wifi/sockets \
@@ -107,7 +107,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service p2p_supplicant /system/bin/wpa_supplicant \
+service p2p_supplicant /system/vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf \
     -puse_p2p_group_interface=1p2p_device=1 \
@@ -121,7 +121,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 ########## kernel version >= 3.10.x ##########
 	
 # for rtl wifi
-service p2p_supp_rtl /system/bin/wpa_supplicant \
+service p2p_supp_rtl /system/vendor/bin/hw/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -133,7 +133,7 @@ service p2p_supp_rtl /system/bin/wpa_supplicant \
     oneshot
 
 # for esp wifi
-service p2p_supp_esp /system/bin/wpa_supplicant \
+service p2p_supp_esp /system/vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf -N \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
@@ -147,7 +147,7 @@ service p2p_supp_esp /system/bin/wpa_supplicant \
     oneshot
 
 #for ssv6051p wifi
-service ssv_p2p_supp /system/bin/wpa_supplicant \
+service ssv_p2p_supp /system/vendor/bin/hw/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -I/system/etc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -N \
@@ -159,7 +159,7 @@ service ssv_p2p_supp /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
+service hostapd /system/vendor/bin/hostapd /data/misc/wifi/hostapd.conf
     class main
     disabled
     oneshot

@@ -176,6 +176,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 endif
 
+ifeq ($(BOARD_BLUETOOTH_SUPPORT),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+endif
+
+ifeq ($(BOARD_WIFI_SUPPORT),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
+endif
+
 ifeq ($(BOARD_HAS_GPS),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml
@@ -572,7 +584,8 @@ endif
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     libbt-vendor \
-    android.hardware.bluetooth@1.0-impl
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 # for realtek bluetooth
 PRODUCT_PACKAGES += \
