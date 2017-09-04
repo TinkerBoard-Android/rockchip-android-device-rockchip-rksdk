@@ -54,6 +54,10 @@ TARGET_CPU_ABI2 ?=
 TARGET_CPU_SMP ?= true
 endif
 
+# Add standalone vendor partion configrations
+TARGET_COPY_OUT_VENDOR := vendor
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
+BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
 
 # GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= mali-t760
