@@ -259,15 +259,20 @@ PRODUCT_PACKAGES += \
     librs_jni \
     libjni_pinyinime
 
-# HAL
-ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
+# Sensor HAL
 PRODUCT_PACKAGES += \
-    power.$(TARGET_BOARD_PLATFORM) 
-endif
-PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-service \
     android.hardware.sensors@1.0-impl \
+    sensors.$(TARGET_BOARD_HARDWARE)
+
+# Power HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-service \
     android.hardware.power@1.0-impl \
-    sensors.$(TARGET_BOARD_HARDWARE) \
+    power.$(TARGET_BOARD_PLATFORM)
+
+# Camera omx-plugin vpu akmd
+PRODUCT_PACKAGES += \
     camera.$(TARGET_BOARD_HARDWARE) \
     Camera \
     libvpu \
@@ -282,6 +287,7 @@ PRODUCT_PACKAGES += \
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_PLATFORM) \
+    android.hardware.light@2.0-service \
     android.hardware.light@2.0-impl    
 
 # Keymaster HAL
@@ -347,6 +353,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default
 
 PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-service \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.broadcastradio@1.0-impl \
