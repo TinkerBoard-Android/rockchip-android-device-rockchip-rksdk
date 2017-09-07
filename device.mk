@@ -105,12 +105,12 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
 
 PRODUCT_COPY_FILES += \
-    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
+    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
 
 #for ssv6051
 PRODUCT_COPY_FILES += \
-    vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+    vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant.conf \
 
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
@@ -540,8 +540,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
     
-$(call inherit-product-if-exists, external/wlan_loader/wifi-firmware.mk)
-
 # Copy manifest to system/
 #ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
 #PRODUCT_COPY_FILES += \
