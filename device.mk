@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+ifeq ($(strip $(TARGET_CPU_ABI)), arm64-v8a)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+endif
+
 # Prebuild apps
 ifneq ($(strip $(TARGET_PRODUCT)), )
     TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
