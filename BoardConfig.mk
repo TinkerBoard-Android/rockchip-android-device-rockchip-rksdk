@@ -54,6 +54,11 @@ TARGET_CPU_ABI2 ?=
 TARGET_CPU_SMP ?= true
 endif
 
+# Add standalone oem partion configrations
+TARGET_COPY_OUT_OEM := oem
+BOARD_OEMIMAGE_FILE_SYSTEM_TYPE ?= ext4
+BOARD_OEMIMAGE_PARTITION_SIZE ?= 536870912
+
 # Add standalone vendor partion configrations
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4

@@ -184,6 +184,16 @@ if [ -d $OUT/vendor ]; then
     cp -f $OUT/vendor.img $IMAGE_PATH/vendor.img
 fi
 
+if [ -d $OUT/oem ]; then
+    echo -n "create oem.img..."
+    python ./build/tools/releasetools/build_image.py \
+    $OUT/oem $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
+    $OUT/oem.img $OUT/system
+    python device/rockchip/common/sparse_tool.py $OUT/oem.img
+    mv $OUT/oem.img.out $OUT/oem.img
+    cp -f $OUT/oem.img $IMAGE_PATH/oem.img
+fi
+
 if [ -f $UBOOT_PATH/uboot.img ]
 then
 	echo -n "create uboot.img..."
