@@ -47,6 +47,8 @@ def Install_Parameter(info):
   common.ZipWriteStr(info.output_zip, "parameter", parameter_bin)
   info.script.Print("start update parameter...")
   info.script.WriteRawParameterImage("/parameter", "parameter")
+  #info.script.FormatPartition("/data");
+  #info.script.FormatPartition("/cache");
   info.script.Print("end update parameter")
 
 def InstallRKLoader(loader_bin, input_zip, info):
