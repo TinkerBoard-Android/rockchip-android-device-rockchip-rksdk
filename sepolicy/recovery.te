@@ -1,0 +1,5 @@
+recovery_only(`
+allow recovery boottime_prop:file { getattr open };
+allow recovery overlay_prop:file { getattr open };
+allow recovery wifi_prop:file { getattr open };
+')
