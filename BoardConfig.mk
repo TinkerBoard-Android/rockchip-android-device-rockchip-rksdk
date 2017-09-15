@@ -57,12 +57,30 @@ endif
 # Add standalone oem partion configrations
 TARGET_COPY_OUT_OEM := oem
 BOARD_OEMIMAGE_FILE_SYSTEM_TYPE ?= ext4
-BOARD_OEMIMAGE_PARTITION_SIZE ?= 536870912
 
 # Add standalone vendor partion configrations
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
-BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
+
+#Calculate partition size from parameter.txt
+USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
+ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
+  BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt system)
+  BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt oem)
+  BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor)
+  BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt cache)
+
+  #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
+else
+  BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
+  BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
+  BOARD_OEMIMAGE_PARTITION_SIZE ?= 536870912
+  BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
+  ifneq ($(strip $(TARGET_DEVICE_DIR)),)
+    #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+  endif
+endif
+
 
 # GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= mali-t760
@@ -137,8 +155,6 @@ TARGET_PROVIDES_INIT_RC ?= false
 #BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
 
 //MAX-SIZE=512M, for generate out/.../system.img
-BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
-BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
 BOARD_FLASH_BLOCK_SIZE ?= 131072
 
 # Enable dex-preoptimization to speed up first boot sequence
