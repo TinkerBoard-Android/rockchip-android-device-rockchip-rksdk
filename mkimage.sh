@@ -176,9 +176,11 @@ fi
 
 if [ -d $OUT/vendor ]; then
     echo -n "create vendor.img..."
-    python ./build/tools/releasetools/build_image.py \
-    $OUT/vendor $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-    $OUT/vendor.img $OUT/system
+    if [ $TARGET != $BOOT_OTA ]; then
+      python ./build/tools/releasetools/build_image.py \
+      $OUT/vendor $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
+      $OUT/vendor.img $OUT/system
+    fi
     python device/rockchip/common/sparse_tool.py $OUT/vendor.img
     mv $OUT/vendor.img.out $OUT/vendor.img
     cp -f $OUT/vendor.img $IMAGE_PATH/vendor.img
