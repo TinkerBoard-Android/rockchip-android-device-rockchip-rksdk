@@ -1,1 +1,6 @@
 /metadata(/.*)?      u:object_r:metadata_file:s0
+
+/dev/block/platform/ff0f0000.dwmmc/by-name/frp    u:object_r:frp_block_device:s0
+/dev/block/platform/fe330000.sdhci/by-name/frp    u:object_r:frp_block_device:s0
+/dev/block/rknand_frp                             u:object_r:frp_block_device:s0
+/dev/block/platform/1021c000.rksdmmc/by-name/frp  u:object_r:frp_block_device:s0
