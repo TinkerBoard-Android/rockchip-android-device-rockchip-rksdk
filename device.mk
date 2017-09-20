@@ -777,6 +777,33 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.status.hidebar_enable=false   \
     persist.sys.ui.hw=true
 
+#The module which belong to vndk-sp is defined by google
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0.vndk-sp\
+    android.hardware.graphics.allocator@2.0.vndk-sp\
+    android.hardware.graphics.mapper@2.0.vndk-sp\
+    android.hardware.graphics.common@1.0.vndk-sp\
+    android.hidl.base@1.0.vndk-sp\
+    libhwbinder.vndk-sp\
+    libbase.vndk-sp\
+    libcutils.vndk-sp\
+    libhardware.vndk-sp\
+    libhidlbase.vndk-sp\
+    libhidltransport.vndk-sp\
+    libutils.vndk-sp\
+    libc++.vndk-sp\
+    libRS_internal.vndk-sp\
+    libRSDriver.vndk-sp\
+    libRSCpuRef.vndk-sp\
+    libbcinfo.vndk-sp\
+    libblas.vndk-sp\
+    libft2.vndk-sp\
+    libpng.vndk-sp\
+    libcompiler_rt.vndk-sp\
+    libbacktrace.vndk-sp\
+    libunwind.vndk-sp\
+    liblzma.vndk-sp\
+
 #######for target product ########
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
