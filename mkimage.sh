@@ -188,9 +188,11 @@ fi
 
 if [ -d $OUT/oem ]; then
     echo -n "create oem.img..."
-    python ./build/tools/releasetools/build_image.py \
-    $OUT/oem $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-    $OUT/oem.img $OUT/system
+    if [ $TARGET != $BOOT_OTA ]; then
+      python ./build/tools/releasetools/build_image.py \
+      $OUT/oem $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
+      $OUT/oem.img $OUT/system
+    fi
     python device/rockchip/common/sparse_tool.py $OUT/oem.img
     mv $OUT/oem.img.out $OUT/oem.img
     cp -f $OUT/oem.img $IMAGE_PATH/oem.img
