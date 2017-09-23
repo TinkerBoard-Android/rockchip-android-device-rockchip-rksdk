@@ -15,7 +15,6 @@ allow displayd sysfs_hdmi:file rw_file_perms;
 allow displayd cache_file:file { rw_file_perms create };
 allow displayd cache_file:dir rw_dir_perms;
 allow displayd baseparameter_block_device:blk_file rw_file_perms;
-allow displayd displayd:netlink_kobject_uevent_socket { create setopt bind getopt read };
 allow displayd displayd:netlink_route_socket { create setopt bind getopt read };
 allow displayd displayd:netlink_nflog_socket { create setopt bind getopt read };
 allow displayd displayd:unix_stream_socket { connectto };

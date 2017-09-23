@@ -9,8 +9,6 @@ userdebug_or_eng(`
   allow apk_logfs rootfs:lnk_file getattr;
   allow apk_logfs self:capability dac_override;
   allow apk_logfs shell_exec:file { read getattr };
-  allow apk_logfs aplog_data_file:dir { write add_name remove_name search };
-  allow apk_logfs aplog_data_file:file { create open getattr append rename unlink };
   allow apk_logfs system_file:file execute_no_trans;
   allow apk_logfs toolbox_exec:file { read getattr open execute execute_no_trans };
 ')

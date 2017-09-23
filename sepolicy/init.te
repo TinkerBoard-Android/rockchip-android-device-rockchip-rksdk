@@ -9,7 +9,6 @@ domain_trans(init, drmservice_exec, drmservice)
 domain_trans(init, tinyplaywav_exec, tinyplaywav)
 domain_trans(init, displayd_exec, displayd)
 domain_auto_trans(init, rootfs, resize2fs)
-domain_auto_trans(init, gpsd_exec, gpsd)
 domain_trans(init, iso_exec, iso)
 domain_trans(init, cifsmanager_exec, cifsmanager)
 domain_trans(init, abc_exec, abc)
@@ -33,7 +32,6 @@ allow init zram_device:blk_file { write open read };
 
 allow init socket_device:sock_file { create setattr };
 allow init sysfs_hdmi:file rw_file_perms;
-allow init init:netlink_kobject_uevent_socket { create setopt bind getopt read };
 #allow init kernel:security { setcheckreqprot };
 allow init cache_file:dir { mounton };
 allow init metadata_file:dir { mounton };

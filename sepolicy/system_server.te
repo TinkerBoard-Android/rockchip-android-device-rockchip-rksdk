@@ -5,21 +5,15 @@ allow system_server timer_device:chr_file rw_file_perms;
 allow system_server surfaceflinger:fifo_file rw_file_perms;
 allow system_server serial_device:chr_file rw_file_perms;
 
-allow system_server gps_data_file:dir { search write read open add_name };
-allow system_server gps_data_file:fifo_file { write open read };
 allow system_server dumpstate:unix_stream_socket { ioctl };
 
 allow system_server socket_device:sock_file { write };
 
 allow system_server displayd:unix_stream_socket { connectto };
-allow system_server gps_data_file:fifo_file { create rw_file_perms setattr };
 
 allow system_server system_server:capability { sys_module };
 allow system_server sensor_device:chr_file rw_file_perms;
 allow system_server system_server:unix_stream_socket { ioctl };
-
-allow system_server pppoe_service:service_manager { add find };
-allow system_server pppoe_data_file:file { read open getattr };
 
 # map with latest kernel security/selinux/include/classmap.h
 allow system_server system_server:netlink_netfilter_socket { create setopt bind write read getopt };

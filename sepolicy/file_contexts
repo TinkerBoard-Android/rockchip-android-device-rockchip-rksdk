@@ -44,9 +44,6 @@
 
 /sys/devices/virtual/android_usb/android0/(/.*)? -- u:object_r:sysfs_usb:s0
 
-#add for glgps
-/system/bin/glgps    u:object_r:gpsd_exec:s0
-
 #lcdcscale
 /sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
 
@@ -63,9 +60,6 @@
 
 #for displayd
 /system/bin/displayd                 u:object_r:displayd_exec:s0
-
-#for glgps
-/data/system/gps(/.*)?     u:object_r:gps_data_file:s0
 
 #for3399 device frp funtions
 /dev/block/platform/fe330000\.sdhci/by-name/frp  u:object_r:frp_block_device:s0
@@ -116,29 +110,7 @@
 /dev/rkvdec                u:object_r:video_device:s0
 /dev/dri(/.*)?       u:object_r:gpu_device:s0
 
-#for aplog
-(/system)?/vendor/bin/start_log_srv.sh     u:object_r:ap_log_srv_script_exec:s0
-(/system)?/vendor/bin/logcat_ep.sh     u:object_r:apk_logfs_exec:s0
-(/system)?/vendor/bin/log-watch     u:object_r:log-watch_exec:s0
-(/system)?/vendor/etc/log-watch-kmsg.cfg u:object_r:log-watch-cnf:s0
-# Crashlogd executable
-(/system)?/vendor/bin/crashlogd u:object_r:crashlogd_exec:s0
-(/system)?/vendor/bin/elogs.sh u:object_r:earlylogs_exec:s0
-
-# pppoe
-/system/bin/pppoe-setup          u:object_r:pppoe_exec:s0
-/system/bin/pppoe-start          u:object_r:pppoe_exec:s0
-/system/bin/pppoe-stop           u:object_r:pppoe_exec:s0
-/system/bin/pppoe-connect        u:object_r:pppoe_exec:s0
-/system/bin/pppoe-status         u:object_r:pppoe_exec:s0
-
-/data/misc/ppp(/.*)?             u:object_r:pppoe_data_file:s0
-
-/system/bin/wfd                  u:object_r:wfd_exec:s0
-
 /dev/vendor_storage              u:object_r:storage_device:s0
-
-/data/logs(/.*)? u:object_r:aplog_data_file:s0
 
 #for tee
 /system/bin/tee-supplicant     u:object_r:tee_exec:s0

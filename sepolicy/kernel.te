@@ -3,9 +3,7 @@ allow kernel block_device:blk_file { read write open };
 
 # mr1
 allow kernel self:capability { mknod mknod };
-allow kernel device:blk_file { create_file_perms };
 allow kernel block_device:blk_file rw_file_perms;
-allow kernel device:blk_file { create  setattr };
 
 allow kernel device:chr_file { create setattr getattr unlink };
 allow kernel kernel:system { module_request };

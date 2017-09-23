@@ -1,5 +1,4 @@
 # Additional rules for platform_app
-allow platform_app surfaceflinger_tmpfs:file { read write };
 # Write to /cache.
 allow platform_app vfat:dir create_dir_perms;
 allow platform_app vfat:file create_file_perms;
