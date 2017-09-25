@@ -1,0 +1,2 @@
+allow hal_audio_default media_prop:file { getattr open read };
+allow hal_audio_default property_socket:sock_file write;
