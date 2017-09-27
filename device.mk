@@ -554,11 +554,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
     
-# Copy manifest to system/
-#ifeq ($(strip $(SYSTEM_WITH_MANIFEST)),true)
-#PRODUCT_COPY_FILES += \
-#    manifest.xml:system/manifest.xml
-#endif
+# Copy manifest to vendor/
+ifeq ($(strip $(VENDOR_WITH_MANIFEST)),true)
+PRODUCT_COPY_FILES += \
+    manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest_rk_version.xml
+endif
 
 # Copy init.usbstorage.rc to root
 #ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
