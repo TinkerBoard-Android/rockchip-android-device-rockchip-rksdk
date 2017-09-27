@@ -62,6 +62,9 @@ BOARD_OEMIMAGE_FILE_SYSTEM_TYPE ?= ext4
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
+DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
+DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
+
 #Calculate partition size from parameter.txt
 USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
 ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
