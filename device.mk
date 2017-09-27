@@ -296,15 +296,17 @@ PRODUCT_PACKAGES += \
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
-# Gatekeeper HAL
-#PRODUCT_PACKAGES += \
+# new gatekeeper HAL
+# PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service
 
 # Dumpstate HAL
 PRODUCT_PACKAGES += \
@@ -778,6 +780,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.hdmi_enable=true   \
     sys.status.hidebar_enable=false   \
     persist.sys.ui.hw=true
+
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 #The module which belong to vndk-sp is defined by google
 PRODUCT_PACKAGES += \
