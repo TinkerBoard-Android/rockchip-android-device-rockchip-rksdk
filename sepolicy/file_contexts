@@ -21,7 +21,6 @@
 
 #akmd
 /dev/akm8963_dev     u:object_r:akmd_device:s0
-/system/bin/akmd     u:object_r:akmd_exec:s0
 /data/misc/akmd(/.*)?     u:object_r:akmd_file:s0
 
 /metadata(/.*)?      u:object_r:metadata_file:s0
@@ -31,12 +30,6 @@
 /radical_update(/.*)? u:object_r:ru_file:s0
 /dev/rtk_btusb       u:object_r:rtkbt_device:s0
 /dev/rknand_sys_storage                u:object_r:rknand_device:s0
-/system/bin/drmservice                 u:object_r:drmservice_exec:s0
-/system/bin/iso                        u:object_r:iso_exec:s0
-/data/cifsmanager(/.*)?                u:object_r:cifsmanager_exec:s0
-/system/bin/tinyplaywav                u:object_r:tinyplaywav_exec:s0
-/system/bin/tinyplay                   u:object_r:tinyplay_exec:s0
-/system/bin/tinymix                    u:object_r:tinymix_exec:s0
 #/system/bin/e2fsck                     u:object_r:ext4_exec:s0
 
 
@@ -55,9 +48,6 @@
 
 #hdmi
 /sys/devices/virtual/display/HDMI(/.*)? -- u:object_r:sysfs_hdmi:s0
-
-#for displayd
-/system/bin/displayd                 u:object_r:displayd_exec:s0
 
 # for nand device
 /dev/block/rknand_frp u:object_r:frp_block_device:s0
@@ -90,10 +80,9 @@
 /dev/opteearmtz[0-9]*         u:object_r:tee_device:s0
 /data/tee(/.*)?        		u:object_r:tee_data_file:s0
 
-/system/bin/rk_store_keybox     u:object_r:rk_store_keybox_exec:s0
-#for abc
-/system/bin/abc             u:object_r:abc_exec:s0
-
-
 /dev/block/mmcblk1 u:object_r:uboot_block_device:s0
 /dev/block/mmcblk1rpmb u:object_r:rpmb_block_device:s0
+
+# Vendor file tag
+/vendor/lib(64)?/(/.*)?            u:object_r:vendor_file:s0
+/vendor/lib(64)?/hw/(/.*)?         u:object_r:vendor_file:s0

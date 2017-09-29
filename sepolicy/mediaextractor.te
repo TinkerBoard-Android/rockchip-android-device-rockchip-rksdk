@@ -1,2 +1,3 @@
+allow mediaextractor fuse:file { read open getattr };
 set_prop(mediaextractor,drm_prop)
 set_prop(mediaextractor,media_prop)

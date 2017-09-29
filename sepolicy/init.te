@@ -4,13 +4,6 @@
 #  domain_trans(init, rootfs, busybox)
 #')
 
-domain_trans(init, drmservice_exec, drmservice)
-domain_trans(init, tinyplaywav_exec, tinyplaywav)
-domain_trans(init, displayd_exec, displayd)
-domain_trans(init, iso_exec, iso)
-domain_trans(init, cifsmanager_exec, cifsmanager)
-domain_trans(init, abc_exec, abc)
-domain_trans(init, rk_store_keybox_exec, rk_store_keybox)
 
 allow init serial_device:chr_file { write ioctl };
 allow init kernel:system { module_request };
@@ -43,6 +36,7 @@ allow init frp_block_device:blk_file { write };
 allow init devpts:chr_file { getattr };
 allow init debugfs:dir mounton;
 allow init debugfs:file { write };
+allow init debugfs_tracing:file { write };
 
 allow init block_device:lnk_file { relabelfrom };
 allow init userdata_block_device:lnk_file { relabelto };

@@ -1,0 +1,2 @@
+allow untrusted_app_25 gpu_device:dir { search };
+allow untrusted_app_25 vendor_file:file { open read execute getattr };

@@ -9,7 +9,7 @@ allow system_server dumpstate:unix_stream_socket { ioctl };
 
 allow system_server socket_device:sock_file { write };
 
-allow system_server displayd:unix_stream_socket { connectto };
+#allow system_server displayd:unix_stream_socket { connectto };
 
 allow system_server system_server:capability { sys_module };
 allow system_server sensor_device:chr_file rw_file_perms;
@@ -39,6 +39,10 @@ allow system_server bluetooth:file rw_file_perms;
 allow system_server radio:file write;
 allow system_server isolated_app:file write;
 allow system_server system_file:system { module_load };
+
+# for vendor
+allow system_server vendor_file:file { execute getattr open read };
+
 set_prop(system_server,wifi_log_prop)
 set_prop(system_server,media_prop)
 set_prop(system_server,drm_prop)
