@@ -62,6 +62,9 @@ BOARD_OEMIMAGE_FILE_SYSTEM_TYPE ?= ext4
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
+# default.prop & build.prop split
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
+
 DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
 
