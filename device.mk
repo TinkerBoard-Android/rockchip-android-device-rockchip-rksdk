@@ -176,83 +176,83 @@ $(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_con
 
 ifeq ($(BOARD_NFC_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
+    frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml
 endif
 
 ifeq ($(BOARD_BLUETOOTH_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 endif
 
 ifeq ($(BOARD_WIFI_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
+    frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml
 endif
 
 ifeq ($(BOARD_HAS_GPS),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml
+    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 endif
 
 ifeq ($(BOARD_COMPASS_SENSOR_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml
 endif
 
 ifeq ($(BOARD_GYROSCOPE_SENSOR_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml
 endif
 
 ifeq ($(BOARD_PROXIMITY_SENSOR_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml
+	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml
 endif
 
 ifeq ($(BOARD_LIGHT_SENSOR_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml
 endif
 
 # opengl aep feature
 ifeq ($(BOARD_OPENGL_AEP),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 endif
 
 # CAMERA
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
+    frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml
 endif
 
 # USB HOST
 ifeq ($(BOARD_USB_HOST_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+    frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml
 endif
 
 # USB ACCESSORY
 ifeq ($(BOARD_USB_ACCESSORY_SUPPORT),true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/box_core_hardware.xml:system/etc/permissions/box_core_hardware.xml 
+        frameworks/native/data/etc/box_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/box_core_hardware.xml
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
     PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/vr_core_hardware.xml:system/etc/permissions/vr_core_hardware.xml 
+        frameworks/native/data/etc/vr_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vr_core_hardware.xml
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
     PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/laptop_core_hardware.xml:system/etc/permissions/laptop_core_hardware.xml
+        frameworks/native/data/etc/laptop_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/laptop_core_hardware.xml
 else # tablet
     PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml 
+        frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
 endif
 
 # Live Wallpapers
@@ -586,9 +586,9 @@ copyNfcFirmware = $(subst XXXX,$(strip $(1)),hardware/broadcom/nfc/firmware/XXXX
 # NFC access control + feature files + configuration
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
     $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/nfc/libnfc-brcm-20791b03.conf:system/etc/libnfc-brcm-20791b03.conf \
     $(LOCAL_PATH)/nfc/libnfc-brcm-20791b04.conf:system/etc/libnfc-brcm-20791b04.conf \
@@ -678,7 +678,7 @@ endif
 # hdmi cec
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 PRODUCT_PACKAGES += \
 	hdmi_cec.$(TARGET_BOARD_HARDWARE)
