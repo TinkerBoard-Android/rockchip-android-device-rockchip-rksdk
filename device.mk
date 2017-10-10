@@ -784,6 +784,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
+# Add runtime resource overlay for framework-res
+PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
+
 #The module which belong to vndk-sp is defined by google
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0.vndk-sp\
