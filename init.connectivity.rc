@@ -50,6 +50,7 @@ on boot
     mkdir /data/misc/wpa_supplicant 0770 wifi wifi
     chown wifi wifi /data/misc/wifi 
     chown system wifi /data/misc/wifi/entropy.bin
+    chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
     chown wifi wifi /data/misc/wifi/p2p_supplicant.conf
     chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
 
