@@ -102,7 +102,7 @@ PRODUCT_COPY_FILES += \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
     $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.nvme.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.nvme.rc) \
     device/rockchip/common/ueventd.rockchip.rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/common/media_profiles_default.xml:system/etc/media_profiles_default.xml \
+    device/rockchip/common/media_profiles_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
      device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
@@ -330,6 +330,7 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
     android.hardware.camera.metadata@3.2
 
 # iep
