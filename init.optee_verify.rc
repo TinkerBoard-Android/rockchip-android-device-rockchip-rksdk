@@ -1,7 +1,8 @@
-on early-boot
+#on early-boot
+on post-fs
     start tee-supplicant
 
 
-service tee-supplicant /system/bin/tee-supplicant
+service tee-supplicant /vendor/bin/tee-supplicant
     class core
     seclabel u:r:tee:s0
