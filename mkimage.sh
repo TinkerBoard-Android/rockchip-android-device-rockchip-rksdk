@@ -7,6 +7,7 @@ export PATH=$ANDROID_BUILD_PATHS:$PATH
 TARGET_PRODUCT=`get_build_var TARGET_PRODUCT`
 TARGET_HARDWARE=`get_build_var TARGET_BOARD_HARDWARE`
 TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
+TARGET_DEVICE_DIR=`get_build_var TARGET_DEVICE_DIR`
 PLATFORM_VERSION=`get_build_var PLATFORM_VERSION`
 PLATFORM_SECURITY_PATCH=`get_build_var PLATFORM_SECURITY_PATCH`
 TARGET_BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
@@ -33,39 +34,8 @@ FSTYPE=ext4
 echo system filesysystem is $FSTYPE
 
 BOARD_CONFIG=device/rockchip/common/device.mk
-if [[ $TARGET_BOARD_PLATFORM = "rk3399" ]]; then
-	if [[ $BOARD_SYSTEMIMAGE_PARTITION_SIZE = "1610612736" ]]; then
-		PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter_system_1.5G.txt
-	elif [[ $BOARD_SYSTEMIMAGE_PARTITION_SIZE = "3221225472" ]]; then
-		PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter_system_3.0G.txt
-	elif [[ $BOARD_SYSTEMIMAGE_PARTITION_SIZE = "4294967296" ]]; then
-		PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter_system_4.0G.txt
-	else
-		PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/$TARGET_PRODUCT/parameter.txt
-	fi
-elif [[ $TARGET_BOARD_PLATFORM = "rk3368" ]]; then
-	if [[ $BOARD_SYSTEMIMAGE_PARTITION_SIZE = "1610612736" ]]; then
-                PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter_system_1.5G.txt
-        elif [[ $BOARD_SYSTEMIMAGE_PARTITION_SIZE = "3221225472" ]]; then
-                PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter_system_3.0G.txt
-        elif [[ $BOARD_SYSTEMIMAGE_PARTITION_SIZE = "4294967296" ]]; then
-                PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter_system_4.0G.txt
-        else
-                PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter.txt
-        fi
-elif [[ $TARGET_BOARD_PLATFORM = "rk3126c" ]]; then
-    PARAMETER=device/rockchip/rk312x/rk3126c/parameter.txt
-elif [[ $TARGET_BOARD_PLATFORM = "rk3128" ]]; then
-    PARAMETER=device/rockchip/rk312x/rk3128_box/parameter.txt
-elif [[ $TARGET_BOARD_PLATFORM = "px3se" ]]; then
-    PARAMETER=device/rockchip/rk312x/px3se/parameter.txt
-else
-	if [[ $TARGET_PRODUCT = "px5" || $TARGET_PRODUCT = "px3" ]]; then
-		PARAMETER=device/rockchip/$TARGET_PRODUCT/parameter.txt
-	else
-		PARAMETER=device/rockchip/$TARGET_BOARD_PLATFORM/parameter.txt
-	fi
-fi
+
+PARAMETER=${TARGET_DEVICE_DIR}/parameter.txt
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
