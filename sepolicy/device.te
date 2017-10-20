@@ -14,7 +14,10 @@ type baseparameter_block_device, dev_type;
 type sensor_device, dev_type;
 type e2fsck_cache_block_device, dev_type;
 type e2fsck_metadata_block_device, dev_type;
+type e2fsck_system_block_device, dev_type;
 type e2fsck_frp_block_device, dev_type;
+type e2fsck_oem_block_device, dev_type;
+
 #for optee
 type uboot_block_device, dev_type;
 type rpmb_block_device, dev_type;

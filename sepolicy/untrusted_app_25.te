@@ -1,2 +1,7 @@
+allow untrusted_app_25 media_prop:file { open read };
+allow untrusted_app_25 proc_stat:file read;
+allow untrusted_app_25 sysfs:file { open read execute getattr };
 allow untrusted_app_25 gpu_device:dir { search };
 allow untrusted_app_25 vendor_file:file { open read execute getattr };
+
+get_prop(untrusted_app_25, media_prop)

@@ -1,0 +1,5 @@
+allow hal_camera_default graphic_prop:file { open read  getattr };
+allow hal_camera_default graphic_prop:property_service set;
+allow hal_camera_default init:unix_stream_socket connectto;
+allow hal_camera_default property_socket:sock_file write;
+allow hal_camera_default vndbinder_device:chr_file { read write open ioctl };

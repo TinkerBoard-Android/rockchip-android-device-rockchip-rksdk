@@ -43,6 +43,10 @@ allow system_server system_file:system { module_load };
 # for vendor
 allow system_server vendor_file:file { execute getattr open read };
 
+# for audioserver
+allow system_server hal_audio_default:file write;
+allow system_server untrusted_app_25:file write;
+
 set_prop(system_server,wifi_log_prop)
 set_prop(system_server,media_prop)
 set_prop(system_server,drm_prop)
