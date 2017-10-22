@@ -717,6 +717,12 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/common/neon_transform/lib/librockchipxxx.so:system/lib/librockchipxxx.so \
 	device/rockchip/common/neon_transform/lib64/librockchipxxx.so:system/lib64/librockchipxxx.so
 
+# support eecolor hdr api
+PRODUCT_COPY_FILES += \
+        device/rockchip/common/eecolorapi/lib/libeecolorapi.so:system/lib/libeecolorapi.so \
+        device/rockchip/common/eecolorapi/lib64/libeecolorapi.so:system/lib64/libeecolorapi.so
+
+
 #if force app can see udisk
 ifeq ($(strip $(BOARD_FORCE_UDISK_VISIBLE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
