@@ -789,9 +789,6 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
 
-#Use HWC2
-TARGET_USES_HWC2 := true
-
 #The module which belong to vndk-sp is defined by google
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0.vndk-sp\

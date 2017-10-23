@@ -354,3 +354,6 @@ ENABLE_CPUSETS := true
 
 # Enable sparse system image
 BOARD_USE_SPARSE_SYSTEM_IMAGE ?= false
+
+#Use HWC2
+TARGET_USES_HWC2 ?= true
