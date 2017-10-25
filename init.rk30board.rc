@@ -244,10 +244,6 @@ on property:persist.sys.abc_switch=1
 on property:persist.sys.abc_switch=0
     stop abc
 
-service drmservice /system/bin/drmservice
-        class main
-        oneshot
-
 ##$_rbox_$_modify_$_shenzhenyi_20160312
 ##$_rbox_$_modify_$_begin
 service displayd /system/bin/displayd
