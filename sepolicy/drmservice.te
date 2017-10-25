@@ -1,0 +1,14 @@
+type drmservice, domain;
+type drmservice_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(drmservice)
+
+allow drmservice configfs:file { open write };
+allow drmservice init:unix_stream_socket connectto;
+allow drmservice proc:file { open read };
+allow drmservice property_socket:sock_file write;
+allow drmservice rknand_device:chr_file { ioctl open read write };
+allow drmservice self:capability dac_override;
+allow drmservice system_prop:property_service set;
+allow drmservice wifi_data_file:file { open read write create getattr };
+allow drmservice wifi_data_file:dir { write add_name };
