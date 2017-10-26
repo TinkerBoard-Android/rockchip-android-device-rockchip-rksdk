@@ -289,9 +289,6 @@ PRODUCT_PACKAGES += \
     libgralloc_priv_omx \
     akmd 
 
-# Health HAL
-PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-impl
 
 # Light HAL
 PRODUCT_PACKAGES += \
@@ -303,10 +300,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
-
-# USB HAL
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
 
 # new gatekeeper HAL
 # PRODUCT_PACKAGES += \
@@ -376,7 +369,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
-    android.hardware.broadcastradio@1.0-impl \
     android.hardware.soundtrigger@2.0-impl
 
 PRODUCT_PACKAGES += \
@@ -654,9 +646,6 @@ ifeq ($(BUILD_WITH_WIDEVINE),true)
 $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
-#ro.product.first_api_level indicates the first api level, device has been commercially launced on.
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=23
 
 $(call inherit-product-if-exists, vendor/rockchip/common/device-vendor.mk)
 
