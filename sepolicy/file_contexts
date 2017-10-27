@@ -87,3 +87,6 @@
 /vendor/lib(64)?/(/.*)?            u:object_r:vendor_file:s0
 /vendor/lib(64)?/hw/(/.*)?         u:object_r:vendor_file:s0
 /vendor/bin/drmservice		   u:object_r:drmservice_exec:s0
+
+# DRM-widevine
+/vendor/bin/hw/android\.hardware\.drm@1\.0-service.widevine          u:object_r:hal_drm_widevine_exec:s0 

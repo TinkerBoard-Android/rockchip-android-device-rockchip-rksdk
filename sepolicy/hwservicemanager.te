@@ -1,0 +1,4 @@
+allow hwservicemanager hal_drm_widevine:binder call;
+allow hwservicemanager hal_drm_widevine:dir search;
+allow hwservicemanager hal_drm_widevine:file { open read };
+allow hwservicemanager hal_drm_widevine:process getattr;
