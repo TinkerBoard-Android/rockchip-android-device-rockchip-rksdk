@@ -1,3 +1,5 @@
+allow hal_wifi_default self:capability { dac_override dac_read_search };
+allow hal_wifi_default wifi_data_file:dir search;
 allow hal_wifi_default sysfs:file write;
 allow hal_wifi_default proc:file open;
 allow hal_wifi_default proc:file read;

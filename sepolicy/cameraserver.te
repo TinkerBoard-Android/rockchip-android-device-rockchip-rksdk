@@ -1,3 +1,4 @@
+allow cameraserver vendor_file:file { execute getattr open read };
 allow cameraserver debugfs_tracing:file rw_file_perms;
 allow cameraserver camdata_file:file { rw_file_perms unlink setattr create };
 allow cameraserver camdata_file:dir { search write add_name remove_name };
@@ -11,6 +12,9 @@ allow cameraserver system_file:dir { read open };
 allow cameraserver system_server:unix_stream_socket { read write };
 allow cameraserver rga_device:chr_file { read write open ioctl };
 allow cameraserver rootfs:lnk_file getattr;
+
+allow cameraserver hal_allocator:fd use;
+
 set_prop(cameraserver,graphic_prop)
 set_prop(cameraserver,system_prop)
 set_prop(cameraserver,ctsgts_prop)
