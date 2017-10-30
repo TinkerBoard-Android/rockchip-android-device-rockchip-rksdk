@@ -1,5 +1,12 @@
+vndbinder_use(hal_camera_default);
+binder_call(hal_camera_default, hal_graphics_composer)
+binder_call(hal_camera_default, system_server)
+
+allow hal_camera_default gpu_device:dir { search };
 allow hal_camera_default graphic_prop:file { open read  getattr };
 allow hal_camera_default graphic_prop:property_service set;
 allow hal_camera_default init:unix_stream_socket connectto;
 allow hal_camera_default property_socket:sock_file write;
 allow hal_camera_default vndbinder_device:chr_file { read write open ioctl };
+
+set_prop(hal_camera_default,system_prop)
