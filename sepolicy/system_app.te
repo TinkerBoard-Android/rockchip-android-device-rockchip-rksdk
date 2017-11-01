@@ -23,6 +23,9 @@ allow system_app media_rw_data_file:file { create unlink };
 
 allow system_app vendor_file:file { execute getattr open read };
 
+binder_call(system_app, storaged_service)
+binder_call(system_app, wificond)
+
 get_prop(system_app,drm_prop)
 get_prop(system_app,media_prop)
 set_prop(system_app,system_prop)
