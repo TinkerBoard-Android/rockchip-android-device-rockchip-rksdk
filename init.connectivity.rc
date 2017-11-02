@@ -64,7 +64,8 @@ on boot
     chown nfc nfc /data/nfc
     chown nfc nfc /data/nfc/param
 
-service wpa_supplicant /vendor/bin/hw/wpa_supplicant
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
+    /vendor/etc/wifi/wpa_config.txt
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
