@@ -1,4 +1,4 @@
-import init.${ro.hardware}.bootmode.${ro.bootmode}.rc
+import init.${ro.hardware}.bootmode.${ro.boot.mode}.rc
 import init.rockchip.rc
 import init.connectivity.rc
 import init.box.samba.rc
@@ -228,6 +228,12 @@ on property:persist.internet.adb.enable=0
 on property:ro.boot.noril=true
     setprop ro.radio.noril true
     stop ril-daemon
+
+# set ro.bootmode
+on property:ro.boot.mode=emmc
+    setprop ro.bootmode normal
+on property:ro.boot.mode=unknown
+    setprop ro.bootmode normal
 
 # set ro.serialno
 on property:sys.serialno=*
