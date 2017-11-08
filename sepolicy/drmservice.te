@@ -13,3 +13,5 @@ allow drmservice self:capability dac_override;
 allow drmservice system_prop:property_service set;
 allow drmservice wifi_data_file:file { open read write create getattr };
 allow drmservice wifi_data_file:dir { search write add_name };
+
+allow drmservice storage_device:chr_file { ioctl open read write };

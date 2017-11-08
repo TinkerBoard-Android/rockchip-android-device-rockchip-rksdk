@@ -36,5 +36,20 @@ allow priv_app tombstoned_exec:file getattr;
 allow priv_app tzdatacheck_exec:file getattr;
 allow priv_app vold_exec:file getattr;
 
+allow priv_app blkid_untrusted:file getattr;
+allow priv_app clatd_exec:file getattr;
+allow priv_app idmap_exec:file getattr;
+allow priv_app incident:file getattr;
+allow priv_app incidentd:file getattr;
+allow priv_app mdnsd:file getattr;
+allow priv_app storaged_service:file getattr;
+allow priv_app surfaceflinger:file getattr;
+allow priv_app uncrypt_exec:file getattr;
+allow priv_app vdc_exec:file getattr;
+allow priv_app webview_zygote_exec:file getattr;
+allow priv_app wificond_exec:file getattr;
+
+binder_call(priv_app, audioserver)
+
 allowxperm priv_app self:udp_socket ioctl { SIOCGIWESSID };
 r_dir_file(priv_app, sysfs_type)

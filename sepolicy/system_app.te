@@ -25,6 +25,7 @@ allow system_app vendor_file:file { execute getattr open read };
 
 binder_call(system_app, storaged_service)
 binder_call(system_app, wificond)
+binder_call(system_app, installd_service)
 
 get_prop(system_app,drm_prop)
 get_prop(system_app,media_prop)

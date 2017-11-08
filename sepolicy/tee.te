@@ -1,4 +1,3 @@
-typeattribute tee coredomain;
 allow tee tee_device:chr_file { read write ioctl open };
 allow tee rootfs:lnk_file getattr;
 allow tee tee_exec:file entrypoint;

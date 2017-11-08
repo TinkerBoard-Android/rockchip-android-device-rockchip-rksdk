@@ -76,7 +76,7 @@
 /dev/vendor_storage              u:object_r:storage_device:s0
 
 #for tee
-/system/bin/tee-supplicant     u:object_r:tee_exec:s0
+/(vendor|system/vendor)/bin/tee-supplicant     u:object_r:tee_exec:s0
 /dev/opteearmtz[0-9]*         u:object_r:tee_device:s0
 /data/tee(/.*)?        		u:object_r:tee_data_file:s0
 
