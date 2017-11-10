@@ -46,7 +46,7 @@
 
     <!-- Setting this true forces the headset jack switches to use the/dev/input/event subsystem
          rather than the uevent framework. -->
-    <bool name="config_useDevInputEventForAudioJack">true</bool>
+    <bool name="config_useDevInputEventForAudioJack">false</bool>
 
     <!-- Enable device idle mode -->
     <bool name="config_enableAutoPowerModes">true</bool>

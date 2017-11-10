@@ -844,3 +844,5 @@ endif
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
+
+USE_XML_AUDIO_POLICY_CONF := 1
