@@ -162,8 +162,7 @@ endif
 
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-    $(LOCAL_PATH)/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+    $(LOCAL_PATH)/fstab.rk30board:root/fstab.rk30board
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -627,8 +626,17 @@ endif
 
 # setup dm-verity configs.
 # uncomment the two lines if use verity
-#PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.rksdmmc/by-name/system
-#$(call inherit-product, build/target/product/verity.mk)
+PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
+PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/by-name/vendor
+$(call inherit-product, build/target/product/verity.mk)
+
+# Add for function frp
+ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
+	PRODUCT_PROPERTY_OVERRIDES += \
+		ro.frp.pst=/dev/block/by-name/frp
+endif
+endif
 
 ifeq ($(strip $(BUILD_BOX_WITH_GOOGLE_MARKET)), true)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mini-box.mk)

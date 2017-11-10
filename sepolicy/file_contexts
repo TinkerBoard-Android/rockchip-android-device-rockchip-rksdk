@@ -49,16 +49,17 @@
 #hdmi
 /sys/devices/virtual/display/HDMI(/.*)? -- u:object_r:sysfs_hdmi:s0
 
-# for nand device
-/dev/block/rknand_frp u:object_r:frp_block_device:s0
-/dev/block/rknand_system u:object_r:system_block_device:s0
-/dev/block/rknand_vendor u:object_r:system_block_device:s0
-/dev/block/rknand_oem u:object_r:system_block_device:s0
-/dev/block/rknand_cache u:object_r:e2fsck_cache_block_device:s0
-/dev/block/rknand_metadata u:object_r:e2fsck_metadata_block_device:s0
-/dev/block/rknand_userdata u:object_r:userdata_block_device:s0
-/dev/block/rknand_boot u:object_r:boot_block_device:s0
-/dev/block/rknand_recovery u:object_r:recovery_block_device:s0
+# for device
+/dev/block/by-name/frp u:object_r:frp_block_device:s0
+/dev/block/by-name/system u:object_r:system_block_device:s0
+/dev/block/by-name/vendor u:object_r:system_block_device:s0
+/dev/block/by-name/oem u:object_r:system_block_device:s0
+/dev/block/by-name/cache u:object_r:e2fsck_cache_block_device:s0
+/dev/block/by-name/metadata u:object_r:e2fsck_metadata_block_device:s0
+/dev/block/by-name/userdata u:object_r:userdata_block_device:s0
+/dev/block/by-name/boot u:object_r:boot_block_device:s0
+/dev/block/by-name/recovery u:object_r:recovery_block_device:s0
+/dev/block/by-name/misc u:object_r:misc_block_device:s0
 
 # sensor
 /dev/lightsensor                u:object_r:sensor_device:s0
