@@ -119,6 +119,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     libiconv \
+    libwpa_client \
     hostapd \
     wificond \
     wifilogd \
@@ -607,12 +608,11 @@ PRODUCT_PACKAGES += \
 # for realtek bluetooth
 PRODUCT_PACKAGES += \
     bluetooth_rtk.default \
-    libbt-vendor.so \
-    libbt-vendor_uart.so \
-    libbt-vendor_usb.so \
+    libbt-vendor-realtek \
     bt_vendor.conf
-#include hardware/realtek/rtkbt/rtkbt.mk
-#$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
+
+include hardware/realtek/rtkbt/rtkbt.mk
+$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 include device/rockchip/common/samba/rk31_samba.mk
