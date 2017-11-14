@@ -605,11 +605,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     android.hardware.bluetooth@1.0-service
 
-# GPS HAL
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service
-
 # for realtek bluetooth
 PRODUCT_PACKAGES += \
     bluetooth_rtk.default \
