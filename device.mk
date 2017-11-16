@@ -160,9 +160,10 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 endif
 
-
+# Merge fstab
+$(shell ./$(LOCAL_PATH)/merge_fstab.sh $(TARGET_PRODUCT) $(OUT))
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.rk30board:root/fstab.rk30board
+    device/rockchip/$(TARGET_PRODUCT)/fstab.rk30board:root/fstab.rk30board
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \

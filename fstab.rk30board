@@ -8,7 +8,6 @@
 /dev/block/by-name/metadata       /metadata           ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait,check
 /dev/block/by-name/userdata       /data               f2fs      noatime,nodiratime,nosuid,nodev,discard,inline_xattr                   wait,check,notrim,forceencrypt=/metadata/key_file
 /dev/block/by-name/misc         /misc               emmc      defaults     defaults
-/devices/platform/1021c000.dwmmc/mmc_host*        auto  auto    defaults        voldmanaged=sdcard1:auto,encryptable=userdata
 
 /devices/platform/*.usb*   auto vfat defaults      voldmanaged=usb:auto
 
