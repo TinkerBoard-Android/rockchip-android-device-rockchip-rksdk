@@ -147,10 +147,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.connectivity.rc:root/init.connectivity.rc
 endif
 
-ifeq ($(findstring car,$(PRODUCT_BUILD_MODULE)),car)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy_$(PRODUCT_BUILD_MODULE).conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
-else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
@@ -158,7 +154,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
-endif
 
 # Merge fstab
 $(shell ./$(LOCAL_PATH)/merge_fstab.sh $(TARGET_PRODUCT) $(OUT))
