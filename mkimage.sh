@@ -13,6 +13,8 @@ PLATFORM_SECURITY_PATCH=`get_build_var PLATFORM_SECURITY_PATCH`
 TARGET_BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
 BOARD_SYSTEMIMAGE_PARTITION_SIZE=`get_build_var BOARD_SYSTEMIMAGE_PARTITION_SIZE`
 BOARD_USE_SPARSE_SYSTEM_IMAGE=`get_build_var BOARD_USE_SPARSE_SYSTEM_IMAGE`
+TARGET_ARCH=`get_build_var TARGET_ARCH`
+TARGET_OUT_VENDOR=`get_build_var TARGET_OUT_VENDOR`
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_HARDWARE=$TARGET_HARDWARE
@@ -27,6 +29,7 @@ fi
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 UBOOT_PATH=u-boot
 KERNEL_PATH=kernel
+KERNEL_CONFIG=$KERNEL_PATH/.config
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
 
@@ -142,6 +145,15 @@ if [ -d $OUT/system ]; then
     mkyaffs2image -c 4080 -s 16 -f $OUT/system $IMAGE_PATH/4k/system.img
   fi
   echo "done."
+fi
+
+if [ `grep "CONFIG_WIFI_BUILD_MODULE=y" $KERNEL_CONFIG` ]; then
+    if [ ! -f $TARGET_OUT_VENDOR/lib/modules/wifi/*.ko ]; then
+        cd kernel
+        make ARCH=$TARGET_ARCH rockchip_defconfig
+        cd ..
+        device/rockchip/common/build_wifi_ko.sh $TARGET_ARCH $TARGET_OUT_VENDOR
+    fi
 fi
 
 if [ -d $OUT/vendor ]; then
