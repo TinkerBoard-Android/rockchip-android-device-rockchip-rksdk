@@ -169,6 +169,8 @@ ifeq ($(HOST_OS),linux)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT ?= true
     endif
+  else
+    WITH_DEXPREOPT ?= false
   endif
 endif
 

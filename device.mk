@@ -31,12 +31,11 @@ ifneq ($(strip $(TARGET_PRODUCT)), )
     -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
 endif
 
-#add for Nougat Bring Up
-#$(call inherit-product, device/rockchip/common/copy.mk)
-
-# Box product use device/rockchip/common/tv/tv_base.mk instead
-ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+# Inherit product config
+ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+  $(call inherit-product, device/google/atv/products/atv_base.mk)
+else
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 endif
 
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
@@ -128,18 +127,18 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-PRODUCT_PACKAGES += \
-    libpppoe-jni \
-    pppoe-service \
-    librp-pppoe
+    PRODUCT_PACKAGES += \
+      libpppoe-jni \
+      pppoe-service \
+      librp-pppoe
 
-PRODUCT_SYSTEM_SERVER_JARS += \
-    pppoe-service
+    PRODUCT_SYSTEM_SERVER_JARS += \
+      pppoe-service
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc
+    PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc
 endif
 
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
@@ -159,6 +158,7 @@ PRODUCT_COPY_FILES += \
 ifneq ($(OUT), )
 # only excute these on make start
 $(shell ./$(LOCAL_PATH)/merge_fstab.sh -p $(TARGET_PRODUCT) -o $(OUT) -d $(TARGET_DEVICE_DIR))
+$(warning xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:root/fstab.rk30board
 endif
@@ -170,10 +170,6 @@ PRODUCT_PACKAGES += \
 # For tts test
 PRODUCT_PACKAGES += \
     libwebrtc_audio_coding
-
-#camera
-$(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
-$(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 
 #audio
 $(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_config/rk_audio.mk)
@@ -231,6 +227,21 @@ endif
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml
+
+PRODUCT_PACKAGES += \
+    camera.$(TARGET_BOARD_HARDWARE) \
+    Camera
+
+# Camera HAL
+PRODUCT_PACKAGES += \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
+    android.hardware.camera.metadata@3.2
+
+$(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
+$(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 endif
 
 # USB HOST
@@ -245,16 +256,13 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-    PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/box_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/box_core_hardware.xml
-else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/vr_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vr_core_hardware.xml
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/laptop_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/laptop_core_hardware.xml
-else # tablet
+else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
 endif
@@ -281,8 +289,6 @@ PRODUCT_PACKAGES += \
 
 # Camera omx-plugin vpu akmd
 PRODUCT_PACKAGES += \
-    camera.$(TARGET_BOARD_HARDWARE) \
-    Camera \
     libvpu \
     libstagefrighthw \
     libgralloc_priv_omx \
@@ -321,14 +327,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service
-
-# Camera HAL
-PRODUCT_PACKAGES += \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service \
-    android.hardware.camera.metadata@3.2
 
 # iep
 ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3128 px3se rk3368 rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
@@ -468,11 +466,6 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
-#$_rbox_$_modify_$_zhengyang: add displayd
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-PRODUCT_PACKAGES += \
-    displayd
-endif
 
 ########################################################
 # build with drmservice
@@ -555,7 +548,7 @@ PRODUCT_COPY_FILES += \
 # Copy manifest to vendor/
 ifeq ($(strip $(VENDOR_WITH_MANIFEST)),true)
 PRODUCT_COPY_FILES += \
-    manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest_rk_version.xml
+     $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest_rk_version.xml
 endif
 
 # Copy init.usbstorage.rc to root
@@ -614,10 +607,10 @@ include hardware/realtek/rtkbt/rtkbt.mk
 $(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-include device/rockchip/common/samba/rk31_samba.mk
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rk.screenoff_time=2147483647
-else 
+    include device/rockchip/common/samba/rk31_samba.mk
+    PRODUCT_PROPERTY_OVERRIDES += \
+      ro.rk.screenoff_time=2147483647
+else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.screenoff_time=60000
 endif
@@ -640,8 +633,8 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
 endif
 endif
 
-ifeq ($(strip $(BUILD_BOX_WITH_GOOGLE_MARKET)), true)
-$(call inherit-product-if-exists, vendor/partner_gms/products/gms-mini-box.mk)
+ifeq ($(strip $(BUILD_WITH_GTVS)), true)
+$(call inherit-product-if-exists, vendor/google/products/gms.mk)
 $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
@@ -682,7 +675,7 @@ PRODUCT_COPY_FILES += \
 endif
 
 # hdmi cec
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+ifneq ($(filter box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
@@ -740,12 +733,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.udisk.visible=true
 endif
 
-#if box platform force app can see udisk
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.udisk.visible=true
-endif
-
 #if disable safe mode to speed up booting time
 ifeq ($(strip $(BOARD_DISABLE_SAFE_MODE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -801,8 +788,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 # Add runtime resource overlay for framework-res
+# TODO disable for box
+ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
+endif
 
 #The module which belong to vndk-sp is defined by google
 PRODUCT_PACKAGES += \
@@ -837,6 +827,9 @@ DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
 
   PRODUCT_PROPERTY_OVERRIDES += \
        ro.target.product=box
+else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
+  PRODUCT_PROPERTY_OVERRIDES += \
+       ro.target.product=atv
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=vr
