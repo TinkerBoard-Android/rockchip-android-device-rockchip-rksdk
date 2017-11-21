@@ -1,0 +1,3 @@
+ReadMe
+1.Put some media/resource ... into 'pre_set/media/0/'(attached to sdcard), that user cannot del or modify these.
+2.Put some data for App(like data of map ...) into 'pre_set_del/', that user or App can update or modify these.

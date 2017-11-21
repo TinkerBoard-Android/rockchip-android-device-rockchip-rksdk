@@ -319,6 +319,9 @@ BOARD_ENABLE_3G_DONGLE := true
 #for boot and shutdown animation ringing
 BOOT_SHUTDOWN_ANIMATION_RINGING ?= false
 
+#for oem preset
+OEM_PRESET ?= false
+
 #for pms multi thead scan
 BOARD_ENABLE_PMS_MULTI_THREAD_SCAN ?= false
 

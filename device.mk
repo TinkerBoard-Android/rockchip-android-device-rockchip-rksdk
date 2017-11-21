@@ -622,6 +622,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.screenoff_time=60000
 endif
 
+# OEM Unlock reporting
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.oem_unlock_supported=1
+
 # setup dm-verity configs.
 # uncomment the two lines if use verity
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
@@ -765,6 +769,10 @@ ifeq ($(strip $(BOOT_SHUTDOWN_ANIMATION_RINGING)),true)
 include device/rockchip/common/bootshutdown/bootshutdown.mk
 endif
 
+# For oem preset
+ifeq ($(strip $(OEM_PRESET)),true)
+include device/rockchip/common/oem_preset/oem_preset.mk
+endif
 
 ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)
 PRODUCT_PROPERTY_OVERRIDES += \

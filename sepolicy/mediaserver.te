@@ -43,3 +43,4 @@ get_prop(mediaserver,ctsgts_prop)
 #move to vendor
 allow mediaserver vendor_file:file { open read getattr execute };
 allow mediaserver tmpfs:lnk_file { open read };
+allow mediaserver sysfs:file write;
