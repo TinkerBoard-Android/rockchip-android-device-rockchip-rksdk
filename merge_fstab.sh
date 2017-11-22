@@ -1,12 +1,39 @@
 #!/bin/bash
-TARGET_PRODUCT=$1
-PRODUCT_OUT=$2
+
+TARGET_PRODUCT=
+PRODUCT_OUT=
+TARGET_DEVICE_DIR=
+
+# get pass argument
+while getopts "p:o:d:" arg
+do
+    case $arg in
+        p)
+            TARGET_PRODUCT=$OPTARG
+            ;;
+        o)
+            PRODUCT_OUT=$OPTARG
+            ;;
+        d)
+            TARGET_DEVICE_DIR=$OPTARG
+            ;;
+    esac
+done
+
+# check arguments
+if [[ -z $TARGET_PRODUCT || -z $PRODUCT_OUT || -z $TARGET_DEVICE_DIR ]];then
+    echo "Missing some args, exit!" 1>&2
+    echo "TARGET_PRODUCT=$TARGET_PRODUCT" 1>&2
+    echo "PRODUCT_OUT=$PRODUCT_OUT" 1>&2
+    echo "TARGET_DEVICE_DIR=$TARGET_DEVICE_DIR" 1>&2
+    exit 1
+fi
 
 DEVICE_ROCKCHIP_PATH=device/rockchip
 FSTAB_NAME=fstab.rk30board
 FSTAB_COMMON=$DEVICE_ROCKCHIP_PATH/common/$FSTAB_NAME
-FSTAB_PRODUCT=$DEVICE_ROCKCHIP_PATH/$TARGET_PRODUCT/fstab.$TARGET_PRODUCT
-FASTB_UNION=$DEVICE_ROCKCHIP_PATH/$TARGET_PRODUCT/$FSTAB_NAME
+FSTAB_PRODUCT=$TARGET_DEVICE_DIR/fstab.$TARGET_PRODUCT
+FASTB_UNION=$TARGET_DEVICE_DIR/$FSTAB_NAME
 FSTAB_OUT=$PRODUCT_OUT/$FSTAB_NAME
 ############################################################################################
 #merge product's fstab to fstab.rk30board
