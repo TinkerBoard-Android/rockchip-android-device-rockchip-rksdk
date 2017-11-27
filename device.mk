@@ -116,7 +116,7 @@ PRODUCT_COPY_FILES += \
     vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant.conf \
 
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
+    rk_wifi_hal \
     libiconv \
     libwpa_client \
     hostapd \
