@@ -840,6 +840,16 @@ else
         ro.target.product=tablet
 endif
 
+### fix adb-device cannot be identified  ###
+### in AOSP-system image (user firmware) ###
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0
+else
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=1
+endif
+
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
