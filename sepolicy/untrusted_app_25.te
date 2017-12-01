@@ -4,5 +4,8 @@ allow untrusted_app_25 sysfs:file { open read execute getattr };
 allow untrusted_app_25 gpu_device:dir { search };
 allow untrusted_app_25 vendor_file:file { open read execute getattr };
 
+# for gts:GtsOemLockServiceTestCases
+allow untrusted_app_25 oem_lock_service:service_manager find;
+
 get_prop(untrusted_app_25, drm_prop)
 get_prop(untrusted_app_25, media_prop)

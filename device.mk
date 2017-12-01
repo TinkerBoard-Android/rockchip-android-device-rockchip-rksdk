@@ -611,9 +611,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.screenoff_time=60000
 endif
 
-# OEM Unlock reporting
+# Flash Lock Status reporting,
+# GTS: com.google.android.gts.persistentdata.
+# PersistentDataHostTest#testTestGetFlashLockState
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.oem_unlock_supported=1
+    ro.oem_unlock_supported=1 \
+    ro.boot.verifiedbootstate=orange
 
 # setup dm-verity configs.
 # uncomment the two lines if use verity
