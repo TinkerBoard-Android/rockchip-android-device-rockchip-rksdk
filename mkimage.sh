@@ -148,12 +148,9 @@ if [ -d $OUT/system ]; then
 fi
 
 if [ `grep "CONFIG_WIFI_BUILD_MODULE=y" $KERNEL_CONFIG` ]; then
-    if [ ! -f $TARGET_OUT_VENDOR/lib/modules/wifi/*.ko ]; then
-        cd kernel
-        make ARCH=$TARGET_ARCH rockchip_defconfig
-        cd ..
-        device/rockchip/common/build_wifi_ko.sh $TARGET_ARCH $TARGET_OUT_VENDOR
-    fi
+    echo "Install wifi ko to $TARGET_OUT_VENDOR/lib/modules/wifi/"
+    mkdir -p $TARGET_OUT_VENDOR/lib/modules/wifi
+    find kernel/drivers/net/wireless/rockchip_wlan/*  -name "*.ko" | xargs -n1 -i cp {} $TARGET_OUT_VENDOR/lib/modules/wifi/
 fi
 
 if [ -d $OUT/vendor ]; then
