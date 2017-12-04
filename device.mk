@@ -850,8 +850,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=1
 endif
 
-# Vendor Interface Manifest
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
-
 USE_XML_AUDIO_POLICY_CONF := 1
