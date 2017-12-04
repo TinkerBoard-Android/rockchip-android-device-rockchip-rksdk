@@ -540,11 +540,11 @@ PRODUCT_COPY_FILES += \
 # for preinstall
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
-    
+
 # Copy manifest to vendor/
-ifeq ($(strip $(VENDOR_WITH_MANIFEST)),true)
+ifeq ($(strip $(BOARD_RECORD_COMMIT_ID)),true)
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest_rk_version.xml
+     commit_id.xml:$(TARGET_COPY_OUT_VENDOR)/commit_id.xml
 endif
 
 # Copy init.usbstorage.rc to root

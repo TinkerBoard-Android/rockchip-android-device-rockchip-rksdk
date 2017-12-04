@@ -288,8 +288,8 @@ BOARD_PPPOE_PASS_CTS ?= false
 # ethernet
 BOARD_HS_ETHERNET ?= true
 
-#rk version manifest
-VENDOR_WITH_MANIFEST ?= true
+# Save commit id into firmware
+BOARD_RECORD_COMMIT_ID ?= true
 
 # no battery
 BUILD_WITHOUT_BATTERY ?= false
