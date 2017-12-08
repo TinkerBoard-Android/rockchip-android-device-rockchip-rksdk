@@ -238,6 +238,7 @@ on property:ro.boot.mode=unknown
 # set ro.serialno
 on property:sys.serialno=*
     setprop ro.serialno ${sys.serialno}
+    restart adbd
 
 # Android bug collector
 service abc /system/bin/abc
