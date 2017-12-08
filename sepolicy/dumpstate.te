@@ -1,0 +1,15 @@
+allow dumpstate debugfs_mmc:dir search;
+allow dumpstate gatekeeper_service:service_manager find;
+allow dumpstate kernel:system module_request;
+allow dumpstate proc_stat:file read;
+allow dumpstate self:netlink_xfrm_socket { create setopt };
+allow dumpstate sysfs_leds:dir search;
+allow dumpstate vendor_file:file { execute_no_trans getattr open read };
+
+allow dumpstate system_block_device:blk_file getattr;
+allow dumpstate metadata_file:dir getattr;
+allow dumpstate e2fsck_cache_block_device:blk_file getattr;
+allow dumpstate userdata_block_device:blk_file getattr;
+allow dumpstate e2fsck_oem_block_device:blk_file getattr;
+
+binder_call(dumpstate, installd)

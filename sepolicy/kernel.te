@@ -4,6 +4,7 @@ allow kernel block_device:blk_file { read write open };
 allow kernel device:blk_file setattr;
 # mr1
 allow kernel self:capability { mknod mknod };
+allow kernel self:netlink_route_socket create;
 allow kernel block_device:blk_file rw_file_perms;
 
 allow kernel device:blk_file create;

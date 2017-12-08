@@ -20,3 +20,4 @@ allow vold mnt_media_rw_stub_file:dir { search };
 
 allow vold vold_exec:file { execute execute_no_trans r_file_perms };
 allow vold userdata_block_device:blk_file { ioctl open read write };
+allow vold system_data_file:file { open };

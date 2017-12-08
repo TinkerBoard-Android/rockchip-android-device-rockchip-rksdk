@@ -3,4 +3,5 @@ allow mediacodec rga_device:chr_file { ioctl rw_file_perms };
 allow mediacodec gpu_device:dir search;
 allow mediacodec media_prop:file { open read getattr };
 allow mediacodec system_file:dir { open read };
+
 get_prop(mediacodec,ctsgts_prop);

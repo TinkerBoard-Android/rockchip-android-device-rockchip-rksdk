@@ -18,6 +18,10 @@ type e2fsck_system_block_device, dev_type;
 type e2fsck_frp_block_device, dev_type;
 type e2fsck_oem_block_device, dev_type;
 
+type zram_device, dev_type;
+type akmd_device, dev_type;
+type storage_device, dev_type;
+
 #for optee
 type uboot_block_device, dev_type;
 type rpmb_block_device, dev_type;

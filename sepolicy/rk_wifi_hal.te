@@ -13,5 +13,5 @@ allow rk_wifi_hal self:capability { dac_override sys_module };
 allow rk_wifi_hal sysfs:dir { open read };
 allow rk_wifi_hal sysfs:file { getattr open read };
 allow rk_wifi_hal wifi_prop:property_service set;
-allow rk_wifi_hal wifi_data_file:dir { add_name write };
+allow rk_wifi_hal wifi_data_file:dir { add_name write search };
 allow rk_wifi_hal wifi_data_file:file { create open read setattr write };
