@@ -495,7 +495,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.storage_suppntfs=true
 
 PRODUCT_PACKAGES += \
-   ntfs-3g \
    ntfsfix \
    mkntfs
 else
@@ -805,7 +804,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0.vndk-sp\
     android.hardware.graphics.mapper@2.0.vndk-sp\
     android.hardware.graphics.common@1.0.vndk-sp\
-    android.hidl.base@1.0.vndk-sp\
+    android.hidl.base@1.0\
     libhwbinder.vndk-sp\
     libbase.vndk-sp\
     libcutils.vndk-sp\
