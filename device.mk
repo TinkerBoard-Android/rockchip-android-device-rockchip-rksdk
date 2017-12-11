@@ -614,8 +614,7 @@ endif
 # GTS: com.google.android.gts.persistentdata.
 # PersistentDataHostTest#testTestGetFlashLockState
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.oem_unlock_supported=1 \
-    ro.boot.verifiedbootstate=orange
+    ro.oem_unlock_supported=1
 
 # setup dm-verity configs.
 # uncomment the two lines if use verity
