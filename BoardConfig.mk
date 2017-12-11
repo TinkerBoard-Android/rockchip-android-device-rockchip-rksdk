@@ -204,9 +204,6 @@ RECOVERY_UPDATEIMG_RSA_CHECK ?= false
 RECOVERY_BOARD_ID ?= false
 # RECOVERY_BOARD_ID ?= true
 
-# for widevine drm
-BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
-
 # for drmservice
 BUILD_WITH_DRMSERVICE :=true
 
@@ -234,9 +231,6 @@ BUILD_BOX_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET_ALL ?= false
 BUILD_WITH_GOOGLE_FRP ?= false
-
-#widevine configuration
-BUILD_WITH_WIDEVINE ?= false
 
 #Android GO configuration
 BUILD_WITH_GO_OPT ?= false

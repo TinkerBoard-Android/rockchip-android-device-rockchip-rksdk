@@ -656,7 +656,7 @@ $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
 endif
 endif
 
-ifeq ($(BUILD_WITH_WIDEVINE),true)
+ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
 $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
