@@ -495,6 +495,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.storage_suppntfs=true
 
 PRODUCT_PACKAGES += \
+   ntfs-3g \
    ntfsfix \
    mkntfs
 else
