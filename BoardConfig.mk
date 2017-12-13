@@ -362,3 +362,6 @@ BOARD_USE_SPARSE_SYSTEM_IMAGE ?= false
 
 #Use HWC2
 TARGET_USES_HWC2 ?= true
+
+# Sepolicy Version
+BOARD_SEPOLICY_VERS = 27.0
