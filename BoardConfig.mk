@@ -137,7 +137,6 @@ endif
 
 TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
-BOARD_USE_LOW_MEM ?= false
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 
 ########for target product ########
@@ -238,6 +237,9 @@ BUILD_WITH_GOOGLE_FRP ?= false
 
 #widevine configuration
 BUILD_WITH_WIDEVINE ?= false
+
+#Android GO configuration
+BUILD_WITH_GO_OPT ?= false
 
 # face lock
 BUILD_WITH_FACELOCK ?= false

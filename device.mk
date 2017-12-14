@@ -64,6 +64,13 @@ PRODUCT_PACKAGES += \
     bdt
 endif
 
+# build with go optimization
+ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
+$(call inherit-product, build/target/product/go_defaults.mk)
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml
+endif
+
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
@@ -84,13 +91,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.screenshot_enable=true   \
     sys.status.hidebar_enable=false \
     persist.sys.ui.hw=true
-
-else
-ifeq ($(strip $(BOARD_USE_LOW_MEM)), true)
-include frameworks/native/build/tablet-dalvik-heap.mk
-else
-include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
-endif
 endif
 
 PRODUCT_COPY_FILES += \
@@ -704,15 +704,6 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.mem_optimise.enable=true
-endif
-
-
-# lowmem mode
-ifeq ($(strip $(BOARD_USE_LOW_MEM)),true)
-PRODUCT_COPY_FILES += \
-	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.config.low_ram=true
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
