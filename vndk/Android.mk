@@ -2,19 +2,6 @@ LOCAL_PATH := $(call my-dir)
 #The modules list follow belong to vndk-sp.
 #The module which belong to vndk-sp is defined by google.
 VNDK_SP_LIBRARIES := \
-    android.hardware.renderscript@1.0\
-    android.hardware.graphics.allocator@2.0\
-    android.hardware.graphics.mapper@2.0\
-    android.hardware.graphics.common@1.0\
-    android.hidl.base@1.0\
-    libhwbinder\
-    libbase\
-    libcutils\
-    libhardware\
-    libhidlbase\
-    libhidltransport\
-    libutils\
-    libc++\
     libRS_internal\
     libRSDriver\
     libRSCpuRef\
@@ -23,9 +10,29 @@ VNDK_SP_LIBRARIES := \
     libft2\
     libpng\
     libcompiler_rt\
+
+VNDK_SP_EXT_LIBRARIES := \
+    libion\
+
+ifndef BOARD_VNDK_VERSION
+VNDK_SP_LIBRARIES += \
+    android.hardware.renderscript@1.0\
+    android.hardware.graphics.allocator@2.0\
+    android.hardware.graphics.mapper@2.0\
+    android.hardware.graphics.common@1.0\
+    libhwbinder\
+    libbase\
+    libcutils\
+    libhardware\
+    libutils\
+    libc++\
     libbacktrace\
     libunwind\
     liblzma\
+    libhidlbase\
+    libhidltransport\
+
+endif
 
 define add-vndk-sp-lib
 include $$(CLEAR_VARS)
@@ -37,6 +44,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_INSTALLED_MODULE_STEM := $1.so
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_RELATIVE_PATH := vndk-sp
+LOCAL_VENDOR_MODULE := $2
 include $$(BUILD_PREBUILT)
 
 include $$(CLEAR_VARS)
@@ -48,8 +56,11 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_INSTALLED_MODULE_STEM := $1.so
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_RELATIVE_PATH := vndk-sp
+LOCAL_VENDOR_MODULE := $2
 include $$(BUILD_PREBUILT)
 endef
 
 $(foreach lib,$(VNDK_SP_LIBRARIES),\
-    $(eval $(call add-vndk-sp-lib,$(lib))))
+    $(eval $(call add-vndk-sp-lib,$(lib),)))
+$(foreach lib,$(VNDK_SP_EXT_LIBRARIES),\
+    $(eval $(call add-vndk-sp-lib,$(lib),true)))

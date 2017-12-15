@@ -780,6 +780,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.status.hidebar_enable=false
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
+PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE := 27
 
 # Add runtime resource overlay for framework-res
 # TODO disable for box
@@ -788,13 +789,15 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
 endif
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.vndk.version=26.1.0 \
+
 #The module which belong to vndk-sp is defined by google
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0.vndk-sp\
     android.hardware.graphics.allocator@2.0.vndk-sp\
     android.hardware.graphics.mapper@2.0.vndk-sp\
     android.hardware.graphics.common@1.0.vndk-sp\
-    android.hidl.base@1.0\
     libhwbinder.vndk-sp\
     libbase.vndk-sp\
     libcutils.vndk-sp\
@@ -814,6 +817,7 @@ PRODUCT_PACKAGES += \
     libbacktrace.vndk-sp\
     libunwind.vndk-sp\
     liblzma.vndk-sp\
+    libion.vndk-sp
 
 #######for target product ########
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
