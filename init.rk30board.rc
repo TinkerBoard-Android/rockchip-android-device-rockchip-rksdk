@@ -49,6 +49,7 @@ on init
 on boot
 
     restorecon_recursive /sys/devices/system/cpu/cpufreq/interactive
+    restorecon_recursive /metadata/tee
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack

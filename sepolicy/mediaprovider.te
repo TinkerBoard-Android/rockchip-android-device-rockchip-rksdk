@@ -1,0 +1,1 @@
+allow mediaprovider drm_prop:file read;

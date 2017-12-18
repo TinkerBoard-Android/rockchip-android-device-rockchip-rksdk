@@ -41,7 +41,7 @@ allow init debugfs_tracing:file { write };
 allow init block_device:lnk_file { relabelfrom };
 allow init userdata_block_device:lnk_file { relabelto };
 allow init frp_block_device:lnk_file { relabelto };
-allow init e2fsck_metadata_block_device:lnk_file { relabelto };
+allow init metadata_block_device:lnk_file { relabelto };
 allow init e2fsck_cache_block_device:lnk_file { relabelto };
 allow init system_file:system { module_load };
 allow init debugfs:dir mounton;

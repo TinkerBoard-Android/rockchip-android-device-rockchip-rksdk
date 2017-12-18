@@ -13,7 +13,7 @@ allow untrusted_app_25 device_logging_prop:file { getattr open };
 allow untrusted_app_25 dm_device:blk_file getattr;
 allow untrusted_app_25 dumpstate_options_prop:file { getattr open };
 allow untrusted_app_25 e2fsck_cache_block_device:blk_file getattr;
-allow untrusted_app_25 e2fsck_metadata_block_device:blk_file getattr;
+allow untrusted_app_25 metadata_block_device:blk_file getattr;
 allow untrusted_app_25 graphic_prop:file { getattr open };
 allow untrusted_app_25 logpersistd_logging_prop:file { getattr open };
 allow untrusted_app_25 mmc_prop:file { getattr open };
