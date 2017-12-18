@@ -91,8 +91,7 @@
 /metadata/tee(/.*)?        		u:object_r:tee_data_file:s0
 
 /dev/block/mmcblk1 u:object_r:uboot_block_device:s0
-/dev/block/mmcblk1rpmb u:object_r:rpmb_block_device:s0
-/dev/block/mmcblk0rpmb u:object_r:rpmb_block_device:s0
+/dev/block/mmcblk[0-9]rpmb u:object_r:rpmb_block_device:s0
 
 # Vendor file tag
 /vendor/lib(64)?/(/.*)?            u:object_r:vendor_file:s0
