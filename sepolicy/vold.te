@@ -22,3 +22,4 @@ allow vold userdata_block_device:blk_file { ioctl open read write };
 allow vold system_block_device:blk_file { getattr };
 allow vold e2fsck_oem_block_device:blk_file { getattr };
 allow vold e2fsck_cache_block_device:blk_file { getattr };
+allow vold vendor_file:file { execute execute_no_trans getattr open read };

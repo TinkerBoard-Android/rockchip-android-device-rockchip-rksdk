@@ -9,3 +9,7 @@ allow rild self:capability { setuid setgid dac_override };
 allow rild system_data_file:dir {write add_name};
 #allow rild system_data_file:file {create write};
 allow rild self:capability { sys_admin };
+allow rild net_dns_prop:file { getattr open read };
+allow rild rootfs:dir { open read };
+allow rild system_prop:property_service set;
+allow rild toolbox_exec:file { execute execute_no_trans getattr open read };

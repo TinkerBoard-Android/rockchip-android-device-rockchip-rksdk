@@ -752,18 +752,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.safemode.disabled=true
 endif
 
-ifeq ($(strip $(BOARD_ENABLE_3G_DONGLE)),true)
-ifeq ($(strip $(PRODUCT_BUILD_MODULE)), px3car)
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.enable.3g.dongle=true \
-    rild.libpath=/system/lib/libril-rk29-dataonly.so
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.enable.3g.dongle=true \
-    rild.libpath=/system/lib64/libril-rk29-dataonly.so
-endif
-endif
-
 #boot and shutdown animation, ringing
 ifeq ($(strip $(BOOT_SHUTDOWN_ANIMATION_RINGING)),true)
 include device/rockchip/common/bootshutdown/bootshutdown.mk
