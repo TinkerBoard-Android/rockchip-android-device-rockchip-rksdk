@@ -32,8 +32,10 @@ ifneq ($(strip $(TARGET_PRODUCT)), )
 endif
 
 # Inherit product config
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
   $(call inherit-product, device/google/atv/products/atv_base.mk)
+else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+  $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
 else
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 endif
@@ -821,8 +823,7 @@ PRODUCT_PACKAGES += \
 
 #######for target product ########
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
-
+  DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
   PRODUCT_PROPERTY_OVERRIDES += \
        ro.target.product=box
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
