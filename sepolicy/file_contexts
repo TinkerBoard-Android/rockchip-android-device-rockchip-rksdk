@@ -81,6 +81,8 @@
 #for vpu
 /dev/rkvdec                u:object_r:video_device:s0
 /dev/dri(/.*)?       u:object_r:gpu_device:s0
+/dev/vepu            u:object_r:video_device:s0
+/dev/h265e           u:object_r:video_device:s0
 
 /dev/vendor_storage              u:object_r:storage_device:s0
 
