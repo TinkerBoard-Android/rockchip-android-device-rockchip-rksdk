@@ -92,7 +92,7 @@
 /data/tee(/.*)?        		u:object_r:tee_data_file:s0
 /metadata/tee(/.*)?        		u:object_r:tee_data_file:s0
 
-/dev/block/mmcblk1 u:object_r:uboot_block_device:s0
+/dev/block/mmcblk[0-9] u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb u:object_r:rpmb_block_device:s0
 
 # Vendor file tag
