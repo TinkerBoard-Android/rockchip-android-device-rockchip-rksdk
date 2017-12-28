@@ -21,3 +21,5 @@ allow drmservice media_rw_data_file:dir { add_name create setattr write };
 allow drmservice media_rw_data_file:file { create getattr open setattr write };
 allow drmservice oemfs:dir { open read };
 allow drmservice oemfs:file { getattr open read };
+allow drmservice metadata_file:dir { search write add_name setattr };
+allow drmservice metadata_file:file { rw_file_perms create setattr };
