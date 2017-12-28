@@ -39,12 +39,16 @@ on post-fs-data
 
     mkdir /data/cifsmanager 777 system system
     chmod 0666 /dev/opteearmtz00
+    chmod 0666 /dev/tee0
+    chmod 0666 /dev/teepriv0
 
     mkdir /data/logs 0755 root shell
 on init
     # set temperature control policy as normal mode
     write /sys/module/rockchip_pm/parameters/policy 1
     chmod 0666 /dev/opteearmtz00
+    chmod 0666 /dev/tee0
+    chmod 0666 /dev/teepriv0
 
 on boot
 
@@ -209,6 +213,8 @@ on boot
     chmod 0666 /dev/opteearmtz00
 
     restorecon /metadata/view_cts.ini
+    chmod 0666 /dev/tee0
+    chmod 0666 /dev/teepriv0
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
     restorecon /metadata/view_cts.ini
