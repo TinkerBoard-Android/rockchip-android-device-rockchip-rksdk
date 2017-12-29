@@ -13,7 +13,6 @@ on post-fs
     insmod /system/lib/modules/rk30_mirroring.ko
     insmod /system/lib/modules/rk29-ipp.ko
     insmod /system/lib/modules/pvrsrvkm.ko
-    insmod /drmboot.ko
 
     # Turn on swap
     swapon_all /fstab.rk30board
@@ -233,6 +232,7 @@ on property:ro.boot.noril=true
 # set ro.bootmode
 on property:ro.boot.mode=emmc
     setprop ro.bootmode normal
+    insmod /drmboot.ko
 on property:ro.boot.mode=unknown
     setprop ro.bootmode normal
 
