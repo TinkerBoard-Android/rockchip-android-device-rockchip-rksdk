@@ -30,3 +30,6 @@ get_prop(system_app,drm_prop)
 get_prop(system_app,media_prop)
 set_prop(system_app,system_prop)
 get_prop(system_app,ctsgts_prop)
+
+allow system_app metadata_file:dir { search getattr };
+allow system_app gpu_file:file rw_file_perms;

@@ -56,3 +56,6 @@ binder_call(priv_app, audioserver)
 allow priv_app hal_memtrack_hwservice:hwservice_manager find;
 allowxperm priv_app self:udp_socket ioctl { SIOCGIWESSID };
 r_dir_file(priv_app, sysfs_type)
+
+allow priv_app metadata_file:dir { search getattr };
+allow priv_app gpu_file:file rw_file_perms;

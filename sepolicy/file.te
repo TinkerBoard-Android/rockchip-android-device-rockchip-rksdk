@@ -1,6 +1,7 @@
 # /dev
 type metadata_file, file_type;
 type camdata_file, file_type, data_file_type;
+type gpu_file, file_type,mlstrustedobject;
 type ru_file, file_type;
 type ext4_exec, exec_type, file_type;
 

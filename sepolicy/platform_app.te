@@ -17,6 +17,9 @@ allow platform_app property_socket:sock_file write;
 
 allow platform_app vendor_file:file { execute getattr open read };
 
+allow platform_app metadata_file:dir { search getattr };
+allow platform_app gpu_file:file rw_file_perms;
+
 set_prop(platform_app,system_prop)
 set_prop(platform_app,media_prop)
 set_prop(platform_app,drm_prop)

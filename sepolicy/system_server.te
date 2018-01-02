@@ -53,3 +53,7 @@ set_prop(system_server,media_prop)
 set_prop(system_server,drm_prop)
 set_prop(system_server,ctsgts_prop)
 get_prop(system_server,ctsgts_prop)
+
+
+allow system_server metadata_file:dir { search getattr };
+allow system_server gpu_file:file rw_file_perms;

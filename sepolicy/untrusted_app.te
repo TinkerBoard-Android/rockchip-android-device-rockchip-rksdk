@@ -22,4 +22,6 @@ allow untrusted_app vendor_file:file { read getattr open execute };
 
 allow untrusted_app userdata_block_device:blk_file getattr;
 allow untrusted_app block_device:dir search;
-allow untrusted_app metadata_file:dir getattr;
+
+allow untrusted_app metadata_file:dir { search getattr };
+allow untrusted_app gpu_file:file rw_file_perms;

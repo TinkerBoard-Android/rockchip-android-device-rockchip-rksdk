@@ -23,3 +23,4 @@ allow drmservice oemfs:dir { open read };
 allow drmservice oemfs:file { getattr open read };
 allow drmservice metadata_file:dir { search write add_name setattr };
 allow drmservice metadata_file:file { rw_file_perms create setattr };
+allow drmservice gpu_file:file { rw_file_perms create setattr };

@@ -17,5 +17,8 @@ allow surfaceflinger self:capability { sys_nice };
 #move to vendor
 allow surfaceflinger vendor_file:file { open read getattr execute };
 
+allow surfaceflinger metadata_file:dir { search getattr };
+allow surfaceflinger gpu_file:file rw_file_perms;
+
 set_prop(surfaceflinger,ctsgts_prop)
 get_prop(surfaceflinger,ctsgts_prop)
