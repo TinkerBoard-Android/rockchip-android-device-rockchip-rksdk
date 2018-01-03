@@ -200,6 +200,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml
 endif
 
+ifeq ($(BOARD_USER_FAKETOUCH),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.faketouch.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.faketouch.xml
+endif
+
 ifeq ($(BOARD_GYROSCOPE_SENSOR_SUPPORT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml

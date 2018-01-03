@@ -367,3 +367,6 @@ TARGET_USES_HWC2 ?= true
 
 # Sepolicy Version
 BOARD_SEPOLICY_VERS = 27.0
+
+# CTS require faketouch
+BOARD_USER_FAKETOUCH ?= true
