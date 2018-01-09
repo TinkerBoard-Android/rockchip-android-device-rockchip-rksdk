@@ -140,7 +140,8 @@ endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc
+      $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc \
+      $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
 endif
 
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
