@@ -7,7 +7,6 @@ allow untrusted_app_25 vendor_file:file { open read execute getattr };
 allow untrusted_app_25 block_device:dir getattr;
 
 allow untrusted_app_25 boottime_prop:file { getattr open };
-allow untrusted_app_25 ctsgts_prop:file { getattr open };
 allow untrusted_app_25 device_logging_prop:file { getattr open };
 allow untrusted_app_25 dm_device:blk_file getattr;
 allow untrusted_app_25 dumpstate_options_prop:file { getattr open };
@@ -25,6 +24,7 @@ allow untrusted_app_25 wifi_prop:file { getattr open };
 
 get_prop(untrusted_app_25, drm_prop)
 get_prop(untrusted_app_25, media_prop)
+get_prop(untrusted_app_25, ctsgts_prop)
 
 allow untrusted_app_25 metadata_file:dir { search getattr };
 allow untrusted_app_25 gpu_file:file  rw_file_perms;

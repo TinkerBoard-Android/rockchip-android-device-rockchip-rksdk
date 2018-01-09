@@ -46,3 +46,5 @@ get_prop(mediaserver,ctsgts_prop)
 allow mediaserver vendor_file:file { open read getattr execute };
 allow mediaserver tmpfs:lnk_file { open read };
 allow mediaserver sysfs:file write;
+allow mediaserver metadata_file:dir search;
+allow mediaserver gpu_file:file rw_file_perms;

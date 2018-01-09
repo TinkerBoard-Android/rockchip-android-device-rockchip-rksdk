@@ -5,7 +5,7 @@
 
 /dev/block/by-name/oem            /oem                ext4      ro,noatime,nodiratime,noauto_da_alloc                                  wait,check
 /dev/block/by-name/cache          /cache              ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait,check
-/dev/block/by-name/metadata       /metadata           ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait,check
+/dev/block/by-name/metadata       /metadata           ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait
 /dev/block/by-name/misc         /misc               emmc      defaults     defaults
 
 /devices/platform/*usb*   auto vfat defaults      voldmanaged=usb:auto

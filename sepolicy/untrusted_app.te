@@ -14,7 +14,10 @@ allow untrusted_app block_device:dir { getattr };
 
 allow untrusted_app { domain -init -kernel}:dir { getattr search };
 allow untrusted_app { domain -init -kernel}:file { read getattr open };
+allow untrusted_app { domain -init -kernel}:system { module_request };
+
 get_prop(untrusted_app,ctsgts_prop)
+get_prop(untrusted_app,media_prop)
 allow untrusted_app system_data_file:file r_file_perms;
 allow untrusted_app sysfs_lut:file { getattr setattr open write };
 allow untrusted_app sysfs_zram:file { getattr open read };

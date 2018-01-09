@@ -14,5 +14,10 @@ allow hal_camera_default vndbinder_device:chr_file { read write open ioctl };
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
 allow hal_camera_default hal_graphics_allocator_hwservice:hwservice_manager find;
 allow hal_camera_default self:capability sys_nice;
+allow hal_camera_default metadata_file:dir { search };
+allow hal_camera_default gpu_file:file rw_file_perms;
+allow hal_camera_default sysfs:dir { read open };
+allow hal_camera_default sysfs:file { read open getattr };
+allow hal_camera_default debugfs:dir { read open };
 
 set_prop(hal_camera_default,system_prop)

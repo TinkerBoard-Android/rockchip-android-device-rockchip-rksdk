@@ -23,10 +23,10 @@
 /dev/akm8963_dev     u:object_r:akmd_device:s0
 /data/misc/akmd(/.*)?     u:object_r:akmd_file:s0
 
-/metadata                 u:object_r:rootfs:s0
-/metadata/.*              u:object_r:vold_data_file:s0
 /metadata(/.*)?      u:object_r:metadata_file:s0
-/metadata/view_cts.ini u:object_r:gpu_file:s0
+/metadata/key_file        u:object_r:vold_data_file:s0
+/metadata/view_cts\.ini u:object_r:gpu_file:s0
+
 /dev/mma8452_daemon  u:object_r:sensor_device:s0
 /data/camera(/.*)?   u:object_r:camdata_file:s0
 

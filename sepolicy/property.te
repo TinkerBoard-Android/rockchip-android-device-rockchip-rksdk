@@ -1,6 +1,6 @@
 type graphic_prop, property_type;
-type drm_prop, property_type;
-type media_prop, property_type;
+type drm_prop, property_type, mlstrustedsubject;
+type media_prop, property_type, mlstrustedsubject;
 type ctsgts_prop, property_type;
 type secureboot_prop, property_type;
 type tee_supplicant_prop, property_type;

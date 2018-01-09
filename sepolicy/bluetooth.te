@@ -7,3 +7,4 @@ allow bluetooth surfaceflinger:fifo_file rw_file_perms;
 allow bluetooth storage_device:chr_file rw_file_perms;
 allow bluetooth gpu_device:dir search;
 allow bluetooth gpu_device:chr_file { rw_file_perms ioctl };
+allow bluetooth vendor_file:file { open read getattr execute };

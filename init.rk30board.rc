@@ -49,7 +49,6 @@ on init
 on boot
 
     restorecon_recursive /sys/devices/system/cpu/cpufreq/interactive
-    restorecon_recursive /metadata/tee
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
@@ -198,9 +197,11 @@ on boot
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/bits_per_pixel
     chmod 0660 /sys/devices/platform/fb/graphics/fb9/win_property
 
-    restorecon_recursive /dev/block/platform/fe330000.sdhci/by-name/
+    restorecon_recursive /dev/block/by-name/
     #for tee
     restorecon /system/bin/tee-supplicant
+    restorecon_recursive /metadata/tee/
+
     #for WV keybox provision
     restorecon /system/bin/rk_store_keybox
     # for bd  
