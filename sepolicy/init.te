@@ -50,3 +50,6 @@ allow init configfs:lnk_file create_file_perms;
 allow init perfprofd_exec:file getattr;
 allow init rootfs:system { module_load };
 allow init sysfs:dir write;
+allow init rootfs:dir { relabelto };
+allow rootfs labeledfs:filesystem associate;
+allow init debugfs_tracing:dir mounton;
