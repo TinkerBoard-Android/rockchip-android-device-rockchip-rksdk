@@ -853,3 +853,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 endif
 
 USE_XML_AUDIO_POLICY_CONF := 1
+
+ifeq ($(strip $(BOARD_USE_DRM)),true)
+PRODUCT_PACKAGES += \
+    modetest
+endif
