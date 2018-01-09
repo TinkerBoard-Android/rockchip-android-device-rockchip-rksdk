@@ -186,11 +186,10 @@ else
 	echo "$UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first!"
 fi
 
-if [ -f $UBOOT_PATH/trust_emmc.img ] && [ -f $UBOOT_PATH/trust_nand.img ]
+if [ -f $UBOOT_PATH/trust_nand.img ]
 then
         echo -n "create trust.img..."
         cp -a $UBOOT_PATH/trust_nand.img $IMAGE_PATH/trust.img
-        cp -a $UBOOT_PATH/trust_emmc.img $IMAGE_PATH/trust_emmc.img
         echo "done."
 elif [ -f $UBOOT_PATH/trust.img ]
 then
