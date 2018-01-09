@@ -2,9 +2,8 @@
 if [[ $REPO_REMOTE == rk* ]]; then
     REMOTE_DIFF=`git log $REPO_LREV..HEAD`
     LOCAL_DIFF=`git diff`
-    if [ -n "$REMOTE_DIFF" ]; then
+    if [ -n "$REMOTE_DIFF" -o  -n "$LOCAL_DIFF" ]; then
         mkdir -p $STUB_PATCH_PATH/$REPO_PATH/
-        git format-patch $REPO_LREV..HEAD -o $STUB_PATCH_PATH/$REPO_PATH
 
         echo "remote url:" >> $STUB_PATCH_PATH/$REPO_PATH/git-merge-base.txt
         REMOTE_URL=`git remote -v`
@@ -14,8 +13,11 @@ if [[ $REPO_REMOTE == rk* ]]; then
         git merge-base HEAD $REPO_LREV | xargs git show -s >> $STUB_PATCH_PATH/$REPO_PATH/git-merge-base.txt
     fi
 
+    if [ -n "$REMOTE_DIFF" ]; then
+        git format-patch $REPO_LREV..HEAD -o $STUB_PATCH_PATH/$REPO_PATH
+    fi
+
     if [ -n "$LOCAL_DIFF" ]; then
-        mkdir -p $STUB_PATCH_PATH/$REPO_PATH/
         git diff --binary > $STUB_PATCH_PATH/$REPO_PATH/local_diff.patch
     fi
     if [ -n "$REMOTE_DIFF" -o -n "$LOCAL_DIFF" ]; then
