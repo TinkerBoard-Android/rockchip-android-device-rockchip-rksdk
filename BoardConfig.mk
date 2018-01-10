@@ -354,6 +354,7 @@ USE_CLANG_PLATFORM_BUILD ?= true
 # Zoom out recovery ui of box by two percent.
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     TARGET_RECOVERY_OVERSCAN_PERCENT := 2
+    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
 endif
 
 #enable cpusets sched policy
