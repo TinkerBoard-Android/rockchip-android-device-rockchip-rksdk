@@ -1,0 +1,9 @@
+type iso, domain;
+type iso_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(iso)
+
+allow iso media_rw_data_file:dir { add_name create setattr write };
+allow iso media_rw_data_file:file { create getattr open setattr write };
+allow iso system_prop:property_service set;
+allow iso system_data_file:dir { add_name create write };
+allow iso system_data_file:file { open };

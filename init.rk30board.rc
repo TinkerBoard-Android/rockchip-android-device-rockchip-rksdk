@@ -298,7 +298,7 @@ service shutdownanim /system/bin/bootanimation shutdown
     oneshot
 
 #for bd	
-service iso_operate /system/bin/iso
+service iso_operate /vendor/bin/iso
     class main
     disabled
     oneshot		
