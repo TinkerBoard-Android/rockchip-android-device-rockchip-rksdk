@@ -32,5 +32,6 @@
     <feature name="android.software.live_tv" />
     <feature name="android.software.picture_in_picture" />
     <feature name="android.software.voice_recognizers" />
+    <feature name="android.software.pppoe" />
 
 </permissions>
