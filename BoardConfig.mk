@@ -355,6 +355,7 @@ USE_CLANG_PLATFORM_BUILD ?= true
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     TARGET_RECOVERY_OVERSCAN_PERCENT := 2
     TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
+    PRODUCT_PACKAGES += saveBaseParameter
 endif
 
 #enable cpusets sched policy
