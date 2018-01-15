@@ -249,13 +249,16 @@ else
         echo "$PARAMETER not fount!"
 fi
 
-if [ -f $TARGET_BASE_PARAMETER_IMAGE ]
+if [ "$TARGET_BASE_PARAMETER_IMAGE"x != ""x ]
 then
-        echo -n "create parameter..."
+    if [ -f $TARGET_BASE_PARAMETER_IMAGE ]
+    then
+        echo -n "create baseparameter..."
         cp -a $TARGET_BASE_PARAMETER_IMAGE $IMAGE_PATH/baseparameter.img
         echo "done."
-else
+    else
         echo "$TARGET_BASE_PARAMETER_IMAGE not fount!"
+    fi
 fi
 
 chmod a+r -R $IMAGE_PATH/
