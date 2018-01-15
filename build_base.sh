@@ -121,7 +121,7 @@ echo "cwcw$PROJECT_TOP"
 .repo/repo/repo forall -c "$PROJECT_TOP/device/rockchip/common/gen_patches_body.sh"
 
 #Copy stubs
-cp manifest.xml $STUB_PATH/manifest_${DATE}.xml
+cp commit_id.xml $STUB_PATH/manifest_${DATE}.xml
 
 mkdir -p $STUB_PATCH_PATH/kernel
 cp kernel/.config $STUB_PATCH_PATH/kernel
