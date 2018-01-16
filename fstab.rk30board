@@ -10,4 +10,4 @@
 
 /devices/platform/*usb*   auto vfat defaults      voldmanaged=usb:auto
 
-/dev/block/zram0                                none                swap      defaults                                              zramsize=533413200
+/dev/block/zram0                                none                swap      defaults                                              zramsize=50%
