@@ -70,7 +70,7 @@ endif
 ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
 $(call inherit-product, build/target/product/go_defaults.mk)
 PRODUCT_COPY_FILES += \
-	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml
+    frameworks/native/data/etc/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
 endif
 
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
@@ -707,14 +707,6 @@ PRODUCT_COPY_FILES += \
         device/rockchip/common/boot_boost/prescan_packages.xml:system/etc/prescan_packages.xml
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.boot_boost.enable=true
-endif
-
-# mem optimization
-ifeq ($(strip $(BOARD_WITH_MEM_OPTIMISE)),true)
-PRODUCT_COPY_FILES += \
-	device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.mem_optimise.enable=true
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
