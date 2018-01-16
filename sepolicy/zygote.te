@@ -8,3 +8,4 @@ allow zygote vendor_file:file { read open getattr ioctl execute };
 set_prop(zygote, media_prop)
 set_prop(zygote, drm_prop)
 set_prop(zygote, graphic_prop)
+allow zygote cgroup:file { rw_file_perms create };

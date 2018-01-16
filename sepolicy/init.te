@@ -10,7 +10,7 @@ allow init kernel:system { module_request };
 
 allow init tmpfs:lnk_file { create };
 allow init devpts:chr_file { ioctl };
-allow init block_device:blk_file { getattr read write };
+allow init block_device:blk_file { getattr read write setattr };
 allow init video_device:chr_file { write };
 
 allow init init:capability { sys_module };
@@ -53,3 +53,4 @@ allow init sysfs:dir write;
 allow init rootfs:dir { relabelto };
 allow rootfs labeledfs:filesystem associate;
 allow init debugfs_tracing:dir mounton;
+allow init { e2fsck_oem_block_device security_block_device boot_block_device misc_block_device recovery_block_device }:lnk_file { relabelto };

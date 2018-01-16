@@ -1,1 +1,2 @@
 get_prop(mediaprovider, drm_prop)
+get_prop(mediaprovider, media_prop)

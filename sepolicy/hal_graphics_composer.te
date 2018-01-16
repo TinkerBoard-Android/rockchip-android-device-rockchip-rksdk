@@ -8,3 +8,5 @@ allow hal_graphics_composer_default vndbinder_device:chr_file { read write open 
 
 allow hal_graphics_composer_default hal_graphics_allocator_hwservice:hwservice_manager find;
 binder_call(hal_graphics_composer_default, hal_graphics_allocator_default)
+allow hal_graphics_composer_default sysfs:file rw_file_perms;
+allow hal_graphics_composer_default block_device:dir { search };

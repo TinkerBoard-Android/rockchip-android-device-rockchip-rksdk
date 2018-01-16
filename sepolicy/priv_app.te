@@ -59,3 +59,5 @@ r_dir_file(priv_app, sysfs_type)
 
 allow priv_app metadata_file:dir { search getattr };
 allow priv_app gpu_file:file rw_file_perms;
+get_prop(priv_app,ctsgts_prop)
+get_prop(priv_app,media_prop)

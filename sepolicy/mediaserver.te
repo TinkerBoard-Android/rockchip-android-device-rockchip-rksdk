@@ -41,6 +41,7 @@ set_prop(mediaserver,media_prop)
 set_prop(mediaserver,drm_prop)
 set_prop(mediaserver,ctsgts_prop)
 get_prop(mediaserver,ctsgts_prop)
+get_prop(mediaserver,media_prop)
 
 #move to vendor
 allow mediaserver vendor_file:file { open read getattr execute };
