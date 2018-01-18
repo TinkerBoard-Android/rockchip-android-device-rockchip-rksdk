@@ -22,6 +22,9 @@ allow untrusted_app_25 secureboot_prop:file { getattr open };
 allow untrusted_app_25 system_block_device:blk_file getattr;
 allow untrusted_app_25 wifi_prop:file { getattr open };
 
+allow untrusted_app_25 sysfs_wifi:dir { search };
+allow untrusted_app_25 sysfs_wifi:file { read };
+
 get_prop(untrusted_app_25, drm_prop)
 get_prop(untrusted_app_25, media_prop)
 get_prop(untrusted_app_25, ctsgts_prop)

@@ -37,11 +37,13 @@ allow mediaserver platform_app:file { read open };
 allow mediaserver untrusted_app:dir { search };
 allow mediaserver untrusted_app:file { read open };
 
-set_prop(mediaserver,media_prop)
-set_prop(mediaserver,drm_prop)
-set_prop(mediaserver,ctsgts_prop)
-get_prop(mediaserver,ctsgts_prop)
-get_prop(mediaserver,media_prop)
+set_prop(mediaserver, media_prop)
+set_prop(mediaserver, drm_prop)
+set_prop(mediaserver, ctsgts_prop)
+get_prop(mediaserver, ctsgts_prop)
+get_prop(mediaserver, media_prop)
+
+binder_call(mediaserver, hal_configstore_default)
 
 #move to vendor
 allow mediaserver vendor_file:file { open read getattr execute };
@@ -49,3 +51,4 @@ allow mediaserver tmpfs:lnk_file { open read };
 allow mediaserver sysfs:file write;
 allow mediaserver metadata_file:dir search;
 allow mediaserver gpu_file:file rw_file_perms;
+allow mediaserver hal_configstore_ISurfaceFlingerConfigs:hwservice_manager { find };
