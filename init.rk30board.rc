@@ -10,7 +10,7 @@ on post-fs
     restorecon_recursive /metadata
     insmod /system/lib/modules/ump.ko
     insmod /system/lib/modules/mali.ko
-    insmod /system/lib/modules/mali_kbase.ko
+    insmod /vendor/lib/modules/mali_kbase.ko
     insmod /system/lib/modules/rk30_mirroring.ko
     insmod /system/lib/modules/rk29-ipp.ko
     insmod /system/lib/modules/pvrsrvkm.ko
