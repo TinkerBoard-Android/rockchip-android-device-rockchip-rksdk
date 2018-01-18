@@ -353,7 +353,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Add board.platform default property to parsing related rc
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM))
+    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM)) \
+    ro.target.product=$(strip $(TARGET_BOARD_PLATFORM_PRODUCT))
 
 PRODUCT_CHARACTERISTICS := tablet
 
