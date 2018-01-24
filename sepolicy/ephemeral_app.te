@@ -1,0 +1,4 @@
+allow ephemeral_app vendor_file:file { execute getattr open read };
+allow ephemeral_app gpu_device:dir search;
+allow ephemeral_app self:process ptrace;
+allow ephemeral_app shell_data_file:dir search;
