@@ -138,9 +138,8 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
       pppoe-service
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc \
       $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
 endif
 
@@ -625,6 +624,9 @@ $(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     include device/rockchip/common/samba/rk31_samba.mk
+    PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc
+
     PRODUCT_PROPERTY_OVERRIDES += \
       ro.rk.screenoff_time=2147483647
 else
