@@ -249,6 +249,13 @@ $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 endif
 
+# Camera Autofocus
+ifeq ($(CAMERA_SUPPORT_AUTOFOCUS),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.autofocus.xml \
+
+endif
+
 # USB HOST
 ifeq ($(BOARD_USB_HOST_SUPPORT),true)
 PRODUCT_COPY_FILES += \

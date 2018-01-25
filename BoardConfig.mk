@@ -366,3 +366,6 @@ BOARD_SEPOLICY_VERS = 27.0
 
 # CTS require faketouch
 BOARD_USER_FAKETOUCH ?= true
+
+#for Camera autofocus support
+CAMERA_SUPPORT_AUTOFOCUS ?= false
