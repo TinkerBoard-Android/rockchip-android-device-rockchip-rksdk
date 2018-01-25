@@ -573,15 +573,15 @@ int main(int argc, char** argv){
         int left,top,right,bottom;
         sscanf(overscan, "overscan %d,%d,%d,%d", &left, &top, &right, &bottom);
         if (display ==HWC_DISPLAY_PRIMARY) {
-            base_paramer.main.overscan.leftscale = left;
-            base_paramer.main.overscan.rightscale = right;
-            base_paramer.main.overscan.topscale = top;
-            base_paramer.main.overscan.bottomscale = bottom;
+            base_paramer.main.scan.leftscale = left;
+            base_paramer.main.scan.rightscale = right;
+            base_paramer.main.scan.topscale = top;
+            base_paramer.main.scan.bottomscale = bottom;
         } else if(display == HWC_DISPLAY_EXTERNAL){
-            base_paramer.aux.overscan.leftscale = left;
-            base_paramer.aux.overscan.rightscale = right;
-            base_paramer.aux.overscan.topscale = top;
-            base_paramer.aux.overscan.bottomscale = bottom;
+            base_paramer.aux.scan.leftscale = left;
+            base_paramer.aux.scan.rightscale = right;
+            base_paramer.aux.scan.topscale = top;
+            base_paramer.aux.scan.bottomscale = bottom;
         }
     }
 
