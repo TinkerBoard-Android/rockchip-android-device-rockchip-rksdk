@@ -41,6 +41,7 @@ PRODUCT_PACKAGES += \
     libstagefright_soft_amrwbenc \
     libstagefright_soft_avcdec \
     libstagefright_soft_avcenc \
+    libstagefright_soft_flacdec \
     libstagefright_soft_flacenc \
     libstagefright_soft_g711dec \
     libstagefright_soft_gsmdec \
