@@ -342,7 +342,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service
 
 # iep
-ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3128 px3se rk3368 rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3128 px3se rk3368 rk3326 rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )
 BUILD_IEP := true
 PRODUCT_PACKAGES += \
     libiep
