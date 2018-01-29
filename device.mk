@@ -92,6 +92,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.disable_scissor_opt=true \
     ro.rk.screenshot_enable=true   \
     sys.status.hidebar_enable=false \
+    ro.boot.vr=0 \
     persist.sys.ui.hw=true
 endif
 
