@@ -18,4 +18,4 @@ boot                                         /boot                mtd           
 recovery                                     /recovery            mtd             defaults                  defaults
 backup                                       /backup              mtd             defaults                  defaults
 trust                                        /trust               mtd             defaults                  defaults
-baseparamer                                  /baseparamer         mtd             defaults                  defaults
+baseparameter                                /baseparameter       mtd             defaults                  defaults

@@ -17,5 +17,5 @@
 /dev/block/platform/f8000000.pcie/by-name/recovery              /recovery            emmc             defaults                  defaults
 /dev/block/platform/f8000000.pcie/by-name/backup                /backup              emmc             defaults                  defaults
 /dev/block/platform/f8000000.pcie/by-name/trust                 /trust               emmc             defaults                  defaults
-/dev/block/platform/f8000000.pcie/by-name/baseparamer           /baseparamer         emmc             defaults                  defaults
+/dev/block/platform/f8000000.pcie/by-name/baseparameter         /baseparameter       emmc             defaults                  defaults
 /dev/block/platform/f8000000.pcie/by-name/frp                   /frp                 emmc             defaults                  defaults

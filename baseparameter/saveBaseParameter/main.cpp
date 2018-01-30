@@ -128,7 +128,6 @@ static char const *const device_template[] =
 	"/dev/block/rknand_baseparameter",
 	NULL
 };
-//"/dev/block/platform/ff520000.dwmmc/by-name/baseparamer",
 
 const char* GetBaseparameterFile(void)
 {
