@@ -269,11 +269,11 @@ service displayd /system/bin/displayd
 
 ##$_rbox_$_modify_$_chenzhi_20120309
 ##$_rbox_$_modify_$_begin
-service pppoe_setup /system/bin/pppoe-setup
+service pppoe_setup /vendor/bin/pppoe-setup
     disabled
     oneshot
 
-service pppoe_start /system/bin/pppoe-start
+service pppoe_start /vendor/bin/pppoe-start
     disabled
     oneshot
 
@@ -281,7 +281,7 @@ service bplus_helper  /system/bin/bplus_helper
     class main
     oneshot
 
-service pppoe_stop /system/bin/pppoe-stop
+service pppoe_stop /vendor/bin/pppoe-stop
     disabled
     oneshot
 ##$_rbox_$_modify_$_end

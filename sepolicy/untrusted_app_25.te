@@ -21,6 +21,7 @@ allow untrusted_app_25 safemode_prop:file { getattr open };
 allow untrusted_app_25 secureboot_prop:file { getattr open };
 allow untrusted_app_25 system_block_device:blk_file getattr;
 allow untrusted_app_25 wifi_prop:file { getattr open };
+allow untrusted_app_25 pppoe_prop:file { getattr open };
 
 allow untrusted_app_25 sysfs_wifi:dir { search };
 allow untrusted_app_25 sysfs_wifi:file { read };
