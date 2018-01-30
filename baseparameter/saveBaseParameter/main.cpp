@@ -70,7 +70,7 @@ enum output_format {
     invalid_output=6,
 };
 
-enum  output_depth{
+enum output_depth {
     Automatic=0,
     depth_24bit=8,
     depth_30bit=10,
@@ -307,26 +307,66 @@ static void saveBcshConfig(struct file_base_paramer *base_paramer, int dpy){
     }
 }
 
-static void usage(char *name){
-    fprintf(stderr, "usage: %s [-fsdcu]\n", name);
-    fprintf(stderr, "\t-f\t fb e: 1920x1080@60\n");
-    fprintf(stderr, "\t-d\t dpy(e: 0 or 1)\n");	
-    fprintf(stderr, "\t-D\t devices(e: HDMI-A,TV)\n");
-    fprintf(stderr, "\t-c\t color(e: RGB-8bit or YCBCR444-10bit)\n");
-    fprintf(stderr, "\t-u\t value:2 set auto resolution 1: enable change resolution\n");
-    fprintf(stderr, "\t-o\t overscan(e: overscan 100,100,100,100)\n");
-    fprintf(stderr, "usage: %s [-p]\n", name);
-    fprintf(stderr, "\t-p\t print baseparamter \n");
-    fprintf(stderr, "\t-R\t reset baseparameter \n");
+static void printParameter(struct file_base_paramer *base_paramer){
+    printf("-main: \n");
+    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x\n", base_paramer->main.resolution.hdisplay,
+            base_paramer->main.resolution.vdisplay, base_paramer->main.resolution.hsync_start,
+            base_paramer->main.resolution.hsync_end, base_paramer->main.resolution.htotal,
+            base_paramer->main.resolution.vsync_start, base_paramer->main.resolution.vsync_end,
+            base_paramer->main.resolution.vtotal, base_paramer->main.resolution.flags);
+    printf("\tcorlor: format %d depth %d \n", base_paramer->main.format, base_paramer->main.depthc);
+    printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->main.hwc_info.framebuffer_width,
+            base_paramer->main.hwc_info.framebuffer_height, base_paramer->main.hwc_info.fps, base_paramer->main.hwc_info.device);
+    printf("\tbcsh: %d %d %d %d \n", base_paramer->main.bcsh.brightness, base_paramer->main.bcsh.contrast,
+            base_paramer->main.bcsh.saturation, base_paramer->main.bcsh.hue);
+    printf("\toverscan: %d %d %d %d \n", base_paramer->main.scan.leftscale, base_paramer->main.scan.topscale,
+            base_paramer->main.scan.rightscale, base_paramer->main.scan.bottomscale);
+    printf("\tfeature:  0x%x \n", base_paramer->main.feature);
+
+    printf("-aux: \n");
+    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x\n", base_paramer->aux.resolution.hdisplay, 
+            base_paramer->aux.resolution.vdisplay,
+            base_paramer->aux.resolution.hsync_start,
+            base_paramer->aux.resolution.hsync_end, base_paramer->aux.resolution.htotal,
+            base_paramer->aux.resolution.vsync_start, base_paramer->main.resolution.vsync_end, 
+            base_paramer->aux.resolution.vtotal,
+            base_paramer->aux.resolution.flags);
+    printf("\tcorlor: format %d depth %d \n", base_paramer->aux.format, base_paramer->aux.depthc);
+    printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->aux.hwc_info.framebuffer_width, 
+            base_paramer->aux.hwc_info.framebuffer_height, base_paramer->aux.hwc_info.fps, 
+            base_paramer->aux.hwc_info.device);
+    printf("\tbcsh: %d %d %d %d \n", base_paramer->aux.bcsh.brightness, base_paramer->aux.bcsh.contrast, 
+            base_paramer->aux.bcsh.saturation, base_paramer->aux.bcsh.hue);
+    printf("\toverscan: %d %d %d %d \n", base_paramer->aux.scan.leftscale, base_paramer->aux.scan.topscale,
+            base_paramer->aux.scan.rightscale, base_paramer->aux.scan.bottomscale);
+    printf("\tfeature:  0x%x \n", base_paramer->aux.feature);
+}
+
+static void usage(){
+    fprintf(stderr, "\nsaveParameter: read and write baseparameter partition tool\n");
+    fprintf(stderr, "\nUsage:\n");
+    fprintf(stderr, "\t-h\t Help info\n");
+    fprintf(stderr, "\t-d\t Choose Display to Setting (e: 0 or 1)\n");	
+    fprintf(stderr, "\t-f\t Framebuffer Resolution (e: 1920x1080@60)\n");
+    fprintf(stderr, "\t-D\t Display Attach Devices (e: HDMI-A,TV)\n");
+    fprintf(stderr, "\t-c\t Color (e: RGB-8bit or YCBCR444-10bit)\n");
+    fprintf(stderr, "\t-u\t Is Enable Auto Resolution (2:auto resolution; 1:set one fixed resolution)\n");
+    fprintf(stderr, "\t-o\t Overscan (e: overscan \"100,100,100,100\")\n");
+    fprintf(stderr, "\t-b\t BCSH (e: \"50,50,50,50\") \n");
+    fprintf(stderr, "\t-p\t Print Baseparamter\n");
+    fprintf(stderr, "\t-R\t Reset Baseparameter (1:only reset user setting baseparameter partition; 2:reset baseparameter paratition include backup)\n");
+    fprintf(stderr, "\nExample: saveBaseParameter -d 0 -f 1920x1080@60 -D \"HDMI-A,TV\" -c Auto -u 2 -o \"100,100,100,100\" -b \"50,50,50,50\"\n");
+    fprintf(stderr, "\n===== Rockchip All Rights Reserved =====\n\n");
 }
 
 int main(int argc, char** argv){
     struct file_base_paramer base_paramer;
+    struct file_base_paramer backup_paramer;
     int file;
     char* device=NULL;
     char* fb_info=NULL;
     bool isEnablesaveReso=false;
-    bool resetBaseParameter=false;
+    int resetBaseParameter=0;
     int display=0;
     char* corlor_info=NULL;
     bool autoCorlor=false;
@@ -334,62 +374,72 @@ int main(int argc, char** argv){
     int value;
     int isPrintBaseInfo=0;
     char* overscan=NULL;
+    char* bcsh=NULL;
 
     int res;
-    while ((res = getopt(argc, argv, "f:d:D:u:c:R:a:p:o:")) >= 0) {
+    // printf("----- parsing auguments\n");
+    while ((res = getopt(argc, argv, "b:f:d:D:u:c:R:o:hap")) >= 0) {
         //	printf("res = %d\n", res);
         const char *colonPos;
         switch (res) {
             case 'f':
                 fb_info = optarg;
                 if (strstr(fb_info, "x") == NULL || strstr(fb_info, "@")==NULL){
-                    usage(fb_info);
+                    usage();
                     return -1;
                 }
-                printf("framebuffer %s \n", fb_info);
+                printf("framebuffer %s (-f)\n", fb_info);
                 break;
             case 'd':
                 display = atoi(optarg);
                 if (display > 1) {
-                    usage(optarg);
+                    usage();
                     return 0;
                 }
+                printf("display %d (-d)\n", display);
                 break;
             case 'D':
                 device  = optarg;
-                printf("device %s -d\n", device);
+                printf("device %s (-D)\n", device);
                 break;
             case 'u':
                 value  = atoi(optarg);
-                printf("isEnablesaveReso %s -u\n", optarg);
+                printf("isEnableSaveResolution %s (-u)\n", optarg);
                 if (value == 2)
-                    autoResolution = 1;		
+                    autoResolution = 1;
                 else if (value == 1) 
                     isEnablesaveReso =true;
                 break;
             case 'c':
                 corlor_info = optarg;
-                printf("-c %s \n", optarg);
+                printf("color %s (-c)\n", optarg);
                 break;
             case 'R':
                 resetBaseParameter = atoi(optarg);
+                printf("reset baseparameter %d\n", resetBaseParameter);
                 break;
             case 'a':
                 autoCorlor=true;
                 break;
             case 'p':
                 isPrintBaseInfo = 1;
+                printf("print baseparameter\n");
                 break;
             case 'o':
                 overscan = optarg;
-                break; 
+                printf("overscan %s (-o)\n", overscan);
+                break;
+            case 'b':
+                bcsh = optarg;
+                printf("bcsh %s (-b)\n", bcsh);
+                break;
+            case 'h':
+                usage();
+                return 0;
             default:
                 break;
         }
     }
-
-    if (device == NULL)
-        usage(device);
 
     const char *baseparameterfile = GetBaseparameterFile();
     if (!baseparameterfile) {
@@ -405,77 +455,54 @@ int main(int argc, char** argv){
     }
     // caculate file's size and read it
     unsigned int length = lseek(file, 0L, SEEK_END);
-    lseek(file, 0L, SEEK_SET);
     if(length < sizeof(base_paramer)) {
         printf("BASEPARAME data's length is error\n");
         close(file);
         return -1;
     }
-
+    lseek(file, 0L, SEEK_SET);
     read(file, (void*)&(base_paramer.main), sizeof(base_paramer.main));/*read main display info*/
     lseek(file, BASE_OFFSET, SEEK_SET);
     read(file, (void*)&(base_paramer.aux), sizeof(base_paramer.aux));/*read aux display info*/
+    lseek(file, BACKUP_OFFSET, SEEK_SET);
+    read(file, (void*)&(backup_paramer.main), sizeof(backup_paramer.main));/*read main display info*/
+    lseek(file, BACKUP_OFFSET + BASE_OFFSET, SEEK_SET);
+    read(file, (void*)&(backup_paramer.aux), sizeof(backup_paramer.aux));/*read aux display info*/
 
-    if (resetBaseParameter>0){
+    if (resetBaseParameter > 0) {
         memset(&base_paramer.main, 0, sizeof(base_paramer.main));
+        memset(&base_paramer.aux, 0, sizeof(base_paramer.aux));
+        // reset baseparameter
+        lseek(file, 0L, SEEK_SET);
         write(file, (char*)(&base_paramer.main), sizeof(base_paramer.main));
         lseek(file, BASE_OFFSET, SEEK_SET);
-        memset(&base_paramer.aux, 0, sizeof(base_paramer.aux));	        
         write(file, (char*)(&base_paramer.aux), sizeof(base_paramer.aux));
-        sync();
-
-        if (resetBaseParameter == 2)
-        {
+        // reset back baseparameter
+        if (resetBaseParameter == 2) {
+            printf("reset backup parameter\n");
             lseek(file, BACKUP_OFFSET, SEEK_SET);
-            if (display == HWC_DISPLAY_PRIMARY)
-                write(file, (char*)(&base_paramer.main), sizeof(base_paramer.main));
+            write(file, (char*)(&base_paramer.main), sizeof(base_paramer.main));
             lseek(file, BACKUP_OFFSET+BASE_OFFSET, SEEK_SET);
-            if (display == HWC_DISPLAY_EXTERNAL)
-                write(file, (char*)(&base_paramer.aux), sizeof(base_paramer.aux));
-
+            write(file, (char*)(&base_paramer.aux), sizeof(base_paramer.aux));
         }
+        sync();
         close(file);
-        printf("resetBaseParamerter ******************");
+        printf("reset done.\n");
         return 0;
     }
 
     if (isPrintBaseInfo > 0) {
-        printf("main: \n");
-        printf("resolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x\n", base_paramer.main.resolution.hdisplay,
-                base_paramer.main.resolution.vdisplay, base_paramer.main.resolution.hsync_start,
-                base_paramer.main.resolution.hsync_end, base_paramer.main.resolution.htotal,
-                base_paramer.main.resolution.vsync_start, base_paramer.main.resolution.vsync_end,
-                base_paramer.main.resolution.vtotal, base_paramer.main.resolution.flags);
-        printf("corlor: %d-%d \n", base_paramer.main.format, base_paramer.main.depthc);
-        printf("fbinfo: %dx%d@%f device:%s\n", base_paramer.main.hwc_info.framebuffer_width,
-                base_paramer.main.hwc_info.framebuffer_height, base_paramer.main.hwc_info.fps, base_paramer.main.hwc_info.device);
-        printf("bcsh: %d %d %d %d \n", base_paramer.main.bcsh.brightness, base_paramer.main.bcsh.contrast,
-                base_paramer.main.bcsh.saturation, base_paramer.main.bcsh.hue);
-        printf("overscan: %d %d %d %d \n", base_paramer.main.scan.leftscale, base_paramer.main.scan.topscale,
-                base_paramer.main.scan.rightscale, base_paramer.main.scan.bottomscale);
-        printf("feature:  0x%x \n", base_paramer.main.feature);
-
-        printf("aux: \n");
-        printf("resolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x\n", base_paramer.aux.resolution.hdisplay, 
-                base_paramer.aux.resolution.vdisplay,
-                base_paramer.aux.resolution.hsync_start,
-                base_paramer.aux.resolution.hsync_end, base_paramer.aux.resolution.htotal,
-                base_paramer.aux.resolution.vsync_start, base_paramer.main.resolution.vsync_end, 
-                base_paramer.aux.resolution.vtotal,
-                base_paramer.aux.resolution.flags);
-        printf("corlor: %d-%d \n", base_paramer.aux.format, base_paramer.aux.depthc);
-        printf("fbinfo: %dx%d@%f device:%s\n", base_paramer.aux.hwc_info.framebuffer_width, 
-                base_paramer.aux.hwc_info.framebuffer_height, base_paramer.aux.hwc_info.fps, 
-                base_paramer.aux.hwc_info.device);
-        printf("bcsh: %d %d %d %d \n", base_paramer.aux.bcsh.brightness, base_paramer.aux.bcsh.contrast, 
-                base_paramer.aux.bcsh.saturation, base_paramer.aux.bcsh.hue);
-        printf("overscan: %d %d %d %d \n", base_paramer.aux.scan.leftscale, base_paramer.aux.scan.topscale,
-                base_paramer.aux.scan.rightscale, base_paramer.aux.scan.bottomscale);
-        printf("feature:  0x%x \n", base_paramer.aux.feature);
+        printf("========== base parameter ==========\n");
+        printParameter(&base_paramer);
+        printf("\n========= backup parameter ==========\n");
+        printParameter(&backup_paramer);
+        printf("====================================\n");
         return 0;
     }
 
-    printf("read: base_paramer.main.resolution.hdisplay = %d,  vdisplay=%d(%s@%f) 0x%x\n", base_paramer.main.resolution.hdisplay,
+    printf("----- setting baseparameter\n");
+    printf("base_paramer.main.resolution hdisplay=%d vdisplay=%d (%s@%f) 0x%x\n", 
+            base_paramer.main.resolution.hdisplay,
             base_paramer.main.resolution.vdisplay,
             base_paramer.main.hwc_info.device,  base_paramer.main.hwc_info.fps,
             base_paramer.main.feature);
@@ -571,7 +598,7 @@ int main(int argc, char** argv){
 
     if (overscan != NULL) {
         int left,top,right,bottom;
-        sscanf(overscan, "overscan %d,%d,%d,%d", &left, &top, &right, &bottom);
+        sscanf(overscan, "%d,%d,%d,%d", &left, &top, &right, &bottom);
         if (display ==HWC_DISPLAY_PRIMARY) {
             base_paramer.main.scan.leftscale = left;
             base_paramer.main.scan.rightscale = right;
@@ -585,6 +612,24 @@ int main(int argc, char** argv){
         }
     }
 
+    if (bcsh != NULL) {
+        int b,c,s,h;
+        sscanf(bcsh, "%d,%d,%d,%d", &b, &c, &s, &h);
+        if (display ==HWC_DISPLAY_PRIMARY) {
+            base_paramer.main.bcsh.brightness = b;
+            base_paramer.main.bcsh.contrast = c;
+            base_paramer.main.bcsh.saturation = s;
+            base_paramer.main.bcsh.hue = h;
+        } else if(display == HWC_DISPLAY_EXTERNAL){
+            base_paramer.aux.bcsh.brightness = b;
+            base_paramer.aux.bcsh.contrast = c;
+            base_paramer.aux.bcsh.saturation = s;
+            base_paramer.aux.bcsh.hue = h;
+        }
+    }
+
+    printf("----- checking baseparameter\n");
+    printParameter(&base_paramer);
 
     lseek(file, 0L, SEEK_SET);
     if (display == HWC_DISPLAY_PRIMARY)
@@ -601,6 +646,8 @@ int main(int argc, char** argv){
         write(file, (char*)(&base_paramer.aux), sizeof(base_paramer.aux));
     close(file);
     sync();
+    printf("----- writing baseparameter\n");
+    printf("done.\n");
 
     return 0;
 }

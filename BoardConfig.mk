@@ -349,7 +349,10 @@ USE_CLANG_PLATFORM_BUILD ?= true
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     TARGET_RECOVERY_OVERSCAN_PERCENT := 2
     TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
-    PRODUCT_PACKAGES += saveBaseParameter
+    # savBaseParameter tool
+    ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+        PRODUCT_PACKAGES += saveBaseParameter
+    endif
 endif
 
 #enable cpusets sched policy
