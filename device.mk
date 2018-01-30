@@ -92,7 +92,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.disable_scissor_opt=true \
     ro.rk.screenshot_enable=true   \
     sys.status.hidebar_enable=false \
-    ro.boot.vr=0 \
     persist.sys.ui.hw=true
 endif
 
@@ -278,6 +277,9 @@ else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
+# add this prop to skip vr test for cts-on-gsi in vts
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.boot.vr=0
 endif
 
 # Live Wallpapers
