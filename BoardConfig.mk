@@ -69,7 +69,17 @@ DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
 
 #Calculate partition size from parameter.txt
+USE_DEFAULT_GPT := $(shell test -f $(TARGET_DEVICE_DIR)/gpt.txt && echo true)
 USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
+
+ifeq ($(strip $(USE_DEFAULT_GPT)), true)
+  BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/gpt.txt system)
+  BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/gpt.txt oem)
+  BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/gpt.txt vendor)
+  BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/gpt.txt cache)
+
+  #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/gpt.txt)
+else
 ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
   BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt system)
   BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt oem)
@@ -86,7 +96,7 @@ else
     #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
   endif
 endif
-
+endif
 
 # GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= mali-t760
