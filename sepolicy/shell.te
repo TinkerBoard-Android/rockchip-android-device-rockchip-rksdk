@@ -34,3 +34,6 @@ get_prop(shell, ctsgts_prop)
 allow shell metadata_file:dir { search getattr rw_dir_perms };
 allow shell gpu_file:file rw_file_perms;
 allow shell metadata_file:file r_file_perms;
+# read files in /data/logs
+allow shell aplog_data_file:dir r_dir_perms;
+allow shell aplog_data_file:file r_file_perms;

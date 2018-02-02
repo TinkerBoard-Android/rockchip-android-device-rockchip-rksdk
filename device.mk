@@ -734,6 +734,7 @@ endif
 
 PRODUCT_PACKAGES += \
 	abc
+
 # boot optimization
 PRODUCT_COPY_FILES += \
         device/rockchip/common/boot_boost/libboot_optimization.so:system/lib/libboot_optimization.so

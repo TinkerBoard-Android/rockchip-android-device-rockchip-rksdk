@@ -96,6 +96,7 @@
 
 /dev/vendor_storage              u:object_r:storage_device:s0
 
+/data/logs(/.*)? u:object_r:aplog_data_file:s0
 #for tee
 /(vendor|system/vendor)/bin/tee-supplicant     u:object_r:tee_exec:s0
 /dev/opteearmtz[0-9]*         u:object_r:tee_device:s0
@@ -116,3 +117,6 @@
 /vendor/bin/iso                    u:object_r:iso_exec:s0
 # default hal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
+
+#for abc
+/system/bin/abc             u:object_r:abc_exec:s0
