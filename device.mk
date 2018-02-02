@@ -37,7 +37,11 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
 else
+ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
+else
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+endif
 endif
 
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
@@ -71,6 +75,9 @@ ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
 $(call inherit-product, build/target/product/go_defaults.mk)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
+PRODUCT_PROPERTY_OVERRIDES += \
+    config.disable_rtt=true \
+    config.disable_consumerir=true
 endif
 
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
