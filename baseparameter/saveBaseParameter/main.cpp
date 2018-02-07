@@ -308,11 +308,12 @@ static void saveBcshConfig(struct file_base_paramer *base_paramer, int dpy){
 
 static void printParameter(struct file_base_paramer *base_paramer){
     printf("-main: \n");
-    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x\n", base_paramer->main.resolution.hdisplay,
+    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n", base_paramer->main.resolution.hdisplay,
             base_paramer->main.resolution.vdisplay, base_paramer->main.resolution.hsync_start,
             base_paramer->main.resolution.hsync_end, base_paramer->main.resolution.htotal,
             base_paramer->main.resolution.vsync_start, base_paramer->main.resolution.vsync_end,
-            base_paramer->main.resolution.vtotal, base_paramer->main.resolution.flags);
+            base_paramer->main.resolution.vtotal, base_paramer->main.resolution.flags,
+            base_paramer->main.resolution.clock);
     printf("\tcorlor: format %d depth %d \n", base_paramer->main.format, base_paramer->main.depthc);
     printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->main.hwc_info.framebuffer_width,
             base_paramer->main.hwc_info.framebuffer_height, base_paramer->main.hwc_info.fps, base_paramer->main.hwc_info.device);
@@ -323,13 +324,14 @@ static void printParameter(struct file_base_paramer *base_paramer){
     printf("\tfeature:  0x%x \n", base_paramer->main.feature);
 
     printf("-aux: \n");
-    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x\n", base_paramer->aux.resolution.hdisplay, 
+    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n", base_paramer->aux.resolution.hdisplay, 
             base_paramer->aux.resolution.vdisplay,
             base_paramer->aux.resolution.hsync_start,
             base_paramer->aux.resolution.hsync_end, base_paramer->aux.resolution.htotal,
             base_paramer->aux.resolution.vsync_start, base_paramer->main.resolution.vsync_end, 
             base_paramer->aux.resolution.vtotal,
-            base_paramer->aux.resolution.flags);
+            base_paramer->aux.resolution.flags,
+            base_paramer->aux.resolution.clock);
     printf("\tcorlor: format %d depth %d \n", base_paramer->aux.format, base_paramer->aux.depthc);
     printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->aux.hwc_info.framebuffer_width, 
             base_paramer->aux.hwc_info.framebuffer_height, base_paramer->aux.hwc_info.fps, 
