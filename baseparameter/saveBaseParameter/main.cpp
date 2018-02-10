@@ -22,6 +22,8 @@
 #define HDCP1X_EN (1<<2)
 #define RESOLUTION_WHITE_EN (1<<3)
 
+#define BASEPARAMETER_IMAGE_SIZE 1024*1024
+
 enum {
     HWC_DISPLAY_PRIMARY     = 0,
     HWC_DISPLAY_EXTERNAL    = 1,    // HDMI, DP, etc.
@@ -306,6 +308,61 @@ static void saveBcshConfig(struct file_base_paramer *base_paramer, int dpy){
     }
 }
 
+int outputImage(const char *file_path, struct file_base_paramer *base, struct file_base_paramer *back)
+{
+    int fd;
+    ssize_t ret;
+
+    fd = open(file_path, O_CREAT | O_WRONLY, 0666);
+    if (fd < 0) {
+        perror("fail to open");
+        return -1;
+    }
+
+    lseek(fd, BASEPARAMETER_IMAGE_SIZE-1, SEEK_SET);
+    ret = write(fd, "\0", 1);
+    if (ret < 0) {
+        perror("fail to write");
+        goto out;
+    }
+
+    lseek(fd, 0L, SEEK_SET);
+    ret = write(fd, (char*)(&base->main), sizeof(base->main));
+    if (ret < 0) {
+        perror("fail to write");
+        goto out;
+    }
+    lseek(fd, BASE_OFFSET, SEEK_SET);
+    ret = write(fd, (char*)(&base->aux), sizeof(base->aux));
+    if (ret < 0) {
+        perror("fail to write");
+        goto out;
+    }
+
+    lseek(fd, BACKUP_OFFSET, SEEK_SET);
+    ret = write(fd, (char*)(&back->main), sizeof(back->main));
+    if (ret < 0) {
+        perror("fail to write");
+        goto out;
+    }
+    lseek(fd, BACKUP_OFFSET+BASE_OFFSET, SEEK_SET);
+    ret = write(fd, (char*)(&back->aux), sizeof(back->aux));
+    if (ret < 0) {
+        perror("fail to write");
+        goto out;
+    }
+
+    fsync(fd);
+    close(fd);
+    printf("create %s success\n", file_path);
+
+    return 0;
+
+out:
+    close(fd);
+    return -1;
+}
+
 static void printParameter(struct file_base_paramer *base_paramer){
     printf("-main: \n");
     printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n", base_paramer->main.resolution.hdisplay,
@@ -347,6 +404,8 @@ static void usage(){
     fprintf(stderr, "\nsaveParameter: read and write baseparameter partition tool\n");
     fprintf(stderr, "\nUsage:\n");
     fprintf(stderr, "\t-h\t Help info\n");
+    fprintf(stderr, "\t-p\t Print Baseparamter\n");
+    fprintf(stderr, "\t-t\t output to target file (e: \"/sdcard/baseparameter.img)\"\n");
     fprintf(stderr, "\t-d\t Choose Display to Setting (e: 0 or 1)\n");	
     fprintf(stderr, "\t-f\t Framebuffer Resolution (e: 1920x1080@60)\n");
     fprintf(stderr, "\t-D\t Display Attach Devices (e: HDMI-A,TV)\n");
@@ -354,7 +413,6 @@ static void usage(){
     fprintf(stderr, "\t-u\t Is Enable Auto Resolution (2:auto resolution; 1:set one fixed resolution)\n");
     fprintf(stderr, "\t-o\t Overscan (e: overscan \"100,100,100,100\")\n");
     fprintf(stderr, "\t-b\t BCSH (e: \"50,50,50,50\") \n");
-    fprintf(stderr, "\t-p\t Print Baseparamter\n");
     fprintf(stderr, "\t-R\t Reset Baseparameter (1:only reset user setting baseparameter partition; 2:reset baseparameter paratition include backup)\n");
     fprintf(stderr, "\nExample: saveBaseParameter -d 0 -f 1920x1080@60 -D \"HDMI-A,TV\" -c Auto -u 2 -o \"100,100,100,100\" -b \"50,50,50,50\"\n");
     fprintf(stderr, "\n===== Rockchip All Rights Reserved =====\n\n");
@@ -376,11 +434,15 @@ int main(int argc, char** argv){
     int isPrintBaseInfo=0;
     char* overscan=NULL;
     char* bcsh=NULL;
+    bool isSaveToTargetFile=false;
+    char* target_save_file="/sdcard/baseparameter.img";
+    bool hasOpts=false;
 
     int res;
     // printf("----- parsing auguments\n");
-    while ((res = getopt(argc, argv, "b:f:d:D:u:c:R:o:hap")) >= 0) {
+    while ((res = getopt(argc, argv, "t:b:f:d:D:u:c:R:o:hap")) >= 0) {
         //	printf("res = %d\n", res);
+        hasOpts = true;
         const char *colonPos;
         switch (res) {
             case 'f':
@@ -434,12 +496,22 @@ int main(int argc, char** argv){
                 bcsh = optarg;
                 printf("bcsh %s (-b)\n", bcsh);
                 break;
+            case 't':
+                target_save_file = optarg;
+                isSaveToTargetFile = true;
+                printf("save to %s (-t)\n", target_save_file);
+                break;
             case 'h':
                 usage();
                 return 0;
             default:
                 break;
         }
+    }
+
+    if (hasOpts == false) {
+       usage();
+       return 0;
     }
 
     const char *baseparameterfile = GetBaseparameterFile();
@@ -498,6 +570,13 @@ int main(int argc, char** argv){
         printf("\n========= backup parameter ==========\n");
         printParameter(&backup_paramer);
         printf("====================================\n");
+        return 0;
+    }
+
+    if (isSaveToTargetFile > 0) {
+        printf("start writing to %s\n", target_save_file);
+        int ret = outputImage(target_save_file, &base_paramer, &backup_paramer);
+        printf("writing to %s done, result:%d\n", target_save_file, ret);
         return 0;
     }
 
