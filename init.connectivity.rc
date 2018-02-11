@@ -15,7 +15,6 @@ on boot
 
     # bluetooth MAC address programming
     chown bluetooth net_bt ro.bt.bdaddr_path
-    chown bluetooth net_bt /vendor/etc/bluetooth
     chown bluetooth net_bt /data/misc/bluetooth
     setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
