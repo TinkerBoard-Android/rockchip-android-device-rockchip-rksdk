@@ -6,6 +6,7 @@ import init.${ro.board.platform}.rc
 import init.${ro.target.product}.rc
 import init.car.rc
 import init.optee.rc
+
 on post-fs
     restorecon_recursive /metadata
     insmod /system/lib/modules/ump.ko
@@ -15,11 +16,7 @@ on post-fs
     insmod /system/lib/modules/rk29-ipp.ko
     insmod /system/lib/modules/pvrsrvkm.ko
 
-    # Turn on swap
-    swapon_all /fstab.rk30board
-
 on post-fs-data
-  
     # AP6476 GPS permission
     chmod 755 /system/bin/glgps
     chown root system /system/bin/glgps
@@ -52,7 +49,6 @@ on init
 
 on boot
 
-    restorecon_recursive /sys/devices/system/cpu/cpufreq/interactive
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
@@ -187,7 +183,7 @@ on boot
     chmod 0664 /sys/devices/virtual/display/HDMI/enable
     chmod 0664 /sys/devices/virtual/display/HDMI/mode
     chmod 0664 /sys/devices/virtual/display/HDMI/scale
-  
+
     #add for cts
     chmod 0660 /sys/bus/platform/drivers/usb20_otg/dwc_otg_conn_en
     chmod 0660 /sys/bus/platform/drivers/usb20_otg/force_usb_mode
@@ -208,7 +204,7 @@ on boot
 
     #for WV keybox provision
     restorecon /system/bin/rk_store_keybox
-    # for bd  
+    # for bd
     mkdir /mnt/iso 0660 system system
     chmod 0666 /dev/opteearmtz00
 
@@ -217,6 +213,8 @@ on boot
     chmod 0666 /dev/teepriv0
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
+    # Turn on swap
+    swapon_all /fstab.rk30board
     restorecon /metadata/view_cts.ini
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 0
@@ -244,6 +242,7 @@ on property:ro.boot.noril=true
 on property:ro.boot.mode=emmc
     setprop ro.bootmode normal
     insmod /drmboot.ko
+
 on property:ro.boot.mode=unknown
     setprop ro.bootmode normal
 
