@@ -41,7 +41,6 @@ echo system filesysystem is $FSTYPE
 BOARD_CONFIG=device/rockchip/common/device.mk
 
 PARAMETER=${TARGET_DEVICE_DIR}/parameter.txt
-GPT=${TARGET_DEVICE_DIR}/gpt.txt
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
@@ -241,19 +240,13 @@ else
         echo "$KERNEL_PATH/kernel.img not fount!"
 fi
 
-if [ -f $GPT ]
+if [ -f $PARAMETER ]
 then
-        echo -n "create gpt..."
-        cp -a $GPT $IMAGE_PATH/gpt.txt
-        echo "done."
-elif [ -f $PARAMETER ]
-then
-        
         echo -n "create parameter..."
         cp -a $PARAMETER $IMAGE_PATH/parameter.txt
         echo "done."
 else
-        echo"$PARAMETER add $GPT not fount!"
+        echo "$PARAMETER not fount!"
 fi
 
 if [ "$TARGET_BASE_PARAMETER_IMAGE"x != ""x ]
