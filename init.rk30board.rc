@@ -16,6 +16,12 @@ on post-fs
     insmod /system/lib/modules/rk29-ipp.ko
     insmod /system/lib/modules/pvrsrvkm.ko
 
+    # Turn on swap
+    swapon_all /fstab.rk30board
+
+on property:vold.decrypt=trigger_restart_framework && property:persist.sys.usb.config=adb
+    setprop sys.usb.config ${persist.sys.usb.config}
+
 on post-fs-data
     # AP6476 GPS permission
     chmod 755 /system/bin/glgps
@@ -261,6 +267,7 @@ service abc /system/bin/abc
     class main
     disabled
     oneshot
+seclabel u:r:abc:s0
 
 on property:persist.sys.abc_switch=1
     start abc
