@@ -120,10 +120,10 @@ struct file_base_paramer
 
 static char const *const device_template[] =
 {
-	"/dev/block/platform/1021c000.rksdmmc/by-name/baseparameter",
-	"/dev/block/platform/30020000.rksdmmc/by-name/baseparameter",
-	"/dev/block/platform/ff0f0000.rksdmmc/by-name/baseparameter",
-	"/dev/block/platform/ff520000.rksdmmc/by-name/baseparameter",
+	"/dev/block/platform/1021c000.dwmmc/by-name/baseparameter",
+	"/dev/block/platform/30020000.dwmmc/by-name/baseparameter",
+	"/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
+	"/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
 	"/dev/block/platform/fe330000.sdhci/by-name/baseparameter",
 	"/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
 	"/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
