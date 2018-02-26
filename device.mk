@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifeq ($(strip $(TARGET_CPU_ABI)), arm64-v8a)
+ifeq ($(strip $(TARGET_ARCH)), arm64)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 
@@ -36,12 +36,10 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
   $(call inherit-product, device/google/atv/products/atv_base.mk)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
-else
-ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
+else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
 else
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-endif
 endif
 
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
