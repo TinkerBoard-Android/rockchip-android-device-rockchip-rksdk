@@ -193,6 +193,11 @@ then
         echo -n "create trust.img..."
         cp -a $UBOOT_PATH/trust_nand.img $IMAGE_PATH/trust.img
         echo "done."
+elif [ -f $UBOOT_PATH/trust_with_ta.img ]
+then
+        echo -n "create trust.img..."
+        cp -a $UBOOT_PATH/trust_with_ta.img $IMAGE_PATH/trust.img
+        echo "done."
 elif [ -f $UBOOT_PATH/trust.img ]
 then
         echo -n "create trust.img..."

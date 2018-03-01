@@ -53,14 +53,6 @@ else
     exit 1
 fi
 
-#trust: for rk322x WIDEVINE_LEVEL 1 must use ta trust
-if [ "$WIDEVINE_LEVEL" = "1" ]; then
-  if [ -f u-boot/trust_with_ta.img ]; then
-       mv u-boot/trust_with_ta.img u-boot/trust.img
-       echo "WIDEVINE_LEVEL 1 use ta trust"
-  fi
-fi
-
 # build kernel
 echo "Start build kernel"
 cd kernel && make ARCH=$ARCH distclean && make ARCH=$ARCH $KERNEL_DEFCONFIG && make ARCH=$ARCH $KERNEL_DTS.img -j$JOBS && cd -
