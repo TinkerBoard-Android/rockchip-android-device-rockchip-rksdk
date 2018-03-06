@@ -7,6 +7,8 @@
 #include <errno.h>
 #include <unistd.h>
 #include <cutils/log.h>
+#include <xf86drm.h>
+#include <xf86drmMode.h>
 
 #define BASE_OFFSET 8*1024
 #define BACKUP_OFFSET 512*1024
@@ -99,15 +101,20 @@ struct bcsh_info {
     unsigned short hue;
 };
 
-struct disp_info{
+struct screen_info {
+    int type;
     struct drm_display_mode resolution;// 52 bytes
-    struct overscan scan;//10 bytes
     enum output_format  format; // 4 bytes
     enum output_depth depthc; // 4 bytes
     unsigned int feature;//4 //4 bytes
+};
+
+struct disp_info{
+    struct screen_info screen_list[5];
+    struct overscan scan;//12 bytes
     struct hwc_inital_info hwc_info; //140 bytes
     struct bcsh_info bcsh;
-    unsigned int reserve[128];/*0~3 use for bcsh*/ //459x4
+    unsigned int reserve[128]; //459x4
     struct lut_data mlutdata;/*6k+4*/
 };
 
@@ -120,15 +127,15 @@ struct file_base_paramer
 
 static char const *const device_template[] =
 {
-	"/dev/block/platform/1021c000.dwmmc/by-name/baseparameter",
-	"/dev/block/platform/30020000.dwmmc/by-name/baseparameter",
-	"/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
-	"/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
-	"/dev/block/platform/fe330000.sdhci/by-name/baseparameter",
-	"/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
-	"/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
-	"/dev/block/rknand_baseparameter",
-	NULL
+    "/dev/block/platform/1021c000.dwmmc/by-name/baseparameter",
+    "/dev/block/platform/30020000.dwmmc/by-name/baseparameter",
+    "/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
+    "/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
+    "/dev/block/platform/fe330000.sdhci/by-name/baseparameter",
+    "/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
+    "/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
+    "/dev/block/rknand_baseparameter",
+    NULL
 };
 
 const char* GetBaseparameterFile(void)
@@ -144,22 +151,47 @@ const char* GetBaseparameterFile(void)
     return NULL;
 }
 
-static void saveResolutionInfo(struct file_base_paramer *base_paramer, int dpy){
+static int findSuitableInfoSlot(struct disp_info* info, int type)
+{
+    int found=0;
+    for (int i=0;i<5;i++) {
+        if (info->screen_list[i].type !=0 && info->screen_list[i].type == type) {
+            found = i;
+            break;
+        } else if (info->screen_list[i].type !=0 && found == false){
+            found++;
+        }
+    }
+    if (found == -1) {
+        found = 0;
+        ALOGD("noting saved, used the first slot");
+    }
+    ALOGD("findSuitableInfoSlot: %d type=%d", found, type);
+    return found;
+}
+
+static void saveResolutionInfo(struct file_base_paramer *base_paramer, int dpy, int type){
+    int slot=-1;
     unsigned int left,top,right,bottom;
+
+    if (type <= 0)
+        type = DRM_MODE_CONNECTOR_HDMIA;
     left = top = right = bottom = 95;
+
     if (dpy == HWC_DISPLAY_PRIMARY) {
-        base_paramer->main.resolution.clock = 148500;
-        base_paramer->main.resolution.hdisplay = 1920;
-        base_paramer->main.resolution.hsync_start = 2008;
-        base_paramer->main.resolution.hsync_end = 2052;
-        base_paramer->main.resolution.htotal = 2200;
-        base_paramer->main.resolution.vdisplay = 1080;
-        base_paramer->main.resolution.vsync_start = 1084;
-        base_paramer->main.resolution.vsync_end = 1089;
-        base_paramer->main.resolution.vtotal = 1125;
-        base_paramer->main.resolution.vrefresh = 60;
-        base_paramer->main.resolution.vscan = 0;
-        base_paramer->main.resolution.flags = 0x5;
+        slot = findSuitableInfoSlot(&base_paramer->main, type);
+        base_paramer->main.screen_list[slot].resolution.clock = 148500;
+        base_paramer->main.screen_list[slot].resolution.hdisplay = 1920;
+        base_paramer->main.screen_list[slot].resolution.hsync_start = 2008;
+        base_paramer->main.screen_list[slot].resolution.hsync_end = 2052;
+        base_paramer->main.screen_list[slot].resolution.htotal = 2200;
+        base_paramer->main.screen_list[slot].resolution.vdisplay = 1080;
+        base_paramer->main.screen_list[slot].resolution.vsync_start = 1084;
+        base_paramer->main.screen_list[slot].resolution.vsync_end = 1089;
+        base_paramer->main.screen_list[slot].resolution.vtotal = 1125;
+        base_paramer->main.screen_list[slot].resolution.vrefresh = 60;
+        base_paramer->main.screen_list[slot].resolution.vscan = 0;
+        base_paramer->main.screen_list[slot].resolution.flags = 0x5;
 
         base_paramer->main.scan.maxvalue = 100;
         base_paramer->main.scan.leftscale = (unsigned short)left;
@@ -167,18 +199,19 @@ static void saveResolutionInfo(struct file_base_paramer *base_paramer, int dpy){
         base_paramer->main.scan.rightscale = (unsigned short)right;
         base_paramer->main.scan.bottomscale = (unsigned short)bottom;
     } else {
-        base_paramer->aux.resolution.clock = 148500;
-        base_paramer->aux.resolution.hdisplay = 1920;
-        base_paramer->aux.resolution.hsync_start = 2008;
-        base_paramer->aux.resolution.hsync_end = 2052;
-        base_paramer->aux.resolution.htotal = 2200;
-        base_paramer->aux.resolution.vdisplay = 1080;
-        base_paramer->aux.resolution.vsync_start = 1084;
-        base_paramer->aux.resolution.vsync_end = 1089;
-        base_paramer->aux.resolution.vtotal = 1125;
-        base_paramer->aux.resolution.vrefresh = 60;
-        base_paramer->aux.resolution.vscan = 0;
-        base_paramer->aux.resolution.flags = 0x5;
+        slot = findSuitableInfoSlot(&base_paramer->aux, type);
+        base_paramer->aux.screen_list[slot].resolution.clock = 148500;
+        base_paramer->aux.screen_list[slot].resolution.hdisplay = 1920;
+        base_paramer->aux.screen_list[slot].resolution.hsync_start = 2008;
+        base_paramer->aux.screen_list[slot].resolution.hsync_end = 2052;
+        base_paramer->aux.screen_list[slot].resolution.htotal = 2200;
+        base_paramer->aux.screen_list[slot].resolution.vdisplay = 1080;
+        base_paramer->aux.screen_list[slot].resolution.vsync_start = 1084;
+        base_paramer->aux.screen_list[slot].resolution.vsync_end = 1089;
+        base_paramer->aux.screen_list[slot].resolution.vtotal = 1125;
+        base_paramer->aux.screen_list[slot].resolution.vrefresh = 60;
+        base_paramer->aux.screen_list[slot].resolution.vscan = 0;
+        base_paramer->aux.screen_list[slot].resolution.flags = 0x5;
 
         base_paramer->aux.scan.maxvalue = 100;
         base_paramer->aux.scan.leftscale = (unsigned short)left;
@@ -186,18 +219,6 @@ static void saveResolutionInfo(struct file_base_paramer *base_paramer, int dpy){
         base_paramer->aux.scan.rightscale = (unsigned short)right;
         base_paramer->aux.scan.bottomscale = (unsigned short)bottom;
     }
-}
-
-static void saveColor(struct file_base_paramer *base_paramer) {
-    base_paramer->main.format = output_rgb;
-    /*set feature to COLOR_AUTO, uboot will choose it automatic*/
-    base_paramer->main.feature |= COLOR_AUTO;
-    base_paramer->main.depthc = Automatic;
-
-    /*AUX INFO*/
-    base_paramer->aux.format = output_rgb;
-    base_paramer->aux.feature |= COLOR_AUTO;
-    base_paramer->aux.depthc = Automatic;
 }
 
 static void saveHwcInitalInfo(struct file_base_paramer *base_paramer, int dpy, char* fb_info, char* device){
@@ -363,41 +384,107 @@ out:
     return -1;
 }
 
+int getTypeFromConnector() {
+    int fd = open("/dev/dri/card0", O_RDWR);
+    if (fd < 0) {
+        ALOGE("Failed to open dri- %s", strerror(-errno));
+        return -ENODEV;
+    }
+    int ret = drmSetClientCap(fd, DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1);
+    if (ret) {
+        ALOGE("Failed to set universal plane cap %d", ret);
+        return ret;
+    }
+
+    ret = drmSetClientCap(fd, DRM_CLIENT_CAP_ATOMIC, 1);
+    if (ret) {
+        ALOGE("Failed to set atomic cap %d", ret);
+        return ret;
+    }
+
+    drmModeResPtr res = drmModeGetResources(fd);
+    if (!res) {
+        ALOGE("Failed to get DrmResources resources");
+        return -ENODEV;
+    }
+    for (int i = 0; !ret && i < res->count_connectors; ++i) {
+        drmModeConnectorPtr c = drmModeGetConnector(fd, res->connectors[i]);
+        ALOGD("connector_type=%d", c->connector_type);
+        if (!c) {
+            ALOGE("Failed to get connector %d", res->connectors[i]);
+            ret = -ENODEV;
+            break;
+        }
+
+        drmModeFreeConnector(c);
+    }
+    if (res)
+        drmModeFreeResources(res);
+    if (fd > 0)
+        close(fd);
+    return 1;
+}
+
 static void printParameter(struct file_base_paramer *base_paramer){
     printf("-main: \n");
-    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n", base_paramer->main.resolution.hdisplay,
-            base_paramer->main.resolution.vdisplay, base_paramer->main.resolution.hsync_start,
-            base_paramer->main.resolution.hsync_end, base_paramer->main.resolution.htotal,
-            base_paramer->main.resolution.vsync_start, base_paramer->main.resolution.vsync_end,
-            base_paramer->main.resolution.vtotal, base_paramer->main.resolution.flags,
-            base_paramer->main.resolution.clock);
-    printf("\tcorlor: format %d depth %d \n", base_paramer->main.format, base_paramer->main.depthc);
+    for (int i=0;i<5;i++) {
+        if (base_paramer->main.screen_list[i].type != 0 ) {
+            printf("\tresolution: slot[%d] type=%d %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n",
+                    i, base_paramer->main.screen_list[i].type,
+                    base_paramer->main.screen_list[i].resolution.hdisplay,
+                    base_paramer->main.screen_list[i].resolution.vdisplay,
+                    base_paramer->main.screen_list[i].resolution.hsync_start,
+                    base_paramer->main.screen_list[i].resolution.hsync_end,
+                    base_paramer->main.screen_list[i].resolution.htotal,
+                    base_paramer->main.screen_list[i].resolution.vsync_start,
+                    base_paramer->main.screen_list[i].resolution.vsync_end,
+                    base_paramer->main.screen_list[i].resolution.vtotal,
+                    base_paramer->main.screen_list[i].resolution.flags,
+                    base_paramer->main.screen_list[i].resolution.clock);
+            printf("\tcorlor: format %d depth %d \n", base_paramer->main.screen_list[i].format,
+                    base_paramer->main.screen_list[i].depthc);
+            printf("\tfeature:  0x%x \n", base_paramer->main.screen_list[i].feature);
+        }
+    }
     printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->main.hwc_info.framebuffer_width,
-            base_paramer->main.hwc_info.framebuffer_height, base_paramer->main.hwc_info.fps, base_paramer->main.hwc_info.device);
+            base_paramer->main.hwc_info.framebuffer_height, base_paramer->main.hwc_info.fps,
+            base_paramer->main.hwc_info.device);
     printf("\tbcsh: %d %d %d %d \n", base_paramer->main.bcsh.brightness, base_paramer->main.bcsh.contrast,
             base_paramer->main.bcsh.saturation, base_paramer->main.bcsh.hue);
     printf("\toverscan: %d %d %d %d \n", base_paramer->main.scan.leftscale, base_paramer->main.scan.topscale,
             base_paramer->main.scan.rightscale, base_paramer->main.scan.bottomscale);
-    printf("\tfeature:  0x%x \n", base_paramer->main.feature);
+    //    printf("\tfeature:  0x%x \n", base_paramer->main.feature);
 
     printf("-aux: \n");
-    printf("\tresolution: %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n", base_paramer->aux.resolution.hdisplay, 
-            base_paramer->aux.resolution.vdisplay,
-            base_paramer->aux.resolution.hsync_start,
-            base_paramer->aux.resolution.hsync_end, base_paramer->aux.resolution.htotal,
-            base_paramer->aux.resolution.vsync_start, base_paramer->main.resolution.vsync_end, 
-            base_paramer->aux.resolution.vtotal,
-            base_paramer->aux.resolution.flags,
-            base_paramer->aux.resolution.clock);
-    printf("\tcorlor: format %d depth %d \n", base_paramer->aux.format, base_paramer->aux.depthc);
-    printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->aux.hwc_info.framebuffer_width, 
-            base_paramer->aux.hwc_info.framebuffer_height, base_paramer->aux.hwc_info.fps, 
+    for (int i=0;i<5;i++) {
+        if (base_paramer->aux.screen_list[i].type != 0 ) {
+            printf("\tresolution:slot[%d] type=%d %dx%d@p-%d-%d-%d-%d-%d-%d-%x clk=%d\n",
+                    i, base_paramer->aux.screen_list[i].type,
+                    base_paramer->aux.screen_list[i].resolution.hdisplay,
+                    base_paramer->aux.screen_list[i].resolution.vdisplay,
+                    base_paramer->aux.screen_list[i].resolution.hsync_start,
+                    base_paramer->aux.screen_list[i].resolution.hsync_end,
+                    base_paramer->aux.screen_list[i].resolution.htotal,
+                    base_paramer->aux.screen_list[i].resolution.vsync_start,
+                    base_paramer->main.screen_list[i].resolution.vsync_end,
+                    base_paramer->aux.screen_list[i].resolution.vtotal,
+                    base_paramer->aux.screen_list[i].resolution.flags,
+                    base_paramer->aux.screen_list[i].resolution.clock);
+            printf("\tcorlor: format %d depth %d \n", base_paramer->aux.screen_list[i].format,
+                    base_paramer->aux.screen_list[i].depthc);
+            printf("\tfeature:  0x%x \n", base_paramer->aux.screen_list[i].feature);
+        }
+    }
+    printf("\tfbinfo: %dx%d@%f device:%s\n", base_paramer->aux.hwc_info.framebuffer_width,
+            base_paramer->aux.hwc_info.framebuffer_height, base_paramer->aux.hwc_info.fps,
             base_paramer->aux.hwc_info.device);
-    printf("\tbcsh: %d %d %d %d \n", base_paramer->aux.bcsh.brightness, base_paramer->aux.bcsh.contrast, 
+    printf("\tbcsh: %d %d %d %d \n", base_paramer->aux.bcsh.brightness, base_paramer->aux.bcsh.contrast,
             base_paramer->aux.bcsh.saturation, base_paramer->aux.bcsh.hue);
     printf("\toverscan: %d %d %d %d \n", base_paramer->aux.scan.leftscale, base_paramer->aux.scan.topscale,
             base_paramer->aux.scan.rightscale, base_paramer->aux.scan.bottomscale);
-    printf("\tfeature:  0x%x \n", base_paramer->aux.feature);
+    //  printf("\tfeature:  0x%x \n", base_paramer->aux.feature);
+
+    getTypeFromConnector();
 }
 
 static void usage(){
@@ -406,7 +493,7 @@ static void usage(){
     fprintf(stderr, "\t-h\t Help info\n");
     fprintf(stderr, "\t-p\t Print Baseparamter\n");
     fprintf(stderr, "\t-t\t output to target file (e: \"/sdcard/baseparameter.img)\"\n");
-    fprintf(stderr, "\t-d\t Choose Display to Setting (e: 0 or 1)\n");	
+    fprintf(stderr, "\t-d\t Choose Display to Setting (e: 0 or 1)\n");
     fprintf(stderr, "\t-f\t Framebuffer Resolution (e: 1920x1080@60)\n");
     fprintf(stderr, "\t-D\t Display Attach Devices (e: HDMI-A,TV)\n");
     fprintf(stderr, "\t-c\t Color (e: RGB-8bit or YCBCR444-10bit)\n");
@@ -437,6 +524,7 @@ int main(int argc, char** argv){
     bool isSaveToTargetFile=false;
     char* target_save_file="/sdcard/baseparameter.img";
     bool hasOpts=false;
+    int type=0;
 
     int res;
     // printf("----- parsing auguments\n");
@@ -501,6 +589,10 @@ int main(int argc, char** argv){
                 isSaveToTargetFile = true;
                 printf("save to %s (-t)\n", target_save_file);
                 break;
+            case 'T':
+                type = atoi(optarg);
+                printf("save to Connect type %d\n", type);
+                break;
             case 'h':
                 usage();
                 return 0;
@@ -510,8 +602,8 @@ int main(int argc, char** argv){
     }
 
     if (hasOpts == false) {
-       usage();
-       return 0;
+        usage();
+        return 0;
     }
 
     const char *baseparameterfile = GetBaseparameterFile();
@@ -543,9 +635,20 @@ int main(int argc, char** argv){
     read(file, (void*)&(backup_paramer.aux), sizeof(backup_paramer.aux));/*read aux display info*/
 
     if (resetBaseParameter > 0) {
+#if 1
         memset(&base_paramer.main, 0, sizeof(base_paramer.main));
         memset(&base_paramer.aux, 0, sizeof(base_paramer.aux));
         // reset baseparameter
+        base_paramer.main.bcsh.brightness = 50;
+        base_paramer.main.bcsh.contrast = 50;
+        base_paramer.main.bcsh.saturation = 50;
+        base_paramer.main.bcsh.hue = 50;
+        base_paramer.main.scan.maxvalue = 100;
+        base_paramer.main.scan.leftscale = 100;
+        base_paramer.main.scan.rightscale = 100;
+        base_paramer.main.scan.topscale = 100;
+        base_paramer.main.scan.bottomscale = 100;
+
         lseek(file, 0L, SEEK_SET);
         write(file, (char*)(&base_paramer.main), sizeof(base_paramer.main));
         lseek(file, BASE_OFFSET, SEEK_SET);
@@ -561,6 +664,23 @@ int main(int argc, char** argv){
         sync();
         close(file);
         printf("reset done.\n");
+#else
+        memset(&base_paramer.main.screen_list, 0, sizeof(base_paramer.main.screen_list));
+        memset(&base_paramer.aux.screen_list, 0, sizeof(base_paramer.aux.screen_list));
+
+        lseek(file, 0L, SEEK_SET);
+        write(file, (char*)(&base_paramer.main.screen_list), sizeof(base_paramer.main.screen_list));
+        lseek(file, BASE_OFFSET, SEEK_SET);
+        write(file, (char*)(&base_paramer.aux.screen_list), sizeof(base_paramer.aux.screen_list));
+        if (resetBaseParameter == 2) {
+            lseek(file, BACKUP_OFFSET, SEEK_SET);
+            write(file, (char*)(&base_paramer.main.screen_list), sizeof(base_paramer.main.screen_list));
+            lseek(file, BACKUP_OFFSET+BASE_OFFSET, SEEK_SET);
+            write(file, (char*)(&base_paramer.aux.screen_list), sizeof(base_paramer.aux.screen_list));
+        }
+        sync();
+        close(file);
+#endif
         return 0;
     }
 
@@ -573,6 +693,7 @@ int main(int argc, char** argv){
         return 0;
     }
 
+    printf("isSaveToTargetFile = %d\n", isSaveToTargetFile);
     if (isSaveToTargetFile > 0) {
         printf("start writing to %s\n", target_save_file);
         int ret = outputImage(target_save_file, &base_paramer, &backup_paramer);
@@ -581,92 +702,114 @@ int main(int argc, char** argv){
     }
 
     printf("----- setting baseparameter\n");
-    printf("base_paramer.main.resolution hdisplay=%d vdisplay=%d (%s@%f) 0x%x\n", 
-            base_paramer.main.resolution.hdisplay,
-            base_paramer.main.resolution.vdisplay,
-            base_paramer.main.hwc_info.device,  base_paramer.main.hwc_info.fps,
-            base_paramer.main.feature);
+    printf("base_paramer.main.resolution  (%s@%f)\n",
+            base_paramer.main.hwc_info.device,  base_paramer.main.hwc_info.fps);
     if (isEnablesaveReso) {
-        saveResolutionInfo(&base_paramer, display);
+        saveResolutionInfo(&base_paramer, display, type);
     }
     if (autoResolution > 0) {
-        if (display == HWC_DISPLAY_PRIMARY) {
-            memset(&base_paramer.main.resolution, 0, sizeof(base_paramer.main.resolution));
-            base_paramer.main.feature |= RESOLUTION_AUTO;
-        }
-        if (display == HWC_DISPLAY_EXTERNAL) {
-            memset(&base_paramer.aux.resolution, 0, sizeof(base_paramer.aux.resolution));
-            base_paramer.aux.feature |= RESOLUTION_AUTO;
+        for (int i=0;i<5;i++) {
+            if (display == HWC_DISPLAY_PRIMARY) {
+                memset(&base_paramer.main.screen_list[i].resolution, 0,
+                        sizeof(base_paramer.main.screen_list[i].resolution));
+                base_paramer.main.screen_list[i].feature |= RESOLUTION_AUTO;
+            }
+            if (display == HWC_DISPLAY_EXTERNAL) {
+                memset(&base_paramer.aux.screen_list[i].resolution, 0,
+                        sizeof(base_paramer.aux.screen_list[i].resolution));
+                base_paramer.aux.screen_list[i].feature |= RESOLUTION_AUTO;
+            }
         }
     }
 
-    //saveColor(&base_paramer);
     /*enable HDCP1X*/
     if (display == HWC_DISPLAY_PRIMARY && (corlor_info != NULL && strcmp(corlor_info, "Auto"))) {
         //base_paramer.main.feature |= HDCP1X_EN;
         char color[16];
         char depth[16];
+        int slot=0;
+
+        if (type <= 0)
+            type = DRM_MODE_CONNECTOR_HDMIA;
+        slot = findSuitableInfoSlot(&base_paramer.main, type);
+        base_paramer.aux.screen_list[slot].type = type;
 
         memset(color,0,sizeof(color));
         memset(depth,0,sizeof(depth));
         sscanf(corlor_info, "%s-%s", color, depth);
-        base_paramer.main.feature |= RESOLUTION_WHITE_EN;
+        base_paramer.main.screen_list[slot].feature |= RESOLUTION_WHITE_EN;
         if (strncmp(color, "RGB", 3) == 0)
-            base_paramer.main.format = output_rgb;
+            base_paramer.main.screen_list[slot].format = output_rgb;
         else if (strncmp(color, "YCBCR444", 8) == 0)
-            base_paramer.main.format = output_ycbcr444;
+            base_paramer.main.screen_list[slot].format = output_ycbcr444;
         else if (strncmp(color, "YCBCR422", 8) == 0)
-            base_paramer.main.format = output_ycbcr422;
+            base_paramer.main.screen_list[slot].format = output_ycbcr422;
         else if (strncmp(color, "YCBCR420", 8) == 0)
-            base_paramer.main.format = output_ycbcr420;
+            base_paramer.main.screen_list[slot].format = output_ycbcr420;
         else {
-            base_paramer.main.format = output_ycbcr_high_subsampling;
-            base_paramer.main.feature |= COLOR_AUTO;
+            base_paramer.main.screen_list[slot].format = output_ycbcr_high_subsampling;
+            base_paramer.main.screen_list[slot].feature |= COLOR_AUTO;
         }
 
         printf("info=%s corlor-depth %s-%s\n",corlor_info, color, depth);
         printf("depth=%s\n", depth);
         if (strstr(corlor_info, "8bit") != NULL)
-            base_paramer.main.depthc = depth_24bit;
+            base_paramer.main.screen_list[slot].depthc = depth_24bit;
         else if (strstr(corlor_info, "10bit") != NULL)
-            base_paramer.main.depthc = depth_30bit;
+            base_paramer.main.screen_list[slot].depthc = depth_30bit;
         else
-            base_paramer.main.depthc = Automatic;
+            base_paramer.main.screen_list[slot].depthc = Automatic;
     } else if (display == HWC_DISPLAY_PRIMARY){
-        base_paramer.main.format = output_ycbcr_high_subsampling;
-        base_paramer.main.depthc = Automatic;
-        base_paramer.main.feature |= COLOR_AUTO;
+        int slot=0;
+        if (type <= 0)
+            type = DRM_MODE_CONNECTOR_HDMIA;
+        slot = findSuitableInfoSlot(&base_paramer.main, type);
+
+        base_paramer.main.screen_list[slot].format = output_ycbcr_high_subsampling;
+        base_paramer.main.screen_list[slot].depthc = Automatic;
+        base_paramer.main.screen_list[slot].feature |= COLOR_AUTO;
     }
 
     if (display == HWC_DISPLAY_EXTERNAL && (corlor_info!=NULL&& strcmp(corlor_info, "Auto"))) {
         //base_paramer.aux.feature |= HDCP1X_EN;
-        base_paramer.aux.feature |= RESOLUTION_WHITE_EN;
         char color[16];
         char depth[16];
+        int slot=0;
 
+        if (type <= 0)
+            type = DRM_MODE_CONNECTOR_HDMIA;
+        slot = findSuitableInfoSlot(&base_paramer.main, type);
+        base_paramer.aux.screen_list[slot].type = type;
         sscanf(corlor_info, "%s-%s", color, depth);
         if (strncmp(color, "RGB", 3) == 0)
-            base_paramer.aux.format = output_rgb;
+            base_paramer.aux.screen_list[slot].format = output_rgb;
         else if (strncmp(color, "YCBCR444", 8) == 0)
-            base_paramer.aux.format = output_ycbcr444;
+            base_paramer.aux.screen_list[slot].format = output_ycbcr444;
         else if (strncmp(color, "YCBCR422", 8) == 0)
-            base_paramer.aux.format = output_ycbcr422;
+            base_paramer.aux.screen_list[slot].format = output_ycbcr422;
         else if (strncmp(color, "YCBCR420", 8) == 0)
-            base_paramer.aux.format = output_ycbcr420;
+            base_paramer.aux.screen_list[slot].format = output_ycbcr420;
         else {
-            base_paramer.aux.format = output_ycbcr_high_subsampling;
-            base_paramer.aux.feature |= COLOR_AUTO;
+            base_paramer.aux.screen_list[slot].format = output_ycbcr_high_subsampling;
+            base_paramer.aux.screen_list[slot].feature |= COLOR_AUTO;
         }
 
         if (strstr(depth, "8bit") == 0)
-            base_paramer.aux.depthc = depth_24bit;
+            base_paramer.aux.screen_list[slot].depthc = depth_24bit;
         else if (strstr(depth, "10bit") == 0)
-            base_paramer.aux.depthc = depth_30bit;
+            base_paramer.aux.screen_list[slot].depthc = depth_30bit;
         else
-            base_paramer.aux.depthc = Automatic;
+            base_paramer.aux.screen_list[slot].depthc = Automatic;
+
+        base_paramer.aux.screen_list[slot].feature |= RESOLUTION_WHITE_EN;
     } else if (display == HWC_DISPLAY_EXTERNAL){
-        base_paramer.aux.format = output_ycbcr_high_subsampling;
-        base_paramer.aux.depthc = Automatic;
+        int slot=0;
+        if (type <= 0)
+            type = DRM_MODE_CONNECTOR_HDMIA;
+        slot = findSuitableInfoSlot(&base_paramer.main, type);
+        base_paramer.aux.screen_list[slot].type = type;
+        base_paramer.aux.screen_list[slot].format = output_ycbcr_high_subsampling;
+        base_paramer.aux.screen_list[slot].depthc = Automatic;
     }
 
     if (device == NULL || fb_info== NULL) {
@@ -724,6 +867,7 @@ int main(int argc, char** argv){
     lseek(file, BACKUP_OFFSET+BASE_OFFSET, SEEK_SET);
     if (display == HWC_DISPLAY_EXTERNAL)
         write(file, (char*)(&base_paramer.aux), sizeof(base_paramer.aux));
+
     close(file);
     sync();
     printf("----- writing baseparameter\n");
