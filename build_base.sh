@@ -52,6 +52,13 @@ else
     echo "Build uboot failed!"
     exit 1
 fi
+#for ota
+if [ -f u-boot/trust_with_ta.img ]
+then
+        echo -n "replace trust_with_ta.img to trust.img"
+        cp -a u-boot/trust_with_ta.img u-boot/trust.img
+        echo "done."
+fi
 
 # build kernel
 echo "Start build kernel"
