@@ -672,7 +672,11 @@ endif
 
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
+ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms_go.mk)
+else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
+endif
 else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
 endif
