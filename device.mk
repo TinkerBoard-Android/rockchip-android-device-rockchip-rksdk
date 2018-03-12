@@ -877,6 +877,9 @@ endif
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0
+PRODUCT_COPY_FILES += \
+    device/rockchip/common/zmodem/rz:$(TARGET_COPY_OUT_VENDOR)/bin/rz \
+    device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz
 else
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=1
