@@ -873,3 +873,8 @@ ifeq ($(strip $(BOARD_USE_DRM)),true)
 PRODUCT_PACKAGES += \
     modetest
 endif
+
+ifeq ($(strip $(BOARD_USB_ALLOW_DEFAULT_MTP)), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.usb.default_mtp=true
+endif
