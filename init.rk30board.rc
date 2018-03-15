@@ -207,11 +207,11 @@ on boot
 
     restorecon_recursive /dev/block/by-name/
     #for tee
-    restorecon /system/bin/tee-supplicant
+    restorecon /vendor/bin/tee-supplicant
     restorecon_recursive /metadata/tee/
 
     #for WV keybox provision
-    restorecon /system/bin/rk_store_keybox
+    restorecon /vendor/bin/rk_store_keybox
     # for bd
     mkdir /mnt/iso 0660 system system
     chmod 0666 /dev/opteearmtz00
@@ -317,6 +317,6 @@ service iso_operate /vendor/bin/iso
     disabled
     oneshot		
 
-service rk_store_keybox /system/bin/rk_store_keybox
+service rk_store_keybox /vendor/bin/rk_store_keybox
     class main
     oneshot		

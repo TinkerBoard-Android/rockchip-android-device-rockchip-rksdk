@@ -4,6 +4,7 @@
 #  domain_trans(init, rootfs, busybox)
 #')
 
+domain_trans(init, rk_store_keybox_exec, rk_store_keybox)
 
 allow init serial_device:chr_file { write ioctl };
 allow init kernel:system { module_request };
