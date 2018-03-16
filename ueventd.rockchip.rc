@@ -96,6 +96,7 @@
 
 #for hdmi cec
 /dev/cec	0666	system	system
+/dev/cec0	0660	system	system
 #sofia 
 /dev/dcc    0666    system  system
 /dev/pmem_gfx   0666    system  system
