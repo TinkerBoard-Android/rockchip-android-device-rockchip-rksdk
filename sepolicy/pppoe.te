@@ -1,32 +1,21 @@
-type pppoe, domain, mlstrustedsubject;
-type pppoe_exec, exec_type, vendor_file_type, file_type;
-init_daemon_domain(pppoe)
-
-set_prop(pppoe, pppoe_prop)
-allow pppoe shell_exec:file { getattr read open };
-allow pppoe system_file:file { execute_no_trans };
-allow pppoe system_file:dir { read open add_name };
-allow pppoe toolbox_exec:file { getattr read open };
-allow pppoe vendor_toolbox_exec:file { execute_no_trans };
-allow pppoe pppoe_data_file:file { open write create setattr append read getattr unlink };
-allow pppoe pppoe_data_file:dir { write add_name read open read open search remove_name };
-allow pppoe ppp_exec:file { getattr read open };
-allow pppoe system_data_file:dir { write add_name read open read open search remove_name };
-allow pppoe system_data_file:file { read getattr };
-allow pppoe pppoe_exec:file { execute_no_trans execute };
-allow pppoe vendor_file:file { execute execute_no_trans };
-allow pppoe pppoe:capability { net_raw net_admin dac_override setuid setgid };
-allow pppoe pppoe:packet_socket { create read setopt bind write };
-allow pppoe pppoe:socket { create connect };
-allow pppoe pppoe:udp_socket { create ioctl };
-allow pppoe ppp_device:chr_file { read write open ioctl };
-allow pppoe properties_device:dir {read open };
-allow pppoe proc_stat:file {read open getattr};
-allow pppoe proc_modules:file { read open getattr };
-allow pppoe proc_net:file { read open getattr };
-allow pppoe domain:file { read open };
-allow pppoe domain:dir { getattr search };
-allow pppoe {net_radio_prop system_prop}:property_service { set };
-allowxperm pppoe self:udp_socket ioctl priv_sock_ioctls;
-
-
+allow dhcp system_file:dir { read open add_name };
+allow dhcp ppp_exec:file { execute getattr read open execute_no_trans };
+allow dhcp system_data_file:dir { write add_name read open read open search remove_name };
+#allow dhcp system_data_file:file { open write create setattr append read getattr unlink };
+allow dhcp dhcp_exec:file { execute_no_trans execute };
+allow dhcp dhcp:capability { dac_override };
+allow dhcp dhcp:packet_socket { create read setopt bind write ioctl };
+allow dhcp dhcp:socket { create connect ioctl };
+allow dhcp dhcp:udp_socket { create ioctl };
+allow dhcp ppp_device:chr_file { read write open ioctl };
+allow dhcp properties_device:dir {read open };
+allow dhcp proc_stat:file {read open getattr};
+allow dhcp proc_modules:file { read open getattr };
+allow dhcp proc_net:file { read open getattr };
+allow dhcp {net_radio_prop system_prop}:property_service { set };
+allow dhcp domain:file { read open };
+allow dhcp domain:dir { getattr search };
+allow dhcp proc_modules:file { read open getattr };
+allowxperm dhcp self:packet_socket ioctl { unpriv_sock_ioctls priv_sock_ioctls unpriv_tty_ioctls };
+allowxperm dhcp dhcp:socket ioctl ppp_ioctls;
+allowxperm dhcp self:udp_socket ioctl priv_sock_ioctls;

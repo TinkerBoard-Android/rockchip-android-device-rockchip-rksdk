@@ -15,8 +15,8 @@ allow system_server system_server:capability { sys_module };
 allow system_server sensor_device:chr_file rw_file_perms;
 allow system_server system_server:unix_stream_socket { ioctl };
 
-allow system_server pppoe_service:service_manager { add find };
-allow system_server pppoe_data_file:file { read open getattr };
+allow system_server dhcp_data_file:file { read open getattr };
+allow system_server dhcp_data_file:dir { search };
 
 # map with latest kernel security/selinux/include/classmap.h
 allow system_server system_server:netlink_netfilter_socket { create setopt bind write read getopt };
@@ -56,7 +56,7 @@ set_prop(system_server,media_prop)
 set_prop(system_server,drm_prop)
 set_prop(system_server,ctsgts_prop)
 get_prop(system_server,ctsgts_prop)
-set_prop(system_server, pppoe_prop)
+set_prop(system_server, dhcp_prop)
 
 
 allow system_server metadata_file:dir { search getattr };
