@@ -19,5 +19,7 @@ allow hal_camera_default gpu_file:file rw_file_perms;
 allow hal_camera_default sysfs:dir { read open };
 allow hal_camera_default sysfs:file { read open getattr };
 allow hal_camera_default debugfs:dir { read open };
+allow hal_camera_default camdata_file:file { rw_file_perms unlink setattr create getattr };
+allow hal_camera_default camdata_file:dir { search write add_name remove_name };
 
 set_prop(hal_camera_default,system_prop)
