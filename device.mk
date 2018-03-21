@@ -38,6 +38,7 @@ else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackageGo.mk)
 else
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
