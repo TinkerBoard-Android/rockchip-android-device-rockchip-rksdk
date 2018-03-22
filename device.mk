@@ -843,10 +843,14 @@ PRODUCT_PACKAGES += \
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
   DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
   PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=box
+       ro.target.product=box \
+       media.stagefright.extractremote=false
+
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=atv
+       ro.target.product=atv \
+       media.stagefright.extractremote=false
+
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=vr
