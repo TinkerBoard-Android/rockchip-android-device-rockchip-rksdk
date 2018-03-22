@@ -51,6 +51,8 @@ allow priv_app wificond_exec:file getattr;
 
 allow priv_app proc_interrupts:file read;
 allow priv_app proc_modules:file { getattr open read };
+allow priv_app device:dir { open read };
+allow priv_app proc_interrupts:file open;
 
 binder_call(priv_app, audioserver)
 allow priv_app hal_memtrack_hwservice:hwservice_manager find;
