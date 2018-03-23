@@ -848,8 +848,7 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=atv \
-       media.stagefright.extractremote=false
+       ro.target.product=atv
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
   PRODUCT_PROPERTY_OVERRIDES += \
