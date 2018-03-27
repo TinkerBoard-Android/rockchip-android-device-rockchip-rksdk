@@ -170,8 +170,6 @@ PRODUCT_COPY_FILES += \
 
 # Merge fstab
 $(shell ./$(LOCAL_PATH)/merge_fstab.sh -p $(TARGET_PRODUCT) -d $(TARGET_DEVICE_DIR))
-PRODUCT_COPY_FILES += \
-    $(TARGET_DEVICE_DIR)/fstab.rk30board:root/fstab.rk30board
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \

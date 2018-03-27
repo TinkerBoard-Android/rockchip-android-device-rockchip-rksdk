@@ -26,9 +26,13 @@ fi
 
 DEVICE_ROCKCHIP_PATH=device/rockchip
 FSTAB_NAME=fstab.rk30board
+if [ -f $TARGET_DEVICE_DIR/$FSTAB_NAME ]; then
+FSTAB_COMMON=$TARGET_DEVICE_DIR/$FSTAB_NAME
+else
 FSTAB_COMMON=$DEVICE_ROCKCHIP_PATH/common/$FSTAB_NAME
+fi
 FSTAB_PRODUCT=$TARGET_DEVICE_DIR/fstab.$TARGET_PRODUCT
-FASTB_UNION=$TARGET_DEVICE_DIR/$FSTAB_NAME
+FASTB_UNION=$OUT/root/$FSTAB_NAME
 ############################################################################################
 #merge product's fstab to fstab.rk30board
 ############################################################################################
