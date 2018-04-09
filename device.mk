@@ -900,5 +900,5 @@ endif
 #GOOGLE EXPRESS PLUS CONFIGURATION
 ifeq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_COPY_FILES += \
-     vendor/rockchip/gms-express.xml:system/etc/sysconfig/gms-express.xml
+     vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
 endif
