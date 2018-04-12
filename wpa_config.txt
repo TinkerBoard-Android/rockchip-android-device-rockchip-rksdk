@@ -52,3 +52,20 @@
 -e/data/misc/wifi/entropy.bin
 -g@android:wpa_wlan0
 
+[mvl]
+/vendor/bin/hw/wpa_supplicant
+-ip2p0
+-Dnl80211
+-c/data/misc/wifi/p2p_supplicant.conf
+-e/data/misc/wifi/entropy.bin
+-N
+-iuap0
+-Dnl80211
+-c/data/misc/wifi/wpa_supplicant.conf
+-N
+-iwlan0
+-Dnl80211
+-c/data/misc/wifi/wpa_supplicant.conf
+-O/data/misc/wifi/sockets
+-g@android:wpa_wlan0
+
