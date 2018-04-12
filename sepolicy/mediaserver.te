@@ -52,3 +52,5 @@ allow mediaserver sysfs:file write;
 allow mediaserver metadata_file:dir search;
 allow mediaserver gpu_file:file rw_file_perms;
 allow mediaserver hal_configstore_ISurfaceFlingerConfigs:hwservice_manager { find };
+allow mediaserver sdcardfs:dir write;
+allow mediaserver system_data_file:dir create;

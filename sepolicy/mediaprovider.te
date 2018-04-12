@@ -1,4 +1,10 @@
 allow mediaprovider camdata_file:file { read open getattr };
+allow mediaprovider gpu_file:file { getattr open read };
+allow mediaprovider vendor_file:file { execute getattr open read };
+allow mediaprovider vendor_file:file { open read getattr execute };
+allow mediaprovider gpu_file:file { open read getattr };
+allow mediaprovider metadata_file:dir { search };
+allow mediaprovider gpu_device:dir search;
 
 get_prop(mediaprovider, drm_prop)
 get_prop(mediaprovider, media_prop)
