@@ -24,3 +24,6 @@ set_prop(platform_app,system_prop)
 set_prop(platform_app,media_prop)
 set_prop(platform_app,drm_prop)
 get_prop(platform_app,ctsgts_prop)
+
+allow platform_app fuseblk:dir create_dir_perms;
+allow platform_app fuseblk:file create_file_perms;
