@@ -1,2 +1,4 @@
 allow hal_power_default sysfs:file { open rw_file_perms };
 allow hal_power_default sysfs_devices_system_cpu:file write;
+allow hal_power_default metadata_file:dir rw_dir_perms;
+allow hal_power_default gpu_file:file rw_file_perms;
