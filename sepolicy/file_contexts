@@ -121,3 +121,6 @@
 
 #for abc
 /system/bin/abc             u:object_r:abc_exec:s0
+
+#for cec
+/dev/cec[0-9]*              u:object_r:cec_device:s0
