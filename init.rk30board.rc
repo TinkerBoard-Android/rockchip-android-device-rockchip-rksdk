@@ -87,6 +87,10 @@ on boot
     chown system system  /sys/devices/ffa30000.gpu/dvfs
     chmod 0777 /sys/devices/platform/ff9a0000.gpu/devfreq/ff9a0000.gpu/governor
 
+    # Adjust governor for rk3126c gpu
+    chown system system /sys/devices/platform/10091000.gpu/devfreq/10091000.gpu/governor
+    chmod 0664 /sys/devices/platform/10091000.gpu/devfreq/10091000.gpu/governor
+
     chown system system /sys/devices/system/cpu/cpu0/online
     chmod 0660 /sys/devices/system/cpu/cpu0/online
 

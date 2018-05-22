@@ -12,5 +12,7 @@ allow bootanim rootfs:lnk_file getattr;
 allow bootanim drm_prop:file { read open getattr };
 
 allow bootanim gpu_file:file { open read getattr };
+allow bootanim metadata_file:dir { search getattr };
+
 # for vendor
 allow bootanim vendor_file:file { ioctl read getattr open execute };
