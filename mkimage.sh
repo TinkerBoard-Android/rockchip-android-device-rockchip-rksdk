@@ -16,6 +16,7 @@ BOARD_USE_SPARSE_SYSTEM_IMAGE=`get_build_var BOARD_USE_SPARSE_SYSTEM_IMAGE`
 TARGET_ARCH=`get_build_var TARGET_ARCH`
 TARGET_OUT_VENDOR=`get_build_var TARGET_OUT_VENDOR`
 TARGET_BASE_PARAMETER_IMAGE=`get_build_var TARGET_BASE_PARAMETER_IMAGE`
+HIGH_RELIABLE_RECOVERY_OTA=`get_build_var HIGH_RELIABLE_RECOVERY_OTA`
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_HARDWARE=$TARGET_HARDWARE
@@ -23,6 +24,7 @@ echo TARGET_BUILD_VARIANT=$TARGET_BUILD_VARIANT
 echo BOARD_SYSTEMIMAGE_PARTITION_SIZE=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
 echo BOARD_USE_SPARSE_SYSTEM_IMAGE=$BOARD_USE_SPARSE_SYSTEM_IMAGE
 echo TARGET_BASE_PARAMETER_IMAGE==$TARGET_BASE_PARAMETER_IMAGE
+echo HIGH_RELIABLE_RECOVERY_OTA=$HIGH_RELIABLE_RECOVERY_OTA
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -208,6 +210,18 @@ else
         echo "$UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first!"
 fi
 
+if [ "$HIGH_RELIABLE_RECOVERY_OTA" = "true" ]; then
+	if [ -f $UBOOT_PATH/uboot_ro.img ]
+	then
+		echo -n "HIGH_RELIABLE_RECOVERY_OTA is true. create uboot_ro.img..."
+		cp -a $UBOOT_PATH/uboot_ro.img $IMAGE_PATH/uboot_ro.img
+		cp -a $IMAGE_PATH/trust.img $IMAGE_PATH/trust_ro.img
+		echo "done."
+	else
+		echo "$UBOOT_PATH/uboot_ro.img not fount! Please make it from $UBOOT_PATH first!"
+	fi
+fi
+
 if [ -f $UBOOT_PATH/*_loader_*.bin ]
 then
         echo -n "create loader..."
@@ -247,9 +261,20 @@ fi
 
 if [ -f $PARAMETER ]
 then
-        echo -n "create parameter..."
-        cp -a $PARAMETER $IMAGE_PATH/parameter.txt
-        echo "done."
+				if [ "$HIGH_RELIABLE_RECOVERY_OTA" = "true" ]; then
+	        echo -n "create parameter...HIGH_RELIABLE_RECOVERY_OTA is ture. "
+	        echo -n "create parameter from hrr..."
+	        if [ -f $PARAMETER ]; then
+						cp -a ${TARGET_DEVICE_DIR}/parameter_hrr.txt $IMAGE_PATH/parameter.txt
+						echo "done."
+	        else
+						echo "${TARGET_DEVICE_DIR}/parameter_hrr.txt not fount! Please make it from ${TARGET_DEVICE_DIR} first!"
+	        fi
+	      else
+					echo -n "create parameter..."
+	        cp -a $PARAMETER $IMAGE_PATH/parameter.txt
+	        echo "done."
+	      fi
 else
         echo "$PARAMETER not fount!"
 fi
