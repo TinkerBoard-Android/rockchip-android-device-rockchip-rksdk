@@ -30,4 +30,3 @@ allow untrusted_app block_device:dir search;
 
 allow untrusted_app metadata_file:dir { search getattr };
 allow untrusted_app gpu_file:file rw_file_perms;
-allow untrusted_app proc_stat:file { getattr open read };
