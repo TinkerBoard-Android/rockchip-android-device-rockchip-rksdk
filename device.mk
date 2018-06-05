@@ -296,7 +296,6 @@ endif
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
-    LiveWallpapersPicker \
     NoiseField \
     PhaseBeam \
     librs_jni \
