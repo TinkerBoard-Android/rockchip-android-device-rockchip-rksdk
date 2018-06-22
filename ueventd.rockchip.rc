@@ -59,6 +59,9 @@
 #/dev/ttyS2                0660   bluetooth  net_bt_stack
 /dev/rtk_btusb            0660   bluetooth  net_bt_stack
 
+#for hid audio
+/dev/hidraw0              0660   audio  audio
+
 # for radio
 /dev/ttyUSB0              0660   radio		radio
 /dev/ttyUSB1              0660   radio		radio

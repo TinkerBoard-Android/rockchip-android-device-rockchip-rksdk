@@ -124,3 +124,6 @@
 
 #for cec
 /dev/cec[0-9]*              u:object_r:cec_device:s0
+
+#for hid audio
+/dev/hidraw0                u:object_r:hidraw_device:s0

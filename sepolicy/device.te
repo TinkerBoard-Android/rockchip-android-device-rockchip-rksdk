@@ -29,3 +29,6 @@ type rpmb_block_device, dev_type;
 
 #for cec
 type cec_device, dev_type;
+
+#for hid audio
+type hidraw_device, dev_type;

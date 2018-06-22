@@ -3,6 +3,7 @@ allow hal_audio_default property_socket:sock_file write;
 
 allow hal_audio_default init:unix_stream_socket connectto;
 
+allow hal_audio_default hidraw_device:chr_file { open read write };
 
 set_prop(hal_audio_default,media_prop)
 allow hal_audio_default sysfs:file rw_file_perms;
