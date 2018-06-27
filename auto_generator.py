@@ -122,7 +122,7 @@ def main(argv):
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     else:
                         if argv[2]=='preinstall_del' or argv[2]=='preinstall_del_forever':
-                            makefile.write(copy_app_templet % (found.group(), argv[3], argv[3]))
+                            makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                         else:
                             makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     shutil.move(apk,apkpath)

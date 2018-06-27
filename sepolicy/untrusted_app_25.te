@@ -33,3 +33,6 @@ get_prop(untrusted_app_25, ctsgts_prop)
 
 allow untrusted_app_25 metadata_file:dir { search getattr };
 allow untrusted_app_25 gpu_file:file  rw_file_perms;
+allow untrusted_app_25 system_data_file:file r_file_perms;
+allow untrusted_app_25 system_data_file:file { open execute};
+allow untrusted_app_25 oemfs:file {execmod};
