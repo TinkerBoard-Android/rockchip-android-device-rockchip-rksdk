@@ -10,7 +10,7 @@ allow rk_store_keybox system_data_file:dir { add_name create write };
 allow rk_store_keybox system_file:file { execute_no_trans };
 allow rk_store_keybox property_socket:sock_file { write };
 allow rk_store_keybox uboot_block_device:blk_file { ioctl open read write };
-allow rk_store_keybox storage_device:chr_file { ioctl open read write };
+allow rk_store_keybox storage_device:chr_file { ioctl open read write setattr };
 allow rk_store_keybox rpmb_block_device:blk_file { ioctl open read write };
 allow rk_store_keybox shell_exec:file { getattr read open };
 allow rk_store_keybox vendor_shell_exec:file { execute execute_no_trans };

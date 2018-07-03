@@ -28,7 +28,9 @@ binder_call(system_app, installd_service)
 
 get_prop(system_app,drm_prop)
 get_prop(system_app,media_prop)
+set_prop(system_app,media_prop)
 set_prop(system_app,system_prop)
+set_prop(system_app,audio_prop)
 get_prop(system_app,ctsgts_prop)
 
 allow system_app metadata_file:dir { search getattr };
