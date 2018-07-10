@@ -2,9 +2,3 @@ allow hwservicemanager hal_drm_widevine:binder call;
 allow hwservicemanager hal_drm_widevine:dir search;
 allow hwservicemanager hal_drm_widevine:file { open read };
 allow hwservicemanager hal_drm_widevine:process getattr;
-
-allow hwservicemanager hal_neuralnetworks_armnn:dir search;
-allow hwservicemanager hal_neuralnetworks_armnn:binder call;
-allow hwservicemanager hal_neuralnetworks_armnn:file read;
-allow hwservicemanager hal_neuralnetworks_armnn:file open;
-allow hwservicemanager hal_neuralnetworks_armnn:process getattr;

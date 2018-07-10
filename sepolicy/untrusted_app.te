@@ -30,6 +30,3 @@ allow untrusted_app block_device:dir search;
 
 allow untrusted_app metadata_file:dir { search getattr };
 allow untrusted_app gpu_file:file rw_file_perms;
-
-allow untrusted_app hal_neuralnetworks_hwservice:hwservice_manager {find};
-allow untrusted_app hal_neuralnetworks_armnn:binder {call transfer};

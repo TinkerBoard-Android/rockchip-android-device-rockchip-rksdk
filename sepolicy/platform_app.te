@@ -27,6 +27,3 @@ get_prop(platform_app,ctsgts_prop)
 
 allow platform_app fuseblk:dir create_dir_perms;
 allow platform_app fuseblk:file create_file_perms;
-
-allow platform_app hal_neuralnetworks_hwservice:hwservice_manager {find};
-allow platform_app hal_neuralnetworks_armnn:binder {call transfer};
