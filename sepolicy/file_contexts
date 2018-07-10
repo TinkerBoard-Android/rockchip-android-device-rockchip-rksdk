@@ -118,6 +118,7 @@
 /vendor/bin/iso                    u:object_r:iso_exec:s0
 # default hal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-armnn   u:object_r:hal_neuralnetworks_armnn_exec:s0
 
 #for abc
 /system/bin/abc             u:object_r:abc_exec:s0
@@ -127,3 +128,6 @@
 
 #for hid audio
 /dev/hidraw0                u:object_r:hidraw_device:s0
+
+#for androidNN
+/sys/devices/platform/ff690000.efuse/rockchip-efuse0/nvmem u:object_r:sysfs_armnn:s0

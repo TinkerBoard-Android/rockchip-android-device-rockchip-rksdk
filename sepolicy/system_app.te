@@ -38,3 +38,7 @@ allow system_app gpu_file:file rw_file_perms;
 
 allow system_app fuseblk:dir { create rmdir write add_name remove_name };
 allow system_app fuseblk:file { create unlink };
+
+allow system_app hal_neuralnetworks_hwservice:hwservice_manager {find};
+allow system_app hal_neuralnetworks_armnn:binder {call transfer};
+

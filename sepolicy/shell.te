@@ -37,3 +37,5 @@ allow shell metadata_file:file r_file_perms;
 # read files in /data/logs
 allow shell aplog_data_file:dir r_dir_perms;
 allow shell aplog_data_file:file r_file_perms;
+
+allow shell hal_neuralnetworks_armnn_exec:file getattr;
