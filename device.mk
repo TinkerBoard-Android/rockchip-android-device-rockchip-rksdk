@@ -694,6 +694,9 @@ ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
 $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
+ifeq ($(strip $(BUILD_WITH_MICROSOFT_PLAYREADY)), true)
+$(call inherit-product-if-exists, vendor/microsoft/playready.mk)
+endif
 
 $(call inherit-product-if-exists, vendor/rockchip/common/device-vendor.mk)
 
