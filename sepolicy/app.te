@@ -1,5 +1,0 @@
-get_prop(appdomain,system_prop)
-allow appdomain app_data_file:dir getattr;
-
-allow { appdomain -isolated_app -ephemeral_app } fuseblk:dir r_dir_perms;
-allow { appdomain -isolated_app -ephemeral_app } fuseblk:file rw_file_perms;

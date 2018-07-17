@@ -1,4 +1,0 @@
-allow hal_graphics_allocator_default gpu_device:dir search;
-allow hal_graphics_allocator_default init:unix_stream_socket connectto;
-allow hal_graphics_allocator_default property_socket:sock_file write;
-set_prop(hal_graphics_allocator_default, system_prop)

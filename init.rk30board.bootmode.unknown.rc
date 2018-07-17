@@ -1,5 +1,5 @@
 on fs
-    insmod /rk30xxnand_ko.ko
+    #insmod /rk30xxnand_ko.ko
 # mount mtd partitions
 #    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
 #    start readahead

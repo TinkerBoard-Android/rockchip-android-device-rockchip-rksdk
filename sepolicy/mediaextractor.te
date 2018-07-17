@@ -1,6 +1,0 @@
-allow mediaextractor sdcardfs:file { read getattr };
-allow mediaextractor fuse:file { read open getattr };
-allow mediaextractor vfat:file { read getattr };
-allow mediaextractor fuseblk:file { read getattr };
-set_prop(mediaextractor,drm_prop)
-set_prop(mediaextractor,media_prop)

@@ -1,5 +1,0 @@
-allow hal_tv_cec_default property_socket:sock_file { write };
-allow hal_tv_cec_default system_prop:property_service { set };
-allow hal_tv_cec_default init:unix_stream_socket { connectto };
-allow hal_tv_cec_default sysfs:file rw_file_perms;
-allow hal_tv_cec_default cec_device:chr_file rw_file_perms;

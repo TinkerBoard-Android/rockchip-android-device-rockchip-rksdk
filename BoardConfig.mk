@@ -17,9 +17,12 @@
 # Use the non-open-source parts, if they're present
 -include vendor/rockchip/common/BoardConfigVendor.mk
 
-TARGET_NO_KERNEL ?= false
+TARGET_NO_KERNEL := false
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
+#TARGET_NO_BOOTLOADER ?= true
+TARGET_NO_RECOVERY := true
+BOARD_USES_RECOVERY_AS_BOOT := true
 
 TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
@@ -64,6 +67,8 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
+
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
@@ -160,17 +165,24 @@ TARGET_PROVIDES_INIT_RC ?= false
 #BOARD_HAL_STATIC_LIBRARIES ?= libdumpstate.$(TARGET_PRODUCT) libhealthd.$(TARGET_PRODUCT)
 
 //MAX-SIZE=512M, for generate out/.../system.img
-BOARD_FLASH_BLOCK_SIZE ?= 131072
+BOARD_FLASH_BLOCK_SIZE := 991072
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 26503790080
+BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
+BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
+  #ifeq ($(TARGET_BUILD_VARIANT),user)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT ?= true
     endif
-  else
-    WITH_DEXPREOPT ?= false
-  endif
+  #else
+  #  WITH_DEXPREOPT ?= false
+  #endif
 endif
 
 ART_USE_HSPACE_COMPACT ?= true
@@ -186,7 +198,7 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR?= \
 
 
 # Recovery
-TARGET_NO_RECOVERY ?= false
+#TARGET_NO_RECOVERY ?= false
 TARGET_ROCHCHIP_RECOVERY ?= true
 
 # to flip screen in recovery 
@@ -353,7 +365,7 @@ BOARD_BLUETOOTH_SUPPORT ?= true
 BOARD_BLUETOOTH_LE_SUPPORT ?= true
 BOARD_WIFI_SUPPORT ?= true
 
-USE_CLANG_PLATFORM_BUILD ?= true
+#USE_CLANG_PLATFORM_BUILD ?= true
 
 # Zoom out recovery ui of box by two percent.
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
@@ -375,7 +387,7 @@ BOARD_USE_SPARSE_SYSTEM_IMAGE ?= false
 TARGET_USES_HWC2 ?= true
 
 # Sepolicy Version
-BOARD_SEPOLICY_VERS = 27.0
+#BOARD_SEPOLICY_VERS = 27.0
 
 # CTS require faketouch
 BOARD_USER_FAKETOUCH ?= true

@@ -50,8 +50,8 @@ PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 ########################################################
 # Kernel
 ########################################################
-PRODUCT_COPY_FILES += \
-    $(TARGET_PREBUILT_KERNEL):kernel
+#PRODUCT_COPY_FILES += \
+#    $(TARGET_PREBUILT_KERNEL):kernel
 
 #SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -77,8 +77,8 @@ $(call inherit-product, build/target/product/go_defaults_512.mk)
 else
 $(call inherit-product, build/target/product/go_defaults.mk)
 endif
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
+#PRODUCT_COPY_FILES += \
+#    frameworks/native/data/etc/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_rtt=true \
     config.disable_consumerir=true
@@ -575,8 +575,8 @@ PRODUCT_COPY_FILES += \
 
 # Copy manifest to vendor/
 ifeq ($(strip $(BOARD_RECORD_COMMIT_ID)),true)
-PRODUCT_COPY_FILES += \
-     commit_id.xml:$(TARGET_COPY_OUT_VENDOR)/commit_id.xml
+#PRODUCT_COPY_FILES += \
+#     commit_id.xml:$(TARGET_COPY_OUT_VENDOR)/commit_id.xml
 endif
 
 # Copy init.usbstorage.rc to root
@@ -631,8 +631,8 @@ PRODUCT_PACKAGES += \
     libbt-vendor-realtek \
     bt_vendor.conf
 
-include hardware/realtek/rtkbt/rtkbt.mk
-$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
+#include hardware/realtek/rtkbt/rtkbt.mk
+#$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     include device/rockchip/common/samba/rk31_samba.mk
@@ -807,7 +807,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.status.hidebar_enable=false
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
-PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE := 27
+#PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE := 27
 
 # Add runtime resource overlay for framework-res
 # TODO disable for box
