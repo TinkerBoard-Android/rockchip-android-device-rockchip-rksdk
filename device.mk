@@ -50,8 +50,8 @@ PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 ########################################################
 # Kernel
 ########################################################
-#PRODUCT_COPY_FILES += \
-#    $(TARGET_PREBUILT_KERNEL):kernel
+PRODUCT_COPY_FILES += \
+    $(TARGET_PREBUILT_KERNEL):kernel
 
 #SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
