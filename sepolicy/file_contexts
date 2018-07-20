@@ -1,0 +1,5 @@
+# for drmservice
+/vendor/bin/rockchip.drmservice                       u:object_r:np_rockchip_drmservice_exec:s0
+
+# for block device
+/dev/block/by-name/frp                                u:object_r:frp_block_device:s0

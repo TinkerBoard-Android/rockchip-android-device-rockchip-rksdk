@@ -499,7 +499,7 @@ endif
 # build with drmservice
 ########################################################
 ifeq ($(strip $(BUILD_WITH_DRMSERVICE)),true)
-PRODUCT_PACKAGES += drmservice
+PRODUCT_PACKAGES += rockchip.drmservice
 endif
 
 ########################################################
@@ -818,9 +818,6 @@ ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
 endif
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.vndk.version=26.1.0 \
 
 #The module which belong to vndk-sp is defined by google
 PRODUCT_PACKAGES += \

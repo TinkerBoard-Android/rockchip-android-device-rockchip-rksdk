@@ -183,12 +183,15 @@ ART_USE_HSPACE_COMPACT ?= true
 TARGET_USES_LOGD ?= true
 
 # Sepolicy
+PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS ?= \
     device/rockchip/common/sepolicy 
 
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR?= \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy 
 
+# Enable VNDK Check for Android P (MUST in P)
+# BOARD_VNDK_VERSION := current
 
 # Recovery
 #TARGET_NO_RECOVERY ?= false
@@ -299,7 +302,7 @@ BOARD_PPPOE_PASS_CTS ?= false
 BOARD_HS_ETHERNET ?= true
 
 # Save commit id into firmware
-BOARD_RECORD_COMMIT_ID ?= true
+BOARD_RECORD_COMMIT_ID ?= false
 
 # no battery
 BUILD_WITHOUT_BATTERY ?= false

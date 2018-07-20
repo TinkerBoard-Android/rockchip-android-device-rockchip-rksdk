@@ -1,0 +1,4 @@
+type np_rockchip_drmservice, domain;
+type np_rockchip_drmservice_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(np_rockchip_drmservice)
