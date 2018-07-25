@@ -1,6 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 #The modules list follow belong to vndk-sp.
 #The module which belong to vndk-sp is defined by google.
+ifndef BOARD_VNDK_VERSION
 VNDK_SP_LIBRARIES := \
     libRS_internal\
     libRSDriver\
@@ -11,10 +12,6 @@ VNDK_SP_LIBRARIES := \
     libpng\
     libcompiler_rt\
 
-VNDK_SP_EXT_LIBRARIES := \
-    libion\
-
-ifndef BOARD_VNDK_VERSION
 VNDK_SP_LIBRARIES += \
     android.hardware.renderscript@1.0\
     android.hardware.graphics.allocator@2.0\
@@ -32,7 +29,6 @@ VNDK_SP_LIBRARIES += \
     libhidlbase\
     libhidltransport\
 
-endif
 
 define add-vndk-sp-lib
 include $$(CLEAR_VARS)
@@ -64,3 +60,4 @@ $(foreach lib,$(VNDK_SP_LIBRARIES),\
     $(eval $(call add-vndk-sp-lib,$(lib),)))
 $(foreach lib,$(VNDK_SP_EXT_LIBRARIES),\
     $(eval $(call add-vndk-sp-lib,$(lib),true)))
+endif

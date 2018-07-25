@@ -313,12 +313,13 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
     power.$(TARGET_BOARD_PLATFORM)
 
-# Camera omx-plugin vpu akmd
+# Camera omx-plugin vpu akmd libion_rockchip_ext
 PRODUCT_PACKAGES += \
     libvpu \
     libstagefrighthw \
     libgralloc_priv_omx \
-    akmd 
+    akmd \
+    libion_ext
 
 
 # Light HAL
@@ -844,7 +845,6 @@ PRODUCT_PACKAGES += \
     libbacktrace.vndk-sp\
     libunwind.vndk-sp\
     liblzma.vndk-sp\
-    libion.vndk-sp
 
 #######for target product ########
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
