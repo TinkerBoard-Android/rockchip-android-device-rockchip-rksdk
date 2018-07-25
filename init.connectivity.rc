@@ -31,12 +31,14 @@ on boot
     chmod 0664 /sys/class/rfkill/rfkill0/state
 
 # for wifi
-#   mt7601u
-#   chmod 0644 /system/lib/modules/mtprealloc7601Usta.ko
 
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/sockets/tmp 0440 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
     
@@ -65,6 +67,12 @@ on boot
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     /vendor/etc/wifi/wpa_config.txt
+#   we will start as root and wpa_supplicant will switch to user wifi
+#   after setting up the capabilities required for WEXT
+#   user wifi
+#   group wifi inet keystore
+    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
