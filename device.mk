@@ -77,8 +77,8 @@ $(call inherit-product, build/target/product/go_defaults_512.mk)
 else
 $(call inherit-product, build/target/product/go_defaults.mk)
 endif
-#PRODUCT_COPY_FILES += \
-#    frameworks/native/data/etc/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
+PRODUCT_COPY_FILES += \
+    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_rtt=true \
     config.disable_consumerir=true
