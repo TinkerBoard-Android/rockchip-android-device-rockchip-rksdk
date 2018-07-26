@@ -193,7 +193,7 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR?= \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy 
 
 # Enable VNDK Check for Android P (MUST in P)
-# BOARD_VNDK_VERSION := current
+BOARD_VNDK_VERSION := current
 
 # Recovery
 #TARGET_NO_RECOVERY ?= false
