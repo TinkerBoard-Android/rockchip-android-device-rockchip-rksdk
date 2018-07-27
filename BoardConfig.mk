@@ -167,18 +167,6 @@ TARGET_PROVIDES_INIT_RC ?= false
 //MAX-SIZE=512M, for generate out/.../system.img
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= true
-
-# Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT ?= true
-    endif
-  else
-    WITH_DEXPREOPT ?= false
-  endif
-endif
 
 ART_USE_HSPACE_COMPACT ?= true
 
