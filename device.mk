@@ -628,16 +628,12 @@ endif
 PRODUCT_PACKAGES += \
     libbt-vendor \
     android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0-service \
+    android.hardware.bluetooth@1.0-service.rc
 
-# for realtek bluetooth
-PRODUCT_PACKAGES += \
-    bluetooth_rtk.default \
-    libbt-vendor-realtek \
-    bt_vendor.conf
-
-#include hardware/realtek/rtkbt/rtkbt.mk
-#$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_RTK)), true)
+include hardware/realtek/rtkbt/rtkbt.mk
+endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     include device/rockchip/common/samba/rk31_samba.mk
