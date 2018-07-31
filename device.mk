@@ -391,7 +391,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0-service \
+    android.hardware.audio@2.0-service \
     android.hardware.audio@4.0-impl \
     android.hardware.audio.effect@4.0-impl \
     android.hardware.soundtrigger@2.0-impl
