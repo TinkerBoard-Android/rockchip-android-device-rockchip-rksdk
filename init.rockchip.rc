@@ -15,7 +15,6 @@ on early-init
 
 on init
     # start watchdogd
-    mkdir /metadata 0770 root root
 
     # for adobe reader mobile
     export RK_ADOBE_DE_MOBILE 1
@@ -30,6 +29,9 @@ on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     symlink /sdcard /mnt/sdcard
+
+on fs
+    mount_all /vendor/etc/fstab.${ro.hardware}
 
 on post-fs
     # Swap in only 1 page at a time

@@ -17,7 +17,7 @@
 # Use the non-open-source parts, if they're present
 -include vendor/rockchip/common/BoardConfigVendor.mk
 
-TARGET_NO_KERNEL := false
+#TARGET_NO_KERNEL := false
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 #BOARD_USES_RECOVERY_AS_BOOT := true
@@ -55,6 +55,13 @@ TARGET_CPU_ABI2 ?=
 TARGET_CPU_SMP ?= true
 endif
 
+BOARD_BOOTIMG_HEADER_VERSION ?= 1
+BOARD_KERNEL_CMDLINE ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=/dev/block/platform/by-name/metadata androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init skip_initramfs rootwait ro init=/init root=/dev/dm-0 dm=\"system none ro,0 1 android-verity /dev/mmcblk2p15\"
+ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=/dev/block/platform/by-name/metadata androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init
+
+BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
+
 # Add standalone oem partion configrations
 TARGET_COPY_OUT_OEM := oem
 BOARD_OEMIMAGE_FILE_SYSTEM_TYPE ?= ext4
@@ -66,7 +73,7 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 
-#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml

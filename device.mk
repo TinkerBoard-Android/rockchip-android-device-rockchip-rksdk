@@ -169,7 +169,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
-	$(TARGET_DEVICE_DIR)/fstab.rk30board:root/fstab.rk30board
+	$(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -398,8 +398,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libclearkeycasplugin \
-    android.hardware.drm@1.1-service \
-    android.hardware.drm@1.1-impl
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.0-impl
 
 #Health hardware
 PRODUCT_PACKAGES += \
