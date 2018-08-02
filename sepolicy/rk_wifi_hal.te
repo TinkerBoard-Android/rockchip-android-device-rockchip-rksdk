@@ -1,0 +1,7 @@
+type rk_wifi_hal, domain;
+type rk_wifi_hal_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(rk_wifi_hal)
+allow rk_wifi_hal vendor_file:system module_load;
+allow rk_wifi_hal proc_net:file { getattr open read };
+allow rk_wifi_hal proc_version:file { open read };
