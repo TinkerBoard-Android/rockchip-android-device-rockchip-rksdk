@@ -1,6 +1,6 @@
-import init.${ro.hardware}.usb.rc
-import init.${ro.hardware}.environment.rc
-import /init.debug.rc
+import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
+import /vendor/etc/init/hw/init.${ro.hardware}.environment.rc
+import /vendor/etc/init/hw/init.debug.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755

@@ -1,10 +1,10 @@
-import init.rockchip.rc
-import init.connectivity.rc
-import init.box.samba.rc
-import init.${ro.board.platform}.rc
-import init.${ro.target.product}.rc
-import init.car.rc
-import init.optee.rc
+import /vendor/etc/init/hw/init.rockchip.rc
+import /vendor/etc/init/hw/init.connectivity.rc
+import /vendor/etc/init/hw/init.box.samba.rc
+import /vendor/etc/init/hw/init.${ro.board.platform}.rc
+import /vendor/etc/init/hw/init.${ro.target.product}.rc
+import /vendor/etc/init/hw/init.car.rc
+import /vendor/etc/init/hw/init.optee.rc
 
 on post-fs
     restorecon_recursive /mnt/vendor/metadata

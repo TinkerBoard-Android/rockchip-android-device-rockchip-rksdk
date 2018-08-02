@@ -107,13 +107,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 PRODUCT_COPY_FILES += \
-	device/rockchip/common/init.rockchip.rc:root/init.rockchip.rc \
-    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:root/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:root/init.$(TARGET_BOARD_HARDWARE).usb.rc \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
-    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.nvme.rc:root/init.$(TARGET_BOARD_HARDWARE).bootmode.nvme.rc) \
-    device/rockchip/common/ueventd.rockchip.rc:root/ueventd.$(TARGET_BOARD_HARDWARE).rc \
+	device/rockchip/common/init.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rockchip.rc \
+    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).rc \
+    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).usb.rc \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).bootmode.emmc.rc) \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).bootmode.unknown.rc) \
+    $(call add-to-product-copy-files-if-exists,device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).bootmode.nvme.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).bootmode.nvme.rc) \
+    device/rockchip/common/ueventd.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/ueventd.rc \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
      device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
@@ -157,7 +157,7 @@ endif
 
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.connectivity.rc:root/init.connectivity.rc
+    $(LOCAL_PATH)/init.connectivity.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.connectivity.rc
 endif
 
 PRODUCT_COPY_FILES += \
@@ -478,7 +478,7 @@ PRODUCT_PROPERTY_OVERRIDES +=               \
     persist.sys.usb.config=mass_storage,adb
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.rockchip.hasUMS.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+    $(LOCAL_PATH)/init.rockchip.hasUMS.true.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).environment.rc
 else
 ifeq ($(strip $(BUILD_WITH_CDROM)),true)
 PRODUCT_PROPERTY_OVERRIDES +=                 \
@@ -487,7 +487,7 @@ PRODUCT_PROPERTY_OVERRIDES +=                 \
     persist.sys.usb.config=mass_storage,adb 
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.rockchip.hasCDROM.true.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+    $(LOCAL_PATH)/init.rockchip.hasCDROM.true.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).environment.rc
 else
 PRODUCT_PROPERTY_OVERRIDES +=       \
     ro.factory.hasUMS=false         \
@@ -495,7 +495,7 @@ PRODUCT_PROPERTY_OVERRIDES +=       \
     testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.rockchip.hasUMS.false.rc:root/init.$(TARGET_BOARD_HARDWARE).environment.rc
+    $(LOCAL_PATH)/init.rockchip.hasUMS.false.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).environment.rc
 endif
 endif
 
@@ -566,8 +566,8 @@ endif
 
 ifeq ($(strip $(BOARD_BOOT_READAHEAD)), true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/proprietary/readahead/readahead:root/sbin/readahead \
-    $(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:root/readahead_list.txt
+    $(LOCAL_PATH)/proprietary/readahead/readahead:$(TARGET_COPY_OUT_VENDOR)/sbin/readahead \
+    $(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:$(TARGET_COPY_OUT_VENDOR)/readahead_list.txt
 endif
 
 #whtest for bin
@@ -638,7 +638,7 @@ endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     include device/rockchip/common/samba/rk31_samba.mk
     PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.box.samba.rc:root/init.box.samba.rc
+      $(LOCAL_PATH)/init.box.samba.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.box.samba.rc
 
     PRODUCT_PROPERTY_OVERRIDES += \
       ro.rk.screenoff_time=2147483647
