@@ -58,9 +58,17 @@ TARGET_CPU_ABI2 ?=
 TARGET_CPU_SMP ?= true
 endif
 
+# Enable android verified boot 2.0
+BOARD_AVB_ENABLE ?= false
+PRODUCT_SUPPORTS_BOOT_SIGNER := false
+
+ifeq ($(filter true, $(BOARD_AVB_ENABLE)), )
+BOARD_KERNEL_CMDLINE ?=
+else
+BOARD_KERNEL_CMDLINE ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init skip_initramfs rootwait ro init=/init root=/dev/mmcblk2p15
+endif
 BOARD_BOOTIMG_HEADER_VERSION ?= 1
-BOARD_KERNEL_CMDLINE ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=/dev/block/platform/by-name/metadata androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init skip_initramfs rootwait ro init=/init root=/dev/dm-0 dm=\"system none ro,0 1 android-verity /dev/mmcblk2p15\"
-ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=/dev/block/platform/by-name/metadata androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init
+ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=/dev/mmcblk2p15
 
 BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
@@ -88,6 +96,9 @@ ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
   BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt oem)
   BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor)
   BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt cache)
+  BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt boot)
+  BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt dtbo)
+  BOARD_RECOVERYIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt recovery)
 
   #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
 else
@@ -95,6 +106,9 @@ else
   BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
   BOARD_OEMIMAGE_PARTITION_SIZE ?= 536870912
   BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
+  BOARD_BOOTIMAGE_PARTITION_SIZE ?= 41943040
+  BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 41943040
+  BOARD_DTBOIMG_PARTITION_SIZE ?= 8388608
   ifneq ($(strip $(TARGET_DEVICE_DIR)),)
     #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
   endif

@@ -653,12 +653,6 @@ endif
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
-# setup dm-verity configs.
-# uncomment the two lines if use verity
-PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
-PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/by-name/vendor
-$(call inherit-product, build/target/product/verity.mk)
-PRODUCT_SUPPORTS_BOOT_SIGNER := false
 
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
