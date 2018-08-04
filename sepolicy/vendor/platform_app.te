@@ -1,0 +1,8 @@
+#system_executes_vendor_violators
+typeattribute platform_app system_executes_vendor_violators;
+allow platform_app graphics_file:file { read open getattr execute};
+
+#for gpu
+allow platform_app gpu_device:dir { search rw_dir_perms };
+
+get_prop(platform_app,vendor_default_prop)

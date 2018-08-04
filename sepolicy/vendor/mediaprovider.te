@@ -1,0 +1,2 @@
+allow mediaprovider unlabeled:dir { getattr };
+get_prop(mediaprovider,vendor_default_prop)
