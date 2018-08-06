@@ -22,6 +22,9 @@ TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 #BOARD_USES_RECOVERY_AS_BOOT := true
 
+#binder protocol(8)
+TARGET_USES_64_BIT_BINDER := true
+
 TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
 # value: tablet,box,phone
