@@ -363,3 +363,25 @@
 /dev/i2c-1 0660 system system
 #for ovr
 /dev/ovr0		  0664   system          system
+
+#for rk_isp1
+/dev/v4l-subdev0          0660   media      camera
+/dev/v4l-subdev1          0660   media      camera
+/dev/v4l-subdev2          0660   media      camera
+/dev/v4l-subdev3          0660   media      camera
+/dev/v4l-subdev4          0660   media      camera
+/dev/v4l-subdev5          0660   media      camera
+/dev/v4l-subdev6          0660   media      camera
+/dev/v4l-subdev7          0660   media      camera
+
+/dev/video0          0660   media      camera
+/dev/video1          0660   media      camera
+/dev/video2          0660   media      camera
+/dev/video3          0660   media      camera
+/dev/video4          0660   media      camera
+/dev/video5          0660   media      camera
+/dev/video6          0660   media      camera
+/dev/video7          0660   media      camera
+
+/dev/media0          0660   media      camera
+/dev/media1          0660   media      camera
