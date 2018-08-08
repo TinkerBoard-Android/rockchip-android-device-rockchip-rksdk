@@ -264,7 +264,7 @@ on property:cts_gts.status=true
     restorecon /mnt/vendor/metadata/view_cts.ini
 
 # Android bug collector
-service abc /system/bin/abc
+service abc /vendor/bin/abc
     class main
     disabled
     oneshot
