@@ -18,6 +18,7 @@ TARGET_ARCH=`get_build_var TARGET_ARCH`
 TARGET_OUT_VENDOR=`get_build_var TARGET_OUT_VENDOR`
 TARGET_BASE_PARAMETER_IMAGE=`get_build_var TARGET_BASE_PARAMETER_IMAGE`
 HIGH_RELIABLE_RECOVERY_OTA=`get_build_var HIGH_RELIABLE_RECOVERY_OTA`
+BOARD_AVB_ENABLE=`get_build_var BOARD_AVB_ENABLE`
 
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
@@ -27,6 +28,7 @@ echo BOARD_SYSTEMIMAGE_PARTITION_SIZE=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
 echo BOARD_USE_SPARSE_SYSTEM_IMAGE=$BOARD_USE_SPARSE_SYSTEM_IMAGE
 echo TARGET_BASE_PARAMETER_IMAGE==$TARGET_BASE_PARAMETER_IMAGE
 echo HIGH_RELIABLE_RECOVERY_OTA=$HIGH_RELIABLE_RECOVERY_OTA
+echo BOARD_AVB_ENABLE=$BOARD_AVB_ENABLE
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -72,8 +74,12 @@ BOOT_OTA="ota"
     fi
 
 echo -n "create dtbo.img.... "
-cp ${TARGET_DEVICE_DIR}/dtbo.img $OUT/dtbo.img
-cp ${TARGET_DEVICE_DIR}/dtbo.img $IMAGE_PATH/dtbo.img
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+cp -a $OUT/dtbo.img $IMAGE_PATH/dtbo.img
+else
+echo -n "BOARD_AVB_ENABLE is false,use default dtbo.img"
+cp -a $TARGET_DEVICE_DIR/dtbo.img $IMAGE_PATH/dtbo.img
+fi
 echo "done."
 
 echo -n "create boot.img.... "
@@ -91,41 +97,32 @@ cp -f $OUT/system.img $IMAGE_PATH/system.img
 #cp -f $OUT/system.img $IMAGE_PATH/system.img
 echo "done."
 
+echo -n "create vbmeta.img.... "
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+cp -a $OUT/vbmeta.img $IMAGE_PATH/vbmeta.img
+else
+echo -n "BOARD_AVB_ENABLE is false,use default vbmeta.img"
+cp -a device/rockchip/common/vbmeta.img $IMAGE_PATH/vbmeta.img
+fi
+echo "done."
+
+echo -n "create vendor.img..."
+python device/rockchip/common/sparse_tool.py $OUT/vendor.img
+mv $OUT/vendor.img.out $OUT/vendor.img
+cp -a $OUT/vendor.img $IMAGE_PATH/vendor.img
+echo "done."
+
+echo -n "create oem.img..."
+python device/rockchip/common/sparse_tool.py $OUT/oem.img
+mv $OUT/oem.img.out $OUT/oem.img
+cp -f $OUT/oem.img $IMAGE_PATH/oem.img
+echo "done."
+
 	echo -n "create misc.img.... "
 	cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
 	cp -a rkst/Image/pcba_small_misc.img $IMAGE_PATH/pcba_small_misc.img
 	cp -a rkst/Image/pcba_whole_misc.img $IMAGE_PATH/pcba_whole_misc.img
 	echo "done."
-
-if [ `grep "CONFIG_WIFI_BUILD_MODULE=y" $KERNEL_CONFIG` ]; then
-    echo "Install wifi ko to $TARGET_OUT_VENDOR/lib/modules/wifi/"
-    mkdir -p $TARGET_OUT_VENDOR/lib/modules/wifi
-    find kernel/drivers/net/wireless/rockchip_wlan/*  -name "*.ko" | xargs -n1 -i cp {} $TARGET_OUT_VENDOR/lib/modules/wifi/
-fi
-
-if [ -d $OUT/vendor ]; then
-    echo -n "create vendor.img..."
-    if [ $TARGET != $BOOT_OTA ]; then
-      python ./build/tools/releasetools/build_image.py \
-      $OUT/vendor $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-      $OUT/vendor.img $OUT/system
-    fi
-    python device/rockchip/common/sparse_tool.py $OUT/vendor.img
-    mv $OUT/vendor.img.out $OUT/vendor.img
-    cp -f $OUT/vendor.img $IMAGE_PATH/vendor.img
-fi
-
-if [ -d $OUT/oem ]; then
-    echo -n "create oem.img..."
-    if [ $TARGET != $BOOT_OTA ]; then
-      python ./build/tools/releasetools/build_image.py \
-      $OUT/oem $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-      $OUT/oem.img $OUT/system
-    fi
-    python device/rockchip/common/sparse_tool.py $OUT/oem.img
-    mv $OUT/oem.img.out $OUT/oem.img
-    cp -f $OUT/oem.img $IMAGE_PATH/oem.img
-fi
 
 if [ -f $UBOOT_PATH/uboot.img ]
 then
