@@ -725,6 +725,14 @@ PRODUCT_PACKAGES += \
     android.hardware.tv.cec@1.0-service
 endif
 
+
+# Hw Output HAL
+PRODUCT_PACKAGES += \
+    rockchip.hardware.outputmanager@1.0-impl \
+    rockchip.hardware.outputmanager@1.0-service
+
+PRODUCT_PACKAGES += hw_output.default
+
 PRODUCT_PACKAGES += \
 	abc
 
