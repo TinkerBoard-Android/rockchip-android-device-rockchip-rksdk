@@ -31,12 +31,21 @@
                 </mixPort>
                 <mixPort name="spdif_passthrough" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="44100,48000"
+                             samplingRates="32000,44100,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                    <profile name="" format="AUDIO_FORMAT_IEC61937"
+                             samplingRates="32000,44100,48000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="hdmi" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="44100,48000,176400,192000"
+                             samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000,96000,176400,192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="" format=""
+                             samplingRates="32000,44100,48000,96000,176400,192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="" format="AUDIO_FORMAT_IEC61937"
+                             samplingRates="32000,44100,48000,96000,176400,192000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
                 </mixPort>
                 <mixPort name="primary input" role="sink">
