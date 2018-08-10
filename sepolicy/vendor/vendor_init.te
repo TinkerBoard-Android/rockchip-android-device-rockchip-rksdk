@@ -13,7 +13,9 @@ userdebug_or_eng(`
   allow vendor_init proc_sysrq:file w_file_perms;
 ')
 
+get_prop(vendor_init, public_vendor_default_prop)
 set_prop(vendor_init, public_vendor_default_prop)
+get_prop(vendor_init, public_vendor_system_prop)
 set_prop(vendor_init, public_vendor_system_prop)
 
 dontaudit vendor_init unlabeled:dir getattr;

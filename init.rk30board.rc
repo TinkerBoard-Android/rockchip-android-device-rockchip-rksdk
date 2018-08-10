@@ -16,10 +16,10 @@ on post-fs
     insmod /system/lib/modules/pvrsrvkm.ko
 
     # Turn on swap
-    swapon_all /vendor/etc/fstab.${ro.hardware}
+#    swapon_all /vendor/etc/fstab.${ro.hardware}
 
-on property:vold.decrypt=trigger_restart_framework && property:persist.sys.usb.config=adb
-    setprop sys.usb.config ${persist.sys.usb.config}
+#on property:vold.decrypt=trigger_restart_framework && property:persist.sys.usb.config=adb
+#    setprop sys.usb.config ${persist.sys.usb.config}
 
 on post-fs-data
     # AP6476 GPS permission
@@ -233,12 +233,12 @@ on property:sys.boot_completed=1
 
 
 # for Internet adb
-on property:persist.internet.adb.enable=1
+on property:persist.vendor.internet.adb.enable=1
     setprop service.adb.tcp.port 5555
     restart adbd
 
 # for Internet adb
-on property:persist.internet.adb.enable=0
+on property:persist.vendor.internet.adb.enable=0
     setprop service.adb.tcp.port 0
     restart adbd
 
@@ -256,11 +256,11 @@ on property:ro.boot.mode=unknown
     setprop ro.bootmode normal
 
 # set ro.serialno
-on property:sys.serialno=*
-    setprop ro.serialno ${sys.serialno}
+on property:vendor.serialno=*
+    setprop ro.serialno ${vendor.serialno}
     restart adbd
 
-on property:cts_gts.status=true
+on property:vendor.cts_gts.status=true
     restorecon /mnt/vendor/metadata/view_cts.ini
 
 # Android bug collector

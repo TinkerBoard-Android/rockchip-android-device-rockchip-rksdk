@@ -129,16 +129,6 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-on property:ro.factory.hasUMS=false
-    mount rootfs rootfs / ro remount
-
-on property:ro.factory.hasUMS=cdrom
-    mount rootfs rootfs / ro remount
-
-on property:ro.factory.hasUMS=true
-    mount rootfs rootfs / ro remount
-    stop sdcard
-
 on property:ro.boot.charger.emmc=1
     start console
     start charger
@@ -163,25 +153,6 @@ service akmd /system/bin/akmd
     oneshot
     seclabel u:r:akmd:s0
 
-on property:sys.gmali.performance=ui
-    start pat_ui
-
-service pat_ui /system/bin/performance ui
-    disabled
-    oneshot
-
-on property:sys.gmali.performance=video
-    start pat_video
-
-service pat_video /system/bin/performance video
-    disabled
-    oneshot
-
-#factory
-on property:ro.factory.tool=1     
-    write /sys/class/gsensor_class/orientation gsensor={-1,0,0,0,0,1,0,-1,0}
-    write /sys/devices/platform/rk29-keypad/rk29key {menu:MENU,home:HOME,vol+:VOLUP,vol-:VOLDOWN,play:PLAY,esc:ESC,sensor:CAMERA}
-    write /sys/devices/platform/rk29_backlight/rk29backlight 100
 
 #on property:ro.rk.btchip=broadcom.bplus
 #    start gpsd
