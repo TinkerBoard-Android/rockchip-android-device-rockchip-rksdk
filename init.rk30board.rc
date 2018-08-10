@@ -269,9 +269,9 @@ service abc /vendor/bin/abc
     disabled
     oneshot
 
-on property:persist.sys.abc_switch=1
+on property:persist.vendor.abc_switch=1
     start abc
-on property:persist.sys.abc_switch=0
+on property:persist.vendor.abc_switch=0
     stop abc
 
 ##$_rbox_$_modify_$_shenzhenyi_20160312
