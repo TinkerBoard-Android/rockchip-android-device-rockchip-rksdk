@@ -14,5 +14,7 @@ allow rk_wifi_hal init:unix_stream_socket { connectto };
 allow rk_wifi_hal kernel:system module_request;
 dontaudit rk_wifi_hal self:capability { dac_override };
 allow rk_wifi_hal self:capability sys_module;
+typeattribute rk_wifi_hal data_between_core_and_vendor_violators;
+allow rk_wifi_hal wifi_data_file:file rw_file_perms;
 
 get_prop(rk_wifi_hal,exported_wifi_prop)

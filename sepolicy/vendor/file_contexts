@@ -25,6 +25,9 @@
 /sys/devices/platform/11000000.syscon/11000000.syscon:usb2-phy@760/otg_mode u:object_r:sysfs_usb:s0
 /sys/devices/platform/ff450000.syscon/ff450000.syscon:usb2-phy@100/otg_mode u:object_r:sysfs_usb:s0
 
+#hctosys
+/sys/devices/platform/rtc-fake/rtc/rtc0/hctosys -- u:object_r:sysfs_hctosys:s0
+
 #lcdcscale
 /sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
 
@@ -35,6 +38,7 @@
 
 #hdmi
 /sys/devices/virtual/display/HDMI(/.*)? -- u:object_r:sysfs_hdmi:s0
+/sys/devices/platform/display-subsystem/drm/(/.*)? -- u:object_r:sysfs_hdmi:s0
 
 # for device
 /dev/block/by-name/frp u:object_r:frp_block_device:s0
@@ -79,7 +83,7 @@
 #/vendor/lib(64)?/hw/(/.*)?         u:object_r:vendor_file:s0
 /vendor/bin/rockchip.drmservice                       u:object_r:np_rockchip_drmservice_exec:s0
 /vendor/bin/hw/rk_wifi_hal	   u:object_r:rk_wifi_hal_exec:s0
-/vendor/bin/hw/rockchip.hardware.outputmanager@1.0-service        u:object_r:rk_output_hal_exec:s0
+/vendor/bin/hw/rockchip\.hardware\.outputmanager@1\.0-service        u:object_r:rk_output_hal_exec:s0
 /vendor/bin/abc 				u:object_r:abc_exec:s0
 /vendor/lib/libdrm.so              u:object_r:graphics_file:s0
 /vendor/lib/libdrm_rockchip.so              u:object_r:graphics_file:s0
@@ -104,3 +108,6 @@
 
 #data
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
+
+#bluetooth
+/sys/class/rfkill/rfkill0/state        u:object_r:sysfs_rfkill:s0

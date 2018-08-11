@@ -8,7 +8,7 @@ mpp_mem_flag                    u:object_r:vendor_omx_prop:s0
 sys.hdmicec.                    u:object_r:vendor_cec_prop:s0
 #np_rockchip_drmservice
 persist.sys.hid                    u:object_r:vendor_drm_prop:s0
-sys.serialno                    u:object_r:vendor_drm_prop:s0
+vendor.serialno                    u:object_r:vendor_drm_prop:s0
 
 sys_graphic.            u:object_r:graphic_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
@@ -134,3 +134,4 @@ vts.                    u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 drm_debug                    u:object_r:vendor_default_prop:s0
 sys.vwb.                    u:object_r:vendor_default_prop:s0
+UserVolumeLabel                    u:object_r:vendor_default_prop:s0

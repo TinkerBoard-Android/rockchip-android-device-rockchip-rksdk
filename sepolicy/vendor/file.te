@@ -20,6 +20,8 @@ type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type mediadrm_vendor_data_file, file_type, data_file_type;
 
 # /sys
+type sysfs_rfkill, sysfs_type, fs_type;
+type sysfs_hctosys, sysfs_type, fs_type;
 type sysfs_camera, sysfs_type, fs_type;
 type sysfs_enable_ps_sensor, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
