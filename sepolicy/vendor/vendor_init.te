@@ -35,6 +35,8 @@ get_prop(vendor_init, public_vendor_system_prop)
 set_prop(vendor_init, public_vendor_system_prop)
 get_prop(vendor_init, vendor_drm_prop)
 set_prop(vendor_init, vendor_drm_prop)
+get_prop(vendor_init, cts_gts_prop)
+set_prop(vendor_init, cts_gts_prop)
 
 dontaudit vendor_init unlabeled:dir getattr;
 dontaudit vendor_init unlabeled:file getattr;

@@ -1,0 +1,2 @@
+allow vold vold_exec:file { execute_no_trans };
+get_prop(vold,vendor_default_prop)

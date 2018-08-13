@@ -1,3 +1,4 @@
+vendor.cts_gts.                 u:object_r:cts_gts_prop:s0
 #omx
 use_mpp_mode                    u:object_r:vendor_omx_prop:s0
 dump_omx_log                    u:object_r:vendor_omx_prop:s0

@@ -7,5 +7,6 @@ allow mediacodec property_socket:sock_file { write };
 allow mediacodec init:unix_stream_socket { connectto };
 get_prop(mediacodec,vendor_default_prop);
 get_prop(mediacodec,public_vendor_default_prop);
+get_prop(mediacodec,cts_gts_prop);
 get_prop(mediacodec,vendor_omx_prop);
 set_prop(mediacodec,vendor_omx_prop);
