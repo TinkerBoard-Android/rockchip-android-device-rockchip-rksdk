@@ -4,12 +4,13 @@ use_mpp_mode                    u:object_r:vendor_omx_prop:s0
 dump_omx_log                    u:object_r:vendor_omx_prop:s0
 mpp_buffer_debug                    u:object_r:vendor_omx_prop:s0
 mpp_mem_flag                    u:object_r:vendor_omx_prop:s0
-
+omx.                            u:object_r:vendor_omx_prop:s0
 #cec
 sys.hdmicec.                    u:object_r:vendor_cec_prop:s0
 #np_rockchip_drmservice
 persist.sys.hid                    u:object_r:vendor_drm_prop:s0
 vendor.serialno                    u:object_r:vendor_drm_prop:s0
+sys.secureboot                     u:object_r:vendor_drm_prop:s0
 
 sys_graphic.            u:object_r:graphic_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
@@ -125,7 +126,6 @@ ro.hwui.disable_scissor_opt          u:object_r:vendor_default_prop:s0
 ro.rk.screenshot_enable              u:object_r:vendor_default_prop:s0
 sys.status.hidebar_enable            u:object_r:vendor_default_prop:s0
 ro.target.product                    u:object_r:vendor_default_prop:s0
-sys.secureboot                    u:object_r:vendor_default_prop:s0
 drm.service.                    u:object_r:vendor_default_prop:s0
 persist.sys.first_booting                    u:object_r:vendor_default_prop:s0
 ro.boot.copy_oem                    u:object_r:vendor_default_prop:s0
@@ -136,3 +136,5 @@ ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 drm_debug                    u:object_r:vendor_default_prop:s0
 sys.vwb.                    u:object_r:vendor_default_prop:s0
 UserVolumeLabel                    u:object_r:vendor_default_prop:s0
+cts_gts.                    u:object_r:vendor_default_prop:s0
+ro.tee.storage                    u:object_r:vendor_default_prop:s0

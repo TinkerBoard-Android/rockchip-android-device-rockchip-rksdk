@@ -1,1 +1,2 @@
+allow mediaserver unlabeled:file { getattr read };
 get_prop(mediaserver,vendor_default_prop)

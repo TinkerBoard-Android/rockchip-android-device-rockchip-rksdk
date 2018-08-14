@@ -7,6 +7,8 @@ type ext4_exec, exec_type, file_type;
 # /vendor
 type graphics_file, file_type,vendor_file_type,mlstrustedobject;
 
+type vendor_metadata, file_type,vendor_file_type,mlstrustedobject;
+
 # /data
 type akmd_file, file_type, data_file_type;
 type location_data_file, file_type, data_file_type;
@@ -20,7 +22,7 @@ type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type mediadrm_vendor_data_file, file_type, data_file_type;
 
 # /sys
-type sysfs_rfkill, sysfs_type, fs_type;
+type rk_bluetooth_file, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_hctosys, sysfs_type, fs_type;
 type sysfs_camera, sysfs_type, fs_type;
 type sysfs_enable_ps_sensor, sysfs_type, fs_type;

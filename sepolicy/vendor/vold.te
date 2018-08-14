@@ -1,2 +1,8 @@
 allow vold vold_exec:file { execute_no_trans };
+allow vold vendor_metadata:dir { open read ioctl };
+allow vold e2fsck_oem_block_device:blk_file { getattr };
+allow vold system_block_device:blk_file { getattr };
+allow vold self:capability { setuid };
+allow vold unlabeled:filesystem { mount };
+
 get_prop(vold,vendor_default_prop)
