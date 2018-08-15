@@ -72,6 +72,11 @@ PRODUCT_PACKAGES += \
     bdt
 endif
 
+# librkskia
+PRODUCT_PACKAGES += \
+   librkskia
+
+
 # build with go optimization
 ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
 ifeq ($(strip $(TARGET_ARCH)), arm64)
