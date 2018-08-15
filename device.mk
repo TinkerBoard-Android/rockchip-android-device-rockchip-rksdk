@@ -128,7 +128,7 @@ PRODUCT_COPY_FILES += \
 
 #for ssv6051
 PRODUCT_COPY_FILES += \
-    vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant.conf \
+    vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_ssv.conf \
 
 PRODUCT_PACKAGES += \
     iperf \
