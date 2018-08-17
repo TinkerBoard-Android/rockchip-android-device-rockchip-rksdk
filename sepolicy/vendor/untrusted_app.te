@@ -1,0 +1,2 @@
+allow untrusted_app  graphics_file:file { read open getattr };
+allow untrusted_app  block_device:dir { getattr };

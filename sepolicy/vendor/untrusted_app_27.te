@@ -1,0 +1,2 @@
+typeattribute untrusted_app_27 system_executes_vendor_violators;
+allow untrusted_app_27 graphics_file:file { read open getattr execute };

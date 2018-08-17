@@ -1,2 +1,9 @@
 allow mediaserver unlabeled:file { getattr read };
+allow mediaserver gpu_device:dir { getattr };
+allow mediaserver sysfs_hdmi:file { open read getattr };
+allow mediaserver surfaceflinger:unix_stream_socket { read write };
+allow mediaserver rga_device:chr_file { read write open };
+allow mediaserver storage_file:lnk_file { read };
+allow mediaserver tmpfs:lnk_file { read };
+
 get_prop(mediaserver,vendor_default_prop)
