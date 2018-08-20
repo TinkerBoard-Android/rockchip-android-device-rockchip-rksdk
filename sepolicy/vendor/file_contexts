@@ -115,3 +115,5 @@
 #data
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
 
+#gpu_file
+/mnt/vendor/metadata/view_cts\.ini u:object_r:gpu_file:s0

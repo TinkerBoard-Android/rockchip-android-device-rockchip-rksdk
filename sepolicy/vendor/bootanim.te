@@ -11,5 +11,5 @@ dontaudit bootanim kernel:system module_request;
 allow bootanim gpu_device:dir { search rw_dir_perms};
 typeattribute bootanim system_executes_vendor_violators;
 allow bootanim graphics_file:file { read open getattr execute};
-
+allow bootanim gpu_file:file { open read getattr };
 get_prop(bootanim, vendor_default_prop)

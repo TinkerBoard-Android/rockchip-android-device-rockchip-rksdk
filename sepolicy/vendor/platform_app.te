@@ -4,5 +4,6 @@ allow platform_app graphics_file:file { read open getattr execute};
 
 #for gpu
 allow platform_app gpu_device:dir { search rw_dir_perms };
+allow platform_app gpu_file:file rw_file_perms;
 
 get_prop(platform_app,vendor_default_prop)

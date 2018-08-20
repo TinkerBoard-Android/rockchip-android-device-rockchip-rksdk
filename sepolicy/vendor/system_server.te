@@ -6,6 +6,7 @@ allow system_server graphics_file:file { read open getattr execute };
 allow system_server gpu_device:dir { search rw_dir_perms };
 allow system_server serial_device:chr_file rw_file_perms;
 allow system_server sysfs_hctosys:file { read open getattr };
+allow system_server gpu_file:file rw_file_perms;
 # input files
 r_dir_file(system_server, idc_file)
 r_dir_file(system_server, keylayout_file)

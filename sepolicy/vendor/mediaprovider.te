@@ -1,2 +1,3 @@
 allow mediaprovider unlabeled:dir { getattr };
+allow mediaprovider gpu_file:file { open read getattr };
 get_prop(mediaprovider,vendor_default_prop)

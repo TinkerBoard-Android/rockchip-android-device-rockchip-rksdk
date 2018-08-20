@@ -13,5 +13,6 @@ allow np_rockchip_drmservice proc_cmdline:file { read open };
 typeattribute np_rockchip_drmservice data_between_core_and_vendor_violators;
 allow np_rockchip_drmservice wifi_data_file:file rw_file_perms;
 allow np_rockchip_drmservice storage_device:file rw_file_perms;
+allow np_rockchip_drmservice gpu_file:file { rw_file_perms create setattr };
 set_prop(np_rockchip_drmservice,vendor_drm_prop)
 get_prop(np_rockchip_drmservice,vendor_drm_prop)
