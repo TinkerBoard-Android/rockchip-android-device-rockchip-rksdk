@@ -137,7 +137,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     iperf \
-    rk_wifi_hal \
+    android.hardware.wifi@1.0-service \
     libiconv \
     libwpa_client \
     hostapd \
