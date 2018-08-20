@@ -775,7 +775,7 @@ PRODUCT_COPY_FILES += \
 #if force app can see udisk
 ifeq ($(strip $(BOARD_FORCE_UDISK_VISIBLE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.udisk.visible=true
+	ro.vendor.udisk.visible=true
 endif
 
 #if disable safe mode to speed up booting time

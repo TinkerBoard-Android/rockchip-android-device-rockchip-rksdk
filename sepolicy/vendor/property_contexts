@@ -109,7 +109,7 @@ ro.sf.lcdc_composer                  u:object_r:vendor_default_prop:s0
 ro.boot.noril                        u:object_r:vendor_default_prop:s0
 ril.function.dataonly                u:object_r:vendor_default_prop:s0
 ro.config.enable.remotecontrol       u:object_r:vendor_default_prop:s0
-ro.udisk.visible                     u:object_r:vendor_default_prop:s0
+ro.vendor.udisk.visible              u:object_r:vendor_default_prop:s0
 ro.safemode.disabled                 u:object_r:vendor_default_prop:s0
 ro.hwui.texture_cache_size           u:object_r:vendor_default_prop:s0
 ro.hwui.layer_cache_size             u:object_r:vendor_default_prop:s0
