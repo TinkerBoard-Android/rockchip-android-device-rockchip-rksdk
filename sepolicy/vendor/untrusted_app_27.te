@@ -1,3 +1,5 @@
 typeattribute untrusted_app_27 system_executes_vendor_violators;
 allow untrusted_app_27 graphics_file:file { read open getattr execute };
 allow untrusted_app_27 gpu_file:file  rw_file_perms;
+allow untrusted_app_27 gpu_device:dir { search };
+dontaudit untrusted_app_27 mnt_vendor_file:dir { search read open getattr };
