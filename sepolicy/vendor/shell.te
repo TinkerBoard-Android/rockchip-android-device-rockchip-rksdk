@@ -9,6 +9,8 @@ allow shell proc:file getattr;
 allow shell vendor_toolbox_exec:file getattr;
 allow shell gpu_device:dir { search };
 allow shell init_exec:file getattr;
+allow shell vendor_metadata:dir getattr;
+allow shell debugfs:dir { read open } ;
 
 allow shell sysfs:file { getattr };
 allow shell vendor_file:file { read open getattr execute };
