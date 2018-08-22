@@ -9,7 +9,6 @@ on boot
     chown bluetooth net_bt /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt /proc/bluetooth/sleep/btwrite    
 
-#   insmod /system/lib/modules/rtk_btusb.ko
     chmod 0660 /dev/rtk_btusb
     chown bluetooth net_bt /dev/rtk_btusb
 

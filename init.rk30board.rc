@@ -8,12 +8,6 @@ import /vendor/etc/init/hw/init.optee.rc
 
 on post-fs
     restorecon_recursive /mnt/vendor/metadata
-    insmod /system/lib/modules/ump.ko
-    insmod /system/lib/modules/mali.ko
-    insmod /vendor/lib/modules/mali_kbase.ko
-    insmod /system/lib/modules/rk30_mirroring.ko
-    insmod /system/lib/modules/rk29-ipp.ko
-    insmod /system/lib/modules/pvrsrvkm.ko
 
     # Turn on swap
 #    swapon_all /vendor/etc/fstab.${ro.hardware}
@@ -250,7 +244,6 @@ on property:ro.boot.noril=true
 # set ro.bootmode
 on property:ro.boot.mode=emmc
     setprop ro.bootmode normal
-    #insmod /drmboot.ko
 
 on property:ro.boot.mode=unknown
     setprop ro.bootmode normal

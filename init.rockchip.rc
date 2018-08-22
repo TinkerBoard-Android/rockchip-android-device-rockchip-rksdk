@@ -13,6 +13,9 @@ on early-init
     restorecon /sys/kernel/debug/tracing/trace_marker
     restorecon_recursive /sys/kernel/debug/tracing/
 
+    # Loading kernel modules in background
+    start vendor.insmod_sh
+
 on init
     # start watchdogd
 
@@ -54,6 +57,10 @@ on post-fs-data
   
     setprop vold.post_fs_data_done 1
     mkdir /data/system/gps 0775 root system
+
+on early-boot
+    # wait for insmod_sh to finish all modules
+    wait_for_prop sys.all.modules.ready 1
 
 on boot
     setprop UserVolumeLabel "RockChips"
@@ -134,7 +141,6 @@ on property:ro.boot.charger.emmc=1
     start charger
 
 on property:ro.boot.charger.emmc=0
-    #insmod /rk30xxnand_ko.ko
     mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
     start console
     mount ext4 mtd@metadata /metadata wait noatime nodiratime nosuid nodev noauto_da_alloc
@@ -153,6 +159,12 @@ service akmd /system/bin/akmd
     oneshot
     seclabel u:r:akmd:s0
 
+service vendor.insmod_sh /vendor/bin/init.insmod.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
 
 #on property:ro.rk.btchip=broadcom.bplus
 #    start gpsd
