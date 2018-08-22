@@ -1,6 +1,6 @@
 allow vold vold_exec:file { execute_no_trans };
 allow vold vendor_metadata:dir { open read ioctl search };
-allow vold vendor_metadata:file { getattr open read write };
+allow vold vendor_metadata:file { getattr open read };
 allow vold e2fsck_oem_block_device:blk_file { getattr };
 allow vold e2fsck_cache_block_device:blk_file { getattr };
 allow vold system_block_device:blk_file { getattr };

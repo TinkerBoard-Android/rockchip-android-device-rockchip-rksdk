@@ -6,6 +6,6 @@ allow mediaserver rga_device:chr_file { read write open };
 allow mediaserver storage_file:lnk_file { read };
 allow mediaserver tmpfs:lnk_file { read };
 allow mediaserver gpu_file:file rw_file_perms;
-allow mediaserver cts_gts_prop:file { read open getattr};
 
 get_prop(mediaserver,vendor_default_prop)
+get_prop(mediaserver,cts_gts_prop)
