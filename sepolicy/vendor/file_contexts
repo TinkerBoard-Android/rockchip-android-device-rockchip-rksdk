@@ -87,10 +87,10 @@
 /vendor/bin/hw/rk_wifi_hal	   u:object_r:rk_wifi_hal_exec:s0
 /vendor/bin/hw/rockchip\.hardware\.outputmanager@1\.0-service        u:object_r:rk_output_hal_exec:s0
 /vendor/bin/abc 				u:object_r:abc_exec:s0
-/vendor/lib/libdrm.so              u:object_r:graphics_file:s0
-/vendor/lib/libdrm_rockchip.so              u:object_r:graphics_file:s0
-/vendor/lib/libgralloc_drm.so              u:object_r:graphics_file:s0
-/vendor/lib/hw/gralloc.rk30board.so              u:object_r:graphics_file:s0
+/vendor/lib(64)?/libdrm.so              u:object_r:graphics_file:s0
+/vendor/lib(64)?/libdrm_rockchip.so              u:object_r:graphics_file:s0
+/vendor/lib(64)?/libgralloc_drm.so              u:object_r:graphics_file:s0
+/vendor/lib(64)?/hw/gralloc.rk30board.so              u:object_r:graphics_file:s0
 # default hal
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0

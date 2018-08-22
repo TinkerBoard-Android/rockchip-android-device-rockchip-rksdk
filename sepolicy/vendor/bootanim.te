@@ -13,3 +13,7 @@ typeattribute bootanim system_executes_vendor_violators;
 allow bootanim graphics_file:file { read open getattr execute};
 allow bootanim gpu_file:file { open read getattr };
 get_prop(bootanim, vendor_default_prop)
+allow bootanim init:unix_stream_socket connectto;
+allow bootanim property_socket:sock_file write;
+allow bootanim vendor_file:file { getattr open read };
+allow bootanim vendor_file:file execute;
