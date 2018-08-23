@@ -269,6 +269,7 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
+$(call inherit-product-if-exists, hardware/rockchip/camera/etc/camera_etc.mk)
 endif
 
 # Camera Autofocus
