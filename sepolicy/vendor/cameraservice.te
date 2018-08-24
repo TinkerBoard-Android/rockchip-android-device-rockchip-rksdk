@@ -1,3 +1,6 @@
 allow cameraserver device:dir r_dir_perms;
 allow cameraserver video_device:dir r_dir_perms;
 allow cameraserver video_device:chr_file rw_file_perms;
+typeattribute cameraserver system_executes_vendor_violators;
+allow cameraserver graphics_file:file { read open getattr execute };
+allow cameraserver gpu_device:chr_file { read open write ioctl };
