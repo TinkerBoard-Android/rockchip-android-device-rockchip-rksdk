@@ -2,7 +2,7 @@
 # for gpu
 typeattribute system_server system_executes_vendor_violators;
 allow system_server graphics_file:file { read open getattr execute };
-
+allow system_server abc:dir { read open };
 allow system_server gpu_device:dir { search rw_dir_perms };
 allow system_server serial_device:chr_file rw_file_perms;
 allow system_server sysfs_hctosys:file { read open getattr };

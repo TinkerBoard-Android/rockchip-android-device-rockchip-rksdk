@@ -37,6 +37,9 @@
 /system/bin/mkntfs   u:object_r:vold_exec:s0
 /system/bin/ntfsfix  u:object_r:vold_exec:s0
 
+#for media
+/sys/firmware/devicetree/base/compatible     u:object_r:sysfs_dev:s0
+/sys/devices/platform/dmc/devfreq/dmc/system_status     u:object_r:sysfs_dev:s0
 #hdmi
 /sys/devices/virtual/display/HDMI(/.*)? -- u:object_r:sysfs_hdmi:s0
 /sys/devices/platform/display-subsystem/drm(/.*)? -- u:object_r:sysfs_hdmi:s0
@@ -92,6 +95,13 @@
 /vendor/lib(64)?/libdrm_rockchip.so              u:object_r:graphics_file:s0
 /vendor/lib(64)?/libgralloc_drm.so              u:object_r:graphics_file:s0
 /vendor/lib(64)?/hw/gralloc.rk30board.so              u:object_r:graphics_file:s0
+/vendor/lib(64)?/libmpp.so              u:object_r:video_file:s0
+/vendor/lib(64)?/libvpu.so              u:object_r:video_file:s0
+/vendor/lib(64)?/libstdc\+\+.so              u:object_r:video_file:s0
+/vendor/lib(64)?/librk_vpuapi.so              u:object_r:video_file:s0
+/vendor/lib(64)?/libgralloc_priv_omx.so              u:object_r:video_file:s0
+/vendor/lib(64)?/librga.so              u:object_r:video_file:s0
+/vendor/lib(64)?/libiep.so              u:object_r:video_file:s0
 # default hal
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0

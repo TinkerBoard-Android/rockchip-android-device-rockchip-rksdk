@@ -5,6 +5,8 @@ allow mediacodec sysfs:file { read open getattr };
 allow mediacodec sysfs:dir { read open getattr };
 allow mediacodec property_socket:sock_file { write };
 allow mediacodec init:unix_stream_socket { connectto };
+allow mediacodec sysfs_dev:file { open read getattr write };
+allow mediacodec video_file:file { read getattr open };
 get_prop(mediacodec,vendor_default_prop);
 get_prop(mediacodec,public_vendor_default_prop);
 get_prop(mediacodec,cts_gts_prop);

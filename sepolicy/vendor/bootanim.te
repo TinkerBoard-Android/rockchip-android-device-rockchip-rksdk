@@ -5,6 +5,7 @@ allow bootanim hwservicemanager:binder call;
 # in /data/system. This should be moved. In the meantime, suppress
 # this denial on wahoo since this functionality is not used.
 dontaudit bootanim system_data_file:dir read;
+dontaudit bootanim mnt_vendor_file:dir search;
 
 # TODO(b/37205419): Remove upon resolution
 dontaudit bootanim kernel:system module_request;
@@ -12,6 +13,7 @@ allow bootanim gpu_device:dir { search rw_dir_perms};
 typeattribute bootanim system_executes_vendor_violators;
 allow bootanim graphics_file:file { read open getattr execute};
 allow bootanim gpu_file:file { open read getattr };
+allow bootanim vendor_metadata:dir { search };
 get_prop(bootanim, vendor_default_prop)
 allow bootanim init:unix_stream_socket connectto;
 allow bootanim property_socket:sock_file write;

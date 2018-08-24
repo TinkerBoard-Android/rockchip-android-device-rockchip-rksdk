@@ -6,6 +6,7 @@ type ext4_exec, exec_type, file_type;
 
 # /vendor
 type graphics_file, file_type,vendor_file_type,mlstrustedobject;
+type video_file, file_type,vendor_file_type,mlstrustedobject;
 
 type vendor_metadata, file_type,vendor_file_type,mlstrustedobject;
 
@@ -38,6 +39,7 @@ type sysfs_video, sysfs_type, fs_type;
 type sysfs_wifi, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_fb, fs_type, sysfs_type;
 type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lut, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lcdc, fs_type, sysfs_type, mlstrustedobject;
 type aplog_data_file, file_type, data_file_type;

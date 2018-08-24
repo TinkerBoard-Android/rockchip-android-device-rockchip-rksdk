@@ -2,9 +2,10 @@
 typeattribute priv_app system_executes_vendor_violators;
 allow priv_app graphics_file:file { read open getattr execute};
 allow priv_app proc_modules:file { open getattr };
+allow priv_app proc_uptime:file { open getattr read };
 allow priv_app proc_interrupts:file { open };
 allow priv_app sysfs:dir { open };
-#allow priv_app sysfs:file { read };
+dontaudit priv_app mnt_vendor_file:dir { search };
 
 #for gpu
 allow priv_app gpu_device:dir { search rw_dir_perms };

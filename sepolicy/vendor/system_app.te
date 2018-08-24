@@ -1,6 +1,7 @@
 #system_executes_vendor_violators
 typeattribute system_app system_executes_vendor_violators;
 allow system_app graphics_file:file { read open getattr execute};
+dontaudit system_app mnt_vendor_file:dir search;
 #for gpu
 allow system_app gpu_device:dir { search rw_dir_perms };
 allow system_app sysfs_lcdc:file rw_file_perms;

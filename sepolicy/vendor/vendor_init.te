@@ -10,10 +10,10 @@ allow vendor_init proc_uid_cpupower:file write;
 allow vendor_init bluetooth_data_file:dir setattr;
 allow vendor_init debugfs:file write;
 allow vendor_init dhcp_data_file:dir setattr;
-allow vendor_init wpa_socket:dir setattr;
+allow vendor_init wpa_socket:dir { setattr search };
 allow vendor_init tmpfs:dir create;
-allow vendor_init vendor_file:system  { module_load };
-dontaudit vendor_init kernel:system module_request;
+allow vendor_init vendor_file:system { module_load };
+#dontaudit vendor_init kernel:system module_request;
 
 # Allow vendor_init to write to /proc/sysrq-trigger on userdebug and eng builds
 userdebug_or_eng(`
@@ -26,7 +26,8 @@ allow vendor_init system_data_file:file { r_file_perms };
 dontaudit vendor_init system_data_file:file { write append };
 allow vendor_init block_device:lnk_file { relabelfrom };
 allow vendor_init userdata_block_device:lnk_file { relabelto };
-allow vendor_init baseparameter_block_device:lnk_file { relabelto };
+allow vendor_init baseparameter_block_device:lnk_file { relabelto setattr };
+allow vendor_init baseparameter_block_device:blk_file { setattr write };
 allow vendor_init e2fsck_oem_block_device:lnk_file { relabelto };
 allow vendor_init frp_block_device:lnk_file { relabelto };
 allow vendor_init metadata_block_device:lnk_file { relabelto };

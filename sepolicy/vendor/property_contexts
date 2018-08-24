@@ -1,3 +1,6 @@
+#camera
+persist.camera.debug.logfile    u:object_r:vendor_camera_prop:s0
+#cts
 vendor.cts_gts.                 u:object_r:cts_gts_prop:s0
 #omx
 use_mpp_mode                    u:object_r:vendor_omx_prop:s0
@@ -60,6 +63,7 @@ persist.sys.saveconfig               u:object_r:public_vendor_system_prop:s0
 iep.                            u:object_r:public_vendor_system_prop:s0
 sys.hdmi_status.                            u:object_r:public_vendor_system_prop:s0
 sys.hwc                            u:object_r:public_vendor_system_prop:s0
+mediaplayer.timedtext.listener                            u:object_r:public_vendor_system_prop:s0
 
 
 # vendor_default_prop
