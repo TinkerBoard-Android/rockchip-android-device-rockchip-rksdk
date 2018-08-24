@@ -61,14 +61,19 @@ endif
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
 PRODUCT_SUPPORTS_BOOT_SIGNER := false
+BOARD_SELINUX_ENFORCING ?= false
 
 ifeq ($(filter true, $(BOARD_AVB_ENABLE)), )
-BOARD_KERNEL_CMDLINE ?=
+BOARD_KERNEL_CMDLINE ?= androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init skip_initramfs rootwait ro init=/init
 else
-BOARD_KERNEL_CMDLINE ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init skip_initramfs rootwait ro init=/init root=/dev/mmcblk2p15
+BOARD_KERNEL_CMDLINE ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init skip_initramfs rootwait ro init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 endif
 BOARD_BOOTIMG_HEADER_VERSION ?= 1
-ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=/dev/mmcblk2p15
+ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
+
+ifeq ($(filter true, $(BOARD_SELINUX_ENFORCING)), )
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+endif
 
 BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
