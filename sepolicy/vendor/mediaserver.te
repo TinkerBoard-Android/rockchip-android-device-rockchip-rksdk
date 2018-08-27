@@ -1,12 +1,10 @@
 allow mediaserver unlabeled:file { getattr read open };
-allow mediaserver gpu_device:dir { getattr };
+allow mediaserver gpu_device:dir { getattr search };
 allow mediaserver sysfs_hdmi:file { open read getattr };
 allow mediaserver surfaceflinger:unix_stream_socket { read write };
 allow mediaserver rga_device:chr_file { read write open };
-allow mediaserver gpu_device:dir { search };
 allow mediaserver storage_file:lnk_file { read };
 allow mediaserver tmpfs:lnk_file { read };
-allow mediaserver gpu_file:file rw_file_perms;
 allow mediaserver sysfs_dev:file { open read getattr write };
 allow mediaserver system_data_file:dir { read open write add_name create setattr remove_name rmdir };
 allow mediaserver system_data_file:file { read open };
@@ -17,9 +15,7 @@ allow mediaserver mnt_user_file:dir { read search open };
 allow mediaserver mnt_user_file:lnk_file { read };
 
 allow mediaserver vendor_file:file { read getattr };
-typeattribute mediaserver system_executes_vendor_violators;
-allow mediaserver video_file:file { read getattr execute open };
-allow mediaserver graphics_file:file { open read getattr execute};
+allow mediaserver video_file:file { read getattr open };
 
 typeattribute mediaserver system_writes_vendor_properties_violators;
 get_prop(mediaserver,vendor_omx_prop)

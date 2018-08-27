@@ -1,11 +1,10 @@
 # /dev
 type camdata_file, file_type, data_file_type;
-type gpu_file, file_type,mlstrustedobject;
+type gpu_data_file, file_type, data_file_type, core_data_file_type, mlstrustedobject;
 type ru_file, file_type;
 type ext4_exec, exec_type, file_type;
 
 # /vendor
-type graphics_file, file_type,vendor_file_type,mlstrustedobject;
 type video_file, file_type,vendor_file_type,mlstrustedobject;
 
 type vendor_metadata, file_type,vendor_file_type,mlstrustedobject;

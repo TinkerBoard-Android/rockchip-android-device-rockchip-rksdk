@@ -43,5 +43,5 @@ get_prop(shell, device_logging_prop)
 get_prop(shell, vendor_default_prop)
 
 allow shell metadata_file:dir { search getattr rw_dir_perms };
-allow shell gpu_file:file rw_file_perms;
+allow shell gpu_data_file:file rw_file_perms;
 allow shell metadata_file:file r_file_perms;

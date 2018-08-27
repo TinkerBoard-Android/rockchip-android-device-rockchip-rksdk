@@ -59,3 +59,5 @@ set_prop(vendor_init, public_vendor_default_prop)
 
 dontaudit vendor_init unlabeled:dir getattr;
 dontaudit vendor_init unlabeled:file getattr;
+allow vendor_init gpu_data_file:file getattr;
+allow vendor_init ota_data_file:dir rw_dir_perms;

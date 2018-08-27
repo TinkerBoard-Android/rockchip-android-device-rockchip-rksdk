@@ -1,10 +1,6 @@
-#system_executes_vendor_violators
-typeattribute platform_app system_executes_vendor_violators;
-allow platform_app graphics_file:file { read open getattr execute};
-
 #for gpu
 allow platform_app gpu_device:dir { search rw_dir_perms };
-allow platform_app gpu_file:file rw_file_perms;
+allow platform_app gpu_data_file:file rw_file_perms;
 allow platform_app vendor_metadata:dir { search };
-allow platform_app vendor_file:file { execute getattr open read };
+allow platform_app vendor_file:file { getattr open read };
 get_prop(platform_app,vendor_default_prop)

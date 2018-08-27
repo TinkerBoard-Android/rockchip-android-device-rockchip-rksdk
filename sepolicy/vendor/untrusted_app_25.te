@@ -1,11 +1,12 @@
 allow untrusted_app_25 sysfs_net:dir { search };
-typeattribute untrusted_app_25 system_executes_vendor_violators;
-allow untrusted_app_25 vendor_file:file { read open getattr execute };
+allow untrusted_app_25 vendor_file:file { read open getattr };
 dontaudit untrusted_app_25 mnt_vendor_file:dir { search };
 
-allow untrusted_app_25 graphics_file:file { read open getattr execute };
 allow untrusted_app_25 gpu_device:dir { search };
-allow untrusted_app_25 gpu_file:file  rw_file_perms;
+allow untrusted_app_25 gpu_data_file:file  rw_file_perms;
 allow untrusted_app_25 unlabeled:dir { search read open getattr };
 allow untrusted_app_25 unlabeled:file { open read getattr };
 allow untrusted_app_25 rootfs:dir { search read open getattr };
+allow untrusted_app_25 block_device:dir { getattr search };
+allow untrusted_app_25 ota_data_file:dir rw_dir_perms;
+allow untrusted_app_25 ota_data_file:file rw_file_perms;

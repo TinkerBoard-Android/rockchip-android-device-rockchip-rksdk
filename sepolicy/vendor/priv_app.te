@@ -1,6 +1,3 @@
-#system_executes_vendor_violators
-typeattribute priv_app system_executes_vendor_violators;
-allow priv_app graphics_file:file { read open getattr execute};
 allow priv_app proc_modules:file { open getattr };
 allow priv_app proc_uptime:file { open getattr read };
 allow priv_app proc_interrupts:file { open };
@@ -11,8 +8,7 @@ dontaudit priv_app mnt_vendor_file:dir { search };
 allow priv_app gpu_device:dir { search rw_dir_perms };
 allow priv_app sysfs_usb:file rw_file_perms;
 allow priv_app vendor_file:file { read open getattr };
-allow priv_app gpu_file:file rw_file_perms;
+allow priv_app gpu_data_file:file rw_file_perms;
 allow priv_app vendor_metadata:dir { search };
-allow priv_app vendor_file:file execute;
 
 get_prop(priv_app,vendor_default_prop)

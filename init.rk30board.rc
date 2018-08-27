@@ -213,12 +213,12 @@ on boot
     mkdir /mnt/iso 0660 system system
     chmod 0666 /dev/opteearmtz00
 
-    restorecon /mnt/vendor/metadata/view_cts.ini
+    restorecon /data/ota/view_cts.ini
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
-    restorecon /mnt/vendor/metadata/view_cts.ini
+    restorecon /data/ota/view_cts.ini
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 0
     setprop persist.sys.first_booting false
@@ -254,7 +254,7 @@ on property:vendor.serialno=*
     restart adbd
 
 on property:vendor.cts_gts.status=true
-    restorecon /mnt/vendor/metadata/view_cts.ini
+    restorecon /data/ota/view_cts.ini
 
 # Android bug collector
 service abc /vendor/bin/abc

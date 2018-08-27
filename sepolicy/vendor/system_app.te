@@ -1,12 +1,9 @@
-#system_executes_vendor_violators
-typeattribute system_app system_executes_vendor_violators;
-allow system_app graphics_file:file { read open getattr execute};
 dontaudit system_app mnt_vendor_file:dir search;
 #for gpu
 allow system_app gpu_device:dir { search rw_dir_perms };
 allow system_app sysfs_lcdc:file rw_file_perms;
 allow system_app sysfs_usb:file rw_file_perms;
-allow system_app gpu_file:file rw_file_perms;
+allow system_app gpu_data_file:file rw_file_perms;
 allow system_app vendor_metadata:dir { search };
 #for hdmi
 allow system_app sysfs_hdmi:file rw_file_perms;
@@ -19,7 +16,7 @@ allow system_app cache_file:lnk_file { read };
 allow system_app cache_recovery_file:dir { search };
 allow system_app cache_recovery_file:file rw_file_perms;
 
-allow system_app vendor_file:file { execute getattr };
+allow system_app vendor_file:file { getattr };
 allow system_app cache_file:dir search;
 get_prop(system_app,vendor_default_prop)
 #set_prop(system_app,vendor_default_prop)

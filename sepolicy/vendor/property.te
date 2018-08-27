@@ -1,5 +1,5 @@
 type public_vendor_default_prop, property_type;
-type public_vendor_system_prop, property_type;
+type public_vendor_system_prop, property_type, mlstrustedobject;
 type tee_supplicant_prop, property_type;
 type keymaster_prop, property_type;
 type graphic_prop, property_type;

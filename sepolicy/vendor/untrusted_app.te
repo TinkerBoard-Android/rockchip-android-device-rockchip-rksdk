@@ -1,3 +1,6 @@
-allow untrusted_app  graphics_file:file { read open getattr };
-allow untrusted_app  block_device:dir { getattr };
-allow untrusted_app gpu_file:file rw_file_perms;
+allow untrusted_app  block_device:dir { getattr search };
+allow untrusted_app  gpu_device:dir { search };
+allow untrusted_app  gpu_data_file:file rw_file_perms;
+allow untrusted_app  ota_data_file:dir rw_dir_perms;
+allow untrusted_app  ota_data_file:file rw_file_perms;
+get_prop(untrusted_app,public_vendor_system_prop)

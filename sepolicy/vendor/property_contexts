@@ -147,3 +147,5 @@ sensor.debug.time                     u:object_r:vendor_default_prop:s0
 
 # for ko insmod
 sys.all.modules.ready      u:object_r:public_vendor_system_prop:s0
+
+debug.hwui.renderer u:object_r:public_vendor_system_prop:s0

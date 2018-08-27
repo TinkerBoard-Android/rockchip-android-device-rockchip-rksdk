@@ -11,7 +11,6 @@ allow hal_graphics_composer_default vndbinder_device:chr_file { read write open 
 allow hal_graphics_composer_default sysfs_devices_system_cpu:file rw_file_perms;
 allow hal_graphics_composer_default property_socket:sock_file { write };
 allow hal_graphics_composer_default init:unix_stream_socket { connectto };
-allow hal_graphics_composer_default gpu_file:file rw_file_perms;
 # HWC_UeventThread
 allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
 

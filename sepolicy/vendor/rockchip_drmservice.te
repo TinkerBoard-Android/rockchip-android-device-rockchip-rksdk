@@ -14,7 +14,7 @@ allow np_rockchip_drmservice configfs:dir { search };
 allow np_rockchip_drmservice configfs:file { open write };
 allow np_rockchip_drmservice proc_cmdline:file { read open };
 typeattribute np_rockchip_drmservice data_between_core_and_vendor_violators;
-allow np_rockchip_drmservice gpu_file:file { rw_file_perms create setattr };
+allow np_rockchip_drmservice gpu_data_file:file { rw_file_perms create setattr };
 allow np_rockchip_drmservice wifi_data_file:file { rw_file_perms create };
 allow np_rockchip_drmservice storage_device:chr_file rw_file_perms;
 set_prop(np_rockchip_drmservice,vendor_drm_prop)
