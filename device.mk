@@ -252,9 +252,18 @@ endif
 
 # CAMERA
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
+
+ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
+
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-external-service
+else
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml
+endif
 
 PRODUCT_PACKAGES += \
     camera.$(TARGET_BOARD_HARDWARE) \
