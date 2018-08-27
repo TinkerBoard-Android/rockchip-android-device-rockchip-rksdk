@@ -61,6 +61,9 @@
     <!-- Boolean indicating whether the wifi chipset has background scan support -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
+    <!-- Enable WFD -->
+    <bool name="config_enableWifiDisplay">true</bool>
+
     <string-array name="config_ephemeralResolverPackage" translatable="true">
         <item>com.google.android.gms</item>
     </string-array>
