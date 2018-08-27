@@ -10,6 +10,7 @@ allow system_server gpu_file:file rw_file_perms;
 # input files
 r_dir_file(system_server, idc_file)
 r_dir_file(system_server, keylayout_file)
+r_dir_file(system_server, metadata_file)
 #rk_output_hal
 allow system_server rk_output_hal_service:hwservice_manager find;
 add_service(system_server,drm_device_management_service)
@@ -19,3 +20,4 @@ typeattribute system_server system_writes_vendor_properties_violators;
 get_prop(system_server,vendor_default_prop)
 get_prop(system_server,cts_gts_prop)
 set_prop(system_server,cts_gts_prop)
+set_prop(system_server,public_vendor_system_prop)

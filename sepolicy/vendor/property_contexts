@@ -142,6 +142,8 @@ sys.vwb.                    u:object_r:vendor_default_prop:s0
 UserVolumeLabel                    u:object_r:vendor_default_prop:s0
 cts_gts.                    u:object_r:vendor_default_prop:s0
 ro.tee.storage                    u:object_r:vendor_default_prop:s0
+sensor.debug.level                    u:object_r:vendor_default_prop:s0
+sensor.debug.time                     u:object_r:vendor_default_prop:s0
 
 # for ko insmod
 sys.all.modules.ready      u:object_r:public_vendor_system_prop:s0
