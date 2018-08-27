@@ -129,6 +129,8 @@
 #gpu_data_file
 /data/ota/view_cts\.ini u:object_r:gpu_data_file:s0
 
+#for iso
+/vendor/bin/iso                    u:object_r:iso_exec:s0
 # insmod ko
 /vendor/bin/init\.insmod\.sh                                         u:object_r:init-insmod-sh_exec:s0
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
