@@ -1,5 +1,5 @@
 #camera
-persist.camera.debug.logfile    u:object_r:vendor_camera_prop:s0
+persist.vendor.camera.debug.logfile    u:object_r:vendor_camera_prop:s0
 #cts
 vendor.cts_gts.                 u:object_r:cts_gts_prop:s0
 #omx
@@ -74,7 +74,6 @@ ro.audio.monitorOrientation          u:object_r:vendor_default_prop:s0
 sf.power.control                     u:object_r:vendor_default_prop:s0
 ro.tether.denied                     u:object_r:vendor_default_prop:s0
 sys.resolution.changed               u:object_r:vendor_default_prop:s0
-ro.product.usbfactory                u:object_r:vendor_default_prop:s0
 wifi.supplicant_scan_interval        u:object_r:vendor_default_prop:s0
 ro.kernel.android.checkjni           u:object_r:vendor_default_prop:s0
 #sys.hwc.device.primary               u:object_r:vendor_default_prop:s0
@@ -96,7 +95,6 @@ ro.rk.bt_enable                      u:object_r:vendor_default_prop:s0
 ro.rk.flash_enable                   u:object_r:vendor_default_prop:s0
 ro.rk.hdmi_enable                    u:object_r:vendor_default_prop:s0
 #ro.factory.hasUMS                    u:object_r:vendor_default_prop:s0
-persist.sys.usb.config               u:object_r:vendor_default_prop:s0
 testing.mediascanner.skiplist        u:object_r:vendor_default_prop:s0
 ro.factory.hasGPS                    u:object_r:vendor_default_prop:s0
 ro.factory.storage_suppntfs          u:object_r:vendor_default_prop:s0
@@ -129,12 +127,8 @@ ro.hwui.text_large_cache_height      u:object_r:vendor_default_prop:s0
 ro.hwui.disable_scissor_opt          u:object_r:vendor_default_prop:s0
 ro.rk.screenshot_enable              u:object_r:vendor_default_prop:s0
 sys.status.hidebar_enable            u:object_r:vendor_default_prop:s0
-ro.target.product                    u:object_r:vendor_default_prop:s0
 drm.service.                    u:object_r:vendor_default_prop:s0
 persist.sys.first_booting                    u:object_r:vendor_default_prop:s0
-ro.boot.copy_oem                    u:object_r:vendor_default_prop:s0
-ro.board.platform                    u:object_r:vendor_default_prop:s0
-ro.board.zone                    u:object_r:vendor_default_prop:s0
 vts.                    u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 drm_debug                    u:object_r:vendor_default_prop:s0
