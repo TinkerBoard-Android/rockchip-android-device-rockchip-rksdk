@@ -893,6 +893,11 @@ else
         ro.target.product=tablet
 endif
 
+# By default, enable zram; experiment can toggle the flag,
+# which takes effect on boot
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.zram_enabled=1
+
 ### fix adb-device cannot be identified  ###
 ### in AOSP-system image (user firmware) ###
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
