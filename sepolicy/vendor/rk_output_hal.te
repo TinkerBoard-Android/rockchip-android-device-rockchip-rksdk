@@ -11,6 +11,7 @@ allow rk_output_hal block_device:dir { search };
 allow rk_output_hal init:unix_stream_socket { connectto };
 allow rk_output_hal property_socket:sock_file { write };
 allow rk_output_hal baseparameter_block_device:blk_file rw_file_perms;
+allow rk_output_hal baseparameter_block_device:blk_file { getattr };
 allow rk_output_hal vndbinder_device:chr_file { read write open ioctl };
 allow rk_output_hal rk_output_hal_service:hwservice_manager { add find };
 allow rk_output_hal hidl_base_hwservice:hwservice_manager add;
