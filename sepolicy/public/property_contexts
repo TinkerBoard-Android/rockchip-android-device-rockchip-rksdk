@@ -1,5 +1,0 @@
-persist.sys.usb.config        u:object_r:exported3_system_prop:s0 exact string
-ro.product.usbfactory  u:object_r:exported2_default_prop:s0 exact string
-ro.target.product  u:object_r:exported2_default_prop:s0 exact string
-ro.boot.copy_oem  u:object_r:exported2_default_prop:s0 exact string
-ro.board.zone  u:object_r:exported2_default_prop:s0 exact string
