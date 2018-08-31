@@ -44,3 +44,5 @@ vendor.gmali.                           u:object_r:public_vendor_system_prop:s0
 
 # gralloc
 vendor.ggralloc.                        u:object_r:public_vendor_system_prop:s0
+#tee_supplicant_prop
+vendor.security.tee_supplicant       u:object_r:tee_supplicant_prop:s0

@@ -9,8 +9,6 @@ omx.                            u:object_r:vendor_omx_prop:s0
 sys_graphic.            u:object_r:graphic_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
 sys.keymaster.       u:object_r:keymaster_prop:s0
-#tee_supplicant_prop
-security.tee_supplicant u:object_r:tee_supplicant_prop:s0
 # public_vendor_default_prop
 # They are public_vendor_default_props for vendor-specific extension.
 # Usually they are for vndk-sp libs and vendor apks.
