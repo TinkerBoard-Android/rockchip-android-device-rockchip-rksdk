@@ -20,3 +20,6 @@ persist.vendor.video.cvrs               u:object_r:public_vendor_system_prop:s0
 persist.vendor.saveconfig               u:object_r:public_vendor_system_prop:s0
 
 ro.vendor.udisk.visible              u:object_r:vendor_default_prop:s0
+
+#cec
+vendor.sys.hdmicec.                    u:object_r:vendor_cec_prop:s0
