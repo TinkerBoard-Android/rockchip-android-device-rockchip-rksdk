@@ -72,8 +72,6 @@ ro.hwui.text_large_cache_width       u:object_r:vendor_default_prop:s0
 ro.hwui.text_large_cache_height      u:object_r:vendor_default_prop:s0
 ro.hwui.disable_scissor_opt          u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
-sensor.debug.level                    u:object_r:vendor_default_prop:s0
-sensor.debug.time                     u:object_r:vendor_default_prop:s0
 
 
 debug.hwui.renderer u:object_r:public_vendor_system_prop:s0
