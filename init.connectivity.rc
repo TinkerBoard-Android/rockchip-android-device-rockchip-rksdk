@@ -1,5 +1,5 @@
-
-on boot
+# zygote need to be started after otapreopt which will be done on post-fs-data
+on zygote-start
 
 # for bluetooth
     # change back to bluetooth from system
