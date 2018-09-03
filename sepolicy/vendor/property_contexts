@@ -5,10 +5,21 @@ vendor.cts_gts.                         u:object_r:cts_gts_prop:s0
 #np_rockchip_drmservice
 persist.vendor.sys.hid                  u:object_r:vendor_drm_prop:s0
 vendor.serialno                         u:object_r:vendor_drm_prop:s0
-vendor.secureboot                       u:object_r:vendor_drm_prop:s0
+ovendor.secureboot                       u:object_r:vendor_drm_prop:s0
+vindor.hwc.device.primary               u:object_r:public_vendor_system_prop:s0
+vendor.rga.                             u:object_r:public_vendor_system_prop:s0
+vendor.hwc.compose_policy               u:object_r:public_vendor_system_prop:s0
+vendor.hwc.                             u:object_r:public_vendor_system_prop:s0
+vendor.3d_resolution.                   u:object_r:public_vendor_system_prop:s0
+vendor.dump                             u:object_r:public_vendor_system_prop:s0
+
 persist.vendor.overscan.                u:object_r:public_vendor_system_prop:s0
 persist.vendor.color.                   u:object_r:public_vendor_system_prop:s0
+vendor.gmali.                           u:object_r:public_vendor_system_prop:s0
 vendor.display.timeline                 u:object_r:public_vendor_system_prop:s0
+persist.vendor.framebuffer.             u:object_r:public_vendor_system_prop:s0
+vendor.ghwc.                            u:object_r:public_vendor_system_prop:s0
+vendor.xxx.                             u:object_r:public_vendor_system_prop:s0
 persist.vendor.resolution.              u:object_r:public_vendor_system_prop:s0
 persist.vendor.hdcp1x.                  u:object_r:public_vendor_system_prop:s0
 persist.vendor.resolution_white.        u:object_r:public_vendor_system_prop:s0
@@ -18,6 +29,8 @@ persist.vendor.saturation.              u:object_r:public_vendor_system_prop:s0
 persist.vendor.hue.                     u:object_r:public_vendor_system_prop:s0
 persist.vendor.video.cvrs               u:object_r:public_vendor_system_prop:s0
 persist.vendor.saveconfig               u:object_r:public_vendor_system_prop:s0
+vendor.hdmi_status.                     u:object_r:public_vendor_system_prop:s0
+vendor.hwc                              u:object_r:public_vendor_system_prop:s0
 
 ro.vendor.udisk.visible                 u:object_r:vendor_default_prop:s0
 
