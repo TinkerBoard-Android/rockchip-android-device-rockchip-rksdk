@@ -24,9 +24,6 @@ persist.audio.currentplayback                         u:object_r:public_vendor_d
 
 # public_vendor_system_prop
 # They are public_vendor_system_props for vendor-specific extension.
-sys.ggralloc.version                 u:object_r:public_vendor_system_prop:s0
-sys.ggralloc.                 u:object_r:public_vendor_system_prop:s0
-gralloc.                 u:object_r:public_vendor_system_prop:s0
 iep.                            u:object_r:public_vendor_system_prop:s0
 mediaplayer.timedtext.listener                            u:object_r:public_vendor_system_prop:s0
 

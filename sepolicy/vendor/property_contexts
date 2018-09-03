@@ -39,3 +39,9 @@ vendor.sys.hdmicec.                     u:object_r:vendor_cec_prop:s0
 
 #sensor
 vendor.sensor.debug.                    u:object_r:vendor_default_prop:s0
+
+# mali
+vendor.gmali.                           u:object_r:public_vendor_system_prop:s0
+
+# gralloc
+vendor.ggralloc.                        u:object_r:public_vendor_system_prop:s0
