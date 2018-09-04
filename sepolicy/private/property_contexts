@@ -28,18 +28,6 @@ persist.bluetooth.btsnooppath        u:object_r:vendor_default_prop:s0
 persist.bluetooth.btsnoopsize        u:object_r:vendor_default_prop:s0
 persist.bluetooth.rtkcoex            u:object_r:vendor_default_prop:s0
 bluetooth.enable_timeout_ms          u:object_r:vendor_default_prop:s0
-ro.hwui.texture_cache_size           u:object_r:vendor_default_prop:s0
-ro.hwui.layer_cache_size             u:object_r:vendor_default_prop:s0
-ro.hwui.r_buffer_cache_size          u:object_r:vendor_default_prop:s0
-ro.hwui.path_cache_size              u:object_r:vendor_default_prop:s0
-ro.hwui.gradient_cache_size          u:object_r:vendor_default_prop:s0
-ro.hwui.drop_shadow_cache_size       u:object_r:vendor_default_prop:s0
-ro.hwui.texture_cache_flushrate      u:object_r:vendor_default_prop:s0
-ro.hwui.text_small_cache_width       u:object_r:vendor_default_prop:s0
-ro.hwui.text_small_cache_height      u:object_r:vendor_default_prop:s0
-ro.hwui.text_large_cache_width       u:object_r:vendor_default_prop:s0
-ro.hwui.text_large_cache_height      u:object_r:vendor_default_prop:s0
-ro.hwui.disable_scissor_opt          u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 
 
