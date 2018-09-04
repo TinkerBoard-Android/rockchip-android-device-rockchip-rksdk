@@ -263,6 +263,8 @@ on property:vendor.serialno=*
 
 on property:vendor.cts_gts.status=true
     restorecon /data/ota/view_cts.ini
+    restart vendor.media.omx
+    restart media
 
 # Android bug collector
 service abc /vendor/bin/abc
