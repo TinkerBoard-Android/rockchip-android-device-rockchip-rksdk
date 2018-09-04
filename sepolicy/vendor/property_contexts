@@ -15,7 +15,6 @@ vendor.dump                             u:object_r:public_vendor_system_prop:s0
 
 persist.vendor.overscan.                u:object_r:public_vendor_system_prop:s0
 persist.vendor.color.                   u:object_r:public_vendor_system_prop:s0
-vendor.gmali.                           u:object_r:public_vendor_system_prop:s0
 vendor.display.timeline                 u:object_r:public_vendor_system_prop:s0
 persist.vendor.framebuffer.             u:object_r:public_vendor_system_prop:s0
 vendor.ghwc.                            u:object_r:public_vendor_system_prop:s0
