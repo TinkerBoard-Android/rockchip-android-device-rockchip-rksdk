@@ -5,8 +5,8 @@ vendor.cts_gts.                         u:object_r:cts_gts_prop:s0
 #np_rockchip_drmservice
 persist.vendor.sys.hid                  u:object_r:vendor_drm_prop:s0
 vendor.serialno                         u:object_r:vendor_drm_prop:s0
-ovendor.secureboot                       u:object_r:vendor_drm_prop:s0
-vindor.hwc.device.primary               u:object_r:public_vendor_system_prop:s0
+vendor.secureboot                       u:object_r:vendor_drm_prop:s0
+vendor.hwc.device.primary               u:object_r:public_vendor_system_prop:s0
 vendor.rga.                             u:object_r:public_vendor_system_prop:s0
 vendor.hwc.compose_policy               u:object_r:public_vendor_system_prop:s0
 vendor.hwc.                             u:object_r:public_vendor_system_prop:s0
