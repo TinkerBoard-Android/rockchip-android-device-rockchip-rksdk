@@ -13,12 +13,6 @@ sys.keymaster.       u:object_r:keymaster_prop:s0
 # They are public_vendor_default_props for vendor-specific extension.
 # Usually they are for vndk-sp libs and vendor apks.
 ro.factory.hasUMS             u:object_r:public_vendor_default_prop:s0
-media.audio.slice             u:object_r:public_vendor_default_prop:s0
-media.audio.                         u:object_r:public_vendor_default_prop:s0
-media.                         u:object_r:public_vendor_default_prop:s0
-audio.                         u:object_r:public_vendor_default_prop:s0
-audio_hal.                         u:object_r:public_vendor_default_prop:s0
-persist.audio.currentplayback                         u:object_r:public_vendor_default_prop:s0
 
 # public_vendor_system_prop
 # They are public_vendor_system_props for vendor-specific extension.
