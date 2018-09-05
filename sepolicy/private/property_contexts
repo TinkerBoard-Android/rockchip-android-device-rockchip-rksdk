@@ -1,10 +1,7 @@
 #for rk modules
 #omx
-use_mpp_mode                    u:object_r:vendor_omx_prop:s0
-dump_omx_log                    u:object_r:vendor_omx_prop:s0
 mpp_buffer_debug                    u:object_r:vendor_omx_prop:s0
 mpp_mem_flag                    u:object_r:vendor_omx_prop:s0
-omx.                            u:object_r:vendor_omx_prop:s0
 
 sys_graphic.            u:object_r:graphic_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
