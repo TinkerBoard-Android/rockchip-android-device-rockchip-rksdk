@@ -39,11 +39,16 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
+  # For arm Go tablet.
   $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackageGo.mk)
 else
+  # For arm64 Go tablet
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+else
+# Normal tablet, add QuickStep for normal product only.
+PRODUCT_PACKAGES += Launcher3QuickStep
 endif
 
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
