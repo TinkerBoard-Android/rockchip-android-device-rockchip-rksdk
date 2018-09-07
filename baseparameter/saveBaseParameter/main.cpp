@@ -240,7 +240,7 @@ static void saveHwcInitalInfo(struct file_base_paramer *base_paramer, int dpy, c
         base_paramer->main.hwc_info.framebuffer_height = fb_h;
         base_paramer->main.hwc_info.fps = fps;
         memset(property,0,sizeof(property));
-        len = property_get("sys.hwc.device.primary", property, NULL);
+        len = property_get("vendor.hwc.device.primary", property, NULL);
         if (len && device==NULL) {
             memcpy(base_paramer->main.hwc_info.device, property, strlen(property));
         } else if (device != NULL){
@@ -255,7 +255,7 @@ static void saveHwcInitalInfo(struct file_base_paramer *base_paramer, int dpy, c
         base_paramer->aux.hwc_info.framebuffer_height = fb_h;
         base_paramer->aux.hwc_info.fps = fps;
         memset(property,0,sizeof(property));
-        len = property_get("sys.hwc.device.extend", property, NULL);
+        len = property_get("vendor.hwc.device.extend", property, NULL);
         if (len && device==NULL)
             memcpy(base_paramer->aux.hwc_info.device, property, strlen(property));
         else if (device != NULL)
@@ -270,28 +270,28 @@ static void saveBcshConfig(struct file_base_paramer *base_paramer, int dpy){
         char property[PROPERTY_VALUE_MAX];
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.brightness.main", property, "0");
+        property_get("persist.vendor.sys.brightness.main", property, "0");
         if (atoi(property) > 0)
             base_paramer->main.reserve[0] = atoi(property);
         else
             base_paramer->main.reserve[0] = DEFAULT_BRIGHTNESS;
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.contrast.main", property, "0");
+        property_get("persist.vendor.sys.contrast.main", property, "0");
         if (atoi(property) > 0)
             base_paramer->main.reserve[1] = atoi(property);
         else
             base_paramer->main.reserve[1] = DEFAULT_CONTRAST;
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.saturation.main", property, "0");
+        property_get("persist.vendor.sys.saturation.main", property, "0");
         if (atoi(property) > 0)
             base_paramer->main.reserve[2] = atoi(property);
         else
             base_paramer->main.reserve[2] = DEFAULT_SATURATION;
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.hue.main", property, "0");
+        property_get("persist.vendor.sys.hue.main", property, "0");
         if (atoi(property) > 0)
             base_paramer->main.reserve[3] = atoi(property);
         else
@@ -300,28 +300,28 @@ static void saveBcshConfig(struct file_base_paramer *base_paramer, int dpy){
         char property[PROPERTY_VALUE_MAX];
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.brightness.aux", property, "0");
+        property_get("persist.vendor.sys.brightness.aux", property, "0");
         if (atoi(property) > 0)
             base_paramer->aux.reserve[0] = atoi(property);
         else
             base_paramer->aux.reserve[0] = DEFAULT_BRIGHTNESS;
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.contrast.aux", property, "0");
+        property_get("persist.vendor.sys.contrast.aux", property, "0");
         if (atoi(property) > 0)
             base_paramer->aux.reserve[1] = atoi(property);
         else
             base_paramer->aux.reserve[1] = DEFAULT_CONTRAST;
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.saturation.aux", property, "0");
+        property_get("persist.vendor.sys.saturation.aux", property, "0");
         if (atoi(property) > 0)
             base_paramer->aux.reserve[2] = atoi(property);
         else
             base_paramer->aux.reserve[2] = DEFAULT_SATURATION;
 
         memset(property,0,sizeof(property));
-        property_get("persist.sys.hue.aux", property, "0");
+        property_get("persist.vendor.sys.hue.aux", property, "0");
         if (atoi(property) > 0)
             base_paramer->aux.reserve[3] = atoi(property);
         else
