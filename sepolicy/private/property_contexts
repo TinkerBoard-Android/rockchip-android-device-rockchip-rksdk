@@ -1,8 +1,4 @@
 #for rk modules
-#omx
-mpp_buffer_debug                    u:object_r:vendor_omx_prop:s0
-mpp_mem_flag                    u:object_r:vendor_omx_prop:s0
-
 sys_graphic.            u:object_r:graphic_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
 sys.keymaster.       u:object_r:keymaster_prop:s0
