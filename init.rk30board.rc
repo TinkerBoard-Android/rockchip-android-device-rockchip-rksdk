@@ -314,11 +314,11 @@ service shutdownanim /system/bin/bootanimation shutdown
     disabled
     oneshot
 
-#for bd	
-service iso_operate /vendor/bin/iso
+#for bd
+service iso_operate /system/bin/iso
     class main
     disabled
-    oneshot		
+    oneshot
 
 service rk_store_keybox /vendor/bin/rk_store_keybox
     class main
