@@ -9,8 +9,5 @@ dontaudit hal_wifi_default wifi_data_file:dir { search };
 allow hal_wifi_default init:unix_stream_socket { connectto };
 allow hal_wifi_default kernel:system module_request;
 dontaudit hal_wifi_default self:capability { dac_override };
-typeattribute hal_wifi_default data_between_core_and_vendor_violators;
-allow hal_wifi_default wifi_data_file:file { rw_file_perms create_file_perms };
-allow hal_wifi_default wifi_data_file:dir rw_dir_perms;
 allow hal_wifi_default self:capability sys_module;
 get_prop(hal_wifi_default,exported_wifi_prop)
