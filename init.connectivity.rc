@@ -11,6 +11,8 @@ on zygote-start
 
     chmod 0660 /dev/rtk_btusb
     chown bluetooth net_bt /dev/rtk_btusb
+    chmod 0660 /dev/rtkbt_dev
+    chown bluetooth net_bt /dev/rtkbt_dev
 
     # bluetooth MAC address programming
     chown bluetooth net_bt ro.bt.bdaddr_path
@@ -31,28 +33,11 @@ on zygote-start
 
 # for wifi
 
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets/tmp 0440 wifi wifi
-    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
     
-    mkdir /data/misc/wifi 0770 wifi wifi
-    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
-    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    chmod 777 /data/misc/wifi/sockets
-    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
-    chown wifi wifi /data/misc/wifi 
-    chown system wifi /data/misc/wifi/entropy.bin
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
-    chown wifi wifi /data/misc/wifi/p2p_supplicant.conf
-    chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
 
 #for nfc
     chmod 0660 /dev/bcm2079x
@@ -77,14 +62,3 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service wifiservice /vendor/bin/wifiservice
-    class main
-    user root
-    disabled
-    oneshot
-
-service btservice /vendor/bin/btservice
-    class main
-    user root
-    disabled
-    oneshot
