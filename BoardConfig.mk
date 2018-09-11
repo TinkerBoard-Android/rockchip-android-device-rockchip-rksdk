@@ -141,11 +141,11 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK ?= false
 DEVICE_HAVE_LIBRKVPU ?= true
 
 #rotate screen to 0, 90, 180, 270
-#0:   rotate_0
-#90:  rotate_90
-#180: rotate_180
-#270: rotate_270
-ROTATE_SCREEN ?= rotate_0
+#0:   ROTATION_NONE
+#90:  ROTATION_RIGHT
+#180: ROTATION_DOWN
+#270: ROTATION_LEFT
+TARGET_RECOVERY_DEFAULT_ROTATION ?= ROTATION_NONE
 
 #Screen to Double, Single
 #YES: Screen to Double
