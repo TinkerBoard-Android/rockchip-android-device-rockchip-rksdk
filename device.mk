@@ -178,8 +178,13 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+PRODUCT_COPY_FILES += \
+	$(TARGET_DEVICE_DIR)/fstab.rk30board_AB:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board
+else
 PRODUCT_COPY_FILES += \
 	$(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board
+endif
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -946,4 +951,55 @@ PRODUCT_PACKAGES += libstdc++.vendor
 #only box and atv using our audio policy(write by rockchip)
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 USE_CUSTOM_AUDIO_POLICY := 1
+endif
+
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_verifier	\
+    cppreopts.sh
+
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+    bootctrl.rk30board	\
+    libavbuser	\
+    libfstab	\
+    libcutils
+
+PRODUCT_PACKAGES += \
+    update_engine_sideload
+
+PRODUCT_PACKAGES += \
+    update_engine_client
+
+AB_OTA_PARTITIONS += \
+    boot \
+    system	\
+    bootloader	\
+    tos	\
+    vendor	\
+    oem	\
+    vbmeta \
+    dtbo
+
+# Boot control HAL
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-service \
+
+PRODUCT_PACKAGES += \
+  bootctrl.rk30board
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
+
+# A/B OTA dexopt package
+PRODUCT_PACKAGES += otapreopt_script
+
+# A/B OTA dexopt update_engine hookup
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
+
 endif

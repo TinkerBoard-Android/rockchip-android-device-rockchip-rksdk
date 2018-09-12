@@ -426,3 +426,33 @@ BOARD_USB_ALLOW_DEFAULT_MTP ?= false
 HIGH_RELIABLE_RECOVERY_OTA := false
 BOARD_USES_FULL_RECOVERY_IMAGE := false
 BOARD_DEFAULT_CAMERA_HAL_VERSION ?=3.3
+
+BOARD_USES_AB_IMAGE ?= false
+
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+    AB_OTA_UPDATER := true
+    TARGET_NO_RECOVERY := true
+    BOARD_USES_RECOVERY_AS_BOOT := true
+    BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+    USE_AB_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter_ab.txt && echo true)
+    ifeq ($(strip $(USE_AB_PARAMETER)), true)
+        BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt system_a)
+        BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt oem_a)
+        BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt vendor_a)
+        BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt cache)
+        BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt boot_a)
+        BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt dtbo_a)
+        #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter_ab.txt)
+    endif
+    ifeq ($(filter true, $(BOARD_AVB_ENABLE)), )
+        BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
+    else
+        BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
+    endif
+    ifeq ($(filter true, $(BOARD_SELINUX_ENFORCING)), )
+        BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+    endif
+    ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS := console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init
+    DEVICE_MANIFEST_FILE := device/rockchip/common/manifest_ab.xml
+    TARGET_RECOVERY_FSTAB := $(TARGET_DEVICE_DIR)/fstab.rk30board_AB
+endif
