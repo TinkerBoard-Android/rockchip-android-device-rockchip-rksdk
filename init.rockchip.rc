@@ -41,22 +41,7 @@ on post-fs
     write /proc/sys/vm/page-cluster 0
 
 on post-fs-data
-    # for optee data storage 
-    mkdir /data/tee 0700 root root
-    # Now that are booted all the way and out of mount panics, ensure that we panic on later errors.
-    # This is a hack to work around the fact that we can't recover from all errors that would lead to a panic
-    # during the initial mount (http://b/17382778), yet we need to panic on emmc errors (http://b/17640053)
-    # For a remount only the flags and the target mount point are relevant.
-    mount dummy dummy /data remount nosuid nodev noatime rw seclabel,background_gc=on,user_xattr,acl,errors=panic
-
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
-
-    mkdir /data/camera 0775 media camera
-  
     setprop vold.post_fs_data_done 1
-    mkdir /data/system/gps 0775 root system
 
 on early-boot
     # wait for insmod_sh to finish all modules
@@ -64,13 +49,6 @@ on early-boot
 
 on boot
     setprop UserVolumeLabel "RockChips"
-
-    # bluetooth
-    # change back to bluetooth from system
-    chown bluetooth net_bt_stack /data/misc/bluetooth
-
-    # power down interface
-    # write /sys/class/rfkill/rfkill0/state 0
 
 service charger /charger
     class charger

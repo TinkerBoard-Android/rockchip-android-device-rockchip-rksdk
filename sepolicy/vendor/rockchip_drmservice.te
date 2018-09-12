@@ -7,18 +7,12 @@ dontaudit np_rockchip_drmservice self:capability {dac_override};
 allow np_rockchip_drmservice init:unix_stream_socket { connectto };
 dontaudit np_rockchip_drmservice self:capability { dac_read_search };
 allow np_rockchip_drmservice sysfs_android_usb:dir { search };
-allow np_rockchip_drmservice system_data_file:file { read open };
 allow np_rockchip_drmservice vendor_metadata:dir { search };
 allow np_rockchip_drmservice vendor_metadata:file { read open getattr };
 allow np_rockchip_drmservice configfs:dir { search };
 allow np_rockchip_drmservice configfs:file { open write };
 allow np_rockchip_drmservice proc_cmdline:file { read open };
-typeattribute np_rockchip_drmservice data_between_core_and_vendor_violators;
-allow np_rockchip_drmservice gpu_data_file:file { rw_file_perms create setattr };
-allow np_rockchip_drmservice wifi_data_file:file { rw_file_perms create };
 allow np_rockchip_drmservice storage_device:chr_file rw_file_perms;
+allow np_rockchip_drmservice vendor_data_file:file { rw_file_perms create setattr };
 set_prop(np_rockchip_drmservice,vendor_drm_prop)
 get_prop(np_rockchip_drmservice,vendor_drm_prop)
-allow np_rockchip_drmservice wifi_data_file:dir rw_dir_perms;
-allow np_rockchip_drmservice ota_data_file:dir rw_dir_perms;
-allow np_rockchip_drmservice ota_data_file:file { rw_file_perms create setattr };

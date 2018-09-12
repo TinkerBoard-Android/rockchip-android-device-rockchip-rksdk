@@ -21,24 +21,15 @@ on post-fs-data
     chown root system /system/bin/glgps
     chmod 644 /system/lib/hw/gps.default.so
     chown root system /system/lib/hw/gps.default.so
-    mkdir /data/gps 0770 system net_bt_stack
 
     chmod 664 /sys/class/display/HDMI/color
 
-    ##$_rbox_$_modify_$_chenzhi_20120309
-    ##$_rbox_$_modify_$_begin
-    mkdir /data/misc/ppp 777 system system
-    chmod 777 /data/misc/ppp
-    copy /etc/ppp/pap-secrets /data/misc/ppp/pap-secrets
-    copy /etc/ppp/pppoe.conf /data/misc/ppp/pppoe.conf
-    ##$_rbox_$_modify_$_end
 
-    mkdir /data/cifsmanager 777 system system
     chmod 0666 /dev/opteearmtz00
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
 
-    mkdir /data/logs 0755 root shell
+    mkdir /data/vendor/logs 0755 root shell
 on init
     # set temperature control policy as normal mode
     write /sys/module/rockchip_pm/parameters/policy 1
@@ -213,13 +204,11 @@ on boot
     mkdir /mnt/iso 0660 system system
     chmod 0666 /dev/opteearmtz00
 
-    restorecon /data/ota/view_cts.ini
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
 # cpu min freq must change to 126M when boot completed
 
 on property:sys.boot_completed=1
-    restorecon /data/ota/view_cts.ini
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 0
     setprop persist.sys.first_booting false
@@ -262,7 +251,6 @@ on property:vendor.serialno=*
     restart adbd
 
 on property:vendor.cts_gts.status=true
-    restorecon /data/ota/view_cts.ini
     restart vendor.media.omx
     restart media
 

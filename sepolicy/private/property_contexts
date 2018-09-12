@@ -11,6 +11,7 @@ ro.factory.hasUMS             u:object_r:public_vendor_default_prop:s0
 # They are public_vendor_system_props for vendor-specific extension.
 iep.                            u:object_r:public_vendor_system_prop:s0
 mediaplayer.timedtext.listener                            u:object_r:public_vendor_system_prop:s0
+media.audio.slice                            u:object_r:public_vendor_system_prop:s0
 
 
 # vendor_default_prop
