@@ -65,7 +65,7 @@ extern "C" void destroyAudioPolicyManager(AudioPolicyInterface *interface)
 
 ATVAudioPolicyManager::ATVAudioPolicyManager(
         AudioPolicyClientInterface *clientInterface)
-    : AudioPolicyManager(clientInterface), mForceSubmixInputSelection(false)
+    : AudioPolicyManager(clientInterface)
 {
     ALOGD("%s",__FUNCTION__);
     mBitstreamDevice = AUDIO_DEVICE_NONE;
@@ -91,21 +91,15 @@ bool ATVAudioPolicyManager::isAlreadConnect(audio_devices_t device,
     return false;
 }
 
-status_t ATVAudioPolicyManager::setDeviceConnectionState(audio_devices_t device,
-                                                         audio_policy_dev_state_t state,
-                                                         const char *device_address,
-                                                         const char *device_name)
+/*
+ * set device for audio pass throught/bitstream (HDMI or spdif)
+ * there is no interface for android to set bitstream device
+ * we reusing setDeviceConnectionState to set the bitsteram device,
+ * if device_name = "RK_SET_BITSTREAM_DEVICE", then set the bitstream device
+ */
+status_t ATVAudioPolicyManager::setBitStreamDevice(audio_devices_t device,audio_policy_dev_state_t state,
+                             const char *device_address,const char *device_name)
 {
-    ALOGD("setDeviceConnectionState() this= %p, device: 0x%X, state %d, address %s name %s",
-            this,device, state, device_address, device_name);
-
-    if (!audio_is_output_device(device) && !audio_is_input_device(device)) return BAD_VALUE;
-
-    /*
-     * there is no interface for android to set bitstream device
-     * we reusing setDeviceConnectionState to set the bitsteram device,
-     * if device_name = "RK_SET_BITSTREAM_DEVICE", then set the bitstream device
-     */
     const char* setBitstreamDevice = "RK_SET_BITSTREAM_DEVICE";
     if((device_name != NULL) && (strcmp(device_name,setBitstreamDevice) == 0)){
         audio_devices_t newDevice = mBitstreamDevice;
@@ -132,21 +126,27 @@ status_t ATVAudioPolicyManager::setDeviceConnectionState(audio_devices_t device,
         }
     }
 
-    /*
-     * If the input device is the remote submix and an address starting with "force=" was
-     * specified, enable "force=1" / disable "force=0" the forced selection of the remote submix
-     * input device over hardware input devices (e.g RemoteControl).
-     */
-    if (device == AUDIO_DEVICE_IN_REMOTE_SUBMIX && device_address) {
-        AudioParameter parameters = AudioParameter(String8(device_address));
-        int forceValue;
-        if (parameters.getInt(String8("force"), forceValue) == OK) {
-            mForceSubmixInputSelection = forceValue != 0;
-        }
+    return -1;
+}
 
+status_t ATVAudioPolicyManager::setDeviceConnectionState(audio_devices_t device,
+                                                         audio_policy_dev_state_t state,
+                                                         const char *device_address,
+                                                         const char *device_name)
+{
+    ALOGD("setDeviceConnectionState() this= %p, device: 0x%X, state %d, address %s name %s",
+            this,device, state, device_address, device_name);
+
+    if (!audio_is_output_device(device) && !audio_is_input_device(device)) return BAD_VALUE;
+
+    if(setBitStreamDevice(device,state,device_address,device_name) == NO_ERROR) {
         return NO_ERROR;
     }
 
+    /*
+     * some device may be set connect already(For example: HDMI/SPDIF set connect for audio bitstream/pass throught by AudioSetting),
+     * so we just return NO_ERROR to tell AudioService or App this device is connect success
+     */
     bool already = isAlreadConnect(device,state,device_address,device_name);
     if(already){
         ALOGD("setDeviceConnectionState() device already connected: %x", device);
@@ -175,45 +175,6 @@ audio_policy_dev_state_t ATVAudioPolicyManager::getDeviceConnectionState(audio_d
 
     return AudioPolicyManager::getDeviceConnectionState(device,device_address);
 }
-
-audio_devices_t ATVAudioPolicyManager::getDeviceForInputSource(audio_source_t inputSource)
-{
-    const audio_devices_t availableDeviceTypes = mAvailableInputDevices.types() & ~AUDIO_DEVICE_BIT_IN;
-#if 0
-    uint32_t device = AUDIO_DEVICE_NONE;
-    bool usePhysRemote = true;
-
-    if (inputSource == AUDIO_SOURCE_VOICE_RECOGNITION ||
-            inputSource == AUDIO_SOURCE_UNPROCESSED) {
-      ALOGV("getDeviceForInputSource %s %s", usePhysRemote ? "use physical" : "",
-          mForceSubmixInputSelection ? "use virtual" : "");
-      if (availableDeviceTypes & AUDIO_DEVICE_IN_WIRED_HEADSET &&
-            usePhysRemote) {
-          // User a wired headset (physical remote) if available, connected and active
-          ALOGV("Wired Headset available");
-          device = AUDIO_DEVICE_IN_WIRED_HEADSET;
-      } else if (availableDeviceTypes & AUDIO_DEVICE_IN_REMOTE_SUBMIX &&
-            mForceSubmixInputSelection) {
-          // REMOTE_SUBMIX should always be avaible, let's make sure it's being forced at the moment
-          ALOGV("Virtual remote available");
-          device = AUDIO_DEVICE_IN_REMOTE_SUBMIX;
-      } else if (availableDeviceTypes & AUDIO_DEVICE_IN_USB_DEVICE) {
-          ALOGV("Use USB audio input");
-          device = AUDIO_DEVICE_IN_USB_DEVICE;
-      }
-    } else if ((availableDeviceTypes & AUDIO_DEVICE_IN_REMOTE_SUBMIX) &&
-            (inputSource == AUDIO_SOURCE_REMOTE_SUBMIX)) {
-        device = AUDIO_DEVICE_IN_REMOTE_SUBMIX;
-    }
-
-    ALOGV("getDeviceForInputSource() input source %d, device %08x", inputSource, device);
-#endif
-    if ((availableDeviceTypes & AUDIO_DEVICE_IN_REMOTE_SUBMIX) && mForceSubmixInputSelection) {
-        return AUDIO_DEVICE_IN_REMOTE_SUBMIX;
-    }
-    return AudioPolicyManager::getDeviceForInputSource(inputSource);
-}
-
 status_t ATVAudioPolicyManager::getSurroundFormats(unsigned int *numSurroundFormats,
                                                 audio_format_t *surroundFormats,
                                                 bool *surroundFormatsEnabled,

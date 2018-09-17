@@ -36,8 +36,6 @@ public:
                                               audio_policy_dev_state_t state,
                                               const char *device_address,
                                               const char *device_name);
-
-    virtual audio_devices_t getDeviceForInputSource(audio_source_t inputSource);
     virtual audio_policy_dev_state_t getDeviceConnectionState(audio_devices_t device,
                                               const char *device_address);
     virtual status_t getSurroundFormats(unsigned int *numSurroundFormats,
@@ -56,9 +54,10 @@ protected:
     bool isAlreadConnect(audio_devices_t device,audio_policy_dev_state_t state,
                                                 const char *device_address,
                                                 const char *device_name);
+
+    virtual status_t setBitStreamDevice(audio_devices_t device,audio_policy_dev_state_t state,
+                             const char *device_address,const char *device_name);
 private:
-    // Flag which indicates whether to record from the submix device.
-    bool mForceSubmixInputSelection;
     audio_devices_t  mBitstreamDevice;
 };
 
