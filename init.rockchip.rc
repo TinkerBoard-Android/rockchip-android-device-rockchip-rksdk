@@ -45,7 +45,7 @@ on post-fs-data
 
 on early-boot
     # wait for insmod_sh to finish all modules
-    wait_for_prop sys.all.modules.ready 1
+    wait_for_prop vendor.all.modules.ready 1
 
 on boot
     setprop UserVolumeLabel "RockChips"
