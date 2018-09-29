@@ -317,10 +317,12 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 # Sensor HAL
+ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
     android.hardware.sensors@1.0-impl \
     sensors.$(TARGET_BOARD_HARDWARE)
+endif
 
 # Power HAL
 PRODUCT_PACKAGES += \
@@ -338,10 +340,12 @@ PRODUCT_PACKAGES += \
 
 
 # Light HAL
+ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_PLATFORM) \
     android.hardware.light@2.0-service \
-    android.hardware.light@2.0-impl    
+    android.hardware.light@2.0-impl
+endif
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
