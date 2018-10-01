@@ -71,6 +71,11 @@ def InstallTrust(trust_bin, input_zip, info):
   info.script.Print("Writing trust img...")
   info.script.WriteRawImage("/trust", "trust.img")
 
+def InstallVbmeta(vbmeta_bin, input_zip, info):
+  common.ZipWriteStr(info.output_zip, "vbmeta.img",vbmeta_bin)
+  info.script.Print("Writing vbmeta img...")
+  info.script.WriteRawImage("/vbmeta", "vbmeta.img")
+
 def InstallCharge(charge_bin, input_zip, info):
   common.ZipWriteStr(info.output_zip, "charge.img", charge_bin)
   info.script.Print("Writing charge img..")
@@ -95,6 +100,14 @@ def FullOTA_InstallEnd(info):
     InstallUboot(uboot, info.input_zip, info)
   except KeyError:
     print "warning: no uboot.img in input target_files; not flashing uboot"
+
+  try:
+    vbmeta = info.input_zip.read("vbmeta.img")
+    print "wirte vbmeta now..."
+    InstallVbmeta(vbmeta, info.input_zip, info)
+  except KeyError:
+    print "warning: no vbmeta.img in input target_files; not flashing vbmeta"
+
 
   try:
     charge = info.input_zip.read("charge.img")
@@ -146,6 +159,22 @@ def IncrementalOTA_InstallEnd(info):
     InstallTrust(trust_target, info.target_zip, info)
   else:
     print "trust unchanged; skipping"
+
+  try:
+    vbmeta_target = info.target_zip.read("vbmeta.img")
+  except KeyError:
+    vbmeta_target = None
+
+  try:
+    vbmeta_source = info.source_zip.read("vbmeta.img")
+  except KeyError:
+    vbmeta_source = None
+
+  if (vbmeta_target != None) and (vbmeta_target != vbmeta_source):
+    print "write vbmeta now..."
+    InstallVbmeta(vbmeta_target, info.target_zip, info)
+  else:
+    print "vbmeta unchanged; skipping"
 
   try:
     loader_uboot_target = info.target_zip.read("uboot.img")
