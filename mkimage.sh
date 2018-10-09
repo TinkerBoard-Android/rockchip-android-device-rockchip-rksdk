@@ -234,4 +234,13 @@ then
     fi
 fi
 
+if [ $TARGET == $BOOT_OTA ]
+then
+echo -n "create system.img boot.img oem.img vendor.img dtbo.img vbmeta.img for OTA..."
+cp -rf  $OUT/obj/PACKAGING/target_files_intermediates/*-target_files*/IMAGES/*.img  $IMAGE_PATH/
+rm -rf  $IMAGE_PATH/cache.img
+rm -rf  $IMAGE_PATH/recovery-two-step.img
+echo "done."
+fi
+
 chmod a+r -R $IMAGE_PATH/
