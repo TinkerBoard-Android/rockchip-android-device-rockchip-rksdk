@@ -1,1 +1,2 @@
 allow adbd oemfs:dir { search };
+set_prop(adbd,ctl_start_prop)
