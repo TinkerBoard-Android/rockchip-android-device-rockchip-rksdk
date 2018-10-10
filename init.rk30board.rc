@@ -311,3 +311,7 @@ service iso_operate /system/bin/iso
 service rk_store_keybox /vendor/bin/rk_store_keybox
     class main
     oneshot		
+
+#vts audio property
+on property:vts.native_server.on=1
+    setprop vendor.vts_test true
