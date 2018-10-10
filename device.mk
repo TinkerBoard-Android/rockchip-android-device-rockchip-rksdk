@@ -316,12 +316,17 @@ PRODUCT_PACKAGES += \
     librs_jni \
     libjni_pinyinime
 
-# Sensor HAL
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
+# Sensor HAL
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
     android.hardware.sensors@1.0-impl \
     sensors.$(TARGET_BOARD_HARDWARE)
+
+# ConfigStoreHAL, for HWRotation, set SF_PRIMARY_DISPLAY_ORIENTATION to change it.
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.1-service
+
 endif
 
 # Power HAL
