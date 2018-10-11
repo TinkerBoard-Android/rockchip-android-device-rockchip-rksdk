@@ -97,6 +97,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_consumerir=true
 endif
 
+ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
+endif
+
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
