@@ -110,15 +110,14 @@ status_t ATVAudioPolicyManager::setBitStreamDevice(audio_devices_t device,audio_
         }
         if(mBitstreamDevice != newDevice){
             mBitstreamDevice = newDevice;
-            // if device is changed, the surround format need clear
-            mSurroundFormats.clear();
-            ALOGD("%s: %d: mSurroundFormats.clear()",__FUNCTION__,__LINE__);
             if((device == AUDIO_DEVICE_OUT_AUX_DIGITAL) || (device == AUDIO_DEVICE_OUT_SPDIF)){
                 bool already = isAlreadConnect(device,state,device_address,"");
                 if(already){
                     return NO_ERROR;
                 }
-
+                // if device is changed, the surround format need clear
+                mSurroundFormats.clear();
+                ALOGD("%s: %d: mSurroundFormats.clear()",__FUNCTION__,__LINE__);
                 return AudioPolicyManager::setDeviceConnectionState(device, state, device_address, "");
             }
         }else{
