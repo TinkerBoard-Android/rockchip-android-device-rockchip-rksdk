@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ $REPO_REMOTE == rk* ]]; then
+if [[ $REPO_REMOTE == rk* ]] || [[ $REPO_RREV == rk33* ]]; then
     REMOTE_DIFF=`git log $REPO_LREV..HEAD`
     LOCAL_DIFF=`git diff`
     if [ -n "$REMOTE_DIFF" -o  -n "$LOCAL_DIFF" ]; then
