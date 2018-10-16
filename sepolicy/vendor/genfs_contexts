@@ -1,0 +1,3 @@
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-charger/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
+
