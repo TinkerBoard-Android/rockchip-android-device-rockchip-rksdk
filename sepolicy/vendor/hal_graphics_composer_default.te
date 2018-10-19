@@ -20,6 +20,8 @@ allow hal_graphics_composer_default hal_graphics_allocator_hwservice:hwservice_m
 dontaudit hal_graphics_composer_default kernel:system module_request;
 binder_call(hal_graphics_composer_default, hal_graphics_allocator_default)
 
+allow hal_graphics_composer_default mediaserver:fd {use};
+
 get_prop(hal_graphics_composer_default, public_vendor_system_prop)
 get_prop(hal_graphics_composer_default, graphic_prop)
 set_prop(hal_graphics_composer_default, public_vendor_system_prop)
