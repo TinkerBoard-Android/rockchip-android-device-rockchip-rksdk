@@ -699,6 +699,9 @@ $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
 ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
+ifeq ($(strip $(BUILD_WITH_EEA)),true)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms_go_eea_$(BUILD_WITH_EEA_TYPE).mk)
+else
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go.mk)
@@ -706,12 +709,18 @@ else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go-mandatory.mk)
 endif
 endif
+endif
+else
+
+ifeq ($(strip $(BUILD_WITH_EEA)), true)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms_eea_$(BUILD_WITH_EEA_TYPE).mk)
 else
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
 else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
+endif
 endif
 endif
 endif
