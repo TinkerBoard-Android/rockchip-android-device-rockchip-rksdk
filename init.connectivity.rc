@@ -49,6 +49,10 @@ on zygote-start
     chown nfc nfc /data/nfc
     chown nfc nfc /data/nfc/param
 
+on property:wlan.driver.status=ok
+    chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
+    chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path
+
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     /vendor/etc/wifi/wpa_config.txt
 #   we will start as root and wpa_supplicant will switch to user wifi
