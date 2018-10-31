@@ -387,4 +387,4 @@
 /dev/media1          0660   media      camera
 
 # for sensors
-/dev/input/event*    0660   input system
+/dev/input/event*    0666   input system
