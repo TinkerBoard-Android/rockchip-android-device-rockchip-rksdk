@@ -12,6 +12,10 @@ allow surfaceflinger self:capability { sys_nice };
 allow surfaceflinger vendor_metadata:dir { search };
 dontaudit surfaceflinger sysfs:file rw_file_perms;
 
+# for video formate 10bit to 8bit by rga
+allow surfaceflinger rga_device:dir search;
+allow surfaceflinger rga_device:chr_file rw_file_perms;
+
 typeattribute surfaceflinger system_writes_vendor_properties_violators;
 get_prop(surfaceflinger,public_vendor_system_prop)
 set_prop(surfaceflinger,public_vendor_system_prop)
