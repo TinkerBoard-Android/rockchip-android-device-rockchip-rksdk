@@ -16,6 +16,10 @@ allow mediaserver mnt_user_file:lnk_file { read };
 
 allow mediaserver vendor_file:file { read getattr };
 allow mediaserver video_file:file { read getattr open };
+allow mediaserver rga_device:chr_file { ioctl };
+allow mediaserver hal_configstore_ISurfaceFlingerConfigs:hwservice_manager { find };
+allow mediaserver hal_configstore_default:binder { call };
+binder_call(mediaserver,hal_configstore_default)
 
 typeattribute mediaserver system_writes_vendor_properties_violators;
 get_prop(mediaserver,vendor_omx_prop)
@@ -25,3 +29,5 @@ set_prop(mediaserver,public_vendor_default_prop)
 get_prop(mediaserver,public_vendor_system_prop)
 set_prop(mediaserver,public_vendor_system_prop)
 get_prop(mediaserver,cts_gts_prop)
+get_prop(mediaserver,ctl_start_prop)
+set_prop(mediaserver,ctl_start_prop)
