@@ -25,7 +25,7 @@
     <feature name="android.hardware.location.network" />
     <feature name="android.hardware.screen.landscape" />
     <feature name="android.hardware.type.television" />
-
+    <feature name="nrdp.modelgroup" />
     <feature name="android.software.backup" />
 <!--
     <feature name="android.software.leanback" />
