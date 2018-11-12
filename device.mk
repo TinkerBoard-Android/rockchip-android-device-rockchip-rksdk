@@ -695,7 +695,6 @@ endif
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
-
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
 ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
@@ -727,10 +726,14 @@ ifeq ($(strip $(BUILD_WITH_EEA)), true)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms_eea_$(BUILD_WITH_EEA_TYPE).mk)
 else
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), box)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms-mini-box.mk)
+else
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
 else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
+endif
 endif
 endif
 endif
