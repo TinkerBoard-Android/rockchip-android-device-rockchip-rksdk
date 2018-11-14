@@ -1,5 +1,6 @@
 #camera
-persist.vendor.camera.debug.logfile     u:object_r:vendor_camera_prop:s0
+persist.vendor.camera.                  u:object_r:vendor_camera_prop:s0
+vendor.cam.                             u:object_r:vendor_camera_prop:s0
 #cts
 vendor.cts_gts.                         u:object_r:cts_gts_prop:s0
 #omx
