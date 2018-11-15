@@ -18,3 +18,4 @@ allow hal_drm_widevine gpu_device:dir { add_name getattr open read search write 
 allow hal_drm_widevine gpu_device:chr_file { ioctl open read write };
 allow hal_drm_widevine mediadrm_vendor_data_file:dir { search create read write open add_name getattr remove_name};
 allow hal_drm_widevine mediadrm_vendor_data_file:file { create read write open getattr unlink };
+allow hal_drm_widevine hal_allocator_server:fd { use };
