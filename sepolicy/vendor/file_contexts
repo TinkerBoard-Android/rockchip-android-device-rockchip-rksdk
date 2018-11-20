@@ -84,6 +84,9 @@
 #/data/tee(/.*)?                                u:object_r:tee_data_file:s0
 /vendor/bin/rk_store_keybox                     u:object_r:rk_store_keybox_exec:s0
 
+# for rootservice
+/vendor/bin/rootservice            u:object_r:rootservice_exec:s0
+
 /dev/block/mmcblk[0-9]                          u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb                      u:object_r:rpmb_block_device:s0
 

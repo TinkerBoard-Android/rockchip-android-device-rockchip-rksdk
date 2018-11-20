@@ -914,6 +914,12 @@ else
         ro.target.product=tablet
 endif
 
+ifeq ($(strip $(BOARD_ALLOW_ROOTSERVICE)), true)
+   include device/rockchip/common/rootservice/rootservice.mk
+    PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.root.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.root.rc
+endif
+
 # By default, enable zram; experiment can toggle the flag,
 # which takes effect on boot
 PRODUCT_PROPERTY_OVERRIDES += \
