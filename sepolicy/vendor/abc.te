@@ -29,7 +29,7 @@ allow abc abc:process { fork getsched sigchld setsched };
 allow abc abc:dir { search };
 allow abc abc:file { open write };
 allow abc abc:lnk_file { read };
-allow abc abc:capability { dac_override sys_nice };
+allow abc abc:capability { sys_nice };
 allow abc selinuxfs:filesystem { getattr };
 allow abc logdw_socket:sock_file { write };
 allow abc pmsg_device:chr_file { write };
