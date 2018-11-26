@@ -18,7 +18,7 @@ if [[ $REPO_REMOTE == rk* ]] || [[ $REPO_RREV == rk33* ]]; then
     fi
 
     if [ -n "$LOCAL_DIFF" ]; then
-        git diff --binary > $STUB_PATCH_PATH/$REPO_PATH/local_diff.patch
+        git diff --binary > $STUB_PATCH_PATH/$REPO_PATH/local_diff.diff
     fi
     if [ -n "$REMOTE_DIFF" -o -n "$LOCAL_DIFF" ]; then
         echo Generate patch for "$REPO_PATH" done
