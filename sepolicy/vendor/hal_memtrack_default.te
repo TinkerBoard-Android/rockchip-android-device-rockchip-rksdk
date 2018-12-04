@@ -1,0 +1,2 @@
+allow hal_memtrack_default sys_mali:file r_file_perms;
+allow hal_memtrack_default system_app:file r_file_perms;

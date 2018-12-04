@@ -64,6 +64,7 @@
 
 
 /sys/devices/platform/fb/graphics/fb[0-9]/cabc                u:object_r:sysfs_fb:s0
+/sys/kernel/debug/mali/gpu_memory                u:object_r:sys_mali:s0
 
 /mnt/vendor/metadata                            u:object_r:vendor_metadata:s0
 
