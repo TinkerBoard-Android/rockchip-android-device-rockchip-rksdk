@@ -171,6 +171,24 @@ on boot
     chmod 0664 /sys/class/leds/net-green/brightness
     chown system system /sys/class/leds/net-red/brightness
     chmod 0664 /sys/class/leds/net-red/brightness
+    chown system system /sys/class/leds/led_r/brightness
+    chown system system /sys/class/leds/led_r/trigger
+    chown system system /sys/class/leds/led_r/timer
+    chmod 0664 /sys/class/leds/led_r/brightness
+    chmod 0664 /sys/class/leds/led_r/trigger
+    chmod 0664 /sys/class/leds/led_r/timer
+    chown system system /sys/class/leds/led_g/brightness
+    chown system system /sys/class/leds/led_g/trigger
+    chown system system /sys/class/leds/led_g/timer
+    chmod 0664 /sys/class/leds/led_g/brightness
+    chmod 0664 /sys/class/leds/led_g/trigger
+    chmod 0664 /sys/class/leds/led_g/timer
+    chown system system /sys/class/leds/led_b/brightness
+    chown system system /sys/class/leds/led_b/trigger
+    chown system system /sys/class/leds/led_b/timer
+    chmod 0664 /sys/class/leds/led_b/brightness
+    chmod 0664 /sys/class/leds/led_b/trigger
+    chmod 0664 /sys/class/leds/led_b/timer
 
     chown root system /sys/class/graphics/fb0/map
     chmod 0664 /sys/class/graphics/fb0/map
