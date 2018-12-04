@@ -957,7 +957,7 @@ PRODUCT_COPY_FILES += \
      vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
 
 # Imporve the tracking of GMS Express base build.
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.base_build=noah
 endif
 
