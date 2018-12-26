@@ -266,7 +266,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external-service
 else
 PRODUCT_PACKAGES += \
-    librkisp_ae \
+    librkisp_aec \
     librkisp_awb \
     librkisp_af
 
