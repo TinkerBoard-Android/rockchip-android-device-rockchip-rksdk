@@ -21,7 +21,8 @@ import re
 
 def FullOTA_Assertions(info):
   ## we suggest not update the parameter.
-  #Install_Parameter(info)
+  #parameter_bin = info.input_zip.read("parameter")
+  #Install_Parameter(parameter_bin,info.input_zip,info)
   AddBootloaderAssertion(info, info.input_zip)
 
 def IncrementalOTA_Assertions(info):
@@ -36,20 +37,16 @@ def AddBootloaderAssertion(info, input_zip):
       info.script.AssertSomeBootloader(*bootloaders)
     info.metadata["pre-bootloader"] = m.group(1)
 
-def Install_Parameter(info):
+def Install_Parameter(parameter_bin, input_zip, info):
   try:
-    parameter_bin = info.input_zip.read("PARAMETER/parameter");
+    print "write parameter.bin now"
+    info.script.Print("Start update GptParameter...")
+    common.ZipWriteStr(info.output_zip, "parameter", parameter_bin)
+    info.script.WriteRawGptParameterImage()
+    info.script.Print("end update parameter")
+    info.script.FormatPartition("/data");
   except KeyError:
-    print "warning: no parameter in input target_files; not flashing parameter"
-    return
-
-  print "find parameter, should add to package"
-  common.ZipWriteStr(info.output_zip, "parameter", parameter_bin)
-  info.script.Print("start update parameter...")
-  info.script.WriteRawParameterImage("/parameter", "parameter")
-  #info.script.FormatPartition("/data");
-  #info.script.FormatPartition("/cache");
-  info.script.Print("end update parameter")
+    print "no parameter.bin, ignore it."
 
 def InstallRKLoader(loader_bin, input_zip, info):
   try:
