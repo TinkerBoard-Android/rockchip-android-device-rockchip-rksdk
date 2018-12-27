@@ -19,6 +19,9 @@ TARGET_OUT_VENDOR=`get_build_var TARGET_OUT_VENDOR`
 TARGET_BASE_PARAMETER_IMAGE=`get_build_var TARGET_BASE_PARAMETER_IMAGE`
 HIGH_RELIABLE_RECOVERY_OTA=`get_build_var HIGH_RELIABLE_RECOVERY_OTA`
 BOARD_AVB_ENABLE=`get_build_var BOARD_AVB_ENABLE`
+BOARD_KERNEL_CMDLINE=`get_build_var BOARD_KERNEL_CMDLINE`
+ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS=`get_build_var ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS`
+BOARD_BOOTIMG_HEADER_VERSION=`get_build_var BOARD_BOOTIMG_HEADER_VERSION`
 
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
@@ -40,6 +43,13 @@ KERNEL_PATH=kernel
 KERNEL_CONFIG=$KERNEL_PATH/.config
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
+
+if [ "$TARGET_ARCH" = "arm" ]; then
+KERNEL_DEBUG=kernel/arch/arm/boot/zImage
+else
+KERNEL_DEBUG=kernel/arch/arm64/boot/Image
+fi
+
 
 FSTYPE=ext4
 echo system filesysystem is $FSTYPE
@@ -73,7 +83,7 @@ BOOT_OTA="ota"
         fi
     fi
 
-echo -n "create dtbo.img.... "
+echo "create dtbo.img.... "
 if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/dtbo.img $IMAGE_PATH/dtbo.img
 else
@@ -82,12 +92,26 @@ cp -a $TARGET_DEVICE_DIR/dtbo.img $IMAGE_PATH/dtbo.img
 fi
 echo "done."
 
-echo -n "create boot.img.... "
+echo "create boot.img.... "
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/boot.img $IMAGE_PATH/boot.img
+else
+echo "BOARD_AVB_ENABLE is false, make boot.img from kernel."
+    mkbootimg --kernel $KERNEL_DEBUG --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$BOARD_KERNEL_CMDLINE" --output $OUT/boot.img && \
+    cp -a $OUT/boot.img $IMAGE_PATH/boot.img
+fi
 echo "done."
 
-echo -n "create recovery.img.... "
+echo "create recovery.img.... "
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/recovery.img $IMAGE_PATH/recovery.img
+else
+echo "BOARD_AVB_ENABLE is false, make recovery.img from kernel && out."
+    [ -d $OUT/recovery/root ] && \
+    mkbootfs -d $OUT/system $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
+    mkbootimg --kernel $KERNEL_DEBUG --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --recovery_dtbo $TARGET_DEVICE_DIR/dtbo.img --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS" --output $OUT/recovery.img && \
+    cp -a $OUT/recovery.img $IMAGE_PATH/recovery.img
+fi
 echo "done."
 
 echo -n "create system.img.... "
