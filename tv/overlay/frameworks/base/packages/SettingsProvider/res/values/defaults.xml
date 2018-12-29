@@ -26,7 +26,7 @@
     <bool name="def_device_provisioned">true</bool>
 
     <!-- Keep screen on at all times by default -->
-    <bool name="def_stay_on_while_plugged_in">true</bool>
+    <bool name="def_stay_on_while_plugged_in">false</bool>
 
     <!-- Do not give up on DHCP -->
     <integer name="def_max_dhcp_retries">0</integer>
