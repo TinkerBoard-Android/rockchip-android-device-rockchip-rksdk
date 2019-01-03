@@ -460,3 +460,21 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     DEVICE_MANIFEST_FILE := device/rockchip/common/manifest_ab.xml
     TARGET_RECOVERY_FSTAB := $(TARGET_DEVICE_DIR)/fstab.rk30board_AB
 endif
+
+#TWRP
+ifeq ($(strip $(BOARD_TWRP_ENABLE)), true)
+	TW_THEME := landscape_hdpi
+	TW_USE_TOOLBOX := true
+	TW_EXTRA_LANGUAGES := true
+	TW_DEFAULT_LANGUAGE := zh_CN
+	DEVICE_RESOLUTION := 1280x720
+	TW_NO_BATT_PERCENT := true
+	TWRP_EVENT_LOGGING := false
+	TARGET_RECOVERY_FORCE_PIXEL_FORMAT := RGB_565
+	TW_NO_SCREEN_TIMEOUT := true
+	TW_NO_SCREEN_BLANK := true
+	TW_SCREEN_BLANK_ON_BOOT := false
+	TW_IGNORE_MISC_WIPE_DATA := true
+	TW_HAS_MTP := true
+	TW_NO_USB_STORAGE := true
+endif
