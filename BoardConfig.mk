@@ -63,10 +63,10 @@ BOARD_AVB_ENABLE ?= false
 PRODUCT_SUPPORTS_BOOT_SIGNER := false
 BOARD_SELINUX_ENFORCING ?= false
 
-ifeq ($(filter true, $(BOARD_AVB_ENABLE)), )
-BOARD_KERNEL_CMDLINE ?= androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
+ifneq ($(filter true, $(BOARD_AVB_ENABLE)), )
+BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 else
-BOARD_KERNEL_CMDLINE ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
+BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 endif
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_BOOTIMG_HEADER_VERSION ?= 1
