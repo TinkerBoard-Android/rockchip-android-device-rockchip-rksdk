@@ -101,6 +101,11 @@ status_t ATVAudioPolicyManager::setBitStreamDevice(audio_devices_t device,audio_
                              const char *device_address,const char *device_name)
 {
     const char* setBitstreamDevice = "RK_SET_BITSTREAM_DEVICE";
+    /*
+     * we set special address for setting Bitstream devcie
+     */
+    const char* address = "RK_BITSTREAM_DEVICE_ADDRESS";
+    (void*)device_address;
     if((device_name != NULL) && (strcmp(device_name,setBitstreamDevice) == 0)){
         audio_devices_t newDevice = mBitstreamDevice;
         if((device == AUDIO_DEVICE_OUT_AUX_DIGITAL) && (state == AUDIO_POLICY_DEVICE_STATE_AVAILABLE)){
@@ -116,11 +121,11 @@ status_t ATVAudioPolicyManager::setBitStreamDevice(audio_devices_t device,audio_
                 mBitstreamDevice = newDevice;
                 ALOGD("%s: %d: mSurroundFormats.clear()",__FUNCTION__,__LINE__);
             }
-            bool already = isAlreadConnect(device,state,device_address,"");
+            bool already = isAlreadConnect(device,state,address,device_name);
             if(already){
                 return NO_ERROR;
             }
-            return AudioPolicyManager::setDeviceConnectionState(device, state, device_address, "");
+            return AudioPolicyManager::setDeviceConnectionState(device, state, address, device_name);
         }
     }
 
