@@ -7,5 +7,6 @@ type vendor_wifi_prop, property_type;
 type vendor_drm_prop, property_type;
 type vendor_cec_prop, property_type;
 type vendor_omx_prop, property_type;
+type vendor_hal_wifi_prop, property_type;
 type cts_gts_prop, property_type;
 type vendor_camera_prop, property_type;

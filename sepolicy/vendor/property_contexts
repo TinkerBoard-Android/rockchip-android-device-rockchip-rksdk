@@ -37,6 +37,7 @@ persist.vendor.video.cvrs               u:object_r:public_vendor_system_prop:s0
 persist.vendor.saveconfig               u:object_r:public_vendor_system_prop:s0
 vendor.hdmi_status.                     u:object_r:public_vendor_system_prop:s0
 vendor.hwc                              u:object_r:public_vendor_system_prop:s0
+vendor.wifi.direct.interface            u:object_r:vendor_hal_wifi_prop:s0
 
 ro.vendor.udisk.visible                 u:object_r:vendor_default_prop:s0
 

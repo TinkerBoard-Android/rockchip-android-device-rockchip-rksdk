@@ -53,6 +53,12 @@ on property:wlan.driver.status=ok
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
     chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path
 
+on property:vendor.wifi.direct.interface=p2p0
+    setprop wifi.direct.interface p2p0
+
+on property:vendor.wifi.direct.interface=p2p-dev-wlan0
+    setprop wifi.direct.interface p2p-dev-wlan0
+
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     /vendor/etc/wifi/wpa_config.txt
 #   we will start as root and wpa_supplicant will switch to user wifi

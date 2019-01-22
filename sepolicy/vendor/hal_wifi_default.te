@@ -6,6 +6,7 @@ allow hal_wifi_default sysfs:file rw_file_perms;
 allow hal_wifi_default proc_modules:file { read open getattr };
 allow hal_wifi_default property_socket:sock_file { write };
 allow hal_wifi_default tombstone_wifi_data_file:dir { read open };
+set_prop(hal_wifi_default,vendor_hal_wifi_prop)
 dontaudit hal_wifi_default wifi_data_file:dir { search };
 allow hal_wifi_default init:unix_stream_socket { connectto };
 allow hal_wifi_default kernel:system module_request;
