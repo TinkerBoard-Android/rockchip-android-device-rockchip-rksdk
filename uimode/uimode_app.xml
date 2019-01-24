@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<ui-mode-package-config>
+    <app package="com.amazon.avod.thirdpartyclient" uiMode="1"/>
+    <app package="com.ktcp.video" uiMode="4"/>
+</ui-mode-package-config>

@@ -1021,3 +1021,7 @@ endif
 
 #TWRP
 BOARD_TWRP_ENABLE ?= false
+
+#Build with UiMode Config
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/uimode/uimode_app.xml:vendor/etc/uimode_app.xml
