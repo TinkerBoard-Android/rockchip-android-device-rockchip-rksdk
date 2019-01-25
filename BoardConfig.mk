@@ -217,10 +217,8 @@ PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS ?= \
     device/rockchip/common/sepolicy/vendor 
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/private
-
-
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR?= \
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
+    device/rockchip/common/sepolicy/private \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy 
 
 # Enable VNDK Check for Android P (MUST in P)
