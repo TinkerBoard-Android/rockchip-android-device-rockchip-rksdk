@@ -26,7 +26,13 @@ recovery_only(`
     allow recovery metadata_file:dir { mounton };
     allow recovery tmpfs:dir { mounton };
     allow recovery kmsg_device:chr_file rw_file_perms;
-    allow recovery sysfs:dir {read};
+
+    allow recovery sysfs:dir {read open};
+    allow recovery sysfs:file {read open};
+    allow recovery sysfs_batteryinfo:dir { search };
+
     allow recovery ctl_bootanim_prop:file {open getattr};
     allow recovery ctl_bugreport_prop:file {open getattr};
+
+    allow shell rootfs:file { entrypoint read };
 ')
