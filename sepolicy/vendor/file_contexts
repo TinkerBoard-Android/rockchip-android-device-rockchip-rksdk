@@ -94,6 +94,7 @@
 # Vendor file tag
 #/vendor/lib(64)?/(/.*)?                        u:object_r:vendor_file:s0
 #/vendor/lib(64)?/hw/(/.*)?                     u:object_r:vendor_file:s0
+/vendor/bin/usb_dongle                          u:object_r:usb_dongle_exec:s0
 /vendor/bin/rockchip.drmservice                 u:object_r:np_rockchip_drmservice_exec:s0
 /vendor/bin/hw/rk_wifi_hal	                    u:object_r:rk_wifi_hal_exec:s0
 /vendor/bin/hw/rockchip\.hardware\.outputmanager@1\.0-service           u:object_r:rk_output_hal_exec:s0
