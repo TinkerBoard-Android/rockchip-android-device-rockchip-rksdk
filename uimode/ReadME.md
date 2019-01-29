@@ -1,7 +1,7 @@
 #   Dynamic Load UiMode
 
 ##  Overview
-In Box,some app didn't display normal.Because globals UiMode is Configuration.UI_MODE_TYPE_TELEVISION.Some App didn't support Tv Device. Now we provider the means that load UiMode dynamic for each App by White List Config(device/rockchip/common/uimode/uimode_app.xml in source, vendor/etc/uimode_app.xml in device). After the device is running, you can dynamically set the UIMode value of the app through TvSettings, which is convenient for debugging. Now this means only support box device.
+In Box,some app didn't display normal.Because globals UiMode is Configuration.UI_MODE_TYPE_TELEVISION.Some App didn't support Tv Device. Now we provider the means that load UiMode dynamic for each App by White List Config(device/rockchip/common/uimode/uimode_app.xml in source, vendor/etc/uimode_app.xml in device, Read-write file path /data/system/uimode_app.xml). After the device is running, you can dynamically set the UIMode value of the app through TvSettings, which is convenient for debugging. Now this means only support box device.
 
 ##  Usage
 +   Before compiling,you must to amend the config.
@@ -23,7 +23,7 @@ In Box,some app didn't display normal.Because globals UiMode is Configuration.UI
 #   动态加载UiMode
 
 ##  概述
-在盒子里，有部分App无法正常显示。因为全局的UIMode是Configuration.UI_MODE_TYPE_TELEVISION，这部分App不支持Tv端的显示。现在我们提供了一种方式，通过白名单配置来动态的为App加载UIMode（源码路径：device/rockchip/common/uimode/uimode_app.xml,设备路径：vendor/etc/uimode_app.xml， 可读写文件路径/data/cache/recovery/uimode_app.xml）。设备运行后可以通过TvSettings动态设置App的UIMode值，以此方便调试。目前此方式仅支持box设备。
+在盒子里，有部分App无法正常显示。因为全局的UIMode是Configuration.UI_MODE_TYPE_TELEVISION，这部分App不支持Tv端的显示。现在我们提供了一种方式，通过白名单配置来动态的为App加载UIMode（源码路径：device/rockchip/common/uimode/uimode_app.xml,设备路径：vendor/etc/uimode_app.xml， 可读写文件路径/data/system/uimode_app.xml）。设备运行后可以通过TvSettings动态设置App的UIMode值，以此方便调试。目前此方式仅支持box设备。
 
 ##  使用说明
 
