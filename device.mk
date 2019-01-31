@@ -1024,4 +1024,4 @@ BOARD_TWRP_ENABLE ?= false
 
 #Build with UiMode Config
 PRODUCT_COPY_FILES += \
-	device/rockchip/common/uimode/uimode_app.xml:vendor/etc/uimode_app.xml
+	device/rockchip/common/uimode/package_uimode_config.xml:vendor/etc/package_uimode_config.xml
