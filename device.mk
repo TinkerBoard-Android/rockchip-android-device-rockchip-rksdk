@@ -35,7 +35,10 @@ endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
   $(call inherit-product, device/google/atv/products/atv_base.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
-  PRODUCT_PACKAGES += DocumentsUI
+  PRODUCT_PACKAGES += DocumentsUI \
+                      PlayAutoInstallConfig \
+                      ATVContentProvider \
+
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
