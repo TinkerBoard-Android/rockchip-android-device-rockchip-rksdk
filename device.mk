@@ -901,7 +901,10 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=atv
+       ro.target.product=atv \
+       ro.com.google.clientidbase=android-rockchip-tv
+  PRODUCT_COPY_FILES += \
+       $(LOCAL_PATH)/bootanimation.zip:/system/media/bootanimation.zip
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
   PRODUCT_PROPERTY_OVERRIDES += \

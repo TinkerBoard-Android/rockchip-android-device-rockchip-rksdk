@@ -422,7 +422,9 @@ TARGET_USES_HWC2 ?= true
 #BOARD_SEPOLICY_VERS = 27.0
 
 # CTS require faketouch
+ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 BOARD_USER_FAKETOUCH ?= true
+endif
 
 #for Camera autofocus support
 CAMERA_SUPPORT_AUTOFOCUS ?= false
