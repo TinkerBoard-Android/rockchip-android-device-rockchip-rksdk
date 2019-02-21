@@ -4,7 +4,7 @@ vendor.cam.                             u:object_r:vendor_camera_prop:s0
 #cts
 vendor.cts_gts.                         u:object_r:cts_gts_prop:s0
 #omx
-vendor.vp9_4k_optimize                  u:object_r:vendor_omx_prop:s0
+vendor.video.skipline                   u:object_r:vendor_omx_prop:s0
 vendor.use_mpp_mode                     u:object_r:vendor_omx_prop:s0
 vendor.dump.omx.log                     u:object_r:vendor_omx_prop:s0
 vendor.omx.                             u:object_r:vendor_omx_prop:s0
