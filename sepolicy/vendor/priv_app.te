@@ -12,4 +12,7 @@ allow priv_app gpu_data_file:file rw_file_perms;
 allow priv_app vendor_metadata:dir { search };
 allow priv_app ota_data_file:dir { search rw_dir_perms };
 
+allow priv_app sysfs_wifi:file r_file_perms;
+allow priv_app proc_pci:file r_file_perms;
+
 get_prop(priv_app,vendor_default_prop)

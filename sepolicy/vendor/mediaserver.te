@@ -19,6 +19,10 @@ allow mediaserver video_file:file { read getattr open };
 allow mediaserver rga_device:chr_file { ioctl };
 allow mediaserver hal_configstore_ISurfaceFlingerConfigs:hwservice_manager { find };
 allow mediaserver hal_configstore_default:binder { call };
+
+allow mediaserver ion_device:chr_file { write };
+allow mediaserver sysfs_devices_system_cpu:file { write };
+
 binder_call(mediaserver,hal_configstore_default)
 
 typeattribute mediaserver system_writes_vendor_properties_violators;

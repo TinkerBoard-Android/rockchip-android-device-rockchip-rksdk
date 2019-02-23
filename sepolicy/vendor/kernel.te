@@ -18,3 +18,4 @@ userdebug_or_eng(`
   allow kernel self:socket create;
 ')
 dontaudit kernel self:socket create;
+dontaudit kernel device:blk_file { create setattr getattr unlink };

@@ -19,6 +19,7 @@
 /dev/block/zram0     u:object_r:zram_device:s0
 /dev/sw_sync         u:object_r:gpu_device:s0
 /dev/mma8452_daemon  u:object_r:sensor_device:s0
+/dev/lightsensor     u:object_r:sensor_device:s0
 
 # camera
 /dev/media[0-9]      u:object_r:camera_device:s0
