@@ -2,6 +2,7 @@ allow mediacodec rga_device:chr_file { ioctl rw_file_perms };
 allow mediacodec gpu_device:dir search;
 allow mediacodec system_file:dir { open read };
 allow mediacodec sysfs:file { read open getattr };
+allow mediacodec sysfs_vpu:file { read open getattr };
 allow mediacodec sysfs:dir { read open getattr };
 allow mediacodec property_socket:sock_file { write };
 allow mediacodec init:unix_stream_socket { connectto };

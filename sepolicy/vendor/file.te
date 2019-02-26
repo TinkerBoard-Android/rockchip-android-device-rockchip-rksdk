@@ -42,6 +42,7 @@ type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lut, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lcdc, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_vpu, sysfs_type, fs_type;
 type aplog_data_file, file_type, data_file_type;
 type fuseblk, sdcard_type, fs_type, mlstrustedobject;
 type proc_ostype, fs_type, mlstrustedobject;

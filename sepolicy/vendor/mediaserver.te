@@ -22,6 +22,7 @@ allow mediaserver hal_configstore_default:binder { call };
 
 allow mediaserver ion_device:chr_file { write };
 allow mediaserver sysfs_devices_system_cpu:file { write };
+allow mediaserver sysfs_vpu:file { read open getattr };
 
 binder_call(mediaserver,hal_configstore_default)
 
