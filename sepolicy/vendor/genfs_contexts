@@ -13,6 +13,7 @@ genfscon sysfs /kernel/mm/ksm/pages_shared                                      
 
 genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net/wlan0/address           u:object_r:sysfs_wifi:s0
 genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/wlan0/address           u:object_r:sysfs_wifi:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/wlan0/type           u:object_r:sysfs_wifi:s0
 
 genfscon sysfs /devices/virtual/net/ip_vti0/type                                                     u:object_r:sysfs_wifi:s0
 genfscon sysfs /devices/virtual/net/ip6tnl0/type                                                     u:object_r:sysfs_wifi:s0
