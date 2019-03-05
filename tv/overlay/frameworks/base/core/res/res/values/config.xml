@@ -36,6 +36,7 @@
              5  UI_MODE_TYPE_APPLIANCE
          Any other values will have surprising consequences. -->
     <integer name="config_defaultUiModeType">4</integer>
+    <bool name="config_lockUiMode">true</bool>
 
     <!-- Control the behavior when the user long presses the home button.
             0 - Nothing

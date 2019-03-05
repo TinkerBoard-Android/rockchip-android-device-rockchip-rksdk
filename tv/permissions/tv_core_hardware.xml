@@ -25,7 +25,7 @@
     <feature name="android.hardware.location.network" />
     <feature name="android.hardware.screen.landscape" />
     <feature name="android.hardware.screen.portrait" />
-    <feature name="android.hardware.type.television" />
+    
     <feature name="nrdp.modelgroup" />
     <feature name="android.software.backup" />
     
@@ -49,12 +49,30 @@
     
 <!--
     <feature name="android.software.leanback" />
--->
+    <feature name="android.hardware.television" />
     <feature name="android.software.leanback_only" />
+    -->
     <feature name="android.software.live_tv" />
     <feature name="android.software.picture_in_picture" />
     <feature name="android.software.voice_recognizers" />
     <feature name="android.software.pppoe" />
     <feature name="android.software.app_widgets" />
+    <!-- add some gms google features for netflix -->
+    <feature name="com.google.android.apps.dialer.SUPPORTED" />
+    <feature name="com.google.android.feature.EXCHANGE_6_2" />
+    <feature name="com.google.android.feature.GOOGLE_BUILD" />
+    <feature name="com.google.android.feature.GOOGLE_EXPERIENCE" />
+    <feature name="com.google.android.feature.PIXEL_2017_EXPERIENCE" />
+    <feature name="com.google.android.feature.PIXEL_2018_EXPERIENCE" />
+    <feature name="com.google.android.feature.TURBO_PRELOAD" />
+    <feature name="com.google.android.feature.WELLBEING" />
+    <feature name="android.software.verified_boot" />
+    
+    <!-- add some gms google features for phone play store -->
+    <feature name="android.hardware.telephony" />
+    <feature name="android.hardware.telephony.cdma" />
+    <feature name="android.hardware.telephony.gsm" />
+    
+    
 
 </permissions>
