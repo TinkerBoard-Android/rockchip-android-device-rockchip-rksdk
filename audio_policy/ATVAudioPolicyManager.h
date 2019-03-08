@@ -38,11 +38,6 @@ public:
                                               const char *device_name);
     virtual audio_policy_dev_state_t getDeviceConnectionState(audio_devices_t device,
                                               const char *device_address);
-    virtual status_t getSurroundFormats(unsigned int *numSurroundFormats,
-                                                audio_format_t *surroundFormats,
-                                                bool *surroundFormatsEnabled,
-                                                bool reported);
-    virtual status_t setSurroundFormatEnabled(audio_format_t audioFormat, bool enabled);
 protected:
     virtual audio_io_handle_t getOutputForDevice(
                                                 audio_devices_t device,

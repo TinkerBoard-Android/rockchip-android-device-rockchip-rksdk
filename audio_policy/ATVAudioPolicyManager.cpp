@@ -29,27 +29,6 @@
 
 namespace android {
 
-#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
-
-// define must keep sync with AudioPolicyManager.cpp
-static const audio_format_t SURROUND_FORMATS[] = {
-    AUDIO_FORMAT_AC3,
-    AUDIO_FORMAT_E_AC3,
-    AUDIO_FORMAT_DTS,
-    AUDIO_FORMAT_DTS_HD,
-    AUDIO_FORMAT_AAC_LC,
-    AUDIO_FORMAT_DOLBY_TRUEHD,
-    AUDIO_FORMAT_E_AC3_JOC,
-};
-// Array of all AAC formats. When AAC is enabled by users, all AAC formats should be enabled.
-static const audio_format_t AAC_FORMATS[] = {
-    AUDIO_FORMAT_AAC_LC,
-    AUDIO_FORMAT_AAC_HE_V1,
-    AUDIO_FORMAT_AAC_HE_V2,
-    AUDIO_FORMAT_AAC_ELD,
-    AUDIO_FORMAT_AAC_XHE,
-};
-
 // ---  class factory
 extern "C" AudioPolicyInterface* createAudioPolicyManager(
         AudioPolicyClientInterface *clientInterface)
@@ -101,10 +80,6 @@ status_t ATVAudioPolicyManager::setBitStreamDevice(audio_devices_t device,audio_
                              const char *device_address,const char *device_name)
 {
     const char* setBitstreamDevice = "RK_SET_BITSTREAM_DEVICE";
-    /*
-     * we set special address for setting Bitstream devcie
-     */
-    const char* address = "RK_BITSTREAM_DEVICE_ADDRESS";
     (void*)device_address;
     if((device_name != NULL) && (strcmp(device_name,setBitstreamDevice) == 0)){
         audio_devices_t newDevice = mBitstreamDevice;
@@ -117,15 +92,13 @@ status_t ATVAudioPolicyManager::setBitStreamDevice(audio_devices_t device,audio_
         if((device == AUDIO_DEVICE_OUT_AUX_DIGITAL) || (device == AUDIO_DEVICE_OUT_SPDIF)){
             // if device is changed, the surround format need clear
             if(mBitstreamDevice != newDevice){
-                mSurroundFormats.clear();
                 mBitstreamDevice = newDevice;
-                ALOGD("%s: %d: mSurroundFormats.clear()",__FUNCTION__,__LINE__);
             }
-            bool already = isAlreadConnect(device,state,address,device_name);
+            bool already = isAlreadConnect(device,state,device_address,device_name);
             if(already){
                 return NO_ERROR;
             }
-            return AudioPolicyManager::setDeviceConnectionState(device, state, address, device_name);
+            return AudioPolicyManager::setDeviceConnectionState(device, state, device_address, device_name);
         }
     }
 
@@ -177,107 +150,6 @@ audio_policy_dev_state_t ATVAudioPolicyManager::getDeviceConnectionState(audio_d
     }
 
     return AudioPolicyManager::getDeviceConnectionState(device,device_address);
-}
-status_t ATVAudioPolicyManager::getSurroundFormats(unsigned int *numSurroundFormats,
-                                                audio_format_t *surroundFormats,
-                                                bool *surroundFormatsEnabled,
-                                                bool reported)
-{
-    if (numSurroundFormats == NULL || (*numSurroundFormats != 0 &&
-            (surroundFormats == NULL || surroundFormatsEnabled == NULL))) {
-        return BAD_VALUE;
-    }
-
-    size_t formatsWritten = 0;
-    size_t formatsMax = *numSurroundFormats;
-    FormatVector formats;
-    if (reported && (mBitstreamDevice == AUDIO_DEVICE_OUT_HDMI)) {
-        return AudioPolicyManager::getSurroundFormats(numSurroundFormats,surroundFormats,surroundFormatsEnabled,reported);
-    }else {
-        for (size_t i = 0; i < ARRAY_SIZE(SURROUND_FORMATS); i++) {
-            formats.add(SURROUND_FORMATS[i]);
-        }
-    }
-
-    *numSurroundFormats = 0;
-    for (size_t i = 0; i < formats.size(); i++) {
-        if (formatsWritten < formatsMax) {
-            surroundFormats[formatsWritten] = formats[i];
-            bool formatEnabled = false;
-            if (formats[i] == AUDIO_FORMAT_AAC_LC) {
-                for (size_t j = 0; j < ARRAY_SIZE(AAC_FORMATS); j++) {
-                    formatEnabled =
-                            mSurroundFormats.find(AAC_FORMATS[i]) != mSurroundFormats.end();
-                    break;
-                }
-            } else {
-                formatEnabled = mSurroundFormats.find(formats[i]) != mSurroundFormats.end();
-            }
-
-            surroundFormatsEnabled[formatsWritten++] = formatEnabled;
-        }
-        (*numSurroundFormats)++;
-    }
-    return NO_ERROR;
-}
-
-status_t ATVAudioPolicyManager::setSurroundFormatEnabled(audio_format_t audioFormat, bool enabled)
-{
-    ALOGV("%s:this = %p, mBitstreamDevice = 0x%x,audioFormat = 0x%x,enabled = %d",
-                __FUNCTION__,this,mBitstreamDevice,(int)audioFormat,enabled);
-    if(mBitstreamDevice == AUDIO_DEVICE_OUT_HDMI){
-        return AudioPolicyManager::setSurroundFormatEnabled(audioFormat,enabled);
-    }
-
-    if(mBitstreamDevice != AUDIO_DEVICE_OUT_SPDIF){
-        return INVALID_OPERATION;
-    }
-    // Check if audio format is a surround formats.
-    bool isSurroundFormat = false;
-    for (size_t i = 0; i < ARRAY_SIZE(SURROUND_FORMATS); i++) {
-        if (audioFormat == SURROUND_FORMATS[i]) {
-            isSurroundFormat = true;
-            break;
-        }
-    }
-    if (!isSurroundFormat) {
-        ALOGD("%s: %d: BAD_VALUE",__FUNCTION__,__LINE__);
-        return BAD_VALUE;
-    }
-
-    // Should only be called when MANUAL.
-    audio_policy_forced_cfg_t forceUse = mEngine->getForceUse(
-                AUDIO_POLICY_FORCE_FOR_ENCODED_SURROUND);
-    if (forceUse != AUDIO_POLICY_FORCE_ENCODED_SURROUND_MANUAL) {
-        ALOGD("%s: %d: INVALID_OPERATION",__FUNCTION__,__LINE__);
-        return INVALID_OPERATION;
-    }
-
-    if ((mSurroundFormats.find(audioFormat) != mSurroundFormats.end() && enabled)
-            || (mSurroundFormats.find(audioFormat) == mSurroundFormats.end() && !enabled)) {
-        return NO_ERROR;
-    }
-
-    if (enabled) {
-        if (audioFormat == AUDIO_FORMAT_AAC_LC) {
-            for (size_t i = 0; i < ARRAY_SIZE(AAC_FORMATS); i++) {
-                mSurroundFormats.insert(AAC_FORMATS[i]);
-            }
-        } else {
-            ALOGD("%s: %d: insert audioFormat = 0x%x",__FUNCTION__,__LINE__,(int)audioFormat);
-            mSurroundFormats.insert(audioFormat);
-        }
-    } else {
-        if (audioFormat == AUDIO_FORMAT_AAC_LC) {
-            for (size_t i = 0; i < ARRAY_SIZE(AAC_FORMATS); i++) {
-                mSurroundFormats.erase(AAC_FORMATS[i]);
-            }
-        } else {
-            mSurroundFormats.erase(audioFormat);
-        }
-    }
-
-    return NO_ERROR;
 }
 
 /*
