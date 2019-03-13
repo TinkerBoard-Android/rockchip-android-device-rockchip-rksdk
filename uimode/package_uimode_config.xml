@@ -3,4 +3,5 @@
     <app package="com.amazon.avod.thirdpartyclient" uiMode="1"/>
     <app package="com.ktcp.video" uiMode="4"/>
     <app package="com.netflix.mediaclient" uiMode="1"/>
+    <app package="com.google.android.videos" uiMode="1"/>
 </ui-mode-package-config>

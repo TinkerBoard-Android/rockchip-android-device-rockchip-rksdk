@@ -39,13 +39,10 @@
     <feature name="android.hardware.microphone"/>
     <feature name="android.software.voice_recognizers"/>
     <feature name="android.software.midi"/>
-    
+
     <feature name="android.hardware.nfc"/>
     <feature name="com.google.android.feature.PIXEL_EXPERIENCE"/>
     <feature name="android.software.autofill"/>
-    
-    
-    
 <!--
     <feature name="android.software.leanback" />
     <feature name="android.hardware.television" />
@@ -66,12 +63,12 @@
     <feature name="com.google.android.feature.TURBO_PRELOAD" />
     <feature name="com.google.android.feature.WELLBEING" />
     <feature name="android.software.verified_boot" />
-    
+
+    <feature name="android.hardware.opengles.aep" />
+    <feature name="android.hardware.television" />
     <!-- add some gms google features for phone play store -->
     <feature name="android.hardware.telephony" />
     <feature name="android.hardware.telephony.cdma" />
     <feature name="android.hardware.telephony.gsm" />
-    
-    
 
 </permissions>
