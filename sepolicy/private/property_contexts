@@ -76,3 +76,7 @@ ro.product.usbfactory  u:object_r:exported_default_prop:s0 exact string
 ro.boot.copy_oem  u:object_r:exported_default_prop:s0 exact string
 # vendor-init-settable|vendor-init-actionable
 #persist.sys.zram_enabled u:object_r:exported2_system_prop:s0 exact bool
+
+#For TvSettings
+persist.vendor.abc_switch      u:object_r:debug_prop:s0
+persist.vendor.internet.adb.enable        u:object_r:debug_prop:s0

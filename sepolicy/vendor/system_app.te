@@ -23,3 +23,4 @@ allow system_app vendor_file:file { getattr };
 allow system_app cache_file:dir search;
 get_prop(system_app,vendor_default_prop)
 set_prop(system_app,powerctl_prop)
+set_prop(system_app,debug_prop)

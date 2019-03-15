@@ -49,6 +49,7 @@ set_prop(vendor_init, vendor_drm_prop)
 #set_prop(vendor_init, exported_secure_prop)
 set_prop(vendor_init, public_vendor_system_prop)
 set_prop(vendor_init, public_vendor_default_prop)
+set_prop(vendor_init, shell_prop)
 
 dontaudit vendor_init unlabeled:dir {getattr setattr};
 dontaudit vendor_init unlabeled:file getattr;
