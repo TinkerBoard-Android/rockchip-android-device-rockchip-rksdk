@@ -7,7 +7,7 @@ allow system_server sysfs_hctosys:file { read open getattr };
 
 # for storage
 allow system_server storage_stub_file:dir getattr;
-allow system_server sysfs_ksm:file { open };
+allow system_server sysfs_ksm:file { open read getattr };
 
 # input files
 r_dir_file(system_server, idc_file)
