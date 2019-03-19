@@ -39,6 +39,7 @@ type sysfs_wifi, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_fb, fs_type, sysfs_type;
 type sysfs_ksm, fs_type, sysfs_type;
 type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_ethernet, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lut, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_lcdc, fs_type, sysfs_type, mlstrustedobject;
