@@ -995,13 +995,15 @@ PRODUCT_PACKAGES += \
 AB_OTA_PARTITIONS += \
     boot \
     system	\
-    bootloader	\
-    tos	\
+    uboot	\
+    trust	\
     vendor	\
     oem	\
-    vbmeta \
     dtbo
-
+ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
+AB_OTA_PARTITIONS += \
+    vbmeta
+endif
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \

@@ -59,8 +59,17 @@ KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_P
 
 BOOT_OTA="ota"
 
-echo -n "create system.img boot.img bootloader.img tos.img oem.img vendor.img dtbo.img vbmeta.img..."
+echo -n "create system.img boot.img uboot.img trust.img oem.img vendor.img dtbo.img vbmeta.img..."
 cp -rf  $OUT/obj/PACKAGING/target_files_intermediates/*-target_files*/IMAGES/*.img  $IMAGE_PATH/
+echo "done."
+
+
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+echo -n "done!"
+else
+echo -n "BOARD_AVB_ENABLE is false,use default vbmeta.img..."
+cp -a device/rockchip/common/vbmeta.img $IMAGE_PATH/vbmeta.img
+fi
 echo "done."
 
 
