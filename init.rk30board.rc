@@ -331,3 +331,10 @@ service rk_store_keybox /vendor/bin/rk_store_keybox
 #vts audio property
 on property:vts.native_server.on=1
     setprop vendor.vts_test true
+
+# For Control Adb in Booting
+on property:persist.sys.adb_enable=1
+    restart adbd
+
+on property:persist.sys.adb_enable=0
+    stop adbd
