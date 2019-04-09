@@ -66,9 +66,9 @@
 
     <feature name="android.hardware.opengles.aep" />
     <feature name="android.hardware.television" />
-    <!-- add some gms google features for phone play store -->
+    <!-- add some gms google features for phone play store
     <feature name="android.hardware.telephony" />
     <feature name="android.hardware.telephony.cdma" />
-    <feature name="android.hardware.telephony.gsm" />
+    <feature name="android.hardware.telephony.gsm" /> -->
 
 </permissions>
