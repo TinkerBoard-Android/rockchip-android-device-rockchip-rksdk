@@ -49,6 +49,7 @@ type fuseblk, sdcard_type, fs_type, mlstrustedobject;
 type proc_ostype, fs_type, mlstrustedobject;
 type proc_pci, fs_type, proc_type;
 type sys_mali, fs_type, debugfs_type, mlstrustedobject;
+type sysfs_temp, fs_type, sysfs_type;
 
 # input files
 type idc_file, file_type, vendor_file_type;

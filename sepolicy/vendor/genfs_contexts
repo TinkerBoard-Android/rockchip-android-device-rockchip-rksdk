@@ -32,3 +32,5 @@ genfscon sysfs /firmware/devicetree/base/vpu_service/allocator                  
 genfscon proc /bus/pci/devices                                                                       u:object_r:proc_pci:s0
 
 genfscon fuseblk / u:object_r:fuseblk:s0
+
+genfscon sysfs /devices/virtual/thermal/thermal_zone0/temp                       u:object_r:sysfs_temp:s0
