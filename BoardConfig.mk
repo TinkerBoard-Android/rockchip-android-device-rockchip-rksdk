@@ -99,6 +99,7 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_INCLUDE_RECOVERY_DTBO := true
 
 DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
