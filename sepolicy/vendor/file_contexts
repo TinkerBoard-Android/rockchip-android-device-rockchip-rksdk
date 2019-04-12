@@ -80,6 +80,7 @@
 /dev/h265e                                      u:object_r:video_device:s0
 
 /dev/vendor_storage                             u:object_r:storage_device:s0
+/dev/rknand_sys_storage                         u:object_r:storage_device:s0
 
 #for tee
 /(vendor|system/vendor)/bin/tee-supplicant      u:object_r:tee_exec:s0
