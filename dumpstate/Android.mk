@@ -21,7 +21,7 @@ LOCAL_C_INCLUDES := frameworks/native/cmds/dumpstate
 LOCAL_SRC_FILES := dumpstate.cpp
 
 LOCAL_MODULE := libdumpstate.$(TARGET_PRODUCT)
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3399)
+ifneq ($(filter rk3399 rk3399pro, $(strip $(TARGET_BOARD_PLATFORM))), )
 LOCAL_CFLAGS += -DTARGET_BOARD_PLATFORM_RK3399
 endif
 LOCAL_MODULE_TAGS := optional
