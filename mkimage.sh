@@ -137,11 +137,11 @@ mv $OUT/vendor.img.out $OUT/vendor.img
 cp -a $OUT/vendor.img $IMAGE_PATH/vendor.img
 echo "done."
 
-echo -n "create oem.img..."
-python device/rockchip/common/sparse_tool.py $OUT/oem.img
-mv $OUT/oem.img.out $OUT/oem.img
-cp -f $OUT/oem.img $IMAGE_PATH/oem.img
-echo "done."
+#echo -n "create oem.img..."
+#python device/rockchip/common/sparse_tool.py $OUT/oem.img
+#mv $OUT/oem.img.out $OUT/oem.img
+#cp -f $OUT/oem.img $IMAGE_PATH/oem.img
+#echo "done."
 
 	echo -n "create misc.img.... "
 	cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img

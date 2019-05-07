@@ -63,7 +63,7 @@ fi
 
 # build kernel
 echo "Start build kernel"
-cd kernel && make ARCH=$ARCH distclean && make ARCH=$ARCH $KERNEL_DEFCONFIG && make ARCH=$ARCH $KERNEL_DTS.img -j$JOBS && cd -
+#cd kernel && make ARCH=$ARCH distclean && make ARCH=$ARCH $KERNEL_DEFCONFIG && make ARCH=$ARCH $KERNEL_DTS.img -j$JOBS && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
@@ -76,8 +76,8 @@ fi
 
 # build android
 echo "start build android"
-make installclean
-make -j$JOBS
+#make installclean
+#make -j$JOBS
 if [ $? -eq 0 ]; then
     echo "Build android ok!"
 else
@@ -125,8 +125,7 @@ rm $PACK_TOOL_DIR/rockdev/Image -rf
 mkdir -p $STUB_PATH
 
 #Generate patches
-echo "cwcw$PROJECT_TOP"
-.repo/repo/repo forall -c "$PROJECT_TOP/device/rockchip/common/gen_patches_body.sh"
+#.repo/repo/repo forall -c "$PROJECT_TOP/device/rockchip/common/gen_patches_body.sh"
 
 #Copy stubs
 cp commit_id.xml $STUB_PATH/manifest_${DATE}.xml

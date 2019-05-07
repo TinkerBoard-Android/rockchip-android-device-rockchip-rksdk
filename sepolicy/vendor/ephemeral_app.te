@@ -1,3 +1,0 @@
-allow ephemeral_app gpu_device:dir { search };
-allow ephemeral_app self:process { ptrace };
-

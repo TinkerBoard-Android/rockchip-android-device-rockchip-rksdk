@@ -1,2 +1,0 @@
-allow dumpstate gpu_device:dir {search};
-allow dumpstate mnt_media_rw_file:dir getattr;

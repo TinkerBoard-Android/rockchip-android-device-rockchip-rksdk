@@ -1,3 +1,0 @@
-allow bluetooth gpu_device:dir{ search };
-
-get_prop(bluetooth,vendor_default_prop)

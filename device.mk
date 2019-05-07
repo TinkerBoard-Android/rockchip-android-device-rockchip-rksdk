@@ -19,17 +19,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 
 # Prebuild apps
-ifneq ($(strip $(TARGET_PRODUCT)), )
-    TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
-    TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(TARGET_DEVICE_DIR)))
+#ifneq ($(strip $(TARGET_PRODUCT)), )
+#    TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
+#    TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(TARGET_DEVICE_DIR)))
 #    $(info device-rockchip-common TARGET_DEVICE_DIR: $(TARGET_DEVICE_DIR))
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app)
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app)
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app)
-    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
-    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
-    -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
-endif
+#    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app)
+#    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app)
+#    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app)
+#    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
+#    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
+#    -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
+#endif
 
 # Inherit product config
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
@@ -133,8 +133,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_config.txt:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_config.txt \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
-    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_bcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_bcm.conf
+    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
+#    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_bcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_bcm.conf
 
 #for ssv6051
 PRODUCT_COPY_FILES += \
@@ -985,9 +985,9 @@ endif
 PRODUCT_PACKAGES += libstdc++.vendor
 
 #only box and atv using our audio policy(write by rockchip)
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-USE_CUSTOM_AUDIO_POLICY := 1
-endif
+#ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+#USE_CUSTOM_AUDIO_POLICY := 1
+#endif
 
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
 PRODUCT_PACKAGES += \
@@ -1048,3 +1048,15 @@ BOARD_TWRP_ENABLE ?= false
 #Build with UiMode Config
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/uimode/package_uimode_config.xml:vendor/etc/package_uimode_config.xml
+
+
+# Zoom out recovery ui of box by two percent.
+ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+    TARGET_RECOVERY_OVERSCAN_PERCENT := 2
+    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
+    # savBaseParameter tool
+    ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+        PRODUCT_PACKAGES += saveBaseParameter
+    endif
+    DEVICE_FRAMEWORK_MANIFEST_FILE := device/rockchip/common/manifest_framework_override.xml
+endif

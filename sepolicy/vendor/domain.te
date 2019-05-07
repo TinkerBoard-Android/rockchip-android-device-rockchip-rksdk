@@ -1,3 +1,0 @@
-
-get_prop(domain, public_vendor_default_prop)
-get_prop(domain, public_vendor_system_prop)

@@ -63,13 +63,13 @@ endif
 
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
-PRODUCT_SUPPORTS_BOOT_SIGNER := false
 BOARD_SELINUX_ENFORCING ?= false
 
 ifneq ($(filter true, $(BOARD_AVB_ENABLE)), )
 BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 else
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
+BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
+#BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 endif
 
 ifneq ($(filter true, $(BOOTIMG_SUPPORT_MAGISK)), )
@@ -77,13 +77,14 @@ BOARD_KERNEL_CMDLINE += skip_initramfs
 endif
 
 BOARD_KERNEL_CMDLINE += loop.max_part=7
-BOARD_BOOTIMG_HEADER_VERSION ?= 1
+BOARD_BOOTIMG_HEADER_VERSION ?= 2
 ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 
 ifeq ($(filter true, $(BOARD_SELINUX_ENFORCING)), )
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 endif
 
+# TODO Q: update to version 2, add dtb section
 BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
 
@@ -97,9 +98,6 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
-
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOARD_INCLUDE_RECOVERY_DTBO := true
 
 DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
@@ -224,7 +222,6 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
 
 # Enable VNDK Check for Android P (MUST in P)
 BOARD_VNDK_VERSION := current
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
 # Recovery
 #TARGET_NO_RECOVERY ?= false
@@ -286,7 +283,7 @@ BUILD_WITH_GOOGLE_FRP ?= false
 BUILD_WITH_GO_OPT ?= false
 
 # define BUILD_NUMBER
-BUILD_NUMBER := $(shell $(DATE) +%H%M%S)
+#BUILD_NUMBER := $(shell $(DATE) +%H%M%S)
 
 # face lock
 BUILD_WITH_FACELOCK ?= false
@@ -338,7 +335,7 @@ BOARD_PPPOE_PASS_CTS ?= false
 BOARD_HS_ETHERNET ?= true
 
 # Save commit id into firmware
-BOARD_RECORD_COMMIT_ID ?= true
+BOARD_RECORD_COMMIT_ID ?= false
 
 # no battery
 BUILD_WITHOUT_BATTERY ?= false
@@ -399,16 +396,17 @@ BOARD_WIFI_SUPPORT ?= true
 
 #USE_CLANG_PLATFORM_BUILD ?= true
 
+# Android Q, move to device.mk since we can not change PRODUCT_PACKAGES in BoardConfig.mk
 # Zoom out recovery ui of box by two percent.
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-    TARGET_RECOVERY_OVERSCAN_PERCENT := 2
-    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb720.img
+#ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+#    TARGET_RECOVERY_OVERSCAN_PERCENT := 2
+#    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb720.img
     # savBaseParameter tool
-    ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-        PRODUCT_PACKAGES += saveBaseParameter
-    endif
-    DEVICE_FRAMEWORK_MANIFEST_FILE := device/rockchip/common/manifest_framework_override.xml
-endif
+#    ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+#        PRODUCT_PACKAGES += saveBaseParameter
+#    endif
+#    DEVICE_FRAMEWORK_MANIFEST_FILE := device/rockchip/common/manifest_framework_override.xml
+#endif
 
 #enable cpusets sched policy
 ENABLE_CPUSETS := true
@@ -446,7 +444,6 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     AB_OTA_UPDATER := true
     TARGET_NO_RECOVERY := true
     BOARD_USES_RECOVERY_AS_BOOT := true
-    BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
     USE_AB_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter_ab.txt && echo true)
     ifeq ($(strip $(USE_AB_PARAMETER)), true)
         BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt system_a)
