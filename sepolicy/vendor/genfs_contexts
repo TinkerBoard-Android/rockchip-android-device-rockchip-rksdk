@@ -1,0 +1,6 @@
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-charger/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/11040000.efuse/rockchip-efuse0/nvmem                                u:object_r:sysfs_hdmi:s0
+genfscon sysfs /devices/platform/20072000.i2c/i2c-0/0-001a/rk816-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-0062/power_supply                              u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-006b/power_supply                              u:object_r:sysfs_batteryinfo:s0

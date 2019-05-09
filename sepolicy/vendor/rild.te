@@ -1,0 +1,6 @@
+allow rild net_dns_prop:file { getattr open read };
+allow rild ppp_device:chr_file ioctl;
+allow rild rootfs:dir { open read };
+#TODO removed for Q
+#allow rild system_file:file execute_no_trans;
+allow rild vendor_file:file execute_no_trans;
