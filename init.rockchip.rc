@@ -130,7 +130,7 @@ on charger
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     setprop sys.usb.config adb
 
-service akmd /system/bin/akmd
+service akmd /vendor/bin/akmd
     class main
     user system
     group system

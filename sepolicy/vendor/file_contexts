@@ -21,6 +21,10 @@
 /dev/mma8452_daemon  u:object_r:sensor_device:s0
 /dev/lightsensor     u:object_r:sensor_device:s0
 
+/dev/akm8963_dev     u:object_r:akmd_device:s0
+/dev/akm_dev         u:object_r:akmd_device:s0
+/vendor/bin/akmd     u:object_r:akmd_exec:s0
+
 # camera
 /dev/media[0-9]      u:object_r:camera_device:s0
 /dev/v4l-subdev[0-9] u:object_r:camera_device:s0
