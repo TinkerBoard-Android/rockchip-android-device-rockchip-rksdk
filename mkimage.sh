@@ -45,7 +45,7 @@ KERNEL_CONFIG=$KERNEL_PATH/.config
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
 
-if [ "$TARGET_ARCH_VARIANT" = "armv8-a" ]; then
+if [ "$TARGET_ARCH" = "arm64" ]; then
 KERNEL_DEBUG=kernel/arch/arm64/boot/Image
 else
 KERNEL_DEBUG=kernel/arch/arm/boot/zImage
