@@ -13,6 +13,7 @@ allow mediaserver unlabeled:dir { read search open };
 allow mediaserver storage_file:dir { read search open };
 allow mediaserver mnt_user_file:dir { read search open };
 allow mediaserver mnt_user_file:lnk_file { read };
+allow mediaserver system_app_data_file:file { read write };
 
 allow mediaserver vendor_file:file { read getattr };
 allow mediaserver video_file:file { read getattr open };
