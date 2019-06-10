@@ -9,7 +9,9 @@ allow untrusted_app_27 unlabeled:file { open read getattr };
 allow untrusted_app_27 rootfs:dir { search read open getattr };
 allow untrusted_app_27 block_device:dir { getattr search };
 allow untrusted_app_27 ota_data_file:dir rw_dir_perms;
+allow untrusted_app_27 proc_rkperf:dir r_dir_perms;
 allow untrusted_app_27 ota_data_file:file rw_file_perms;
+allow untrusted_app_27 proc_rkperf:file rw_file_perms;
 allow untrusted_app_27 oemfs:file {execmod};
 get_prop(untrusted_app_27,vendor_default_prop)
 get_prop(untrusted_app_27,cts_gts_prop)

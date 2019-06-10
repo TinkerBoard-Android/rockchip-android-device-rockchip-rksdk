@@ -33,6 +33,7 @@ genfscon sysfs /class/net/eth0/carrier                                u:object_r
 genfscon sysfs /firmware/devicetree/base/vpu_service/allocator                                       u:object_r:sysfs_vpu:s0
 
 genfscon proc /bus/pci/devices                                                                       u:object_r:proc_pci:s0
+genfscon proc /hps/enabled                                                                           u:object_r:proc_rkperf:s0
 
 genfscon fuseblk / u:object_r:fuseblk:s0
 

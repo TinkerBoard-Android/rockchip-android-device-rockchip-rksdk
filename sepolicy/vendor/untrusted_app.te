@@ -1,6 +1,8 @@
 allow untrusted_app  block_device:dir { getattr search };
 allow untrusted_app  gpu_device:dir { search };
 allow untrusted_app  gpu_data_file:file rw_file_perms;
+allow untrusted_app  proc_rkperf:dir r_dir_perms;
+allow untrusted_app  proc_rkperf:file rw_file_perms;
 allow untrusted_app  ota_data_file:dir rw_dir_perms;
 allow untrusted_app  ota_data_file:file rw_file_perms;
 allow untrusted_app  vendor_security_patch_level_prop:file { read open getattr };
