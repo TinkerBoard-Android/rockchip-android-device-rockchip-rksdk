@@ -12,6 +12,9 @@ genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-charger/power_s
 # rk3326 I2C-0 RTC
 genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
 
+# rk3399 RTC
+genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+
 genfscon sysfs /kernel/mm/ksm/pages_shared                                                           u:object_r:sysfs_ksm:s0
 genfscon sysfs /kernel/mm/ksm/pages_sharing                                                          u:object_r:sysfs_ksm:s0
 
