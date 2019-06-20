@@ -135,6 +135,8 @@ static char const *const device_template[] =
     "/dev/block/platform/ff520000.dwmmc/by-name/baseparameter",
     "/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
     "/dev/block/rknand_baseparameter",
+    "/dev/block/by-name/baseparameter",
+    "/dev/block/platform/30030000.nandc/by-name/baseparameter",
     NULL
 };
 
