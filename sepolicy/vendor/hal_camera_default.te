@@ -12,6 +12,8 @@ allow hal_camera_default hal_graphics_composer_default:fd { use };
 allow hal_camera_default sysfs:file { read open getattr };
 allow hal_camera_default sysfs_vpu:file { read open getattr };
 allow hal_camera_default sysfs_dev:file { read open getattr };
+# for fence
+allow hal_camera_default mediaserver:fd { use };
 
 get_prop(hal_camera_default,vendor_default_prop)
 get_prop(hal_camera_default,vendor_omx_prop)

@@ -16,6 +16,9 @@ dontaudit surfaceflinger sysfs:file rw_file_perms;
 allow surfaceflinger rga_device:dir search;
 allow surfaceflinger rga_device:chr_file rw_file_perms;
 
+#for camera hal fence
+allow surfaceflinger hal_camera_default:fd { use };
+
 typeattribute surfaceflinger system_writes_vendor_properties_violators;
 get_prop(surfaceflinger,public_vendor_system_prop)
 set_prop(surfaceflinger,public_vendor_system_prop)
