@@ -3,3 +3,4 @@ dontaudit hal_bluetooth_default self:udp_socket { create };
 allow hal_bluetooth_default serial_device:chr_file rw_file_perms;
 allow hal_bluetooth_default sysfs:file write;
 allow hal_bluetooth_default rk_bluetooth_file:file rw_file_perms;
+allow hal_bluetooth_default rtkbt_device:chr_file rw_file_perms;

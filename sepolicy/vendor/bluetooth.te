@@ -1,3 +1,3 @@
 allow bluetooth gpu_device:dir{ search };
-
+allow bluetooth tmpfs:dir { write };
 get_prop(bluetooth,vendor_default_prop)
