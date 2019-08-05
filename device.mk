@@ -720,6 +720,9 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go.mk)
 else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go-mandatory.mk)
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), box)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms-mini-box.mk)
+endif
 endif
 endif
 endif
