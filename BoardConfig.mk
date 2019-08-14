@@ -179,9 +179,9 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
-#ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-#DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
-#endif
+ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
+endif
 
 ########for target product ########
 #ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
