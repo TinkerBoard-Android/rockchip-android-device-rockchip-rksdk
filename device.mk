@@ -187,13 +187,28 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
+FSTAB_FLAGS := wait,first_stage_mount
+FSTAB_PREFIX := /dev/block/by-name/
+FSTAB_FILE = $(OUT_DIR)/fstab.ramdisk
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
-PRODUCT_COPY_FILES += \
-	$(TARGET_DEVICE_DIR)/fstab.rk30board_AB:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board
-else
-PRODUCT_COPY_FILES += \
-	$(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board
+    FSTAB_FLAGS += ,slotselect
 endif
+
+ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
+    FSTAB_FLAGS += ,avb
+endif
+
+ifeq ($(strip $(PRODUCT_USE_DYNAMIC_PARTITIONS)), true)
+    FSTAB_PREFIX := none
+    FSTAB_FLAGS += ,logical
+endif
+
+# generate the fstab file
+$(shell python $(LOCAL_PATH)/fstab_generator.py -p $(FSTAB_PREFIX) -f $(FSTAB_FLAGS) -o $(FSTAB_FILE))
+
+PRODUCT_COPY_FILES += \
+    $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
+    $(FSTAB_FILE):$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \

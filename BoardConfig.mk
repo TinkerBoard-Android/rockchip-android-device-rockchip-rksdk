@@ -91,11 +91,14 @@ BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG ?= true
 
-# Add standalone odm partion configrations
+# Add standalone metadata partition
+BOARD_USES_METADATA_PARTITION ?= true
+
+# Add standalone odm partition configrations
 TARGET_COPY_OUT_ODM := odm
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
-# Add standalone vendor partion configrations
+# Add standalone vendor partition configrations
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
