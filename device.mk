@@ -85,6 +85,11 @@ endif
 PRODUCT_PACKAGES += \
    librkskia
 
+# For screen hwrotation
+ifneq ($(filter 90 180 270, $(strip $(SF_PRIMARY_DISPLAY_ORIENTATION))), )
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	ro.surface_flinger.primary_display_orientation=ORIENTATION_$(SF_PRIMARY_DISPLAY_ORIENTATION)
+endif
 
 # build with go optimization
 ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
@@ -341,10 +346,6 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
     android.hardware.sensors@1.0-impl \
     sensors.$(TARGET_BOARD_HARDWARE)
-
-# ConfigStoreHAL, for HWRotation, set SF_PRIMARY_DISPLAY_ORIENTATION to change it.
-PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.1-service
 
 endif
 

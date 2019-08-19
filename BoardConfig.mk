@@ -139,17 +139,19 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK ?= false
 DEVICE_HAVE_LIBRKVPU ?= true
 
 #rotate screen to 0, 90, 180, 270
-#0:   rotate_0
-#90:  rotate_90
-#180: rotate_180
-#270: rotate_270
+#0:   rotate_0      ORIENTATION_0  : 0
+#90:  rotate_90     ORIENTATION_90 : 90
+#180: rotate_180    ORIENTATION_180: 180
+#270: rotate_270    ORIENTATION_270: 270
+# For Recovery Rotation
 ROTATE_SCREEN ?= rotate_0
+# For Surface Flinger Rotation
+SF_PRIMARY_DISPLAY_ORIENTATION ?= 0
 
 #Screen to Double, Single
 #YES: Screen to Double
 #NO: Screen to single
 DOUBLE_SCREEN ?= NO
-
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali400)
 BOARD_EGL_CFG := vendor/rockchip/common/gpu/Mali400/lib/arm/egl.cfg
