@@ -116,6 +116,17 @@ fi
 echo "done."
 
 echo -n "create system.img.... "
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+echo -n "system.img has been signed by avbtool, just copy."
+else
+echo "BOARD_AVB_ENABLE is false, make system.img from out."
+    [ -d $OUT/system ] && \
+    python build/make/tools/releasetools/build_image.py \
+    $OUT/system \
+    $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
+    $OUT/system.img \
+    $OUT/system
+fi
 python device/rockchip/common/sparse_tool.py $OUT/system.img
 mv $OUT/system.img.out $OUT/system.img
 cp -f $OUT/system.img $IMAGE_PATH/system.img
@@ -129,13 +140,24 @@ else
 echo -n "BOARD_AVB_ENABLE is false,use default vbmeta.img"
 cp -a device/rockchip/common/vbmeta.img $IMAGE_PATH/vbmeta.img
 fi
-echo "done."
+echo -n "done."
 
 echo -n "create vendor.img..."
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+echo -n "vendor.img has been signed by avbtool, just copy."
+else
+echo "BOARD_AVB_ENABLE is false, make vendor.img from out."
+    [ -d $OUT/vendor ] && \
+    python build/make/tools/releasetools/build_image.py \
+    $OUT/vendor \
+    $OUT/obj/PACKAGING/vendor_intermediates/vendor_image_info.txt \
+    $OUT/vendor.img \
+    $OUT/system
+fi
 python device/rockchip/common/sparse_tool.py $OUT/vendor.img
 mv $OUT/vendor.img.out $OUT/vendor.img
 cp -a $OUT/vendor.img $IMAGE_PATH/vendor.img
-echo "done."
+echo -n "done."
 
 #echo -n "create oem.img..."
 #python device/rockchip/common/sparse_tool.py $OUT/oem.img
