@@ -159,11 +159,22 @@ mv $OUT/vendor.img.out $OUT/vendor.img
 cp -a $OUT/vendor.img $IMAGE_PATH/vendor.img
 echo -n "done."
 
-#echo -n "create oem.img..."
-#python device/rockchip/common/sparse_tool.py $OUT/oem.img
-#mv $OUT/oem.img.out $OUT/oem.img
-#cp -f $OUT/oem.img $IMAGE_PATH/oem.img
-#echo "done."
+echo -n "create odm.img..."
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+echo -n "odm.img has been signed by avbtool, just copy."
+else
+echo "BOARD_AVB_ENABLE is false, make odm.img from out."
+    [ -d $OUT/odm ] && \
+    python build/make/tools/releasetools/build_image.py \
+    $OUT/odm \
+    $OUT/obj/PACKAGING/odm_intermediates/odm_image_info.txt \
+    $OUT/odm.img \
+    $OUT/system
+fi
+python device/rockchip/common/sparse_tool.py $OUT/odm.img
+mv $OUT/odm.img.out $OUT/odm.img
+cp -f $OUT/odm.img $IMAGE_PATH/odm.img
+echo "done."
 
 	echo -n "create misc.img.... "
 	cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
