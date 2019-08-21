@@ -88,9 +88,9 @@ endif
 BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
 
-# Add standalone oem partion configrations
-TARGET_COPY_OUT_OEM := oem
-BOARD_OEMIMAGE_FILE_SYSTEM_TYPE ?= ext4
+# Add standalone odm partion configrations
+TARGET_COPY_OUT_ODM := odm
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
 # Add standalone vendor partion configrations
 TARGET_COPY_OUT_VENDOR := vendor
@@ -106,7 +106,7 @@ DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
 USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
 ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
   BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt system)
-  BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt oem)
+  BOARD_ODMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt odm)
   BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor)
   BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt cache)
   BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt boot)
@@ -117,7 +117,7 @@ ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
 else
   BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
   BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
-  BOARD_OEMIMAGE_PARTITION_SIZE ?= 536870912
+  BOARD_ODMIMAGE_PARTITION_SIZE ?= 536870912
   BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
   BOARD_BOOTIMAGE_PARTITION_SIZE ?= 41943040
   BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 41943040
@@ -369,9 +369,6 @@ BOARD_HAVE_DONGLE ?= false
 #for boot and shutdown animation ringing
 BOOT_SHUTDOWN_ANIMATION_RINGING ?= false
 
-#for oem preset
-OEM_PRESET ?= false
-
 #for pms multi thead scan
 BOARD_ENABLE_PMS_MULTI_THREAD_SCAN ?= false
 
@@ -449,7 +446,7 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     USE_AB_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter_ab.txt && echo true)
     ifeq ($(strip $(USE_AB_PARAMETER)), true)
         BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt system_a)
-        BOARD_OEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt oem_a)
+        BOARD_ODMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt odm_a)
         BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt vendor_a)
         BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt cache)
         BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt boot_a)
