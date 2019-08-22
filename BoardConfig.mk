@@ -20,6 +20,7 @@
 #TARGET_NO_KERNEL := false
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
+BOARD_PREBUILT_DTBIMAGE_DIR ?= kernel/arch/arm/boot/dts
 #BOARD_USES_RECOVERY_AS_BOOT := true
 
 #binder protocol(8)
@@ -87,6 +88,8 @@ endif
 # TODO Q: update to version 2, add dtb section
 BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_PREBUILT_DTBOIMAGE := $(TARGET_DEVICE_DIR)/dtbo.img
+
+BOARD_INCLUDE_DTB_IN_BOOTIMG ?= true
 
 # Add standalone odm partion configrations
 TARGET_COPY_OUT_ODM := odm
