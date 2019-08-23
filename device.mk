@@ -106,6 +106,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 endif
