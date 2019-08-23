@@ -96,6 +96,7 @@ echo "done."
 echo "create boot.img.... "
 if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/boot.img $IMAGE_PATH/boot.img
+cp -a $OUT/boot-debug.img $IMAGE_PATH/boot-debug.img
 else
 echo "BOARD_AVB_ENABLE is false, make boot.img from kernel."
     mkbootimg --kernel $KERNEL_DEBUG --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$BOARD_KERNEL_CMDLINE" --output $OUT/boot.img && \
