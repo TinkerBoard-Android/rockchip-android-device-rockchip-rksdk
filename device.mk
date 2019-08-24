@@ -642,7 +642,7 @@ PRODUCT_COPY_FILES += \
 # Copy manifest to vendor/
 ifeq ($(strip $(BOARD_RECORD_COMMIT_ID)),true)
 PRODUCT_COPY_FILES += \
-     commit_id.xml:$(TARGET_COPY_OUT_VENDOR)/commit_id.xml
+    $(OUT_DIR)/commit_id.xml:$(TARGET_COPY_OUT_VENDOR)/commit_id.xml
 endif
 
 # Copy init.usbstorage.rc to root
