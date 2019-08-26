@@ -23,11 +23,6 @@ wifi.supplicant_scan_interval        u:object_r:vendor_default_prop:s0
 #sys.hwc.device.primary               u:object_r:vendor_default_prop:s0
 sys.video.refFrameMode               u:object_r:vendor_default_prop:s0
 testing.mediascanner.skiplist        u:object_r:vendor_default_prop:s0
-persist.bluetooth.btsnoopenable      u:object_r:vendor_default_prop:s0
-persist.bluetooth.btsnooppath        u:object_r:vendor_default_prop:s0
-persist.bluetooth.btsnoopsize        u:object_r:vendor_default_prop:s0
-persist.bluetooth.rtkcoex            u:object_r:vendor_default_prop:s0
-bluetooth.enable_timeout_ms          u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 
 
