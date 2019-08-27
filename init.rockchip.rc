@@ -13,6 +13,9 @@ on early-init
     restorecon /sys/kernel/debug/tracing/trace_marker
     restorecon_recursive /sys/kernel/debug/tracing/
 
+    chown system system /sys/kernel/debug/sync/sw_sync
+    chmod 0666 /sys/kernel/debug/sync/sw_sync
+
     # Loading kernel modules in background
     start vendor.insmod_sh
 
