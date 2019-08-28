@@ -192,16 +192,16 @@ FSTAB_FLAGS := wait,first_stage_mount
 FSTAB_PREFIX := /dev/block/by-name/
 FSTAB_FILE = $(OUT_DIR)/fstab.ramdisk
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
-    FSTAB_FLAGS += ,slotselect
+    FSTAB_FLAGS := $(FSTAB_FLAGS),slotselect
 endif
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
-    FSTAB_FLAGS += ,avb
+    FSTAB_FLAGS := $(FSTAB_FLAGS),avb
 endif
 
-ifeq ($(strip $(PRODUCT_USE_DYNAMIC_PARTITIONS)), true)
+ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
     FSTAB_PREFIX := none
-    FSTAB_FLAGS += ,logical
+    FSTAB_FLAGS := $(FSTAB_FLAGS),logical
 endif
 
 # generate the fstab file
