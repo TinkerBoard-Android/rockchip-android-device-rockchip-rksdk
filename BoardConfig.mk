@@ -69,8 +69,7 @@ BOARD_SELINUX_ENFORCING ?= false
 ifneq ($(filter true, $(BOARD_AVB_ENABLE)), )
 BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 else
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
-#BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
+BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 endif
 
 ifneq ($(filter true, $(BOOTIMG_SUPPORT_MAGISK)), )
@@ -112,9 +111,14 @@ DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
 #Calculate partition size from parameter.txt
 USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
 ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
-  BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt system)
-  BOARD_ODMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt odm)
-  BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor)
+  ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+    BOARD_SUPER_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt super)
+    BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
+  else
+    BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt system)
+    BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor)
+    BOARD_ODMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt odm)
+  endif
   BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt cache)
   BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt boot)
   BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt dtbo)
@@ -122,10 +126,14 @@ ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
 
   #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
 else
-  BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
+  ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+    BOARD_SUPER_PARTITION_SIZE ?=  3263168512
+  else
+    BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 1073741824
+    BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
+    BOARD_ODMIMAGE_PARTITION_SIZE ?= 536870912
+  endif
   BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
-  BOARD_ODMIMAGE_PARTITION_SIZE ?= 536870912
-  BOARD_VENDORIMAGE_PARTITION_SIZE ?= 536870912
   BOARD_BOOTIMAGE_PARTITION_SIZE ?= 41943040
   BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 41943040
   BOARD_DTBOIMG_PARTITION_SIZE ?= 8388608
@@ -133,7 +141,6 @@ else
     #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
   endif
 endif
-
 
 # GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= mali-t760
