@@ -398,6 +398,12 @@ PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
 
+# Weaver HAL
+PRODUCT_PACKAGES += \
+    android.hardware.weaver@1.0-impl \
+    android.hardware.weaver@1.0-service \
+    481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta
+
 # Dumpstate HAL
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.dragon
