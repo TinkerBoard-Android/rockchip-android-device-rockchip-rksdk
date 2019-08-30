@@ -61,7 +61,7 @@
 /dev/block/by-name/misc                         u:object_r:misc_block_device:s0
 /dev/block/by-name/security                     u:object_r:security_block_device:s0
 /dev/block/by-name/baseparameter                u:object_r:baseparameter_block_device:s0
-
+/dev/block/by-name/super                        u:object_r:super_block_device:s0
 
 /sys/devices/platform/fb/graphics/fb[0-9]/cabc                u:object_r:sysfs_fb:s0
 /sys/kernel/debug/mali/gpu_memory                u:object_r:sys_mali:s0
