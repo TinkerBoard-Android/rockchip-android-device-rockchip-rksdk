@@ -4,23 +4,25 @@ import getopt
 import os
 from string import Template
 
-templet = Template("${_block_prefix}system /system ext4 ro,barrier=1 ${_flags}\n\
-${_block_prefix}vendor /vendor ext4 ro,barrier=1 ${_flags}\n\
-/dev/block/by-name/metadata /metadata ext4 nodev,noatime,nosuid,errors=panic wait,formattable,first_stage_mount")
+usage = 'fstab_generator.py -p <block_prefix> -f <flags> -o <output_file>'
 
 def main(argv):
+    ifile = ''
+    plist = 'system,vendor'
     prefix = ''
     flags = ''
     fstab_file = ''
     try:
-        opts, args = getopt.getopt(argv, "hp:f:o:", ["block_prefix=","flags=","ofile="])
+        opts, args = getopt.getopt(argv, "hi:p:f:o:", ["ifile","bprefix=","flags=","ofile="])
     except getopt.GetoptError:
-        print 'fstab_generator.py -p <block_prefix> -f <flags> -o <output_file>'
+        print usage
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print 'fstab_generator.py -p <block_prefix> -f <flags> -o <output_file>'
+            print usage
             sys.exit(2)
+        elif opt in ("-i", "--ifile"):
+            ifile = arg;
         elif opt in ("-p", "--block_prefix"):
             prefix = arg;
         elif opt in ("-f", "--flags"):
@@ -28,19 +30,23 @@ def main(argv):
         elif opt in ("-o", "--ofile"):
             fstab_file = arg;
         else:
-            print 'fstab_generator.py -p <block_prefix> -f <flags> -o <output_file>'
+            print usage
             sys.exit(2)
 
-    #print 'prefix=' + prefix + ', flags=' + flags + ', fstab_file=' + fstab_file
     if prefix == 'none':
         prefix = ''
 
-    fstab_file_content = templet.substitute(_block_prefix=prefix,_flags=flags)
+    file_fstab_in = open(ifile)
+    template_fstab_in = file_fstab_in.read()
+    fstab_in_t = Template(template_fstab_in)
+
+    line = fstab_in_t.substitute(_block_prefix=prefix,_flags=flags)
+
     if fstab_file != '':
         with open(fstab_file,"w") as f:
-            f.write(fstab_file_content)
+            f.write(line)
     else:
-        print fstab_file_content
+        print line
 
 if __name__=="__main__":
     main(sys.argv[1:])

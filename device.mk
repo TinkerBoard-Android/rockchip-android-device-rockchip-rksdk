@@ -188,28 +188,35 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
-FSTAB_FLAGS := wait,first_stage_mount
+ifndef PRODUCT_FSTAB_TEMPLATE
+$(warning Please add fstab.in with PRODUCT_FSTAB_TEMPLATE in your product.mk)
+PRODUCT_COPY_FILES += \
+    $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board
+    $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
+else
+FSTAB_FLAGS := wait,
 FSTAB_PREFIX := /dev/block/by-name/
-FSTAB_FILE = $(OUT_DIR)/fstab.ramdisk
+FSTAB_FILE = $(OUT_DIR)/fstab.rk30board
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
-    FSTAB_FLAGS := $(FSTAB_FLAGS),slotselect
-endif
+    FSTAB_FLAGS := $(FSTAB_FLAGS)slotselect,
+endif # BOARD_USES_AB_IMAGE
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
-    FSTAB_FLAGS := $(FSTAB_FLAGS),avb
-endif
+    FSTAB_FLAGS := $(FSTAB_FLAGS)avb,
+endif # BOARD_AVB_ENABLE
 
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
     FSTAB_PREFIX := none
-    FSTAB_FLAGS := $(FSTAB_FLAGS),logical
-endif
+    FSTAB_FLAGS := $(FSTAB_FLAGS)logical,
+endif # BOARD_USE_DYNAMIC_PARTITIONS
 
-# generate the fstab file
-$(shell python $(LOCAL_PATH)/fstab_generator.py -p $(FSTAB_PREFIX) -f $(FSTAB_FLAGS) -o $(FSTAB_FILE))
+# generate fstab file from template
+$(shell python $(LOCAL_PATH)/fstab_generator.py -i $(PRODUCT_FSTAB_TEMPLATE) -p $(FSTAB_PREFIX) -f $(FSTAB_FLAGS) -o $(FSTAB_FILE))
 
 PRODUCT_COPY_FILES += \
-    $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
+    $(FSTAB_FILE):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
     $(FSTAB_FILE):$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
+endif # Use PRODUCT_FSTAB_TEMPLATE
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
