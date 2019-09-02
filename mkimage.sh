@@ -46,6 +46,7 @@ echo system filesysystem is $FSTYPE
 BOARD_CONFIG=device/rockchip/common/device.mk
 
 PARAMETER=${TARGET_DEVICE_DIR}/parameter.txt
+FLASH_CONFIG_FILE=${TARGET_DEVICE_DIR}/config.cfg
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
@@ -253,6 +254,15 @@ then
         echo "done."
 else
         echo "$KERNEL_PATH/kernel.img not fount!"
+fi
+
+if [ -f $FLASH_CONFIG_FILE ]
+then
+    echo -n "create config.cfg..."
+    cp -a $FLASH_CONFIG_FILE $IMAGE_PATH/config.cfg
+    echo "done."
+else
+    echo "$FLASH_CONFIG_FILE not fount!"
 fi
 
 if [ -f $PARAMETER ]
