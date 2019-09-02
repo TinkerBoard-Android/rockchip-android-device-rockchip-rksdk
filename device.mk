@@ -854,10 +854,6 @@ PRODUCT_COPY_FILES += \
         device/rockchip/common/eecolorapi/lib/libeecolorapi.so:system/lib/libeecolorapi.so \
         device/rockchip/common/eecolorapi/lib64/libeecolorapi.so:system/lib64/libeecolorapi.so
 
-
-#first_api_level
-include build/make/target/product/product_launched_with_p.mk
-
 #if force app can see udisk
 ifeq ($(strip $(BOARD_FORCE_UDISK_VISIBLE)),true)
 PRODUCT_PROPERTY_OVERRIDES += \
