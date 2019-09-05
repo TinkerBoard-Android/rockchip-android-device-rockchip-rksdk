@@ -211,7 +211,7 @@ ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
 endif # BOARD_USE_DYNAMIC_PARTITIONS
 
 # generate fstab file from template
-$(shell python $(LOCAL_PATH)/fstab_generator.py -i $(PRODUCT_FSTAB_TEMPLATE) -p $(FSTAB_PREFIX) -f $(FSTAB_FLAGS) -o $(FSTAB_FILE))
+$(shell python $(LOCAL_PATH)/scripts/fstab_generator.py -i $(PRODUCT_FSTAB_TEMPLATE) -p $(FSTAB_PREFIX) -f $(FSTAB_FLAGS) -o $(FSTAB_FILE))
 
 PRODUCT_COPY_FILES += \
     $(FSTAB_FILE):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
@@ -640,25 +640,11 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
     librecovery_ui_$(TARGET_PRODUCT)
 
-# for bugreport
-ifneq ($(TARGET_BUILD_VARIANT), user)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bugreport.sh:system/bin/bugreport.sh
-endif
-
 ifeq ($(strip $(BOARD_BOOT_READAHEAD)), true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/proprietary/readahead/readahead:$(TARGET_COPY_OUT_VENDOR)/sbin/readahead \
     $(LOCAL_PATH)/proprietary/readahead/readahead_list.txt:$(TARGET_COPY_OUT_VENDOR)/readahead_list.txt
 endif
-
-#whtest for bin
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/whtest.sh:system/bin/whtest.sh
-
-# for preinstall
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/preinstall_cleanup.sh:system/bin/preinstall_cleanup.sh
 
 # Copy manifest to vendor/
 ifeq ($(strip $(BOARD_RECORD_COMMIT_ID)),true)
