@@ -23,6 +23,7 @@ BOARD_AVB_ENABLE=`get_build_var BOARD_AVB_ENABLE`
 BOARD_KERNEL_CMDLINE=`get_build_var BOARD_KERNEL_CMDLINE`
 ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS=`get_build_var ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS`
 BOARD_BOOTIMG_HEADER_VERSION=`get_build_var BOARD_BOOTIMG_HEADER_VERSION`
+PRODUCT_USE_DYNAMIC_PARTITIONS=`get_build_var PRODUCT_USE_DYNAMIC_PARTITIONS`
 
 echo TARGET_BOARD_PLATFORM=$TARGET_BOARD_PLATFORM
 echo TARGET_PRODUCT=$TARGET_PRODUCT
@@ -177,11 +178,16 @@ mv $OUT/odm.img.out $OUT/odm.img
 cp -f $OUT/odm.img $IMAGE_PATH/odm.img
 echo "done."
 
-	echo -n "create misc.img.... "
-	cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
-	cp -a rkst/Image/pcba_small_misc.img $IMAGE_PATH/pcba_small_misc.img
-	cp -a rkst/Image/pcba_whole_misc.img $IMAGE_PATH/pcba_whole_misc.img
-	echo "done."
+if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
+    cp -a $OUT/super.img $IMAGE_PATH/super.img
+    echo "copy super.img..."
+fi
+
+echo -n "create misc.img.... "
+cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
+cp -a rkst/Image/pcba_small_misc.img $IMAGE_PATH/pcba_small_misc.img
+cp -a rkst/Image/pcba_whole_misc.img $IMAGE_PATH/pcba_whole_misc.img
+echo "done."
 
 if [ -f $UBOOT_PATH/uboot.img ]
 then
