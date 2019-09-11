@@ -10,12 +10,6 @@ import /vendor/etc/init/hw/init.root.rc
 on post-fs
     restorecon_recursive /mnt/vendor/metadata
 
-    # Turn on swap
-#    swapon_all /vendor/etc/fstab.${ro.hardware}
-
-#on property:vold.decrypt=trigger_restart_framework && property:persist.sys.usb.config=adb
-#    setprop sys.usb.config ${persist.sys.usb.config}
-
 on post-fs-data
     # AP6476 GPS permission
     chmod 755 /system/bin/glgps

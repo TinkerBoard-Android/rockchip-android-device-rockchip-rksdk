@@ -1,6 +1,7 @@
 import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
 import /vendor/etc/init/hw/init.${ro.hardware}.environment.rc
 import /vendor/etc/init/hw/init.debug.rc
+import /vendor/etc/init/hw/init.mount_all.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
@@ -35,9 +36,6 @@ on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     symlink /sdcard /mnt/sdcard
-
-on fs
-    mount_all /vendor/etc/fstab.${ro.hardware}
 
 on post-fs
     # Swap in only 1 page at a time
