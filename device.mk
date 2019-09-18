@@ -195,20 +195,20 @@ PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
 else
-FSTAB_FLAGS := wait,
+FSTAB_FLAGS := wait
 FSTAB_PREFIX := /dev/block/by-name/
 FSTAB_FILE = $(OUT_DIR)/fstab.rk30board
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
-    FSTAB_FLAGS := $(FSTAB_FLAGS)slotselect,
+    FSTAB_FLAGS := $(FSTAB_FLAGS),slotselect
 endif # BOARD_USES_AB_IMAGE
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
-    FSTAB_FLAGS := $(FSTAB_FLAGS)avb,
+    FSTAB_FLAGS := $(FSTAB_FLAGS),avb
 endif # BOARD_AVB_ENABLE
 
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
     FSTAB_PREFIX := none
-    FSTAB_FLAGS := $(FSTAB_FLAGS)logical,
+    FSTAB_FLAGS := $(FSTAB_FLAGS),logical
 endif # BOARD_USE_DYNAMIC_PARTITIONS
 
 # generate fstab file from template
