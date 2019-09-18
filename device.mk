@@ -88,6 +88,10 @@ endif
 PRODUCT_PACKAGES += \
    librkskia
 
+# libtinyxml
+PRODUCT_PACKAGES += \
+    libtinyxml
+
 # For screen hwrotation
 ifneq ($(filter 90 180 270, $(strip $(SF_PRIMARY_DISPLAY_ORIENTATION))), )
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
