@@ -169,6 +169,9 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
+PRODUCT_PACKAGES += \
+    rockchip.hardware.rockit@1.0-service \
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     PRODUCT_PACKAGES += \
       libpppoe-jni \
