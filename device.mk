@@ -109,7 +109,14 @@ ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
-endif
+
+# Build vbmeta with public_key_metadata
+# when BOARD_AVB_METADATA_BIN_PATH is set
+ifdef BOARD_AVB_METADATA_BIN_PATH
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS := \
+    --public_key_metadata $(BOARD_AVB_METADATA_BIN_PATH)
+endif # BOARD_AVB_METADATA_BIN_PATH
+endif # BOARD_AVB_ENABLE
 
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
