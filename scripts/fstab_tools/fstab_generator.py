@@ -62,7 +62,7 @@ def main(argv):
     if type == 'fstab':
         line = fstab_in_t.substitute(_block_prefix=prefix,_flags=flags,_flags_vbmeta=vbmeta_part)
     else:
-        line = fstab_in_t.substitute(_vbmeta=dt_vbmeta,_flags=flags)
+        line = fstab_in_t.substitute(_boot_device=prefix,_vbmeta=dt_vbmeta,_flags=flags)
 
     if fstab_file != '':
         with open(fstab_file,"w") as f:
