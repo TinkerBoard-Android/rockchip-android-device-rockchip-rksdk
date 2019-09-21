@@ -198,32 +198,11 @@ PRODUCT_COPY_FILES += \
 
 ifndef PRODUCT_FSTAB_TEMPLATE
 $(warning Please add fstab.in with PRODUCT_FSTAB_TEMPLATE in your product.mk)
+# To use fstab auto generator, define fstab.in in your product.mk,
+# Then include the device/rockchip/common/build/rockchip/RebuildFstab.mk in your AndroidBoard.mk
 PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
-else
-FSTAB_FLAGS := wait
-FSTAB_PREFIX := /dev/block/by-name/
-FSTAB_FILE = $(OUT_DIR)/fstab.rk30board
-ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
-    FSTAB_FLAGS := $(FSTAB_FLAGS),slotselect
-endif # BOARD_USES_AB_IMAGE
-
-ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
-    FSTAB_FLAGS := $(FSTAB_FLAGS),avb
-endif # BOARD_AVB_ENABLE
-
-ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
-    FSTAB_PREFIX := none
-    FSTAB_FLAGS := $(FSTAB_FLAGS),logical
-endif # BOARD_USE_DYNAMIC_PARTITIONS
-
-# generate fstab file from template
-$(shell python $(LOCAL_PATH)/scripts/fstab_generator.py -i $(PRODUCT_FSTAB_TEMPLATE) -p $(FSTAB_PREFIX) -f $(FSTAB_FLAGS) -o $(FSTAB_FILE))
-
-PRODUCT_COPY_FILES += \
-    $(FSTAB_FILE):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
-    $(FSTAB_FILE):$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
 endif # Use PRODUCT_FSTAB_TEMPLATE
 
 # For audio-recoard 
