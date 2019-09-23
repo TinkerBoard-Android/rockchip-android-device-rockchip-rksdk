@@ -72,13 +72,14 @@ BOOT_OTA="ota"
         fi
     fi
 
+
 echo "create dtbo.img.... "
-if [ "$BOARD_AVB_ENABLE" = "true" ]; then
-cp -a $OUT/dtbo.img $IMAGE_PATH/dtbo.img
+if [ ! -f "$OUT/dtbo.img" ]; then
+BOARD_DTBO_IMG=$OUT/rebuild-dtbo.img
 else
-echo -n "BOARD_AVB_ENABLE is false,use default dtbo.img"
-cp -a $TARGET_DEVICE_DIR/dtbo.img $IMAGE_PATH/dtbo.img
+BOARD_DTBO_IMG=$OUT/dtbo.img
 fi
+cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
 
 echo "create boot.img.... "
@@ -99,7 +100,7 @@ else
 echo "BOARD_AVB_ENABLE is false, make recovery.img from kernel && out."
     [ -d $OUT/recovery/root ] && \
     mkbootfs -d $OUT/system $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
-    mkbootimg --kernel $KERNEL_DEBUG --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --recovery_dtbo $TARGET_DEVICE_DIR/dtbo.img --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS" --output $OUT/recovery.img && \
+    mkbootimg --kernel $KERNEL_DEBUG --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --recovery_dtbo $BOARD_DTBO_IMG --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS" --output $OUT/recovery.img && \
     cp -a $OUT/recovery.img $IMAGE_PATH/recovery.img
 fi
 echo "done."
