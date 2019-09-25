@@ -959,15 +959,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### in AOSP-system image (user firmware) ###
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=0 \
     ro.logd.kernel=1
 PRODUCT_COPY_FILES += \
     device/rockchip/common/zmodem/rz:$(TARGET_COPY_OUT_VENDOR)/bin/rz \
     device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz
 PRODUCT_PACKAGES += io
-else
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=1
 endif
 
 USE_XML_AUDIO_POLICY_CONF := 1
