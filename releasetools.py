@@ -83,6 +83,11 @@ def InstallVbmeta(vbmeta_bin, input_zip, info):
   info.script.Print("Writing vbmeta img...")
   info.script.WriteRawImage("/vbmeta", "vbmeta.img")
 
+def InstallDtbo(dtbo_bin, input_zip, info):
+  common.ZipWriteStr(info.output_zip, "dtbo.img",dtbo_bin)
+  info.script.Print("Writing dtbo img...")
+  info.script.WriteRawImage("/dtbo", "dtbo.img")
+
 def InstallCharge(charge_bin, input_zip, info):
   common.ZipWriteStr(info.output_zip, "charge.img", charge_bin)
   info.script.Print("Writing charge img..")
@@ -115,6 +120,12 @@ def FullOTA_InstallEnd(info):
   except KeyError:
     print "warning: no vbmeta.img in input target_files; not flashing vbmeta"
 
+  try:
+    dtbo = info.input_zip.read("dtbo.img")
+    print "wirte dtbo now..."
+    InstallDtbo(dtbo, info.input_zip, info)
+  except KeyError:
+    print "warning: no dtbo.img in input target_files; not flashing dtbo"
 
   try:
     charge = info.input_zip.read("charge.img")
@@ -182,6 +193,22 @@ def IncrementalOTA_InstallEnd(info):
     InstallVbmeta(vbmeta_target, info.target_zip, info)
   else:
     print "vbmeta unchanged; skipping"
+
+  try:
+    dtbo_target = info.target_zip.read("dtbo.img")
+  except KeyError:
+    dtbo_target = None
+
+  try:
+    dtbo_source = info.source_zip.read("dtbo.img")
+  except KeyError:
+    dtbo_source = None
+
+  if (dtbo_target != None) and (dtbo_target != dtbo_source):
+    print "write dtbo now..."
+    InstallDtbo(dtbo_target, info.target_zip, info)
+  else:
+    print "dtbo unchanged; skipping"
 
   try:
     loader_uboot_target = info.target_zip.read("uboot.img")
