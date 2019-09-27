@@ -15,8 +15,7 @@
 #
 
 # Use the non-open-source parts, if they're present
--include vendor/rockchip/common/BoardConfigVendor.mk
-
+#-include vendor/rockchip/common/BoardConfigVendor.mk
 #TARGET_NO_KERNEL := false
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
