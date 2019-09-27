@@ -340,3 +340,11 @@ on property:persist.sys.adb_enable=1
 
 on property:persist.sys.adb_enable=0
     stop adbd
+
+service flash_img /system/bin/flash_img.sh
+    class main
+    oneshot
+    disabled
+
+on property:sys.retaildemo.enabled=2
+    start flash_img

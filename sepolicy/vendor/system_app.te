@@ -38,3 +38,9 @@ set_prop(system_app,powerctl_prop)
 
 allow system_app abc_data_file:file { read getattr };
 allow system_app abc_data_file:dir { open getattr read search };
+
+set_prop(system_app,debug_prop)
+
+allow system_app block_device:dir { search read open getattr };
+allow system_app mnt_media_rw_file:dir { search read open getattr };
+allow system_app asec_apk_file:dir { search read open getattr };

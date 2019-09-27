@@ -81,6 +81,8 @@ ro.boot.copy_oem  u:object_r:exported_default_prop:s0 exact string
 #For TvSettings
 persist.internet_adb_enable      u:object_r:debug_prop:s0
 persist.abc_switch      u:object_r:debug_prop:s0
+persist.vendor.flash_if_path        u:object_r:debug_prop:s0
+persist.vendor.flash_of_path        u:object_r:debug_prop:s0
 
 #fake use 2 otg
 persist.vendor.fake_data_role           u:object_r:debug_prop:s0
