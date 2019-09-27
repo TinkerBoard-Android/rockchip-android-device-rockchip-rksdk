@@ -159,3 +159,6 @@
 /sys/devices/virtual/power_supply(/.*)?                              u:object_r:sysfs_power:s0
 
 /dev/rtkbt_dev       u:object_r:rtkbt_device:s0
+
+#flash_img
+/system/bin/flash_img.sh u:object_r:install_recovery_exec:s0

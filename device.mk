@@ -1079,3 +1079,19 @@ BOARD_TWRP_ENABLE ?= false
 #Build with UiMode Config
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/uimode/package_uimode_config.xml:vendor/etc/package_uimode_config.xml
+
+#Build with Flash IMG
+BOARD_FLASH_IMG_ENABLE ?= false
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
+	BOARD_FLASH_IMG_ENABLE := true
+endif
+#FLASH_IMG
+ifeq ($(strip $(BOARD_FLASH_IMG_ENABLE)), true)
+	PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+		ro.flash_img.enable = true
+else
+	PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+		ro.flash_img.enable = false
+endif
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/flash_img/flash_img.sh:system/bin/flash_img.sh
