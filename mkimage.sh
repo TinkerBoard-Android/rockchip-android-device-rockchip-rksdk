@@ -303,6 +303,9 @@ echo -n "create system.img boot.img oem.img vendor.img dtbo.img vbmeta.img for O
 cp -rf  $OUT/obj/PACKAGING/target_files_intermediates/*-target_files*/IMAGES/*.img  $IMAGE_PATH/
 rm -rf  $IMAGE_PATH/cache.img
 rm -rf  $IMAGE_PATH/recovery-two-step.img
+if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
+    rm -rf  $IMAGE_PATH/super_empty.img
+fi
 echo "done."
 fi
 
