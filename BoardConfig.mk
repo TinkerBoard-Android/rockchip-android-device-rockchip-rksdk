@@ -30,6 +30,9 @@ TARGET_BOARD_HARDWARE ?= rk30board
 # value: tablet,box,phone
 # It indicates whether to be tablet platform or not
 
+# Export this prop for Mainline Modules.
+ROCKCHIP_LUNCHING_API_LEVEL := $(PRODUCT_SHIPPING_API_LEVEL)
+
 # support devices to install magisk through include ramdisk in boot.img
 BOOTIMG_SUPPORT_MAGISK := false
 
