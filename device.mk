@@ -944,6 +944,10 @@ else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),laptop)
 else
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=tablet
+
+  PRODUCT_PACKAGES += \
+        Music \
+        SoundRecorder
 endif
 
 ifeq ($(strip $(BOARD_ALLOW_ROOTSERVICE)), true)
