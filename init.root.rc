@@ -6,6 +6,6 @@ service rootservice /vendor/bin/rootservice
     disabled
     oneshot
 
-#on property:sys.boot_completed=1
-on property:persist.vendor.rootservice=1
+#on property:persist.vendor.rootservice=1
+on property:sys.boot_completed=1
     start rootservice
