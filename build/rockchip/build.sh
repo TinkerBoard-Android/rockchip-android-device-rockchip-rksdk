@@ -19,10 +19,10 @@ BUILD_UPDATE_IMG=false
 BUILD_OTA=false
 BUILD_PACKING=false
 BUILD_VARIANT=userdebug
-
+KERNEL_DTS=""
 
 # check pass argument
-while getopts "UKApouv:" arg
+while getopts "UKApouv:d:" arg
 do
     case $arg in
         U)
@@ -52,6 +52,9 @@ do
         v)
             BUILD_VARIANT=$OPTARG
             ;;
+        d)
+            KERNEL_DTS=$OPTARG
+            ;;
         ?)
             usage ;;
     esac
@@ -74,7 +77,10 @@ SDK_VERSION=`get_build_var CURRENT_SDK_VERSION`
 UBOOT_DEFCONFIG=`get_build_var PRODUCT_UBOOT_CONFIG`
 KERNEL_ARCH=`get_build_var PRODUCT_KERNEL_ARCH`
 KERNEL_DEFCONFIG=`get_build_var PRODUCT_KERNEL_CONFIG`
+if [ "$KERNEL_DTS" = "" ] ; then
 KERNEL_DTS=`get_build_var PRODUCT_KERNEL_DTS`
+fi
+echo "-------------------KERNEL_DTS:$KERNEL_DTS"
 PACK_TOOL_DIR=RKTools/$TARGET_BOARD_PLATFORM/linux/Linux_Pack_Firmware
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 export PROJECT_TOP=`gettop`
