@@ -92,6 +92,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libtinyxml
 
+# omx
+PRODUCT_PACKAGES += \
+    libomxvpu_enc \
+    libomxvpu_dec \
+    libRkOMX_Resourcemanager \
+    libOMX_Core \
+
 # For screen hwrotation
 ifneq ($(filter 90 180 270, $(strip $(SF_PRIMARY_DISPLAY_ORIENTATION))), )
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
