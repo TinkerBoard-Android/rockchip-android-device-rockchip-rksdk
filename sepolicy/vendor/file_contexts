@@ -42,7 +42,7 @@
 
 #for media
 /sys/firmware/devicetree/base/compatible     u:object_r:sysfs_dev:s0
-/sys/devices/platform/dmc/devfreq/dmc/system_status     u:object_r:sysfs_dev:s0
+
 #hdmi
 /sys/devices/virtual/display/HDMI(/.*)? -- u:object_r:sysfs_hdmi:s0
 /sys/devices/platform/display-subsystem/drm(/.*)? -- u:object_r:sysfs_hdmi:s0
