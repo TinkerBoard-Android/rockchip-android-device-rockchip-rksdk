@@ -22,7 +22,7 @@ recovery_only(`
     allow recovery vfat:file {create append};
     allow recovery storage_device:chr_file {read write open ioctl};
     allow recovery video_device:chr_file {read write open ioctl};
-    allow recovery gpu_device:chr_file {read write open ioctl};
+    allow recovery gpu_device:chr_file rw_file_perms;
     allow recovery metadata_file:dir { mounton };
     allow recovery tmpfs:dir { mounton };
     allow recovery kmsg_device:chr_file rw_file_perms;
@@ -33,6 +33,10 @@ recovery_only(`
 
     allow recovery ctl_bootanim_prop:file {open getattr};
     allow recovery ctl_bugreport_prop:file {open getattr};
+    allow recovery self:capability { fsetid };
+
+    allow recovery e2fsck_cache_block_device:blk_file ioctl;
+    allowxperm recovery e2fsck_cache_block_device:blk_file ioctl { BLKPBSZGET };
 
     allow shell rootfs:file { entrypoint read };
 ')

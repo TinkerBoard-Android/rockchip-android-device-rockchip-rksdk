@@ -47,6 +47,7 @@
 /sys/devices/virtual/display/HDMI(/.*)? -- u:object_r:sysfs_hdmi:s0
 /sys/devices/platform/display-subsystem/drm(/.*)? -- u:object_r:sysfs_hdmi:s0
 /sys/class/devfreq/dmc(/.*)? -- u:object_r:sysfs_hdmi:s0
+/sys/system_monitor/system_status               u:object_r:sys_dmc:s0
 
 # for device
 /dev/block/by-name/frp                          u:object_r:frp_block_device:s0
@@ -123,16 +124,9 @@
 #for hid audio
 /dev/hidraw0                u:object_r:hidraw_device:s0
 
-# file in /system
-#TODO removed for Q
-#/system/bin/move_widevine_data\.sh              u:object_r:move-widevine-data-sh_exec:s0
-
 #bluetooth
 /sys/class/rfkill(/.*)?                 u:object_r:rk_bluetooth_file:s0
 /proc/bluetooth/sleep/lpm               u:object_r:rk_bluetooth_file:s0
-
-#data
-/data/vendor/mediadrm(/.*)?             u:object_r:mediadrm_vendor_data_file:s0
 
 #gpu_data_file
 /data/ota/view_cts\.ini u:object_r:gpu_data_file:s0

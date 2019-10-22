@@ -1,0 +1,2 @@
+#data
+/data/vendor/mediadrm(/.*)?             u:object_r:mediadrm_vendor_data_file:s0
