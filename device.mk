@@ -46,6 +46,8 @@ else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackageGo.mk)
+  PRODUCT_PACKAGES += Launcher3GoIconRecents
+  ROCKCHIP_USE_LAZY_HAL := true
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm64)
   # For arm64 Go tablet
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
@@ -170,7 +172,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     iperf \
-    android.hardware.wifi@1.0-service \
     libiconv \
     libwpa_client \
     hostapd \
@@ -180,8 +181,14 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
+ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    rockchip.hardware.rockit@1.0-service \
+    android.hardware.wifi@1.0-service-lazy
+else
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service
+endif
+
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     PRODUCT_PACKAGES += \
@@ -292,7 +299,6 @@ endif
 
 # CAMERA
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
-
 ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
@@ -319,8 +325,17 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service \
     android.hardware.camera.metadata@3.2
+
+ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.camera.enableLazyHal=true
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-service-lazy
+else
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-service
+endif
 
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
@@ -353,8 +368,10 @@ else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/laptop_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/laptop_core_hardware.xml
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
+ifneq ($(strip $(BUILD_WITH_GO_OPT)),true)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
+endif
 # add this prop to skip vr test for cts-on-gsi in vts
     PRODUCT_PROPERTY_OVERRIDES += \
         ro.boot.vr=0
@@ -395,8 +412,14 @@ PRODUCT_PACKAGES += \
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_PLATFORM) \
-    android.hardware.light@2.0-service \
     android.hardware.light@2.0-impl
+ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service-lazy
+else
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service
+endif
 endif
 
 # Keymaster HAL
@@ -483,10 +506,21 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libclearkeycasplugin \
-    android.hardware.drm@1.0-service \
-    android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.2-service.clearkey
+    android.hardware.drm@1.0-impl
 
+ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
+PRODUCT_PACKAGES += \
+    android.hardware.cas@1.1-service-lazy \
+    android.hardware.drm@1.0-service-lazy \
+    android.hardware.drm@1.2-service-lazy.clearkey \
+    rockchip.hardware.rockit@1.0-service
+else
+PRODUCT_PACKAGES += \
+    android.hardware.cas@1.1-service \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.2-service.clearkey \
+    rockchip.hardware.rockit@1.0-service
+endif
 #Health hardware
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service \
