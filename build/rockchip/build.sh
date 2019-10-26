@@ -1,9 +1,10 @@
 #!/bin/bash
 usage()
 {
-   echo "USAGE: [-U] [-K] [-A] [-p] [-o] [-u] [-v VERSION_NAME]  "
+   echo "USAGE: [-U] [-CK] [-A] [-p] [-o] [-u] [-v VERSION_NAME]  "
     echo "No ARGS means use default build option                  "
     echo "WHERE: -U = build uboot                                 "
+    echo "       -C = build kernel with Clang                     "
     echo "       -K = build kernel                                "
     echo "       -A = build android                               "
     echo "       -p = will build packaging in IMAGE      "
@@ -13,6 +14,7 @@ usage()
     exit 1
 }
 BUILD_UBOOT=false
+BUILD_KERNEL_WITH_CLANG=false
 BUILD_KERNEL=false
 BUILD_ANDROID=false
 BUILD_UPDATE_IMG=false
@@ -22,12 +24,16 @@ BUILD_VARIANT=userdebug
 KERNEL_DTS=""
 
 # check pass argument
-while getopts "UKApouv:d:" arg
+while getopts "UCKApouv:d:" arg
 do
     case $arg in
         U)
             echo "will build u-boot"
             BUILD_UBOOT=true
+            ;;
+        C)
+            echo "will build kernel with Clang"
+            BUILD_KERNEL_WITH_CLANG=true
             ;;
         K)
             echo "will build kernel"
@@ -105,10 +111,13 @@ else
 fi
 fi
 
+if [ "$BUILD_KERNEL_WITH_CLANG" = true ] ; then
+ADDON_ARGS="CC=../prebuilts/clang/host/linux-x86/clang-r353983c/bin/clang"
+fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
-cd kernel && make clean && make ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j64 && cd -
+cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j64 && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
