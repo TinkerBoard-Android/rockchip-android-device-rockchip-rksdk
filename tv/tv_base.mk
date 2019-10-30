@@ -75,7 +75,7 @@ PRODUCT_PACKAGES += \
     FusedLocation \
     InputDevices \
     KeyChain \
-    LatinIME \
+    BoxLatinIME \
     PicoTts \
     PacProcessor \
     PrintSpooler \
