@@ -112,7 +112,9 @@
 /vendor/lib(64)?/libiep.so                      u:object_r:same_process_hal_file:s0
 # default hal
 /vendor/bin/hw/android\.hardware\.drm@1\.2-service\.widevine            u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.widevine            u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.2-service\.clearkey            u:object_r:hal_drm_clearkey_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.clearkey            u:object_r:hal_drm_clearkey_exec:s0
 
 # input files
 /vendor/usr/idc(/.*)?                  u:object_r:idc_file:s0
