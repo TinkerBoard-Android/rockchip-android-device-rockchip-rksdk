@@ -115,7 +115,8 @@ else
 $(call inherit-product, build/target/product/go_defaults.mk)
 endif
 PRODUCT_COPY_FILES += \
-    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
+    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml \
+    frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_rtt=true \
     config.disable_consumerir=true
@@ -1034,7 +1035,7 @@ endif
 #GOOGLE EXPRESS PLUS CONFIGURATION
 ifeq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_COPY_FILES += \
-     vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
+    vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
 
 # Imporve the tracking of GMS Express base build.
 PRODUCT_PROPERTY_OVERRIDES += \
