@@ -248,12 +248,12 @@ on sys-boot-completed-set && property:persist.sys.zram_enabled=1
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
 # for Internet adb
-on property:persist.vendor.internet.adb.enable=1
+on property:persist.internet_adb_enable=1
     setprop service.adb.tcp.port 5555
     restart adbd
 
 # for Internet adb
-on property:persist.vendor.internet.adb.enable=0
+on property:persist.internet_adb_enable=0
     setprop service.adb.tcp.port 0
     restart adbd
 
@@ -284,9 +284,9 @@ service abc /vendor/bin/abc
     disabled
     oneshot
 
-on property:persist.vendor.abc_switch=1
+on property:persist.abc_switch=1
     start abc
-on property:persist.vendor.abc_switch=0
+on property:persist.abc_switch=0
     stop abc
 
 ##$_rbox_$_modify_$_shenzhenyi_20160312
