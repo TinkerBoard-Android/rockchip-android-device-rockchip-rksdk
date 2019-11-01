@@ -37,6 +37,8 @@ on init
     chmod 0666 /dev/opteearmtz00
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
+    chown system system /sys/system_monitor/system_status
+    chmod 0666 /sys/system_monitor/system_status
 
 on boot
 
