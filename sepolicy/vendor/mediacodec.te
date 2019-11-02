@@ -10,6 +10,5 @@ allow mediacodec video_file:file { read getattr open };
 allow mediacodec tee_device:chr_file rw_file_perms;
 get_prop(mediacodec,vendor_default_prop);
 get_prop(mediacodec,public_vendor_default_prop);
-get_prop(mediacodec,cts_gts_prop);
 get_prop(mediacodec,vendor_omx_prop);
 set_prop(mediacodec,vendor_omx_prop);

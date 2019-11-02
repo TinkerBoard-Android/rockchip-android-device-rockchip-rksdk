@@ -1,3 +1,6 @@
+# for cts_gts
+cts_gts.            u:object_r:test_harness_prop:s0
+
 #for rk modules
 sys_graphic.            u:object_r:graphic_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0

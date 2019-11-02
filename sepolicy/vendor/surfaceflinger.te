@@ -19,4 +19,3 @@ allow surfaceflinger rga_device:chr_file rw_file_perms;
 
 typeattribute surfaceflinger system_writes_vendor_properties_violators;
 get_prop(surfaceflinger,public_vendor_system_prop)
-set_prop(surfaceflinger,public_vendor_system_prop)

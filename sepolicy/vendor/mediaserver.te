@@ -20,15 +20,13 @@ allow mediaserver rga_device:chr_file { ioctl };
 #TODO removed for Q
 #allow mediaserver hal_configstore_ISurfaceFlingerConfigs:hwservice_manager { find };
 allow mediaserver hal_configstore_default:binder { call };
+allow mediaserver vendor-rockit-hal_hwservice:hwservice_manager { find };
 binder_call(mediaserver,hal_configstore_default)
 
 typeattribute mediaserver system_writes_vendor_properties_violators;
 get_prop(mediaserver,vendor_omx_prop)
 get_prop(mediaserver,vendor_default_prop)
 get_prop(mediaserver,public_vendor_default_prop)
-set_prop(mediaserver,public_vendor_default_prop)
 get_prop(mediaserver,public_vendor_system_prop)
-set_prop(mediaserver,public_vendor_system_prop)
-get_prop(mediaserver,cts_gts_prop)
 get_prop(mediaserver,ctl_start_prop)
 set_prop(mediaserver,ctl_start_prop)

@@ -15,6 +15,7 @@ allow vendor-rockit-hal-1-0 sdcardfs:file r_file_perms;
 hwbinder_use(vendor-rockit-hal-1-0)
 vndbinder_use(vendor-rockit-hal-1-0)
 
+get_prop(vendor-rockit-hal-1-0, hwservicemanager_prop)
 binder_call(mediaserver, vendor-rockit-hal-1-0)
 binder_call(vendor-rockit-hal-1-0, mediaserver)
 binder_call(vendor-rockit-hal-1-0, hwservicemanager)

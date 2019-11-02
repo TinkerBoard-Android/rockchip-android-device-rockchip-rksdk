@@ -13,4 +13,3 @@ allow untrusted_app_25 ota_data_file:dir rw_dir_perms;
 allow untrusted_app_25 ota_data_file:file rw_file_perms;
 allow untrusted_app_25 oemfs:file {execmod};
 get_prop(untrusted_app_25,vendor_default_prop)
-get_prop(untrusted_app_25,cts_gts_prop)

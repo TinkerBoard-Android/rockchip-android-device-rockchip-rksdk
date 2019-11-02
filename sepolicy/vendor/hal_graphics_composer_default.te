@@ -19,9 +19,8 @@ allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_so
 
 allow hal_graphics_composer_default baseparameter_block_device:blk_file rw_file_perms;
 dontaudit hal_graphics_composer_default baseparameter_block_device:chr_file rw_file_perms;
-#TODO removed for Q
-#allow hal_graphics_composer_default hal_graphics_allocator_hwservice:hwservice_manager { find };
-dontaudit hal_graphics_composer_default kernel:system module_request;
+
+auditallow hal_graphics_composer_default hal_graphics_allocator_hwservice:hwservice_manager { find };
 binder_call(hal_graphics_composer_default, hal_graphics_allocator_default)
 
 allow hal_graphics_composer_default mediaserver:fd {use};
