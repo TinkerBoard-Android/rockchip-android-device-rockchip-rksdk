@@ -990,7 +990,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.logd.kernel=1
 PRODUCT_COPY_FILES += \
     device/rockchip/common/zmodem/rz:$(TARGET_COPY_OUT_VENDOR)/bin/rz \
-    device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz
+    device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz \
+    device/rockchip/common/debug-tool/dr-g:system/bin/dr-g
 else
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=1
