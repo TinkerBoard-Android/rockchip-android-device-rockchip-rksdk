@@ -103,6 +103,7 @@
 /vendor/lib(64)?/libdrm_rockchip.so             u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgralloc_drm.so              u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/gralloc.rk30board.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/vulkan.rk30board.so         u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libmpp.so                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libvpu.so                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libstdc\+\+.so                 u:object_r:same_process_hal_file:s0
@@ -132,6 +133,9 @@
 
 #gpu_data_file
 /data/ota/view_cts\.ini u:object_r:gpu_data_file:s0
+
+#data
+/data/vendor/mediadrm(/.*)?             u:object_r:mediadrm_vendor_data_file:s0
 
 #for iso
 #TODO removed for Q
