@@ -12,6 +12,7 @@ def main(argv):
     flags = ''
     fstab_file = ''
     vbmeta_part = ''
+    avbpub_key = ',avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey'
     type = 'fstab'
     dt_vbmeta = 'vbmeta {\n\
         compatible = "android,vbmeta";\n\
@@ -52,6 +53,7 @@ def main(argv):
         list_flags.insert(pos_avb + 3, '=vbmeta')
     else:
         dt_vbmeta = ''
+        avbpub_key = ''
 
     vbmeta_part = "".join(list_flags)
 
@@ -60,7 +62,7 @@ def main(argv):
     fstab_in_t = Template(template_fstab_in)
 
     if type == 'fstab':
-        line = fstab_in_t.substitute(_block_prefix=prefix,_flags=flags,_flags_vbmeta=vbmeta_part)
+        line = fstab_in_t.substitute(_block_prefix=prefix,_flags=flags,_flags_vbmeta=vbmeta_part,_flags_avbpubkey=avbpub_key)
     else:
         line = fstab_in_t.substitute(_boot_device=prefix,_vbmeta=dt_vbmeta,_flags=flags)
 
