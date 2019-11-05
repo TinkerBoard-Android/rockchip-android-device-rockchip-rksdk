@@ -16,6 +16,11 @@ ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
     fstab_flags := $(fstab_flags),logical
 endif # BOARD_USE_DYNAMIC_PARTITIONS
 
+fstab_sdmmc_device := 00000000.dwmmc
+ifdef PRODUCT_SDMMC_DEVICE
+    fstab_sdmmc_device := $(PRODUCT_SDMMC_DEVICE)
+endif
+
 intermediates := $(call intermediates-dir-for,FAKE,rockchip_fstab)
 rebuild_fstab := $(intermediates)/fstab.rk30board
 
@@ -27,6 +32,7 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-i $(PRODUCT_FSTAB_TEMPLATE) \
 	-p $(fstab_prefix) \
 	-f $(fstab_flags) \
+	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 
 INSTALLED_RK_VENDOR_FSTAB := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/etc/$(notdir $(rebuild_fstab))
