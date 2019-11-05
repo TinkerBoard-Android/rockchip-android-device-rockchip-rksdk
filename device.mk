@@ -622,7 +622,7 @@ PRODUCT_COPY_FILES += \
 else
 PRODUCT_PROPERTY_OVERRIDES +=       \
     ro.factory.hasUMS=false         \
-    persist.sys.usb.config=mtp,adb  \
+    persist.sys.usb.config=adb  \
     testing.mediascanner.skiplist = /mnt/shell/emulated/Android/
 
 PRODUCT_COPY_FILES += \
