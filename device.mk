@@ -512,13 +512,13 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.0-service-lazy \
+    android.hardware.cas@1.1-service-lazy \
     android.hardware.drm@1.0-service-lazy \
     android.hardware.drm@1.2-service-lazy.clearkey \
     rockchip.hardware.rockit@1.0-service
 else
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.0-service \
+    android.hardware.cas@1.1-service \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.2-service.clearkey \
     rockchip.hardware.rockit@1.0-service
