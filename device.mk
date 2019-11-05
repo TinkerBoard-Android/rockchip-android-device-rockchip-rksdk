@@ -47,7 +47,7 @@ else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackageGo.mk)
   PRODUCT_PACKAGES += Launcher3GoIconRecents
-  ROCKCHIP_USE_LAZY_HAL := true
+  #ROCKCHIP_USE_LAZY_HAL := true
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm64)
   # For arm64 Go tablet
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
