@@ -1,1 +1,3 @@
-#allow charger self:capability { wake_alarm };
+recovery_only(`
+    #allow charger self:capability { wake_alarm };
+')
