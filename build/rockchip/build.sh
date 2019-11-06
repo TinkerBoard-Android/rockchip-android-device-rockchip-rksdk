@@ -87,7 +87,7 @@ if [ "$KERNEL_DTS" = "" ] ; then
 KERNEL_DTS=`get_build_var PRODUCT_KERNEL_DTS`
 fi
 echo "-------------------KERNEL_DTS:$KERNEL_DTS"
-PACK_TOOL_DIR=RKTools/$TARGET_BOARD_PLATFORM/linux/Linux_Pack_Firmware
+PACK_TOOL_DIR=RKTools/linux/Linux_Pack_Firmware
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 export PROJECT_TOP=`gettop`
 
@@ -168,7 +168,7 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
     cp -f $IMAGE_PATH/* $PACK_TOOL_DIR/rockdev/Image/
 
     echo "Make update.img"
-    cd $PACK_TOOL_DIR/rockdev && ./mkupdate.sh
+    cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
     if [ $? -eq 0 ]; then
         echo "Make update image ok!"
     else
