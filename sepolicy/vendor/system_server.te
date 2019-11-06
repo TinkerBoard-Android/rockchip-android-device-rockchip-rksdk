@@ -20,5 +20,4 @@ allow system_server rk_output_hal_service:hwservice_manager find;
 add_service(system_server,drm_device_management_service)
 binder_call(system_server, rk_output_hal)
 
-typeattribute system_server system_writes_vendor_properties_violators;
 get_prop(system_server,vendor_default_prop)
