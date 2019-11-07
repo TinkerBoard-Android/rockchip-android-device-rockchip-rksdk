@@ -11,6 +11,7 @@ usage()
     echo "       -o = build OTA package                           "
     echo "       -u = build update.img                            "
     echo "       -v = build android with 'user' or 'userdebug'    "
+    echo "       -V = build version    "
     exit 1
 }
 BUILD_UBOOT=false
@@ -22,9 +23,10 @@ BUILD_OTA=false
 BUILD_PACKING=false
 BUILD_VARIANT=userdebug
 KERNEL_DTS=""
+BUILD_VERSION=""
 
 # check pass argument
-while getopts "UCKApouv:d:" arg
+while getopts "UCKApouv:d:V:" arg
 do
     case $arg in
         U)
@@ -57,6 +59,9 @@ do
             ;;
         v)
             BUILD_VARIANT=$OPTARG
+            ;;
+        V)
+            BUILD_VERSION=$OPTARG
             ;;
         d)
             KERNEL_DTS=$OPTARG
@@ -94,7 +99,7 @@ export PROJECT_TOP=`gettop`
 lunch $TARGET_PRODUCT-$BUILD_VARIANT
 
 DATE=$(date  +%Y%m%d.%H%M)
-STUB_PATH=Image/"$TARGET_PRODUCT"_"$BUILD_VARIANT"_"$DATE"
+STUB_PATH=Image/"$TARGET_PRODUCT"_"$BUILD_VARIANT"_"$BUILD_VERSION"_"$DATE"
 STUB_PATH="$(echo $STUB_PATH | tr '[:lower:]' '[:upper:]')"
 export STUB_PATH=$PROJECT_TOP/$STUB_PATH
 export STUB_PATCH_PATH=$STUB_PATH/PATCHES
@@ -133,7 +138,7 @@ cd u-boot && ./scripts/pack_resource.sh ../kernel/resource.img && cp resource.im
 if [ "$BUILD_ANDROID" = true ] ; then
 echo "start build android"
 make installclean
-make -j8
+make -j16
 if [ $? -eq 0 ]; then
     echo "Build android ok!"
 else
