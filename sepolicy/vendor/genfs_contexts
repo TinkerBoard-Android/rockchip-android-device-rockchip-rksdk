@@ -34,4 +34,6 @@ genfscon sysfs /devices/virtual/net/sit0/address                                
 genfscon sysfs /devices/platform/11040000.efuse/rockchip-efuse0/nvmem                                u:object_r:sysfs_hdmi:s0
 genfscon sysfs /devices/platform/ffb00000.efuse/rockchip-efuse0/nvmem                                u:object_r:sysfs_hdmi:s0
 
+genfscon sysfs /devices/platform/ff390000.dwmmc                                                      u:object_r:sysfs_mmc:s0
+
 genfscon fuseblk / u:object_r:fuseblk:s0
