@@ -117,7 +117,7 @@ fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
-cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j64 && cd -
+cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j32 && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
@@ -133,7 +133,7 @@ cd u-boot && ./scripts/pack_resource.sh ../kernel/resource.img && cp resource.im
 if [ "$BUILD_ANDROID" = true ] ; then
 echo "start build android"
 make installclean
-make -j64
+make -j8
 if [ $? -eq 0 ]; then
     echo "Build android ok!"
 else
@@ -156,7 +156,7 @@ if [ "$BUILD_OTA" = true ] ; then
     INTERNAL_OTA_PACKAGE_OBJ_TARGET=obj/PACKAGING/target_files_intermediates/$TARGET_PRODUCT-target_files-*.zip
     INTERNAL_OTA_PACKAGE_TARGET=$TARGET_PRODUCT-ota-*.zip
     echo "generate ota package"
-    make otapackage -j4
+    make otapackage -j8
     ./mkimage.sh ota
     cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
     cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
