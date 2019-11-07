@@ -13,15 +13,9 @@ allow mediaserver unlabeled:dir { read search open };
 allow mediaserver storage_file:dir { read search open };
 allow mediaserver mnt_user_file:dir { read search open };
 allow mediaserver mnt_user_file:lnk_file { read };
-#TODO removed for Q
-#allow mediaserver vendor_file:file { read getattr };
-#allow mediaserver video_file:file { read getattr open };
 allow mediaserver rga_device:chr_file { ioctl };
-#TODO removed for Q
-#allow mediaserver hal_configstore_ISurfaceFlingerConfigs:hwservice_manager { find };
 allow mediaserver hal_configstore_default:binder { call };
 allow mediaserver vendor-rockit-hal_hwservice:hwservice_manager { find };
-binder_call(mediaserver,hal_configstore_default)
 
 get_prop(mediaserver,vendor_omx_prop)
 get_prop(mediaserver,vendor_default_prop)
