@@ -22,6 +22,7 @@
 /dev/pmem_cam             0660   system     camera
 /dev/vpu                  0660   system     system
 /dev/vpu_service          0666   media      media
+/dev/mpp_service          0666   media      media
 /dev/vpu-service          0666   media      media
 /dev/hevc_service         0666   media      media
 /dev/hevc-service         0666   media      media
