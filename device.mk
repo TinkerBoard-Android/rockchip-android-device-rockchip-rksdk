@@ -164,8 +164,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_config.txt:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_config.txt \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
-#    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_bcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_bcm.conf
+    hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_bcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_bcm.conf
 
 #for ssv6051
 PRODUCT_COPY_FILES += \
