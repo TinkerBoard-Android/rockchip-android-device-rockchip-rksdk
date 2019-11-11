@@ -779,9 +779,11 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
     PRODUCT_PROPERTY_OVERRIDES += \
       ro.frp.pst=/dev/block/by-name/frp
   endif
-  # Enforce privapp-permissions whitelist
-  PRODUCT_PROPERTY_OVERRIDES += \
-      ro.control_privapp_permissions=enforce
+  ifeq ($(strip $(TARGET_BUILD_VARIANT)), user)
+    # Enforce privapp-permissions whitelist only for user build.
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.control_privapp_permissions=enforce
+  endif
 endif
 
 ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)
