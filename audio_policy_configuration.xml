@@ -22,6 +22,7 @@
             <attachedDevices>
                 <item>Speaker</item>
                 <item>Built-In Mic</item>
+                <item>HDMIIn</item>
             </attachedDevices>
             <defaultOutputDevice>Speaker</defaultOutputDevice>
             <mixPorts>
@@ -76,6 +77,8 @@
                 </devicePort>
                 <devicePort tagName="BT SCO Headset Mic" type="AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET" role="source">
                 </devicePort>
+                <devicePort tagName="HDMIIn" type="AUDIO_DEVICE_IN_HDMI" role="source">
+                </devicePort>
             </devicePorts>
             <routes>
                 <route type="mix" sink="Speaker"
@@ -96,7 +99,7 @@
                        sources="primary output,spdif_passthrough"/>
 
                 <route type="mix" sink="primary input"
-                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic"/>
+                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic,HDMIIn"/>
             </routes>
         </module>
 
