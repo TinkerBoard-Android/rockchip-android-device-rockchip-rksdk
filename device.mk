@@ -111,9 +111,11 @@ endif
 ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
 ifeq ($(strip $(TARGET_ARCH)), arm64)
 $(call inherit-product, build/target/product/go_defaults_512.mk)
+$(call inherit-product, device/rockchip/common/build/rockchip/AndroidGo512.mk)
 else
 $(call inherit-product, build/target/product/go_defaults.mk)
 endif
+$(call inherit-product, device/rockchip/common/build/rockchip/AndroidGoCommon.mk)
 PRODUCT_COPY_FILES += \
     device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml \
     frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml
