@@ -134,13 +134,6 @@ on charger
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     setprop sys.usb.config adb
 
-service akmd /system/bin/akmd
-    class main
-    user system
-    group system
-    oneshot
-    seclabel u:r:akmd:s0
-
 service vendor.insmod_sh /vendor/bin/init.insmod.sh
     class main
     user root
