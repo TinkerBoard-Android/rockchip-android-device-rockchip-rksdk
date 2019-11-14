@@ -1111,7 +1111,10 @@ PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     libcutils
 
 PRODUCT_PACKAGES += \
-    update_engine_sideload
+    update_engine_sideload \
+    sg_write_buffer \
+    f2fs_io \
+    check_f2fs
 
 PRODUCT_PACKAGES += \
     update_engine_client
@@ -1122,19 +1125,26 @@ AB_OTA_PARTITIONS += \
     uboot	\
     trust	\
     vendor	\
-    oem	\
+    odm	\
     dtbo
 ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
 AB_OTA_PARTITIONS += \
     vbmeta
 endif
+ifndef BOARD_USES_AB_LEGACY_RETROFIT
+AB_OTA_PARTITIONS += \
+    product
+endif
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-impl.recovery \
     android.hardware.boot@1.0-service \
 
 PRODUCT_PACKAGES += \
-  bootctrl.rk30board
+  bootctrl.rk30board \
+  bootctrl.rk30board.recovery
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
