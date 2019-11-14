@@ -43,5 +43,16 @@ INSTALLED_RK_RAMDISK_FSTAB := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_RAMDISK)/$(notdir
 $(INSTALLED_RK_RAMDISK_FSTAB) : $(rebuild_fstab)
 	$(call copy-file-to-new-target-with-cp)
 
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+INSTALLED_RK_RECOVERY_FIRST_STAGE_FSTAB := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/$(notdir $(rebuild_fstab))
+$(INSTALLED_RK_RECOVERY_FIRST_STAGE_FSTAB) : $(rebuild_fstab)
+	$(call copy-file-to-new-target-with-cp)
+endif # BOARD_USES_AB_IMAGE
+
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_RK_VENDOR_FSTAB) $(INSTALLED_RK_RAMDISK_FSTAB) $(INSTALLED_RK_RECOVERY_FIRST_STAGE_FSTAB)
+else
 ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_RK_VENDOR_FSTAB) $(INSTALLED_RK_RAMDISK_FSTAB)
+endif
+
 endif
