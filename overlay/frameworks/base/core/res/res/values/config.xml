@@ -135,6 +135,14 @@
         <item>241</item>   <!-- 500 nit -->
     </integer-array>
 
+    <!-- Default supported concurrent socket keepalive slots per transport type, used by
+         ConnectivityManager.createSocketKeepalive() for calculating the number of keepalive
+         offload slots that should be reserved for privileged access. This string array should be
+         overridden by the device to present the capability of creating socket keepalives. -->
+    <!-- An Array of "[NetworkCapabilities.TRANSPORT_*],[supported keepalives] -->
+    <string-array translatable="false" name="config_networkSupportedKeepaliveCount">
+    </string-array>
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
