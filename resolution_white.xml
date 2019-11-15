@@ -13,7 +13,7 @@
 		<vtotal>525</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>8000a</flags>
+		<flags>a</flags>
 		<vic>2</vic>
 	</resolution>
 	<resolution> <!-- 1280x720P60 -->
@@ -29,7 +29,7 @@
 		<vtotal>750</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>4</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080I60 -->
@@ -45,7 +45,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>100015</flags>
+		<flags>15</flags>
 		<vic>5</vic>
 	</resolution>
 	<resolution> <!-- 720x480I60 -->
@@ -61,7 +61,7 @@
 		<vtotal>525</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>8101A</flags>
+		<flags>101A</flags>
 		<vic>6</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080P60 -->
@@ -77,7 +77,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>16</vic>
 	</resolution>
 	<resolution> <!-- 720x576P50 -->
@@ -93,7 +93,7 @@
 		<vtotal>625</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>8000a</flags>
+		<flags>a</flags>
 		<vic>17</vic>
 	</resolution>
 	<resolution> <!-- 1280x720P50 -->
@@ -109,7 +109,7 @@
 		<vtotal>750</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>19</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080I50 -->
@@ -125,7 +125,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>100015</flags>
+		<flags>15</flags>
 		<vic>20</vic>
 	</resolution>
 	<resolution> <!-- 720x576I50 -->
@@ -141,7 +141,7 @@
 		<vtotal>625</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>8101A</flags>
+		<flags>101A</flags>
 		<vic>21</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080P50 -->
@@ -157,7 +157,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>31</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080P24 -->
@@ -173,7 +173,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>24</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>32</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080P25 -->
@@ -189,7 +189,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>25</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>33</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080P30 -->
@@ -205,7 +205,7 @@
 		<vtotal>1125</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>30</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>34</vic>
 	</resolution>
 	<resolution> <!-- 1280x720P24 -->
@@ -221,7 +221,7 @@
 		<vtotal>750</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>24</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>60</vic>
 	</resolution>
 	<resolution> <!-- 1280x720P25 -->
@@ -237,7 +237,7 @@
 		<vtotal>750</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>25</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>61</vic>
 	</resolution>
 	<resolution> <!-- 1280x720P30 -->
@@ -253,7 +253,7 @@
 		<vtotal>750</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>30</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>62</vic>
 	</resolution>
 	<resolution> <!-- 3840x2160P24 -->
@@ -269,7 +269,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>24</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>93</vic>
 	</resolution>
 	<resolution> <!-- 3840x2160P25 -->
@@ -285,7 +285,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>25</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>94</vic>
 	</resolution>
 	<resolution> <!-- 3840x2160P30 -->
@@ -301,7 +301,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>30</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>95</vic>
 	</resolution>
 	<resolution> <!-- 3840x2160P50 -->
@@ -317,7 +317,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>96</vic>
 	</resolution>
 	<resolution> <!-- 3840x2160P60 -->
@@ -333,7 +333,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>97</vic>
 	</resolution>
 	<resolution> <!-- 4096x2160P24 -->
@@ -349,7 +349,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>24</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>98</vic>
 	</resolution>
 	<resolution> <!-- 4096x2160P25 -->
@@ -365,7 +365,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>25</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>99</vic>
 	</resolution>
 	<resolution> <!-- 4096x2160P30 -->
@@ -381,7 +381,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>30</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>100</vic>
 	</resolution>
 	<resolution> <!-- 4096x2160P50 -->
@@ -397,7 +397,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>50</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>101</vic>
 	</resolution>
 	<resolution> <!-- 4096x2160P60 -->
@@ -413,7 +413,7 @@
 		<vtotal>2250</vtotal>
 		<vscan>0</vscan>
 		<vrefresh>60</vrefresh>
-		<flags>100005</flags>
+		<flags>5</flags>
 		<vic>102</vic>
 	</resolution>
 </resolutions>
