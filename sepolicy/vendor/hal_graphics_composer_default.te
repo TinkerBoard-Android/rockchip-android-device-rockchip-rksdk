@@ -19,6 +19,7 @@ allow hal_graphics_composer_default baseparameter_block_device:blk_file rw_file_
 dontaudit hal_graphics_composer_default baseparameter_block_device:chr_file rw_file_perms;
 
 allow hal_graphics_composer_default mediaserver:fd {use};
+allow hal_graphics_composer_default hal_camera_default:fd use;
 
 hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator)
 vndbinder_use(hal_graphics_composer_default)
