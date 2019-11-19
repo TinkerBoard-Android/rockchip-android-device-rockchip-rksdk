@@ -11,6 +11,7 @@ allow system_app mnt_media_rw_file:dir { getattr };
 #for hdmi
 allow system_app sysfs_hdmi:file rw_file_perms;
 allow system_app sysfs_fb:file rw_file_perms;
+allow system_app proc_stat:file { read };
 
 #TODO removed for Q
 #allow system_app vendor_file:file { read open };
