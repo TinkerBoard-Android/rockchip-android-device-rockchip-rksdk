@@ -121,7 +121,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_rtt=true \
-    config.disable_consumerir=true
+    config.disable_consumerir=true \
+    ro.config.per_app_memcg=false
 endif
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
