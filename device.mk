@@ -551,15 +551,23 @@ endif
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service \
     android.hardware.health@2.0-impl
+ifneq ($(filter true yes, $(BUILD_WITH_GOOGLE_MARKET) $(PRODUCT_USE_PREBUILT_GTVS)),)
+  ifeq ($(strip $(TARGET_ARCH)), arm64)
+    ifneq ($(strip $(BUILD_WITH_GO_OPT)), true)
+      # for swiftshader, vulkan v1.1 test.
+      PRODUCT_PACKAGES += \
+        vulkan.rk30board
 
-# for swiftshader, vulkan v1.1 test.
-PRODUCT_PACKAGES += \
-    vulkan.rk30board
+      PRODUCT_PROPERTY_OVERRIDES += \
+        ro.cpuvulkan.version=4198400
 
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-0.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute-0.xml
+      PRODUCT_COPY_FILES += \
+        frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
+        frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-0.xml \
+        frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute-0.xml
+    endif
+  endif
+endif
 
 # Filesystem management tools
 # EXT3/4 support
