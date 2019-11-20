@@ -224,16 +224,6 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-    PRODUCT_PACKAGES += \
-      libpppoe-jni \
-      pppoe-service \
-      librp-pppoe
-
-    PRODUCT_SYSTEM_SERVER_JARS += \
-      pppoe-service
-endif
-
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml \
