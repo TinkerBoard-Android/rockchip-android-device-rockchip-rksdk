@@ -120,7 +120,8 @@ PRODUCT_COPY_FILES += \
 
 # Enable frame-exact AV sync
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.media.avsync=true
+    persist.sys.media.avsync=true \
+    persist.sys.audio.enforce_safevolume=false
 
 
 # SDK builds needs to build layoutlib-legacy that depends on debug info
