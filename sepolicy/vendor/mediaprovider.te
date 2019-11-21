@@ -2,4 +2,7 @@ allow mediaprovider unlabeled:dir { getattr search read open};
 allow mediaprovider unlabeled:file { getattr read open };
 allow mediaprovider gpu_data_file:file { open read getattr };
 allow mediaprovider mnt_media_rw_file:dir { open read getattr };
+allow mediaprovider gpu_device:dir rw_dir_perms;
+allow mediaprovider gpu_device:chr_file rw_file_perms;
+
 get_prop(mediaprovider,vendor_default_prop)
