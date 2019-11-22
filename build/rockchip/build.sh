@@ -12,6 +12,7 @@ usage()
     echo "       -u = build update.img                            "
     echo "       -v = build android with 'user' or 'userdebug'    "
     echo "       -V = build version    "
+    echo "       -J = build jobs    "
     exit 1
 }
 BUILD_UBOOT=false
@@ -24,9 +25,10 @@ BUILD_PACKING=false
 BUILD_VARIANT=userdebug
 KERNEL_DTS=""
 BUILD_VERSION=""
+BUILD_JOBS=16
 
 # check pass argument
-while getopts "UCKApouv:d:V:" arg
+while getopts "UCKApouv:d:V:J:" arg
 do
     case $arg in
         U)
@@ -65,6 +67,9 @@ do
             ;;
         d)
             KERNEL_DTS=$OPTARG
+            ;;
+        J)
+            BUILD_JOBS=$OPTARG
             ;;
         ?)
             usage ;;
@@ -122,7 +127,7 @@ fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
-cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j32 && cd -
+cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j$BUILD_JOBS && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
@@ -138,7 +143,7 @@ cd u-boot && ./scripts/pack_resource.sh ../kernel/resource.img && cp resource.im
 if [ "$BUILD_ANDROID" = true ] ; then
 echo "start build android"
 make installclean
-make -j16
+make -j$BUILD_JOBS
 if [ $? -eq 0 ]; then
     echo "Build android ok!"
 else
@@ -161,7 +166,7 @@ if [ "$BUILD_OTA" = true ] ; then
     INTERNAL_OTA_PACKAGE_OBJ_TARGET=obj/PACKAGING/target_files_intermediates/$TARGET_PRODUCT-target_files-*.zip
     INTERNAL_OTA_PACKAGE_TARGET=$TARGET_PRODUCT-ota-*.zip
     echo "generate ota package"
-    make otapackage -j8
+    make otapackage -j$BUILD_JOBS
     ./mkimage.sh ota
     cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
     cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
@@ -181,7 +186,7 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
         exit 1
     fi
     cd -
-    mv $PACK_TOOL_DIR/rockdev/update.img $IMAGE_PATH/
+    mv $PACK_TOOL_DIR/rockdev/update.img $IMAGE_PATH/ -f
     rm $PACK_TOOL_DIR/rockdev/Image -rf
 fi
 
