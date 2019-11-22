@@ -21,7 +21,7 @@
 
     <!-- Bounds [left top right bottom] on screen for picture-in-picture (PIP) windows,
          when the PIP menu is shown in center. -->
-    <string translatable="false" name="pip_menu_bounds">"296 280 1024 690"</string>
+    <string translatable="false" name="pip_menu_bounds">"296 80 1024 490"</string>
 
     <!-- Bounds [left top right bottom] on screen for picture-in-picture (PIP) windows,
          when the PIP is shown in Recents without focus. -->
