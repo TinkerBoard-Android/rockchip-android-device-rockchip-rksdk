@@ -164,3 +164,8 @@
 
 #samba
 /system/bin/cifsmanager.sh     u:object_r:vold_exec:s0
+
+#rockchip audiosetting
+/vendor/bin/hw/rockchip.hardware.rkaudiosetting@1.0-service          u:object_r:rk_audio_setting_hal_exec:s0
+/data/vendor/audio                              u:object_r:rk_audio_setting_vendor_data_file:s0
+/data/vendor/audio/rt_audio_config.xml          u:object_r:rk_audio_setting_vendor_data_file:s0

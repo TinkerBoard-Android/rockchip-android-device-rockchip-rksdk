@@ -24,6 +24,7 @@ on post-fs-data
     chmod 0666 /dev/teepriv0
 
     mkdir /data/vendor/logs 0755 root shell
+    mkdir /data/vendor/audio 0755 system system
 
 on early-init
     setprop ro.hardware.egl mali
