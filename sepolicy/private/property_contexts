@@ -3,6 +3,7 @@ cts_gts.            u:object_r:test_harness_prop:s0
 
 #for rk modules
 sys_graphic.            u:object_r:graphic_prop:s0
+ro.base_build           u:object_r:exported_default_prop:s0
 ro.cpuvulkan.version    u:object_r:exported_default_prop:s0
 ro.config.per_app_memcg u:object_r:exported_default_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
