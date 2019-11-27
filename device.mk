@@ -1044,13 +1044,17 @@ else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),laptop)
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=laptop
-else
+else # tablet
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=tablet
 
   PRODUCT_PACKAGES += \
-        Music \
         SoundRecorder
+ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
+PRODUCT_PACKAGES += \
+    Music \
+    WallpaperPicker
+endif # tablet without GMS-Express
 endif
 
 # By default, enable zram; experiment can toggle the flag,
