@@ -879,6 +879,13 @@ PRODUCT_PROPERTY_OVERRIDES +=               \
     ro.config.enable.skipverify=true
 endif
 
+# rktoolbox
+ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+ifeq ($(strip $(BOARD_WITH_RKTOOLBOX)),true)
+$(call inherit-product-if-exists, external/rktoolbox/rktoolbox.mk)
+endif
+endif
+
 # hdmi cec
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 PRODUCT_COPY_FILES += \

@@ -458,6 +458,9 @@ HIGH_RELIABLE_RECOVERY_OTA := false
 BOARD_USES_FULL_RECOVERY_IMAGE := false
 BOARD_DEFAULT_CAMERA_HAL_VERSION ?=3.3
 
+# rktoolbox
+BOARD_WITH_RKTOOLBOX ?=true
+
 #TWRP
 ifeq ($(strip $(BOARD_TWRP_ENABLE)), true)
 	TW_THEME := landscape_hdpi
