@@ -1,2 +1,2 @@
 rockchip.hardware.outputmanager::IRkOutputManager      u:object_r:rk_output_hal_service:s0
-rockchip.hardware.rockit::IRockitPlayer                u:object_r:vendor-rockit-hal_hwservice:s0
+rockchip.hardware.rockit::IRockitPlayerService         u:object_r:vendor-rockit-hal_hwservice:s0
