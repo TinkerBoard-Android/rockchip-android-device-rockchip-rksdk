@@ -7,12 +7,15 @@ init_daemon_domain(vendor-rockit-hal-1-0)
 # Client
 add_hwservice(vendor-rockit-hal-1-0, vendor-rockit-hal_hwservice)
 
-allow vendor-rockit-hal-1-0 gpu_device:chr_file rw_file_perms;
-allow vendor-rockit-hal-1-0 gpu_device:dir r_dir_perms;
+allow vendor-rockit-hal-1-0 { gpu_device ion_device video_device }:chr_file rw_file_perms;
+allow vendor-rockit-hal-1-0 sysfs_dev:file r_file_perms;
+allow vendor-rockit-hal-1-0 sys_dmc:file rw_file_perms;
 
-allow vendor-rockit-hal-1-0 sdcardfs:file r_file_perms;
-allow vendor-rockit-hal-1-0 storage_file:file r_file_perms;
-allow vendor-rockit-hal-1-0 storage_file:dir r_dir_perms;
+r_dir_file(vendor-rockit-hal-1-0, gpu_device)
+r_dir_file(vendor-rockit-hal-1-0, sdcardfs)
+r_dir_file(vendor-rockit-hal-1-0, storage_file)
+r_dir_file(vendor-rockit-hal-1-0, mnt_media_rw_file)
+r_dir_file(vendor-rockit-hal-1-0, vfat)
 
 hwbinder_use(vendor-rockit-hal-1-0)
 vndbinder_use(vendor-rockit-hal-1-0)

@@ -116,8 +116,8 @@
 /vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.clearkey            u:object_r:hal_drm_clearkey_exec:s0
 
 # input files
-/vendor/usr/idc(/.*)?                  u:object_r:idc_file:s0
-/vendor/usr/keylayout(/.*)?            u:object_r:keylayout_file:s0
+/vendor/usr/idc(/.*)?                  u:object_r:vendor_idc_file:s0
+/vendor/usr/keylayout(/.*)?            u:object_r:vendor_keylayout_file:s0
 
 #for cec
 /dev/cec[0-9]*              u:object_r:cec_device:s0

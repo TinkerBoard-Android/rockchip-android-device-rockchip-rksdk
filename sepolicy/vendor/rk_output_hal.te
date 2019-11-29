@@ -12,10 +12,11 @@ allow rk_output_hal init:unix_stream_socket { connectto };
 allow rk_output_hal property_socket:sock_file { write };
 allow rk_output_hal baseparameter_block_device:blk_file rw_file_perms;
 allow rk_output_hal baseparameter_block_device:blk_file { getattr };
-allow rk_output_hal vndbinder_device:chr_file { read write open ioctl };
 allow rk_output_hal rk_output_hal_service:hwservice_manager { add find };
 allow rk_output_hal hidl_base_hwservice:hwservice_manager add;
 binder_call(rk_output_hal,hwservicemanager)
 binder_call(rk_output_hal,system_server)
 get_prop(rk_output_hal,hwservicemanager_prop)
 set_prop(rk_output_hal,public_vendor_system_prop)
+
+vndbinder_use(rk_output_hal)
