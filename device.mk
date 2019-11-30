@@ -463,8 +463,7 @@ ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
 # Weaver HAL
 PRODUCT_PACKAGES += \
     android.hardware.weaver@1.0-impl \
-    android.hardware.weaver@1.0-service \
-    481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta
+    android.hardware.weaver@1.0-service
 
 # Fastbootd HAL
 # TODO: develop a hal for GMS...
