@@ -814,6 +814,13 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
     # Enforce privapp-permissions whitelist only for user build.
     PRODUCT_PROPERTY_OVERRIDES += \
         ro.control_privapp_permissions=enforce
+    ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
+      $(warning ****************************************)
+      $(error You are building GMS with a user variant without GMS-Express!)
+      $(warning Please note that all your apps MUST be able to get permissions, Otherwise android cannot boot!)
+      $(warning After confirming your apps, please remove the above error line!)
+      $(warning ****************************************)
+    endif
   endif
 endif
 
