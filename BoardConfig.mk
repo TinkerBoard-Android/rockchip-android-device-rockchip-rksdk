@@ -34,9 +34,6 @@ TARGET_BOARD_HARDWARE ?= rk30board
 # Export this prop for Mainline Modules.
 ROCKCHIP_LUNCHING_API_LEVEL := $(PRODUCT_SHIPPING_API_LEVEL)
 
-# support devices to install magisk through include ramdisk in boot.img
-BOOTIMG_SUPPORT_MAGISK := false
-
 ifneq ($(filter %box, $(TARGET_PRODUCT)), )
 TARGET_BOARD_PLATFORM_PRODUCT ?= box
 else
@@ -74,10 +71,6 @@ BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30
 else # BOARD_AVB_ENABLE is false
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
 endif # BOARD_AVB_ENABLE
-
-ifneq ($(filter true, $(BOOTIMG_SUPPORT_MAGISK)), )
-BOARD_KERNEL_CMDLINE += skip_initramfs
-endif
 
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_BOOTIMG_HEADER_VERSION ?= 2
