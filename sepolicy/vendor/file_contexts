@@ -158,3 +158,6 @@
 #rockit hal
 /vendor/bin/hw/rockchip.hardware.rockit@1.0-service                  u:object_r:vendor-rockit-hal-1-0_exec:s0
 /vendor/bin/hw/rockchip.hardware.rockit@1.0-service-lazy             u:object_r:vendor-rockit-hal-1-0_exec:s0
+
+#abc
+/data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0

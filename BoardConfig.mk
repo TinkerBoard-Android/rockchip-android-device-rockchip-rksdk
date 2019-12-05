@@ -226,11 +226,16 @@ TARGET_USES_LOGD ?= true
 # Sepolicy
 PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS ?= \
-    device/rockchip/common/sepolicy/vendor 
+    device/rockchip/common/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
     device/rockchip/common/sepolicy/private \
-    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy 
+    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
+
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
+    BOARD_SEPOLICY_DIRS += \
+        device/rockchip/common/box/sepolicy/vendor
+endif
 
 # Enable VNDK Check for Android P (MUST in P)
 BOARD_VNDK_VERSION := current
@@ -239,7 +244,7 @@ BOARD_VNDK_VERSION := current
 #TARGET_NO_RECOVERY ?= false
 TARGET_ROCHCHIP_RECOVERY ?= true
 
-# to flip screen in recovery 
+# to flip screen in recovery
 BOARD_HAS_FLIPPED_SCREEN ?= false
 
 # Auto update package from USB

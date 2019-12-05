@@ -11,7 +11,12 @@ allow system_app mnt_media_rw_file:dir { getattr };
 #for hdmi
 allow system_app sysfs_hdmi:file rw_file_perms;
 allow system_app sysfs_fb:file rw_file_perms;
-allow system_app proc_stat:file { read };
+allow system_app proc_stat:file { read open getattr };
+
+#for devicetest
+#allow system_app system_app_data_file:file { execute execute_no_trans };
+allow system_app system_data_file:file { read };
+allow system_app { sysfs_leds metadata_file }:dir { search };
 
 #TODO removed for Q
 #allow system_app vendor_file:file { read open };
@@ -26,3 +31,6 @@ allow system_app cache_recovery_file:file {rw_file_perms create unlink setattr};
 allow system_app cache_file:dir search;
 get_prop(system_app,vendor_default_prop)
 set_prop(system_app,powerctl_prop)
+
+allow system_app abc_data_file:file { read getattr };
+allow system_app abc_data_file:dir { open getattr read search };
