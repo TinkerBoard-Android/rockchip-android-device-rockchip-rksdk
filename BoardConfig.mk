@@ -64,7 +64,7 @@ endif
 
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
-BOARD_SELINUX_ENFORCING ?= true
+BOARD_SELINUX_ENFORCING ?= false
 
 ifneq ($(filter true, $(BOARD_AVB_ENABLE)), )
 BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
