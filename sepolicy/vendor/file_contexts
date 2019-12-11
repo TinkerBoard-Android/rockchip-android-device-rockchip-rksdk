@@ -99,6 +99,9 @@
 # for rootservice
 /vendor/bin/rootservice            u:object_r:rootservice_exec:s0
 
+#preinstall_del.sh
+/vendor/bin/preinstall_del.sh            u:object_r:bundledservice_exec:s0
+
 /dev/block/mmcblk[0-9]                          u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb                      u:object_r:rpmb_block_device:s0
 

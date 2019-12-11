@@ -25,9 +25,11 @@ ifneq ($(strip $(TARGET_PRODUCT)), )
 #    $(info device-rockchip-common TARGET_DEVICE_DIR: $(TARGET_DEVICE_DIR))
     $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app)
     $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app)
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_sh bundled_del_sh-app)
     $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app)
     -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
     -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
+    -include $(TARGET_DEVICE_DIR)/preinstall_del_sh/preinstall.mk
     -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
 endif
 
@@ -971,6 +973,9 @@ ifeq ($(strip $(BOARD_ALLOW_ROOTSERVICE)), true)
     PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.root.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.root.rc
 endif
+
+PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.preinstall.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.preinstall.rc
 
 # By default, enable zram; experiment can toggle the flag,
 # which takes effect on boot

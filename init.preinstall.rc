@@ -1,0 +1,10 @@
+on boot
+service bundledservice /vendor/bin/preinstall_del.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start bundledservice

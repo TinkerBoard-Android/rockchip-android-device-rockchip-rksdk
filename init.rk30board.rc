@@ -6,6 +6,7 @@ import /vendor/etc/init/hw/init.${ro.target.product}.rc
 import /vendor/etc/init/hw/init.car.rc
 import /vendor/etc/init/hw/init.optee.rc
 import /vendor/etc/init/hw/init.root.rc
+import /vendor/etc/init/hw/init.preinstall.rc
 
 on post-fs
     restorecon_recursive /mnt/vendor/metadata
