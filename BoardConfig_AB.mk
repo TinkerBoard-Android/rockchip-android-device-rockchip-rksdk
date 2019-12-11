@@ -52,6 +52,4 @@ ifeq ($(filter true, $(BOARD_SELINUX_ENFORCING)), )
     BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 endif
 ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS := console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init
-DEVICE_MANIFEST_FILE := device/rockchip/common/manifest_ab.xml
 TARGET_RECOVERY_FSTAB := $(TARGET_DEVICE_DIR)/recovery.fstab_AB
-
