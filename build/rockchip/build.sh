@@ -11,6 +11,7 @@ usage()
     echo "       -o = build OTA package                           "
     echo "       -u = build update.img                            "
     echo "       -v = build android with 'user' or 'userdebug'    "
+    echo "       -d = huild kernel dts name    "
     echo "       -V = build version    "
     echo "       -J = build jobs    "
     exit 1
