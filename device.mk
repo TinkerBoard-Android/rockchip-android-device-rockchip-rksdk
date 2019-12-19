@@ -90,9 +90,10 @@ endif
 PRODUCT_PACKAGES += \
    librkskia
 
-# libtinyxml
+# librtxml librtopus
 PRODUCT_PACKAGES += \
-    libtinyxml
+    librttinyxml \
+    librtopus    \
 
 # omx
 PRODUCT_PACKAGES += \
