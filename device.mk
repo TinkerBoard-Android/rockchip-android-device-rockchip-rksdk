@@ -786,7 +786,8 @@ endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     include device/rockchip/common/samba/rk31_samba.mk
     PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/init.box.samba.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.box.samba.rc
+      $(LOCAL_PATH)/init.box.samba.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.box.samba.rc \
+      device/rockchip/common/cifsmanager.sh:system/bin/cifsmanager.sh
 
     PRODUCT_PROPERTY_OVERRIDES += \
       ro.rk.screenoff_time=2147483647

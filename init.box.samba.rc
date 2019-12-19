@@ -1,5 +1,4 @@
-
-service cifsmanager /data/cifsmanager/cifsmanager.sh
+service cifsmanager /system/bin/cifsmanager.sh
      disabled
      oneshot
 

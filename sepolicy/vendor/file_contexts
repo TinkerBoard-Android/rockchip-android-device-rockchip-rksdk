@@ -161,3 +161,6 @@
 
 #abc
 /data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0
+
+#samba
+/system/bin/cifsmanager.sh     u:object_r:vold_exec:s0
