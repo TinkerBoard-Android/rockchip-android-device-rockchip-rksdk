@@ -803,8 +803,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+  ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   # Add for Mainline GMS Modules.
   $(call inherit-product-if-exists, vendor/partner_modules/rockchip/modules-mandatory.mk)
+  endif
   ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
     PRODUCT_PROPERTY_OVERRIDES += \
       ro.frp.pst=/dev/block/by-name/frp
