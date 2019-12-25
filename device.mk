@@ -334,16 +334,16 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external-service
-else
+endif
 PRODUCT_PACKAGES += \
     librkisp_aec \
     librkisp_awb \
-    librkisp_af
+    librkisp_af \
+    libuvcapp
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml
-endif
 
 PRODUCT_PACKAGES += \
     camera.$(TARGET_BOARD_HARDWARE) \
