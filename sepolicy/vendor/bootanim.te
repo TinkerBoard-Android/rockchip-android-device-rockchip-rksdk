@@ -14,5 +14,7 @@ allow bootanim vendor_metadata:dir { search };
 get_prop(bootanim, vendor_default_prop)
 allow bootanim init:unix_stream_socket connectto;
 allow bootanim property_socket:sock_file write;
+allow bootanim audio_service:service_manager find;
+allow bootanim system_prop:property_service set;
 #TODO removed for Q
 #allow bootanim vendor_file:file { getattr open read };

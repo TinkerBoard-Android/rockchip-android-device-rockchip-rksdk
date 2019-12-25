@@ -172,5 +172,7 @@
 /data/vendor/audio                              u:object_r:rk_audio_setting_vendor_data_file:s0
 /data/vendor/audio/rt_audio_config.xml          u:object_r:rk_audio_setting_vendor_data_file:s0
 
+/odm/media(/.*)?    u:object_r:oemfs:s0
+
 #flash_img
 /system/bin/flash_img.sh u:object_r:install_recovery_exec:s0
