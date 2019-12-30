@@ -587,6 +587,9 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinypcminfo
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.thumbnail.prefer_hw_codecs=true
+
 PRODUCT_PACKAGES += \
 	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
 	alsa.audio_policy.$(TARGET_BOARD_HARDWARE)
