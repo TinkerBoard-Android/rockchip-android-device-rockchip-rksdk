@@ -19,6 +19,10 @@ type sensors_cal_file, file_type;
 type radio_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type sensor_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+# vendor data file
+type mediadrm_vendor_data_file, file_type, data_file_type;
+type abc_data_file, file_type, data_file_type;
+type rk_audio_setting_vendor_data_file, file_type, data_file_type;
 
 # /sys
 type rk_bluetooth_file, sysfs_type, fs_type, mlstrustedobject;
