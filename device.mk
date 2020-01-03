@@ -1232,3 +1232,9 @@ PRODUCT_COPY_FILES += \
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+
+BOARD_TV_LOW_MEMOPT ?= false
+
+ifeq ($(strip $(BOARD_TV_LOW_MEMOPT)), true)
+    include device/rockchip/common/tv/tv_low_ram_device.mk
+endif
