@@ -15,6 +15,7 @@ genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hc
 
 # rk3399 RTC
 genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
 
 # for kernel 4.19
 genfscon debugfs /sync                                                                               u:object_r:debugfs_sw_sync:s0
