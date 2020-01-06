@@ -1202,15 +1202,13 @@ ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 endif
 
 # add AudioSetting
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 PRODUCT_PACKAGES += \
     rockchip.hardware.rkaudiosetting@1.0-service \
     rockchip.hardware.rkaudiosetting@1.0-impl \
     rockchip.hardware.rkaudiosetting@1.0
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rt_audio_config.xml:/vendor/etc/rt_audio_config.xml
-endif
+    $(LOCAL_PATH)/rt_audio_config.xml:/system/etc/rt_audio_config.xml
 
 #Build with Flash IMG
 BOARD_FLASH_IMG_ENABLE ?= false

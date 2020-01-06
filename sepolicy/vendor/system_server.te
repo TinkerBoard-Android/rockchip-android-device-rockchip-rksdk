@@ -21,7 +21,3 @@ add_service(system_server,drm_device_management_service)
 binder_call(system_server, rk_output_hal)
 
 get_prop(system_server,vendor_default_prop)
-
-#rk_audio_setting_hal
-allow system_server rk_audio_setting_hal_service:hwservice_manager find;
-binder_call(system_server, rk_audio_setting_hal)
