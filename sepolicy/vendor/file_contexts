@@ -22,6 +22,7 @@
 /dev/mma8452_daemon  u:object_r:sensor_device:s0
 /dev/compass         u:object_r:sensor_dev:s0
 /dev/gyrosensor      u:object_r:sensor_dev:s0
+/dev/stune(/.*)?     u:object_r:cgroup:s0
 
 /dev/akm8963_dev        u:object_r:akmd_device:s0
 /dev/akm_dev            u:object_r:akmd_device:s0

@@ -34,9 +34,19 @@ genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:000
 genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
 
-genfscon sysfs /devices/platform/11040000.efuse/rockchip-efuse0/nvmem                                u:object_r:sysfs_hdmi:s0
-genfscon sysfs /devices/platform/ffb00000.efuse/rockchip-efuse0/nvmem                                u:object_r:sysfs_hdmi:s0
+genfscon sysfs /devices/platform/11040000.efuse/rockchip-efuse0/nvmem                               u:object_r:sysfs_hdmi:s0
+genfscon sysfs /devices/platform/ffb00000.efuse/rockchip-efuse0/nvmem                               u:object_r:sysfs_hdmi:s0
 
-genfscon sysfs /devices/platform/ff390000.dwmmc                                                      u:object_r:sysfs_mmc:s0
+# rk3368
+genfscon sysfs /devices/platform/ff0f0000.dwmmc                                                     u:object_r:sysfs_mmc:s0
+genfscon sysfs /devices/platform/ff400000.nandc                                                     u:object_r:sysfs_mmc:s0
+# rk3326
+genfscon sysfs /devices/platform/ff390000.dwmmc                                                     u:object_r:sysfs_mmc:s0
+genfscon sysfs /devices/platform/ff3b0000.nandc                                                     u:object_r:sysfs_mmc:s0
+# rk3126c
+genfscon sysfs /devices/platform/10500000.nandc                                                     u:object_r:sysfs_mmc:s0
+genfscon sysfs /devices/platform/1021c000.dwmmc                                                     u:object_r:sysfs_mmc:s0
+# rk3399
+genfscon sysfs /devices/platform/fe330000.sdhci                                                     u:object_r:sysfs_mmc:s0
 
 genfscon fuseblk / u:object_r:fuseblk:s0
