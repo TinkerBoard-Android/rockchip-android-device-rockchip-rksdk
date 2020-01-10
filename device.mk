@@ -94,6 +94,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librttinyxml \
     librtopus    \
+    librtmem     \
 
 # omx
 PRODUCT_PACKAGES += \
