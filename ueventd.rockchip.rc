@@ -14,6 +14,9 @@
 /dev/pressure             0660   system     system
 
 /dev/ion                  0666   system     system
+
+/dev/ion_legency          0666   system     system
+
 /dev/galcore              0666   system     graphics
 /dev/video0               0660   media      camera
 /dev/video1               0660   media      camera
