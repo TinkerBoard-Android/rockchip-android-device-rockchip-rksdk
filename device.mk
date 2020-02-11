@@ -1210,6 +1210,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rt_audio_config.xml:/system/etc/rt_audio_config.xml
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rt_video_config.xml:/system/etc/rt_video_config.xml
+
 #Build with Flash IMG
 BOARD_FLASH_IMG_ENABLE ?= false
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
