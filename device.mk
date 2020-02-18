@@ -484,6 +484,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service
 
+# For EGL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.egl=${TARGET_BOARD_HARDWARE_EGL}
+
 # HW Composer
 PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_BOARD_HARDWARE) \

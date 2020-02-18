@@ -21,6 +21,7 @@ TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 BOARD_PREBUILT_DTBIMAGE_DIR ?= kernel/arch/arm/boot/dts
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
+TARGET_BOARD_HARDWARE_EGL ?= mali
 #BOARD_USES_RECOVERY_AS_BOOT := true
 
 #binder protocol(8)
