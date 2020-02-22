@@ -23,7 +23,7 @@ BUILD_ANDROID=false
 BUILD_UPDATE_IMG=false
 BUILD_OTA=false
 BUILD_PACKING=false
-BUILD_VARIANT=userdebug
+BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
 KERNEL_DTS=""
 BUILD_VERSION=""
 BUILD_JOBS=16
@@ -142,37 +142,36 @@ cd u-boot && ./scripts/pack_resource.sh ../kernel/resource.img && cp resource.im
 
 # build android
 if [ "$BUILD_ANDROID" = true ] ; then
-echo "start build android"
-make installclean
-make -j$BUILD_JOBS
-if [ $? -eq 0 ]; then
-    echo "Build android ok!"
-else
-    echo "Build android failed!"
-    exit 1
+    # build OTA
+    if [ "$BUILD_OTA" = true ] ; then
+        INTERNAL_OTA_PACKAGE_OBJ_TARGET=obj/PACKAGING/target_files_intermediates/$TARGET_PRODUCT-target_files-*.zip
+        INTERNAL_OTA_PACKAGE_TARGET=$TARGET_PRODUCT-ota-*.zip
+        echo "generate ota package"
+        ./mkimage.sh ota
+        cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
+        cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
+    else # regular build without OTA
+        echo "start build android"
+        make installclean
+        make -j$BUILD_JOBS
+        # check the result of make
+        if [ $? -eq 0 ]; then
+            echo "Build android ok!"
+        else
+            echo "Build android failed!"
+            exit 1
+        fi
+        # mkimage.sh
+        echo "make and copy android images"
+        ./mkimage.sh
+        if [ $? -eq 0 ]; then
+            echo "Make image ok!"
+        else
+            echo "Make image failed!"
+            exit 1
+        fi
+    fi
 fi
-fi
-
-# mkimage.sh
-echo "make and copy android images"
-./mkimage.sh
-if [ $? -eq 0 ]; then
-    echo "Make image ok!"
-else
-    echo "Make image failed!"
-    exit 1
-fi
-
-if [ "$BUILD_OTA" = true ] ; then
-    INTERNAL_OTA_PACKAGE_OBJ_TARGET=obj/PACKAGING/target_files_intermediates/$TARGET_PRODUCT-target_files-*.zip
-    INTERNAL_OTA_PACKAGE_TARGET=$TARGET_PRODUCT-ota-*.zip
-    echo "generate ota package"
-    make otapackage -j$BUILD_JOBS
-    ./mkimage.sh ota
-    cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
-    cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
-fi
-
 
 if [ "$BUILD_UPDATE_IMG" = true ] ; then
     mkdir -p $PACK_TOOL_DIR/rockdev/Image/
