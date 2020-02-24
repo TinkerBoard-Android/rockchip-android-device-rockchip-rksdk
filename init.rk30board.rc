@@ -226,6 +226,7 @@ on boot
 
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
+    chmod 0444 /proc/pagetypeinfo
 
 # cpu min freq must change to 126M when boot completed
 
