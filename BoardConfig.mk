@@ -350,7 +350,7 @@ BOARD_IS_SUPPORT_NTFS ?= true
 BOARD_PPPOE_PASS_CTS ?= false
 
 # ethernet
-BOARD_HS_ETHERNET ?= true
+BOARD_HS_ETHERNET ?= false
 
 # Save commit id into firmware
 BOARD_RECORD_COMMIT_ID ?= true
