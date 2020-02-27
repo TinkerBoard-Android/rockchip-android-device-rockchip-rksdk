@@ -90,12 +90,6 @@ endif
 PRODUCT_PACKAGES += \
    librkskia
 
-# librtxml librtopus
-PRODUCT_PACKAGES += \
-    librttinyxml \
-    librtopus    \
-    librtmem     \
-
 # omx
 PRODUCT_PACKAGES += \
     libomxvpu_enc \
