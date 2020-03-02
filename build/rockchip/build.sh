@@ -16,6 +16,8 @@ usage()
     echo "       -J = build jobs    "
     exit 1
 }
+
+source build/envsetup.sh >/dev/null
 BUILD_UBOOT=false
 BUILD_KERNEL_WITH_CLANG=false
 BUILD_KERNEL=false
@@ -77,8 +79,6 @@ do
     esac
 done
 
-
-source build/envsetup.sh >/dev/null
 TARGET_PRODUCT=`get_build_var TARGET_PRODUCT`
 TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
 
