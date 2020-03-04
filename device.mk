@@ -688,7 +688,7 @@ endif
 ########################################################
 # this product has Ethernet or not
 ########################################################
-ifneq ($(strip $(BOARD_HS_ETHERNET)),true)
+ifeq ($(strip $(BOARD_HS_ETHERNET)),true)
 PRODUCT_PROPERTY_OVERRIDES += ro.vendor.ethernet_settings=true
 endif
 
