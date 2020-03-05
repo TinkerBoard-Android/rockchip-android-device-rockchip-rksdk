@@ -10,3 +10,4 @@ allow vold self:capability { setgid setuid };
 allow vold vold_device:blk_file ioctl;
 allow vold vold_exec:file execute_no_trans;
 allow vold self:capability { dac_override dac_read_search };
+allow vold sysfs_mmc:file rw_file_perms;
