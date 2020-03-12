@@ -152,7 +152,7 @@
 
         <chip name="RK3328,RK3399">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_4k_10bit,hevc_4k_10bit"/>
-            <include name="vp9_4k_8bit"/>
+            <include name="vp9_4k_8bit,hevc_4k_8bit,h264_4k_8bit"/>
         </chip>
     </decoder>
 
