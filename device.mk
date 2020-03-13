@@ -588,6 +588,7 @@ PRODUCT_PACKAGES += \
     libtinyalsa \
     tinymix \
     tinyplay \
+    tinycap \
     tinypcminfo
 
 # PRODUCT_PROPERTY_OVERRIDES += \
