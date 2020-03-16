@@ -130,7 +130,7 @@
         </chip>
 
         <chip name="RK3288">
-            <include name="mpeg1,mpeg2,mpeg4,vp8,h264_4k_10bit,hevc_4k_10bit"/>
+            <include name="mpeg1,mpeg2,mpeg4,vp8,h264_4k_8bit,hevc_4k_8bit,hevc_4k_10bit"/>
             <include name="avs1"/>
         </chip>
 
