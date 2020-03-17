@@ -2,9 +2,6 @@
 on zygote-start
 
 # for bluetooth
-    # change back to bluetooth from system
-    chown bluetooth net_bt /data/misc/bluetooth
-    mkdir /data/misc/bluedroid 0770 bluetooth net_bt
     # bluetooth LPM
     chown bluetooth net_bt /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt /proc/bluetooth/sleep/btwrite    
@@ -16,7 +13,6 @@ on zygote-start
 
     # bluetooth MAC address programming
     chown bluetooth net_bt ro.bt.bdaddr_path
-    chown bluetooth net_bt /data/misc/bluetooth
     setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
     chmod 0660 /dev/ttyS0
