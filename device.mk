@@ -84,6 +84,12 @@ ifeq ($(strip $(TARGET_ROCKCHIP_PCBATEST)), true)
 PRODUCT_PACKAGES += \
     pcba_core \
     bdt
+PRODUCT_COPY_FILES += \
+   vendor/rockchip/common/wifi/iwconfig:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwconfig \
+   vendor/rockchip/common/wifi/iwlist:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwlist \
+   bootable/recovery/pcba_core/rkhal3_camera/media-ctl:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/media-ctl \
+   $(call find-copy-subdir-files,*,bootable/recovery/pcba_core/res,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba) \
+   $(call find-copy-subdir-files,"*.ko",$(TOPDIR)kernel/drivers/net/wireless/rockchip_wlan,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules)
 endif
 
 # librkskia
