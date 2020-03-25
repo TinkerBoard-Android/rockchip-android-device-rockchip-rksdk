@@ -17,3 +17,4 @@ allow surfaceflinger rga_device:dir search;
 allow surfaceflinger rga_device:chr_file rw_file_perms;
 
 get_prop(surfaceflinger,public_vendor_system_prop)
+get_prop(surfaceflinger,vendor_default_prop)
