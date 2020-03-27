@@ -88,6 +88,7 @@ PRODUCT_COPY_FILES += \
    vendor/rockchip/common/wifi/iwconfig:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwconfig \
    vendor/rockchip/common/wifi/iwlist:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwlist \
    bootable/recovery/pcba_core/rkhal3_camera/media-ctl:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/media-ctl \
+   $(TARGET_DEVICE_DIR)/bt_vendor.conf:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/bt_vendor.conf \
    $(call find-copy-subdir-files,*,bootable/recovery/pcba_core/res,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba) \
    $(call find-copy-subdir-files,"*.ko",$(TOPDIR)kernel/drivers/net/wireless/rockchip_wlan,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules)
 endif
@@ -1242,3 +1243,7 @@ BOARD_TV_LOW_MEMOPT ?= false
 ifeq ($(strip $(BOARD_TV_LOW_MEMOPT)), true)
     include device/rockchip/common/tv/tv_low_ram_device.mk
 endif
+
+#bt config for ap bt
+PRODUCT_COPY_FILES += \
+    $(TARGET_DEVICE_DIR)/bt_vendor.conf:/vendor/etc/bluetooth/bt_vendor.conf
