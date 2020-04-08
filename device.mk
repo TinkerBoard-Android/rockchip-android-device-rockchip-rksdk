@@ -420,6 +420,11 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     sensors.$(TARGET_BOARD_HARDWARE)
 
+
+# ConfigStoreHAL, deprecated, but still needs to be installed in Q.
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.1-service
+
 endif
 
 # Power HAL
