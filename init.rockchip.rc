@@ -133,6 +133,8 @@ on charger
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     setprop sys.usb.config adb
+    chmod 0666 /sys/power/state
+    chmod 0666 /sys/power/wakeup_count
 
 service vendor.insmod_sh /vendor/bin/init.insmod.sh
     class main
