@@ -1168,6 +1168,9 @@ AB_OTA_PARTITIONS += \
     product
 endif
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifests/android.hardware.boot@1.0-service.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vintf/manifest/android.hardware.boot@1.0-service.xml
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
