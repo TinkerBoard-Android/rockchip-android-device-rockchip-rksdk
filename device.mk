@@ -827,17 +827,19 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
       ro.frp.pst=/dev/block/by-name/frp
   endif
   ifeq ($(strip $(TARGET_BUILD_VARIANT)), user)
-    # Enforce privapp-permissions whitelist only for user build.
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.control_privapp_permissions=enforce
     ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
       $(warning ****************************************)
-      $(error You are building GMS with a user variant without GMS-Express!)
-      $(warning Please note that all your apps MUST be able to get permissions, Otherwise android cannot boot!)
+      $(error Please note that all your apps MUST be able to get permissions, Otherwise android cannot boot!)
       $(warning After confirming your apps, please remove the above error line!)
       $(warning ****************************************)
     endif
+    # Enforce privapp-permissions whitelist only for user build.
+    PRODUCT_PROPERTY_OVERRIDES += \
+      ro.control_privapp_permissions=enforce
   endif
+  $(warning Please set client id with your own MADA ID!)
+  PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=android-rockchip
 endif
 
 ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)

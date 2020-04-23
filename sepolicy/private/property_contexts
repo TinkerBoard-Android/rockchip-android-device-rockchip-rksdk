@@ -43,7 +43,7 @@ ro.target.product  u:object_r:debug_prop:s0 exact string
 persist.sys.first_booting        u:object_r:debug_prop:s0
 drm.service.                   u:object_r:debug_prop:s0
 ro.setupwizard.mode                   u:object_r:debug_prop:s0
-ro.com.google.gmsversion                   u:object_r:debug_prop:s0
+ro.com.google.                        u:object_r:debug_prop:s0
 sys.status.hidebar_enable              u:object_r:debug_prop:s0
 ro.rk.screenshot_enable              u:object_r:debug_prop:s0
 ro.config.enable.remotecontrol              u:object_r:debug_prop:s0
