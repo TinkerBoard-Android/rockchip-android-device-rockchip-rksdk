@@ -981,10 +981,6 @@ ifeq ($(strip $(BOOT_SHUTDOWN_ANIMATION_RINGING)),true)
 include device/rockchip/common/bootshutdown/bootshutdown.mk
 endif
 
-# For oem preset
-ifeq ($(strip $(OEM_PRESET)),true)
-include device/rockchip/common/oem_preset/oem_preset.mk
-endif
 
 #boot video enable 
 ifeq ($(strip $(BOOT_VIDEO_ENABLE)),true)
