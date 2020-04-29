@@ -1,6 +1,0 @@
-type hal_rockit_default, domain;
-
-hal_server_domain(hal_rockit_default, hal_rockit)
-
-type hal_rockit_default_exec, exec_type, vendor_file_type, file_type;
-init_daemon_domain(hal_rockit_default);

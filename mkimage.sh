@@ -84,44 +84,12 @@ cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
 
 echo "create boot.img.... "
-if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/boot.img $IMAGE_PATH/boot.img
 cp -a $OUT/boot-debug.img $IMAGE_PATH/boot-debug.img
-else
-echo "BOARD_AVB_ENABLE is false, make boot.img from kernel."
-    mkbootimg --kernel $KERNEL_DEBUG --ramdisk $OUT/ramdisk.img --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$BOARD_KERNEL_CMDLINE" --output $OUT/boot.img && \
-    cp -a $OUT/boot.img $IMAGE_PATH/boot.img
-fi
 echo "done."
 
 echo "create recovery.img.... "
-if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/recovery.img $IMAGE_PATH/recovery.img
-else
-echo "BOARD_AVB_ENABLE is false, make recovery.img from kernel && out."
-    [ -d $OUT/recovery/root ] && \
-    mkbootfs -d $OUT/system $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
-    mkbootimg --kernel $KERNEL_DEBUG --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --header_version $BOARD_BOOTIMG_HEADER_VERSION --recovery_dtbo $BOARD_DTBO_IMG --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline "$ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS" --output $OUT/recovery.img && \
-    cp -a $OUT/recovery.img $IMAGE_PATH/recovery.img
-fi
-echo "done."
-
-echo -n "create system.img.... "
-if [ "$BOARD_AVB_ENABLE" = "true" ]; then
-echo -n "system.img has been signed by avbtool, just copy."
-else
-echo "BOARD_AVB_ENABLE is false, make system.img from out."
-    [ -d $OUT/system ] && \
-    python build/make/tools/releasetools/build_image.py \
-    $OUT/system \
-    $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-    $OUT/system.img \
-    $OUT/system
-fi
-python device/rockchip/common/sparse_tool.py $OUT/system.img
-mv $OUT/system.img.out $OUT/system.img
-cp -f $OUT/system.img $IMAGE_PATH/system.img
-#cp -f $OUT/system.img $IMAGE_PATH/system.img
 echo "done."
 
 echo -n "create vbmeta.img.... "
@@ -133,49 +101,13 @@ cp -a device/rockchip/common/vbmeta.img $IMAGE_PATH/vbmeta.img
 fi
 echo -n "done."
 
-echo -n "create vendor.img..."
-if [ "$BOARD_AVB_ENABLE" = "true" ]; then
-echo -n "vendor.img has been signed by avbtool, just copy."
-else
-echo "BOARD_AVB_ENABLE is false, make vendor.img from out."
-    [ -d $OUT/vendor ] && \
-    python build/make/tools/releasetools/build_image.py \
-    $OUT/vendor \
-    $OUT/obj/PACKAGING/vendor_intermediates/vendor_image_info.txt \
-    $OUT/vendor.img \
-    $OUT/system
-fi
-python device/rockchip/common/sparse_tool.py $OUT/vendor.img
-mv $OUT/vendor.img.out $OUT/vendor.img
-cp -a $OUT/vendor.img $IMAGE_PATH/vendor.img
-echo -n "done."
-
-echo -n "create odm.img..."
-if [ "$BOARD_AVB_ENABLE" = "true" ]; then
-echo -n "odm.img has been signed by avbtool, just copy."
-else
-echo "BOARD_AVB_ENABLE is false, make odm.img from out."
-    [ -d $OUT/odm ] && \
-    python build/make/tools/releasetools/build_image.py \
-    $OUT/odm \
-    $OUT/obj/PACKAGING/odm_intermediates/odm_image_info.txt \
-    $OUT/odm.img \
-    $OUT/system
-fi
-python device/rockchip/common/sparse_tool.py $OUT/odm.img
-mv $OUT/odm.img.out $OUT/odm.img
-cp -f $OUT/odm.img $IMAGE_PATH/odm.img
-echo "done."
-
 if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
     cp -a $OUT/super.img $IMAGE_PATH/super.img
     echo "copy super.img..."
 fi
 
 echo -n "create misc.img.... "
-cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
-cp -a rkst/Image/pcba_small_misc.img $IMAGE_PATH/pcba_small_misc.img
-cp -a rkst/Image/pcba_whole_misc.img $IMAGE_PATH/pcba_whole_misc.img
+cp -a rkst/Image/misc_aosp.img $IMAGE_PATH/misc.img
 echo "done."
 
 if [ -f $UBOOT_PATH/uboot.img ]
@@ -236,24 +168,6 @@ else
 	else
         echo "$UBOOT_PATH/*MiniLoaderAll_*.bin not fount! Please make it from $UBOOT_PATH first!"
 	fi
-fi
-
-if [ -f $KERNEL_PATH/resource.img ]
-then
-        echo -n "create resource.img..."
-        cp -a $KERNEL_PATH/resource.img $IMAGE_PATH/resource.img
-        echo "done."
-else
-        echo "$KERNEL_PATH/resource.img not fount!"
-fi
-
-if [ -f $KERNEL_PATH/kernel.img ]
-then
-        echo -n "create kernel.img..."
-        cp -a $KERNEL_PATH/kernel.img $IMAGE_PATH/kernel.img
-        echo "done."
-else
-        echo "$KERNEL_PATH/kernel.img not fount!"
 fi
 
 if [ -f $FLASH_CONFIG_FILE ]

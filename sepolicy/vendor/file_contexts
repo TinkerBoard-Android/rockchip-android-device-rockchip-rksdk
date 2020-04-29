@@ -1,5 +1,4 @@
 /dev/ttyFIQ[0-9]*    u:object_r:serial_device:s0
-/dev/ttyUSB[0-9]*    u:object_r:tty_device:s0
 /dev/mali[0-9]       u:object_r:gpu_device:s0
 /dev/mali            u:object_r:gpu_device:s0
 /dev/ddr_freq        u:object_r:ddr_device:s0
@@ -129,9 +128,11 @@
 /vendor/lib(64)?/libiep.so                      u:object_r:same_process_hal_file:s0
 # default hal
 /vendor/bin/hw/android\.hardware\.drm@1\.2-service\.widevine            u:object_r:hal_drm_widevine_exec:s0
-/vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.widevine            u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.widevine       u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.2-service\.clearkey            u:object_r:hal_drm_clearkey_exec:s0
-/vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.clearkey            u:object_r:hal_drm_clearkey_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.2-service-lazy\.clearkey       u:object_r:hal_drm_clearkey_exec:s0
+/vendor/bin/hw/android\.hardware\.power-service\.rockchip               u:object_r:np_rockchip_power_aidl_exec:s0
+/vendor/bin/hw/android\.hardware\.light-service\.rockchip               u:object_r:np_rockchip_light_aidl_exec:s0
 
 # input files
 /vendor/usr/idc(/.*)?                  u:object_r:vendor_idc_file:s0
@@ -168,10 +169,6 @@
 #weaver hal
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service                u:object_r:weaver-hal-1-0_exec:s0
 
-#rockit hw hal
-/vendor/bin/hw/rockchip\.hardware\.rockit\.hw@1\.0-service           u:object_r:vendor-rockit-hal-1-0_exec:s0
-/vendor/bin/hw/rockchip\.hardware\.rockit\.hw@1\.0-service-lazy      u:object_r:vendor-rockit-hal-1-0_exec:s0
-
 #abc
 /data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0
 
@@ -181,6 +178,3 @@
 #rockchip audiosetting
 
 /odm/media(/.*)?    u:object_r:oemfs:s0
-
-#flash_img
-/system/bin/flash_img.sh u:object_r:install_recovery_exec:s0

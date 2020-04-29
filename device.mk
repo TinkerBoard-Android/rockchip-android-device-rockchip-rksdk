@@ -170,7 +170,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_config.txt:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_config.txt \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
-    hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_bcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_bcm.conf
 
 #for ssv6051
 PRODUCT_COPY_FILES += \
@@ -422,11 +421,10 @@ PRODUCT_PACKAGES += \
 
 endif
 
-# Power HAL
+# Power AIDL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service \
-    android.hardware.power@1.0-impl \
-    power.$(TARGET_BOARD_PLATFORM)
+    android.hardware.power \
+    android.hardware.power-service.rockchip
 
 # Camera omx-plugin vpu akmd libion_rockchip_ext
 PRODUCT_PACKAGES += \
@@ -437,18 +435,13 @@ PRODUCT_PACKAGES += \
     libion_ext
 
 
-# Light HAL
+# Light AIDL
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_PLATFORM) \
-    android.hardware.light@2.0-impl
-ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
+    android.hardware.light
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service-lazy
-else
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service
-endif
+    android.hardware.light-service.rockchip
 endif
 
 # Keymaster HAL
@@ -456,17 +449,7 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
 
-# new gatekeeper HAL
-# PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service
-
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
-# Weaver HAL
-PRODUCT_PACKAGES += \
-    android.hardware.weaver@1.0-impl \
-    android.hardware.weaver@1.0-service
-
 # Fastbootd HAL
 # TODO: develop a hal for GMS...
 PRODUCT_PACKAGES += \
@@ -532,8 +515,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@5.0-impl \
-    android.hardware.audio.effect@5.0-impl \
+    android.hardware.audio@6.0-impl \
+    android.hardware.audio.effect@6.0-impl \
     android.hardware.soundtrigger@2.0-impl
 
 PRODUCT_PACKAGES += \
@@ -542,14 +525,14 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.1-service-lazy \
+    android.hardware.cas@1.2-service-lazy \
     android.hardware.drm@1.0-service-lazy \
-    android.hardware.drm@1.2-service-lazy.clearkey
+    android.hardware.drm@1.3-service-lazy.clearkey
 else
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.1-service \
+    android.hardware.cas@1.2-service \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.2-service.clearkey
+    android.hardware.drm@1.3-service.clearkey
 endif
 
 PRODUCT_PACKAGES += \
@@ -559,8 +542,8 @@ PRODUCT_PACKAGES += \
 
 #Health hardware
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service \
-    android.hardware.health@2.0-impl
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl
 ifneq ($(filter true yes, $(BUILD_WITH_GOOGLE_MARKET) $(PRODUCT_USE_PREBUILT_GTVS)),)
   ifeq ($(strip $(TARGET_ARCH)), arm64)
     ifneq ($(strip $(BUILD_WITH_GO_OPT)), true)
@@ -877,9 +860,10 @@ else
   endif
 endif
 
-ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
-$(call inherit-product-if-exists, vendor/widevine/widevine.mk)
-endif
+# disable widevine until source code released.
+#ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
+#$(call inherit-product-if-exists, vendor/widevine/widevine.mk)
+#endif
 
 ifeq ($(strip $(BUILD_WITH_MICROSOFT_PLAYREADY)), true)
 $(call inherit-product-if-exists, vendor/microsoft/playready.mk)

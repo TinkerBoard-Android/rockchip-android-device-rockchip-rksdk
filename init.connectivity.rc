@@ -35,9 +35,6 @@ on zygote-start
     
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
 
-# for akmd
-   mkdir /data/vendor/akmd 0771 akmd akmd
-
 #for nfc
     chmod 0660 /dev/bcm2079x
     chown nfc nfc /dev/bcm2079x

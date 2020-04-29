@@ -42,7 +42,6 @@ allow init system_file:system { module_load };
 allow init debugfs:dir mounton;
 allow init configfs:file rw_file_perms;
 allow init configfs:lnk_file create_file_perms;
-allow init perfprofd_exec:file getattr;
 allow init rootfs:system { module_load };
 allow init sysfs_devices_system_cpu:file write;
 dontaudit init sysfs:file { setattr open write };

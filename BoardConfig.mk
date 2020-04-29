@@ -65,7 +65,7 @@ endif
 
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
-BOARD_SELINUX_ENFORCING ?= true
+BOARD_SELINUX_ENFORCING ?= false
 
 ifneq ($(filter true, $(BOARD_AVB_ENABLE)), )
 BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
@@ -193,31 +193,14 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
 ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
+#DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 endif
 
-########for target product ########
-#ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
-#DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
-#
-#ADDITIONAL_DEFAULT_PROPERTIES += \
-#	ro.target.product=box
-#else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
-#  ADDITIONAL_DEFAULT_PROPERTIES += \
-#        ro.target.product=vr
-#else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),laptop)
-#  ADDITIONAL_DEFAULT_PROPERTIES += \
-#        ro.target.product=laptop
-#else
-#  ADDITIONAL_DEFAULT_PROPERTIES += \
-#        ro.target.product=tablet
-#endif
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
 TARGET_PROVIDES_INIT_RC ?= false
 
 //MAX-SIZE=512M, for generate out/.../system.img
 BOARD_FLASH_BLOCK_SIZE := 131072
-
 
 ART_USE_HSPACE_COMPACT ?= true
 
@@ -227,10 +210,10 @@ TARGET_USES_LOGD ?= true
 PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS ?= \
     device/rockchip/common/sepolicy/vendor
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
-    device/rockchip/common/sepolicy/private \
-    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
+#BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
+#BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
+#    device/rockchip/common/sepolicy/private \
+#    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
 
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     BOARD_SEPOLICY_DIRS += \
@@ -252,7 +235,7 @@ RECOVERY_AUTO_USB_UPDATE ?= false
 
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_ROCKCHIP_PCBATEST ?= true
+TARGET_ROCKCHIP_PCBATEST ?= false
 #TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_PRODUCT)
 TARGET_USERIMAGES_USE_EXT4 ?= true
 TARGET_USERIMAGES_USE_F2FS ?= false
@@ -352,7 +335,7 @@ BOARD_PPPOE_PASS_CTS ?= false
 BOARD_HS_ETHERNET ?= false
 
 # Save commit id into firmware
-BOARD_RECORD_COMMIT_ID ?= true
+BOARD_RECORD_COMMIT_ID ?= false
 
 # no battery
 BUILD_WITHOUT_BATTERY ?= false
