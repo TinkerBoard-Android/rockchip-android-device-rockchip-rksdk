@@ -252,6 +252,12 @@ $(warning Please add fstab.in with PRODUCT_FSTAB_TEMPLATE in your product.mk)
 PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rk30board \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_RAMDISK)/fstab.rk30board
+
+# Header V3, add vendor_boot
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+PRODUCT_COPY_FILES += \
+    $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.rk30board
+endif
 endif # Use PRODUCT_FSTAB_TEMPLATE
 
 # For audio-recoard 

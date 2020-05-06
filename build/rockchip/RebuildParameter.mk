@@ -9,10 +9,19 @@ partition_list := uboot:4M,trust:4M,misc:4M
 endif # BOARD_USES_AB_IMAGE
 
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+# Header V3, add vendor_boot and resource.
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+partition_list := $(partition_list),resource_a:16M,vendor_boot_a:$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)
+endif # Header V3
 partition_list := $(partition_list),dtbo_a:$(BOARD_DTBOIMG_PARTITION_SIZE),vbmeta_a:1M,boot_a:$(BOARD_BOOTIMAGE_PARTITION_SIZE),security:4M
-else
+else # None-A/B
+# Header V3, add vendor_boot and resource.
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+partition_list := $(partition_list),resource:16M,vendor_boot:$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)
+endif # Header V3
 partition_list := $(partition_list),dtbo:$(BOARD_DTBOIMG_PARTITION_SIZE),vbmeta:1M,boot:$(BOARD_BOOTIMAGE_PARTITION_SIZE),security:4M,recovery:$(BOARD_RECOVERYIMAGE_PARTITION_SIZE)
 endif # BOARD_USES_AB_IMAGE
+
 partition_list := $(partition_list),backup:384M,cache:$(BOARD_CACHEIMAGE_PARTITION_SIZE),metadata:16M
 
 ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)

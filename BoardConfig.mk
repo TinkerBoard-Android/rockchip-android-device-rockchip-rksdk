@@ -15,15 +15,12 @@
 #
 
 # Use the non-open-source parts, if they're present
-#-include vendor/rockchip/common/BoardConfigVendor.mk
-#TARGET_NO_KERNEL := false
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
 TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
 BOARD_PREBUILT_DTBIMAGE_DIR ?= kernel/arch/arm/boot/dts
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
 PRODUCT_PARAMETER_TEMPLATE ?= device/rockchip/common/scripts/parameter_tools/parameter.in
 TARGET_BOARD_HARDWARE_EGL ?= mali
-#BOARD_USES_RECOVERY_AS_BOOT := true
 
 PRODUCT_HAVE_RKAPPS := false
 
@@ -68,27 +65,40 @@ endif
 
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
-BOARD_SELINUX_ENFORCING ?= false
+BOARD_BOOT_HEADER_VERSION ?= 2
+BOARD_MKBOOTIMG_ARGS :=
+BOARD_PREBUILT_DTBOIMAGE ?= $(TARGET_DEVICE_DIR)/dtbo.img
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE ?= false
+BOARD_SELINUX_ENFORCING ?= false
 
-ifneq ($(filter true, $(BOARD_AVB_ENABLE)), )
+ifeq ($(BOARD_AVB_ENABLE), true)
 BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 else # BOARD_AVB_ENABLE is false
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
 endif # BOARD_AVB_ENABLE
 
 BOARD_KERNEL_CMDLINE += loop.max_part=7
-BOARD_BOOTIMG_HEADER_VERSION ?= 2
 ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 
-ifeq ($(filter true, $(BOARD_SELINUX_ENFORCING)), )
+ifneq ($(BOARD_SELINUX_ENFORCING), true)
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 endif
 
-# TODO Q: update to version 2, add dtb section
-BOARD_MKBOOTIMG_ARGS := --second $(TARGET_PREBUILT_RESOURCE) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
-BOARD_PREBUILT_DTBOIMAGE ?= $(TARGET_DEVICE_DIR)/dtbo.img
+# For Header V2, set resource.img as second.
+# For Header V3, add vendor_boot and resource.
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \<= 2)))
+BOARD_MKBOOTIMG_ARGS += --second $(TARGET_PREBUILT_RESOURCE)
+endif
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
+# Always use header v2 for recovery image,
+# - header v3 is used for virtual A/B and GKI;
+# - header v2 do not have recovery;
+ifneq ($(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE), true)
+ifneq ($(BOARD_USES_AB_IMAGE), true)
+BOARD_RECOVERY_MKBOOTIMG_ARGS ?= --second $(TARGET_PREBUILT_RESOURCE) --header_version 2
+endif
+endif
 BOARD_INCLUDE_RECOVERY_DTBO ?= true
 BOARD_INCLUDE_DTB_IN_BOOTIMG ?= true
 
@@ -124,7 +134,10 @@ ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
   BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt boot)
   BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt dtbo)
   BOARD_RECOVERYIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt recovery)
-
+  # Header V3, add vendor_boot
+  ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+    BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor_boot)
+  endif
   #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
 else
   ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
@@ -139,6 +152,10 @@ else
   BOARD_BOOTIMAGE_PARTITION_SIZE ?= 33554432
   BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 100663296
   BOARD_DTBOIMG_PARTITION_SIZE ?= 4194304
+  # Header V3, add vendor_boot
+  ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+    BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE ?= 41943040
+  endif
   ifneq ($(strip $(TARGET_DEVICE_DIR)),)
     #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
   endif
@@ -202,14 +219,9 @@ DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
-TARGET_PROVIDES_INIT_RC ?= false
 
 //MAX-SIZE=512M, for generate out/.../system.img
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-ART_USE_HSPACE_COMPACT ?= true
-
-TARGET_USES_LOGD ?= true
 
 # Sepolicy
 PRODUCT_SEPOLICY_SPLIT := true
@@ -225,7 +237,7 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
         device/rockchip/common/box/sepolicy/vendor
 endif
 
-# Enable VNDK Check for Android P (MUST in P)
+# Enable VNDK Check for Android P (MUST after P)
 BOARD_VNDK_VERSION := current
 
 # Recovery
@@ -257,9 +269,6 @@ RECOVERY_BOARD_ID ?= false
 
 # for drmservice
 BUILD_WITH_DRMSERVICE :=true
-
-# for tablet encryption
-BUILD_WITH_CRYPTO := false
 
 # Audio
 BOARD_USES_GENERIC_AUDIO ?= true

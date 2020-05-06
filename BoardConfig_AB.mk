@@ -60,12 +60,12 @@ else
         endif
     endif
 endif
-ifeq ($(filter true, $(BOARD_AVB_ENABLE)), )
+ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
     BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 else
     BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 endif
-ifeq ($(filter true, $(BOARD_SELINUX_ENFORCING)), )
+ifneq ($(strip $(BOARD_SELINUX_ENFORCING)), true)
     BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 endif
 ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS := console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=US androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init

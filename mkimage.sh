@@ -73,8 +73,17 @@ BOOT_OTA="ota"
         fi
     fi
 
+copy_images_from_out() {
+if [ ! -f "$OUT/$1" ]; then
+    echo "skip copy images: $1"
+else
+    echo "create $1..."
+    cp -a $OUT/$1 $IMAGE_PATH/$1
+    echo "done."
+fi
+}
 
-echo "create dtbo.img.... "
+echo "create dtbo.img..."
 if [ ! -f "$OUT/dtbo.img" ]; then
 BOARD_DTBO_IMG=$OUT/rebuild-dtbo.img
 else
@@ -83,27 +92,33 @@ fi
 cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
 
-echo "create boot.img.... "
-cp -a $OUT/boot.img $IMAGE_PATH/boot.img
-cp -a $OUT/boot-debug.img $IMAGE_PATH/boot-debug.img
-echo "done."
+echo "create resource.img..."
+if [ -f "kernel/resource.img" ]; then
+    cp -a kernel/resource.img $IMAGE_PATH/resource.img
+    echo "done."
+fi
 
-echo "create recovery.img.... "
-cp -a $OUT/recovery.img $IMAGE_PATH/recovery.img
-echo "done."
+copy_images_from_out boot.img
+copy_images_from_out boot-debug.img
+copy_images_from_out vendor_boot.img
+copy_images_from_out vendor_boot-debug.img
+copy_images_from_out recovery.img
+copy_images_from_out super.img
 
-echo -n "create vbmeta.img.... "
+if [ ! "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
+copy_images_from_out system.img
+copy_images_from_out system_ext.img
+copy_images_from_out vendor.img
+copy_images_from_out odm.img
+copy_images_from_out product.img
+fi
+
+echo "create vbmeta.img..."
 if [ "$BOARD_AVB_ENABLE" = "true" ]; then
 cp -a $OUT/vbmeta.img $IMAGE_PATH/vbmeta.img
 else
-echo -n "BOARD_AVB_ENABLE is false,use default vbmeta.img"
+echo "BOARD_AVB_ENABLE is false, use default vbmeta.img"
 cp -a device/rockchip/common/vbmeta.img $IMAGE_PATH/vbmeta.img
-fi
-echo -n "done."
-
-if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
-    cp -a $OUT/super.img $IMAGE_PATH/super.img
-    echo "copy super.img..."
 fi
 
 echo -n "create misc.img.... "
@@ -114,29 +129,24 @@ echo "done."
 
 if [ -f $UBOOT_PATH/uboot.img ]
 then
-	echo -n "create uboot.img..."
+	echo "create uboot.img..."
 	cp -a $UBOOT_PATH/uboot.img $IMAGE_PATH/uboot.img
-	echo "done."
 else
 	echo "$UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first!"
 fi
 
 if [ -f $UBOOT_PATH/trust_nand.img ]
 then
-        echo -n "create trust.img..."
+        echo "create trust.img..."
         cp -a $UBOOT_PATH/trust_nand.img $IMAGE_PATH/trust.img
-        echo "done."
 elif [ -f $UBOOT_PATH/trust_with_ta.img ]
 then
-        echo -n "create trust.img..."
+        echo "create trust.img..."
         cp -a $UBOOT_PATH/trust_with_ta.img $IMAGE_PATH/trust.img
-        echo "done."
 elif [ -f $UBOOT_PATH/trust.img ]
 then
-        echo -n "create trust.img..."
+        echo "create trust.img..."
         cp -a $UBOOT_PATH/trust.img $IMAGE_PATH/trust.img
-        echo "done."
-
 else    
         echo "$UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first!"
 fi
@@ -155,18 +165,15 @@ fi
 
 if [ -f $UBOOT_PATH/*_loader_*.bin ]
 then
-        echo -n "create loader..."
+        echo "create loader..."
         cp -a $UBOOT_PATH/*_loader_*.bin $IMAGE_PATH/MiniLoaderAll.bin
-        echo "done."
 else
 	if [ -f $UBOOT_PATH/*loader*.bin ]; then
-		echo -n "create loader..."
+		echo "create loader..."
 		cp -a $UBOOT_PATH/*loader*.bin $IMAGE_PATH/MiniLoaderAll.bin
-		echo "done."
 	elif [ "$TARGET_PRODUCT" == "px3" -a -f $UBOOT_PATH/RKPX3Loader_miniall.bin ]; then
-        echo -n "create loader..."
+        echo "create loader..."
         cp -a $UBOOT_PATH/RKPX3Loader_miniall.bin $IMAGE_PATH/MiniLoaderAll.bin
-        echo "done."
 	else
         echo "$UBOOT_PATH/*MiniLoaderAll_*.bin not fount! Please make it from $UBOOT_PATH first!"
 	fi
@@ -174,9 +181,8 @@ fi
 
 if [ -f $FLASH_CONFIG_FILE ]
 then
-    echo -n "create config.cfg..."
+    echo "create config.cfg..."
     cp -a $FLASH_CONFIG_FILE $IMAGE_PATH/config.cfg
-    echo "done."
 else
     echo "$FLASH_CONFIG_FILE not fount!"
 fi
