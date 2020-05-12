@@ -285,8 +285,9 @@ BUILD_WITH_GOOGLE_FRP ?= false
 #Android GO configuration
 BUILD_WITH_GO_OPT ?= false
 
+# Don't define BUILD_NMUBER here since it will be defined by build script or Android default behavior.
 # define BUILD_NUMBER
-BUILD_NUMBER := $(shell $(DATE) +%H%M%S)
+#BUILD_NUMBER := $(shell $(DATE) +%H%M%S)
 
 # face lock
 BUILD_WITH_FACELOCK ?= false
