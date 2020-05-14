@@ -35,8 +35,7 @@ endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
   $(call inherit-product, device/google/atv/products/atv_base.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
-  PRODUCT_PACKAGES += DocumentsUI \
-                      PlayAutoInstallConfig \
+  PRODUCT_PACKAGES += PlayAutoInstallConfig \
                       ATVContentProvider \
 
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
@@ -230,7 +229,8 @@ endif
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml \
-      $(LOCAL_PATH)/tv/permissions/privapp-permissions-tv-common.xml:system/etc/permissions/privapp-permissions-tv-common.xml
+      $(LOCAL_PATH)/tv/permissions/privapp-permissions-tv-common.xml:system/etc/permissions/privapp-permissions-tv-common.xml \
+      $(LOCAL_PATH)/tv/permissions/privapp-permissions-product-app.xml:product/etc/permissions/privapp-permissions-product-app.xml
 endif
 
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
