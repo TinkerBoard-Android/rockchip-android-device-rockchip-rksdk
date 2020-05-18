@@ -12,4 +12,5 @@ allow tee block_device:dir { getattr search };
 allow tee security_block_device:blk_file { ioctl open read write };
 allow tee uboot_block_device:blk_file { ioctl open read write };
 allow tee rpmb_block_device:blk_file { ioctl open read write };
+allow tee rpmb_block_device:chr_file rw_file_perms;
 allow tee metadata_file:dir create_dir_perms;
