@@ -166,3 +166,5 @@
 
 #flash_img
 /system/bin/flash_img.sh u:object_r:install_recovery_exec:s0
+
+/dev/pcie-dev       u:object_r:pcie_device:s0
