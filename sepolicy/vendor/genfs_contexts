@@ -52,6 +52,11 @@ genfscon sysfs /devices/platform/rk_headset/extcon/extcon1                      
 genfscon sysfs /devices/platform/rk_headset/extcon/extcon2                                          u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/rk_headset/extcon/extcon3                                          u:object_r:sysfs_extcon:s0
 
+genfscon sysfs /devices/platform/rk-headset/extcon/extcon0                                          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk-headset/extcon/extcon1                                          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk-headset/extcon/extcon2                                          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk-headset/extcon/extcon3                                          u:object_r:sysfs_extcon:s0
+
 genfscon sysfs /devices/platform/10218000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:1/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/10218000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:2/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
