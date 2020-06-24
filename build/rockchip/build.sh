@@ -178,7 +178,12 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
     cp -f $IMAGE_PATH/* $PACK_TOOL_DIR/rockdev/Image/
 
     echo "Make update.img"
-    cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
+    if [[ $TARGET_PRODUCT =~ "PX30" ]]; then
+	cd $PACK_TOOL_DIR/rockdev && ./mkupdate_px30.sh
+    else
+	cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
+    fi
+
     if [ $? -eq 0 ]; then
         echo "Make update image ok!"
     else
