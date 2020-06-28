@@ -119,7 +119,7 @@
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_1080,hevc_1080"/>
         </chip>
 
-        <chip name="RK3368H">
+        <chip name="RK3368a">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_1080,hevc_1080"/>
             <include name="avs1"/>
         </chip>
