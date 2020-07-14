@@ -24,6 +24,8 @@ PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
 TARGET_BOARD_HARDWARE_EGL ?= mali
 #BOARD_USES_RECOVERY_AS_BOOT := true
 
+PRODUCT_HAVE_RKAPPS := false
+
 #binder protocol(8)
 TARGET_USES_64_BIT_BINDER := true
 
