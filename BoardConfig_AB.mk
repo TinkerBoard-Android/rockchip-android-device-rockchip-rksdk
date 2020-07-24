@@ -46,6 +46,19 @@ ifeq ($(strip $(USE_AB_PARAMETER)), true)
     BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt boot_a)
     BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt dtbo_a)
     #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter_ab.txt)
+else
+    ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+        ifneq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS), true)
+            ifeq ($(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE), true)
+                BOARD_SUPER_PARTITION_SIZE := 2688548864
+                BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
+            else
+                BOARD_SUPER_PARTITION_SIZE := 5372903424
+                BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) / 2 - 4194304)
+            endif
+            BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
+        endif
+    endif
 endif
 ifeq ($(filter true, $(BOARD_AVB_ENABLE)), )
     BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=US androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
