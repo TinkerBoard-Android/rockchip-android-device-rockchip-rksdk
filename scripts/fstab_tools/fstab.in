@@ -7,7 +7,7 @@ ${_block_prefix}vendor  /vendor   ext4 ro,barrier=1 ${_flags},first_stage_mount
 ${_block_prefix}odm     /odm      ext4 ro,barrier=1 ${_flags},first_stage_mount
 ${_block_prefix}product /product  ext4 ro,barrier=1 ${_flags},first_stage_mount
 ${_block_prefix}system_ext /system_ext  ext4 ro,barrier=1 ${_flags},first_stage_mount
-/dev/block/by-name/metadata /metadata ext4 nodev,noatime,nosuid,discard,sync wait,formattable,first_stage_mount
+/dev/block/by-name/metadata /metadata ext4 nodev,noatime,nosuid,discard,sync wait,formattable,first_stage_mount,check
 /dev/block/by-name/misc         /misc               emmc      defaults     defaults
 /dev/block/by-name/cache          /cache              ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait,check
 

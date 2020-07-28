@@ -1109,12 +1109,6 @@ PRODUCT_PACKAGES += \
     update_verifier	\
     cppreopts.sh
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.rk30board	\
-    libavbuser	\
-    libfstab	\
-    libcutils
-
 PRODUCT_PACKAGES += \
     update_engine_sideload \
     sg_write_buffer \
@@ -1136,26 +1130,29 @@ ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
 AB_OTA_PARTITIONS += \
     vbmeta
 endif
-ifndef BOARD_USES_AB_LEGACY_RETROFIT
-AB_OTA_PARTITIONS += \
-    product
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifests/android.hardware.boot@1.0-service.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vintf/manifest/android.hardware.boot@1.0-service.xml
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-impl.recovery \
-    android.hardware.boot@1.0-service \
+    android.hardware.boot@1.1-service \
+    android.hardware.boot@1.1-impl
 
+ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+PRODUCT_PACKAGES += \
+    bootctrl.default
+else
 PRODUCT_PACKAGES += \
   bootctrl.rk30board \
   bootctrl.rk30board.recovery
-
+endif
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
+
+ifndef BOARD_USES_AB_LEGACY_RETROFIT
+AB_OTA_PARTITIONS += \
+    system_ext \
+    product
+endif
 
 # A/B OTA dexopt package
 PRODUCT_PACKAGES += otapreopt_script
