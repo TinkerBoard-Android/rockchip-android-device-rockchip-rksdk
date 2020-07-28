@@ -9,6 +9,8 @@ genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-006b/power_supply         
 
 # rk3368 xikp RTC hctosys
 genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+# rk3368a tablet RTC
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
 
 genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-charger/power_supply                u:object_r:sysfs_batteryinfo:s0
@@ -59,8 +61,6 @@ genfscon sysfs /devices/platform/rk-headset/extcon/extcon3                      
 
 genfscon sysfs /devices/platform/10218000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:1/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/10218000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:2/net             u:object_r:sysfs_net:s0
-genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
-genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff380000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:1/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff380000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff380000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/net             u:object_r:sysfs_net:s0
@@ -71,6 +71,9 @@ genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:000
 genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:2/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/ff290000.ethernet/net                                              u:object_r:sysfs_net:s0
 
 # rk3328
