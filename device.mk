@@ -860,10 +860,17 @@ else
   endif
 endif
 
-# disable widevine until source code released.
-#ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
-#$(call inherit-product-if-exists, vendor/widevine/widevine.mk)
-#endif
+ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
+PRODUCT_PACKAGES += \
+    move_widevine_data.sh
+ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.3-service-lazy.widevine
+else
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.3-service.widevine
+endif
+endif
 
 ifeq ($(strip $(BUILD_WITH_MICROSOFT_PLAYREADY)), true)
 $(call inherit-product-if-exists, vendor/microsoft/playready.mk)
