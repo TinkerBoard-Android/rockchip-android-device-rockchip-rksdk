@@ -194,6 +194,8 @@ if [ "$BUILD_PACKING" = true ] ; then
 echo "make and copy packaging in IMAGE "
 
 mkdir -p $STUB_PATH
+mkdir -p $STUB_PATH/IMAGES/
+cp $IMAGE_PATH/* $STUB_PATH/IMAGES/
 
 #Generate patches
 
@@ -206,8 +208,6 @@ mkdir -p $STUB_PATCH_PATH/kernel
 cp kernel/.config $STUB_PATCH_PATH/kernel
 cp kernel/vmlinux $STUB_PATCH_PATH/kernel
 
-mkdir -p $STUB_PATH/IMAGES/
-cp $IMAGE_PATH/* $STUB_PATH/IMAGES/
 cp build.sh $STUB_PATH/build.sh
 #Save build command info
 echo "uboot:   ./make.sh $UBOOT_DEFCONFIG"                                                           >> $STUB_PATH/build_cmd_info.txt
