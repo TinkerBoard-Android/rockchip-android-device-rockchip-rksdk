@@ -169,6 +169,11 @@
 #weaver hal
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service                u:object_r:weaver-hal-1-0_exec:s0
 
+#keymaster hal
+/(vendor|system/vendor)/bin/hw/android\.hardware\.keymaster@4\.0-service.optee       u:object_r:hal_keymaster_default_exec:s0
+#gatekeeper hal
+/(vendor|system/vendor)/bin/hw/android\.hardware\.gatekeeper@1\.0-service.optee     u:object_r:hal_gatekeeper_default_exec:s0
+
 #abc
 /data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0
 
