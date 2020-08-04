@@ -1220,3 +1220,41 @@ endif
 #bt config for ap bt
 PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/bt_vendor.conf:/vendor/etc/bluetooth/bt_vendor.conf
+
+#for enable optee support
+ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
+
+PRODUCT_PACKAGES += \
+    tee-supplicant \
+    android.hardware.gatekeeper@1.0-service.optee \
+    android.hardware.keymaster@4.0-service.optee
+
+ifneq ($(filter rk3326, $(strip $(TARGET_BOARD_PLATFORM))), )
+
+PRODUCT_PACKAGES += \
+    0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta \
+    258be795-f9ca-40e6-a869-9ce6886c5d5d.ta
+
+else
+
+PRODUCT_PACKAGES += \
+    0b82bae5-0cd0-49a5-9521516dba9c43ba.ta \
+    258be795-f9ca-40e6-a8699ce6886c5d5d.ta
+
+#Choose TEE storage type
+#auto (storage type decide by storage chip emmc:rpmb nand:rkss)
+#rpmb
+#rkss
+PRODUCT_PROPERTY_OVERRIDES += ro.tee.storage=rkss
+
+endif
+
+else
+
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@4.0-service \
+    android.hardware.gatekeeper@1.0-service.software
+
+DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.keymaster@4.0-service.xml
+
+endif
