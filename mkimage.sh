@@ -196,7 +196,11 @@ then
 	        echo "done."
 	      fi
 else
+    if [ -f $OUT/parameter.txt ]; then
+        cp -a $OUT/parameter.txt $IMAGE_PATH/parameter.txt
+    else
         echo "$PARAMETER not fount!"
+    fi
 fi
 
 if [ "$TARGET_BASE_PARAMETER_IMAGE"x != ""x ]
