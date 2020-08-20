@@ -6,6 +6,7 @@ import /vendor/etc/init/hw/init.${ro.target.product}.rc
 import /vendor/etc/init/hw/init.car.rc
 import /vendor/etc/init/hw/init.optee.rc
 import /vendor/etc/init/hw/init.root.rc
+import /vendor/etc/init/hw/init.preinstall.rc
 
 on post-fs
     restorecon_recursive /mnt/vendor/metadata
@@ -343,3 +344,11 @@ on property:persist.sys.adb_enable=1
 
 on property:persist.sys.adb_enable=0
     stop adbd
+
+service flash_img /system/bin/flash_img.sh
+    class main
+    oneshot
+    disabled
+
+on property:sys.retaildemo.enabled=2
+    start flash_img

@@ -20,6 +20,7 @@ vendor.hwc.compose_policy               u:object_r:public_vendor_system_prop:s0
 vendor.hwc.                             u:object_r:public_vendor_system_prop:s0
 vendor.3d_resolution.                   u:object_r:public_vendor_system_prop:s0
 vendor.dump                             u:object_r:public_vendor_system_prop:s0
+vendor.gralloc.                         u:object_r:public_vendor_system_prop:s0
 
 persist.vendor.overscan.                u:object_r:public_vendor_system_prop:s0
 persist.vendor.color.                   u:object_r:public_vendor_system_prop:s0

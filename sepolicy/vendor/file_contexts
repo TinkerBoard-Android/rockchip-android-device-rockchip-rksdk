@@ -99,8 +99,12 @@
 # for rootservice
 /vendor/bin/rootservice            u:object_r:rootservice_exec:s0
 
+#preinstall_del.sh
+/vendor/bin/preinstall_del.sh            u:object_r:bundledservice_exec:s0
+
 /dev/block/mmcblk[0-9]                          u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb                      u:object_r:rpmb_block_device:s0
+/dev/mmcblk[0-9]rpmb                            u:object_r:rpmb_block_device:s0
 
 # Vendor file tag
 #/vendor/lib(64)?/(/.*)?                        u:object_r:vendor_file:s0
@@ -159,3 +163,8 @@
 /sys/devices/virtual/power_supply(/.*)?                              u:object_r:sysfs_power:s0
 
 /dev/rtkbt_dev       u:object_r:rtkbt_device:s0
+
+#flash_img
+/system/bin/flash_img.sh u:object_r:install_recovery_exec:s0
+
+/dev/pcie-dev       u:object_r:pcie_device:s0

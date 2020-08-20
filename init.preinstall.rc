@@ -1,11 +1,10 @@
 on boot
-service rootservice /vendor/bin/rootservice
+service bundledservice /vendor/bin/preinstall_del.sh
     class main
     user root
     group root
     disabled
     oneshot
 
-#on property:persist.vendor.rootservice=1
 on property:sys.boot_completed=1
-    start rootservice
+    start bundledservice

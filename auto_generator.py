@@ -27,10 +27,33 @@ include $(BUILD_PREBUILT)
 
 """
 
-copy_app_templet = """LOCAL_PATH := $(my-dir)
+copy_app_templet = """LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_APK_NAME := %s
-LOCAL_POST_PROCESS_COMMAND := $(shell mkdir -p $(TARGET_OUT_OEM)/%s/$(LOCAL_APK_NAME) && cp $(LOCAL_PATH)/$(LOCAL_APK_NAME).apk $(TARGET_OUT_OEM)/%s/$(LOCAL_APK_NAME)/)
+LOCAL_POST_PROCESS_COMMAND := $(shell mkdir -p $(TARGET_OUT_OEM)/%s/$(LOCAL_APK_NAME) && cp $(LOCAL_PATH)/$(LOCAL_APK_NAME).apk $(TARGET_OUT_OEM)/%s/$(LOCAL_APK_NAME)/ && cp $(LOCAL_PATH)/../bundledapplist.txt $(TARGET_OUT_OEM)/bundled_del_sh-app/)
+"""
+
+del_sh_templet = """#!/system/bin/sh
+
+file=/oem/bundled_del_sh-app/bundledapplist.txt
+if [ "$(getprop persist.vendor.preinstall_del)" == "0" ];then
+  echo "no need run preinstall_del !!"
+  exit 1
+fi
+if [ ! -e $file ];then
+ echo "the $file is not a file"
+ exit 2
+fi
+while read line
+do
+  /system/bin/pm install -r /oem/bundled_del_sh-app/$line/$line.apk
+  echo "$line"
+done <$file
+
+setprop persist.vendor.preinstall_del 0
+
+exit 0
+
 """
 
 def main(argv):
@@ -40,16 +63,31 @@ def main(argv):
         isfound = 'not_found_lib'
         include_path = preinstall_dir + '/preinstall.mk'
         android_path = preinstall_dir + '/Android.mk'
+        bundled_path = preinstall_dir + '/bundledapplist.txt'
 
         if os.path.exists(include_path):
             os.remove(include_path)
         if os.path.exists(android_path):
             os.remove(android_path)
+        if os.path.exists(bundled_path):
+            os.remove(bundled_path)
 
         includefile = file(include_path, 'w')
         androidfile = file(android_path, 'w')
+        bundledfile = file(bundled_path, 'w')
 
         androidfile.write("include $(call all-subdir-makefiles)\n\n")
+        if argv[2]=='preinstall_del_sh':
+            # for del sh
+            sh_path = preinstall_dir + '/preinstall_del.sh'
+            if os.path.exists(sh_path):
+                os.remove(sh_path)
+            shfile = file(sh_path, 'w')
+            includefile.write("PRODUCT_PROPERTY_OVERRIDES += persist.vendor.preinstall_del=1 \n\n")
+            shfile.write(del_sh_templet)
+            shfile.close()
+            os.chmod(sh_path,0755)
+            includefile.write("PRODUCT_COPY_FILES += $(TARGET_DEVICE_DIR)/preinstall_del_sh/preinstall_del.sh:$(TARGET_COPY_OUT_VENDOR)/bin/preinstall_del.sh \n\n")
 
         MY_LOCAL_PREBUILT_JNI_LIBS = '\\' + '\n'
 
@@ -70,7 +108,7 @@ def main(argv):
                         apkpath = preinstall_dir + '/' + found.group() + '/'
                         shutil.move(apk,apkpath)
                         makefile = file(makefile_path,'w')
-                        makefile.write("LOCAL_PATH := $(my-dir)\n\n")
+                        makefile.write("LOCAL_PATH:= $(call my-dir)\n\n")
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                         continue
                     for lib_name in zfile.namelist():
@@ -79,7 +117,7 @@ def main(argv):
                             shutil.rmtree(include_apk_path)
                         os.makedirs(include_apklib_path)
                         makefile = file(makefile_path,'w')
-                        makefile.write("LOCAL_PATH := $(my-dir)\n\n")
+                        makefile.write("LOCAL_PATH:= $(call my-dir)\n\n")
                         apkpath = preinstall_dir + '/' + found.group() + '/'
                     for lib_name in zfile.namelist():
                         lib = re.compile(r'\A(lib/armeabi-v7a/)+?')
@@ -123,6 +161,8 @@ def main(argv):
                     else:
                         if argv[2]=='preinstall_del' or argv[2]=='preinstall_del_forever':
                             makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
+                        if argv[2]=='preinstall_del_sh':
+                            makefile.write(copy_app_templet % (found.group(), argv[3], argv[3]))
                         else:
                             makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     shutil.move(apk,apkpath)
@@ -133,8 +173,10 @@ def main(argv):
         for root, dirs,files in os.walk(preinstall_dir):
             for dir_file in dirs:
                 includefile.write('PRODUCT_PACKAGES += %s\n' %dir_file)
+                bundledfile.write('%s\n' %dir_file)
             break
         includefile.close()
+        bundledfile.close()
 
 if __name__=="__main__":
   main(sys.argv)

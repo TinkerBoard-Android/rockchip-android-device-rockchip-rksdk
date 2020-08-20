@@ -25,9 +25,11 @@ ifneq ($(strip $(TARGET_PRODUCT)), )
 #    $(info device-rockchip-common TARGET_DEVICE_DIR: $(TARGET_DEVICE_DIR))
     $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app)
     $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app)
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_sh bundled_del_sh-app)
     $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app)
     -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
     -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
+    -include $(TARGET_DEVICE_DIR)/preinstall_del_sh/preinstall.mk
     -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
 endif
 
@@ -152,6 +154,34 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
+ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
+PRODUCT_PACKAGES += \
+    rild \
+    librk-ril \
+    dhcpcd
+
+PRODUCT_PROPERTY_OVERRIDES += \
+		ro.boot.noril=false \
+		ro.telephony.default_network=9
+
+ifeq ($(strip $(TARGET_ARCH)), arm64)
+PRODUCT_PROPERTY_OVERRIDES += \
+		vendor.rild.libpath=/vendor/lib64/librk-ril.so
+
+PRODUCT_COPY_FILES += \
+		$(LOCAL_PATH)/4g_modem/bin64/dhcpcd:$(TARGET_COPY_OUT_VENDOR)/bin/dhcpcd \
+		$(LOCAL_PATH)/4g_modem/lib64/librk-ril.so:$(TARGET_COPY_OUT_VENDOR)/lib64/librk-ril.so
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+		vendor.rild.libpath=/vendor/lib/librk-ril.so
+
+PRODUCT_COPY_FILES += \
+		$(LOCAL_PATH)/4g_modem/bin32/dhcpcd:$(TARGET_COPY_OUT_VENDOR)/bin/dhcpcd \
+		$(LOCAL_PATH)/4g_modem/lib32/librk-ril.so:$(TARGET_COPY_OUT_VENDOR)/lib/librk-ril.so
+
+endif
+endif
+
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     PRODUCT_PACKAGES += \
       libpppoe-jni \
@@ -271,7 +301,8 @@ else
 PRODUCT_PACKAGES += \
     librkisp_aec \
     librkisp_awb \
-    librkisp_af
+    librkisp_af \
+    libuvcapp
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
@@ -945,6 +976,9 @@ ifeq ($(strip $(BOARD_ALLOW_ROOTSERVICE)), true)
       $(LOCAL_PATH)/init.root.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.root.rc
 endif
 
+PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/init.preinstall.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.preinstall.rc
+
 # By default, enable zram; experiment can toggle the flag,
 # which takes effect on boot
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -958,7 +992,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.logd.kernel=1
 PRODUCT_COPY_FILES += \
     device/rockchip/common/zmodem/rz:$(TARGET_COPY_OUT_VENDOR)/bin/rz \
-    device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz
+    device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz \
+    device/rockchip/common/debug-tool/dr-g:system/bin/dr-g
 else
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=1
@@ -1052,3 +1087,19 @@ BOARD_TWRP_ENABLE ?= false
 #Build with UiMode Config
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/uimode/package_uimode_config.xml:vendor/etc/package_uimode_config.xml
+
+#Build with Flash IMG
+BOARD_FLASH_IMG_ENABLE ?= false
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
+	BOARD_FLASH_IMG_ENABLE := true
+endif
+#FLASH_IMG
+ifeq ($(strip $(BOARD_FLASH_IMG_ENABLE)), true)
+	PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+		ro.flash_img.enable = true
+else
+	PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+		ro.flash_img.enable = false
+endif
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/flash_img/flash_img.sh:system/bin/flash_img.sh
