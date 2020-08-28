@@ -1220,6 +1220,8 @@ endif
 PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/bt_vendor.conf:/vendor/etc/bluetooth/bt_vendor.conf
 
+# Rockchip HALs
+$(call inherit-product, device/rockchip/common/manifests/frameworks/vintf.mk)
 #for enable optee support
 ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
 
