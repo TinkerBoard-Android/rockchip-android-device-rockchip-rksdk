@@ -795,10 +795,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
-  ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-  # Add for Mainline GMS Modules.
-  $(call inherit-product-if-exists, vendor/partner_modules/rockchip/modules-mandatory.mk)
-  endif
   ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
     PRODUCT_PROPERTY_OVERRIDES += \
       ro.frp.pst=/dev/block/by-name/frp
@@ -817,41 +813,31 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
   $(warning Please set client id with your own MADA ID!)
   PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=android-rockchip
+
+  MAINLINE_INCLUDE_WIFI_MODULE := false
+  TMP_GMS_VAR := gms
+  TMP_MAINLINE_VAR := mainline_modules
+  ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
+    TMP_GMS_VAR := $(TMP_GMS_VAR)_go
+    # Mainline partner build config - low RAM
+    TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
+    OVERRIDE_TARGET_FLATTEN_APEX := true
+    PRODUCT_PROPERTY_OVERRIDES += ro.apex.updatable=false
+  endif
+  ifeq ($(strip $(BUILD_WITH_EEA)),true)
+    BUILD_WITH_GOOGLE_MARKET_ALL := true
+    TMP_GMS_VAR := $(TMP_GMS_VAR)_eea_$(BUILD_WITH_EEA_TYPE)
+  endif
+  ifneq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
+    TMP_GMS_VAR := $(TMP_GMS_VAR)-mandatory
+  endif # BUILD_WITH_GOOGLE_MARKET_ALL
+  $(call inherit-product-if-exists, vendor/partner_gms/products/$(TMP_GMS_VAR).mk)
+  $(call inherit-product-if-exists, vendor/partner_modules/build/$(TMP_MAINLINE_VAR).mk)
 endif
 
 ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)
   $(call inherit-product-if-exists, vendor/google_gtvs/gms.mk.sample)
   $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
-endif
-
-ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
-  ifeq ($(strip $(BUILD_WITH_EEA)),true)
-    $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go_eea_$(BUILD_WITH_EEA_TYPE).mk)
-  else
-    ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
-      ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
-        $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go.mk)
-      else
-        $(call inherit-product-if-exists, vendor/partner_gms/products/gms_go-mandatory.mk)
-      endif
-    endif
-  endif
-else
-  ifeq ($(strip $(BUILD_WITH_EEA)), true)
-    $(call inherit-product-if-exists, vendor/partner_gms/products/gms_eea_$(BUILD_WITH_EEA_TYPE).mk)
-  else
-    ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
-      ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), box)
-        $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mini-box.mk)
-      else
-        ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
-          $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
-        else
-          $(call inherit-product-if-exists, vendor/partner_gms/products/gms-mandatory.mk)
-        endif
-      endif
-    endif
-  endif
 endif
 
 ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
