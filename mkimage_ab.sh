@@ -282,12 +282,12 @@ if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
     if [ "$PRODUCT_RETROFIT_DYNAMIC_PARTITIONS" = "true" ]; then
         echo "PRODUCT_RETROFIT_DYNAMIC_PARTITIONS is true! "
         echo "Generate mass production super_system.img super_vendor.img...firmware that matches OTA ... "
-        make dist -j32
+        make installclean && make -j24 && make dist -j24
         echo "re-generate super_system.img super_vendor.img... for mass production done "
         cp -rf  $OUT/obj/PACKAGING/target_files_intermediates/*-target_files*/OTA/*.img  $IMAGE_PATH/
     else
         echo "Generate mass production super.img firmware that matches OTA ... "
-        make dist -j32
+        make installclean && make -j24 && make dist -j24
         echo "re-generate super.img for mass production done "
         cp -rf  $OUT/obj/PACKAGING/super.img_intermediates/super.img  $IMAGE_PATH/
     fi
