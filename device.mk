@@ -1114,17 +1114,17 @@ endif
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-service \
-    android.hardware.boot@1.1-impl
+    android.hardware.boot@1.1-impl \
+    android.hardware.boot@1.1-impl.recovery
 
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-PRODUCT_PACKAGES += \
-    bootctrl.default
-else
+endif
+
 PRODUCT_PACKAGES += \
   bootctrl.rk30board \
   bootctrl.rk30board.recovery
-endif
+
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
 
