@@ -28,6 +28,7 @@ from common import BlockDifference, EmptyImage, GetUserImage
 USERIMAGE_PARTITIONS = [
     "odm",
     "product",
+    "system_ext",
 ]
 
 def FullOTA_Assertions(info):
