@@ -439,10 +439,8 @@ PRODUCT_PACKAGES += \
 # Light AIDL
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 PRODUCT_PACKAGES += \
-    lights.$(TARGET_BOARD_PLATFORM) \
-    android.hardware.light
-PRODUCT_PACKAGES += \
-    android.hardware.light-service.rockchip
+    android.hardware.lights \
+    android.hardware.lights-service.rockchip
 endif
 
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
