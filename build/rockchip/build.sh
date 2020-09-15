@@ -40,6 +40,7 @@ do
             ;;
         C)
             echo "will build kernel with Clang"
+            BUILD_KERNEL=true
             BUILD_KERNEL_WITH_CLANG=true
             ;;
         K)
@@ -123,7 +124,7 @@ fi
 fi
 
 if [ "$BUILD_KERNEL_WITH_CLANG" = true ] ; then
-ADDON_ARGS="CC=../prebuilts/clang/host/linux-x86/clang-r353983c/bin/clang"
+ADDON_ARGS="CC=../prebuilts/clang/host/linux-x86/clang-r383902b/bin/clang LD=../prebuilts/clang/host/linux-x86/clang-r383902b/bin/ld.lld"
 fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
