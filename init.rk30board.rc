@@ -6,16 +6,7 @@ import /vendor/etc/init/hw/init.${ro.target.product}.rc
 import /vendor/etc/init/hw/init.car.rc
 import /vendor/etc/init/hw/init.optee.rc
 
-on post-fs
-    restorecon_recursive /mnt/vendor/metadata
-
 on post-fs-data
-    # AP6476 GPS permission
-    chmod 755 /system/bin/glgps
-    chown root system /system/bin/glgps
-    chmod 644 /system/lib/hw/gps.default.so
-    chown root system /system/lib/hw/gps.default.so
-
     chmod 664 /sys/class/display/HDMI/color
 
 
@@ -40,7 +31,6 @@ on init
     chmod 0666 /sys/system_monitor/system_status
 
 on boot
-
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
@@ -194,7 +184,6 @@ on boot
     chown root system /sys/class/graphics/fb0/map
     chmod 0664 /sys/class/graphics/fb0/map
 
-
     #add for mid change hdmi mode
     chmod 0664 /sys/devices/virtual/display/HDMI/enable
     chmod 0664 /sys/devices/virtual/display/HDMI/mode
@@ -216,7 +205,6 @@ on boot
     restorecon_recursive /dev/block/by-name/
     #for tee
     restorecon /vendor/bin/tee-supplicant
-    restorecon_recursive /mnt/vendor/metadata/tee/
 
     #for WV keybox provision
     restorecon /vendor/bin/rk_store_keybox
@@ -227,8 +215,6 @@ on boot
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
     chmod 0444 /proc/pagetypeinfo
-
-# cpu min freq must change to 126M when boot completed
 
 on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
@@ -261,13 +247,6 @@ on property:persist.internet_adb_enable=0
 on property:ro.boot.noril=true
     setprop ro.radio.noril true
     stop ril-daemon
-
-# set ro.bootmode
-on property:ro.boot.mode=emmc
-    setprop ro.bootmode normal
-
-on property:ro.boot.mode=unknown
-    setprop ro.bootmode normal
 
 # set ro.serialno
 on property:vendor.serialno=*

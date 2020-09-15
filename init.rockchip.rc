@@ -4,38 +4,8 @@ import /vendor/etc/init/hw/init.debug.rc
 import /vendor/etc/init/hw/init.mount_all.rc
 
 on early-init
-    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
-    mount tracefs /sys/kernel/debug/tracing /sys/kernel/debug/tracing mode=755
-    chown system root /sys/kernel/debug/tracing
-
-    # Set up kernel tracing, but disable it by default
-    chmod 0222 /sys/kernel/debug/tracing/trace_marker
-    write /sys/kernel/debug/tracing/tracing_on 0
-    restorecon /sys/kernel/debug/tracing/trace_marker
-    restorecon_recursive /sys/kernel/debug/tracing/
-
-    chown system system /sys/kernel/debug/sync/sw_sync
-    chmod 0666 /sys/kernel/debug/sync/sw_sync
-
     # Loading kernel modules in background
     start vendor.insmod_sh
-
-on init
-    # start watchdogd
-
-    # for adobe reader mobile
-    export RK_ADOBE_DE_MOBILE 1
-    export EBOOK_PAGE_VISIBLE_NUMBER 2　
-    export RK_ADEPT_DEVICE_TYPE mobile
-    export RK_ADOBE_DE_DOC_FOLDER "/mnt/sdcard/Digital Editions"
-    export RK_ADEPT_ACTIVATION_FILE /mnt/sdcard/.adobe-digital-editions/activation.xml
-    export RK_ADEPT_DEVICE_FILE /mnt/sdcard/.adobe-digital-editions/device.xml
-    export RK_ADEPT_DEVICE_SALT_FILE /mnt/sdcard/.adobe-digital-editions/devicesalt
-    export ADOBE_FONTS_DIR  /system/fonts/adobefonts/
-
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    symlink /sdcard /mnt/sdcard
 
 on post-fs
     # Swap in only 1 page at a time
@@ -43,13 +13,6 @@ on post-fs
 
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-
-on post-fs-data
-    setprop vold.post_fs_data_done 1
-
-#on early-boot
-#    # wait for insmod_sh to finish all modules
-#    wait_for_prop vendor.all.modules.ready 1
 
 on boot
     setprop UserVolumeLabel "RockChips"
@@ -63,7 +26,6 @@ service watchdogd /sbin/watchdogd 10 20
     class core
     disabled
     seclabel u:r:watchdogd:s0
-
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B -z \
@@ -118,6 +80,18 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
+# Only mount debugfs on userdebug build
+on property:ro.debuggable=1
+    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+    mount tracefs /sys/kernel/debug/tracing /sys/kernel/debug/tracing mode=755
+    chown system root /sys/kernel/debug/tracing
+
+    # Set up kernel tracing, but disable it by default
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+    write /sys/kernel/debug/tracing/tracing_on 0
+    restorecon /sys/kernel/debug/tracing/trace_marker
+    restorecon_recursive /sys/kernel/debug/tracing/
+
 on property:ro.boot.charger.emmc=1
     start console
     start charger
@@ -155,4 +129,4 @@ service gpsd  /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
 #stresstest
 service getbootmode /system/bin/getbootmode.sh
     disabled
-        oneshot
+    oneshot
