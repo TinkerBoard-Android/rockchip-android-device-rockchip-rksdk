@@ -22,8 +22,6 @@ PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
 PRODUCT_PARAMETER_TEMPLATE ?= device/rockchip/common/scripts/parameter_tools/parameter.in
 TARGET_BOARD_HARDWARE_EGL ?= mali
 
-PRODUCT_HAVE_RKAPPS := false
-
 #binder protocol(8)
 TARGET_USES_64_BIT_BINDER := true
 
