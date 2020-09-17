@@ -46,7 +46,7 @@ else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
   $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
   $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackageGo.mk)
-  PRODUCT_PACKAGES += Launcher3GoIconRecents
+  PRODUCT_PACKAGES += Launcher3QuickStepGo
   ROCKCHIP_USE_LAZY_HAL := true
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm64)
   # For arm64 Go tablet
@@ -125,6 +125,21 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_rtt=true \
     config.disable_consumerir=true
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_go
+# Enable DM file pre-opting to reduce first boot time
+PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
+# Save space but slow down device.
+# DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
+# Config jemalloc for low memory
+MALLOC_SVELTE := true
+
+# Reduces GC frequency of foreground apps by 50%
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.foreground-heap-growth-multiplier=2.0 \
+    ro.zram.mark_idle_delay_mins=60
+# set zygote
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote32
 endif
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
@@ -371,8 +386,13 @@ PRODUCT_PACKAGES += \
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.enableLazyHal=true
+ifeq ($(TARGET_ARCH), $(filter $(TARGET_ARCH), arm64))
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-service-lazy_64
+else
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service-lazy
+endif
 else
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service
