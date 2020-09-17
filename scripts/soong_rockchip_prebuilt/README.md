@@ -10,15 +10,16 @@ cc_rockchip_prebuilt_library_shared {
     },
     check_elf_files: false,
     vendor: true,
+    // optional
     optee: true,
+    vpu: true,
 }
 ```
 Libs would be built:
     optee: true -> v1(or v2 only for RK3326)/arm(64)/$(name).so
-    optee: false -> arm(64)/$(name).so
+    vpu: true -> arm(64)/mpp_dev(only for vpu2)/$(name).so
 Libs would be placed:
     system(vendor)/lib(64)/$(name).so
-
 
 - Binaries
 ```Android.bp
@@ -34,7 +35,6 @@ cc_rockchip_prebuilt_binary {
 ```
 Binaries would be built:
     optee: true -> v1(or v2 only for RK3326)/arm(64)/$(name)
-    optee: false -> arm(64)/$(name)
 Binaries would be placed:
     system(vendor)/bin/$(name)
 

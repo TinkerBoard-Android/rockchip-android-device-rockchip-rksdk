@@ -7,6 +7,33 @@ import (
     "strings"
 )
 
+func isContain(items []string, item string) bool {
+    for _, eachItem := range items {
+        if eachItem == item {
+            return true
+        }
+    }
+    return false
+}
+
+func getOpteePrefix(platform string) string {
+    var optee_v2_list = []string{"rk3326"}
+    if isContain(optee_v2_list, platform) {
+        return "v2/"
+    } else {
+        return "v1/"
+    }
+}
+
+func getVpuPrefix(platform string) string {
+    var vpu_v1_list = []string{"rk3126c", "rk3288", "rk3368"}
+    if isContain(vpu_v1_list, platform) {
+        return ""
+    } else {
+        return "mpp_dev/"
+    }
+}
+
 func init() {
     fmt.Println("Rockchip conditional compile")
     android.RegisterModuleType("cc_rockchip_prebuilt_library_shared", RockchipPrebuiltLibsFactory)
@@ -41,8 +68,8 @@ func RockchipPrebuiltBinFactory() (android.Module) {
 
 /* *
  * For prebuilt binary and object
- * optee: true  --> srcs: v1(2)/arm(64)/$(name)
- * optee: false --> srcs: arm(64)/$(name)
+ * optee --> srcs: v1(2)/arm(64)/$(name)
+ * optee --> srcs: arm(64)/$(name)
  */
 func ChangeSrcsPath(ctx android.LoadHookContext) {
     var prefix string = ""
@@ -52,16 +79,15 @@ func ChangeSrcsPath(ctx android.LoadHookContext) {
     }
     p := &props{}
     if (ctx.ContainsProperty("optee")) {
-        if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-            prefix = "v2/"
-        } else {
-            prefix = "v1/"
-        }
+        prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
     }
     if (strings.EqualFold(ctx.AConfig().DevicePrimaryArchType().String(),"arm64")) {
         prefix += "arm64/"
     } else {
         prefix += "arm/"
+    }
+    if (ctx.ContainsProperty("vpu")) {
+        prefix += getVpuPrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
     }
     p.Srcs = append(p.Srcs, prefix + module_name)
     //fmt.Println("srcs: ", p.Srcs)
@@ -79,6 +105,7 @@ type Ex_multilibType struct {
 
 type soongRockchipPrebuiltProperties struct {
     Optee bool
+    Vpu bool
 }
 
 func AppendMultilibs(ctx android.LoadHookContext) {
@@ -112,40 +139,8 @@ func peferCompileMultilib(ctx android.LoadHookContext) (*string) {
 
     var compile_multilib string
     target_arch := ctx.AConfig().DevicePrimaryArchType().String()
-    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3126c")) {
-        compile_multilib = "32"
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk322x")) {
-        compile_multilib = "32"
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-        if (strings.EqualFold(target_arch,"arm64")) {
-            compile_multilib = "both"
-        } else {
-            compile_multilib = "32"
-        }
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3328")) {
-        if (strings.EqualFold(target_arch,"arm64")) {
-            compile_multilib = "both"
-        } else {
-            compile_multilib = "32"
-        }
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3368")) {
-        if (strings.EqualFold(target_arch,"arm64")) {
-            compile_multilib = "both"
-        } else {
-            compile_multilib = "32"
-        }
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3399")) {
-        if (strings.EqualFold(target_arch,"arm64")) {
-            compile_multilib = "both"
-        } else {
-            compile_multilib = "32"
-        }
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3399pro")) {
-        if (strings.EqualFold(target_arch,"arm64")) {
-            compile_multilib = "both"
-        } else {
-            compile_multilib = "32"
-        }
+    if (strings.EqualFold(target_arch,"arm64")) {
+        compile_multilib = "both"
     } else {
         compile_multilib = "32"
     }
@@ -157,39 +152,20 @@ func configArm64Lib(ctx android.LoadHookContext) (Ex_multilibType) {
     var srcs []string
     var module_name string = ctx.ModuleName()[9:] + ".so"
     var multilib Ex_multilibType
-    var prefix64 string
-    var prefix32 string
+    var prefix64 string = ""
+    var prefix32 string = ""
     if (ctx.ContainsProperty("optee")) {
-        if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-            prefix64 = "v2/arm64/"
-            prefix32 = "v2/arm/"
-        } else {
-            prefix64 = "v1/arm64/"
-            prefix32 = "v1/arm/"
-        }
-    } else {
-        prefix64 = "arm64/"
-        prefix32 = "arm/"
+        prefix64 = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        prefix32 = prefix64
     }
-    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3126c")) {
-        multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
-        multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-        multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
-        multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3328")) {
-        multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
-        multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3368")) {
-        multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
-        multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3399")) {
-        multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
-        multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
-    } else {
-        multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
-        multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
+    prefix64 += "arm64/"
+    prefix32 += "arm/"
+    if (ctx.ContainsProperty("vpu")) {
+        prefix64 += getVpuPrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        prefix32 += getVpuPrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
     }
+    multilib.Lib32.Srcs = append(srcs, prefix32 + module_name)
+    multilib.Lib64.Srcs = append(srcs, prefix64 + module_name)
     //fmt.Println("multilib.lib32.srcs:", multilib.Lib32.Srcs )
     //fmt.Println("multilib.lib64.srcs:", multilib.Lib64.Srcs)
     return multilib
@@ -198,32 +174,16 @@ func configArm64Lib(ctx android.LoadHookContext) (Ex_multilibType) {
 func configArmLib(ctx android.LoadHookContext) ([]string) {
     var srcs []string
     //fmt.Println("TARGET_PRODUCT:", ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
-    var prefix string
+    var prefix string = ""
     var module_name string = ctx.ModuleName()[9:] + ".so"
     if (ctx.ContainsProperty("optee")) {
-        if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-            prefix = "v2/arm/"
-        } else {
-            prefix = "v1/arm/"
-        }
-    } else {
-        prefix = "arm/"
+        prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
     }
-    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3126c")) {
-        srcs = append(srcs, prefix + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk322x")) {
-        srcs = append(srcs, prefix + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-        srcs = append(srcs, prefix + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3328")) {
-        srcs = append(srcs, prefix + module_name)
-    }else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3368")) {
-        srcs = append(srcs, prefix + module_name)
-    } else if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3399")) {
-        srcs = append(srcs, prefix + module_name)
-    } else {
-        srcs = append(srcs, prefix + module_name)
+    prefix += "arm/"
+    if (ctx.ContainsProperty("vpu")) {
+        prefix += getVpuPrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
     }
+    srcs = append(srcs, prefix + module_name)
     //fmt.Println("srcs:", srcs)
     return srcs
 }
