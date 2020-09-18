@@ -182,5 +182,7 @@
 
 /odm/media(/.*)?    u:object_r:oemfs:s0
 
+/(odm|vendor/odm)/bundled_(.*)(/.*)?     u:object_r:vendor_app_file:s0
+
 #flash_img
 /system/bin/flash_img.sh u:object_r:install_recovery_exec:s0
