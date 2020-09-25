@@ -116,14 +116,14 @@ def FullOTA_InstallEnd(info):
     print "warning: no uboot.img in input target_files; not flashing uboot"
 
   try:
-    vbmeta = info.input_zip.read("vbmeta.img")
+    vbmeta = info.input_zip.read("IMAGES/vbmeta.img")
     print "wirte vbmeta now..."
     InstallVbmeta(vbmeta, info.input_zip, info)
   except KeyError:
     print "warning: no vbmeta.img in input target_files; not flashing vbmeta"
 
   try:
-    dtbo = info.input_zip.read("dtbo.img")
+    dtbo = info.input_zip.read("IMAGES/dtbo.img")
     print "wirte dtbo now..."
     InstallDtbo(dtbo, info.input_zip, info)
   except KeyError:
