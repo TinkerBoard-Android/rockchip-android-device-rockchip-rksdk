@@ -86,3 +86,5 @@ persist.vendor.flash_of_path        u:object_r:debug_prop:s0
 
 #fake use 2 otg
 persist.vendor.fake_data_role           u:object_r:debug_prop:s0
+#rk vulkan support
+persist.vendor.rk_vulkan                u:object_r:debug_prop:s0
