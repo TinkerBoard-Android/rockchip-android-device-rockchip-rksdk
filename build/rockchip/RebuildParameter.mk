@@ -28,6 +28,10 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
 partition_list := $(partition_list),frp:512K
 endif
 
+ifneq ($(strip $(BOARD_WITH_SPECIAL_PARTITIONS)), )
+partition_list := $(partition_list),$(BOARD_WITH_SPECIAL_PARTITIONS)
+endif
+
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
 partition_list := $(partition_list),super:$(BOARD_SUPER_PARTITION_SIZE)
 endif # BOARD_USE_DYNAMIC_PARTITIONS
