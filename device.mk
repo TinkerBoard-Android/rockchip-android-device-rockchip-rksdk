@@ -360,6 +360,9 @@ ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
 
+PRODUCT_COPY_FILES += \
+    device/rockchip/common/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
+
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external-service
 DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.external.xml
