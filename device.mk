@@ -295,6 +295,10 @@ PRODUCT_PACKAGES += \
 #audio
 $(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_config/rk_audio.mk)
 
+# SDCardFS deprecate
+# https://source.android.google.cn/devices/storage/sdcardfs-deprecate
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
 ifeq ($(BOARD_NFC_SUPPORT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
