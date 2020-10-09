@@ -140,13 +140,13 @@ def FullOTA_InstallEnd(info):
 #**************************************************************************************************
 #resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
 #**************************************************************************************************
-#
-#  try:
-#    resource = info.input_zip.read("resource.img")
-#    print "wirte resource now..."
-#    InstallResource(resource, info.input_zip, info)
-#  except KeyError:
-#    print "info: no resource image; ignore it."
+
+  try:
+    resource = info.input_zip.read("IMAGES/resource.img")
+    print "wirte resource now..."
+    InstallResource(resource, info.input_zip, info)
+  except KeyError:
+    print "info: no resource image; ignore it."
 
 #  try:
 #    loader_bin = info.input_zip.read("LOADER/RKLoader.img")
@@ -181,12 +181,12 @@ def IncrementalOTA_InstallEnd(info):
     print "trust unchanged; skipping"
 
   try:
-    vbmeta_target = info.target_zip.read("vbmeta.img")
+    vbmeta_target = info.target_zip.read("IMAGES/vbmeta.img")
   except KeyError:
     vbmeta_target = None
 
   try:
-    vbmeta_source = info.source_zip.read("vbmeta.img")
+    vbmeta_source = info.source_zip.read("IMAGES/vbmeta.img")
   except KeyError:
     vbmeta_source = None
 
@@ -197,12 +197,12 @@ def IncrementalOTA_InstallEnd(info):
     print "vbmeta unchanged; skipping"
 
   try:
-    dtbo_target = info.target_zip.read("dtbo.img")
+    dtbo_target = info.target_zip.read("IMAGES/dtbo.img")
   except KeyError:
     dtbo_target = None
 
   try:
-    dtbo_source = info.source_zip.read("dtbo.img")
+    dtbo_source = info.source_zip.read("IMAGES/dtbo.img")
   except KeyError:
     dtbo_source = None
 
@@ -247,21 +247,21 @@ def IncrementalOTA_InstallEnd(info):
 #**************************************************************************************************
 #resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
 #**************************************************************************************************
-#  try:
-#    resource_target = info.target_zip.read("resource.img")
-#  except KeyError:
-#    resource_target = None
+  try:
+    resource_target = info.target_zip.read("IMAGES/resource.img")
+  except KeyError:
+    resource_target = None
 
-#  try:
-#    resource_source = info.source_zip.read("resource.img")
-#  except KeyError:
-#    resource_source = None
+  try:
+    resource_source = info.source_zip.read("IMAGES/resource.img")
+  except KeyError:
+    resource_source = None
 
-#  if (resource_target != None) and (resource_target != resource_source):
-#    print "write resource now..."
-#    InstallResource(resource_target, info.target_zip, info)
-#  else:
-#    print "resource unchanged; skipping"
+  if (resource_target != None) and (resource_target != resource_source):
+    print "write resource now..."
+    InstallResource(resource_target, info.target_zip, info)
+  else:
+    print "resource unchanged; skipping"
 
   try:
     target_loader = info.target_zip.read("RKLoader.bin")
