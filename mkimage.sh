@@ -211,6 +211,18 @@ else
     fi
 fi
 
+SHARED_LIBRARIES_DIR=out/host/linux-x86/lib64
+JAVA_LIBRARIES_DIR=out/host/linux-x86/framework
+OTA_KEY_DIR=build/target/product/security
+
+if [ $TARGET == $BOOT_OTA ]; then
+    echo "create update_loader.zip.."
+    python build/tools/releasetools/package_loader_zip.py  $IMAGE_PATH/MiniLoaderAll.bin  $IMAGE_PATH/update_loader_unsigned.zip
+    java -Djava.library.path=$SHARED_LIBRARIES_DIR -jar $JAVA_LIBRARIES_DIR/signapk.jar -w $OTA_KEY_DIR/testkey.x509.pem $OTA_KEY_DIR/testkey.pk8 $IMAGE_PATH/update_loader_unsigned.zip $IMAGE_PATH/update_loader.zip
+    rm $IMAGE_PATH/update_loader_unsigned.zip
+    echo "done."
+fi
+
 if [ "$TARGET_BASE_PARAMETER_IMAGE"x != ""x ]
 then
     if [ -f $TARGET_BASE_PARAMETER_IMAGE ]
