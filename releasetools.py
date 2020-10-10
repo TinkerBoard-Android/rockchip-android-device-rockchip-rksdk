@@ -100,6 +100,11 @@ def InstallResource(resource_bin, input_zip, info):
   info.script.Print("Writing resource image..")
   info.script.WriteRawImage("/resource", "resource.img")
 
+def InstallVendorBoot(vendor_boot_bin, input_zip, info):
+  common.ZipWriteStr(info.output_zip, "vendor_boot.img",vendor_boot_bin)
+  info.script.Print("Writing vendor_boot img...")
+  info.script.WriteRawImage("/vendor_boot", "vendor_boot.img")
+
 def FullOTA_InstallEnd(info):
   try:
     trust = info.input_zip.read("trust.img")
@@ -162,6 +167,13 @@ def FullOTA_InstallEnd(info):
     InstallRKLoader(loader_bin, info.input_zip, info)
   except KeyError:
     print "no RKLoader.bin, ignore it."
+
+  try:
+    vendor_boot = info.input_zip.read("IMAGES/vendor_boot.img")
+    print "wirte vendor_boot now..."
+    InstallVendorBoot(vendor_boot, info.input_zip, info)
+  except KeyError:
+    print "info: no vendor_boot.img in input target_files; ignore it"
 
 def IncrementalOTA_InstallEnd(info):
   try:
@@ -281,6 +293,22 @@ def IncrementalOTA_InstallEnd(info):
     InstallRKLoader(target_loader, info.target_zip, info)
   else:
     print "loader unchanged; skipping"
+
+  try:
+    vendor_boot_target = info.target_zip.read("IMAGES/vendor_boot.img")
+  except KeyError:
+    vendor_boot_target = None
+
+  try:
+    vendor_boot_source = info.source_zip.read("IMAGES/vendor_boot.img")
+  except KeyError:
+    vendor_boot_source = None
+
+  if (vendor_boot_target != None) and (vendor_boot_target != vbmeta_source):
+    print "write vendor_boot now..."
+    InstallVendorBoot(vendor_boot_target, info.target_zip, info)
+  else:
+    print "vendor_boot unchanged; skipping"
 
 
 def GetUserImages(input_tmp, input_zip):
