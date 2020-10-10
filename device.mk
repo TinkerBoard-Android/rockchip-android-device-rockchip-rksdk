@@ -1173,6 +1173,12 @@ AB_OTA_PARTITIONS += \
     product
 endif
 
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+AB_OTA_PARTITIONS += \
+    resource \
+    vendor_boot
+endif
+
 # A/B OTA dexopt package
 PRODUCT_PACKAGES += otapreopt_script
 
