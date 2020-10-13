@@ -1294,3 +1294,11 @@ PRODUCT_PACKAGES += \
 DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.keymaster@4.0-service.xml
 
 endif
+
+ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
+    DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.memtrack@1.0-service.xml
+    PRODUCT_PACKAGES += \
+        android.hardware.memtrack@1.0-service \
+        android.hardware.memtrack@1.0-impl \
+        memtrack.$(TARGET_BOARD_PLATFORM)
+endif
