@@ -1102,7 +1102,8 @@ endif
 ifeq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
-
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/appwidget.xml:vendor/etc/permissions/appwidget.xml
 # Imporve the tracking of GMS Express base build.
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.base_build=noah
