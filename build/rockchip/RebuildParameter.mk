@@ -44,7 +44,7 @@ ROCKCHIP_PARAMETER_TOOLS := $(SOONG_HOST_OUT_EXECUTABLES)/parameter_tools
 $(rebuild_parameter) : $(PRODUCT_PARAMETER_TEMPLATE) $(ROCKCHIP_PARAMETER_TOOLS)
 	@echo "Building parameter.txt $@."
 	$(ROCKCHIP_PARAMETER_TOOLS) --input $(PRODUCT_PARAMETER_TEMPLATE) \
-	--firmware-version $(PLATFORM_VERSION) \
+	--firmware-version $(BOARD_PLATFORM_VERSION) \
 	--machine-model $(PRODUCT_MODEL) \
 	--manufacturer $(PRODUCT_MANUFACTURER) \
 	--machine $(PRODUCT_DEVICE) \

@@ -64,6 +64,8 @@ TARGET_CPU_ABI2 ?=
 TARGET_CPU_SMP ?= true
 endif
 
+BOARD_PLATFORM_VERSION := 11.0
+
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
 BOARD_BOOT_HEADER_VERSION ?= 2
