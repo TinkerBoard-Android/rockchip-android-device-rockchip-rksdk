@@ -34,7 +34,13 @@ extern "C" AudioPolicyInterface* createAudioPolicyManager(
         AudioPolicyClientInterface *clientInterface)
 {
     ALOGD("%s: RKATVAudioPolicyManager ",__FUNCTION__);
-    return new ATVAudioPolicyManager(clientInterface);
+    ATVAudioPolicyManager *apm = new ATVAudioPolicyManager(clientInterface);
+    status_t status = apm->initialize();
+    if (status != NO_ERROR) {
+        delete apm;
+        apm = nullptr;
+    }
+    return apm;
 }
 
 extern "C" void destroyAudioPolicyManager(AudioPolicyInterface *interface)
@@ -49,6 +55,11 @@ ATVAudioPolicyManager::ATVAudioPolicyManager(
     ALOGD("%s",__FUNCTION__);
     mBitstreamDevice = AUDIO_DEVICE_NONE;
 }
+
+status_t ATVAudioPolicyManager::initialize() {
+    return AudioPolicyManager::initialize();
+}
+
 
 bool ATVAudioPolicyManager::isAlreadConnect(audio_devices_t device,
                                             audio_policy_dev_state_t state,
@@ -150,7 +161,8 @@ status_t ATVAudioPolicyManager::getOutputForAttr(const audio_attributes_t *attr,
                                               audio_output_flags_t *flags,
                                               audio_port_handle_t *selectedDeviceId,
                                               audio_port_handle_t *portId,
-                                              std::vector<audio_io_handle_t> *secondaryOutputs) {
+                                              std::vector<audio_io_handle_t> *secondaryOutputs,
+                                              output_type_t *outputType) {
     if ((config->format == AUDIO_FORMAT_IEC61937) && (*flags == AUDIO_OUTPUT_FLAG_DIRECT)) {
         String8 address("RK_BITSTREAM_DEVICE_ADDRESS");
         ALOGD("%s : getDevice for mBitstreamDevice = 0x%x", __FUNCTION__,mBitstreamDevice);
@@ -164,7 +176,7 @@ status_t ATVAudioPolicyManager::getOutputForAttr(const audio_attributes_t *attr,
     }
 
     return AudioPolicyManager::getOutputForAttr(attr, output, session, stream,uid,
-           config, flags, selectedDeviceId, portId, secondaryOutputs);
+           config, flags, selectedDeviceId, portId, secondaryOutputs, outputType);
 }
 
 }  // namespace android

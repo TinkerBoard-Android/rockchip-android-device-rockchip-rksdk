@@ -31,6 +31,7 @@ public:
     virtual ~ATVAudioPolicyManager() {}
 
      // AudioPolicyInterface
+    virtual status_t initialize();
     virtual status_t setDeviceConnectionState(audio_devices_t device,
                                               audio_policy_dev_state_t state,
                                               const char *device_address,
@@ -46,7 +47,8 @@ public:
                                               audio_output_flags_t *flags,
                                               audio_port_handle_t *selectedDeviceId,
                                               audio_port_handle_t *portId,
-                                              std::vector<audio_io_handle_t> *secondaryOutputs);
+                                              std::vector<audio_io_handle_t> *secondaryOutputs,
+                                              output_type_t *outputType);
 
 protected:
     bool isAlreadConnect(audio_devices_t device,audio_policy_dev_state_t state,

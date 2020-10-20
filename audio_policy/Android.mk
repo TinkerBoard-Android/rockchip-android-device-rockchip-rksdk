@@ -27,6 +27,7 @@ LOCAL_SHARED_LIBRARIES := \
     libutils \
     libmedia_helper \
     libbinder \
+    libaudiofoundation \
     libaudiopolicymanagerdefault
 
 LOCAL_STATIC_LIBRARIES := \
@@ -42,8 +43,6 @@ LOCAL_HEADER_LIBRARIES := \
     libaudiopolicymanager_interface_headers
 
 LOCAL_CFLAGS := -Wall -Werror
-
-LOCAL_MULTILIB := $(AUDIOSERVER_MULTILIB)
 
 LOCAL_MODULE:= libaudiopolicymanager
 
