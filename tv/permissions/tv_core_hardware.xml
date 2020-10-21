@@ -65,7 +65,7 @@
     <feature name="android.software.verified_boot" />
 
     <feature name="android.hardware.opengles.aep" />
-    <feature name="android.hardware.television" />
+    <feature name="android.hardware.type.television" />
     <!-- add some gms google features for phone play store
     <feature name="android.hardware.telephony" />
     <feature name="android.hardware.telephony.cdma" />
