@@ -1,0 +1,4 @@
+# asus-debugger-d
+/vendor/bin/asus-debugger-d     u:object_r:asus-dbug-d_exec:s0
+/dev/socket/asus-debugger       u:object_r:asusdbugd_socket:s0
+/sys/devices/platform/ff9a0000.gpu/utilisation       u:object_r:sysfs_gpuusage:s0

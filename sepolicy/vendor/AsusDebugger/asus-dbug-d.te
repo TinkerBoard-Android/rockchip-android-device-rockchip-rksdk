@@ -1,0 +1,58 @@
+# asus-dbug-d
+type asus-dbug-d, domain;
+type asus-dbug-d_exec, exec_type, vendor_file_type, file_type;
+typeattribute asus-dbug-d socket_between_core_and_vendor_violators;
+typeattribute asus-dbug-d vendor_executes_system_violators;
+typeattribute asus-dbug-d data_between_core_and_vendor_violators;
+init_daemon_domain(asus-dbug-d)
+
+# allow
+unix_socket_connect(asus-dbug-d, property, init)
+allow asus-dbug-d kernel:system { syslog_read syslog_mod };
+allow asus-dbug-d self:packet_socket create_socket_perms;
+allowxperm asus-dbug-d self:packet_socket ioctl { 0x8933 };
+allow asus-dbug-d self:process execmem;
+allow asus-dbug-d self:rawip_socket { getopt create };
+allow asus-dbug-d self:udp_socket { create ioctl };
+
+# socket
+allow asus-dbug-d asusdbugd_socket:sock_file unlink;
+allow asus-dbug-d socket_device:dir { write remove_name add_name };
+allow asus-dbug-d socket_device:sock_file create;
+
+# property
+allow asus-dbug-d asusdbug_prop:property_service set;
+allow asus-dbug-d public_vendor_system_prop:property_service set;
+
+allow asus-dbug-d init:unix_stream_socket connectto;
+#allow asus-dbug-d media_rw_data_file:dir { create read write getattr open search add_name };
+allow asus-dbug-d media_rw_data_file:dir create_dir_perms;
+#allow asus-dbug-d media_rw_data_file:file { write create open getattr append read};
+allow asus-dbug-d media_rw_data_file:file create_file_perms;
+allow asus-dbug-d mnt_user_file:dir search;
+allow asus-dbug-d mnt_user_file:lnk_file read;
+allow asus-dbug-d property_socket:sock_file write;
+allow asus-dbug-d sdcardfs:dir { write search create add_name read open };
+allow asus-dbug-d sdcardfs:file { create write open getattr append read };
+allow asus-dbug-d self:capability { net_raw setuid sys_nice setgid };
+dontaudit asus-dbug-d self:capability { dac_override dac_read_search };
+allow asus-dbug-d self:capability2 syslog;
+allow asus-dbug-d storage_file:dir search;
+allow asus-dbug-d storage_file:lnk_file read;
+allow asus-dbug-d system_file:file { read map execute open execute_no_trans getattr };
+allow asus-dbug-d vendor_shell_exec:file execute_no_trans;
+allow asus-dbug-d vendor_toolbox_exec:file execute_no_trans;
+allow asus-dbug-d tombstone_data_file:dir { read search open };
+allow asus-dbug-d tombstone_data_file:file { read getattr open };
+allow asus-dbug-d logcat_exec:file { map execute read open getattr execute_no_trans };
+allow asus-dbug-d logd:unix_stream_socket connectto;
+allow asus-dbug-d logdr_socket:sock_file write;
+allow platform_app system_app_data_file:dir getattr;
+allow asus-dbug-d logd_socket:sock_file write;
+#allow asus-dbug-d cache_recovery_file:dir create_dir_perms;
+#allow asus-dbug-d cache_recovery_file:file create_file_perms;
+#allow asus-dbug-d cache_file:dir create_dir_perms;
+allow asus-dbug-d pstorefs:dir create_dir_perms;
+allow asus-dbug-d pstorefs:file r_file_perms;
+allow asus-dbug-d toolbox_exec:file rx_file_perms;
+allow asus-dbug-d vendor_toolbox_exec:file rx_file_perms;

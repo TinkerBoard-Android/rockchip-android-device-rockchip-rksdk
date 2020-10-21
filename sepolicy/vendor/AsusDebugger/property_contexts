@@ -1,0 +1,3 @@
+vendor.asus_debugger_running        u:object_r:public_vendor_system_prop:s0
+vendor.run_debugger                 u:object_r:public_vendor_system_prop:s0
+vendor.sys.debugger.config          u:object_r:public_vendor_system_prop:s0

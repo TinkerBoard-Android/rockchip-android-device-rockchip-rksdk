@@ -1,0 +1,4 @@
+# for AsusDebugger socket
+allow system_app asusdbugd_socket:sock_file write;
+allow system_app asus-dbug-d:unix_stream_socket connectto;
+allow system_app sysfs_gpuusage:file { open read };
