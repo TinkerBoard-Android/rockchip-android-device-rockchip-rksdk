@@ -512,6 +512,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
     android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
     android.hardware.graphics.allocator@4.0-service
+
+DEVICE_MANIFEST_FILE += \
+    device/rockchip/common/manifests/android.hardware.graphics.mapper@4.0.xml \
+    device/rockchip/common/manifests/android.hardware.graphics.allocator@4.0.xml
 else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.mpp_buf_type=1
@@ -520,6 +524,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service
+
+DEVICE_MANIFEST_FILE += \
+    device/rockchip/common/manifests/android.hardware.graphics.mapper@2.1.xml \
+    device/rockchip/common/manifests/android.hardware.graphics.allocator@2.0.xml
 endif
 
 PRODUCT_PACKAGES += \
