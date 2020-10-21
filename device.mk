@@ -14,6 +14,11 @@
 # limitations under the License.
 #
 include vendor/rockchip/common/BoardConfigVendor.mk
+
+ifneq (,$(filter  mali-tDVx mali-G52, $(TARGET_BOARD_PLATFORM_GPU)))
+BOARD_VENDOR_GPU_PLATFORM := bifrost
+endif
+
 ifeq ($(strip $(TARGET_ARCH)), arm64)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
@@ -501,20 +506,24 @@ endif # BOARD_USE_DYNAMIC_PARTITIONS
 ifeq ($(TARGET_RK_GRALLOC_VERSION),4)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.mpp_buf_type=4
+# Gralloc HAL
+PRODUCT_PACKAGES += \
+    arm.graphics-V1-ndk_platform.so \
+    android.hardware.graphics.allocator@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
+    android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
+    android.hardware.graphics.allocator@4.0-service
 else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.mpp_buf_type=1
-endif
-
-PRODUCT_PACKAGES += \
-    rkhelper
-
-# Gralloc HAL
 PRODUCT_PACKAGES += \
     gralloc.$(TARGET_BOARD_HARDWARE) \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service
+endif
+
+PRODUCT_PACKAGES += \
+    rkhelper
 
 # For EGL
 PRODUCT_PROPERTY_OVERRIDES += \
