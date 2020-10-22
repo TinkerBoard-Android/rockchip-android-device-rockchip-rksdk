@@ -52,7 +52,7 @@ GRALLOC_USE_ION_DMA_HEAP?=0
 GRALLOC_USE_ION_COMPOUND_PAGE_HEAP?=0
 
 # Properly initializes an empty AFBC buffer
-GRALLOC_INIT_AFBC?=0
+GRALLOC_INIT_AFBC?=1
 # When enabled, forces format to BGRA_8888 for FB usage when HWC is in use
 GRALLOC_HWC_FORCE_BGRA_8888?=0
 # When enabled, disables AFBC for FB usage when HWC is in use
