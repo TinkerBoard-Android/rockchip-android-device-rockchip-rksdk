@@ -295,6 +295,10 @@ BOARD_HAVE_FLASH ?= true
 #HDMI support
 BOARD_SUPPORT_HDMI ?= true
 
+# gralloc 4.0
+include device/rockchip/common/gralloc.device.mk
+
+
 # google apps
 BUILD_BOX_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET ?= false
