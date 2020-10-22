@@ -115,7 +115,8 @@ ifeq ($(filter $(MALI_VIDEO_VERSION),$(MALI_VALID_VIDEO_VERSIONS)),)
     $(error Video version $(MALI_VIDEO_VERSION) is not valid. Valid versions are $(MALI_VALID_VIDEO_VERSIONS))
 endif
 
-GRALLOC_API_VERSION?=v300
+# GRALLOC_API_VERSION?=v300
+GRALLOC_API_VERSION?=4.x
 
 # Setup configuration in Soong namespace
 SOONG_CONFIG_NAMESPACES += arm_gralloc
