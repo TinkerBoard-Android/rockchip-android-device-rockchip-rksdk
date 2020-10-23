@@ -989,6 +989,8 @@ endif
 #boot and shutdown animation, ringing
 ifeq ($(strip $(BOOT_SHUTDOWN_ANIMATION_RINGING)),true)
 include device/rockchip/common/bootshutdown/bootshutdown.mk
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.shutdown_anim.orien=0
 endif
 
 
