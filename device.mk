@@ -489,9 +489,16 @@ PRODUCT_PACKAGES += \
     fastbootd
 endif # BOARD_USE_DYNAMIC_PARTITIONS
 
-# Dumpstate HAL
+# define MPP_BUF_TYPE_DRM 1
+# define MPP_BUF_TYPE_ION_LEGACY 2
+# define MPP_BUF_TYPE_ION_404 3
+# define MPP_BUF_TYPE_ION_419 4
+# define MPP_BUF_TYPE_DMA_BUF 5
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.mpp_buf_type=4 \
+
 PRODUCT_PACKAGES += \
-    android.hardware.dumpstate@1.0-service.dragon
+    rkhelper
 
 # Gralloc HAL
 PRODUCT_PACKAGES += \
