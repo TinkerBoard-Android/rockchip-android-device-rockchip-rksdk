@@ -442,8 +442,8 @@ BOARD_USE_SPARSE_SYSTEM_IMAGE ?= false
 #Use HWC2
 TARGET_USES_HWC2 ?= true
 
-# Sepolicy Version
-#BOARD_SEPOLICY_VERS = 27.0
+# for gralloc 0.3
+TARGET_RK_GRALLOC_VERSION ?= 1
 
 # CTS require faketouch
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
