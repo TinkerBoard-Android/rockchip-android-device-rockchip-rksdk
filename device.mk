@@ -494,8 +494,13 @@ endif # BOARD_USE_DYNAMIC_PARTITIONS
 # define MPP_BUF_TYPE_ION_404 3
 # define MPP_BUF_TYPE_ION_419 4
 # define MPP_BUF_TYPE_DMA_BUF 5
+ifeq ($(TARGET_RK_GRALLOC_VERSION),4)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.mpp_buf_type=4 \
+    ro.vendor.mpp_buf_type=4
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.mpp_buf_type=1
+endif
 
 PRODUCT_PACKAGES += \
     rkhelper
