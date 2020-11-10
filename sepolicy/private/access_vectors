@@ -1,9 +1,0 @@
-class perf_event
-{
-    open
-    cpu
-    kernel
-    tracepoint
-    read
-    write
-}

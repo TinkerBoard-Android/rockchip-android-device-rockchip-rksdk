@@ -14,6 +14,8 @@ allow hal_camera_default debugfs_sw_sync:dir r_dir_perms;
 allow hal_camera_default debugfs_sw_sync:file rw_file_perms;
 allowxperm hal_camera_default debugfs_sw_sync:file ioctl { SYNC_IOC_MERGE SW_SYNC_IOC_INC SW_SYNC_IOC_CREATE_FENCE };
 
+hal_client_domain(hal_camera_default, hal_graphics_allocator)
+
 binder_call(hal_camera_default,hal_graphics_allocator_default)
 
 get_prop(hal_camera_default,vendor_default_prop)

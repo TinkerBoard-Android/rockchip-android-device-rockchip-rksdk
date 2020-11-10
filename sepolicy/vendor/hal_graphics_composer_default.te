@@ -7,6 +7,8 @@ allow hal_graphics_composer_default rga_device:chr_file { read write open ioctl 
 allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;;
 
 allow hal_graphics_composer_default sysfs_hdmi:file rw_file_perms;
+allow hal_graphics_composer_default sysfs_dmc:dir r_dir_perms;
+allow hal_graphics_composer_default sysfs_dmc:file rw_file_perms;
 allow hal_graphics_composer_default block_device:dir { search };
 allow hal_graphics_composer_default gpu_device:dir { search };
 allow hal_graphics_composer_default sysfs_devices_system_cpu:file rw_file_perms;
@@ -19,6 +21,7 @@ allow hal_graphics_composer_default baseparameter_block_device:blk_file rw_file_
 dontaudit hal_graphics_composer_default baseparameter_block_device:chr_file rw_file_perms;
 
 allow hal_graphics_composer_default mediaserver:fd {use};
+allow hal_graphics_composer_default zygote:fd use;
 allow hal_graphics_composer_default hal_camera_default:fd use;
 
 hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator)

@@ -1,0 +1,5 @@
+define(`ioctl_gpu_device', `
+allow $1 gpu_device:dir { search };
+allow $1 gpu_device:chr_file { ioctl };
+allowxperm $1 gpu_device:chr_file ioctl { 0x8006 0x8007 };
+')
