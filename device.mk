@@ -166,6 +166,9 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
 
 PRODUCT_COPY_FILES += \
+    hardware/rockchip/libgraphicpolicy/graphic_profiles.conf:$(TARGET_COPY_OUT_VENDOR)/etc/graphic/graphic_profiles.conf
+
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_config.txt:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_config.txt \
     hardware/broadcom/wlan/bcmdhd/config/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     hardware/broadcom/wlan/bcmdhd/config/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
@@ -1099,7 +1102,8 @@ endif
 ifeq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
-
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/appwidget.xml:vendor/etc/permissions/appwidget.xml
 # Imporve the tracking of GMS Express base build.
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.base_build=noah

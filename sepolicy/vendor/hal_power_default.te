@@ -3,3 +3,4 @@ allow hal_power_default sysfs_devices_system_cpu:file write;
 allow hal_power_default video_device:chr_file rw_file_perms;
 allow hal_power_default sysfs_dev:file r_file_perms;
 allow hal_power_default sysfs_dev:lnk_file rw_file_perms;
+allow hal_power_default sys_dmc:file rw_file_perms;
