@@ -30,7 +30,7 @@ genfscon debugfs /sync                                                          
 
 # for usb grf
 genfscon sysfs /class/extcon/extcon0                                                                 u:object_r:sysfs_extcon:s0
-
+genfscon sysfs /devices/platform/rk-headset/extcon/extcon1/state                                     u:object_r:sysfs_extcon:s0
 # for RK3288/rk3368 hdmi audio
 genfscon sysfs /devices/platform/ff980000.hdmi/extcon/extcon0                                        u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/ff980000.hdmi/extcon/extcon1                                        u:object_r:sysfs_extcon:s0

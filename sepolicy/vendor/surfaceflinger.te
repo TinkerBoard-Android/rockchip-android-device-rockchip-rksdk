@@ -18,6 +18,6 @@ allow surfaceflinger rga_device:chr_file rw_file_perms;
 
 #allow surfaceflinger hal_graphics_allocator_default_tmpfs:file rw_file_perms;
 
-get_prop(surfaceflinger,public_vendor_system_prop)
+get_prop(surfaceflinger,vendor_system_public_prop)
 get_prop(surfaceflinger,vendor_default_prop)
 binder_call(surfaceflinger, zygote)

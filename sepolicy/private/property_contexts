@@ -7,17 +7,17 @@ ro.base_build           u:object_r:exported_default_prop:s0
 ro.cpuvulkan.version    u:object_r:exported_default_prop:s0
 ro.config.per_app_memcg u:object_r:exported_default_prop:s0
 wlan.driver.status                    u:object_r:vendor_wifi_prop:s0
-sys.keymaster.       u:object_r:keymaster_prop:s0
+sys.keymaster.       u:object_r:vendor_keymaster_prop:s0
 # public_vendor_default_prop
 # They are public_vendor_default_props for vendor-specific extension.
 # Usually they are for vndk-sp libs and vendor apks.
 ro.factory.hasUMS             u:object_r:public_vendor_default_prop:s0
 
-# public_vendor_system_prop
-# They are public_vendor_system_props for vendor-specific extension.
-iep.                            u:object_r:public_vendor_system_prop:s0
-mediaplayer.timedtext.listener                            u:object_r:public_vendor_system_prop:s0
-media.audio.slice                            u:object_r:public_vendor_system_prop:s0
+# vendor_system_public_prop
+# They are vendor_system_public_props for vendor-specific extension.
+iep.                            u:object_r:vendor_system_public_prop:s0
+mediaplayer.timedtext.listener                            u:object_r:vendor_system_public_prop:s0
+media.audio.slice                            u:object_r:vendor_system_public_prop:s0
 
 
 # vendor_default_prop
@@ -32,11 +32,11 @@ testing.mediascanner.skiplist        u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 
 
-debug.hwui.renderer u:object_r:public_vendor_system_prop:s0
+debug.hwui.renderer u:object_r:vendor_system_public_prop:s0
 #rk modules end
 
 #for vendor/build.prop
-sys.all.modules.ready                   u:object_r:public_vendor_system_prop:s0
+sys.all.modules.ready                   u:object_r:vendor_system_public_prop:s0
 #vendor-init-settable|public-readable 
 persist.sys.usb.config        u:object_r:debug_prop:s0 exact string
 ro.target.product  u:object_r:debug_prop:s0 exact string

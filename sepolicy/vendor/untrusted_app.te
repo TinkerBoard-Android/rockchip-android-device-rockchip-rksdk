@@ -7,6 +7,6 @@ allow untrusted_app  userdata_block_device:blk_file { getattr };
 allow untrusted_app  oemfs:file {execmod};
 
 dontaudit untrusted_app mnt_vendor_file:dir { search };
-get_prop(untrusted_app,public_vendor_system_prop)
+get_prop(untrusted_app,vendor_system_public_prop)
 get_prop(untrusted_app,vendor_default_prop)
 get_prop(untrusted_app,vendor_security_patch_level_prop)
