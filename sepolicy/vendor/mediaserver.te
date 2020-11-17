@@ -16,6 +16,8 @@ allow mediaserver mnt_user_file:lnk_file { read };
 allow mediaserver rga_device:chr_file { ioctl };
 allow mediaserver hal_configstore_default:binder { call };
 allow mediaserver vendor-rockit-hal_hwservice:hwservice_manager { find };
+allow mediaserver sysfs_dmc:dir r_dir_perms;
+allow mediaserver sysfs_dmc:file rw_file_perms;
 
 get_prop(mediaserver,vendor_omx_prop)
 get_prop(mediaserver,vendor_default_prop)
