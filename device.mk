@@ -899,8 +899,8 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
   ifneq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
     TMP_GMS_VAR := $(TMP_GMS_VAR)-mandatory
   endif # BUILD_WITH_GOOGLE_MARKET_ALL
-  $(call inherit-product-if-exists, vendor/partner_gms/products/$(TMP_GMS_VAR).mk)
-  $(call inherit-product-if-exists, vendor/partner_modules/build/$(TMP_MAINLINE_VAR).mk)
+  $(call inherit-product, vendor/partner_gms/products/$(TMP_GMS_VAR).mk)
+  $(call inherit-product, vendor/partner_modules/build/$(TMP_MAINLINE_VAR).mk)
 endif
 
 ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)
