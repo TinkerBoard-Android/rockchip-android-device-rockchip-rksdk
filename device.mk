@@ -899,8 +899,11 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
   ifneq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
     TMP_GMS_VAR := $(TMP_GMS_VAR)-mandatory
   endif # BUILD_WITH_GOOGLE_MARKET_ALL
+  PRODUCT_PACKAGE_OVERLAYS += vendor/rockchip/common/gms/gms_overlay
   $(call inherit-product, vendor/partner_gms/products/$(TMP_GMS_VAR).mk)
   $(call inherit-product, vendor/partner_modules/build/$(TMP_MAINLINE_VAR).mk)
+  # add this for zerotouch warpper.
+  #$(call inherit-product, vendor/rockchip/common/gms/zerotouch.mk)
 endif
 
 ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)
