@@ -505,7 +505,7 @@ endif # BOARD_USE_DYNAMIC_PARTITIONS
 # define MPP_BUF_TYPE_DMA_BUF 5
 ifeq ($(TARGET_RK_GRALLOC_VERSION),4)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.mpp_buf_type=4
+    ro.vendor.mpp_buf_type=1
 # Gralloc HAL
 PRODUCT_PACKAGES += \
     arm.graphics-V1-ndk_platform.so \
