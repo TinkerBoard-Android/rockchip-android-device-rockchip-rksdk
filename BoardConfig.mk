@@ -13,21 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-# Use the non-open-source parts, if they're present
-TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
-TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
-BOARD_PREBUILT_DTBIMAGE_DIR ?= kernel/arch/arm/boot/dts
-PRODUCT_PARAMETER_TEMPLATE ?= device/rockchip/common/scripts/parameter_tools/parameter.in
-TARGET_BOARD_HARDWARE_EGL ?= mali
-ifeq ($(BUILD_WITH_GO_OPT), true)
-PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab_go.in
-else
-PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
-endif
 #binder protocol(8)
 TARGET_USES_64_BIT_BINDER := true
-
 TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
 # value: tablet,box,phone
@@ -73,6 +60,28 @@ BOARD_MKBOOTIMG_ARGS :=
 BOARD_PREBUILT_DTBOIMAGE ?= $(TARGET_DEVICE_DIR)/dtbo.img
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE ?= false
 BOARD_SELINUX_ENFORCING ?= false
+
+# Use the non-open-source parts, if they're present
+TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
+TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
+BOARD_PREBUILT_DTBIMAGE_DIR ?= kernel/arch/arm/boot/dts
+PRODUCT_PARAMETER_TEMPLATE ?= device/rockchip/common/scripts/parameter_tools/parameter.in
+TARGET_BOARD_HARDWARE_EGL ?= mali
+
+#Android GO configuration
+BUILD_WITH_GO_OPT ?= false
+
+ifeq ($(BUILD_WITH_GO_OPT), true)
+PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab_go.in
+PRODUCT_KERNEL_CONFIG += android-11-go.config
+else
+PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
+PRODUCT_KERNEL_CONFIG += android-11.config
+endif
+
+ifeq ($(TARGET_BUILD_VARIANT), user)
+PRODUCT_KERNEL_CONFIG += non_debuggable.config
+endif
 
 ifeq ($(BOARD_AVB_ENABLE), true)
 BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=CN androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
@@ -305,9 +314,6 @@ BUILD_WITH_GOOGLE_MARKET ?= false
 BUILD_WITH_GOOGLE_MARKET_ALL ?= false
 BUILD_WITH_GOOGLE_GMS_EXPRESS ?= false
 BUILD_WITH_GOOGLE_FRP ?= false
-
-#Android GO configuration
-BUILD_WITH_GO_OPT ?= false
 
 # define BUILD_NUMBER
 #BUILD_NUMBER := $(shell $(DATE) +%H%M%S)
