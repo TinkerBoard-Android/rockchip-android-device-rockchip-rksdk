@@ -104,6 +104,12 @@
             <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
         </codec>
 
+        <codec name="h264_4k_10bit_full">
+            <limit name="id">h264</limit>
+            <limit name="resolution">4096x2160</limit>
+            <limit name="format">yuv420p,yuv420sp,yuv420p10le,yuv422p,yuv422p10le</limit>
+        </codec>
+
         <codec name="hevc_4k_10bit">
             <limit name="id">hevc</limit>
             <limit name="resolution">4096x2160</limit>
@@ -162,7 +168,7 @@
         </chip>
 
         <chip name="RK3566,RK3568">
-            <include name="mpeg1,mpeg2,mpeg4,vp8,h264_4k_10bit,hevc_4k_10bit"/>
+            <include name="mpeg1,mpeg2,mpeg4,vp8,h264_4k_10bit_full,hevc_4k_10bit"/>
             <include name="vp9_4k_10bit"/>
         </chip>
     </decoder>
