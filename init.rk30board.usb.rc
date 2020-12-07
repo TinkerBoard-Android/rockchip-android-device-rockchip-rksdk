@@ -117,6 +117,7 @@ on property:sys.usb.config=rndis && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idProduct 0x0003
 
 on property:sys.usb.config=rndis,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idProduct 0x0013
 
 on property:sys.usb.config=ptp && property:sys.usb.configfs=1
@@ -130,6 +131,7 @@ on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
     symlink /config/usb_gadget/g1/functions/ffs.ptp /config/usb_gadget/g1/configs/b.1/f1
 
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idProduct 0x0006
 
 on property:sys.usb.config=midi && property:sys.usb.configfs=1
