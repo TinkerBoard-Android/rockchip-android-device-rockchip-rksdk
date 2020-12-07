@@ -251,4 +251,13 @@ fi
 echo "done."
 fi
 
+IS_EBOOK=`get_build_var BUILD_WITH_RK_EBOOK`
+if [ $IS_EBOOK == "true" ]; then
+    if [ -f $UBOOT_PATH/tools/bmp2gray16 ]; then
+    EINK_LOGO_PATH=device/rockchip/rk356x/rk3566_eink/eink_logo/
+    echo -n "create logo.img for uboot/charging/kernel logo"
+    $UBOOT_PATH/tools/bmp2gray16 --uboot-logo $EINK_LOGO_PATH/uboot.bmp --kernel-logo $EINK_LOGO_PATH/kernel.bmp --charge-logo $EINK_LOGO_PATH/battery_0.bmp $EINK_LOGO_PATH/battery_1.bmp $EINK_LOGO_PATH/battery_2.bmp $EINK_LOGO_PATH/battery_3.bmp $EINK_LOGO_PATH/battery_4.bmp $EINK_LOGO_PATH/battery_5.bmp $EINK_LOGO_PATH/battery_fail.bmp --output $IMAGE_PATH/logo.img
+    fi
+fi
+
 chmod a+r -R $IMAGE_PATH/
