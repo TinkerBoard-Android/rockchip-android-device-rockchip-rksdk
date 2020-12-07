@@ -923,6 +923,9 @@ PRODUCT_PACKAGES += \
 endif
 endif
 
+PRODUCT_COPY_FILES += \
+    vendor/rockchip/common/gms/features/android.software.incremental_delivery.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.incremental_delivery.xml
+
 ifeq ($(strip $(BUILD_WITH_MICROSOFT_PLAYREADY)), true)
 $(call inherit-product-if-exists, vendor/microsoft/playready.mk)
 endif
