@@ -1189,6 +1189,10 @@ ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 endif
 
+ifeq ($(strip $(BOARD_USES_VIRTUAL_AB_RETROFIT)),true)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota_retrofit.mk)
+endif
+
 PRODUCT_PACKAGES += \
   bootctrl.rk30board \
   bootctrl.rk30board.recovery
