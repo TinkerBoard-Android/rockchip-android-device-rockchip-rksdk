@@ -976,7 +976,7 @@ endif
 # mid used hdmi
 ifeq ($(strip $(BOARD_SHOW_HDMI_SETTING)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rk.hdmisetting=true
+    ro.vendor.hdmi_settings=true
 
 PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
