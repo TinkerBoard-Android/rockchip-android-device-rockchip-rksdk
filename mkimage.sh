@@ -252,14 +252,15 @@ echo "done."
 fi
 
 IS_EBOOK=`get_build_var BUILD_WITH_RK_EBOOK`
+ebook_logo_tool=rkbin/tools/bmp2gray16
 if [ $IS_EBOOK == "true" ]; then
     if [ -f ${TARGET_DEVICE_DIR}/waveform.img ]; then
         cp ${TARGET_DEVICE_DIR}/waveform.img $IMAGE_PATH/
     fi
-    if [ -f $UBOOT_PATH/tools/bmp2gray16 ]; then
+    if [ -f $ebook_logo_tool ]; then
         EINK_LOGO_PATH=${TARGET_DEVICE_DIR}/eink_logo/
         echo -n "create logo.img for uboot/charging/kernel logo"
-        $UBOOT_PATH/tools/bmp2gray16 --uboot-logo $EINK_LOGO_PATH/uboot.bmp --kernel-logo $EINK_LOGO_PATH/kernel.bmp --charge-logo $EINK_LOGO_PATH/battery_0.bmp $EINK_LOGO_PATH/battery_1.bmp $EINK_LOGO_PATH/battery_2.bmp $EINK_LOGO_PATH/battery_3.bmp $EINK_LOGO_PATH/battery_4.bmp $EINK_LOGO_PATH/battery_5.bmp $EINK_LOGO_PATH/battery_fail.bmp --output $IMAGE_PATH/logo.img
+        $ebook_logo_tool --uboot-logo $EINK_LOGO_PATH/uboot.bmp --kernel-logo $EINK_LOGO_PATH/kernel.bmp --charge-logo $EINK_LOGO_PATH/battery_0.bmp $EINK_LOGO_PATH/battery_1.bmp $EINK_LOGO_PATH/battery_2.bmp $EINK_LOGO_PATH/battery_3.bmp $EINK_LOGO_PATH/battery_4.bmp $EINK_LOGO_PATH/battery_5.bmp $EINK_LOGO_PATH/battery_fail.bmp --output $IMAGE_PATH/logo.img
     fi
 fi
 
