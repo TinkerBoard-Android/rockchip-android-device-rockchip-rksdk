@@ -923,6 +923,8 @@ PRODUCT_PACKAGES += \
 endif
 endif
 
+# Enable Incremental on the device via kernel driver
+PRODUCT_PROPERTY_OVERRIDES += ro.incremental.enable=yes
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/gms/features/android.software.incremental_delivery.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.incremental_delivery.xml
 
