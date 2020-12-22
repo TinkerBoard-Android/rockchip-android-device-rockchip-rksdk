@@ -83,6 +83,8 @@ PRODUCT_PACKAGES += \
     fsck.f2fs \
     mkfs.f2fs \
     fsck_f2fs
+PRODUCT_PACKAGES += \
+    vndservicemanager
 
 # PCBA tools
 ifeq ($(strip $(TARGET_ROCKCHIP_PCBATEST)), true)
