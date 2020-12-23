@@ -1,8 +1,5 @@
 # do mount_all early can imporve boot time when FBE
 # is enabled
-on early-fs
-    start vold
-
 on fs
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
@@ -13,8 +10,6 @@ on late-fs
     start gralloc-2-0
     start surfaceflinger
     start bootanim
-    # Wait for keymaster
-    exec_start wait_for_keymaster
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.hardware} --late
