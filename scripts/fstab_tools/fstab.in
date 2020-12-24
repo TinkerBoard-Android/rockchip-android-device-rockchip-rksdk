@@ -16,6 +16,9 @@ ${_block_prefix}system_ext /system_ext  ext4 ro,barrier=1 ${_flags},first_stage_
 # For sata
 /devices/platform/*.sata* auto vfat defaults voldmanaged=sata:auto
 
+# For pcie ssd
+/devices/platform/*.pcie* auto vfat defaults voldmanaged=pcie:auto
+
 /dev/block/zram0                                none                swap      defaults                                              zramsize=50%
 # For sdmmc
 /devices/platform/${_sdmmc_device}/mmc_host*        auto  auto    defaults        voldmanaged=sdcard1:auto
