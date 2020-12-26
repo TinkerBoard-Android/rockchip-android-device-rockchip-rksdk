@@ -194,6 +194,10 @@
 #abc
 /data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0
 
+
+#read pcie info
+/vendor/bin/read_pcie_info.sh u:object_r:read_pcie_info_exec:s0
+
 #samba
 /system/bin/cifsmanager.sh     u:object_r:vold_exec:s0
 

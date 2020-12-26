@@ -328,5 +328,17 @@ service flash_img /system/bin/flash_img.sh
     oneshot
     disabled
 
+on property:persist.sys.read_pcie_info=1
+    start read_pcie_info
+    setprop persist.sys.read_pcie_info 0
+
+# For Devicetest APK
+service read_pcie_info /vendor/bin/read_pcie_info.sh /mnt/sdcard/pcieInfo.tmp
+    class main
+    user root
+    group root
+    oneshot
+    disabled
+
 on property:sys.retaildemo.enabled=2
     start flash_img
