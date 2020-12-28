@@ -25,6 +25,7 @@ type storage_device, dev_type;
 
 #for optee
 type uboot_block_device, dev_type;
+type vbmeta_block_device, dev_type;
 type rpmb_block_device, dev_type;
 
 #for cec
