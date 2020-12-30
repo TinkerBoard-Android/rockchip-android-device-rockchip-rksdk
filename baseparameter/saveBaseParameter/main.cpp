@@ -127,6 +127,7 @@ struct file_base_paramer
 
 static char const *const device_template[] =
 {
+    "/dev/block/by-name/baseparameter",
     "/dev/block/platform/1021c000.dwmmc/by-name/baseparameter",
     "/dev/block/platform/30020000.dwmmc/by-name/baseparameter",
     "/dev/block/platform/ff0f0000.dwmmc/by-name/baseparameter",
