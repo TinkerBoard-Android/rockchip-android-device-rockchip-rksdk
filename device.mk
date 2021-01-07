@@ -19,6 +19,10 @@ ifneq (,$(filter  mali-tDVx mali-G52, $(TARGET_BOARD_PLATFORM_GPU)))
 BOARD_VENDOR_GPU_PLATFORM := bifrost
 endif
 
+ifneq (,$(filter  mali-t860 mali-t760, $(TARGET_BOARD_PLATFORM_GPU)))
+BOARD_VENDOR_GPU_PLATFORM := midgard
+endif
+
 ifeq ($(strip $(TARGET_ARCH)), arm64)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
