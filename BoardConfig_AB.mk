@@ -61,7 +61,7 @@ else
                         BOARD_SUPER_PARTITION_SIZE := 1971322880
                     endif
                 else # non-go
-                    BOARD_SUPER_PARTITION_SIZE := 2688548864
+                    BOARD_SUPER_PARTITION_SIZE := 3263168512
                 endif
                 BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
             else
