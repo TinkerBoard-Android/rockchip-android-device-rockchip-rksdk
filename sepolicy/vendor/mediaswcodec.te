@@ -1,2 +1,1 @@
-allow mediaswcodec gpu_device:dir r_dir_perms;
-allow mediaswcodec gpu_device:chr_file rw_file_perms;
+rw_rockchip_graphic_device(mediaswcodec)

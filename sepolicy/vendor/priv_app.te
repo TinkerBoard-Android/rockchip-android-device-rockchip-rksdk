@@ -5,7 +5,6 @@ allow priv_app sysfs:dir { open };
 dontaudit priv_app mnt_vendor_file:dir { search };
 
 #for gpu
-allow priv_app gpu_device:dir { search rw_dir_perms };
 allow priv_app sysfs_usb:file rw_file_perms;
 #TODO removed for Q
 #allow priv_app vendor_file:file { read open getattr };
@@ -16,6 +15,7 @@ allow priv_app ota_data_file:dir { search rw_dir_perms };
 #allow priv_app init:unix_stream_socket connectto;
 #allow priv_app property_socket:sock_file write;
 allow priv_app vr_manager_service:service_manager find;
-allow priv_app zygote:binder { call transfer };
 
+binder_call(priv_app, zygote)
+rw_rockchip_graphic_device(priv_app)
 get_prop(priv_app,vendor_default_prop)

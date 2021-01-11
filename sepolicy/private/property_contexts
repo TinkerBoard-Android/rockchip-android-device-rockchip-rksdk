@@ -45,6 +45,7 @@ drm.service.                   u:object_r:debug_prop:s0
 ro.setupwizard.mode                   u:object_r:debug_prop:s0
 ro.com.google.                        u:object_r:debug_prop:s0
 ro.wifi.sleep.power.down              u:object_r:debug_prop:s0
+persist.wifi.sleep.                   u:object_r:debug_prop:s0
 sys.status.hidebar_enable              u:object_r:debug_prop:s0
 ro.rk.screenshot_enable              u:object_r:debug_prop:s0
 ro.config.enable.remotecontrol              u:object_r:debug_prop:s0

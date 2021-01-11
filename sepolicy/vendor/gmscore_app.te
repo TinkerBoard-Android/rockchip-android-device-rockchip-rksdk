@@ -1,1 +1,1 @@
-allow gmscore_app gpu_device:dir r_dir_perms;
+rw_rockchip_graphic_device(gmscore_app)

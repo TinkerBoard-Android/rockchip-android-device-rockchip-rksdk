@@ -1,7 +1,6 @@
 #allow system_server sysfs:file { read open getattr };
 # for gpu
 allow system_server abc:dir { read open getattr };
-allow system_server gpu_device:dir { search rw_dir_perms };
 allow system_server serial_device:chr_file rw_file_perms;
 allow system_server sysfs_hctosys:file { read open getattr };
 allow system_server sysfs_extcon:file r_file_perms;
@@ -24,4 +23,5 @@ add_service(system_server,drm_device_management_service)
 binder_call(system_server, rk_output_hal)
 binder_call(system_server, zygote)
 
+rw_rockchip_graphic_device(system_server)
 get_prop(system_server,vendor_default_prop)

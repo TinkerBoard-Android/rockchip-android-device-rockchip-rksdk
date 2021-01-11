@@ -1,2 +1,1 @@
-allow incidentd gpu_device:chr_file rw_file_perms;
-
+rw_rockchip_graphic_device(incidentd)

@@ -1,6 +1,5 @@
 dontaudit system_app mnt_vendor_file:dir search;
 #for gpu
-allow system_app gpu_device:dir { search rw_dir_perms };
 allow system_app sysfs_lcdc:file rw_file_perms;
 allow system_app sysfs_usb:file rw_file_perms;
 allow system_app gpu_data_file:file rw_file_perms;
@@ -40,6 +39,8 @@ allow system_app abc_data_file:file { read getattr };
 allow system_app abc_data_file:dir { open getattr read search };
 
 set_prop(system_app,debug_prop)
+
+rw_rockchip_graphic_device(system_app)
 
 allow system_app block_device:dir { search read open getattr };
 allow system_app mnt_media_rw_file:dir { search read open getattr };

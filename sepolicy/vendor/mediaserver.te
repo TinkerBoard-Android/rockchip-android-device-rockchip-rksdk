@@ -1,8 +1,6 @@
 allow mediaserver unlabeled:file { getattr read open };
-allow mediaserver gpu_device:dir { getattr search };
 allow mediaserver sysfs_hdmi:file { open read getattr };
 allow mediaserver surfaceflinger:unix_stream_socket { read write };
-allow mediaserver rga_device:chr_file { read write open };
 allow mediaserver storage_file:lnk_file { read };
 allow mediaserver tmpfs:lnk_file { read };
 allow mediaserver sysfs_dev:file { open read getattr write };
@@ -13,12 +11,12 @@ allow mediaserver unlabeled:dir { read search open };
 allow mediaserver storage_file:dir { read search open };
 allow mediaserver mnt_user_file:dir { read search open };
 allow mediaserver mnt_user_file:lnk_file { read };
-allow mediaserver rga_device:chr_file { ioctl };
 allow mediaserver hal_configstore_default:binder { call };
 allow mediaserver vendor-rockit-hal_hwservice:hwservice_manager { find };
 allow mediaserver sysfs_dmc:dir r_dir_perms;
 allow mediaserver sysfs_dmc:file rw_file_perms;
 
+rw_rockchip_graphic_device(mediaserver)
 get_prop(mediaserver,vendor_omx_prop)
 get_prop(mediaserver,vendor_default_prop)
 get_prop(mediaserver,public_vendor_default_prop)

@@ -9,7 +9,6 @@ allow init video_device:chr_file { write };
 
 allow init init:capability { sys_module };
 allow init nvm_block_device:blk_file { write };
-allow init gpu_device:chr_file { write  ioctl };
 allow init property_socket:sock_file { write };
 allow init zram_device:blk_file { write open read };
 
@@ -55,6 +54,8 @@ allow init baseparameter_block_device:lnk_file { relabelto setattr };
 allow init vendor_file:file { execute open};
 allow init oemfs:dir { mounton };
 allow init mnt_vendor_file:dir { mounton };
+
 dontaudit init proc:file { write setattr };
 set_prop(init, vendor_system_public_prop)
 r_dir_file(init, nativetest_data_file)
+rw_rockchip_graphic_device(init)

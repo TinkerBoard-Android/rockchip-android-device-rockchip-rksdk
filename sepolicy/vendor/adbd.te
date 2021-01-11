@@ -1,4 +1,4 @@
 allow adbd oemfs:dir { search };
-allow adbd gpu_device:dir { search };
 
+rw_rockchip_graphic_device(adbd)
 set_prop(adbd,ctl_start_prop)
