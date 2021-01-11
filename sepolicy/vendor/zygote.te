@@ -6,6 +6,7 @@ allow zygote audio_service:service_manager { find };
 allow zygote media_session_service:service_manager { find };
 allow zygote surfaceflinger:unix_stream_socket { read };
 allow zygote gpu_device:chr_file rw_file_perms;
+allow zygote rga_device:chr_file rw_file_perms;
 allow zygote hal_graphics_composer_default:fd use;
 allow zygote surfaceflinger:fd use;
 allow zygote adbd:unix_stream_socket { connectto };

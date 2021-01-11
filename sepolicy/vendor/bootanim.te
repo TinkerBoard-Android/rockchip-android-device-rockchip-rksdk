@@ -11,6 +11,7 @@ allow bootanim gpu_data_file:file {read open getattr};
 dontaudit bootanim kernel:system module_request;
 allow bootanim gpu_device:dir { search rw_dir_perms};
 allow bootanim vendor_metadata:dir { search };
+allow bootanim rga_device:chr_file rw_file_perms;
 get_prop(bootanim, vendor_default_prop)
 allow bootanim init:unix_stream_socket connectto;
 allow bootanim property_socket:sock_file write;
