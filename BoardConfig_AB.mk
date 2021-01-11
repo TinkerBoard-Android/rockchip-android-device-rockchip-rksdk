@@ -55,8 +55,12 @@ else
         ifneq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS), true)
             ifeq ($(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE), true)
                 ifeq ($(BUILD_WITH_GO_OPT), true)
-                    BOARD_SUPER_PARTITION_SIZE := 1971322880
-                else
+                    ifeq ($(strip $(TARGET_ARCH)), arm64) # arm64 go
+                        BOARD_SUPER_PARTITION_SIZE := 2390753280
+                    else # arm go
+                        BOARD_SUPER_PARTITION_SIZE := 1971322880
+                    endif
+                else # non-go
                     BOARD_SUPER_PARTITION_SIZE := 2688548864
                 endif
                 BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
