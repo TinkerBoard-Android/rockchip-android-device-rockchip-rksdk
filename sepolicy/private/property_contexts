@@ -31,6 +31,10 @@ sys.video.refFrameMode               u:object_r:vendor_default_prop:s0
 testing.mediascanner.skiplist        u:object_r:vendor_default_prop:s0
 ro.rfkilldisabled                    u:object_r:vendor_default_prop:s0
 
+#graphic surfaceflinger rk-ext
+persist.sf.mirror.displayid          u:object_r:debug_prop:s0
+persist.sf.mirror.x                  u:object_r:debug_prop:s0
+persist.sf.mirror.y                  u:object_r:debug_prop:s0
 
 debug.hwui.renderer u:object_r:vendor_system_public_prop:s0
 #rk modules end
