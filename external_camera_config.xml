@@ -27,11 +27,9 @@
             <Limit  width="320" height="240" fpsBound="30.0" />
             <Limit  width="320" height="240" fpsBound="20.0" />
             <Limit  width="320" height="240" fpsBound="15.0" />
-            <Limit  width="320" height="240" fpsBound="10.0" />
             <Limit  width="352" height="288" fpsBound="30.0" />
             <Limit  width="352" height="288" fpsBound="20.0" />
             <Limit  width="352" height="288" fpsBound="15.0" />
-            <Limit  width="352" height="288" fpsBound="10.0" />
             <Limit  width="640" height="480" fpsBound="60.0" />
             <Limit  width="640" height="480" fpsBound="30.0" />
             <Limit  width="640" height="480" fpsBound="20.0" />
@@ -40,7 +38,6 @@
             <Limit  width="800" height="600" fpsBound="30.0" />
             <Limit  width="800" height="600" fpsBound="20.0" />
             <Limit  width="800" height="600" fpsBound="15.0" />
-            <Limit  width="800" height="600" fpsBound="10.0" />
             <Limit  width="1024" height="768" fpsBound="30.0" />
             <Limit  width="1024" height="768" fpsBound="20.0" />
             <Limit  width="1024" height="768" fpsBound="15.0" />
@@ -53,24 +50,16 @@
             <Limit  width="1280" height="800" fpsBound="30.0" />
             <Limit  width="1280" height="800" fpsBound="20.0" />
             <Limit  width="1280" height="800" fpsBound="15.0" />
-            <Limit  width="1280" height="800" fpsBound="5.0" />
             <Limit  width="1280" height="960" fpsBound="30.0" />
             <Limit  width="1280" height="960" fpsBound="20.0" />
             <Limit  width="1280" height="960" fpsBound="15.0" />
-            <Limit  width="1280" height="960" fpsBound="5.0" />
             <Limit  width="1280" height="1024" fpsBound="30.0" />
             <Limit  width="1280" height="1024" fpsBound="20.0" />
             <Limit  width="1280" height="1024" fpsBound="15.0" />
-            <Limit  width="1280" height="1024" fpsBound="5.0" />
-            <Limit  width="1600" height="1200" fpsBound="15.0" />
             <Limit  width="1600" height="1200" fpsBound="30.0" />
             <Limit  width="1600" height="1200" fpsBound="15.0" />
-            <Limit  width="1600" height="1200" fpsBound="10.0" />
-            <Limit  width="1600" height="1200" fpsBound="5.0" />
             <Limit  width="1920" height="1080" fpsBound="30.0" />
             <Limit  width="1920" height="1080" fpsBound="15.0" />
-            <Limit  width="1920" height="1080" fpsBound="10.0" />
-            <Limit  width="1920" height="1080" fpsBound="5.0" />
             <Limit  width="2592" height="1944" fpsBound="30.0" />
             <Limit  width="2592" height="1944" fpsBound="15.0" />
             <Limit  width="2592" height="1944" fpsBound="10.0" />
