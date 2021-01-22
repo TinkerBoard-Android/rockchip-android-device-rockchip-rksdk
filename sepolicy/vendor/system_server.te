@@ -20,6 +20,7 @@ allow system_server rk_output_hal_service:hwservice_manager find;
 allow system_server zygote:process { getsched setsched };
 
 add_service(system_server,drm_device_management_service)
+
 binder_call(system_server, rk_output_hal)
 binder_call(system_server, zygote)
 
