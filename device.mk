@@ -60,6 +60,7 @@ else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm64)
   # For arm64 Go tablet
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+  PRODUCT_PACKAGES += Launcher3QuickStepGo
 else
 # Normal tablet, add QuickStep for normal product only.
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
@@ -897,6 +898,8 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
     TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
     OVERRIDE_TARGET_FLATTEN_APEX := true
     PRODUCT_PROPERTY_OVERRIDES += ro.apex.updatable=false
+    # 2G A Go
+    #TMP_GMS_VAR := $(TMP_GMS_VAR)_2gb
   endif
   ifeq ($(strip $(BUILD_WITH_EEA)),true)
     BUILD_WITH_GOOGLE_MARKET_ALL := true
