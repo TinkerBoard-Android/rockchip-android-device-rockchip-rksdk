@@ -1,3 +1,0 @@
-# asus-debugger-d
-allow vendor_init socket_device:sock_file { getattr relabelfrom relabelto setattr };
-allow vendor_init asusdbugd_socket:sock_file { getattr relabelfrom relabelto setattr };
