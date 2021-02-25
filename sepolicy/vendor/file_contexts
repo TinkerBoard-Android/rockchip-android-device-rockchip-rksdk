@@ -128,6 +128,7 @@
 /vendor/lib(64)?/hw/gralloc.rk30board.so        u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/gralloc.rk3368.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/vulkan.rk30board.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/vulkan.pastel.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/vulkan.rk3368.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libmpp.so                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libvpu.so                      u:object_r:same_process_hal_file:s0

@@ -621,9 +621,13 @@ PRODUCT_PACKAGES += \
 ifneq ($(filter true yes, $(BUILD_WITH_GOOGLE_MARKET) $(PRODUCT_USE_PREBUILT_GTVS)),)
   ifeq ($(strip $(TARGET_ARCH)), arm64)
     ifneq ($(strip $(BUILD_WITH_GO_OPT)), true)
-      # for swiftshader, vulkan v1.1 test.
-      PRODUCT_PACKAGES += \
-        vulkan.rk30board
+      ifeq ($(filter rk356x, $(strip $(TARGET_BOARD_PLATFORM))), )
+        # for swiftshader, vulkan v1.1 test.
+        PRODUCT_PACKAGES += \
+          vulkan.pastel
+        PRODUCT_PROPERTY_OVERRIDES += \
+          ro.hardware.vulkan=pastel
+      endif
 
       PRODUCT_PROPERTY_OVERRIDES += \
         ro.cpuvulkan.version=4198400
