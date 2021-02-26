@@ -8,6 +8,7 @@
 <carrier_config>
 <boolean name="enabledMMS" value="false"/>
 <boolean name="show_4g_for_lte_data_icon_bool" value="true"/>
+<boolean name="prefer_2g_bool" value="false"/>
 <boolean name="world_mode_enabled_bool" value="true"/>
 </carrier_config>
 </carrier_config_list>

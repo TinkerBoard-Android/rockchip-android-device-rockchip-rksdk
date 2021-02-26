@@ -430,7 +430,7 @@ BOARD_WIFI_SUPPORT ?= true
 BOARD_HAS_RK_4G_MODEM ?= false
 
 ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
-DEVICE_MANIFEST_FILE := device/rockchip/common/4g_modem/manifest.xml
+DEVICE_MANIFEST_FILE += device/rockchip/common/4g_modem/manifest.xml
 endif
 
 #USE_CLANG_PLATFORM_BUILD ?= true

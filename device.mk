@@ -233,6 +233,12 @@ PRODUCT_PACKAGES += \
     librk-ril \
     dhcpcd
 
+PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+
+PRODUCT_PACKAGES += \
+    android.hardware.radio@1.2-radio-service \
+    android.hardware.radio.config@1.0-service
+
 PRODUCT_PROPERTY_OVERRIDES += \
 		ro.boot.noril=false \
 		ro.telephony.default_network=9
