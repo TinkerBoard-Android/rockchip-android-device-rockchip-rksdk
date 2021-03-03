@@ -494,4 +494,11 @@ ifeq ($(strip $(BOARD_TWRP_ENABLE)), true)
 	TW_IGNORE_MISC_WIPE_DATA := true
 	TW_HAS_MTP := true
 	TW_NO_USB_STORAGE := true
+
+endif
+
+BOARD_BASEPARAMETER_SUPPORT ?= false
+ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
+    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
+    BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
 endif
