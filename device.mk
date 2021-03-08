@@ -1190,7 +1190,9 @@ AB_OTA_PARTITIONS += \
     boot \
     system	\
     uboot	\
+ifneq ($(strip $(BOARD_ROCKCHIP_TRUST_MERGE_TO_UBOOT)),true)
     trust	\
+endif
     vendor	\
     odm	\
     dtbo
