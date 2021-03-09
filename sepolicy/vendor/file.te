@@ -25,7 +25,6 @@ type abc_data_file, file_type, data_file_type;
 type rk_audio_setting_vendor_data_file, file_type, data_file_type;
 
 # /sys
-type rk_bluetooth_file, sysfs_type, fs_type, mlstrustedobject;
 type sysfs_hctosys, sysfs_type, fs_type;
 type sysfs_camera, sysfs_type, fs_type;
 type sysfs_enable_ps_sensor, sysfs_type, fs_type;
