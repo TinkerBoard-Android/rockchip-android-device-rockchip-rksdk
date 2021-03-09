@@ -136,6 +136,13 @@ else
     echo "Build kernel failed!"
     exit 1
 fi
+
+if [ "$KERNEL_ARCH" = "arm64" ]; then
+    KERNEL_DEBUG=kernel/arch/arm64/boot/Image
+else
+    KERNEL_DEBUG=kernel/arch/arm/boot/zImage
+fi
+cp -rf $KERNEL_DEBUG $OUT/kernel
 fi
 
 echo "package resoure.img with charger images"
@@ -162,16 +169,17 @@ if [ "$BUILD_ANDROID" = true ] ; then
             echo "Build android failed!"
             exit 1
         fi
-        # mkimage.sh
-        echo "make and copy android images"
-        ./mkimage.sh
-        if [ $? -eq 0 ]; then
-            echo "Make image ok!"
-        else
-            echo "Make image failed!"
-            exit 1
-        fi
     fi
+fi
+
+# mkimage.sh
+echo "make and copy android images"
+./mkimage.sh
+if [ $? -eq 0 ]; then
+    echo "Make image ok!"
+else
+    echo "Make image failed!"
+    exit 1
 fi
 
 if [ "$BUILD_UPDATE_IMG" = true ] ; then
@@ -180,10 +188,11 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
 
     echo "Make update.img"
     if [[ $TARGET_PRODUCT =~ "PX30" ]]; then
-	cd $PACK_TOOL_DIR/rockdev && ./mkupdate_px30.sh
+        cd $PACK_TOOL_DIR/rockdev && ./mkupdate_px30.sh
     else
-	cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
+        cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
     fi
+
     if [ $? -eq 0 ]; then
         echo "Make update image ok!"
     else
