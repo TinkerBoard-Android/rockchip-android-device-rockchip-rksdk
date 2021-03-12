@@ -998,8 +998,14 @@ ifeq ($(strip $(BOARD_SHOW_HDMI_SETTING)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.hdmi_settings=true
 
-PRODUCT_COPY_FILES += \
+USE_PRODUCT_RESOLUTION_WHITE := $(shell test -f $(TARGET_DEVICE_DIR)/resolution_white.xml && echo true)
+ifeq ($(strip $(USE_PRODUCT_RESOLUTION_WHITE)), true)
+  PRODUCT_COPY_FILES += \
+      $(TARGET_DEVICE_DIR)/resolution_white.xml:/system/usr/share/resolution_white.xml
+else
+  PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
+endif
 
 PRODUCT_PACKAGES += \
     rockchip.hardware.outputmanager@1.0-impl \
