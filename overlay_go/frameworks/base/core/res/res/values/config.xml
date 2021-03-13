@@ -144,16 +144,6 @@
     <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">64</integer>
     <string translatable="false" name="config_ntpServer">asia.pool.ntp.org</string>
 
-    <!-- Default list of files pinned by the Pinner Service -->
-    <string-array translatable="false" name="config_defaultPinnerServiceFiles">
-        <item>"/system/lib/libcrypto.so"</item>
-        <item>"/system/lib/libhidltransport.so"</item>
-        <item>"/system/framework/boot-core-libart.oat"</item>
-        <item>"/system/framework/boot-core-libart.vdex"</item>
-        <item>"/system/framework/boot-ext.vdex"</item>
-        <item>"/system/framework/boot.vdex"</item>
-        <item>"/system/framework/boot-framework.vdex"</item>
-    </string-array>
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">1</integer>
 
