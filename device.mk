@@ -1200,12 +1200,15 @@ AB_OTA_PARTITIONS += \
     boot \
     system	\
     uboot	\
-ifneq ($(strip $(BOARD_ROCKCHIP_TRUST_MERGE_TO_UBOOT)),true)
-    trust	\
-endif
     vendor	\
     odm	\
     dtbo
+
+ifneq ($(strip $(BOARD_ROCKCHIP_TRUST_MERGE_TO_UBOOT)),true)
+AB_OTA_PARTITIONS += \
+    trust
+endif
+
 ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
 AB_OTA_PARTITIONS += \
     vbmeta
