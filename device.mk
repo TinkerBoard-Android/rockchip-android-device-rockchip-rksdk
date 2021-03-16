@@ -1140,6 +1140,11 @@ PRODUCT_PACKAGES += \
 endif # tablet without GMS-Express
 endif
 
+#only box and atv using our audio policy(write by rockchip)
+ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+USE_CUSTOM_AUDIO_POLICY := 1
+endif
+
 # By default, enable zram; experiment can toggle the flag,
 # which takes effect on boot
 PRODUCT_PROPERTY_OVERRIDES += \
