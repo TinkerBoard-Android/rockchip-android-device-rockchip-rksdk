@@ -22,6 +22,7 @@ BUILD_UBOOT=false
 BUILD_KERNEL_WITH_CLANG=false
 BUILD_KERNEL=false
 BUILD_ANDROID=false
+BUILD_AB_IMAGE=false
 BUILD_UPDATE_IMG=false
 BUILD_OTA=false
 BUILD_PACKING=false
@@ -31,7 +32,7 @@ BUILD_VERSION=""
 BUILD_JOBS=16
 
 # check pass argument
-while getopts "UCKApouv:d:V:J:" arg
+while getopts "UCKABpouv:d:V:J:" arg
 do
     case $arg in
         U)
@@ -50,6 +51,10 @@ do
         A)
             echo "will build android"
             BUILD_ANDROID=true
+            ;;
+        B)
+            echo "will build AB Image"
+            BUILD_AB_IMAGE=true
             ;;
         p)
             echo "will build packaging in IMAGE"
@@ -154,8 +159,16 @@ if [ "$BUILD_ANDROID" = true ] ; then
     if [ "$BUILD_OTA" = true ] ; then
         INTERNAL_OTA_PACKAGE_OBJ_TARGET=obj/PACKAGING/target_files_intermediates/$TARGET_PRODUCT-target_files-*.zip
         INTERNAL_OTA_PACKAGE_TARGET=$TARGET_PRODUCT-ota-*.zip
-        echo "generate ota package"
-        ./mkimage.sh ota
+        if [ "$BUILD_AB_IMAGE" = true ] ; then
+            echo "make ab image and generate ota package"
+            make installclean
+            make -j$BUILD_JOBS
+            make otapackage -j$BUILD_JOBS
+            ./mkimage_ab.sh ota
+        else
+            echo "generate ota package"
+            ./mkimage.sh ota
+        fi
         cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
         cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
     else # regular build without OTA
@@ -188,7 +201,13 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
 
     echo "Make update.img"
     if [[ $TARGET_PRODUCT =~ "PX30" ]]; then
-        cd $PACK_TOOL_DIR/rockdev && ./mkupdate_px30.sh
+	cd $PACK_TOOL_DIR/rockdev && ./mkupdate_px30.sh
+    elif [[ $TARGET_PRODUCT =~ "rk356x_box" ]]; then
+	if [ "$BUILD_AB_IMAGE" = true ] ; then
+		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_ab_$TARGET_PRODUCT.sh
+	else
+		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_PRODUCT.sh
+	fi
     else
         cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
     fi
