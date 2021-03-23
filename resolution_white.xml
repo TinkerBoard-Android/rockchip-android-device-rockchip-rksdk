@@ -48,22 +48,6 @@
 		<flags>15</flags>
 		<vic>5</vic>
 	</resolution>
-	<resolution> <!-- 720x480I60 -->
-		<clock>13500</clock>
-		<hdisplay>720</hdisplay>
-		<hsync_start>739</hsync_start>
-		<hsync_end>801</hsync_end>
-		<htotal>858</htotal>
-		<hskew>0</hskew>
-		<vdisplay>480</vdisplay>
-		<vsync_start>488</vsync_start>
-		<vsync_end>494</vsync_end>
-		<vtotal>525</vtotal>
-		<vscan>0</vscan>
-		<vrefresh>60</vrefresh>
-		<flags>101A</flags>
-		<vic>6</vic>
-	</resolution>
 	<resolution> <!-- 1920x1080P60 -->
 		<clock>148500</clock>
 		<hdisplay>1920</hdisplay>
@@ -127,22 +111,6 @@
 		<vrefresh>50</vrefresh>
 		<flags>15</flags>
 		<vic>20</vic>
-	</resolution>
-	<resolution> <!-- 720x576I50 -->
-		<clock>13500</clock>
-		<hdisplay>720</hdisplay>
-		<hsync_start>732</hsync_start>
-		<hsync_end>795</hsync_end>
-		<htotal>864</htotal>
-		<hskew>0</hskew>
-		<vdisplay>576</vdisplay>
-		<vsync_start>580</vsync_start>
-		<vsync_end>586</vsync_end>
-		<vtotal>625</vtotal>
-		<vscan>0</vscan>
-		<vrefresh>50</vrefresh>
-		<flags>101A</flags>
-		<vic>21</vic>
 	</resolution>
 	<resolution> <!-- 1920x1080P50 -->
 		<clock>148500</clock>
