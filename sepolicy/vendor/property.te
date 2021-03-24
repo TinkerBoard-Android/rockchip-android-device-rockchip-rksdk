@@ -9,3 +9,4 @@ type vendor_cec_prop, property_type;
 type vendor_omx_prop, property_type;
 type vendor_hal_wifi_prop, property_type;
 type vendor_camera_prop, property_type;
+type vendor_boot_complete_prop, property_type, mlstrustedobject;

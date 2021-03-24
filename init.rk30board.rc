@@ -231,6 +231,7 @@ on property:sys.boot_completed=1
     # if data is encrypt, when start gps too early, gpsd crashed
     start gpsd
     trigger sys-boot-completed-set
+    setprop vendor.boot_completed 1
 
 # We want one opportunity per boot to enable zram, so we
 # use a trigger we fire from the above stanza. If

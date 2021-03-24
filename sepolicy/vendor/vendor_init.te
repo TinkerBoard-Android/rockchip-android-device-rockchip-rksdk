@@ -31,6 +31,7 @@ allow vendor_init debugfs_trace_marker:file { getattr };
 allow vendor_init sysfs_dmc:lnk_file { setattr };
 
 set_prop(vendor_init, vendor_system_public_prop)
+set_prop(vendor_init, vendor_boot_complete_prop)
 get_prop(vendor_init, public_vendor_default_prop)
 get_prop(vendor_init, vendor_system_public_prop)
 get_prop(vendor_init, vendor_drm_prop)
