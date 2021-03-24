@@ -188,6 +188,7 @@
 
 /dev/media0          0660   media      camera
 /dev/media1          0660   media      camera
+/dev/media2          0660   media      camera
 
 
 # for sensors
