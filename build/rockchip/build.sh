@@ -185,14 +185,16 @@ if [ "$BUILD_ANDROID" = true ] ; then
     fi
 fi
 
-# mkimage.sh
-echo "make and copy android images"
-./mkimage.sh
-if [ $? -eq 0 ]; then
-    echo "Make image ok!"
-else
-    echo "Make image failed!"
-    exit 1
+if [ "$BUILD_OTA" != true ] ; then
+	# mkimage.sh
+	echo "make and copy android images"
+	./mkimage.sh
+	if [ $? -eq 0 ]; then
+		echo "Make image ok!"
+	else
+		echo "Make image failed!"
+		exit 1
+	fi
 fi
 
 if [ "$BUILD_UPDATE_IMG" = true ] ; then
