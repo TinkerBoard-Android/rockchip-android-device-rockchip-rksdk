@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resolutions>
+	<resolution> <!-- 3840x1080P60 -->
+		<clock>297000</clock>
+		<hdisplay>3840</hdisplay>
+		<hsync_start>4016</hsync_start>
+		<hsync_end>4104</hsync_end>
+		<htotal>4400</htotal>
+		<hskew>0</hskew>
+		<vdisplay>1080</vdisplay>
+		<vsync_start>1088</vsync_start>
+		<vsync_end>1098</vsync_end>
+		<vtotal>1125</vtotal>
+		<vscan>0</vscan>
+		<vrefresh>60</vrefresh>
+		<flags>5</flags>
+		<vic>109</vic>
+	</resolution>
 	<resolution> <!-- 800x480P60 -->
 		<clock>33900</clock>
 		<hdisplay>800</hdisplay>
