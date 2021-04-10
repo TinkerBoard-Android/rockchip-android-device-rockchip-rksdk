@@ -209,3 +209,5 @@
 #rockchip audiosetting
 
 /odm/media(/.*)?    u:object_r:oemfs:s0
+
+/(odm|vendor/odm)/bundled_(.*)(/.*)?     u:object_r:vendor_app_file:s0

@@ -4,6 +4,8 @@ import os
 import re
 import zipfile
 import shutil
+import logging
+import string
 
 templet = """include $(CLEAR_VARS)
 LOCAL_MODULE := %s
@@ -40,6 +42,7 @@ def main(argv):
         isfound = 'not_found_lib'
         include_path = preinstall_dir + '/preinstall.mk'
         android_path = preinstall_dir + '/Android.mk'
+        target_arch = argv[4]
 
         if os.path.exists(include_path):
             os.remove(include_path)
@@ -81,28 +84,57 @@ def main(argv):
                         makefile = file(makefile_path,'w')
                         makefile.write("LOCAL_PATH := $(my-dir)\n\n")
                         apkpath = preinstall_dir + '/' + found.group() + '/'
-                    for lib_name in zfile.namelist():
-                        lib = re.compile(r'\A(lib/armeabi-v7a/)+?')
-                        find_name = 'lib/armeabi-v7a/'
-                        if not cmp(lib_name,find_name):
-                            continue
-                        libfound = lib.search(lib_name)
-                        if libfound:
-                            isfound = 'armeabi-v7a'
-                            data = zfile.read(lib_name)
-                            string = lib_name.split(libfound.group())
-                            libfile = include_apklib_path + '/' + string[1]
-                            MY_LOCAL_PREBUILT_JNI_LIBS += '\t' + 'lib/arm' + '/' + string[1] + '\\' + '\n'
-                            if(os.path.isdir(libfile)):
+                    if target_arch == 'arm64':
+                        for lib_name in zfile.namelist():
+                            lib = re.compile(r'\A(lib/arm64-v8a/)+?')
+                            find_name = 'lib/arm64-v8a/'
+                            if lib_name.find(find_name) == -1:
                                 continue
-                            else:
-                                includelib = file(libfile,'w')
-                                includelib.write(data)
+                            libfound = lib.search(lib_name)
+                            if libfound:
+                                isfound = 'arm64-v8a'
+                                data = zfile.read(lib_name)
+                                string = lib_name.split(libfound.group())
+                                libfile = include_apklib_path + '/' + string[1]
+                                MY_LOCAL_PREBUILT_JNI_LIBS += '\t' + 'lib/arm64' + '/' + string[1] + '\\' + '\n'
+                                if (os.path.isdir(libfile)):
+                                    continue
+                                else:
+                                    includelib = file(libfile, 'w')
+                                    includelib.write(data)
+                        try:
+                            if cmp(isfound, 'not_found_lib'):
+                                include_apklib_path_arm64 = include_apk_path + '/lib/arm64'
+                                os.rename(include_apklib_path, include_apklib_path_arm64)
+                        except Exception as e:
+                            logging.warning('rename dir faild for:' + e)
+                    if not cmp(isfound,'not_found_lib'):
+                        for lib_name in zfile.namelist():
+                            lib = re.compile(r'\A(lib/armeabi-v7a/)+?')
+                            find_name = 'lib/armeabi-v7a/'
+                            #if not cmp(lib_name,find_name):
+                            #    continue
+                            if lib_name.find(find_name) == -1:
+                                continue
+                            libfound = lib.search(lib_name)
+                            if libfound:
+                                isfound = 'armeabi-v7a'
+                                data = zfile.read(lib_name)
+                                string = lib_name.split(libfound.group())
+                                libfile = include_apklib_path + '/' + string[1]
+                                MY_LOCAL_PREBUILT_JNI_LIBS += '\t' + 'lib/arm' + '/' + string[1] + '\\' + '\n'
+                                if(os.path.isdir(libfile)):
+                                    continue
+                                else:
+                                    includelib = file(libfile,'w')
+                                    includelib.write(data)
                     if not cmp(isfound,'not_found_lib'):
                         for lib_name in zfile.namelist():
                             lib = re.compile(r'\A(lib/armeabi/)+?')
                             find_name = 'lib/armeabi/'
-                            if not cmp(lib_name,find_name):
+                            #if not cmp(lib_name,find_name):
+                            #    continue
+                            if lib_name.find(find_name) == -1:
                                 continue
                             libfound = lib.search(lib_name)
                             if libfound:
@@ -111,7 +143,7 @@ def main(argv):
                                 libfile = include_apklib_path + '/' + string[1]
                                 MY_LOCAL_PREBUILT_JNI_LIBS += '\t' + 'lib/arm' + '/' + string[1] + '\\' + '\n'
                                 if(os.path.isdir(libfile)):
-				    continue
+				        continue
 				else:
                                     includelib = file(libfile,'w')
                                     includelib.write(data)
@@ -121,8 +153,8 @@ def main(argv):
                         shutil.rmtree(nolibpath)
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     else:
-                        if argv[2]=='preinstall_del' or argv[2]=='preinstall_del_forever':
-                            makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
+                        if isfound == 'arm64-v8a':
+                            makefile.write(templet % (found.group(),argv[3], 'arm64', MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                         else:
                             makefile.write(templet % (found.group(),argv[3],'arm',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                     shutil.move(apk,apkpath)
