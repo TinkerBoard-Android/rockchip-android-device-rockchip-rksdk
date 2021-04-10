@@ -28,17 +28,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 
 # Prebuild apps
-#ifneq ($(strip $(TARGET_PRODUCT)), )
+ifneq ($(strip $(TARGET_PRODUCT)), )
 #    TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
 #    TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(TARGET_DEVICE_DIR)))
 #    $(info device-rockchip-common TARGET_DEVICE_DIR: $(TARGET_DEVICE_DIR))
-#    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app $(TARGET_ARCH))
-#    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app $(TARGET_ARCH))
-#    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app $(TARGET_ARCH))
-#    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
-#    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
-#    -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
-#endif
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app $(TARGET_ARCH))
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app $(TARGET_ARCH))
+    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app $(TARGET_ARCH))
+    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
+    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
+    -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
+endif
 
 # Inherit product config
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
