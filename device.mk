@@ -928,6 +928,7 @@ endif
 
 ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)
   $(call inherit-product-if-exists, vendor/google_gtvs/gms.mk.sample)
+  $(call inherit-product-if-exists, vendor/google_gtvs/mainline_modules_atv.mk.sample)
   $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
