@@ -249,10 +249,15 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS ?= \
     device/rockchip/common/sepolicy/vendor
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
+# BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
     device/rockchip/common/sepolicy/private \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
+
+ifneq ($(BUILD_WITH_RK_EBOOK),true)
+    BOARD_SEPOLICY_DIRS += \
+        device/rockchip/common/sepolicy/split
+endif
 
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     BOARD_SEPOLICY_DIRS += \
