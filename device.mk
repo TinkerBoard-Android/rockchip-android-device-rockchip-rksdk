@@ -1381,3 +1381,6 @@ ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
         android.hardware.memtrack@1.0-impl \
         memtrack.$(TARGET_BOARD_PLATFORM)
 endif
+
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
