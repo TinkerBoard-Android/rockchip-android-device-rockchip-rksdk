@@ -327,7 +327,7 @@ on property:persist.sys.adb_enable=1
 on property:persist.sys.adb_enable=0
     stop adbd
 
-service flash_img /system/bin/flash_img.sh
+service flash_img /vendor/bin/flash_img.sh
     class main
     oneshot
     disabled
@@ -344,5 +344,8 @@ service read_pcie_info /vendor/bin/read_pcie_info.sh /mnt/sdcard/pcieInfo.tmp
     oneshot
     disabled
 
-on property:sys.retaildemo.enabled=2
+on property:vendor.flash.success=2
     start flash_img
+
+on property:flash.success=1
+   setprop vendor.flash.success 1

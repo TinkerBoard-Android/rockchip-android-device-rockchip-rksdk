@@ -53,3 +53,6 @@ hal_client_domain(system_app, hal_power)
 binder_call(system_app, update_engine)
 
 allow system_app proc_pagetypeinfo:file r_file_perms;
+
+allow system_app mnt_sdcard_file:lnk_file r_file_perms;
+allow system_app mnt_pass_through_file:dir r_file_perms;

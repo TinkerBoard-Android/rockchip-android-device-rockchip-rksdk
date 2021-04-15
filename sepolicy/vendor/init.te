@@ -59,3 +59,4 @@ dontaudit init proc:file { write setattr };
 set_prop(init, vendor_system_public_prop)
 r_dir_file(init, nativetest_data_file)
 rw_rockchip_graphic_device(init)
+set_prop(init, debug_prop)

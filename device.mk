@@ -1310,7 +1310,7 @@ else
         ro.flash_img.enable = false
 endif
 PRODUCT_COPY_FILES += \
-    device/rockchip/common/flash_img/flash_img.sh:system/bin/flash_img.sh
+    device/rockchip/common/flash_img/flash_img.sh:vendor/bin/flash_img.sh
 
 #read pcie info for Devicetest APK
 PRODUCT_COPY_FILES += \
