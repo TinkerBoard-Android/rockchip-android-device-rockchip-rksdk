@@ -248,6 +248,10 @@ rm -rf  $IMAGE_PATH/recovery-two-step.img
 if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
     rm -rf  $IMAGE_PATH/super_empty.img
 fi
+if [ "$BOARD_AVB_ENABLE" = "true" ]; then
+    echo "AVB Enable"
+    cp -rf  $OUT/obj/PACKAGING/target_files_intermediates/*-target_files*/VENDOR/etc/recovery.img  $IMAGE_PATH/
+fi
 echo "done."
 fi
 
