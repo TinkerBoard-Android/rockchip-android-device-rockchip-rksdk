@@ -190,6 +190,8 @@
 /vendor/bin/hw/rockchip\.hardware\.rockit\.hw@1\.0-service           u:object_r:vendor-rockit-hal-1-0_exec:s0
 /vendor/bin/hw/rockchip\.hardware\.rockit\.hw@1\.0-service-lazy      u:object_r:vendor-rockit-hal-1-0_exec:s0
 
+#codec2 hw hal
+/vendor/bin/hw/android\.hardware\.media\.c2@1\.1-service             u:object_r:mediacodec_exec:s0
 
 #keymaster hal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.keymaster@4\.0-service.optee       u:object_r:hal_keymaster_default_exec:s0

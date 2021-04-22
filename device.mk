@@ -557,6 +557,9 @@ PRODUCT_PACKAGES += \
     rockchip.hardware.rockit.hw@1.0-service \
     librockit_hw_client@1.0
 
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2@1.1-service \
+    libcodec2_rk_component
 
 #Health hardware
 PRODUCT_PACKAGES += \
