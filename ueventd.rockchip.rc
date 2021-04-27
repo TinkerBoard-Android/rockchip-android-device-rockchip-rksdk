@@ -181,7 +181,7 @@
 /dev/ovr0		  0664   system          system
 
 #for rk_isp1
-/dev/v4l-subdev*          0660   media      camera
+/dev/v4l-subdev*          0666   media      camera
 
 /dev/video*          0660   media      camera
 
