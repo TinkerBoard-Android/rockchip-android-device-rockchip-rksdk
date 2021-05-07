@@ -26,7 +26,7 @@ recovery_only(`
     allow recovery kmsg_device:chr_file rw_file_perms;
 
     allow recovery sysfs:dir {read open};
-    allow recovery sysfs:file {read open};
+    allow recovery sysfs:file {read open write};
     allow recovery sysfs_batteryinfo:dir { search };
 
     allow recovery ctl_bootanim_prop:file {open getattr};
@@ -36,6 +36,18 @@ recovery_only(`
     allow recovery e2fsck_cache_block_device:blk_file ioctl;
     allowxperm recovery e2fsck_cache_block_device:blk_file ioctl { BLKPBSZGET };
 
-    allow shell rootfs:file { entrypoint read };
+    allow shell rootfs:file { entrypoint read};
+    allow recovery sysfs_power:dir {search};
+    allow recovery sysfs_power:file {read open};
+    allow recovery sysfs_mmc:dir {search};
+    allow recovery sysfs_mmc:file {open read getattr};
+    allow recovery rk_bluetooth_file:dir {search};
+    allow recovery rk_bluetooth_file:lnk_file {read};
+    allow recovery sensor_device:chr_file {open read ioctl};
+    allow recovery rtc_device:chr_file {open read write ioctl};
+
+    allow recovery proc_meminfo:file {open read};
+    allow recovery self:capability { fsetid };
+    set_prop(recovery,boottime_prop)
     rw_rockchip_graphic_device(recovery)
 ')
