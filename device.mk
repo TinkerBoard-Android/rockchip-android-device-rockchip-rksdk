@@ -1383,5 +1383,12 @@ ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
         memtrack.$(TARGET_BOARD_PLATFORM)
 endif
 
+PRODUCT_PACKAGES += \
+	libbaseparameter
+
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+
+# build libmpimmz for rknn
+PRODUCT_PACKAGES += \
+	libmpimmz
