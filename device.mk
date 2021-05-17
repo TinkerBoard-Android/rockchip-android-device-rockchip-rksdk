@@ -73,6 +73,16 @@ PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 PRODUCT_PACKAGES += \
     ExactCalculator
 
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Camera2 \
+    Contacts \
+    DeskClock \
+    DocumentsUI \
+    ExactCalculator \
+    Gallery2 \
+    Settings \
+    SoundRecorder
+
 ########################################################
 # Kernel
 ########################################################
