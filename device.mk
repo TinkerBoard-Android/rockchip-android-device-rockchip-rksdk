@@ -83,6 +83,10 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SoundRecorder
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.boot-dex2oat-threads=4 \
+    dalvik.vm.dex2oat-threads=4
+
 ########################################################
 # Kernel
 ########################################################
