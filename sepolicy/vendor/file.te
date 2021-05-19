@@ -53,3 +53,4 @@ type sysfs_mmc, fs_type, sysfs_type;
 # input files
 type idc_file, file_type, vendor_file_type;
 type keylayout_file, file_type, vendor_file_type;
+type rknn_data_file, file_type, data_file_type, core_data_file_type;
