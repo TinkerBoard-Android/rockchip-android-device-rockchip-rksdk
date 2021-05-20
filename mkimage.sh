@@ -238,7 +238,6 @@ fi
 if [ $TARGET == $BOOT_OTA ]
 then
 if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
-    make installclean && make -j4 && make dist -j4
     cp -rf  $OUT/obj/PACKAGING/super.img_intermediates/super.img  $IMAGE_PATH/
 fi
 echo -n "create system.img boot.img oem.img vendor.img dtbo.img vbmeta.img for OTA..."

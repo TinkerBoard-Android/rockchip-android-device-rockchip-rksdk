@@ -164,9 +164,13 @@ if [ "$BUILD_ANDROID" = true ] ; then
             make installclean
             make -j$BUILD_JOBS
             make otapackage -j$BUILD_JOBS
+            make dist -j$BUILD_JOBS
             ./mkimage_ab.sh ota
         else
             echo "generate ota package"
+	    make installclean
+	    make -j$BUILD_JOBS
+	    make dist -j$BUILD_JOBS
             ./mkimage.sh ota
         fi
         cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
