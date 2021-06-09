@@ -95,7 +95,7 @@ PRODUCT_COPY_FILES += \
 
 #SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR8
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR9
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
