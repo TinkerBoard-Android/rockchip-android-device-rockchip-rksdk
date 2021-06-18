@@ -63,9 +63,9 @@ def Install_Parameter(parameter_bin, input_zip, info):
 def InstallRKLoader(loader_bin, input_zip, info):
   try:
     print "wirte RKLoader.bin now..."
-    info.script.Print("Writing rk loader bin...")
+    #info.script.Print("Writing rk loader bin...")
     common.ZipWriteStr(info.output_zip, "RKLoader.bin", loader_bin)
-    info.script.WriteRawLoaderImage()
+    #info.script.WriteRawLoaderImage()
   except KeyError:
     print "no RKLoader.bin, ignore it."
 
