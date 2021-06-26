@@ -37,7 +37,6 @@ func getVpuPrefix(platform string) string {
 func init() {
     fmt.Println("Rockchip conditional compile")
     android.RegisterModuleType("cc_rockchip_prebuilt_library_shared", RockchipPrebuiltLibsFactory)
-    android.RegisterModuleType("cc_rockchip_prebuilt_binary", RockchipPrebuiltBinFactory)
 }
 
 func RockchipPrebuiltLibsFactory() (android.Module) {
@@ -50,19 +49,6 @@ func RockchipPrebuiltLibsFactory() (android.Module) {
 
     // Add Hook for PrebuiltSharedLibraryFactory
     android.AddLoadHook(module, AppendMultilibs)
-    return module
-}
-
-func RockchipPrebuiltBinFactory() (android.Module) {
-    // Register rockchip_prebuilt_binary factory as PrebuiltBinaryFactory
-    module := cc.PrebuiltBinaryFactory()
-
-    // Add new props for rockchip conditional compile
-    addon_props := &soongRockchipPrebuiltProperties{}
-    module.AddProperties(addon_props)
-
-    // Add Hook for PrebuiltBinaryFactory
-    android.AddLoadHook(module, ChangeSrcsPath)
     return module
 }
 

@@ -6,11 +6,10 @@ bootstrap_go_package {
         "blueprint-bootstrap",
         "soong",
         "soong-android",
-        "soong-env",
         "soong-cc",
     ],
     srcs: [
-        "android.go",
+        "prebuilt_lib.go",
         "prebuilt_obj.go",
     ],
     pluginFor: ["soong_build"],

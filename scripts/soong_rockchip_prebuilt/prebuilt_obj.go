@@ -2,8 +2,8 @@ package rockchip_prebuilts
 
 import (
     "strconv"
-    "android/soong/android"
     "strings"
+    "android/soong/android"
 )
 
 var pctx = android.NewPackageContext("android/soon/rockchip_prebuilts")
@@ -12,6 +12,7 @@ func init() {
     pctx.Import("android/soong/android")
 
     android.RegisterModuleType("cc_rockchip_prebuilt_obj", RockchipPrebuiltObjectFactory)
+    android.RegisterModuleType("cc_rockchip_prebuilt_binary", RockchipPrebuiltBinFactory)
 }
 
 type RockchipPrebuiltObjectProperties struct {
@@ -31,6 +32,16 @@ type RockchipPrebuiltObjectProperties struct {
     // Make this module available when building for ramdisk.
     Ramdisk_available *bool
 
+    // Make this module available when building for vendor ramdisk.
+    // On device without a dedicated recovery partition, the module is only
+    // available after switching root into
+    // /first_stage_ramdisk. To expose the module before switching root, install
+    // the recovery variant instead.
+    Vendor_ramdisk_available *bool
+
+    // Make this module available when building for debug ramdisk.
+    Debug_ramdisk_available *bool
+
     // Make this module available when building for recovery.
     Recovery_available *bool
 
@@ -39,6 +50,19 @@ type RockchipPrebuiltObjectProperties struct {
 
     // Whether this module is optee.
     Optee *bool
+
+    // Ignore the following properties because we want to keep compatible.
+    Check_elf_files *bool
+    Shared_libs []string `android:"arch_variant"`
+    Strip stripAttributes
+}
+
+type stripAttributes struct {
+	//Keep_symbols                 *bool
+	//Keep_symbols_and_debug_frame *bool
+	//Keep_symbols_list            []string `android:"arch_variant"`
+	All                          *bool
+	None                         *bool
 }
 
 type RockchipPrebuiltObjectModule interface {
@@ -60,6 +84,7 @@ type RockchipPrebuiltObject struct {
     socInstallDirBase      string
     installDirPath         android.InstallPath
     additionalDependencies *android.Paths
+    addArchToPrefix *bool
 }
 
 func (p *RockchipPrebuiltObject) inRamdisk() bool {
@@ -96,6 +121,14 @@ func (p *RockchipPrebuiltObject) CoreVariantNeeded(ctx android.BaseModuleContext
 
 func (p *RockchipPrebuiltObject) RamdiskVariantNeeded(ctx android.BaseModuleContext) bool {
     return android.Bool(p.properties.Ramdisk_available) || p.ModuleBase.InstallInRamdisk()
+}
+
+func (p *RockchipPrebuiltObject) VendorRamdiskVariantNeeded(ctx android.BaseModuleContext) bool {
+    return android.Bool(p.properties.Vendor_ramdisk_available) || p.ModuleBase.InstallInVendorRamdisk()
+}
+
+func (p *RockchipPrebuiltObject) DebugRamdiskVariantNeeded(ctx android.BaseModuleContext) bool {
+    return android.Bool(p.properties.Debug_ramdisk_available) || p.ModuleBase.InstallInDebugRamdisk()
 }
 
 func (p *RockchipPrebuiltObject) RecoveryVariantNeeded(ctx android.BaseModuleContext) bool {
@@ -149,10 +182,13 @@ func (p *RockchipPrebuiltObject) Optee() bool {
 func (p *RockchipPrebuiltObject) GenerateAndroidBuildActions(ctx android.ModuleContext) {
     var prefix string = ""
     if (p.Optee()) {
-        if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3326")) {
-            prefix = "v2/ta/"
+        prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+    }
+    if (android.Bool(p.addArchToPrefix)) {
+        if (strings.EqualFold(ctx.AConfig().DevicePrimaryArchType().String(),"arm64")) {
+            prefix += "arm64/"
         } else {
-            prefix = "v1/ta/"
+            prefix += "arm/"
         }
     }
     p.sourceFilePath = android.PathForModuleSrc(ctx, prefix + android.String(p.properties.Src))
@@ -199,24 +235,25 @@ func (p *RockchipPrebuiltObject) AndroidMkEntries() []android.AndroidMkEntries {
         Class:      "ETC",
         SubName:    nameSuffix,
         OutputFile: android.OptionalPathForPath(p.outputFilePath),
+        Required: p.properties.Shared_libs,
         ExtraEntries: []android.AndroidMkExtraEntriesFunc{
-            func(entries *android.AndroidMkEntries) {
+            func(ctx android.AndroidMkExtraEntriesContext, entries *android.AndroidMkEntries) {
                 entries.SetString("LOCAL_MODULE_TAGS", "optional")
                 entries.SetString("LOCAL_MODULE_PATH", p.installDirPath.ToMakePath().String())
                 entries.SetString("LOCAL_INSTALLED_MODULE_STEM", p.outputFilePath.Base())
                 entries.SetString("LOCAL_UNINSTALLABLE_MODULE", strconv.FormatBool(!p.Installable()))
+                entries.SetString("LOCAL_SHARED_LIBRARIES", strconv.FormatBool(!p.Installable()))
                 if p.additionalDependencies != nil {
-                    for _, path := range *p.additionalDependencies {
-                        entries.SetString("LOCAL_ADDITIONAL_DEPENDENCIES", path.String())
-                    }
+                    entries.AddStrings("LOCAL_ADDITIONAL_DEPENDENCIES", p.additionalDependencies.Strings()...)
                 }
             },
         },
     }}
 }
 
-func InitRockchipPrebuiltObjectModule(p *RockchipPrebuiltObject, dirBase string) {
+func InitRockchipPrebuiltObjectModule(p *RockchipPrebuiltObject, dirBase string, addArch bool) {
     p.installDirBase = dirBase
+    p.addArchToPrefix = &addArch
     p.AddProperties(&p.properties)
 }
 
@@ -224,7 +261,17 @@ func InitRockchipPrebuiltObjectModule(p *RockchipPrebuiltObject, dirBase string)
 // <partition>/<sub_dir> directory.
 func RockchipPrebuiltObjectFactory() android.Module {
     module := &RockchipPrebuiltObject{}
-    InitRockchipPrebuiltObjectModule(module, "")
+    InitRockchipPrebuiltObjectModule(module, "", false)
+    // This module is device-only
+    android.InitAndroidArchModule(module, android.DeviceSupported, android.MultilibFirst)
+    return module
+}
+
+// cc_rockchip_prebuilt_binary is for a prebuilt artifact that is installed in
+// <partition>/bin/<sub_dir> directory.
+func RockchipPrebuiltBinFactory() android.Module {
+    module := &RockchipPrebuiltObject{}
+    InitRockchipPrebuiltObjectModule(module, "bin", true)
     // This module is device-only
     android.InitAndroidArchModule(module, android.DeviceSupported, android.MultilibFirst)
     return module
