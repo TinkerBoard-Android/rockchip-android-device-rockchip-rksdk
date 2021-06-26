@@ -1,3 +1,2 @@
 allow mediaextractor unlabeled:file { read };
 allow mediaextractor oemfs:file {read};
-get_prop(mediaextractor,vendor_default_prop)

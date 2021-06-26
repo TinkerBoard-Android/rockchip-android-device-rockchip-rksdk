@@ -13,4 +13,3 @@ allow untrusted_app_27 oemfs:file {execmod};
 
 rw_rockchip_graphic_device(untrusted_app_27)
 binder_call(untrusted_app_27, zygote)
-get_prop(untrusted_app_27,vendor_default_prop)

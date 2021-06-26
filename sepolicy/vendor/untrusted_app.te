@@ -7,6 +7,4 @@ allow untrusted_app  oemfs:file {execmod};
 dontaudit untrusted_app mnt_vendor_file:dir { search };
 
 rw_rockchip_graphic_device(untrusted_app)
-get_prop(untrusted_app,vendor_system_public_prop)
-get_prop(untrusted_app,vendor_default_prop)
 get_prop(untrusted_app,vendor_security_patch_level_prop)

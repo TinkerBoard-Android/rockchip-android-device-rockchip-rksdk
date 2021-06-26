@@ -18,4 +18,3 @@ allow priv_app vr_manager_service:service_manager find;
 
 binder_call(priv_app, zygote)
 rw_rockchip_graphic_device(priv_app)
-get_prop(priv_app,vendor_default_prop)

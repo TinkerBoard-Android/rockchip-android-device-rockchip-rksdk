@@ -17,7 +17,6 @@ binder_call(zygote, hwservicemanager)
 binder_call(zygote, audioserver)
 binder_call(zygote, surfaceflinger)
 binder_call(zygote, netd)
-get_prop(zygote, vendor_default_prop)
 get_prop(zygote, test_harness_prop)
 
 
@@ -43,7 +42,6 @@ allow zygote netpolicy_service:service_manager find;
 allow zygote platform_compat_service:service_manager find;
 allow zygote priv_app:binder call;
 allow zygote property_socket:sock_file write;
-allow zygote radio_data_file:dir search;
 allow zygote radio_service:service_manager { find };
 allow zygote registry_service:service_manager find;
 allow zygote role_service:service_manager find;

@@ -8,6 +8,4 @@ allow hal_power_default sysfs_dmc:dir r_dir_perms;
 allow hal_power_default sysfs_dmc:file rw_file_perms;
 allow hal_power_default sysfs_dmc:lnk_file rw_file_perms;
 
-get_prop(hal_power_default, vendor_boot_complete_prop)
-
 dontaudit hal_power_default self:capability dac_override;

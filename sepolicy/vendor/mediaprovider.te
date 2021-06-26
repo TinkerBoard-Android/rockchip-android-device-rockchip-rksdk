@@ -4,4 +4,3 @@ allow mediaprovider gpu_data_file:file { open read getattr };
 allow mediaprovider mnt_media_rw_file:dir { open read getattr };
 
 rw_rockchip_graphic_device(mediaprovider)
-get_prop(mediaprovider,vendor_default_prop)

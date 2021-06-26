@@ -33,7 +33,6 @@ allow system_app cache_recovery_file:file {rw_file_perms create unlink setattr};
 #TODO removed for Q
 #allow system_app vendor_file:file { getattr };
 allow system_app cache_file:dir search;
-get_prop(system_app,vendor_default_prop)
 #set_prop(system_app,exported_system_prop)
 set_prop(system_app,powerctl_prop)
 

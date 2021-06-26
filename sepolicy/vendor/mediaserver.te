@@ -17,9 +17,5 @@ allow mediaserver sysfs_dmc:dir r_dir_perms;
 allow mediaserver sysfs_dmc:file rw_file_perms;
 
 rw_rockchip_graphic_device(mediaserver)
-get_prop(mediaserver,vendor_omx_prop)
-get_prop(mediaserver,vendor_default_prop)
-get_prop(mediaserver,public_vendor_default_prop)
-get_prop(mediaserver,vendor_system_public_prop)
 get_prop(mediaserver,ctl_start_prop)
 set_prop(mediaserver,ctl_start_prop)

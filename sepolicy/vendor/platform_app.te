@@ -4,4 +4,3 @@ allow platform_app vendor_metadata:dir { search };
 #TODO removed for Q
 #allow platform_app vendor_file:file { getattr open read };
 rw_rockchip_graphic_device(platform_app)
-get_prop(platform_app,vendor_default_prop)
