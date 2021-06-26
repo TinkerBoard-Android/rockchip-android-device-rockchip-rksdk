@@ -51,7 +51,8 @@ TARGET_CPU_ABI2 ?=
 TARGET_CPU_SMP ?= true
 endif
 
-BOARD_PLATFORM_VERSION := 11.0
+BOARD_PLATFORM_VERSION := 12.0
+PRODUCT_HAVE_RKAPPS := false
 
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
@@ -59,7 +60,7 @@ BOARD_BOOT_HEADER_VERSION ?= 2
 BOARD_MKBOOTIMG_ARGS :=
 BOARD_PREBUILT_DTBOIMAGE ?= $(TARGET_DEVICE_DIR)/dtbo.img
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE ?= false
-BOARD_SELINUX_ENFORCING ?= true
+BOARD_SELINUX_ENFORCING ?= false
 
 # Use the non-open-source parts, if they're present
 TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
@@ -251,7 +252,7 @@ PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS ?= \
     device/rockchip/common/sepolicy/vendor
 # BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
+#BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
     device/rockchip/common/sepolicy/private \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
 
@@ -280,7 +281,7 @@ RECOVERY_AUTO_USB_UPDATE ?= false
 
 # To use bmp as kernel logo, uncomment the line below to use bgra 8888 in recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_ROCKCHIP_PCBATEST ?= true
+TARGET_ROCKCHIP_PCBATEST ?= false
 #TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_PRODUCT)
 TARGET_USERIMAGES_USE_EXT4 ?= true
 TARGET_USERIMAGES_USE_F2FS ?= false
