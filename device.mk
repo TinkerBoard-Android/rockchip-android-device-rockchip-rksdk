@@ -28,17 +28,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 
 # Prebuild apps
-ifneq ($(strip $(TARGET_PRODUCT)), )
-#    TARGET_DEVICE_DIR=$(shell test -d device && find device -maxdepth 4 -path '*/$(TARGET_PRODUCT)/BoardConfig.mk')
-#    TARGET_DEVICE_DIR := $(patsubst %/,%,$(dir $(TARGET_DEVICE_DIR)))
-#    $(info device-rockchip-common TARGET_DEVICE_DIR: $(TARGET_DEVICE_DIR))
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app $(TARGET_ARCH))
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app $(TARGET_ARCH))
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app $(TARGET_ARCH))
-    -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
-    -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
-    -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
-endif
+$(call inherit-product, device/rockchip/common/modules/preinstall.mk)
+$(call inherit-product, device/rockchip/common/modules/optimize.mk)
 
 # Inherit product config
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
@@ -73,19 +64,6 @@ PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 PRODUCT_PACKAGES += \
     ExactCalculator
 
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Camera2 \
-    Contacts \
-    DeskClock \
-    DocumentsUI \
-    ExactCalculator \
-    Gallery2 \
-    Settings \
-    SoundRecorder
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.boot-dex2oat-threads=4 \
-    dalvik.vm.dex2oat-threads=4
 
 ########################################################
 # Kernel
@@ -106,16 +84,7 @@ PRODUCT_PACKAGES += \
     vndservicemanager
 
 # PCBA tools
-ifeq ($(strip $(TARGET_ROCKCHIP_PCBATEST)), true)
-PRODUCT_PACKAGES += \
-    pcba_core \
-    bdt
-PRODUCT_COPY_FILES += \
-   $(TARGET_DEVICE_DIR)/bt_vendor.conf:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/bt_vendor.conf \
-   $(call find-copy-subdir-files,*,bootable/recovery/pcba_core/res,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba) \
-   $(call find-copy-subdir-files,"*.ko",$(TOPDIR)kernel/drivers/net/wireless/rockchip_wlan,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules) \
-    $(call find-copy-subdir-files,*,vendor/rockchip/common/wifi/firmware,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/firmware)
-endif
+$(call inherit-product, device/rockchip/common/modules/pcba.mk)
 
 # librkskia
 PRODUCT_PACKAGES += \
@@ -134,63 +103,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.surface_flinger.primary_display_orientation=ORIENTATION_$(SF_PRIMARY_DISPLAY_ORIENTATION)
 endif
 
-# build with go optimization
-ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
-ifeq ($(strip $(TARGET_ARCH)), arm64)
-$(call inherit-product, build/target/product/go_defaults_512.mk)
-$(call inherit-product, device/rockchip/common/build/rockchip/AndroidGo512.mk)
-else
-$(call inherit-product, build/target/product/go_defaults.mk)
-endif
-$(call inherit-product, device/rockchip/common/build/rockchip/AndroidGoCommon.mk)
-PRODUCT_COPY_FILES += \
-    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml \
-    frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml
-PRODUCT_PROPERTY_OVERRIDES += \
-    config.disable_rtt=true \
-    config.disable_consumerir=true
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_go
-# Enable DM file pre-opting to reduce first boot time
-PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
-# Save space but slow down device.
-# DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
-# Config jemalloc for low memory
-MALLOC_SVELTE := true
+$(call inherit-product, device/rockchip/common/modules/android_go.mk)
 
-# Reduces GC frequency of foreground apps by 50%
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.foreground-heap-growth-multiplier=2.0 \
-    ro.zram.mark_idle_delay_mins=60
-# set zygote
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote32
-endif
-
-ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
-
-# Build vbmeta with public_key_metadata
-# when BOARD_AVB_METADATA_BIN_PATH is set
-ifdef BOARD_AVB_METADATA_BIN_PATH
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS := \
-    --public_key_metadata $(BOARD_AVB_METADATA_BIN_PATH)
-ifneq ($(strip $(BOARD_USES_AB_IMAGE)),true)
-BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS := \
-    --public_key_metadata $(BOARD_AVB_METADATA_BIN_PATH)
-endif #BOARD_USES_AB_IMAGE
-endif #BOARD_AVB_METADATA_BIN_PATH
-
-ifneq ($(strip $(BOARD_USES_AB_IMAGE)),true)
-BOARD_AVB_RECOVERY_KEY_PATH := $(BOARD_AVB_KEY_PATH)
-BOARD_AVB_RECOVERY_ALGORITHM := $(BOARD_AVB_ALGORITHM)
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-ifdef BOARD_AVB_ROLLBACK_INDEX
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := $(BOARD_AVB_ROLLBACK_INDEX)
-endif
-endif #BOARD_USES_AB_IMAGE
-endif # BOARD_AVB_ENABLE
+$(call inherit-product, device/rockchip/common/modules/avb.mk)
 
 ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
 # setup dalvik vm configs.
