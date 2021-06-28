@@ -17,6 +17,7 @@
 TARGET_USES_64_BIT_BINDER := true
 TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
+PRODUCT_KERNEL_VERSION ?= 4.19
 # value: tablet,box,phone
 # It indicates whether to be tablet platform or not
 

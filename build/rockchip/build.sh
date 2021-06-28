@@ -98,11 +98,14 @@ BUILD_ID=`get_build_var BUILD_ID`
 # only save the version code
 SDK_VERSION=`get_build_var CURRENT_SDK_VERSION`
 UBOOT_DEFCONFIG=`get_build_var PRODUCT_UBOOT_CONFIG`
+KERNEL_VERSION=`get_build_var PRODUCT_KERNEL_VERSION`
 KERNEL_ARCH=`get_build_var PRODUCT_KERNEL_ARCH`
 KERNEL_DEFCONFIG=`get_build_var PRODUCT_KERNEL_CONFIG`
 if [ "$KERNEL_DTS" = "" ] ; then
 KERNEL_DTS=`get_build_var PRODUCT_KERNEL_DTS`
 fi
+LOCAL_KERNEL_PATH=kernel-$KERNEL_VERSION
+echo "-------------------KERNEL_VERSION:$KERNEL_VERSION"
 echo "-------------------KERNEL_DTS:$KERNEL_DTS"
 PACK_TOOL_DIR=RKTools/linux/Linux_Pack_Firmware
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
@@ -129,12 +132,12 @@ fi
 fi
 
 if [ "$BUILD_KERNEL_WITH_CLANG" = true ] ; then
-ADDON_ARGS="CC=../prebuilts/clang/host/linux-x86/clang-r383902b/bin/clang LD=../prebuilts/clang/host/linux-x86/clang-r383902b/bin/ld.lld"
+ADDON_ARGS="CC=../prebuilts/clang/host/linux-x86/clang-r416183b/bin/clang LD=../prebuilts/clang/host/linux-x86/clang-r416183b/bin/ld.lld"
 fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
-cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j$BUILD_JOBS && cd -
+cd $LOCAL_KERNEL_PATH && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j$BUILD_JOBS && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
@@ -143,15 +146,15 @@ else
 fi
 
 if [ "$KERNEL_ARCH" = "arm64" ]; then
-    KERNEL_DEBUG=kernel/arch/arm64/boot/Image
+    KERNEL_DEBUG=$LOCAL_KERNEL_PATH/arch/arm64/boot/Image
 else
-    KERNEL_DEBUG=kernel/arch/arm/boot/zImage
+    KERNEL_DEBUG=$LOCAL_KERNEL_PATH/arch/arm/boot/zImage
 fi
 cp -rf $KERNEL_DEBUG $OUT/kernel
 fi
 
 echo "package resoure.img with charger images"
-cd u-boot && ./scripts/pack_resource.sh ../kernel/resource.img && cp resource.img ../kernel/resource.img && cd -
+cd u-boot && ./scripts/pack_resource.sh ../$LOCAL_KERNEL_PATH/resource.img && cp resource.img ../$LOCAL_KERNEL_PATH/resource.img && cd -
 
 # build android
 if [ "$BUILD_ANDROID" = true ] ; then
@@ -244,11 +247,12 @@ cp $IMAGE_PATH/* $STUB_PATH/IMAGES/
 cp out/commit_id.xml $STUB_PATH/manifest_${DATE}.xml
 
 mkdir -p $STUB_PATCH_PATH/kernel
-cp kernel/.config $STUB_PATCH_PATH/kernel
-cp kernel/vmlinux $STUB_PATCH_PATH/kernel
+cp $LOCAL_KERNEL_PATH/.config $STUB_PATCH_PATH/kernel
+cp $LOCAL_KERNEL_PATH/vmlinux $STUB_PATCH_PATH/kernel
 
 cp build.sh $STUB_PATH/build.sh
 #Save build command info
+echo "Build as $LOCAL_KERNEL_PATH"                                                                   >> $STUB_PATH/build_cmd_info.txt
 echo "uboot:   ./make.sh $UBOOT_DEFCONFIG"                                                           >> $STUB_PATH/build_cmd_info.txt
 echo "kernel:  make ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make ARCH=$KERNEL_ARCH $KERNEL_DTS.img"   >> $STUB_PATH/build_cmd_info.txt
 echo "android: lunch $TARGET_PRODUCT-$BUILD_VARIANT && make installclean && make"                    >> $STUB_PATH/build_cmd_info.txt
