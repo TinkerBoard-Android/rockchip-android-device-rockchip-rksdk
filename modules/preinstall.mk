@@ -16,9 +16,9 @@
 
 # Include this makefile to support prebuild apps
 ifneq ($(strip $(TARGET_PRODUCT)), )
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app $(TARGET_ARCH))
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app $(TARGET_ARCH))
-    $(shell python $(LOCAL_PATH)/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app $(TARGET_ARCH))
+    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall bundled_persist-app $(TARGET_ARCH))
+    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del bundled_uninstall_back-app $(TARGET_ARCH))
+    $(shell python device/rockchip/common/auto_generator.py $(TARGET_DEVICE_DIR) preinstall_del_forever bundled_uninstall_gone-app $(TARGET_ARCH))
     -include $(TARGET_DEVICE_DIR)/preinstall/preinstall.mk
     -include $(TARGET_DEVICE_DIR)/preinstall_del/preinstall.mk
     -include $(TARGET_DEVICE_DIR)/preinstall_del_forever/preinstall.mk
