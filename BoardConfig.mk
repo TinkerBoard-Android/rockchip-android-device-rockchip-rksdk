@@ -18,6 +18,8 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_HARDWARE ?= rk30board
 PRODUCT_KERNEL_VERSION ?= 4.19
+PRODUCT_KERNEL_PATH ?= kernel-$(PRODUCT_KERNEL_VERSION)
+
 # value: tablet,box,phone
 # It indicates whether to be tablet platform or not
 
@@ -62,11 +64,19 @@ BOARD_MKBOOTIMG_ARGS :=
 BOARD_PREBUILT_DTBOIMAGE ?= $(TARGET_DEVICE_DIR)/dtbo.img
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE ?= false
 BOARD_SELINUX_ENFORCING ?= false
+PRODUCT_KERNEL_ARCH ?= arm
+
 
 # Use the non-open-source parts, if they're present
-TARGET_PREBUILT_KERNEL ?= kernel/arch/arm/boot/zImage
-TARGET_PREBUILT_RESOURCE ?= kernel/resource.img
-BOARD_PREBUILT_DTBIMAGE_DIR ?= kernel/arch/arm/boot/dts
+ifeq ($(PRODUCT_KERNEL_ARCH), arm)
+TARGET_PREBUILT_KERNEL ?= $(PRODUCT_KERNEL_PATH)/arch/arm/boot/zImage
+BOARD_PREBUILT_DTBIMAGE_DIR ?= $(PRODUCT_KERNEL_PATH)/arch/arm/boot/dts
+else
+TARGET_PREBUILT_KERNEL ?= $(PRODUCT_KERNEL_PATH)/arch/arm64/boot/Image
+BOARD_PREBUILT_DTBIMAGE_DIR ?= $(PRODUCT_KERNEL_PATH)/arch/arm64/boot/dts/rockchip
+endif
+
+TARGET_PREBUILT_RESOURCE ?= $(PRODUCT_KERNEL_PATH)/resource.img
 PRODUCT_PARAMETER_TEMPLATE ?= device/rockchip/common/scripts/parameter_tools/parameter.in
 TARGET_BOARD_HARDWARE_EGL ?= mali
 

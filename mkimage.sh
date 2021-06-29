@@ -6,15 +6,10 @@ set -e
 export PATH=$ANDROID_BUILD_PATHS:$PATH
 TARGET_PRODUCT=`get_build_var TARGET_PRODUCT`
 TARGET_DEVICE_DIR=`get_build_var TARGET_DEVICE_DIR`
-PLATFORM_VERSION=`get_build_var PLATFORM_VERSION`
-PLATFORM_SECURITY_PATCH=`get_build_var PLATFORM_SECURITY_PATCH`
-TARGET_ARCH_VARIANT=`get_build_var TARGET_ARCH_VARIANT`
+PRODUCT_KERNEL_ARCH=`get_build_var PRODUCT_KERNEL_ARCH`
 TARGET_BASE_PARAMETER_IMAGE=`get_build_var TARGET_BASE_PARAMETER_IMAGE`
 HIGH_RELIABLE_RECOVERY_OTA=`get_build_var HIGH_RELIABLE_RECOVERY_OTA`
 BOARD_AVB_ENABLE=`get_build_var BOARD_AVB_ENABLE`
-BOARD_KERNEL_CMDLINE=`get_build_var BOARD_KERNEL_CMDLINE`
-ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS=`get_build_var ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS`
-BOARD_BOOTIMG_HEADER_VERSION=`get_build_var BOARD_BOOTIMG_HEADER_VERSION`
 PRODUCT_USE_DYNAMIC_PARTITIONS=`get_build_var PRODUCT_USE_DYNAMIC_PARTITIONS`
 
 echo TARGET_PRODUCT=$TARGET_PRODUCT
@@ -28,17 +23,8 @@ fi
 
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 UBOOT_PATH=u-boot
-KERNEL_PATH=kernel
-KERNEL_CONFIG=$KERNEL_PATH/.config
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
-
-if [ "$TARGET_ARCH_VARIANT" = "armv8-a" ]; then
-KERNEL_DEBUG=kernel/arch/arm64/boot/Image
-else
-KERNEL_DEBUG=kernel/arch/arm/boot/zImage
-fi
-
 
 FSTYPE=ext4
 echo system filesysystem is $FSTYPE
@@ -91,12 +77,6 @@ BOARD_DTBO_IMG=$OUT/dtbo.img
 fi
 cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
-
-echo "create resource.img..."
-if [ -f "kernel/resource.img" ]; then
-    cp -a kernel/resource.img $IMAGE_PATH/resource.img
-    echo "done."
-fi
 
 copy_images_from_out boot.img
 copy_images_from_out boot-debug.img
