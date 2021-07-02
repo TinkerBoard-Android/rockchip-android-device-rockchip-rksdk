@@ -1179,6 +1179,8 @@ PRODUCT_PACKAGES_DEBUG += \
 ifndef BOARD_USES_AB_LEGACY_RETROFIT
 AB_OTA_PARTITIONS += \
     system_ext \
+    vendor_dlkm \
+    odm_dlkm \
     product
 endif
 
