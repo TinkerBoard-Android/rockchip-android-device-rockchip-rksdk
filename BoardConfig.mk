@@ -66,6 +66,9 @@ BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE ?= false
 BOARD_SELINUX_ENFORCING ?= false
 PRODUCT_KERNEL_ARCH ?= arm
 
+#TWRP
+BOARD_TWRP_ENABLE ?= false
+
 
 # Use the non-open-source parts, if they're present
 ifeq ($(PRODUCT_KERNEL_ARCH), arm)
@@ -264,24 +267,6 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
 //MAX-SIZE=512M, for generate out/.../system.img
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Sepolicy
-PRODUCT_SEPOLICY_SPLIT := true
-BOARD_SEPOLICY_DIRS ?= \
-    device/rockchip/common/sepolicy/vendor
-# BOARD_PLAT_PUBLIC_SEPOLICY_DIR ?= device/rockchip/common/sepolicy/public
-#BOARD_PLAT_PRIVATE_SEPOLICY_DIR ?= \
-    device/rockchip/common/sepolicy/private \
-    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
-
-ifneq ($(BUILD_WITH_RK_EBOOK),true)
-    BOARD_SEPOLICY_DIRS += \
-        device/rockchip/common/sepolicy/split
-endif
-
-ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
-    BOARD_SEPOLICY_DIRS += \
-        device/rockchip/common/box/sepolicy/vendor
-endif
 
 # Enable VNDK Check for Android P (MUST after P)
 BOARD_VNDK_VERSION := current
@@ -499,25 +484,6 @@ BOARD_DEFAULT_CAMERA_HAL_VERSION ?=3.3
 # rktoolbox
 BOARD_WITH_RKTOOLBOX ?=true
 BOARD_MEMTRACK_SUPPORT ?= false
-
-#TWRP
-ifeq ($(strip $(BOARD_TWRP_ENABLE)), true)
-	TW_THEME := landscape_hdpi
-	TW_USE_TOOLBOX := true
-	TW_EXTRA_LANGUAGES := true
-	TW_DEFAULT_LANGUAGE := zh_CN
-	DEVICE_RESOLUTION := 1280x720
-	TW_NO_BATT_PERCENT := true
-	TWRP_EVENT_LOGGING := false
-	TARGET_RECOVERY_FORCE_PIXEL_FORMAT := RGB_565
-	TW_NO_SCREEN_TIMEOUT := true
-	TW_NO_SCREEN_BLANK := true
-	TW_SCREEN_BLANK_ON_BOOT := false
-	TW_IGNORE_MISC_WIPE_DATA := true
-	TW_HAS_MTP := true
-	TW_NO_USB_STORAGE := true
-
-endif
 
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)

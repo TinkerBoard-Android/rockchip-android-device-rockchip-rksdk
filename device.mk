@@ -85,10 +85,12 @@ PRODUCT_PACKAGES += \
 
 # PCBA tools
 $(call inherit-product, device/rockchip/common/modules/pcba.mk)
-
-# librkskia
-PRODUCT_PACKAGES += \
-   librkskia
+# Optee
+$(call inherit-product, device/rockchip/common/modules/optee.mk)
+# Sepolicy
+$(call inherit-product, device/rockchip/common/modules/sepolicy.mk)
+# TWRP
+$(call inherit-product, device/rockchip/common/modules/twrp.mk)
 
 # omx
 PRODUCT_PACKAGES += \
@@ -1198,8 +1200,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
 
 endif
 
-#TWRP
-BOARD_TWRP_ENABLE ?= false
 
 #Build with UiMode Config
 PRODUCT_COPY_FILES += \
@@ -1264,47 +1264,6 @@ PRODUCT_COPY_FILES += \
 
 # Rockchip HALs
 $(call inherit-product, device/rockchip/common/manifests/frameworks/vintf.mk)
-#for enable optee support
-ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
-
-PRODUCT_PACKAGES += \
-    tee-supplicant \
-    android.hardware.gatekeeper@1.0-service.optee \
-    android.hardware.keymaster@4.0-service.optee \
-    android.hardware.weaver@1.0-service \
-    android.hardware.weaver@1.0-impl
-
-ifneq ($(filter rk3326 rk356x, $(strip $(TARGET_BOARD_PLATFORM))), )
-
-PRODUCT_PACKAGES += \
-    0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta \
-    258be795-f9ca-40e6-a869-9ce6886c5d5d.ta \
-    481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta
-
-else
-
-PRODUCT_PACKAGES += \
-    0b82bae5-0cd0-49a5-9521516dba9c43ba.ta \
-    258be795-f9ca-40e6-a8699ce6886c5d5d.ta \
-    481a57df-aec8-47ad-92f5eb9fc24f64a6.ta
-
-#Choose TEE storage type
-#auto (storage type decide by storage chip emmc:rpmb nand:rkss)
-#rpmb
-#rkss
-PRODUCT_PROPERTY_OVERRIDES += ro.tee.storage=rkss
-
-endif
-
-else
-
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service \
-    android.hardware.gatekeeper@1.0-service.software
-
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.keymaster@4.0-service.xml
-
-endif
 
 ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
     DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.memtrack@1.0-service.xml
