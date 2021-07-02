@@ -147,8 +147,14 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 
-DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifest.xml
-DEVICE_MATRIX_FILE   ?= device/rockchip/common/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifests/manifest_level_$(ROCKCHIP_LUNCHING_API_LEVEL).xml
+ifeq (1,$(strip $(shell expr $(ROCKCHIP_LUNCHING_API_LEVEL) \>= 31)))
+# Android S deprecate schedulerservice, use ioprio in init.rc
+DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix_level_31.xml
+else
+# For Android R and older versions.
+DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix.xml
+endif
 
 #Calculate partition size from parameter.txt
 USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
