@@ -428,6 +428,9 @@ endif
 # Include thermal HAL module
 $(call inherit-product, device/rockchip/common/modules/thermal.mk)
 
+# Media DRM
+$(call inherit-product, device/rockchip/common/modules/media_drm.mk)
+
 # Power AIDL
 PRODUCT_PACKAGES += \
     android.hardware.power \
@@ -541,19 +544,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio@7.0-impl \
     android.hardware.audio.effect@7.0-impl
-
-PRODUCT_PACKAGES += \
-    libclearkeycasplugin
-
-ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
-PRODUCT_PACKAGES += \
-    android.hardware.cas@1.2-service-lazy \
-    android.hardware.drm@1.3-service-lazy.clearkey
-else
-PRODUCT_PACKAGES += \
-    android.hardware.cas@1.2-service \
-    android.hardware.drm@1.3-service.clearkey
-endif
 
 PRODUCT_PACKAGES += \
     rockchip.hardware.rockit.hw@1.0-service \
@@ -880,17 +870,6 @@ ifeq ($(strip $(PRODUCT_USE_PREBUILT_GTVS)), yes)
   $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
 endif
 
-ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
-PRODUCT_PACKAGES += \
-    move_widevine_data.sh
-ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
-PRODUCT_PACKAGES += \
-    android.hardware.drm@1.3-service-lazy.widevine
-else
-PRODUCT_PACKAGES += \
-    android.hardware.drm@1.3-service.widevine
-endif
-endif
 
 # Enable Incremental on the device via kernel driver
 PRODUCT_PROPERTY_OVERRIDES += ro.incremental.enable=yes
