@@ -27,6 +27,28 @@ ifeq ($(strip $(TARGET_ARCH)), arm64)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 
+PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
+
+PRODUCT_PACKAGES += \
+    ExactCalculator
+
+# Kernel
+PRODUCT_COPY_FILES += \
+    $(TARGET_PREBUILT_KERNEL):kernel
+
+# SDK Version
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR9
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    fsck.f2fs \
+    mkfs.f2fs \
+    fsck_f2fs
+PRODUCT_PACKAGES += \
+    vndservicemanager
+
 # Prebuild apps
 $(call inherit-product, device/rockchip/common/modules/preinstall.mk)
 $(call inherit-product, device/rockchip/common/modules/optimize.mk)
@@ -58,31 +80,6 @@ else
   PRODUCT_PACKAGES += Launcher3QuickStep
 endif
 
-PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
-PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
-
-PRODUCT_PACKAGES += \
-    ExactCalculator
-
-
-########################################################
-# Kernel
-########################################################
-PRODUCT_COPY_FILES += \
-    $(TARGET_PREBUILT_KERNEL):kernel
-
-#SDK Version
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR9
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    fsck.f2fs \
-    mkfs.f2fs \
-    fsck_f2fs
-PRODUCT_PACKAGES += \
-    vndservicemanager
-
 # PCBA tools
 $(call inherit-product, device/rockchip/common/modules/pcba.mk)
 # Optee
@@ -108,16 +105,6 @@ endif
 $(call inherit-product, device/rockchip/common/modules/android_go.mk)
 
 $(call inherit-product, device/rockchip/common/modules/avb.mk)
-
-ifeq ($(strip $(BOARD_USE_LCDC_COMPOSER)), true)
-# setup dalvik vm configs.
-$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rk.screenshot_enable=true   \
-    sys.status.hidebar_enable=false \
-    persist.sys.ui.hw=true
-endif
 
 PRODUCT_COPY_FILES += \
     device/rockchip/common/init.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rockchip.rc \
@@ -169,39 +156,7 @@ endif
 
 
 ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
-PRODUCT_PACKAGES += \
-    CarrierDefaultApp \
-    CarrierConfig \
-    rild \
-    librk-ril \
-    dhcpcd
-
-PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
-
-PRODUCT_PACKAGES += \
-    android.hardware.radio@1.2-radio-service \
-    android.hardware.radio.config@1.0-service
-
-PRODUCT_PROPERTY_OVERRIDES += \
-		ro.boot.noril=false \
-		ro.telephony.default_network=9
-
-ifeq ($(strip $(TARGET_ARCH)), arm64)
-PRODUCT_PROPERTY_OVERRIDES += \
-		vendor.rild.libpath=/vendor/lib64/librk-ril.so
-
-PRODUCT_COPY_FILES += \
-		$(LOCAL_PATH)/4g_modem/bin64/dhcpcd:$(TARGET_COPY_OUT_VENDOR)/bin/dhcpcd \
-		$(LOCAL_PATH)/4g_modem/lib64/librk-ril.so:$(TARGET_COPY_OUT_VENDOR)/lib64/librk-ril.so
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-		vendor.rild.libpath=/vendor/lib/librk-ril.so
-
-PRODUCT_COPY_FILES += \
-		$(LOCAL_PATH)/4g_modem/bin32/dhcpcd:$(TARGET_COPY_OUT_VENDOR)/bin/dhcpcd \
-		$(LOCAL_PATH)/4g_modem/lib32/librk-ril.so:$(TARGET_COPY_OUT_VENDOR)/lib/librk-ril.so
-
-endif
+$(call inherit-product, device/rockchip/common/modules/4g_modem.mk)
 endif
 
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
@@ -319,67 +274,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 endif
 
-# CAMERA
-ifeq ($(BOARD_CAMERA_SUPPORT),true)
-ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
-
-PRODUCT_COPY_FILES += \
-    device/rockchip/common/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-external-service
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.external.xml
-else
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.legacy.xml
-endif
-PRODUCT_PACKAGES += \
-    librkisp_aec \
-    librkisp_awb \
-    librkisp_af
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml
-
-PRODUCT_PACKAGES += \
-    camera.$(TARGET_BOARD_HARDWARE) \
-    Camera
-
-# Camera HAL
-PRODUCT_PACKAGES += \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.metadata@3.2
-
-ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.camera.enableLazyHal=true
-ifeq ($(TARGET_ARCH), $(filter $(TARGET_ARCH), arm64))
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-service-lazy_64
-else
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-service-lazy
-endif
-else
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-service
-endif
-
-$(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
-$(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
-$(call inherit-product-if-exists, hardware/rockchip/camera/etc/camera_etc.mk)
-endif
-
-# Camera Autofocus
-ifeq ($(CAMERA_SUPPORT_AUTOFOCUS),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.autofocus.xml \
-
-endif
 
 # USB HOST
 ifeq ($(BOARD_USB_HOST_SUPPORT),true)
@@ -1243,15 +1137,16 @@ endif
 PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/bt_vendor.conf:/vendor/etc/bluetooth/bt_vendor.conf
 
+# Camera support
+ifeq ($(BOARD_CAMERA_SUPPORT),true)
+$(call inherit-product, device/rockchip/common/modules/camera.mk)
+endif
+
 # Rockchip HALs
 $(call inherit-product, device/rockchip/common/manifests/frameworks/vintf.mk)
 
 ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
-    DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.memtrack@1.0-service.xml
-    PRODUCT_PACKAGES += \
-        android.hardware.memtrack@1.0-service \
-        android.hardware.memtrack@1.0-impl \
-        memtrack.$(TARGET_BOARD_PLATFORM)
+$(call inherit-product, device/rockchip/common/modules/memtrack.mk)
 endif
 
 PRODUCT_PACKAGES += \

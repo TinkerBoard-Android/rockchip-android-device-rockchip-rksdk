@@ -207,7 +207,6 @@ endif
 
 # GPU configration
 TARGET_BOARD_PLATFORM_GPU ?= mali-t760
-BOARD_USE_LCDC_COMPOSER ?= false
 GRAPHIC_MEMORY_PROVIDER ?= ump
 USE_OPENGL_RENDERER ?= true
 TARGET_DISABLE_TRIPLE_BUFFERING ?= false
@@ -437,10 +436,6 @@ BOARD_WIFI_SUPPORT ?= true
 
 #for rk 4g modem
 BOARD_HAS_RK_4G_MODEM ?= false
-
-ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
-DEVICE_MANIFEST_FILE += device/rockchip/common/4g_modem/manifest.xml
-endif
 
 #USE_CLANG_PLATFORM_BUILD ?= true
 
