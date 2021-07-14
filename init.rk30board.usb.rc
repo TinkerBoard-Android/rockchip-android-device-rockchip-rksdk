@@ -1,4 +1,3 @@
-import /vendor/etc/init/hw/init.${ro.board.platform}.usb.rc
 on boot
     mkdir /dev/usb-ffs 0775 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
