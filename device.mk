@@ -106,19 +106,14 @@ $(call inherit-product, device/rockchip/common/modules/android_go.mk)
 
 $(call inherit-product, device/rockchip/common/modules/avb.mk)
 
+# init.rc files
+$(call inherit-product, device/rockchip/common/rootdir/rootdir.mk)
+
 PRODUCT_COPY_FILES += \
-    device/rockchip/common/init.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rockchip.rc \
-    device/rockchip/common/init.mount_all_early.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mount_all.rc \
-    device/rockchip/common/init.tune_io.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.tune_io.rc \
-    $(LOCAL_PATH)/init.insmod.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg \
-    $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
-    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).rc \
-    device/rockchip/common/init.$(TARGET_BOARD_HARDWARE).usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).usb.rc \
-    device/rockchip/common/ueventd.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
-     device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
-	device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
+    device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
+    device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
 
 PRODUCT_COPY_FILES += \
     hardware/rockchip/libgraphicpolicy/graphic_profiles.conf:$(TARGET_COPY_OUT_VENDOR)/etc/graphic/graphic_profiles.conf
@@ -640,12 +635,6 @@ ifeq ($(strip $(BOARD_RECORD_COMMIT_ID)),true)
 PRODUCT_COPY_FILES += \
     $(OUT_DIR)/commit_id.xml:$(TARGET_COPY_OUT_VENDOR)/commit_id.xml
 endif
-
-# Copy init.usbstorage.rc to root
-#ifeq ($(strip $(BUILD_WITH_MULTI_USB_PARTITIONS)),true)
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/init.usbstorage.rc:root/init.usbstorage.rc
-#endif
 
 ifeq ($(strip $(BOARD_CONNECTIVITY_MODULE)), ap6xxx_nfc)
 #NFC packages
