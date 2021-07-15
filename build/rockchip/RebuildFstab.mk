@@ -22,7 +22,7 @@ ifdef PRODUCT_SDMMC_DEVICE
 endif
 
 intermediates := $(call intermediates-dir-for,FAKE,rockchip_fstab)
-rebuild_fstab := $(intermediates)/fstab.rk30board
+rebuild_fstab := $(intermediates)/fstab.$(TARGET_BOARD_HARDWARE)
 
 ROCKCHIP_FSTAB_TOOLS := $(SOONG_HOST_OUT_EXECUTABLES)/fstab_tools
 

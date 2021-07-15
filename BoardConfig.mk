@@ -36,9 +36,6 @@ TARGET_BOARD_PLATFORM_PRODUCT ?= tablet
 endif
 endif
 
-# CPU feature configration
-ifeq ($(strip $(TARGET_BOARD_HARDWARE)), rk30board)
-
 TARGET_ARCH ?= arm
 TARGET_ARCH_VARIANT ?= armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER ?= true
@@ -46,13 +43,6 @@ TARGET_CPU_ABI ?= armeabi-v7a
 TARGET_CPU_ABI2 ?= armeabi
 TARGET_CPU_VARIANT ?= cortex-a9
 TARGET_CPU_SMP ?= true
-else
-TARGET_ARCH ?= x86
-TARGET_ARCH_VARIANT ?= silvermont
-TARGET_CPU_ABI ?= x86
-TARGET_CPU_ABI2 ?= 
-TARGET_CPU_SMP ?= true
-endif
 
 BOARD_PLATFORM_VERSION := 12.0
 PRODUCT_HAVE_RKAPPS := false
@@ -99,13 +89,13 @@ PRODUCT_KERNEL_CONFIG += non_debuggable.config
 endif
 
 ifeq ($(BOARD_AVB_ENABLE), true)
-BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=CN androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
+BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=CN androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
 else # BOARD_AVB_ENABLE is false
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
+BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
 endif # BOARD_AVB_ENABLE
 
 BOARD_KERNEL_CMDLINE += loop.max_part=7
-ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=rk30board androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
+ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 
 ifneq ($(BOARD_SELINUX_ENFORCING), true)
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
