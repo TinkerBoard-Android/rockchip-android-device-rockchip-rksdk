@@ -18,7 +18,8 @@ allow system_app metadata_file:dir {getattr};
 allow system_app block_device:dir {search};
 #for devicetest
 #allow system_app system_app_data_file:file { execute execute_no_trans };
-allow system_app system_data_file:file { read };
+allow system_app system_data_file:file { read open };
+allow system_app system_data_root_file:file { read open };
 allow system_app { sysfs_leds metadata_file }:dir { search };
 
 #TODO removed for Q
