@@ -14,6 +14,12 @@
 # limitations under the License.
 #
 
+# Camera profiles
+$(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
+$(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
+$(call inherit-product-if-exists, hardware/rockchip/camera/etc/camera_etc.mk)
+
+# Camera external
 ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
@@ -27,24 +33,27 @@ DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera
 else
 DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.legacy.xml
 endif
-PRODUCT_PACKAGES += \
-    librkisp_aec \
-    librkisp_awb \
-    librkisp_af
+
+# Camera Autofocus
+ifeq ($(CAMERA_SUPPORT_AUTOFOCUS),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.autofocus.xml
+endif
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml
 
-PRODUCT_PACKAGES += \
-    camera.$(TARGET_BOARD_HARDWARE)
-
 # Camera HAL
 PRODUCT_PACKAGES += \
+    camera.$(TARGET_BOARD_HARDWARE) \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.metadata@3.2
+    android.hardware.camera.metadata@3.2 \
+    librkisp_aec \
+    librkisp_af \
+    librkisp_awb
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PROPERTY_OVERRIDES += \
