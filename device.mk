@@ -90,25 +90,20 @@ $(call inherit-product, device/rockchip/common/modules/sepolicy.mk)
 $(call inherit-product, device/rockchip/common/modules/twrp.mk)
 # GMS
 $(call inherit-product, device/rockchip/common/modules/gms.mk)
-# omx
-PRODUCT_PACKAGES += \
-    libomxvpu_enc \
-    libomxvpu_dec \
-    libRkOMX_Resourcemanager \
-    libOMX_Core \
+# Media OMX/C2
+$(call inherit-product, device/rockchip/common/modules/mediacodec.mk)
+# Android Go configuration
+$(call inherit-product, device/rockchip/common/modules/android_go.mk)
+# Android Verified Boot
+$(call inherit-product, device/rockchip/common/modules/avb.mk)
+# init.rc files
+$(call inherit-product, device/rockchip/common/rootdir/rootdir.mk)
 
-# For screen hwrotation
+# For screen hw rotation
 ifneq ($(filter 90 180 270, $(strip $(SF_PRIMARY_DISPLAY_ORIENTATION))), )
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.surface_flinger.primary_display_orientation=ORIENTATION_$(SF_PRIMARY_DISPLAY_ORIENTATION)
 endif
-
-$(call inherit-product, device/rockchip/common/modules/android_go.mk)
-
-$(call inherit-product, device/rockchip/common/modules/avb.mk)
-
-# init.rc files
-$(call inherit-product, device/rockchip/common/rootdir/rootdir.mk)
 
 PRODUCT_COPY_FILES += \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
@@ -326,14 +321,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power \
     android.hardware.power-service.rockchip
 
-# Camera omx-plugin vpu akmd libion_rockchip_ext
 PRODUCT_PACKAGES += \
-    libvpu \
-    libstagefrighthw \
-    libgralloc_priv_omx \
-    akmd \
-    libion_ext
-
+    akmd
 
 # Light AIDL
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
@@ -435,14 +424,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@7.0-impl \
     android.hardware.audio.effect@7.0-impl
 
-PRODUCT_PACKAGES += \
-    rockchip.hardware.rockit.hw@1.0-service \
-    librockit_hw_client@1.0
-
-PRODUCT_PACKAGES += \
-    android.hardware.media.c2@1.1-service \
-    libcodec2_rk_component
-
 #Health hardware
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-service \
@@ -466,9 +447,6 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap \
     tinypcminfo
-
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    media.stagefright.thumbnail.prefer_hw_codecs=true
 
 PRODUCT_PACKAGES += \
 	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
@@ -1021,12 +999,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/rockchip/common/pcie/read_pcie_info.sh:vendor/bin/read_pcie_info.sh
 
-# Vendor seccomp policy files for media components:
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
-
 BOARD_TV_LOW_MEMOPT ?= false
-
 ifeq ($(strip $(BOARD_TV_LOW_MEMOPT)), true)
     include device/rockchip/common/tv/tv_low_ram_device.mk
 endif
