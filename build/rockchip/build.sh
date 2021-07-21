@@ -91,7 +91,9 @@ TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
 #set jdk version
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
+export PATH=prebuilts/clang/host/linux-x86/clang-r416183b/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
 # source environment and chose target product
 BUILD_NUMBER=`get_build_var BUILD_NUMBER`
 BUILD_ID=`get_build_var BUILD_ID`
@@ -107,6 +109,12 @@ fi
 LOCAL_KERNEL_PATH=kernel-$KERNEL_VERSION
 echo "-------------------KERNEL_VERSION:$KERNEL_VERSION"
 echo "-------------------KERNEL_DTS:$KERNEL_DTS"
+
+if [ "$KERNEL_VERSION" = "5.10" ] ; then
+echo "Force use clang and llvm to build kernel-$KERNEL_VERSION"
+BUILD_KERNEL_WITH_CLANG=true
+fi
+
 PACK_TOOL_DIR=RKTools/linux/Linux_Pack_Firmware
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 export PROJECT_TOP=`gettop`
@@ -132,8 +140,9 @@ fi
 fi
 
 if [ "$BUILD_KERNEL_WITH_CLANG" = true ] ; then
-ADDON_ARGS="CC=../prebuilts/clang/host/linux-x86/clang-r416183b/bin/clang LD=../prebuilts/clang/host/linux-x86/clang-r416183b/bin/ld.lld"
+ADDON_ARGS="CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1"
 fi
+
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
