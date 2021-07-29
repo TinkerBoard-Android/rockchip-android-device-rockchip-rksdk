@@ -256,6 +256,22 @@
 		<flags>5</flags>
 		<vic>62</vic>
 	</resolution>
+        <resolution> <!-- 2560x1440P60 -->
+		<clock>241500</clock>
+		<hdisplay>2560</hdisplay>
+		<hsync_start>2608</hsync_start>
+		<hsync_end>2640</hsync_end>
+		<htotal>2720</htotal>
+		<hskew>0</hskew>
+		<vdisplay>1440</vdisplay>
+		<vsync_start>1443</vsync_start>
+		<vsync_end>1448</vsync_end>
+		<vtotal>1481</vtotal>
+		<vscan>0</vscan>
+		<vrefresh>60</vrefresh>
+		<flags>9</flags>
+		<vic>110</vic>
+	</resolution>
 	<resolution> <!-- 3840x2160P24 -->
 		<clock>297000</clock>
 		<hdisplay>3840</hdisplay>
