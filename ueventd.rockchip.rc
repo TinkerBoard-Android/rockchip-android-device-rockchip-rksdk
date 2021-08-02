@@ -197,6 +197,12 @@
 /dev/video9          0660   media      camera
 /dev/video10         0660   media      camera
 /dev/video11         0660   media      camera
+/dev/video12         0660   media      camera
+/dev/video13         0660   media      camera
+/dev/video14         0660   media      camera
+/dev/video15         0660   media      camera
+/dev/video16         0660   media      camera
+/dev/video17         0660   media      camera
 
 # for sensors
 /dev/input/event*    0666   input system
