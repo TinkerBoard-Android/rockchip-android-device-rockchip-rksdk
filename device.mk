@@ -841,6 +841,8 @@ ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_PACKAGES += \
     Music \
     WallpaperPicker
+
+$(call inherit-product, device/rockchip/common/modules/rockchip_apps.mk)
 endif # tablet without GMS-Express
 endif
 
