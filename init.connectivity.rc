@@ -3,6 +3,8 @@ on zygote-start
 
 # for bluetooth
     # bluetooth LPM
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
     chown bluetooth net_bt /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt /proc/bluetooth/sleep/btwrite    
 
