@@ -21,6 +21,7 @@ BOARD_USES_AB_IMAGE=`get_build_var BOARD_USES_AB_IMAGE`
 BOARD_USES_AB_LEGACY_RETROFIT=`get_build_var BOARD_USES_AB_LEGACY_RETROFIT`
 BOARD_USES_RECOVERY_AS_BOOT=`get_build_var BOARD_USES_RECOVERY_AS_BOOT`
 PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=`get_build_var PRODUCT_RETROFIT_DYNAMIC_PARTITIONS`
+PRODUCT_KERNEL_ARCH=`get_build_var PRODUCT_KERNEL_ARCH`
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_BASE_PARAMETER_IMAGE==$TARGET_BASE_PARAMETER_IMAGE
 echo BOARD_AVB_ENABLE=$BOARD_AVB_ENABLE
@@ -30,6 +31,7 @@ echo BOARD_USES_RECOVERY_AS_BOOT=$BOARD_USES_RECOVERY_AS_BOOT
 echo PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=$PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 echo PRODUCT_USE_DYNAMIC_PARTITIONS=$PRODUCT_USE_DYNAMIC_PARTITIONS
 echo BOARD_BOOTIMG_HEADER_VERSION=$BOARD_BOOTIMG_HEADER_VERSION
+echo PRODUCT_KERNEL_ARCH=$PRODUCT_KERNEL_ARCH
 TARGET="withoutkernel"
 if [ "$1"x != ""x  ]; then
          TARGET=$1
@@ -37,16 +39,9 @@ fi
 
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 UBOOT_PATH=u-boot
-KERNEL_PATH=kernel
-KERNEL_CONFIG=$KERNEL_PATH/.config
 rm -rf $IMAGE_PATH
 mkdir -p $IMAGE_PATH
 
-if [ "$TARGET_ARCH_VARIANT" = "armv8-a" ]; then
-KERNEL_DEBUG=kernel/arch/arm64/boot/Image
-else
-KERNEL_DEBUG=kernel/arch/arm/boot/zImage
-fi
 
 
 FSTYPE=ext4
@@ -102,11 +97,6 @@ fi
 cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
 
-echo "create resource.img..."
-if [ -f "kernel/resource.img" ]; then
-    cp -a kernel/resource.img $IMAGE_PATH/resource.img
-    echo "done."
-fi
 
 copy_images_from_out boot.img
 copy_images_from_out boot-debug.img
@@ -257,12 +247,10 @@ if [ "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
     if [ "$PRODUCT_RETROFIT_DYNAMIC_PARTITIONS" = "true" ]; then
         echo "PRODUCT_RETROFIT_DYNAMIC_PARTITIONS is true! "
         echo "Generate mass production super_system.img super_vendor.img...firmware that matches OTA ... "
-        make installclean && make -j24 && make dist -j24
         echo "re-generate super_system.img super_vendor.img... for mass production done "
         cp -rf  $OUT/obj/PACKAGING/target_files_intermediates/*-target_files*/OTA/*.img  $IMAGE_PATH/
     else
         echo "Generate mass production super.img firmware that matches OTA ... "
-        make installclean && make -j24 && make dist -j24
         echo "re-generate super.img for mass production done "
         cp -rf  $OUT/obj/PACKAGING/super.img_intermediates/super.img  $IMAGE_PATH/
     fi
