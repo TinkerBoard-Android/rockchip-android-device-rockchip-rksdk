@@ -224,7 +224,7 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
 
     echo "Make update.img"
     if [[ $TARGET_PRODUCT =~ "PX30" ]]; then
-	cd $PACK_TOOL_DIR/rockdev && ./mkupdate_px30.sh
+	cd $PACK_TOOL_DIR/rockdev && ./mkupdate.sh px30 Image
     elif [[ $TARGET_PRODUCT =~ "rk356x_box" ]]; then
 	if [ "$BUILD_AB_IMAGE" = true ] ; then
 		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_ab_$TARGET_PRODUCT.sh
@@ -232,11 +232,7 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
 		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_PRODUCT.sh
 	fi
     else
-	if [ "$BUILD_AB_IMAGE" = true ] ; then
-		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_"$TARGET_BOARD_PLATFORM"_ab.sh
-	else
-		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
-	fi
+		cd $PACK_TOOL_DIR/rockdev && ./mkupdate.sh $TARGET_BOARD_PLATFORM Image
     fi
 
     if [ $? -eq 0 ]; then
