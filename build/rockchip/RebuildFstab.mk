@@ -5,11 +5,19 @@ fstab_flags := wait
 fstab_prefix := /dev/block/by-name/
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     fstab_flags := $(fstab_flags),slotselect
+    fstab_chained := slotselect,
 endif # BOARD_USES_AB_IMAGE
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
     fstab_flags := $(fstab_flags),avb
+ifdef BOARD_AVB_BOOT_KEY_PATH
+    fstab_chained := $(fstab_chained)avb=boot,
+endif
 endif # BOARD_AVB_ENABLE
+
+ifndef fstab_chained
+    fstab_chained := none
+endif
 
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
     fstab_prefix := none
@@ -32,6 +40,7 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-i $(PRODUCT_FSTAB_TEMPLATE) \
 	-p $(fstab_prefix) \
 	-f $(fstab_flags) \
+	-c $(fstab_chained) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 
