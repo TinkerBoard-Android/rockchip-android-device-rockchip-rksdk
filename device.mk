@@ -316,6 +316,9 @@ $(call inherit-product, device/rockchip/common/modules/thermal.mk)
 # Media DRM
 $(call inherit-product, device/rockchip/common/modules/media_drm.mk)
 
+# Usb controller detector for GKI
+$(call inherit-product, device/rockchip/common/modules/usb.mk)
+
 # Power AIDL
 PRODUCT_PACKAGES += \
     android.hardware.power \
