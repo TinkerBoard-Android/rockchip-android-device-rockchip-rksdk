@@ -909,12 +909,21 @@ endif
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-service \
-    android.hardware.boot@1.1-impl-rockchip \
-    android.hardware.boot@1.1-impl-rockchip.recovery
+    android.hardware.boot@1.2-service \
+    android.hardware.boot@1.2-impl-rockchip \
+    android.hardware.boot@1.2-impl-rockchip.recovery
 
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
+ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION_WITH_GKI_ENABLE)),true)
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+$(call inherit-product, \
+    $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+endif
+else
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+endif
 endif
 
 ifeq ($(strip $(BOARD_USES_VIRTUAL_AB_RETROFIT)),true)
