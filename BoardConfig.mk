@@ -59,7 +59,6 @@ PRODUCT_KERNEL_ARCH ?= arm
 #TWRP
 BOARD_TWRP_ENABLE ?= false
 
-
 # Use the non-open-source parts, if they're present
 ifeq ($(PRODUCT_KERNEL_ARCH), arm)
 TARGET_PREBUILT_KERNEL ?= $(PRODUCT_KERNEL_PATH)/arch/arm/boot/zImage
@@ -88,17 +87,23 @@ ifeq ($(TARGET_BUILD_VARIANT), user)
 PRODUCT_KERNEL_CONFIG += non_debuggable.config
 endif
 
-ifeq ($(BOARD_AVB_ENABLE), true)
-BOARD_KERNEL_CMDLINE := androidboot.wificountrycode=CN androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro init=/init
-else # BOARD_AVB_ENABLE is false
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.baseband=N/A androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 androidboot.verifiedbootstate=orange firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
-endif # BOARD_AVB_ENABLE
+ROCKCHIP_ANDROID_BOOT_CMDLINE ?= androidboot.console=ttyFIQ0 androidboot.wificountrycode=CN
+ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.hardware=$(TARGET_BOARD_HARDWARE)
+ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.boot_devices=$(PRODUCT_BOOT_DEVICE)
 
-BOARD_KERNEL_CMDLINE += loop.max_part=7
 ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
 
+BOARD_KERNEL_CMDLINE := console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
+BOARD_KERNEL_CMDLINE += loop.max_part=7
+
 ifneq ($(BOARD_SELINUX_ENFORCING), true)
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.selinux=permissive
+endif
+
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \<= 3)))
+BOARD_KERNEL_CMDLINE += $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
+else # Boot header 4 requires bootconfig
+BOARD_BOOTCONFIG := $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
 endif
 
 # For Header V2, set resource.img as second.

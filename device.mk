@@ -33,9 +33,11 @@ PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 PRODUCT_PACKAGES += \
     ExactCalculator
 
-# Kernel
+ifdef TARGET_PREBUILT_KERNEL
+# Copy kernel if exists
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
+endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
