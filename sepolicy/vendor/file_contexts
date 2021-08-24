@@ -221,5 +221,3 @@
 #flash_img
 /vendor/bin/flash_img.sh u:object_r:vendor_install_recovery_exec:s0
 
-#rknn_server
-/vendor/bin/rknn_server u:object_r:rknn_server_exec:s0
