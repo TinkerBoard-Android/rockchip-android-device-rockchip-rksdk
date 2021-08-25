@@ -58,7 +58,7 @@
 
 # for BT
 /dev/vflash               0660   bluetooth  net_bt_stack
-/dev/ttyS0                0660   bluetooth  net_bt_stack
+#/dev/ttyS0                0660   bluetooth  net_bt_stack
 /dev/ttyS1                0660   bluetooth  net_bt_stack
 #/dev/ttyS2                0660   bluetooth  net_bt_stack
 /dev/rtk_btusb            0660   bluetooth  net_bt_stack
@@ -204,3 +204,29 @@
 
 # for sensors
 /dev/input/event*    0666   input system
+
+# for 40 pin gpio
+/sys/class/gpio/gpio* active_low 0666 root root
+/sys/class/gpio/gpio* direction  0666 root root
+/sys/class/gpio/gpio* edge       0666 root root
+/sys/class/gpio/gpio* value      0666 root root
+
+# for 40 pin PWM
+/sys/class/pwm/pwmchip* pwm0 0777 root root
+/sys/class/pwm/pwmchip* pwm0/capture 0666 root root
+/sys/class/pwm/pwmchip* pwm0/duty_cycle 0666 root root
+/sys/class/pwm/pwmchip* pwm0/enable     0666 root root
+/sys/class/pwm/pwmchip* pwm0/period     0666 root root
+/sys/class/pwm/pwmchip* pwm0/polarity   0666 root root
+
+# For 40 pin I2C
+/dev/i2c-6 0666 root root
+/dev/i2c-7 0666 root root
+
+# For 40 pin SPI
+/dev/spidev1.0 0666 root root
+/dev/spidev5.0 0666 root root
+
+# For 40 pin UART
+/dev/ttyS0 0666 root root
+/dev/ttyS4 0666 root root
