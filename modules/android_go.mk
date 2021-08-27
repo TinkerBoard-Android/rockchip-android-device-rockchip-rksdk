@@ -23,13 +23,23 @@ else
 $(call inherit-product, build/target/product/go_defaults.mk)
 endif
 $(call inherit-product, device/rockchip/common/build/rockchip/AndroidGoCommon.mk)
+
+# Enable lazy service to save memory
+ROCKCHIP_USE_LAZY_HAL := true
+
+# Copy features to device
 PRODUCT_COPY_FILES += \
-    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml \
-    frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml
-PRODUCT_PROPERTY_OVERRIDES += \
-    config.disable_rtt=true \
-    config.disable_consumerir=true
+    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
+
+# Disable surfaceflinger prime_shader cache to improve post boot memory.
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += service.sf.prime_shader_cache=0
+
+# remove the llkd process
+PRODUCT_PROPERTY_OVERRIDES += ro.llk.enable=false
+
+# Overlay configs
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_go
+
 # Enable DM file pre-opting to reduce first boot time
 PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
 PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
