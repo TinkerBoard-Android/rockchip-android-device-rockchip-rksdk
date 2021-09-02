@@ -36,6 +36,10 @@ ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
 partition_list := $(partition_list),super:$(BOARD_SUPER_PARTITION_SIZE)
 endif # BOARD_USE_DYNAMIC_PARTITIONS
 
+ifdef BOARD_USERDATAIMAGE_PARTITION_SIZE
+partition_list := $(partition_list),data:$(BOARD_USERDATAIMAGE_PARTITION_SIZE)
+endif
+
 intermediates := $(call intermediates-dir-for,FAKE,rockchip_parameter)
 rebuild_parameter := $(intermediates)/parameter.txt
 
