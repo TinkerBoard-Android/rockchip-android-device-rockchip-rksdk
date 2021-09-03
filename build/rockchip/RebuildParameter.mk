@@ -34,7 +34,9 @@ endif
 
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
 partition_list := $(partition_list),super:$(BOARD_SUPER_PARTITION_SIZE)
-endif # BOARD_USE_DYNAMIC_PARTITIONS
+else # BOARD_USE_DYNAMIC_PARTITIONS
+partition_list := $(partition_list),system:$(BOARD_SYSTEMIMAGE_PARTITION_SIZE),vendor:$(BOARD_VENDORIMAGE_PARTITION_SIZE),odm:$(BOARD_ODMIMAGE_PARTITION_SIZE)
+endif
 
 ifdef BOARD_USERDATAIMAGE_PARTITION_SIZE
 partition_list := $(partition_list),data:$(BOARD_USERDATAIMAGE_PARTITION_SIZE)
