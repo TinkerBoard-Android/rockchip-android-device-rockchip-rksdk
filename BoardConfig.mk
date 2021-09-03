@@ -59,6 +59,8 @@ PRODUCT_KERNEL_ARCH ?= arm
 #TWRP
 BOARD_TWRP_ENABLE ?= false
 
+include device/rockchip/common/build/rockchip/Partitions.mk
+
 # Use the non-open-source parts, if they're present
 ifeq ($(PRODUCT_KERNEL_ARCH), arm)
 TARGET_PREBUILT_KERNEL ?= $(PRODUCT_KERNEL_PATH)/arch/arm/boot/zImage
@@ -143,17 +145,6 @@ endif
 BOARD_INCLUDE_RECOVERY_DTBO ?= true
 BOARD_INCLUDE_DTB_IN_BOOTIMG ?= true
 
-# Add standalone metadata partition
-BOARD_USES_METADATA_PARTITION ?= true
-
-# Add standalone odm partition configrations
-TARGET_COPY_OUT_ODM := odm
-BOARD_ODMIMAGE_FILE_SYSTEM_TYPE ?= ext4
-
-# Add standalone vendor partition configrations
-TARGET_COPY_OUT_VENDOR := vendor
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE ?= ext4
-
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 
@@ -164,54 +155,6 @@ DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix_le
 else
 # For Android R and older versions.
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix.xml
-endif
-
-#Calculate partition size from parameter.txt
-USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
-ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
-  ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
-    BOARD_SUPER_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt super)
-    BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
-  else
-    BOARD_SYSTEMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt system)
-    BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor)
-    BOARD_ODMIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt odm)
-  endif
-  BOARD_CACHEIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt cache)
-  BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt boot)
-  BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt dtbo)
-  BOARD_RECOVERYIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt recovery)
-  # Header V3, add vendor_boot
-  ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
-    BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor_boot)
-  endif
-  #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
-else
-  ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
-    ifeq ($(BUILD_WITH_GO_OPT), true)
-      BOARD_SUPER_PARTITION_SIZE ?= 2516582400
-    else
-      BOARD_SUPER_PARTITION_SIZE ?=  3263168512
-    endif
-    BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE ?= $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
-  else
-    BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= 2726297600
-    BOARD_VENDORIMAGE_PARTITION_SIZE ?= 402653184
-    BOARD_ODMIMAGE_PARTITION_SIZE ?= 134217728
-  endif
-  BOARD_CACHEIMAGE_PARTITION_SIZE ?= 402653184
-  BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 100663296
-  BOARD_DTBOIMG_PARTITION_SIZE ?= 4194304
-  # Header V3, add vendor_boot
-  ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
-    BOARD_BOOTIMAGE_PARTITION_SIZE ?= 67108864
-    BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE ?= 41943040
-  else
-    BOARD_BOOTIMAGE_PARTITION_SIZE ?= 41943040
-  endif
-  ifneq ($(strip $(TARGET_DEVICE_DIR)),)
-    #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
-  endif
 endif
 
 # GPU configration
@@ -293,13 +236,6 @@ RECOVERY_AUTO_USB_UPDATE ?= false
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_ROCKCHIP_PCBATEST ?= false
 #TARGET_RECOVERY_UI_LIB ?= librecovery_ui_$(TARGET_PRODUCT)
-TARGET_USERIMAGES_USE_EXT4 ?= true
-TARGET_USERIMAGES_USE_F2FS ?= false
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE ?= ext4
-RECOVERY_UPDATEIMG_RSA_CHECK ?= false
-
-# use ext4 cache for OTA
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE ?= ext4
 
 TARGET_USES_MKE2FS ?= true
 
