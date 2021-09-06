@@ -59,6 +59,10 @@ PRODUCT_KERNEL_ARCH ?= arm
 #TWRP
 BOARD_TWRP_ENABLE ?= false
 
+ifeq ($(PRODUCT_FS_COMPRESSION), 1)
+include device/rockchip/common/build/rockchip/F2fsCompression.mk
+endif
+
 include device/rockchip/common/build/rockchip/Partitions.mk
 
 # Use the non-open-source parts, if they're present
