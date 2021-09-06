@@ -4,7 +4,7 @@ import getopt
 import os
 from string import Template
 
-usage = 'fstab_generator.py -I <type: fstab/dts> -i <fstab_template> -p <block_prefix> -f <flags> -c <chained_flags> -s <sdmmc_device> -o <output_file>'
+usage = 'fstab_generator.py -I <type: fstab/dts> -i <fstab_template> -p <block_prefix> -d <dynamic_part_list> -f <flags> -c <chained_flags> -s <sdmmc_device> -o <output_file>'
 
 def main(argv):
     ifile = ''
@@ -15,13 +15,14 @@ def main(argv):
     sdmmc_device = ''
     avbpub_key = ',avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey'
     type = 'fstab'
+    part_list = ''
     chained_flags = ''
     dt_vbmeta = 'vbmeta {\n\
         compatible = "android,vbmeta";\n\
         parts = "vbmeta,boot,system,vendor,dtbo";\n\
     };'
     try:
-        opts, args = getopt.getopt(argv, "hI:i:p:f:c:s:o:", ["IType","ifile","bprefix=","flags=","chained_flags","sdevice=","ofile="])
+        opts, args = getopt.getopt(argv, "hI:i:p:f:d:c:s:o:", ["IType","ifile","bprefix=","flags=","dynamic_part_list","chained_flags","sdevice=","ofile="])
     except getopt.GetoptError:
         print (usage)
         sys.exit(2)
@@ -37,6 +38,8 @@ def main(argv):
             prefix = arg;
         elif opt in ("-f", "--flags"):
             flags = arg;
+        elif opt in ("-d", "--dynamic_part_list"):
+            part_list = arg;
         elif opt in ("-c", "--chained_flags"):
             chained_flags = arg;
         elif opt in ("-s", "--sdmmc_device"):
@@ -54,6 +57,13 @@ def main(argv):
     if chained_flags == 'none':
         chained_flags = ''
 
+    temp_addon_fstab = ''
+    if part_list != 'none':
+        temp_addon_fstab += '\n'
+        list_partitions = part_list.split(',')
+        for cur_part in list_partitions:
+            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
+
     # add vbmeta parts name at here
     list_flags = list(flags);
     pos_avb = flags.find('avb')
@@ -67,6 +77,10 @@ def main(argv):
 
     file_fstab_in = open(ifile)
     template_fstab_in = file_fstab_in.read()
+
+    if type == 'fstab':
+        template_fstab_in += temp_addon_fstab
+
     fstab_in_t = Template(template_fstab_in)
 
     if type == 'fstab':
