@@ -383,6 +383,9 @@ BOARD_WIFI_SUPPORT ?= true
 #for rk 4g modem
 BOARD_HAS_RK_4G_MODEM ?= false
 
+#for rk DLNA
+PRODUCT_HAVE_DLNA ?= false
+
 #USE_CLANG_PLATFORM_BUILD ?= true
 
 # Android Q, move to device.mk since we can not change PRODUCT_PACKAGES in BoardConfig.mk

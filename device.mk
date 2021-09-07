@@ -146,6 +146,11 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service
 endif
 
+ifeq ($(PRODUCT_HAVE_DLNA),true)
+PRODUCT_PACKAGES += \
+    MediaCenter \
+    DLNA
+endif
 
 ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
 $(call inherit-product, device/rockchip/common/modules/4g_modem.mk)
