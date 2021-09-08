@@ -11,6 +11,8 @@ TARGET_BASE_PARAMETER_IMAGE=`get_build_var TARGET_BASE_PARAMETER_IMAGE`
 HIGH_RELIABLE_RECOVERY_OTA=`get_build_var HIGH_RELIABLE_RECOVERY_OTA`
 BOARD_AVB_ENABLE=`get_build_var BOARD_AVB_ENABLE`
 PRODUCT_USE_DYNAMIC_PARTITIONS=`get_build_var PRODUCT_USE_DYNAMIC_PARTITIONS`
+KERNEL_SRC_PATH=`get_build_var TARGET_PREBUILT_KERNEL`
+KERNEL_PATH=`get_build_var PRODUCT_KERNEL_PATH`
 
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_BASE_PARAMETER_IMAGE==$TARGET_BASE_PARAMETER_IMAGE
@@ -34,7 +36,6 @@ BOARD_CONFIG=device/rockchip/common/device.mk
 PARAMETER=${TARGET_DEVICE_DIR}/parameter.txt
 FLASH_CONFIG_FILE=${TARGET_DEVICE_DIR}/config.cfg
 
-KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
 
 [ $(id -u) -eq 0 ] || FAKEROOT=fakeroot
 
@@ -59,14 +60,18 @@ BOOT_OTA="ota"
         fi
     fi
 
-copy_images_from_out() {
-if [ ! -f "$OUT/$1" ]; then
+copy_images() {
+if [ ! -f "$1" ]; then
     echo "skip copy images: $1"
 else
-    echo "create $1..."
-    cp -a $OUT/$1 $IMAGE_PATH/$1
+    echo "create $2..."
+    cp -a $1 $2
     echo "done."
 fi
+}
+
+copy_images_from_out() {
+    copy_images $OUT/$1 $IMAGE_PATH/$1
 }
 
 echo "create dtbo.img..."
@@ -78,12 +83,14 @@ fi
 cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
 
+copy_images $KERNEL_PATH/resource.img $IMAGE_PATH/resource.img
 copy_images_from_out boot.img
 copy_images_from_out boot-debug.img
 copy_images_from_out vendor_boot.img
 copy_images_from_out vendor_boot-debug.img
 copy_images_from_out recovery.img
 copy_images_from_out super.img
+copy_images $OUT/userdata.img $IMAGE_PATH/data.img
 
 if [ ! "$PRODUCT_USE_DYNAMIC_PARTITIONS" = "true" ]; then
 copy_images_from_out system.img
