@@ -109,8 +109,6 @@ ROCKCHIP_ANDROID_BOOT_CMDLINE ?= androidboot.console=ttyFIQ0 androidboot.wificou
 ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.hardware=$(TARGET_BOARD_HARDWARE)
 ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.boot_devices=$(PRODUCT_BOOT_DEVICE)
 
-ROCKCHIP_RECOVERYIMAGE_CMDLINE_ARGS ?= console=ttyFIQ0 androidboot.baseband=N/A androidboot.selinux=permissive androidboot.wificountrycode=CN androidboot.veritymode=enforcing androidboot.hardware=$(TARGET_BOARD_HARDWARE) androidboot.console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init root=PARTUUID=af01642c-9b84-11e8-9b2a-234eb5e198a0
-
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 
@@ -132,11 +130,14 @@ endif
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Always use header v2 for recovery image,
-# - header v3 is used for virtual A/B and GKI;
-# - header v2 do not have recovery;
+# - header v4 is using bootconfig, always override cmdline in recovery;
+# - header v3+ is used for virtual A/B and GKI;
+# - header v2 used for the device with recovery;
 ifneq ($(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE), true)
 ifneq ($(BOARD_USES_AB_IMAGE), true)
-BOARD_RECOVERY_MKBOOTIMG_ARGS ?= --second $(TARGET_PREBUILT_RESOURCE) --header_version 2
+BOARD_RECOVERY_MKBOOTIMG_ARGS ?= --second $(TARGET_PREBUILT_RESOURCE) \
+    --header_version 2 \
+    --cmdline "$(BOARD_KERNEL_CMDLINE) $(ROCKCHIP_ANDROID_BOOT_CMDLINE)"
 ifeq ($(BOARD_AVB_ENABLE), true)
 BOARD_USES_FULL_RECOVERY_IMAGE := true
 endif
