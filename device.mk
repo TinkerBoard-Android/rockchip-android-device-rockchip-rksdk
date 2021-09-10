@@ -41,7 +41,7 @@ endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR9
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR1
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
