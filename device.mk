@@ -1285,6 +1285,11 @@ AB_OTA_PARTITIONS += \
     vendor_boot
 endif
 
+ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
+AB_OTA_PARTITIONS += \
+    logo
+endif
+
 # A/B OTA dexopt package
 PRODUCT_PACKAGES += otapreopt_script
 
