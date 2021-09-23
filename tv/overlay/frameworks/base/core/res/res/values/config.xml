@@ -106,4 +106,14 @@
          has expired, then assume the device is receiving insufficient current to charge
          effectively and terminate the dream.  Use -1 to disable this safety feature.  -->
     <integer name="config_dreamsBatteryLevelDrainCutoff">5</integer>
+
+    <!-- Control the behavior when the user long presses the power button.
+            0 - Nothing
+            1 - Global actions menu
+            2 - Power off (with confirmation)
+            3 - Power off (without confirmation)
+            4 - Go to voice assist
+            5 - Go to assistant (Settings.Secure.ASSISTANT)
+    -->
+    <integer name="config_longPressOnPowerBehavior">1</integer>
 </resources>

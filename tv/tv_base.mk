@@ -27,6 +27,9 @@ endif
 PRODUCT_COPY_FILES := \
     device/rockchip/common/tv/permissions/tv_core_hardware.xml:system/etc/permissions/tv_core_hardware.xml
 
+PRODUCT_COPY_FILES += \
+    device/google/atv/atv-component-overrides.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/atv-component-overrides.xml
+
 DEVICE_PACKAGE_OVERLAYS := \
     device/rockchip/common/tv/overlay
 
@@ -150,9 +153,6 @@ ifneq ($(USE_OEM_TV_APP),true)
     else
         PRODUCT_PACKAGES += LiveTv
     endif # if PRODUCT_IS_ATV_SDK
-
-    PRODUCT_COPY_FILES += \
-        device/google/atv/permissions/com.google.android.tv.installed.xml:system/etc/permissions/com.google.android.tv.installed.xml
 endif
 
 # To enable access to /dev/dvb*

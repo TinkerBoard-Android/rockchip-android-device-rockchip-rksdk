@@ -652,7 +652,7 @@ include hardware/realtek/rtkbt/rtkbt.mk
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-    include device/rockchip/common/samba/rk31_samba.mk
+    #include device/rockchip/common/samba/rk31_samba.mk
     PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.box.samba.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.box.samba.rc \
       device/rockchip/common/cifsmanager.sh:system/bin/cifsmanager.sh
