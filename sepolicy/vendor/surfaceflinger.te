@@ -2,7 +2,6 @@ dontaudit surfaceflinger kernel:system module_request;
 #TODO removed for Q
 #for hdmi
 allow surfaceflinger sysfs_hdmi:file rw_file_perms;
-allow surfaceflinger surfaceflinger:unix_stream_socket { ioctl };
 allow surfaceflinger system_data_file:dir create_dir_perms;
 allow surfaceflinger gpu_data_file:file {read open getattr};
 allow surfaceflinger self:capability { sys_nice };

@@ -27,3 +27,5 @@ binder_call(system_server, rk_output_hal)
 binder_call(system_server, zygote)
 
 rw_rockchip_graphic_device(system_server)
+
+get_prop(system_server, vendor_base_prop)

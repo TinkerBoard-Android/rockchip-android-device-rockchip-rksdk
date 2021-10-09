@@ -3,9 +3,7 @@ allow tee tee_device:chr_file { read write ioctl open };
 allow tee self:capability { chown setgid setuid sys_admin sys_rawio };
 
 allow tee device:dir r_dir_perms;
-allow tee init:unix_stream_socket { connectto };
 
-allow tee property_socket:sock_file { write };
 allow tee block_device:dir { getattr search };
 allow tee security_block_device:blk_file { ioctl open read write };
 allowxperm tee security_block_device:blk_file ioctl { 0x800ca400 0xc010a401 0x8010a402  0x8004a405 0x8010a403 0x8008a404 0x8010a407 0x8010a406 };

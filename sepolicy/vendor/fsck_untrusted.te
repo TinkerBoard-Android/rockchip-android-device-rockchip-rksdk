@@ -1,0 +1,3 @@
+# DONT DISPLAY W ntfsfix : type=1400 audit(0.0:338): avc: denied { search } for name="dm-5" dev="sysfs" ino=26072 
+# scontext=u:r:fsck_untrusted:s0 tcontext=u:object_r:sysfs_dm:s0 tclass=dir permissive=0
+dontaudit fsck_untrusted sysfs_dm:dir r_dir_perms;
