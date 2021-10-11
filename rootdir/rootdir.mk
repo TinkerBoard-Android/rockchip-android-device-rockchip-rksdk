@@ -27,3 +27,11 @@ PRODUCT_COPY_FILES += \
     $(ROCKCHIP_ROOT_DIR_PATH)/init.recovery.rk30board.rc:recovery/root/init.recovery.$(TARGET_BOARD_HARDWARE).rc \
     $(ROCKCHIP_ROOT_DIR_PATH)/ueventd.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
 
+# Default env for test.
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+PRODUCT_COPY_FILES += \
+    $(ROCKCHIP_ROOT_DIR_PATH)/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.debug.rc
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.dbg.keep_debugfs_mounted=1
+endif
