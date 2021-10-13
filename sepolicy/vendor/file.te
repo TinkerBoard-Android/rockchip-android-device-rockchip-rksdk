@@ -8,6 +8,7 @@ type ext4_exec, exec_type, file_type;
 type video_file, file_type,vendor_file_type,mlstrustedobject;
 
 type vendor_metadata, file_type,vendor_file_type,mlstrustedobject;
+type vendor_incremental_module, vendor_file_type, file_type;
 
 # /data
 type akmd_file, file_type, data_file_type;

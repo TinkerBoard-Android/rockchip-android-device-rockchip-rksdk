@@ -156,6 +156,9 @@
 /vendor/bin/hw/android\.hardware\.power-service\.rockchip               u:object_r:hal_power_default_exec:s0
 /vendor/bin/hw/android\.hardware\.lights-service\.rockchip              u:object_r:hal_light_default_exec:s0
 
+# Incremental file system driver
+/(vendor|vendor_dlkm)/lib/modules/incrementalfs\.ko                     u:object_r:vendor_incremental_module:s0
+
 # input files
 /vendor/usr/idc(/.*)?                  u:object_r:vendor_idc_file:s0
 /vendor/usr/keylayout(/.*)?            u:object_r:vendor_keylayout_file:s0

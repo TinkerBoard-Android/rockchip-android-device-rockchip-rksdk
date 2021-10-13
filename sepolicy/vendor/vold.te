@@ -11,3 +11,7 @@ allow vold vold_device:blk_file ioctl;
 allow vold vold_exec:file execute_no_trans;
 allow vold self:capability { dac_override dac_read_search };
 allow vold sysfs_mmc:file rw_file_perms;
+
+allow vold self:capability sys_module;
+allow vold vendor_incremental_module:file r_file_perms;
+allow vold vendor_incremental_module:system module_load;
