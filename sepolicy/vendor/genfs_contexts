@@ -7,23 +7,8 @@ genfscon sysfs /devices/platform/20072000.i2c/i2c-0/0-001a/rk816-battery/power_s
 genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-0062/power_supply                              u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-006b/power_supply                              u:object_r:sysfs_batteryinfo:s0
 
-# rk3368 xikp RTC hctosys
-genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
-
 genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-charger/power_supply                u:object_r:sysfs_batteryinfo:s0
-
-# rk3126c RTC
-genfscon sysfs /devices/platform/20072000.i2c/i2c-0/0-001a/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
-# rk3288 RTC
-genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
-
-# rk3326 I2C-0 RTC
-genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
-
-# rk3399 RTC
-genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
-genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
 
 # for kernel 4.19
 genfscon debugfs /sync                                                                               u:object_r:debugfs_sw_sync:s0

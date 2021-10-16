@@ -2,7 +2,6 @@ allow mediacodec system_file:dir { open read };
 allow mediacodec sysfs:file { read open getattr };
 allow mediacodec sysfs:dir { read open getattr };
 allow mediacodec sysfs_dev:file { open read getattr write };
-allow mediacodec video_file:file { read getattr open };
 allow mediacodec tee_device:chr_file rw_file_perms;
 allow mediacodec proc_version:file r_file_perms;
 

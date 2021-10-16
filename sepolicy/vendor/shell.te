@@ -8,7 +8,6 @@ allow shell proc_misc:file getattr;
 allow shell proc:file getattr;
 allow shell vendor_toolbox_exec:file getattr;
 allow shell init_exec:file getattr;
-allow shell vendor_metadata:dir getattr;
 allow shell debugfs:dir { read open } ;
 
 allow shell sysfs:file { getattr };
@@ -39,7 +38,6 @@ get_prop(shell, mmc_prop)
 get_prop(shell, device_logging_prop)
 
 allow shell metadata_file:dir { search getattr rw_dir_perms };
-allow shell gpu_data_file:file rw_file_perms;
 allow shell metadata_file:file r_file_perms;
 
 rw_rockchip_graphic_device(shell)

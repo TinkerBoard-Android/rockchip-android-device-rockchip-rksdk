@@ -2,7 +2,6 @@
 # for gpu
 allow system_server abc:dir { read open getattr };
 allow system_server serial_device:chr_file rw_file_perms;
-allow system_server sysfs_hctosys:file { read open getattr };
 allow system_server sysfs_extcon:file r_file_perms;
 
 # for storage
@@ -11,10 +10,6 @@ allow system_server storage_stub_file:dir getattr;
 allow system_server zygote:process getpgid;
 
 allow system_server sysfs_net:file r_file_perms;
-# input files
-#TODO removed for Q
-#r_dir_file(system_server, idc_file)
-#r_dir_file(system_server, keylayout_file)
 r_dir_file(system_server, metadata_file)
 
 #rk_output_hal

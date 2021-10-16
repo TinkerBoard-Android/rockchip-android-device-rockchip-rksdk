@@ -14,9 +14,6 @@ recovery_only(`
     allow recovery media_rw_data_file:dir { search open read };
     allow recovery vfat:dir rw_dir_perms;
     allow recovery media_rw_data_file:file { open read };
-    allow recovery ru_file:file execute_no_trans;
-    allow recovery ru_file:{ file lnk_file } { create_file_perms relabelfrom relabelto };
-    allow recovery ru_file:dir { create_dir_perms relabelfrom relabelto };
 
     allow recovery vfat:file {create append};
     allow recovery storage_device:chr_file {read write open ioctl};
@@ -41,8 +38,6 @@ recovery_only(`
     allow recovery sysfs_power:file {read open};
     allow recovery sysfs_mmc:dir {search};
     allow recovery sysfs_mmc:file {open read getattr};
-    allow recovery rk_bluetooth_file:dir {search};
-    allow recovery rk_bluetooth_file:lnk_file {read};
     allow recovery sensor_device:chr_file {open read ioctl};
     allow recovery rtc_device:chr_file {open read write ioctl};
 

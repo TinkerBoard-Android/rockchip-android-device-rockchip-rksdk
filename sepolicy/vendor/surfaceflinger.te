@@ -3,9 +3,7 @@ dontaudit surfaceflinger kernel:system module_request;
 #for hdmi
 allow surfaceflinger sysfs_hdmi:file rw_file_perms;
 allow surfaceflinger system_data_file:dir create_dir_perms;
-allow surfaceflinger gpu_data_file:file {read open getattr};
 allow surfaceflinger self:capability { sys_nice };
-allow surfaceflinger vendor_metadata:dir { search };
 
 allow surfaceflinger hal_camera_default:fd use;
 

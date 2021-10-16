@@ -1,7 +1,5 @@
 allow bootanim hwservicemanager:binder call;
 
-allow bootanim gpu_data_file:file {read open getattr};
-allow bootanim vendor_metadata:dir { search };
 allow bootanim audio_service:service_manager find;
 allow bootanim mediametrics_service:service_manager find;
 

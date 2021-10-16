@@ -1,15 +1,11 @@
 dontaudit system_app mnt_vendor_file:dir search;
 #for gpu
-allow system_app sysfs_lcdc:file rw_file_perms;
 allow system_app sysfs_usb:file rw_file_perms;
-allow system_app gpu_data_file:file rw_file_perms;
-allow system_app vendor_metadata:dir { search };
 #for ota
 allow system_app selinuxfs:file { read open };
 allow system_app mnt_media_rw_file:dir { getattr };
 #for hdmi
 allow system_app sysfs_hdmi:file rw_file_perms;
-allow system_app sysfs_fb:file rw_file_perms;
 allow system_app sysfs_zram:dir r_dir_perms;
 allow system_app sysfs_zram:file rw_file_perms;
 allow system_app proc_stat:file { read open getattr };

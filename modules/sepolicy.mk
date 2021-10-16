@@ -23,11 +23,6 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS ?= \
     device/rockchip/common/sepolicy/private \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
 
-ifneq ($(BUILD_WITH_RK_EBOOK),true)
-    BOARD_SEPOLICY_DIRS += \
-        device/rockchip/common/sepolicy/split
-endif
-
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     BOARD_SEPOLICY_DIRS += \
         device/rockchip/common/box/sepolicy/vendor

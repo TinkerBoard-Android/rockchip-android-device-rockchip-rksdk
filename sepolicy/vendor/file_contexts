@@ -39,11 +39,8 @@
 /sys/devices/platform/ff450000.syscon/ff450000.syscon:usb2-phy@100/otg_mode u:object_r:sysfs_usb:s0
 /sys/devices/platform/fe8a0000.usb2-phy/otg_mode u:object_r:sysfs_usb:s0
 
-#hctosys
-/sys/devices/platform/rtc-fake/rtc/rtc0/hctosys -- u:object_r:sysfs_hctosys:s0
-
-#lcdcscale
-/sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
+# sysfs_rtc
+/sys/devices/platform/rtc-fake/rtc -- u:object_r:sysfs_rtc:s0
 
 #for support ntfs
 /system/bin/ntfs-3g  u:object_r:vold_exec:s0
@@ -81,11 +78,6 @@
 /dev/block/by-name/trust_[ab]                   u:object_r:uboot_block_device:s0
 /dev/block/by-name/dtbo_[ab]                    u:object_r:uboot_block_device:s0
 /dev/block/by-name/vbmeta_[ab]                  u:object_r:vbmeta_block_device:s0
-
-/sys/devices/platform/fb/graphics/fb[0-9]/cabc                u:object_r:sysfs_fb:s0
-/sys/kernel/debug/mali/gpu_memory                u:object_r:sys_mali:s0
-
-/mnt/vendor/metadata                            u:object_r:vendor_metadata:s0
 
 #for vpu
 /dev/rkvdec                                     u:object_r:video_device:s0
@@ -170,11 +162,8 @@
 /dev/hidraw0                u:object_r:hidraw_device:s0
 
 #bluetooth
-/sys/class/rfkill(/.*)?                 u:object_r:rk_bluetooth_file:s0
-/proc/bluetooth/sleep/lpm               u:object_r:rk_bluetooth_file:s0
-
-#gpu_data_file
-/data/ota/view_cts\.ini u:object_r:gpu_data_file:s0
+/sys/class/rfkill(/.*)?                 u:object_r:sysfs_bluetooth_writable:s0
+/proc/bluetooth/sleep/lpm               u:object_r:sysfs_bluetooth_writable:s0
 
 #data
 /data/vendor/mediadrm(/.*)?             u:object_r:mediadrm_vendor_data_file:s0
