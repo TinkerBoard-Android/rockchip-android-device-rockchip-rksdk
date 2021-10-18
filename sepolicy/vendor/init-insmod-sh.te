@@ -11,5 +11,6 @@ allow init-insmod-sh vendor_toolbox_exec:file rx_file_perms;
 # Allow insmod
 allow init-insmod-sh self:capability sys_module;
 allow init-insmod-sh system_file:system module_load;
-
 allow init-insmod-sh vendor_file:system module_load;
+
+set_prop(init-insmod-sh, vendor_system_public_prop)
