@@ -17,6 +17,10 @@
 #for enable optee support
 ifeq ($(strip $(PRODUCT_HAVE_OPTEE)),true)
 
+# Use keymint 1.0 to support app_attest_key
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml
+
 PRODUCT_PACKAGES += \
     tee-supplicant \
     android.hardware.gatekeeper@1.0-service.optee \
