@@ -660,22 +660,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rk.screenoff_time=60000
 endif
 
-ifneq (,$(filter 4.19, $(PRODUCT_KERNEL_VERSION)))
-# Enable Incremental on the device via kernel driver
-BOARD_VENDOR_KERNEL_MODULES += \
-    vendor/rockchip/common/modular_kernel/4.19/incrementalfs.ko
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.incremental.enable=module:/vendor/lib/modules/incrementalfs.ko
-
-PRODUCT_KERNEL_CONFIG += disable_incfs.config
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.incremental.enable=yes
-endif
-
-PRODUCT_COPY_FILES += \
-    vendor/rockchip/common/gms/features/android.software.incremental_delivery.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.incremental_delivery.xml
+# incrementalfs config
+$(call inherit-product-if-exists, vendor/rockchip/common/modular_kernel/4.19/incrementalfs.mk)
 
 ifeq ($(strip $(BUILD_WITH_MICROSOFT_PLAYREADY)), true)
 $(call inherit-product-if-exists, vendor/microsoft/playready.mk)
