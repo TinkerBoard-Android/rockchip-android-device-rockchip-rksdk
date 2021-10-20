@@ -13,6 +13,7 @@ allow rk_output_hal hidl_base_hwservice:hwservice_manager add;
 binder_call(rk_output_hal,hwservicemanager)
 binder_call(rk_output_hal,system_server)
 get_prop(rk_output_hal,hwservicemanager_prop)
+get_prop(rk_output_hal,vendor_hwc_prop)
 
 rw_rockchip_graphic_device(rk_output_hal)
 vndbinder_use(rk_output_hal)
