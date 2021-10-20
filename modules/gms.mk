@@ -38,9 +38,7 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
       ro.control_privapp_permissions=enforce
   endif
   $(warning Please set client id with your own MADA ID!)
-  PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.clientidbase=android-rockchip
-
+  TARGET_SYSTEM_PROP += vendor/rockchip/common/gms/gms.prop
   MAINLINE_INCLUDE_WIFI_MODULE := false
   TMP_GMS_VAR := gms
   TMP_MAINLINE_VAR := mainline_modules
@@ -71,10 +69,6 @@ endif
 ifeq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
-
-# Imporve the tracking of GMS Express base build.
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.base_build=noah
 endif
 
 # GTVS
