@@ -19,6 +19,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 
+BOARD_AVB_ALGORITHM ?= SHA256_RSA4096
+BOARD_AVB_KEY_PATH ?= device/rockchip/common/avb_test_keys/testkey_atx_psk.pem
+# Only set this when uboot enable security avb.
+# BOARD_AVB_METADATA_BIN_PATH ?= device/rockchip/common/avb_test_keys/atx_metadata.bin
+
 # Build vbmeta with public_key_metadata
 # when BOARD_AVB_METADATA_BIN_PATH is set
 ifdef BOARD_AVB_METADATA_BIN_PATH
@@ -29,6 +34,20 @@ BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS := \
     --public_key_metadata $(BOARD_AVB_METADATA_BIN_PATH)
 endif #BOARD_USES_AB_IMAGE
 endif #BOARD_AVB_METADATA_BIN_PATH
+
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
+# Uses a prebuilt boot.img
+#TARGET_NO_KERNEL := true
+#BOARD_PREBUILT_BOOTIMAGE := \
+    packages/modules/BootPrebuilt/$(PRODUCT_KERNEL_VERSION)/$(PRODUCT_KERNEL_ARCH)/boot.img
+# Enable chained vbmeta for the boot image.
+# The following can be absent, where the hash descriptor of the
+# 'boot' partition will be stored then signed in vbmeta.img instead.
+BOARD_AVB_BOOT_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_BOOT_ALGORITHM ?= SHA256_RSA4096
+BOARD_AVB_BOOT_ROLLBACK_INDEX ?= $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION ?= 2
+endif # Boot Header 4
 
 ifneq ($(strip $(BOARD_USES_AB_IMAGE)),true)
 # BOARD_AVB_RECOVERY_KEY_PATH := $(BOARD_AVB_KEY_PATH)

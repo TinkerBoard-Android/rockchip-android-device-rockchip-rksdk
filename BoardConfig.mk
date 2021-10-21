@@ -74,22 +74,6 @@ TARGET_PREBUILT_KERNEL ?= $(PRODUCT_KERNEL_PATH)/arch/arm64/boot/Image
 BOARD_PREBUILT_DTBIMAGE_DIR ?= $(PRODUCT_KERNEL_PATH)/arch/arm64/boot/dts/rockchip
 endif
 
-ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
-# Uses a prebuilt boot.img
-#TARGET_NO_KERNEL := true
-#BOARD_PREBUILT_BOOTIMAGE := \
-    packages/modules/BootPrebuilt/$(PRODUCT_KERNEL_VERSION)/$(PRODUCT_KERNEL_ARCH)/boot.img
-ifeq ($(BOARD_AVB_ENABLE), true)
-# Enable chained vbmeta for the boot image.
-# The following can be absent, where the hash descriptor of the
-# 'boot' partition will be stored then signed in vbmeta.img instead.
-BOARD_AVB_BOOT_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_BOOT_ALGORITHM ?= SHA256_RSA4096
-BOARD_AVB_BOOT_ROLLBACK_INDEX ?= $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION ?= 2
-endif # AVB for GKI2
-endif # Boot Header 4
-
 TARGET_PREBUILT_RESOURCE ?= $(PRODUCT_KERNEL_PATH)/resource.img
 PRODUCT_PARAMETER_TEMPLATE ?= device/rockchip/common/scripts/parameter_tools/parameter.in
 TARGET_BOARD_HARDWARE_EGL ?= mali
