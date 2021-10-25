@@ -22,6 +22,11 @@
 /dev/mma8452_daemon  u:object_r:sensor_device:s0
 /dev/compass         u:object_r:sensor_dev:s0
 /dev/gyrosensor      u:object_r:sensor_dev:s0
+/dev/lightsensor     u:object_r:sensor_dev:s0
+/dev/psensor         u:object_r:sensor_dev:s0
+/dev/temperature     u:object_r:sensor_dev:s0
+/dev/pressure        u:object_r:sensor_dev:s0
+/dev/angle           u:object_r:sensor_dev:s0
 /dev/stune(/.*)?     u:object_r:cgroup:s0
 
 /dev/akm8963_dev        u:object_r:akmd_device:s0
@@ -37,6 +42,7 @@
 /sys/devices/virtual/android_usb/android0(/.*)? -- u:object_r:sysfs_usb:s0
 /sys/devices/platform/11000000.syscon/11000000.syscon:usb2-phy@760/otg_mode u:object_r:sysfs_usb:s0
 /sys/devices/platform/ff450000.syscon/ff450000.syscon:usb2-phy@100/otg_mode u:object_r:sysfs_usb:s0
+/sys/devices/platform/fe8a0000.usb2-phy/otg_mode u:object_r:sysfs_usb:s0
 
 #hctosys
 /sys/devices/platform/rtc-fake/rtc/rtc0/hctosys -- u:object_r:sysfs_hctosys:s0
@@ -45,8 +51,8 @@
 /sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
 
 #for support ntfs
-/system/bin/ntfs-3g  u:object_r:fsck_exec:s0
-/system/bin/mkntfs   u:object_r:fsck_exec:s0
+/system/bin/ntfs-3g  u:object_r:vold_exec:s0
+/system/bin/mkntfs   u:object_r:vold_exec:s0
 /system/bin/ntfsfix  u:object_r:fsck_exec:s0
 
 #for media
@@ -214,3 +220,4 @@
 
 #flash_img
 /vendor/bin/flash_img.sh u:object_r:vendor_install_recovery_exec:s0
+

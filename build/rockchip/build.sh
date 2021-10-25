@@ -164,9 +164,13 @@ if [ "$BUILD_ANDROID" = true ] ; then
             make installclean
             make -j$BUILD_JOBS
             make otapackage -j$BUILD_JOBS
+            make dist -j$BUILD_JOBS
             ./mkimage_ab.sh ota
         else
             echo "generate ota package"
+	    make installclean
+	    make -j$BUILD_JOBS
+	    make dist -j$BUILD_JOBS
             ./mkimage.sh ota
         fi
         cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
@@ -211,7 +215,11 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
 		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_PRODUCT.sh
 	fi
     else
-        cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
+	if [ "$BUILD_AB_IMAGE" = true ] ; then
+		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_"$TARGET_BOARD_PLATFORM"_ab.sh
+	else
+		cd $PACK_TOOL_DIR/rockdev && ./mkupdate_$TARGET_BOARD_PLATFORM.sh
+	fi
     fi
 
     if [ $? -eq 0 ]; then

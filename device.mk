@@ -95,7 +95,7 @@ PRODUCT_COPY_FILES += \
 
 #SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR7
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR10
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -510,6 +510,9 @@ PRODUCT_PACKAGES += \
     sensors.$(TARGET_BOARD_HARDWARE)
 
 endif
+
+# Include thermal HAL module
+$(call inherit-product, device/rockchip/common/modules/thermal.mk)
 
 # Power AIDL
 PRODUCT_PACKAGES += \
@@ -1304,7 +1307,7 @@ PRODUCT_COPY_FILES += \
 # Zoom out recovery ui of box by two percent.
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     TARGET_RECOVERY_OVERSCAN_PERCENT := 2
-    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
+    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter.img
     # savBaseParameter tool
     ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
         PRODUCT_PACKAGES += saveBaseParameter

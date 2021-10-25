@@ -291,7 +291,7 @@ if [ $IS_EBOOK == "true" ]; then
     if [ -f $ebook_logo_tool ]; then
         EINK_LOGO_PATH=${TARGET_DEVICE_DIR}/eink_logo/
         echo -n "create logo.img for uboot/charging/kernel logo"
-        $ebook_logo_tool --uboot-logo $EINK_LOGO_PATH/uboot_logo/uboot.bmp --kernel-logo $EINK_LOGO_PATH/kernel_logo/kernel.bmp --charge-logo $EINK_LOGO_PATH/uboot_logo/battery_0.bmp $EINK_LOGO_PATH/uboot_logo/battery_1.bmp $EINK_LOGO_PATH/uboot_logo/battery_2.bmp $EINK_LOGO_PATH/uboot_logo/battery_3.bmp $EINK_LOGO_PATH/uboot_logo/battery_4.bmp $EINK_LOGO_PATH/uboot_logo/battery_5.bmp $EINK_LOGO_PATH/uboot_logo/battery_fail.bmp --output $IMAGE_PATH/logo.img
+        $ebook_logo_tool --uboot-logo $EINK_LOGO_PATH/uboot_logo/uboot.bmp --kernel-logo $EINK_LOGO_PATH/kernel_logo/kernel.bmp --charge-logo $EINK_LOGO_PATH/uboot_logo/battery_0.bmp $EINK_LOGO_PATH/uboot_logo/battery_1.bmp $EINK_LOGO_PATH/uboot_logo/battery_2.bmp $EINK_LOGO_PATH/uboot_logo/battery_3.bmp $EINK_LOGO_PATH/uboot_logo/battery_4.bmp $EINK_LOGO_PATH/uboot_logo/battery_5.bmp $EINK_LOGO_PATH/uboot_logo/battery_fail.bmp --poweroff-logo $EINK_LOGO_PATH/uboot_logo/poweroff.bmp --output $IMAGE_PATH/logo.img
     fi
 fi
 

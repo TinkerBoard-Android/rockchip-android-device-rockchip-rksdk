@@ -503,6 +503,10 @@ endif
 
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
-    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter_fb1080.img
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk356x)
+    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v2.0/baseparameter.img
+else
+    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v1.0/baseparameter.img
+endif
     BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
 endif

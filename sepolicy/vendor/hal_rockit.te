@@ -10,6 +10,7 @@ add_hwservice(vendor-rockit-hal-1-0, vendor-rockit-hal_hwservice)
 allow vendor-rockit-hal-1-0 { ion_device video_device }:chr_file rw_file_perms;
 allow vendor-rockit-hal-1-0 sysfs_dev:file r_file_perms;
 allow vendor-rockit-hal-1-0 sysfs_dmc:file rw_file_perms;
+allow vendor-rockit-hal-1-0 hal_graphics_allocator_default:fd use;
 
 r_dir_file(vendor-rockit-hal-1-0, sdcardfs)
 r_dir_file(vendor-rockit-hal-1-0, storage_file)

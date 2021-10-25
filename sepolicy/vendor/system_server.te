@@ -1,4 +1,3 @@
-#allow system_server sysfs:file { read open getattr };
 # for gpu
 allow system_server abc:dir { read open getattr };
 allow system_server serial_device:chr_file rw_file_perms;
@@ -22,6 +21,7 @@ allow system_server rk_output_hal_service:hwservice_manager find;
 allow system_server zygote:process { getsched setsched };
 
 add_service(system_server,drm_device_management_service)
+add_service(system_server,rockchip_audio_setting_service)
 
 binder_call(system_server, rk_output_hal)
 binder_call(system_server, zygote)

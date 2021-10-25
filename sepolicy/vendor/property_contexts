@@ -62,8 +62,3 @@ vendor.boot_completed                   u:object_r:vendor_boot_complete_prop:s0
 #for vendor/build.prop
 vendor.all.modules.ready                   u:object_r:vendor_system_public_prop:s0
 
-#for flash_img
-vendor.flash_of_path                        u:object_r:debug_prop:s0
-vendor.flash_if_path                        u:object_r:debug_prop:s0
-vendor.flash.success                        u:object_r:debug_prop:s0
-flash.success                               u:object_r:vendor_system_public_prop:s0

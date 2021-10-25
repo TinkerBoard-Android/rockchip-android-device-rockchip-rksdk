@@ -11,6 +11,13 @@ ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
     fstab_flags := $(fstab_flags),avb
 endif # BOARD_AVB_ENABLE
 
+# GSI does not has dirsync support.
+ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+    sync_flags := none
+else
+    sync_flags := ,dirsync
+endif
+
 ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
     fstab_prefix := none
     fstab_flags := $(fstab_flags),logical
@@ -30,6 +37,7 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	@echo "Building fstab file $@."
 	$(ROCKCHIP_FSTAB_TOOLS) -I fstab \
 	-i $(PRODUCT_FSTAB_TEMPLATE) \
+	-a $(sync_flags) \
 	-p $(fstab_prefix) \
 	-f $(fstab_flags) \
 	-s $(fstab_sdmmc_device) \
