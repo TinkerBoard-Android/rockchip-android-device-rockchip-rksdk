@@ -1428,3 +1428,10 @@ PRODUCT_COPY_FILES += \
 # build libmpimmz for rknn
 PRODUCT_PACKAGES += \
 	libmpimmz
+
+# prebuild camera binary tools
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += \
+	media-ctl \
+	v4l2-ctl
+endif
