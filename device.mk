@@ -15,7 +15,8 @@
 #
 include vendor/rockchip/common/BoardConfigVendor.mk
 
-ifneq (,$(filter  mali-tDVx mali-G52, $(TARGET_BOARD_PLATFORM_GPU)))
+# mali-G610 的 GPU 架构实际上是 Mali valhall, 但 ARM 对 bifrost 和 valhall 提供同一套的 gralloc 和 DDK 源码.
+ifneq (,$(filter  mali-tDVx mali-G52 mali-G610, $(TARGET_BOARD_PLATFORM_GPU)))
 BOARD_VENDOR_GPU_PLATFORM := bifrost
 endif
 
