@@ -48,6 +48,9 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR1
 
+# Set system properties identifying the chipset
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=Rockchip
+
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     fsck.f2fs \
