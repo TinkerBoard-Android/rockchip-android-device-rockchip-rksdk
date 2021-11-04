@@ -824,12 +824,16 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
   PRODUCT_PROPERTY_OVERRIDES += \
        ro.target.product=box \
 
+  $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
+
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   PRODUCT_PROPERTY_OVERRIDES += \
        ro.target.product=atv \
        ro.com.google.clientidbase=android-rockchip-tv
   PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/bootanimation.zip:/system/media/bootanimation.zip
+
+  $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
   PRODUCT_PROPERTY_OVERRIDES += \
