@@ -34,6 +34,10 @@ PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 PRODUCT_PACKAGES += \
     ExactCalculator
 
+PRODUCT_PACKAGES += \
+    InProcessNetworkStack \
+    com.android.tethering.inprocess
+
 ifdef TARGET_PREBUILT_KERNEL
 # Copy kernel if exists
 PRODUCT_COPY_FILES += \
