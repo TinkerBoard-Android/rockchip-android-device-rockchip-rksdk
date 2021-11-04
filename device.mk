@@ -1433,5 +1433,6 @@ PRODUCT_PACKAGES += \
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	media-ctl \
-	v4l2-ctl
+	v4l2-ctl \
+	rkaiq_tool_server
 endif
