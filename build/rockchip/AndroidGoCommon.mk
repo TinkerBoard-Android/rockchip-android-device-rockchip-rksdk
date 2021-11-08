@@ -1,3 +1,5 @@
+SOUND_PATH := frameworks/base/data/sounds
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.critical_upgrade=true \
     ro.lmk.upgrade_pressure=40 \
@@ -25,3 +27,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=128m \
     dalvik.vm.heapsize=256m
+
+PRODUCT_COPY_FILES += \
+    $(SOUND_PATH)/effects/ogg/VideoRecord_48k.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/VideoRecord.ogg \
+    $(SOUND_PATH)/effects/ogg/VideoStop_48k.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/VideoStop.ogg \
+    $(SOUND_PATH)/effects/ogg/camera_click_48k.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/camera_click.ogg \
+    $(SOUND_PATH)/effects/ogg/camera_focus.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/camera_focus.ogg
