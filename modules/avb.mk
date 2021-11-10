@@ -21,6 +21,21 @@ PRODUCT_COPY_FILES += \
 
 BOARD_AVB_ALGORITHM ?= SHA256_RSA4096
 BOARD_AVB_KEY_PATH ?= device/rockchip/common/avb_test_keys/testkey_atx_psk.pem
+
+BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_DTBO_ADD_HASH_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS += --hash_algorithm sha256
+
+# Dynamic partitions
+ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
+BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_ODM_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+endif
+
 # Only set this when uboot enable security avb.
 # BOARD_AVB_METADATA_BIN_PATH ?= device/rockchip/common/avb_test_keys/atx_metadata.bin
 
@@ -47,6 +62,7 @@ BOARD_AVB_BOOT_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_BOOT_ALGORITHM ?= SHA256_RSA4096
 BOARD_AVB_BOOT_ROLLBACK_INDEX ?= $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION ?= 2
+BOARD_AVB_VENDOR_BOOT_ADD_HASH_FOOTER_ARGS += --hash_algorithm sha256
 endif # Boot Header 4
 
 ifneq ($(strip $(BOARD_USES_AB_IMAGE)),true)
