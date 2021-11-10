@@ -25,7 +25,7 @@ PRODUCT_FSTAB_TEMPLATE := device/rockchip/common/scripts/fstab_tools/fstab_compr
 #BOARD_USERDATAIMAGE_PARTITION_SIZE := 8589934592
 #BOARD_USERDATAIMAGE_PARTITION_SIZE := 26145193984
 #PRODUCT_FSTAB_TEMPLATE := device/rockchip/rk356x/rk3566_s/fstab_userdata.in
-
+PRODUCT_KERNEL_CONFIG += f2fs_compression.config
 # Tracking flags for f2fs compressed
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/gms/features/com.google.android.feature.COMPRESSED_F2FS.xml:system/etc/sysconfig/com.google.android.feature.COMPRESSED_F2FS.xml
