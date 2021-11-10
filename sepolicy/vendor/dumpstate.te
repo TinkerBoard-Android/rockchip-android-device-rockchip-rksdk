@@ -1,0 +1,1 @@
+allow dumpstate sysfs_mmc:file r_file_perms;
