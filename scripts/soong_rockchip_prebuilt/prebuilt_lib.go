@@ -37,6 +37,7 @@ func getVpuPrefix(platform string) string {
 func init() {
     fmt.Println("Rockchip conditional compile")
     android.RegisterModuleType("cc_rockchip_prebuilt_library_shared", RockchipPrebuiltLibsFactory)
+    android.RegisterModuleType("cc_rockchip_prebuilt_library_static", RockchipPrebuiltLibsStaticFactory)
 }
 
 func RockchipPrebuiltLibsFactory() (android.Module) {
@@ -49,6 +50,21 @@ func RockchipPrebuiltLibsFactory() (android.Module) {
 
     // Add Hook for PrebuiltSharedLibraryFactory
     android.AddLoadHook(module, AppendMultilibs)
+    return module
+}
+
+func RockchipPrebuiltLibsStaticFactory() (android.Module) {
+    // Register rockchip_prebuilt_libs factory as PrebuiltStaticLibraryFactory
+    module := cc.PrebuiltStaticLibraryFactory()
+
+    // Add new props for rockchip conditional compile
+    addon_props := &soongRockchipPrebuiltProperties{}
+
+    module.AddProperties(addon_props)
+
+    // Add Hook for PrebuiltStaticLibraryFactory
+    //android.AddLoadHook(module, AppendArchStaticLibs)
+    android.AddLoadHook(module, AppendArchStaticLibs)
     return module
 }
 
@@ -92,6 +108,7 @@ type Ex_multilibType struct {
 type soongRockchipPrebuiltProperties struct {
     Optee bool
     Vpu bool
+    Aiq bool
 }
 
 func AppendMultilibs(ctx android.LoadHookContext) {
@@ -116,6 +133,16 @@ func AppendMultilibs(ctx android.LoadHookContext) {
     }
 }
 
+func AppendArchStaticLibs(ctx android.LoadHookContext) {
+        type props struct {
+            Compile_multilib *string
+            Multilib Ex_multilibType
+        }
+        p := &props{}
+        p.Compile_multilib = peferCompileMultilib(ctx)
+        p.Multilib = configArm64LibStatic(ctx)
+        ctx.AppendProperties(p)
+}
 // Change the lib path, chose lib/lib64
 func peferCompileMultilib(ctx android.LoadHookContext) (*string) {
     /*fmt.Println("TARGET_PRODUCT:", ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
@@ -172,4 +199,23 @@ func configArmLib(ctx android.LoadHookContext) ([]string) {
     srcs = append(srcs, prefix + module_name)
     //fmt.Println("srcs:", srcs)
     return srcs
+}
+
+func configArm64LibStatic(ctx android.LoadHookContext) (Ex_multilibType) {
+    var srcs []string
+    var module_name string = ctx.ModuleName()[9:] + ".a"
+    var arch Ex_multilibType
+    var prefix64 string = ""
+    var prefix32 string = ""
+    var suffix string = "."
+    if (ctx.ContainsProperty("aiq")) {
+        suffix += ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM")[2:]
+    }
+    prefix64 += "android/arm64/"
+    prefix32 += "android/arm/"
+    arch.Lib32.Srcs = append(srcs, prefix32 + module_name + suffix)
+    arch.Lib64.Srcs = append(srcs, prefix64 + module_name + suffix)
+    //fmt.Println("arch.arm.srcs:", arch.Lib32.Srcs )
+    //fmt.Println("arch.arm64.srcs:", arch.Lib64.Srcs)
+    return arch
 }
