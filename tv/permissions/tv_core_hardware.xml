@@ -44,10 +44,10 @@
     <feature name="com.google.android.feature.PIXEL_EXPERIENCE"/>
     <feature name="android.software.autofill"/>
 <!--
-    <feature name="android.software.leanback" />
-    <feature name="android.hardware.television" />
     <feature name="android.software.leanback_only" />
     -->
+    <feature name="android.software.leanback" />
+    <feature name="android.hardware.television" />
     <feature name="android.software.live_tv" />
     <feature name="android.software.picture_in_picture" />
     <feature name="android.software.voice_recognizers" />
