@@ -215,3 +215,8 @@
 
 #flash_img
 /vendor/bin/flash_img.sh u:object_r:vendor_install_recovery_exec:s0
+
+# rk dma_buf heaps
+/dev/dma_heap/cma			u:object_r:dmabuf_system_heap_device:s0
+/dev/dma_heap/system-dma32		u:object_r:dmabuf_system_heap_device:s0
+/dev/dma_heap/system-uncached-dma32	u:object_r:dmabuf_system_heap_device:s0
