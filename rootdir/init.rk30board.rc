@@ -5,7 +5,6 @@ import /vendor/etc/init/hw/init.${ro.board.platform}.rc
 import /vendor/etc/init/hw/init.${ro.target.product}.rc
 import /vendor/etc/init/hw/init.car.rc
 import /vendor/etc/init/hw/init.optee.rc
-import /vendor/etc/init/hw/init.debug.rc
 
 on post-fs-data
     chmod 664 /sys/class/display/HDMI/color

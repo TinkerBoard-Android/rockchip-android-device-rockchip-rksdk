@@ -29,9 +29,6 @@ PRODUCT_COPY_FILES += \
 
 # Default env for test.
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-PRODUCT_COPY_FILES += \
-    $(ROCKCHIP_ROOT_DIR_PATH)/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.debug.rc
-
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.dbg.keep_debugfs_mounted=1
 endif
