@@ -190,3 +190,8 @@
 
 # for sensors
 /dev/input/event*    0666   input system
+
+# for rk dma_buf heaps
+/dev/dma_heap/cma			0444   system     system
+/dev/dma_heap/system-dma32		0444   system     system
+/dev/dma_heap/system-uncached-dma32	0444   system     system
