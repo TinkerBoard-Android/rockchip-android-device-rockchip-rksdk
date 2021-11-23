@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# DRM service opt-in
+PRODUCT_VENDOR_PROPERTIES += drm.service.enabled=true
+
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
     android.hardware.cas@1.2-service-lazy \
