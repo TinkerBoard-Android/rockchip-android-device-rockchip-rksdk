@@ -37,18 +37,17 @@ public:
                                               const char *device_address,
                                               const char *device_name,
                                               audio_format_t encodedFormat);
- 
     virtual status_t getOutputForAttr(const audio_attributes_t *attr,
-                                              audio_io_handle_t *output,
-                                              audio_session_t session,
-                                              audio_stream_type_t *stream,
-                                              uid_t uid,
-                                              const audio_config_t *config,
-                                              audio_output_flags_t *flags,
-                                              audio_port_handle_t *selectedDeviceId,
-                                              audio_port_handle_t *portId,
-                                              std::vector<audio_io_handle_t> *secondaryOutputs,
-                                              output_type_t *outputType);
+                                  audio_io_handle_t *output,
+                                  audio_session_t session,
+                                  audio_stream_type_t *stream,
+                                  const AttributionSourceState& attributionSource,
+                                  const audio_config_t *config,
+                                  audio_output_flags_t *flags,
+                                  audio_port_handle_t *selectedDeviceId,
+                                  audio_port_handle_t *portId,
+                                  std::vector<audio_io_handle_t> *secondaryOutputs,
+                                  output_type_t *outputType) override;
 
 protected:
     bool isAlreadConnect(audio_devices_t device,audio_policy_dev_state_t state,

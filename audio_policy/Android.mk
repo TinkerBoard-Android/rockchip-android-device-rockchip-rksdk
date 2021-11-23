@@ -44,7 +44,8 @@ LOCAL_HEADER_LIBRARIES := \
 
 LOCAL_CFLAGS := -Wall -Werror
 
-LOCAL_MODULE:= libaudiopolicymanager
+LOCAL_MODULE:= libaudiopolicymanagercustom
+LOCAL_SYSTEM_EXT_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
 

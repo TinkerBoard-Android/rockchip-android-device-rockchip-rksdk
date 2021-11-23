@@ -153,17 +153,22 @@ status_t ATVAudioPolicyManager::setDeviceConnectionState(audio_devices_t device,
    String deviceName = "RK_BITSTREAM_DEVICE_NAME";
 */
 status_t ATVAudioPolicyManager::getOutputForAttr(const audio_attributes_t *attr,
-                                              audio_io_handle_t *output,
-                                              audio_session_t session,
-                                              audio_stream_type_t *stream,
-                                              uid_t uid,
-                                              const audio_config_t *config,
-                                              audio_output_flags_t *flags,
-                                              audio_port_handle_t *selectedDeviceId,
-                                              audio_port_handle_t *portId,
-                                              std::vector<audio_io_handle_t> *secondaryOutputs,
-                                              output_type_t *outputType) {
-    if ((config->format == AUDIO_FORMAT_IEC61937) && (*flags == AUDIO_OUTPUT_FLAG_DIRECT)) {
+                                  audio_io_handle_t *output,
+                                  audio_session_t session,
+                                  audio_stream_type_t *stream,
+                                  const AttributionSourceState& attributionSource,
+                                  const audio_config_t *config,
+                                  audio_output_flags_t *flags,
+                                  audio_port_handle_t *selectedDeviceId,
+                                  audio_port_handle_t *portId,
+                                  std::vector<audio_io_handle_t> *secondaryOutputs,
+                                  output_type_t *outputType) { 
+    /*
+     * see flags which set in AudioTrack.cpp
+     * if (format == AUDIO_FORMAT_IEC61937) {
+     *    flags = static_cast<audio_output_flags_t>(flags | AUDIO_OUTPUT_FLAG_IEC958_NONAUDIO);
+     */
+    if ((config->format == AUDIO_FORMAT_IEC61937) && (*flags & AUDIO_OUTPUT_FLAG_DIRECT)) {
         String8 address("RK_BITSTREAM_DEVICE_ADDRESS");
         ALOGD("%s : getDevice for mBitstreamDevice = 0x%x", __FUNCTION__,mBitstreamDevice);
         sp<DeviceDescriptor> device =
@@ -175,7 +180,7 @@ status_t ATVAudioPolicyManager::getOutputForAttr(const audio_attributes_t *attr,
         }
     }
 
-    return AudioPolicyManager::getOutputForAttr(attr, output, session, stream,uid,
+    return AudioPolicyManager::getOutputForAttr(attr, output, session, stream, attributionSource,
            config, flags, selectedDeviceId, portId, secondaryOutputs, outputType);
 }
 
