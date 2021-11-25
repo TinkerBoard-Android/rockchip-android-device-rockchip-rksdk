@@ -21,6 +21,7 @@ on zygote-start
     chmod 0660 /dev/ttyS1
     chmod 0660 /dev/ttyS7
     chmod 0660 /dev/ttyS8
+    chmod 0660 /dev/ttyS9
     chmod 0660 /dev/vflash
     chmod 0664 /dev/vendor_storage
     chown bluetooth net_bt /dev/vflash
@@ -29,6 +30,7 @@ on zygote-start
     chown bluetooth net_bt /dev/ttyS1
     chown bluetooth net_bt /dev/ttyS7
     chown bluetooth net_bt /dev/ttyS8
+    chown bluetooth net_bt /dev/ttyS9
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
     chmod 0664 /sys/class/rfkill/rfkill0/state
