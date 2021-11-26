@@ -223,10 +223,10 @@ func configArm64LibStatic(ctx android.LoadHookContext) (Ex_multilibType) {
     var prefix32 string = ""
     var suffix string = "."
     if (ctx.ContainsProperty("aiq")) {
-	var platform = ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM")[2:]
-	var rkaiq_list = []string{"356x", "3588"}
+	var platform = ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM")
+	var rkaiq_list = []string{"rk356x", "rk3588"}
 	if isContain(rkaiq_list, platform) {
-		suffix += platform
+		suffix += platform[2:]
 	} else {
 		suffix += "356x"
 	}
