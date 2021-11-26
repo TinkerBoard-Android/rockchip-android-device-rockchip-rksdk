@@ -209,7 +209,13 @@ func configArm64LibStatic(ctx android.LoadHookContext) (Ex_multilibType) {
     var prefix32 string = ""
     var suffix string = "."
     if (ctx.ContainsProperty("aiq")) {
-        suffix += ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM")[2:]
+        var platform = ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM")
+        var rkaiq_list = []string{"rk356x", "rk3588"}
+        if isContain(rkaiq_list, platform) {
+            suffix += platform[2:]
+        } else {
+            suffix += "356x"
+        }
     }
     prefix64 += "android/arm64/"
     prefix32 += "android/arm/"
