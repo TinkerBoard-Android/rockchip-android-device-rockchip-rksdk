@@ -13,6 +13,10 @@ vendor.omx.                             u:object_r:vendor_omx_prop:s0
 vendor.mpp_buffer_debug                 u:object_r:vendor_omx_prop:s0
 vendor.mpp_mem_flag                     u:object_r:vendor_omx_prop:s0
 
+# wifi
+vendor.wifi.                            u:object_r:vendor_wifi_prop:s0
+vendor.wlan.                            u:object_r:vendor_wifi_prop:s0
+
 vendor.3d_resolution.                   u:object_r:vendor_system_public_prop:s0
 vendor.dump                             u:object_r:vendor_system_public_prop:s0
 vendor.shutdown_anim.orien              u:object_r:vendor_system_public_prop:s0
