@@ -44,6 +44,8 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR2
 
+TARGET_SYSTEM_PROP += device/rockchip/common/build/rockchip/rksdk.prop
+
 # Set system properties identifying the chipset
 PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=Rockchip
 
