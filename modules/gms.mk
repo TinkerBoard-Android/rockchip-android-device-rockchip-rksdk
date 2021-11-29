@@ -50,6 +50,8 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
     PRODUCT_PROPERTY_OVERRIDES += ro.apex.updatable=false
     # 2G A Go
     #TMP_GMS_VAR := $(TMP_GMS_VAR)_2gb
+  else
+    PRODUCT_PACKAGES += RockchipTetheringConfigOverlay
   endif
   ifeq ($(strip $(BUILD_WITH_EEA)),true)
     BUILD_WITH_GOOGLE_MARKET_ALL := true
