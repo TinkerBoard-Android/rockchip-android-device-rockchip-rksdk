@@ -47,6 +47,10 @@
 #hctosys
 /sys/devices/platform/rtc-fake/rtc/rtc0/hctosys -- u:object_r:sysfs_hctosys:s0
 
+# VoltageDetectService
+/sys/bus/iio/devices/iio:device0/in_voltage2_raw -- u:object_r:sysfs_iio:s0
+/sys/devices/platform/ff100000.saradc/iio:device0/in_voltage2_raw -- u:object_r:sysfs_iio:s0
+
 #lcdcscale
 /sys/devices/fb.11/graphics/fb0/scale -- u:object_r:sysfs_lcdc:s0
 

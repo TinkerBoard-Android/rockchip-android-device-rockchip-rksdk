@@ -57,3 +57,6 @@ allow system_app proc_pagetypeinfo:file r_file_perms;
 
 allow system_app mnt_sdcard_file:lnk_file r_file_perms;
 allow system_app mnt_pass_through_file:dir r_file_perms;
+
+# VoltageDetectService
+allow system_app sysfs_iio:file { open read };
