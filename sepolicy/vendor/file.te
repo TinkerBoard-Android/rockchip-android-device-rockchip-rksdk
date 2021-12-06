@@ -49,7 +49,6 @@ type sys_mali, fs_type, debugfs_type, mlstrustedobject;
 type debugfs_sw_sync, fs_type, debugfs_type;
 type sysfs_dmc, fs_type, sysfs_type;
 type sysfs_mmc, fs_type, sysfs_type;
-type sysfs_iio, fs_type, sysfs_type, mlstrustedobject;
 
 # input files
 type idc_file, file_type, vendor_file_type;

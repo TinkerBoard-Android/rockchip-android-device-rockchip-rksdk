@@ -166,8 +166,6 @@
 /sys/bus/iio/devices/iio:device* smd_delay_threshold     0660 system system
 /sys/bus/iio/devices/iio:device* smd_delay_threshold2        0660 system system
 /sys/bus/iio/devices/iio:device* smd_threshold           0660 system system
-/sys/bus/iio/devices/iio:device* in_voltage2_raw           0666 system system
-/sys/devices/platform/ff100000.saradc/iio:device* in_voltage2_raw 0666 system system
 
 #for frp function
 /dev/block/by-name/frp 0660 system system
