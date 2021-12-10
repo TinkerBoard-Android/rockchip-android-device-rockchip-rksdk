@@ -127,6 +127,7 @@
 /vendor/lib(64)?/libmpp.so                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libvpu.so                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libstdc\+\+.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libstagefrighthw.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/librk_vpuapi.so                u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libglslcompiler.so             u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgralloc_priv_omx.so         u:object_r:same_process_hal_file:s0
