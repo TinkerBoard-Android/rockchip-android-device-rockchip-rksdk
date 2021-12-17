@@ -6,6 +6,7 @@ type mediadrm_vendor_data_file, file_type, data_file_type;
 type abc_data_file, file_type, data_file_type;
 
 # /sys
+type sysfs_camera, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
 type fuseblk, sdcard_type, fs_type, mlstrustedobject;

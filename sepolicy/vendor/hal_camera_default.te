@@ -3,6 +3,11 @@ allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager { find 
 
 allow hal_camera_default hal_graphics_composer_default:fd { use };
 allow hal_camera_default mediaserver:fd { use };
+allow hal_camera_default vendor_data_file:dir { read open write add_name create setattr getattr remove_name rmdir };
+allow hal_camera_default vendor_data_file:file { read open write getattr create};
+allow hal_camera_default sysfs:dir {read open};
+allow hal_camera_default sysfs:file {read open getattr};
+allow hal_camera_default sysfs_camera:file rw_file_perms;
 
 allow hal_camera_default sysfs_dev:file r_file_perms;
 allow hal_camera_default proc_version:file r_file_perms;

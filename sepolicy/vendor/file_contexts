@@ -30,8 +30,11 @@
 /data/vendor/akmd(/.*)? u:object_r:akmd_vendor_data_file:s0
 
 # camera
+/dev/rk803           u:object_r:camera_device:s0
+/dev/drm_dp_aux[0-9] u:object_r:camera_device:s0
 /dev/media[0-9]      u:object_r:camera_device:s0
 /dev/v4l-subdev[0-9] u:object_r:camera_device:s0
+/sys/devices/platform/rkcif-mipi-lvds[^/]+/compact_test u:object_r:sysfs_camera:s0
 
 #usb
 /sys/devices/virtual/android_usb/android0(/.*)? -- u:object_r:sysfs_usb:s0
@@ -199,6 +202,9 @@
 
 #keymint
 /(vendor|system/vendor)/bin/hw/android\.hardware\.security\.keymint-service\.optee       u:object_r:hal_keymint_default_exec:s0
+
+#camera hal
+/(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.[0-9]+-virtual-service          u:object_r:hal_camera_default_exec:s0
 
 #abc
 /data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0
