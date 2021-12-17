@@ -19,10 +19,45 @@ $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/etc/camera_etc.mk)
 
-# Camera external
-ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
+# VIR or EXT
+ifeq (true,$(filter true, $(BOARD_CAMERA_SUPPORT_VIR) $(BOARD_CAMERA_SUPPORT_EXT)))
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
+
+#EXT only
+ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
+DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.external.xml
+endif
+
+#VIR only
+ifeq ($(BOARD_CAMERA_SUPPORT_VIR),true)
+DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.virtual.xml
+endif
+
+#both VIR and EXT
+else ifneq (,$(filter true, $(BOARD_CAMERA_SUPPORT_VIR) $(BOARD_CAMERA_SUPPORT_EXT)))
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
+
+DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.external-virtual.xml
+
+# legacy only
+else
+DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.legacy.xml
+endif
+
+#camera hal for structured light
+ifeq ($(BOARD_CAMERA_SUPPORT_VIR),true)
+$(call inherit-product-if-exists, hardware/rockchip/camera_vir/camera_etc.mk)
+
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-virtual-service
+endif
+
+# Camera external
+ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
 
 ifdef PRODUCT_USB_CAMERA_CONFIG
 PRODUCT_COPY_FILES += \
@@ -34,9 +69,6 @@ endif
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external-service
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.external.xml
-else
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.camera.provider@2.4-provider.legacy.xml
 endif
 
 # Camera Autofocus
