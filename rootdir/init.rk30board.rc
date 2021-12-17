@@ -16,6 +16,7 @@ on post-fs-data
 
     mkdir /data/vendor/logs 0755 root shell
     mkdir /data/vendor/audio 0755 system system
+    mkdir /data/vendor/camera 0755 cameraserver cameraserver
 
 on init
     # set temperature control policy as normal mode
@@ -217,6 +218,11 @@ on boot
     chmod 0666 /dev/tee0
     chmod 0666 /dev/teepriv0
     chmod 0444 /proc/pagetypeinfo
+
+    #for camera hal switch RAW data
+    chmod 0666 /sys/devices/platform/rkcif-mipi-lvds/compact_test
+    chmod 0666 /sys/devices/platform/rkcif-mipi-lvds2/compact_test
+    chmod 0666 /sys/devices/platform/rkcif-mipi-lvds3/compact_test
 
 on property:sys.boot_completed=1
     # if data is encrypt, when start gps too early, gpsd crashed

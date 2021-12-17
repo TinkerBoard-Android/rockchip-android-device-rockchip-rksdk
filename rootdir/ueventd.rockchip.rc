@@ -184,6 +184,8 @@
 /dev/v4l-subdev*          0666   media      camera
 
 /dev/video*          0660   media      camera
+/dev/rk803           0660   media      camera
+/dev/drm_dp_aux*     0660   media      camera
 
 /dev/media*          0660   media      camera
 
