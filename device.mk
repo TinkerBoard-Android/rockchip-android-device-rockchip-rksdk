@@ -162,12 +162,6 @@ ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
 $(call inherit-product, device/rockchip/common/modules/4g_modem.mk)
 endif
 
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-    PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml \
-      $(LOCAL_PATH)/tv/permissions/privapp-permissions-tv-common.xml:system/etc/permissions/privapp-permissions-tv-common.xml
-endif
-
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.connectivity.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.connectivity.rc
@@ -701,10 +695,21 @@ endif
 # hdmi cec
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml
+	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
+	$(LOCAL_PATH)/tv/permissions/privapp-permissions-tv-common.xml:system/etc/permissions/privapp-permissions-tv-common.xml
+
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 PRODUCT_PACKAGES += \
 	hdmi_cec.$(TARGET_BOARD_PLATFORM)
+
+USE_PRODUCT_RESOLUTION_WHITE := $(shell test -f $(TARGET_DEVICE_DIR)/resolution_white.xml && echo true)
+ifeq ($(strip $(USE_PRODUCT_RESOLUTION_WHITE)), true)
+  PRODUCT_COPY_FILES += \
+      $(TARGET_DEVICE_DIR)/resolution_white.xml:/system/usr/share/resolution_white.xml
+else
+  PRODUCT_COPY_FILES += \
+      $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
+endif
 
 # HDMI CEC HAL
 PRODUCT_PACKAGES += \
