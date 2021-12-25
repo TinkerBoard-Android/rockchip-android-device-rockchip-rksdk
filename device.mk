@@ -319,6 +319,9 @@ endif
 # Include thermal HAL module
 $(call inherit-product, device/rockchip/common/modules/thermal.mk)
 
+# include vibrator AIDL module
+$(call inherit-product, device/rockchip/common/modules/vibrator.mk)
+
 # Media DRM
 $(call inherit-product, device/rockchip/common/modules/media_drm.mk)
 
