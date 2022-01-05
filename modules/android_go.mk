@@ -25,6 +25,7 @@ $(call inherit-product, build/target/product/go_defaults.mk)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote32
 endif
 $(call inherit-product, device/rockchip/common/build/rockchip/AndroidGoCommon.mk)
+$(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
 
 # Enable lazy service to save memory
 ROCKCHIP_USE_LAZY_HAL := true

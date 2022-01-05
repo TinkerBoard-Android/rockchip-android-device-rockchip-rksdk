@@ -1,15 +1,15 @@
 SOUND_PATH := frameworks/base/data/sounds
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lmk.critical_upgrade=true \
-    ro.lmk.upgrade_pressure=40 \
-    ro.lmk.downgrade_pressure=60 \
-    ro.lmk.kill_heaviest_task=false \
-    ro.statsd.enable=true
+    ro.lmk.critical_upgrade?=true \
+    ro.lmk.upgrade_pressure?=40 \
+    ro.lmk.downgrade_pressure?=60 \
+    ro.lmk.kill_heaviest_task?=false \
+    ro.statsd.enable?=true
 
 # set threshold to filter unused apps
 PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.downgrade_after_inactive_days=10
+    pm.dexopt.downgrade_after_inactive_days?=10
 
 # set the compiler filter for shared apks to quicken.
 # Rationale: speed has a lot of dex code expansion, it uses more ram and space
@@ -20,13 +20,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Some notable apps that will be affected by this are gms and chrome.
 # b/65591595.
 PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.shared=quicken
+    pm.dexopt.shared?=quicken
 
 # Default heap sizes. Allow up to 256m for large heaps to make sure a single app
 # doesn't take all of the RAM.
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapgrowthlimit=128m \
-    dalvik.vm.heapsize=256m
+    dalvik.vm.heapgrowthlimit?=128m \
+    dalvik.vm.heapsize?=256m
 
 PRODUCT_COPY_FILES += \
     $(SOUND_PATH)/effects/ogg/VideoRecord_48k.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/VideoRecord.ogg \
