@@ -41,6 +41,7 @@
 /sys/devices/platform/11000000.syscon/11000000.syscon:usb2-phy@760/otg_mode u:object_r:sysfs_usb:s0
 /sys/devices/platform/ff450000.syscon/ff450000.syscon:usb2-phy@100/otg_mode u:object_r:sysfs_usb:s0
 /sys/devices/platform/fe8a0000.usb2-phy/otg_mode u:object_r:sysfs_usb:s0
+/sys/devices/platform/fd5d0000.syscon/fd5d0000.syscon:usb2-phy@0/otg_mode u:object_r:sysfs_usb:s0
 
 # sysfs_rtc
 /sys/devices/platform/rtc-fake/rtc -- u:object_r:sysfs_rtc:s0
