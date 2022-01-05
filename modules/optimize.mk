@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-# Include this makefile to support speed profile.
+# Include this makefile to support speed compile.
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Camera2 \
     Contacts \
@@ -28,3 +28,6 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.boot-dex2oat-threads=4 \
     dalvik.vm.dex2oat-threads=4
+
+# Task profile
+PRODUCT_PACKAGES += vendor_cgroups.json
