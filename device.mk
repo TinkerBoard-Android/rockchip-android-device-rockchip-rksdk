@@ -60,6 +60,7 @@ PRODUCT_PACKAGES += \
 # Prebuild apps
 $(call inherit-product, device/rockchip/common/modules/preinstall.mk)
 $(call inherit-product, device/rockchip/common/modules/optimize.mk)
+$(call inherit-product, device/rockchip/common/modules/build_dm.mk)
 
 # Inherit product config
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
