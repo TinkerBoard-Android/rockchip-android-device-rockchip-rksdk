@@ -139,6 +139,12 @@
             <limit name="resolution">8192x4320</limit>
             <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
         </codec>
+
+        <codec name="av1_8k_10bit">
+            <limit name="id">av1</limit>
+            <limit name="resolution">8192x4320</limit>
+            <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
+        </codec>
     </codeclist>
 
     <decoder>
@@ -197,7 +203,7 @@
         </chip>
         <chip name="RK3588">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
-            <include name="vp9_8k_10bit"/>
+            <include name="vp9_8k_10bit,av1_8k_10bit"/>
         </chip>
     </decoder>
 
