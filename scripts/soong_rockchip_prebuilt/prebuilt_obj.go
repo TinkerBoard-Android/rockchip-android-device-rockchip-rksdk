@@ -50,6 +50,7 @@ type RockchipPrebuiltObjectProperties struct {
 
     // Whether this module is optee.
     Optee *bool
+    Npu *bool
 
     // Ignore the following properties because we want to keep compatible.
     Check_elf_files *bool
@@ -179,8 +180,16 @@ func (p *RockchipPrebuiltObject) Optee() bool {
     return p.properties.Optee != nil && android.Bool(p.properties.Optee)
 }
 
+func (p *RockchipPrebuiltObject) Npu() bool {
+    return p.properties.Npu != nil && android.Bool(p.properties.Npu)
+}
+
 func (p *RockchipPrebuiltObject) GenerateAndroidBuildActions(ctx android.ModuleContext) {
     var prefix string = ""
+    if (p.Npu()) {
+        prefix = strings.ToUpper(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        prefix += "/Android/rknn_server/"
+    }
     if (p.Optee()) {
         prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
     }
@@ -276,3 +285,4 @@ func RockchipPrebuiltBinFactory() android.Module {
     android.InitAndroidArchModule(module, android.DeviceSupported, android.MultilibFirst)
     return module
 }
+
