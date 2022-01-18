@@ -1,0 +1,2 @@
+# For Rockchip configs
+r_dir_file(lmkd, rockchip_config_data_file)
