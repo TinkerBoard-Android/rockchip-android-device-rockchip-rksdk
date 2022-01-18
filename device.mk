@@ -28,7 +28,7 @@ ifeq ($(strip $(TARGET_ARCH)), arm64)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 
-PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi xhdpi xxhdpi
+PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi tvdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 
 PRODUCT_PACKAGES += \
