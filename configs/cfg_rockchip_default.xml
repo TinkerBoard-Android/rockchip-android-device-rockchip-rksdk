@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<modules>
+    <!-- LMKD service configs -->
+    <module name="lmkd">
+        <!-- Enable kill filter in lmkd? -->
+        <bool name="enable">true</bool>
+        <string-array name="package_denylist">
+            <item>android.ext.services</item>
+            <item>com.antutu.benchmark</item>
+            <item>com.antutu.ABenchMark</item>
+            <item>com.google.android.packageinstaller</item>
+        </string-array>
+    </module>
+    <!-- Memory reclaim service configs -->
+    <module name="proc_compact_job">
+        <!-- Enable Memory reclaim service? -->
+        <bool name="enable">true</bool>
+        <!-- Enable app process reclaim? Should enable it on low ram device.  -->
+        <bool name="app_reclaim_enable">true</bool>
+        <!-- Reclaim all process(include all apps)? -->
+        <bool name="app_enable">false</bool>
+        <!-- Trigger GC to system process(systemui/system_server)? -->
+        <bool name="system_gc_enable">true</bool>
+        <!-- Run next job if device is busy? -->
+        <bool name="force_reclaim">true</bool>
+        <!-- When does the first job run after startup is complete? -->
+        <integer name="first_pc_delay_mins">1</integer>
+        <!-- When will the next job run? Affected by force_reclaim. -->
+        <integer name="periodic_pc_delay_mins">3</integer>
+    </module>
+    <!-- App auto run controller configs -->
+    <module name="auto_run_controller">
+        <bool name="enable">true</bool>
+        <string-array name="package_denylist">
+            <item>com.snaptube.premium</item>
+        </string-array>
+    </module>
+    <!-- App compile w/h dm file configs -->
+    <module name="package_install_with_dex_metadata">
+        <bool name="enable">true</bool>
+        <string name="dm_files_default_path">/vendor/etc/clouds</string>
+        <string name="dm_files_override_path">/data/misc/dm_clouds</string>
+        <string name="cloud_url">http://192.168.1.155/dm.tar.gz</string>
+    </module>
+</modules>

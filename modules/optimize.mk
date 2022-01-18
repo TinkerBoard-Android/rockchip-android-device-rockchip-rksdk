@@ -31,3 +31,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Task profile
 PRODUCT_PACKAGES += vendor_cgroups.json
+
+ifdef ROCKCHIP_OEM_CONFIG_FILE
+PRODUCT_COPY_FILES += \
+    $(ROCKCHIP_OEM_CONFIG_FILE):$(TARGET_COPY_OUT_VENDOR)/etc/cfg_rockchip_default.xml \
+    $(ROCKCHIP_OEM_CONFIG_PACKAGES):$(TARGET_COPY_OUT_VENDOR)/etc/rockchip_forbid_packages.xml
+endif

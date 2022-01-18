@@ -266,6 +266,10 @@ BUILD_WITH_GOOGLE_FRP ?= false
 # define BUILD_NUMBER
 #BUILD_NUMBER := $(shell $(DATE) +%H%M%S)
 
+# Configs for lmkd/reclaim service/auto run control/performance/dexmetadata compile...
+ROCKCHIP_OEM_CONFIG_FILE ?= device/rockchip/common/configs/cfg_rockchip_default.xml
+ROCKCHIP_OEM_CONFIG_PACKAGES ?= device/rockchip/common/configs/rockchip_forbid_packages.xml
+
 # face lock
 BUILD_WITH_FACELOCK ?= false
 

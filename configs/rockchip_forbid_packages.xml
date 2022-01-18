@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+    <package name="com.tencent.mobileqq">
+        <component1>com.tencent.mobileqq.msf.service.MSFAliveJobService</component1>
+        <component2></component2>
+    </package>
+    <package name="com.autonavi.minimap">
+        <component1>com.autonavi.minimap.offline.receiver.SdCardReceiver</component1>
+        <component2></component2>
+    </package>
+    <package name="com.snaptube.premium">
+        <component1>com.snaptube.premium.receiver.MediaMountReceiver</component1>
+        <component2>com.snaptube.premium.receiver.MediaScannerReceiver</component2>
+    </package>
+</packages>
