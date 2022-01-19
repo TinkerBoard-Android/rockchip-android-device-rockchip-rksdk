@@ -699,6 +699,7 @@ endif
 
 # hdmi cec
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+BOARD_SHOW_HDMI_SETTING := true
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
 	$(LOCAL_PATH)/tv/permissions/privapp-permissions-tv-common.xml:system/etc/permissions/privapp-permissions-tv-common.xml
@@ -707,29 +708,12 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 PRODUCT_PACKAGES += \
 	hdmi_cec.$(TARGET_BOARD_PLATFORM)
 
-USE_PRODUCT_RESOLUTION_WHITE := $(shell test -f $(TARGET_DEVICE_DIR)/resolution_white.xml && echo true)
-ifeq ($(strip $(USE_PRODUCT_RESOLUTION_WHITE)), true)
-  PRODUCT_COPY_FILES += \
-      $(TARGET_DEVICE_DIR)/resolution_white.xml:/system/usr/share/resolution_white.xml
-else
-  PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
-endif
-
 # HDMI CEC HAL
 PRODUCT_PACKAGES += \
     android.hardware.tv.cec@1.0-impl \
     android.hardware.tv.cec@1.0-service
-
-# Hw Output HAL
-PRODUCT_PACKAGES += \
-    rockchip.hardware.outputmanager@1.0-impl \
-    rockchip.hardware.outputmanager@1.0-service
-
-PRODUCT_PACKAGES += hw_output.default
 endif
 
-# mid used hdmi
 ifeq ($(strip $(BOARD_SHOW_HDMI_SETTING)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.hdmi_settings=true
@@ -743,11 +727,15 @@ else
       $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
 endif
 
+# Hw Output HAL
 PRODUCT_PACKAGES += \
     rockchip.hardware.outputmanager@1.0-impl \
     rockchip.hardware.outputmanager@1.0-service
 
 PRODUCT_PACKAGES += hw_output.default
+
+PRODUCT_COPY_FILES += \
+    device/rockchip/common/permissions/rockchip.software.display.xml:system/etc/permissions/rockchip.software.display.xml
 endif
 
 PRODUCT_PACKAGES += \

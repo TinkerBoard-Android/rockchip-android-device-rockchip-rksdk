@@ -32,7 +32,7 @@ ROCKCHIP_USE_LAZY_HAL := true
 
 # Copy features to device
 PRODUCT_COPY_FILES += \
-    device/rockchip/common/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
+    device/rockchip/common/permissions/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
 
 # Disable surfaceflinger prime_shader cache to improve post boot memory.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += service.sf.prime_shader_cache=0
