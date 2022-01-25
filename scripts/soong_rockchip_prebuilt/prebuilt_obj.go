@@ -188,6 +188,9 @@ func (p *RockchipPrebuiltObject) GenerateAndroidBuildActions(ctx android.ModuleC
     var prefix string = ""
     if (p.Npu()) {
         prefix = strings.ToUpper(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        if (!strings.EqualFold("rk356x", prefix) && !strings.EqualFold("rk3588", prefix)) {
+            prefix = "RK356X"
+        }
         prefix += "/Android/rknn_server/"
     }
     if (p.Optee()) {
