@@ -11,3 +11,4 @@ allow hal_power_default sysfs_dmc:lnk_file rw_file_perms;
 dontaudit hal_power_default self:capability dac_override;
 
 get_prop(hal_power_default, vendor_boot_complete_prop)
+get_prop(hal_power_default, vendor_power_prop)

@@ -8,7 +8,8 @@ vendor_internal_prop(vendor_vts_status_prop)
 vendor_internal_prop(vendor_wifi_prop)
 
 vendor_restricted_prop(vendor_base_prop)
-vendor_restricted_prop(vendor_omx_prop)
 vendor_restricted_prop(vendor_boot_complete_prop)
+vendor_restricted_prop(vendor_omx_prop)
+vendor_restricted_prop(vendor_power_prop)
 
 typeattribute vendor_system_public_prop mlstrustedobject;
