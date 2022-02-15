@@ -421,7 +421,10 @@ BOARD_MEMTRACK_SUPPORT ?= false
 
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
-    TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter.img
-    BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
+    ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+        TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v2.0/baseparameter.img
+    else
+        TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v1.0/baseparameter.img
+    endif
+        BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
 endif
-
