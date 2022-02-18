@@ -1,0 +1,16 @@
+cc_prebuilt_library {
+    name: "librockchipxxx",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["lib64/librockchipxxx.so"],
+        },
+        lib32: {
+            srcs: ["lib/librockchipxxx.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}
