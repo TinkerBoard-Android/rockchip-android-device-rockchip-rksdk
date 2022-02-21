@@ -29,10 +29,10 @@ KERNEL_VERSION=`get_build_var PRODUCT_KERNEL_VERSION`
 assert_env_value() {
     RET=`get_build_var $1`
     if [ $2 = "$RET" ] ; then
-        echo -e "\033[32m [Pass] \033[0m \t$1 Check OK!"
+        echo -e "\033[32m [Pass] \033[0m \t\"$1\" Check OK!"
     else
-        echo -e "\033[31m [Failed] \033[0m \t$1 Check Failed! Expect $2, But was $RET"
-        echo -e "\033[31m $3 \033[0m"
+        echo -e "\033[31m [Failed] \033[0m \t$1 Check Failed! Expect \"$2\", But was \"$RET\""
+        echo -e "\033[31m \"$3\" \033[0m"
     fi
 }
 
@@ -42,10 +42,10 @@ assert_env_value() {
 assert_config_in_file() {
     RET=`grep -c "$1" $2`
     if [ "1" = "$RET" ] ; then
-        echo -e "\033[32m [Pass] \033[0m \t$1 Check OK!"
+        echo -e "\033[32m [Pass] \033[0m \t\"$1\" Check OK!"
     else
-        echo -e "\033[31m [Failed] \033[0m \t$1 Check Failed! Expect $1 enabled, But was NOT SET"
-        echo -e "\033[31m $3 \033[0m"
+        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$1\""
+        echo -e "\033[31m \"$3\" \033[0m"
     fi
 }
 
@@ -53,10 +53,10 @@ assert_config_in_file() {
 # $2 string
 assert_value_in_string() {
     if [[ "$2" =~ "$1" ]] ; then
-        echo -e "\033[32m [Pass] \033[0m \t$1 Check OK!"
+        echo -e "\033[32m [Pass] \033[0m \t\"$1\" Check OK!"
     else
-        echo -e "\033[31m [Failed] \033[0m \t$1 Check Failed! Expect $1 FOUND, But was NOT FOUND"
-        echo -e "\033[31m $3 \033[0m"
+        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$\"1 FOUND, But was NOT FOUND"
+        echo -e "\033[31m \"$3\" \033[0m"
     fi
 }
 
@@ -64,10 +64,10 @@ assert_value_in_string() {
 # $2 string
 assert_value_not_in_string() {
     if [[ "$2" =~ "$1" ]] ; then
-        echo -e "\033[31m [Failed] \033[0m \t$1 Check Failed! Expect $1 NOT FOUND, But was FOUND"
-        echo -e "\033[31m $3 \033[0m"
+        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$1\" NOT FOUND, But was FOUND"
+        echo -e "\033[31m \"$3\" \033[0m"
     else
-        echo -e "\033[32m [Pass] \033[0m \t$1 Check OK!"
+        echo -e "\033[32m [Pass] \033[0m \t\"$1\" Check OK!"
     fi
 }
 
@@ -82,6 +82,7 @@ check_GO_config() {
 check_kernel_config() {
     assert_config_in_file "clang version" kernel-$KERNEL_VERSION/.config "Kernel MUST be compiled with clang."
     assert_config_in_file "CONFIG_ANDROID_BINDERFS=y" kernel-$KERNEL_VERSION/.config "Did you compile the kernel with android-11.config?"
+    assert_config_in_file "# CONFIG_DEBUG_FS is not set" kernel-$KERNEL_VERSION/.config "Did you compile the kernel with non_debuggable.config?"
 }
 
 check_widevine() {
