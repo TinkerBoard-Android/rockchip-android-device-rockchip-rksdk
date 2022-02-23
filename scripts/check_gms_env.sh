@@ -20,7 +20,13 @@ dpi_aapt_map["560dpi"]="560"
 dpi_aapt_map["xxxhdpi"]="640"
 
 #IS_GO_BUILD=`get_build_var BUILD_WITH_GO_OPT`
-KERNEL_VERSION=`get_build_var PRODUCT_KERNEL_VERSION`
+KERNEL_PATH=`get_build_var PRODUCT_KERNEL_PATH`
+if [[ $KERNEL_PATH =~ "kernel" ]] ; then
+    log "kernel path: $KERNEL_PATH"
+else
+    KERNEL_PATH=kernel
+    log "kernel path: $KERNEL_PATH"
+fi
 
 # $1 var
 # $2 value
@@ -55,7 +61,7 @@ assert_value_in_string() {
     if [[ "$2" =~ "$1" ]] ; then
         echo -e "\033[32m [Pass] \033[0m \t\"$1\" Check OK!"
     else
-        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$\"1 FOUND, But was NOT FOUND"
+        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$1\" FOUND, But was NOT FOUND"
         echo -e "\033[31m \"$3\" \033[0m"
     fi
 }
@@ -76,13 +82,13 @@ log() {
 }
 
 check_GO_config() {
-    assert_config_in_file "RGA2G" kernel-$KERNEL_VERSION/drivers/video/rockchip/rga2/Kconfig 
+    assert_config_in_file "RGA2G" $KERNEL_PATH/drivers/video/rockchip/rga2/Kconfig
 }
 
 check_kernel_config() {
-    assert_config_in_file "clang version" kernel-$KERNEL_VERSION/.config "Kernel MUST be compiled with clang."
-    assert_config_in_file "CONFIG_ANDROID_BINDERFS=y" kernel-$KERNEL_VERSION/.config "Did you compile the kernel with android-11.config?"
-    assert_config_in_file "# CONFIG_DEBUG_FS is not set" kernel-$KERNEL_VERSION/.config "Did you compile the kernel with non_debuggable.config?"
+    assert_config_in_file "clang version" $KERNEL_PATH/.config "Kernel MUST be compiled with clang."
+    assert_config_in_file "CONFIG_ANDROID_BINDERFS=y" $KERNEL_PATH/.config "Did you compile the kernel with android-11.config?"
+    assert_config_in_file "# CONFIG_DEBUG_FS is not set" $KERNEL_PATH/.config "Did you compile the kernel with non_debuggable.config?"
 }
 
 check_widevine() {
