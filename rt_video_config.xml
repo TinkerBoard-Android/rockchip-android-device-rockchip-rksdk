@@ -204,6 +204,7 @@
         <chip name="RK3588">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
             <include name="vp9_8k_10bit,av1_8k_10bit"/>
+            <include name="avs+"/>
         </chip>
     </decoder>
 
