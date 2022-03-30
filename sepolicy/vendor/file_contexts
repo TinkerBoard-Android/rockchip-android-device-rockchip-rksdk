@@ -219,7 +219,7 @@
 
 #rockchip audiosetting
 
-/(odm|vendor/odm)/bundled_(.*)(/.*)?     u:object_r:vendor_app_file:s0
+/(odm|vendor/odm)/bundled_(.*)(/.*)?    u:object_r:vendor_app_file:s0
 
 #flash_img
 /vendor/bin/flash_img.sh u:object_r:vendor_install_recovery_exec:s0
