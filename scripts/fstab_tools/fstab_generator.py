@@ -13,7 +13,7 @@ def main(argv):
     fstab_file = ''
     vbmeta_part = ''
     sdmmc_device = ''
-    avbpub_key = ',avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey'
+    avbpub_key = ',avb_keys=/avb'
     type = 'fstab'
     part_list = ''
     chained_flags = ''
