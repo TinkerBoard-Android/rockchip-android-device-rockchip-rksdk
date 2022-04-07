@@ -724,9 +724,6 @@ USE_PRODUCT_RESOLUTION_WHITE := $(shell test -f $(TARGET_DEVICE_DIR)/resolution_
 ifeq ($(strip $(USE_PRODUCT_RESOLUTION_WHITE)), true)
   PRODUCT_COPY_FILES += \
       $(TARGET_DEVICE_DIR)/resolution_white.xml:/system/usr/share/resolution_white.xml
-else
-  PRODUCT_COPY_FILES += \
-      $(LOCAL_PATH)/resolution_white.xml:/system/usr/share/resolution_white.xml
 endif
 
 # Hw Output HAL
