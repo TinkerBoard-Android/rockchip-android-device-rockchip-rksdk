@@ -1,0 +1,21 @@
+type hal_hdmi_default, domain;
+
+
+type hal_hdmi_default_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_hdmi_default)
+
+
+allow hal_hdmi_default vndbinder_device:chr_file { read write open ioctl map};
+allow hal_hdmi_default hidl_base_hwservice:hwservice_manager add;
+allow hal_hdmi_default hal_hdmi_hwservice:hwservice_manager {add find};
+
+binder_call(hal_hdmi_default, platform_app)
+binder_call(hal_hdmi_default, hwservicemanager)
+
+
+# Client
+allow cameraserver hal_hdmi_hwservice:hwservice_manager { find };
+allow hal_camera_default hal_hdmi_hwservice:hwservice_manager { find };
+
+get_prop(hal_hdmi_default, hwservicemanager_prop)

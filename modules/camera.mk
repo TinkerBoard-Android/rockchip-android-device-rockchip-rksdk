@@ -106,3 +106,9 @@ else
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service
 endif
+
+ifeq ($(CAMERA_SUPPORT_HDMI),true)
+PRODUCT_PACKAGES += \
+    rockchip.hardware.hdmi@1.0-service \
+    rockchip.hardware.hdmi@1.0-impl
+endif

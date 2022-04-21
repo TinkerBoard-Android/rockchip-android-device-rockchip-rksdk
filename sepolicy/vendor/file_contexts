@@ -173,6 +173,7 @@
 #data
 /data/vendor/mediadrm(/.*)?             u:object_r:mediadrm_vendor_data_file:s0
 
+
 #for iso
 #TODO removed for Q
 #/system/bin/iso                    u:object_r:iso_exec:s0
@@ -206,6 +207,8 @@
 
 #camera hal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.[0-9]+-virtual-service          u:object_r:hal_camera_default_exec:s0
+
+/(vendor|system/vendor)/bin/hw/rockchip\.hardware\.hdmi@1\.0-service       u:object_r:hal_hdmi_default_exec:s0
 
 #abc
 /data/vendor/logs(/.*)?                         u:object_r:abc_data_file:s0

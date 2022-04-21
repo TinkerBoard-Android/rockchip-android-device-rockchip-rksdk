@@ -1,2 +1,3 @@
 type rk_output_hal_service, hwservice_manager_type;
 type vendor-rockit-hal_hwservice, hwservice_manager_type;
+type hal_hdmi_hwservice, hwservice_manager_type;
