@@ -14,9 +14,10 @@
 # limitations under the License.
 #
 PRODUCT_PACKAGES += \
-    DeviceTest \
+    RKDeviceTest \
     Lightning \
     LiveWallpapersPicker \
     RkVideoPlayer \
     RkExplorer \
-    StressTest
+    StressTest \
+    RKUpdateService
