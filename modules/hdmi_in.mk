@@ -17,7 +17,8 @@
 PRODUCT_PACKAGES += \
     TvProvider \
     LiveTv \
-    PartnerSupportSampleTvInput
+    PartnerSupportSampleTvInput \
+    RkHdmiInAudio
 
 # JNI
 PRODUCT_PACKAGES += \
