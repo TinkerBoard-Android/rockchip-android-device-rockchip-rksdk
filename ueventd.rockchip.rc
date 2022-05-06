@@ -217,3 +217,18 @@
 # For 40 pin UART
 /dev/ttyS0 0666 root root
 /dev/ttyS4 0666 root root
+
+# For 4g modem
+# Quectel port
+/dev/ttyUSB*       0660    radio radio
+/dev/ttyACM*       0660    radio radio
+/dev/cdc-wdm*      0660    radio radio
+/dev/qcqmi*        0660    radio radio
+/dev/cdc-acm*      0660    radio radio
+# PCIe
+/dev/mhi_DUN       0660    radio radio
+/dev/mhi_DIAG      0660    radio radio
+/dev/mhi_BHI       0660    radio radio
+/dev/mhi_LOOPBACK  0660    radio radio
+/dev/mhi_QMI0      0660    radio radio
+
