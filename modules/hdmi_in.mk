@@ -16,7 +16,7 @@
 # TV Apps
 PRODUCT_PACKAGES += \
     TvProvider \
-    LiveTv \
+    rkCamera2 \
     PartnerSupportSampleTvInput \
     RkHdmiInAudio
 
