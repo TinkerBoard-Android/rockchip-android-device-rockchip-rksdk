@@ -38,5 +38,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.tv_input=rockchip
 
+CAMERA_SUPPORT_HDMI := true
+
 # Add manifest
 DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.tv.input@1.0-service.xml
