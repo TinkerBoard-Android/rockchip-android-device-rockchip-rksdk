@@ -140,9 +140,12 @@ fi
 fi
 
 if [ "$BUILD_KERNEL_WITH_CLANG" = true ] ; then
-ADDON_ARGS="CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1"
+if [ "$KERNEL_ARCH" = "arm64" ]; then
+    ADDON_ARGS="CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1"
+else
+    ADDON_ARGS="CC=clang LD=ld.lld"
 fi
-
+fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
