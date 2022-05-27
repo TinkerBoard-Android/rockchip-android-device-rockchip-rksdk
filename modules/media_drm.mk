@@ -41,4 +41,15 @@ else
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.widevine
 endif
+ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
+    PRODUCT_PACKAGES += \
+        liboemcrypto
+    ifneq ($(filter rk3326 rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+        PRODUCT_PACKAGES += \
+            c11fe8ac-b997-48cf-a28d-e2a55e5240ef.ta
+    else
+        PRODUCT_PACKAGES += \
+            c11fe8ac-b997-48cf-a28de2a55e5240ef.ta
+    endif
+endif # Widevine L1
 endif
