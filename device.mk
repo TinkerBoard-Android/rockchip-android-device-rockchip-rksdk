@@ -427,10 +427,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Add board.platform default property to parsing related rc
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM)) \
+    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM))
+
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.target.product=$(strip $(TARGET_BOARD_PLATFORM_PRODUCT))
 
-PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_CHARACTERISTICS := $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))
 
 ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
 PRODUCT_PACKAGES += \
@@ -836,30 +838,18 @@ PRODUCT_PACKAGES += \
 #######for target product ########
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
   DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
-  PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=box \
 
   $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=atv \
        ro.com.google.clientidbase=android-rockchip-tv
   PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/bootanimation.zip:/system/media/bootanimation.zip
 
   $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
 
-else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=vr
-else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),laptop)
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=laptop
 else # tablet
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=tablet
-
   PRODUCT_PACKAGES += \
         SoundRecorder
 ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
