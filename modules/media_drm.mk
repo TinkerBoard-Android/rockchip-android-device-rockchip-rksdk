@@ -19,12 +19,16 @@ PRODUCT_VENDOR_PROPERTIES += drm.service.enabled=true
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.2-service-lazy \
-    android.hardware.drm@1.4-service-lazy.clearkey
+    android.hardware.cas@1.2-service-lazy
+
+# Media Drm clearkey
+$(call inherit-product, frameworks/av/drm/mediadrm/plugins/clearkey/service-lazy.mk)
 else
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.2-service \
-    android.hardware.drm@1.4-service.clearkey
+    android.hardware.cas@1.2-service
+
+# Media Drm clearkey
+$(call inherit-product, frameworks/av/drm/mediadrm/plugins/clearkey/service.mk)
 endif
 
 ifneq ($(strip $(BOARD_WIDEVINE_OEMCRYPTO_LEVEL)), )
@@ -32,9 +36,9 @@ PRODUCT_PACKAGES += \
     move_widevine_data.sh
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.4-service-lazy.widevine
+    android.hardware.drm-service-lazy.widevine
 else
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.4-service.widevine
+    android.hardware.drm-service.widevine
 endif
 endif
