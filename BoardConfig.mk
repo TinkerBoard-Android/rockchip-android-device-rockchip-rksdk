@@ -58,6 +58,9 @@ PRODUCT_KERNEL_ARCH ?= arm
 #TWRP
 BOARD_TWRP_ENABLE ?= false
 
+# Android T requires thermal HAL.
+BOARD_ROCKCHIP_THERMAL ?= true
+
 ifeq ($(PRODUCT_FS_COMPRESSION), 1)
 include device/rockchip/common/build/rockchip/F2fsCompression.mk
 endif
