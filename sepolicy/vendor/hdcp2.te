@@ -1,0 +1,11 @@
+type hdcp2, domain;
+type hdcp2_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hdcp2);
+
+#allow init vendor_file:file { execute };
+#allow hdcp2 vendor_file:file { entrypoint map read execute getattr };
+#allow hdcp2 vendor_file:dir { read };
+allow hdcp2 hdcp2_device:chr_file { read write open };
+allow hdcp2 hdcp2_device:chr_file { ioctl };
+allow hdcp2 storage_device:chr_file { read write open ioctl };
+allow hdcp2 sysfs_hdmirx:file { open read };

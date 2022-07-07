@@ -235,3 +235,8 @@
 
 #hdmi in
 /(vendor|system/vendor)/bin/hw/rockchip\.hardware\.tv\.input@1\.0-service   u:object_r:hal_tv_input_default_exec:s0
+
+#for hdcp2
+/dev/hl_dev[0-1]*         u:object_r:hdcp2_device:s0
+/vendor/bin/hdcp2_tx_rx   u:object_r:hdcp2_exec:s0
+/sys/devices/virtual/misc/hdmirx_hdcp/status   u:object_r:sysfs_hdmirx:s0

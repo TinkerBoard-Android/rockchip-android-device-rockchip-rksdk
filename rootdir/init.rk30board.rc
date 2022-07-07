@@ -104,6 +104,9 @@ on boot
     chown system system /sys/class/hdmirx/hdmirx/edid
     chmod 0660 /sys/class/hdmirx/hdmirx/edid
 
+    # hdmirx status
+    chown system system /sys/devices/virtual/misc/hdmirx_hdcp/status
+
     #dp status
     chown system system /sys/devices/platform/display-subsystem/drm/card0/card0-DP-1/status
 

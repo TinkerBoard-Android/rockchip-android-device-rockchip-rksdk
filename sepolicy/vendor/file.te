@@ -8,6 +8,7 @@ type abc_data_file, file_type, data_file_type;
 # /sys
 type sysfs_camera, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_hdmirx, fs_type, sysfs_type, mlstrustedobject;
 type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
 type fuseblk, sdcard_type, fs_type, mlstrustedobject;
 type debugfs_sw_sync, fs_type, debugfs_type;

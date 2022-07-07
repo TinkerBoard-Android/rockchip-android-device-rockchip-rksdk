@@ -33,3 +33,6 @@ type cec_device, dev_type;
 
 #for hid audio
 type hidraw_device, dev_type;
+
+#for hdcp2
+type hdcp2_device, dev_type;
