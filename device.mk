@@ -145,8 +145,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_cli \
     wpa_supplicant.conf \
-    dhcpcd.conf \
-    libwifi-hal-package
+    dhcpcd.conf
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
