@@ -415,7 +415,7 @@ BOARD_USER_FAKETOUCH ?= true
 endif
 
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), tablet)
-BOARD_SUPPORT_MULTIAUDIO ?= true
+BOARD_SUPPORT_MULTIAUDIO ?= false
 endif
 
 #for Camera autofocus support
