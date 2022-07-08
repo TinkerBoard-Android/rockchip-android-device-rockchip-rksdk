@@ -91,7 +91,7 @@ TARGET_BOARD_PLATFORM=`get_build_var TARGET_BOARD_PLATFORM`
 #set jdk version
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$ANDROID_BUILD_TOP/prebuilts/clang/host/linux-x86/clang-r416183b/bin:$PATH
+export PATH=$ANDROID_BUILD_TOP/prebuilts/clang/host/linux-x86/clang-r450784d/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
 
 # source environment and chose target product
