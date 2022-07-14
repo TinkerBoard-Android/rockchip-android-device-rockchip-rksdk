@@ -85,10 +85,10 @@ BUILD_WITH_GO_OPT ?= false
 
 ifeq ($(BUILD_WITH_GO_OPT), true)
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab_go.in
-PRODUCT_KERNEL_CONFIG += android-11-go.config
+PRODUCT_KERNEL_CONFIG += android-13-go.config
 else
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
-PRODUCT_KERNEL_CONFIG += android-11.config
+PRODUCT_KERNEL_CONFIG += android-13.config
 endif
 
 ifeq ($(TARGET_BUILD_VARIANT), user)
