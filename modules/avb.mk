@@ -53,19 +53,15 @@ endif #BOARD_USES_AB_IMAGE
 endif #BOARD_AVB_METADATA_BIN_PATH
 
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
-# Uses a prebuilt boot.img
-#TARGET_NO_KERNEL := true
-#BOARD_PREBUILT_BOOTIMAGE := \
-    packages/modules/BootPrebuilt/$(PRODUCT_KERNEL_VERSION)/$(PRODUCT_KERNEL_ARCH)/boot.img
 # Enable chained vbmeta for the boot image.
 # The following can be absent, where the hash descriptor of the
 # 'boot' partition will be stored then signed in vbmeta.img instead.
-BOARD_AVB_BOOT_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_BOOT_ALGORITHM ?= SHA256_RSA4096
+BOARD_AVB_BOOT_KEY_PATH := $(BOARD_AVB_KEY_PATH)
+BOARD_AVB_BOOT_ALGORITHM := $(BOARD_AVB_ALGORITHM)
 BOARD_AVB_BOOT_ROLLBACK_INDEX ?= $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION ?= 2
 BOARD_AVB_VENDOR_BOOT_ADD_HASH_FOOTER_ARGS += --hash_algorithm sha256
-endif # Boot Header 4
+endif # Boot Header 4, for GKI
 
 ifneq ($(strip $(BOARD_USES_AB_IMAGE)),true)
 BOARD_AVB_RECOVERY_KEY_PATH := $(BOARD_AVB_KEY_PATH)
