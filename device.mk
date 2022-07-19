@@ -202,12 +202,6 @@ PRODUCT_COPY_FILES += \
 endif
 endif # Use PRODUCT_FSTAB_TEMPLATE
 
-ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
-ifneq ($(filter gki_defconfig, $(PRODUCT_KERNEL_CONFIG)), )
-$(call inherit-product, vendor/rockchip/common/modular_kernel/modular_kernel.mk)
-endif
-endif
-
 # For audio-recoard 
 PRODUCT_PACKAGES += \
     libsrec_jni
@@ -338,6 +332,9 @@ $(call inherit-product, device/rockchip/common/modules/media_drm.mk)
 
 # Usb controller detector for GKI
 $(call inherit-product, device/rockchip/common/modules/usb.mk)
+
+# GKI modules
+$(call inherit-product, device/rockchip/common/modules/gki_common.mk)
 
 # Power AIDL
 PRODUCT_PACKAGES += \
