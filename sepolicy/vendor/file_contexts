@@ -70,6 +70,7 @@
 /dev/block/by-name/metadata                     u:object_r:metadata_block_device:s0
 /dev/block/by-name/userdata                     u:object_r:userdata_block_device:s0
 /dev/block/by-name/boot                         u:object_r:boot_block_device:s0
+/dev/block/by-name/vendor_boot                  u:object_r:boot_block_device:s0
 /dev/block/by-name/recovery                     u:object_r:recovery_block_device:s0
 /dev/block/by-name/misc                         u:object_r:misc_block_device:s0
 /dev/block/by-name/security                     u:object_r:security_block_device:s0
