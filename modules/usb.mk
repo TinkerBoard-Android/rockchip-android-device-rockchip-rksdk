@@ -14,5 +14,7 @@
 # limitations under the License.
 #
 
-PRODUCT_PACKAGES += rockchip_udc_detector
+PRODUCT_PACKAGES += \
+    rockchip_udc_detector \
+    recovery_udc_detector
 BOARD_SEPOLICY_DIRS += hardware/rockchip/udc_set/sepolicy
