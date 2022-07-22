@@ -18,8 +18,10 @@ AB_OTA_UPDATER := true
 TARGET_NO_RECOVERY := true
 
 BOARD_USES_RECOVERY_AS_BOOT := true
+ifdef BOARD_BOOT_HEADER_VERSION
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 BOARD_USES_RECOVERY_AS_BOOT :=
+endif
 endif
 
 USE_AB_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter_ab.txt && echo true)
