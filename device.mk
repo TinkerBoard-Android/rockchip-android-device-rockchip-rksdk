@@ -296,7 +296,7 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/laptop_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/laptop_core_hardware.xml
-else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
+else
 ifneq ($(strip $(BUILD_WITH_GO_OPT)),true)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
