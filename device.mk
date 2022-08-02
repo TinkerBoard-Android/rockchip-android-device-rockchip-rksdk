@@ -32,7 +32,8 @@ PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi tvdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 
 PRODUCT_PACKAGES += \
-    ExactCalculator
+    ExactCalculator \
+    wakeup-alarmalign-whitelist.xml
 
 ifdef TARGET_PREBUILT_KERNEL
 # Copy kernel if exists
