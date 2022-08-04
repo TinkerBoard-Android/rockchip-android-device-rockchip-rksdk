@@ -89,7 +89,7 @@ else
 endif
 
 # PCBA tools
-$(call inherit-product, device/rockchip/common/modules/pcba.mk)
+#$(call inherit-product, device/rockchip/common/modules/pcba.mk)
 # Optee
 $(call inherit-product, device/rockchip/common/modules/optee.mk)
 # Sepolicy
