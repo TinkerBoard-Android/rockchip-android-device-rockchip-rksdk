@@ -1,2 +1,6 @@
 #for gpu
 rw_rockchip_graphic_device(platform_app)
+
+allow platform_app hal_hdmi_hwservice:hwservice_manager { find };
+
+binder_call(platform_app, hal_hdmi_default)

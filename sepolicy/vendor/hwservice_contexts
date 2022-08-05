@@ -1,2 +1,3 @@
 rockchip.hardware.outputmanager::IRkOutputManager      u:object_r:rk_output_hal_service:s0
 rockchip.hardware.rockit.hw::IRockitHwService          u:object_r:vendor-rockit-hal_hwservice:s0
+rockchip.hardware.hdmi::IHdmi		       u:object_r:hal_hdmi_hwservice:s0

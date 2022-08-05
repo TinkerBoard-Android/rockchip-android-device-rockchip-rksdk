@@ -27,6 +27,7 @@ allow vendor_init device:lnk_file { create write};
 allow vendor_init tmpfs:dir { write add_name create };
 allow vendor_init sysfs_dmc:lnk_file { setattr };
 
+set_prop(vendor_init, vendor_base_prop)
 set_prop(vendor_init, vendor_boot_complete_prop)
 set_prop(vendor_init, vendor_system_public_prop)
 set_prop(vendor_init, vendor_vts_status_prop)

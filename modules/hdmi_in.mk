@@ -16,8 +16,9 @@
 # TV Apps
 PRODUCT_PACKAGES += \
     TvProvider \
-    LiveTv \
-    PartnerSupportSampleTvInput
+    rkCamera2 \
+    PartnerSupportSampleTvInput \
+    RkHdmiInAudio
 
 # JNI
 PRODUCT_PACKAGES += \

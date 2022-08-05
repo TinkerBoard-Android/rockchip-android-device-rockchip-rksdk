@@ -6,6 +6,7 @@ allow surfaceflinger system_data_file:dir create_dir_perms;
 allow surfaceflinger self:capability { sys_nice };
 
 allow surfaceflinger hal_camera_default:fd use;
+allow surfaceflinger unlabeled:filesystem { getattr };
 
 #allow surfaceflinger hal_graphics_allocator_default_tmpfs:file rw_file_perms;
 

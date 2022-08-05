@@ -101,6 +101,9 @@ on boot
     chown system system /d/dw-hdmi/status
     chmod 0660 /d/dw-hdmi/status
 
+    chown system system /sys/class/hdmirx/hdmirx/edid
+    chmod 0660 /sys/class/hdmirx/hdmirx/edid
+
     #dp status
     chown system system /sys/devices/platform/display-subsystem/drm/card0/card0-DP-1/status
 

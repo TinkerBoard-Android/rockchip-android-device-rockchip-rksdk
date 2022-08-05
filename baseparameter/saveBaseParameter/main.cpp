@@ -42,6 +42,7 @@ static void usage(bool isHwc2){
     fprintf(stderr, "\t-o\t Overscan (left,top,right,bottom e: overscan \"100,100,100,100\")\n");
     fprintf(stderr, "\t-b\t BCSH (brightness,contrast,saturation,hue e: \"50,50,50,50\") \n");
     fprintf(stderr, "\t-R\t Reset Baseparameter (1:only reset user setting baseparameter partition; 2:reset baseparameter paratition include backup)\n");
+    fprintf(stderr, "\t-B\t Backup Baseparameter (write base parameter data to backup Baseparameter)\n");
     if(isHwc2){
     fprintf(stderr, "\t-C\t Choose Connector type and id to Setting (e: 11,0 or 16,0)\n");
     fprintf(stderr, "\nExample: saveBaseParameter -C \"16,0\" -f \"1920x1080@60\" -c Auto -u 2 -o \"100,100,100,100\" -b \"50,50,50,50\"\n");
@@ -109,6 +110,37 @@ int reset(){
     return 0;
 }
 
+int backup(){
+    int file;
+    int ret;
+    const char *baseparameterfile = getBaseparameterFile();
+    if (!baseparameterfile) {
+        sync();
+        return -ENOENT;
+    }
+    file = open(baseparameterfile, O_RDWR);
+    if (file < 0) {
+        LOGD("base paramter file can not be opened \n");
+        sync();
+        return -EIO;
+    }
+    char *data = (char *)malloc(BASEPARAMETER_IMAGE_SIZE / 2);
+    lseek(file, 0L, SEEK_SET);
+    ret = read(file, data, BASEPARAMETER_IMAGE_SIZE / 2);
+    if (ret < 0) {
+        LOGD("fail to read");
+        close(file);
+        free(data);
+        return -EIO;
+    }
+    lseek(file, BACKUP_OFFSET, SEEK_SET);
+    ret = write(file, (char*)data, BASEPARAMETER_IMAGE_SIZE / 2);
+    fsync(file);
+    close(file);
+    free(data);
+    return 0;
+}
+
 int main(int argc, char** argv){
     bool hasOpts = false;
     bool isHwc2 = false;
@@ -117,6 +149,7 @@ int main(int argc, char** argv){
     int res;
     int display = -1;
     int isReset = 0;
+    int isBackup = 0;
     char property[100];
     char* target_save_file = "/sdcard/baseparameter.img";
     char* bcsh = NULL;
@@ -130,7 +163,7 @@ int main(int argc, char** argv){
     if (strstr(property, "HWC2") != NULL) {
         isHwc2 = true;
     }
-    while ((res = getopt(argc, argv, "t:b:f:d:D:u:c:o:C:hapR")) >= 0) {
+    while ((res = getopt(argc, argv, "t:b:f:d:D:u:c:o:C:hapRB")) >= 0) {
         //printf("res = %d\n", res);
         hasOpts = true;
         switch (res) {
@@ -185,6 +218,10 @@ int main(int argc, char** argv){
             case 'R':
                 isReset = 1;
                 printf("reset baseparameter\n");
+                break;
+            case 'B':
+                isBackup = 1;
+                printf("backup baseparameter\n");
                 break;
             default:
                 usage(isHwc2);
@@ -273,6 +310,9 @@ int main(int argc, char** argv){
     }
     if(isReset > 0){
         reset();
+    }
+    if(isBackup > 0){
+        backup();
     }
     if(resolution != NULL){
         if(strcmp(resolution, "auto")){

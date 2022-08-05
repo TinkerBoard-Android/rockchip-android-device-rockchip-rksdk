@@ -42,7 +42,7 @@ endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR7
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR11
 
 TARGET_SYSTEM_PROP += device/rockchip/common/build/rockchip/rksdk.prop
 
@@ -145,7 +145,8 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_cli \
     wpa_supplicant.conf \
-    dhcpcd.conf
+    dhcpcd.conf \
+    libwifi-hal-package
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
@@ -170,8 +171,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.connectivity.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.connectivity.rc
 endif
 
+
+ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio_policy_configuration_multiaudio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+else
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+endif
+
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml \
@@ -193,12 +202,6 @@ PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.$(TARGET_BOARD_HARDWARE)
 endif
 endif # Use PRODUCT_FSTAB_TEMPLATE
-
-ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
-ifneq ($(filter gki_defconfig, $(PRODUCT_KERNEL_CONFIG)), )
-$(call inherit-product, vendor/rockchip/common/modular_kernel/modular_kernel.mk)
-endif
-endif
 
 # For audio-recoard 
 PRODUCT_PACKAGES += \
@@ -331,6 +334,9 @@ $(call inherit-product, device/rockchip/common/modules/media_drm.mk)
 # Usb controller detector for GKI
 $(call inherit-product, device/rockchip/common/modules/usb.mk)
 
+# GKI modules
+$(call inherit-product, device/rockchip/common/modules/gki_common.mk)
+
 # Power AIDL
 PRODUCT_PACKAGES += \
     android.hardware.power \
@@ -419,10 +425,20 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Add board.platform default property to parsing related rc
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM)) \
+    ro.board.platform=$(strip $(TARGET_BOARD_PLATFORM))
+
+PRODUCT_PRODUCT_PROPERTIES += \
     ro.target.product=$(strip $(TARGET_BOARD_PLATFORM_PRODUCT))
 
-PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_CHARACTERISTICS := $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))
+
+ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
+PRODUCT_PACKAGES += \
+    audio.hdmi.$(TARGET_BOARD_HARDWARE) \
+    audio.hdmi_1.$(TARGET_BOARD_HARDWARE) \
+    audio.spdif.$(TARGET_BOARD_HARDWARE) \
+    audio.spdif_1.$(TARGET_BOARD_HARDWARE)
+endif
 
 # audio lib
 PRODUCT_PACKAGES += \
@@ -820,30 +836,18 @@ PRODUCT_PACKAGES += \
 #######for target product ########
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
   DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_screenoff
-  PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=box \
 
   $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
 
 else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   PRODUCT_PROPERTY_OVERRIDES += \
-       ro.target.product=atv \
        ro.com.google.clientidbase=android-rockchip-tv
   PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/bootanimation.zip:/system/media/bootanimation.zip
 
   $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
 
-else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),vr)
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=vr
-else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),laptop)
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=laptop
 else # tablet
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=tablet
-
   PRODUCT_PACKAGES += \
         SoundRecorder
 ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
@@ -864,6 +868,8 @@ endif
 #only box and atv using our audio policy(write by rockchip)
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 USE_CUSTOM_AUDIO_POLICY := 1
+PRODUCT_PACKAGES += \
+    libaudiopolicymanagercustom
 endif
 
 # By default, enable zram; experiment can toggle the flag,
@@ -1066,4 +1072,10 @@ ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	media-ctl \
 	v4l2-ctl
+ifneq (,$(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))))
+PRODUCT_PACKAGES += \
+	rkaiq_tool_server \
+	rkaiq_demo \
+	rkaiq_3A_server
+endif
 endif

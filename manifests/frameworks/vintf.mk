@@ -10,3 +10,4 @@
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/rockchip/common/manifests/frameworks/rockchip.hardware.rockit.hw@1.0-service.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/rockchip/common/manifests/frameworks/rockchip.hardware.neuralnetworks@1.0-service.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/rockchip/common/manifests/frameworks/rockchip.hardware.outputmanager@1.0-service.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/rockchip/common/manifests/frameworks/rockchip.hardware.hdmi@1.0-service.xml

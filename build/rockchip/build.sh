@@ -140,9 +140,12 @@ fi
 fi
 
 if [ "$BUILD_KERNEL_WITH_CLANG" = true ] ; then
-ADDON_ARGS="CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1"
+if [ "$KERNEL_ARCH" = "arm64" ]; then
+    ADDON_ARGS="CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1"
+else
+    ADDON_ARGS="CC=clang LD=ld.lld"
 fi
-
+fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
@@ -164,6 +167,12 @@ fi
 
 echo "package resoure.img with charger images"
 cd u-boot && ./scripts/pack_resource.sh ../$LOCAL_KERNEL_PATH/resource.img && cp resource.img ../$LOCAL_KERNEL_PATH/resource.img && cd -
+
+IS_VEHICLE=`get_build_var BOARD_ROCKCHIP_VEHICLE`
+LOGO_VEHICLE_PATH=`get_build_var TARGET_DEVICE_DIR`
+if [ $IS_VEHICLE == "true" ]; then
+./$LOGO_VEHICLE_PATH/pack_resource.sh ./$LOCAL_KERNEL_PATH/resource.img && cp resource.img ./$LOCAL_KERNEL_PATH/resource.img
+fi
 
 # build android
 if [ "$BUILD_ANDROID" = true ] ; then

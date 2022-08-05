@@ -1,5 +1,5 @@
 #
-# Copyright 2021 Rockchip Limited
+# Copyright 2022 Rockchip Limited
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+BOARD_OPENXR_RUNTIME ?= false
+ifeq ($(strip $(BOARD_OPENXR_RUNTIME)), true)
 PRODUCT_PACKAGES += \
-    RKDeviceTest \
-    Lightning \
-    LiveWallpapersPicker \
-    RkVideoPlayer \
-    RkExplorer \
-    StressTest \
-    RKUpdateService
+    RKOpenXRRuntime \
+    public.libraries-openxr \
+    libc++_shared
+endif
