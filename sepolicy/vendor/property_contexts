@@ -72,3 +72,8 @@ persist.vendor.sys.hid                  u:object_r:vendor_drmservice_prop:s0
 
 # power aidl configs
 ro.vendor.power.                        u:object_r:vendor_power_prop:s0
+
+persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
+vendor.usb.config          u:object_r:vendor_usb_config_prop:s0
+vendor.usb.                u:object_r:vendor_usb_prop:s0
+persist.vendor.usb.        u:object_r:vendor_usb_prop:s0
