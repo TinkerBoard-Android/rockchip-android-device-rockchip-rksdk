@@ -170,7 +170,7 @@ cd u-boot && ./scripts/pack_resource.sh ../$LOCAL_KERNEL_PATH/resource.img && cp
 
 IS_VEHICLE=`get_build_var BOARD_ROCKCHIP_VEHICLE`
 LOGO_VEHICLE_PATH=`get_build_var TARGET_DEVICE_DIR`
-if [ $IS_VEHICLE == "true" ]; then
+if [ $IS_VEHICLE = "true" ]; then
 ./$LOGO_VEHICLE_PATH/pack_resource.sh ./$LOCAL_KERNEL_PATH/resource.img && cp resource.img ./$LOCAL_KERNEL_PATH/resource.img
 fi
 
