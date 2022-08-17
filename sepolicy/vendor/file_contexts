@@ -222,6 +222,9 @@
 #samba
 /system/bin/cifsmanager.sh     u:object_r:vold_exec:s0
 
+#camera360
+/system/bin/camera360.sh     u:object_r:vold_exec:s0
+
 #rockchip audiosetting
 
 /(odm|vendor/odm)/bundled_(.*)(/.*)?    u:object_r:vendor_app_file:s0
