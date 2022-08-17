@@ -430,6 +430,8 @@ BOARD_DEFAULT_CAMERA_HAL_VERSION ?=3.3
 BOARD_WITH_RKTOOLBOX ?=true
 BOARD_MEMTRACK_SUPPORT ?= false
 
+PRODUCT_DEFAULT_DEV_CERTIFICATE := device/rockchip/common/security/testkey
+
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
     ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
