@@ -62,7 +62,8 @@ def main(argv):
         temp_addon_fstab += '\n'
         list_partitions = part_list.split(',')
         for cur_part in list_partitions:
-            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
+            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' erofs ro           ${_flags},first_stage_mount\n'
+            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + '  ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
 
     # add vbmeta parts name at here
     list_flags = list(flags);
