@@ -4,7 +4,16 @@ import getopt
 import os
 from string import Template
 
-usage = 'fstab_generator.py -I <type: fstab/dts> -i <fstab_template> -p <block_prefix> -d <dynamic_part_list> -f <flags> -c <chained_flags> -s <sdmmc_device> -o <output_file>'
+usage = 'fstab_generator.py \
+            -I <type: fstab/dts> \
+            -i <fstab_template> \
+            -p <block_prefix> \
+            -d <dynamic_part_list> \
+            -f <flags> \
+            -c <chained_flags> \
+            -s <sdmmc_device> \
+            -o <output_file> \
+            -a <append>'
 
 def main(argv):
     ifile = ''
@@ -17,12 +26,17 @@ def main(argv):
     type = 'fstab'
     part_list = ''
     chained_flags = ''
+    str_append = ''
     dt_vbmeta = 'vbmeta {\n\
         compatible = "android,vbmeta";\n\
         parts = "vbmeta,boot,system,vendor,dtbo";\n\
     };'
     try:
-        opts, args = getopt.getopt(argv, "hI:i:p:f:d:c:s:o:", ["IType","ifile","bprefix=","flags=","dynamic_part_list","chained_flags","sdevice=","ofile="])
+        opts, args = getopt.getopt(argv, "hI:i:p:f:d:c:s:o:a:",
+                                   ["IType","ifile","bprefix=",
+                                    "flags=","dynamic_part_list",
+                                    "chained_flags","sdevice=",
+                                    "ofile=", "append="])
     except getopt.GetoptError:
         print (usage)
         sys.exit(2)
@@ -46,6 +60,8 @@ def main(argv):
             sdmmc_device = arg;
         elif opt in ("-o", "--ofile"):
             fstab_file = arg;
+        elif opt in ("-a", "--append"):
+            str_append = arg;
         else:
             print (usage)
             sys.exit(2)
@@ -56,6 +72,8 @@ def main(argv):
         flags = ''
     if chained_flags == 'none':
         chained_flags = ''
+    if str_append == 'none':
+        str_append = ''
 
     temp_addon_fstab = ''
     if part_list != 'none':
@@ -64,6 +82,10 @@ def main(argv):
         for cur_part in list_partitions:
             temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' erofs ro           ${_flags},first_stage_mount\n'
             temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + '  ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
+
+    if str_append != 'none':
+        temp_addon_fstab += str_append
+        temp_addon_fstab += '\n'
 
     # add vbmeta parts name at here
     list_flags = list(flags);

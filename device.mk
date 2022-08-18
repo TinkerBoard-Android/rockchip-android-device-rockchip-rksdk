@@ -973,6 +973,12 @@ ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 AB_OTA_PARTITIONS += \
     resource \
     vendor_boot
+
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
+AB_OTA_PARTITIONS += \
+    init_boot
+endif
+
 endif
 
 # A/B OTA dexopt package

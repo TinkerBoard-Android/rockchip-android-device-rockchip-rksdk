@@ -4,9 +4,12 @@ $(info build fstab file with $(PRODUCT_FSTAB_TEMPLATE)....)
 fstab_flags := wait
 fstab_prefix := /dev/block/by-name/
 fstab_dynamic_list :=
+fstab_chained := recoveryonly,
+fstab_addon := recoveryonly,
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     fstab_flags := $(fstab_flags),slotselect
     fstab_chained := slotselect,
+    fstab_addon := slotselect,
 endif # BOARD_USES_AB_IMAGE
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
@@ -14,12 +17,16 @@ ifeq ($(strip $(BOARD_AVB_ENABLE)), true)
 ifdef BOARD_AVB_BOOT_KEY_PATH
     fstab_chained := $(fstab_chained)avb=boot,
 endif
+ifdef BOARD_AVB_INIT_BOOT_KEY_PATH
+    fstab_addon := $(fstab_addon)avb=init_boot,
+endif
 endif # BOARD_AVB_ENABLE
 
-ifndef fstab_chained
-    fstab_chained := none
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
+str_addon := "/dev/block/by-name/init_boot /init_boot emmc defaults $(fstab_addon)first_stage_ramdisk"
+else
+str_addon := none
 endif
-
 # Add partition to fstab_dynamic_list
 # $1 part
 # Do not add ',' to head
@@ -65,6 +72,7 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-f $(fstab_flags) \
 	-d $(fstab_dynamic_list) \
 	-c $(fstab_chained) \
+	-a $(str_addon) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 

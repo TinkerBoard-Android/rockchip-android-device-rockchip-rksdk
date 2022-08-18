@@ -12,12 +12,18 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
 # Header V3, add vendor_boot and resource.
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 partition_list := $(partition_list),resource_a:16M,vendor_boot_a:$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
+partition_list := $(partition_list),init_boot_a:$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE)
+endif # Header V4
 endif # Header V3
 partition_list := $(partition_list),dtbo_a:$(BOARD_DTBOIMG_PARTITION_SIZE),vbmeta_a:1M,boot_a:$(BOARD_BOOTIMAGE_PARTITION_SIZE)
 else # None-A/B
 # Header V3, add vendor_boot and resource.
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 partition_list := $(partition_list),resource:16M,vendor_boot:$(BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE)
+ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
+partition_list := $(partition_list),init_boot:$(BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE)
+endif # Header V4
 endif # Header V3
 partition_list := $(partition_list),dtbo:$(BOARD_DTBOIMG_PARTITION_SIZE),vbmeta:1M,boot:$(BOARD_BOOTIMAGE_PARTITION_SIZE),recovery:$(BOARD_RECOVERYIMAGE_PARTITION_SIZE)
 endif # BOARD_USES_AB_IMAGE
