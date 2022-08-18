@@ -8,6 +8,10 @@ ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= ext4
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+BOARD_USES_SYSTEM_DLKMIMAGE := true
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := $(ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE)
+
 # Add standalone odm partition configrations
 PRODUCT_BUILD_PRODUCT_IMAGE := true
 TARGET_COPY_OUT_PRODUCT := product
@@ -27,4 +31,8 @@ BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := $(ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE)
 
 BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
 BOARD_SUPER_PARTITION_GROUPS := rockchip_dynamic_partitions
-BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor vendor_dlkm odm odm_dlkm product
+BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_PARTITION_LIST := \
+    system system_dlkm system_ext \
+    vendor vendor_dlkm \
+    odm odm_dlkm \
+    product
