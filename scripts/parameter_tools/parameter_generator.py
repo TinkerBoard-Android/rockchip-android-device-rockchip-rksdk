@@ -103,7 +103,7 @@ def main(argv):
         str_part, int_next_start_offset = generate_pt(cur_part_name, cur_part_size, cur_part_start)
         cur_part_start = int_next_start_offset
         final_parts += str_part + ","
-        if pos_slotselect >= 0:
+        if (pos_slotselect >= 0) & (pos_slotselect == (len(cur_part_name) - 2)):
             slot_b_part_name = cur_part[:pos_slotselect] + '_b'
             str_part, int_next_start_offset = generate_pt(slot_b_part_name, cur_part_size, cur_part_start)
             cur_part_start = int_next_start_offset
