@@ -76,7 +76,7 @@
 
         <codec name="avs2">
             <limit name="id">avs2</limit>
-            <limit name="resolution">4096x2160</limit>
+            <limit name="resolution">8192x4320</limit>
             <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
         </codec>
 
