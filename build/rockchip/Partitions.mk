@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= ext4
+endif
+
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := $(ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE)
 
 # Add standalone vendor partition configrations
