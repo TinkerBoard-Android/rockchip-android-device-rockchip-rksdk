@@ -18,6 +18,8 @@
 
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
 
+DTBO_APPEND_FIX := device/rockchip/$(TARGET_BOARD_PLATFORM)/dtbo_gki_fix.dts
+
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
