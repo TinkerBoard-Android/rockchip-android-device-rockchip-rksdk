@@ -26,6 +26,7 @@ BOARD_INIT_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 PRODUCT_BUILD_INIT_BOOT_IMAGE := true
 #BOARD_BUILD_GKI_BOOT_IMAGE_WITHOUT_RAMDISK := true
+DTBO_APPEND_FIX := device/rockchip/$(TARGET_BOARD_PLATFORM)/dtbo_gki_fix.dts
 
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)

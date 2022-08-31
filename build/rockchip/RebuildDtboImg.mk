@@ -11,6 +11,11 @@ rebuild_dts := $(intermediates)/device-tree-overlay.dts
 rebuild_dtbo_dtb := $(intermediates)/device-dtbo.dtb
 rebuild_dtbo_img := $(intermediates)/rebuild-dtbo.img
 
+addon_string ?= none
+ifdef DTBO_APPEND_FIX
+addon_string := file:$(DTBO_APPEND_FIX)
+endif
+
 dtbo_flags := wait
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     dtbo_flags := $(dtbo_flags),slotselect
@@ -30,6 +35,7 @@ $(rebuild_dts) : $(ROCKCHIP_FSTAB_TOOLS) $(PRODUCT_DTBO_TEMPLATE)
 	-i $(PRODUCT_DTBO_TEMPLATE) \
 	-p $(dtbo_boot_device) \
 	-f $(dtbo_flags) \
+	-a $(addon_string) \
 	-o $(rebuild_dts)
 
 $(rebuild_dtbo_img) : $(rebuild_dts) $(AOSP_DTC_TOOL) $(AOSP_MKDTIMG_TOOL)
