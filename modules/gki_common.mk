@@ -50,5 +50,5 @@ PRODUCT_PACKAGES += \
     tune2fs.vendor_ramdisk
 
 # Build all KOs
-$(call inherit-product, vendor/rockchip/gki/modular_kernel.mk)
+$(call inherit-product, mkcombinedroot/modular_kernel.mk)
 endif
