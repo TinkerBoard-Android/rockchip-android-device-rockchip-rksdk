@@ -115,6 +115,7 @@ ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \<= 3)))
 BOARD_KERNEL_CMDLINE += $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
 else # Boot header 4 requires bootconfig
 BOARD_BOOTCONFIG := $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
+BOARD_KERNEL_CMDLINE += 8250.nr_uarts=10
 endif
 
 # For Header V2, set resource.img as second.
