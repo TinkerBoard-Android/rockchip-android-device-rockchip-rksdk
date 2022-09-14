@@ -158,7 +158,7 @@ PRODUCT_BROKEN_SUBOPTIMAL_ORDER_OF_SYSTEM_SERVER_JARS := true
 
 # Boot animation
 PRODUCT_COPY_FILES += \
-    packages/services/Car/car_product/bootanimations/bootanimation-832.zip:system/media/bootanimation.zip
+    packages/services/Car/car_product/car_ui_portrait/bootanimation/bootanimation.zip:system/media/bootanimation.zip
 
 PRODUCT_LOCALES := \
     en_US \
