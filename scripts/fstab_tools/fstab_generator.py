@@ -26,6 +26,7 @@ def main(argv):
     type = 'fstab'
     part_list = ''
     chained_flags = ''
+    append = ''
     str_append = ''
     dt_vbmeta = 'vbmeta {\n\
         compatible = "android,vbmeta";\n\
@@ -83,10 +84,6 @@ def main(argv):
             temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' erofs ro           ${_flags},first_stage_mount\n'
             temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + '  ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
 
-    if str_append != 'none':
-        temp_addon_fstab += str_append
-        temp_addon_fstab += '\n'
-
     # add vbmeta parts name at here
     list_flags = list(flags);
     pos_avb = flags.find('avb')
@@ -103,6 +100,15 @@ def main(argv):
 
     if type == 'fstab':
         template_fstab_in += temp_addon_fstab
+
+    if str_append != 'none':
+        pos = str_append.find('file:')
+        if pos == 0:
+            # cat file
+            append = open(str_append[pos + len('file:'):]).read()
+        else:
+            append = str_append
+        template_fstab_in += append
 
     fstab_in_t = Template(template_fstab_in)
 
