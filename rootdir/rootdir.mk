@@ -25,7 +25,15 @@ PRODUCT_COPY_FILES += \
     $(ROCKCHIP_ROOT_DIR_PATH)/init.rk30board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).rc \
     $(ROCKCHIP_ROOT_DIR_PATH)/init.rk30board.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).usb.rc \
     $(ROCKCHIP_ROOT_DIR_PATH)/init.recovery.rk30board.rc:recovery/root/init.recovery.$(TARGET_BOARD_HARDWARE).rc \
-    $(ROCKCHIP_ROOT_DIR_PATH)/ueventd.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc \
+
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), car)
+PRODUCT_COPY_FILES += \
+    device/rockchip/common/car/ueventd.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
+else
+PRODUCT_COPY_FILES += \
+    $(ROCKCHIP_ROOT_DIR_PATH)/ueventd.rockchip.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
+endif
 
 PRODUCT_COPY_FILES += \
     $(ROCKCHIP_ROOT_DIR_PATH)/init.system.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/init.rockchip.rc
