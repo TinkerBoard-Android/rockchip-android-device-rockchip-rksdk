@@ -244,11 +244,7 @@ BUILD_WITH_DRMSERVICE :=true
 BOARD_USES_GENERIC_AUDIO ?= true
 
 # Wifi&Bluetooth
-#BOARD_HAVE_BLUETOOTH ?= true
-#BLUETOOTH_USE_BPLUS ?= false
-#BOARD_HAVE_BLUETOOTH_BCM ?= false
-#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_BOARD_PLATFORM)/bluetooth
-#include device/rockchip/common/wifi_bt_common.mk
+include device/rockchip/common/wifi_bt_common.mk
 
 #Camera flash
 BOARD_HAVE_FLASH ?= true
