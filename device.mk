@@ -445,14 +445,15 @@ PRODUCT_PACKAGES += \
     audio_policy.$(TARGET_BOARD_HARDWARE) \
     audio.primary.$(TARGET_BOARD_HARDWARE) \
     audio.alsa_usb.$(TARGET_BOARD_HARDWARE) \
-    audio.r_submix.default\
-    libaudioroute\
-    audio.usb.default\
+    audio.r_submix.default \
+    libaudioroute \
+    audio.usb.default \
+    audio.usbv2.default \
     libanr
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio@7.0-impl \
+    android.hardware.audio.service \
+    android.hardware.audio@7.1-impl \
     android.hardware.audio.effect@7.0-impl
 
 #Health hardware
