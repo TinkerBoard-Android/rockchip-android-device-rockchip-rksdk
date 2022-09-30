@@ -183,7 +183,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
@@ -224,14 +223,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml
 endif
 
-ifeq ($(BOARD_BLUETOOTH_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml
-ifeq ($(BOARD_BLUETOOTH_LE_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
-endif
-endif
+# Bluetooth
+$(call inherit-product, device/rockchip/common/modules/bluetooth.mk)
 
 ifeq ($(BOARD_WIFI_SUPPORT),true)
 PRODUCT_COPY_FILES += \
@@ -491,19 +484,6 @@ $(call inherit-product-if-exists, external/alsa-utils/copy.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=false 
 
-ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
-    PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
-else
-    PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=false
-endif
-
-ifeq ($(strip $(MT6622_BT_SUPPORT)),true)
-    PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=mt6622
-endif
-
-ifeq ($(strip $(BLUETOOTH_USE_BPLUS)),true)
-    PRODUCT_PROPERTY_OVERRIDES += ro.rk.btchip=broadcom.bplus
-endif
 
 ifeq ($(strip $(BOARD_HAVE_FLASH)), true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=true
@@ -523,7 +503,6 @@ endif
 
 
 PRODUCT_TAGS += dalvik.gc.type-precise
-
 
 ########################################################
 # build with UMS? CDROM?
@@ -659,16 +638,6 @@ PRODUCT_COPY_FILES += \
     $(call copyNfcFirmware, BCM43341NFCB0_002.001.009.0021.0000_Generic_PreI2C_NCD_Signed_configdata.ncd)
 endif
 
-# Bluetooth HAL
-PRODUCT_PACKAGES += \
-    libbt-vendor \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service \
-    android.hardware.bluetooth@1.0-service.rc
-
-ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_RTK)), true)
-include hardware/realtek/rtkbt/rtkbt.mk
-endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     #include device/rockchip/common/samba/rk31_samba.mk
@@ -1047,10 +1016,6 @@ BOARD_TV_LOW_MEMOPT ?= false
 ifeq ($(strip $(BOARD_TV_LOW_MEMOPT)), true)
     include device/rockchip/common/tv/tv_low_ram_device.mk
 endif
-
-#bt config for ap bt
-PRODUCT_COPY_FILES += \
-    $(TARGET_DEVICE_DIR)/bt_vendor.conf:/vendor/etc/bluetooth/bt_vendor.conf
 
 # Camera support
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
