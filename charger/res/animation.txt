@@ -1,0 +1,20 @@
+# Sample Animation file for testing.
+
+# animation: num_cycles, first_frame_repeats, animation_file
+animation: 2 1 charger/battery_scale
+
+fail: charger/battery_fail
+
+# frame: disp_time min_level max_level
+frame: 500 0 19
+frame: 600 0 39
+frame: 700 0 59
+frame: 750 0 79
+frame: 750 0 89
+frame: 750 0 100
+
+# percent_display: x y (distance below the battery) r g b a font_file
+percent_display: c 50 255 255 255 255 charger/font
+
+# clock_display: x y (distance below the top of the screen) r g b a font_file
+clock_display: c 100 255 255 255 255 charger/font

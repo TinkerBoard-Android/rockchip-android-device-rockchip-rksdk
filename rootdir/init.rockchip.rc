@@ -14,18 +14,6 @@ on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
-service charger /system/bin/charger
-    class charger
-    seclabel u:r:healthd:s0
-    seclabel u:r:charger:s0
-    user system
-    group system wakelock input
-    capabilities SYS_BOOT
-    file /dev/kmsg w
-    file /sys/fs/pstore/console-ramoops-0 r
-    file /sys/fs/pstore/console-ramoops r
-    file /proc/last_kmsg r
-
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /system/bin/watchdogd 10 20
     class core
@@ -97,20 +85,10 @@ on property:ro.debuggable=1
     restorecon /sys/kernel/debug/tracing/trace_marker
     restorecon_recursive /sys/kernel/debug/tracing/
 
-on property:ro.boot.charger.emmc=1
-    start console
-    start charger
-
-on property:ro.boot.charger.emmc=0
-    mount ext4 mtd@system /system wait ro noatime nodiratime noauto_da_alloc
-    start console
-    mount ext4 mtd@metadata /metadata wait noatime nodiratime nosuid nodev noauto_da_alloc
-    start charger
-
 on charger
-    setprop ro.boot.charger.emmc 0
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
+    start console
     setprop sys.usb.config adb
     chmod 0666 /sys/power/state
     chmod 0666 /sys/power/wakeup_count

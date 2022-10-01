@@ -1,0 +1,45 @@
+
+// /vendor/etc/res/images/charger/battery_fail.png
+prebuilt_etc {
+    name: "rockchip_charger_res_images_battery_fail.png",
+    src: "res/battery_fail.png",
+    relative_install_path: "res/images/charger",
+    vendor: true,
+    filename: "battery_fail.png",
+}
+
+// /vendor/etc/res/images/charger/battery_scale.png
+prebuilt_etc {
+    name: "rockchip_charger_res_images_battery_scale.png",
+    src: "res/battery_scale.png",
+    relative_install_path: "res/images/charger",
+    vendor: true,
+    filename: "battery_scale.png",
+}
+
+// /vendor/etc/res/images/charger/font.png
+prebuilt_etc {
+    name: "rockchip_charger_res_images_font.png",
+    src: "res/font.png",
+    relative_install_path: "res/images/charger",
+    vendor: true,
+    filename: "font.png",
+}
+
+prebuilt_etc {
+    name: "rockchip_charger_res_animation.txt",
+    src: "res/animation.txt",
+    relative_install_path: "res/values/charger",
+    vendor: true,
+    filename: "animation.txt",
+}
+
+phony {
+    name: "charger_res_images_rockchip",
+    required: [
+        "rockchip_charger_res_images_battery_fail.png",
+        "rockchip_charger_res_images_battery_scale.png",
+        "rockchip_charger_res_images_font.png",
+        "rockchip_charger_res_animation.txt",
+    ],
+}

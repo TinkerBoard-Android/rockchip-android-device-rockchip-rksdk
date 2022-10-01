@@ -407,14 +407,8 @@ else
 BUILD_IEP := false
 endif
 
-# charge
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
-
-# Allows healthd to boot directly from charger mode rather than initiating a reboot.
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.enable_boot_charger_mode=0
+# Health/Battery & Charger
+$(call inherit-product, device/rockchip/common/modules/health.mk)
 
 # Add board.platform default property to parsing related rc
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -448,11 +442,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.audio@7.1-impl \
     android.hardware.audio.effect@7.0-impl
-
-#Health hardware
-PRODUCT_PACKAGES += \
-    android.hardware.health-service.example \
-    android.hardware.health-service.example_recovery
 
 # Filesystem management tools
 # EXT3/4 support
