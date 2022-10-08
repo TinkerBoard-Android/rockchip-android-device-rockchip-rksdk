@@ -44,7 +44,7 @@ def IncrementalOTA_Assertions(info):
 
 def AddBootloaderAssertion(info, input_zip):
   android_info = input_zip.read("OTA/android-info.txt")
-  m = re.search(r"require\s+version-bootloader\s*=\s*(\S+)", android_info)
+  m = re.search(r"require\s+version-bootloader\s*=\s*(\S+)", android_info.decode('utf-8'))
   if m:
     bootloaders = m.group(1).split("|")
     if "*" not in bootloaders:
@@ -53,23 +53,23 @@ def AddBootloaderAssertion(info, input_zip):
 
 def Install_Parameter(parameter_bin, input_zip, info):
   try:
-    print "write parameter.bin now"
+    print("write parameter.bin now")
     info.script.Print("Start update GptParameter...")
     common.ZipWriteStr(info.output_zip, "parameter", parameter_bin)
     info.script.WriteRawGptParameterImage()
     info.script.Print("end update parameter")
     info.script.FormatPartition("/data");
   except KeyError:
-    print "no parameter.bin, ignore it."
+    print("no parameter.bin, ignore it.")
 
 def InstallRKLoader(loader_bin, input_zip, info):
   try:
-    print "wirte RKLoader.bin now..."
+    print("wirte RKLoader.bin now...")
     #info.script.Print("Writing rk loader bin...")
     common.ZipWriteStr(info.output_zip, "RKLoader.bin", loader_bin)
     #info.script.WriteRawLoaderImage()
   except KeyError:
-    print "no RKLoader.bin, ignore it."
+    print("no RKLoader.bin, ignore it.")
 
 
 def InstallUboot(loader_bin, input_zip, info):
@@ -110,39 +110,39 @@ def InstallVendorBoot(vendor_boot_bin, input_zip, info):
 def FullOTA_InstallEnd(info):
   try:
     trust = info.input_zip.read("trust.img")
-    print "write trust now..."
+    print("write trust now...")
     InstallTrust(trust, info.input_zip, info)
   except KeyError:
-    print "warning: no trust.img in input target_files; not flashing trust"
+    print("warning: no trust.img in input target_files; not flashing trust")
 
   try:
     uboot = info.input_zip.read("uboot.img")
-    print "write uboot now..."
+    print("write uboot now...")
     InstallUboot(uboot, info.input_zip, info)
   except KeyError:
-    print "warning: no uboot.img in input target_files; not flashing uboot"
+    print("warning: no uboot.img in input target_files; not flashing uboot")
 
   try:
     vbmeta = info.input_zip.read("IMAGES/vbmeta.img")
-    print "wirte vbmeta now..."
+    print("wirte vbmeta now...")
     InstallVbmeta(vbmeta, info.input_zip, info)
   except KeyError:
-    print "warning: no vbmeta.img in input target_files; not flashing vbmeta"
+    print("warning: no vbmeta.img in input target_files; not flashing vbmeta")
 
   try:
     dtbo = info.input_zip.read("IMAGES/dtbo.img")
-    print "wirte dtbo now..."
+    print("wirte dtbo now...")
     InstallDtbo(dtbo, info.input_zip, info)
   except KeyError:
-    print "warning: no dtbo.img in input target_files; not flashing dtbo"
+    print("warning: no dtbo.img in input target_files; not flashing dtbo")
 
   try:
     charge = info.input_zip.read("charge.img")
-    print "wirte charge now..."
+    print("wirte charge now...")
     InstallCharge(charge, info.input_zip, info)
   except KeyError:
     # print "info: no charge img; ignore it."
-    print "no charge img; ignore it."
+    print("no charge img; ignore it.")
 
 #**************************************************************************************************
 #resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
@@ -150,10 +150,10 @@ def FullOTA_InstallEnd(info):
 
   try:
     resource = info.input_zip.read("IMAGES/resource.img")
-    print "wirte resource now..."
+    print("wirte resource now...")
     InstallResource(resource, info.input_zip, info)
   except KeyError:
-    print "info: no resource image; ignore it."
+    print("info: no resource image; ignore it.")
 
 #  try:
 #    loader_bin = info.input_zip.read("LOADER/RKLoader.img")
@@ -168,14 +168,14 @@ def FullOTA_InstallEnd(info):
     loader_bin = info.input_zip.read("RKLoader.bin")
     InstallRKLoader(loader_bin, info.input_zip, info)
   except KeyError:
-    print "no RKLoader.bin, ignore it."
+    print("no RKLoader.bin, ignore it.")
 
   try:
     vendor_boot = info.input_zip.read("IMAGES/vendor_boot.img")
-    print "wirte vendor_boot now..."
+    print("wirte vendor_boot now...")
     InstallVendorBoot(vendor_boot, info.input_zip, info)
   except KeyError:
-    print "info: no vendor_boot.img in input target_files; ignore it"
+    print("info: no vendor_boot.img in input target_files; ignore it")
 
 def IncrementalOTA_InstallEnd(info):
   try:
@@ -189,10 +189,10 @@ def IncrementalOTA_InstallEnd(info):
     trust_source = None
 
   if (trust_target != None) and (trust_target != trust_source):
-    print "write trust now..."
+    print("write trust now...")
     InstallTrust(trust_target, info.target_zip, info)
   else:
-    print "trust unchanged; skipping"
+    print("trust unchanged; skipping")
 
   try:
     vbmeta_target = info.target_zip.read("IMAGES/vbmeta.img")
@@ -205,10 +205,10 @@ def IncrementalOTA_InstallEnd(info):
     vbmeta_source = None
 
   if (vbmeta_target != None) and (vbmeta_target != vbmeta_source):
-    print "write vbmeta now..."
+    print("write vbmeta now...")
     InstallVbmeta(vbmeta_target, info.target_zip, info)
   else:
-    print "vbmeta unchanged; skipping"
+    print("vbmeta unchanged; skipping")
 
   try:
     dtbo_target = info.target_zip.read("IMAGES/dtbo.img")
@@ -221,10 +221,10 @@ def IncrementalOTA_InstallEnd(info):
     dtbo_source = None
 
   if (dtbo_target != None) and (dtbo_target != dtbo_source):
-    print "write dtbo now..."
+    print("write dtbo now...")
     InstallDtbo(dtbo_target, info.target_zip, info)
   else:
-    print "dtbo unchanged; skipping"
+    print("dtbo unchanged; skipping")
 
   try:
     loader_uboot_target = info.target_zip.read("uboot.img")
@@ -237,10 +237,10 @@ def IncrementalOTA_InstallEnd(info):
     loader_uboot_source = None
 
   if (loader_uboot_target != None) and (loader_uboot_target != loader_uboot_source):
-    print "write uboot now..."
+    print("write uboot now...")
     InstallUboot(loader_uboot_target, info.target_zip, info)
   else:
-    print "uboot unchanged; skipping"
+    print("uboot unchanged; skipping")
 
   try:
     charge_target = info.target_zip.read("charge.img")
@@ -253,10 +253,10 @@ def IncrementalOTA_InstallEnd(info):
     charge_source = None
 
   if (charge_target != None) and (charge_target != charge_source):
-    print "write charge now..."
+    print("write charge now...")
     InstallCharge(charge_target, info.target_zip, info)
   else:
-    print "charge unchanged; skipping"
+    print("charge unchanged; skipping")
 
 #**************************************************************************************************
 #resource package in the boot.img and recovery.img,so we suggest not to update alone resource.img
@@ -272,28 +272,28 @@ def IncrementalOTA_InstallEnd(info):
     resource_source = None
 
   if (resource_target != None) and (resource_target != resource_source):
-    print "write resource now..."
+    print("write resource now...")
     InstallResource(resource_target, info.target_zip, info)
   else:
-    print "resource unchanged; skipping"
+    print("resource unchanged; skipping")
 
   try:
     target_loader = info.target_zip.read("RKLoader.bin")
   except KeyError:
-    print "warning: rk loader bin missing from target; not flashing loader"
+    print("warning: rk loader bin missing from target; not flashing loader")
     target_loader = None
 
   try:
     source_loader = info.source_zip.read("RKLoader.bin")
   except KeyError:
-    print "warning: rk loader bin missing from source; not flashing loader"
+    print("warning: rk loader bin missing from source; not flashing loader")
     source_loader = None
 
   if (target_loader != None) and (source_loader != target_loader):
-    print "write loader now..."
+    print("write loader now...")
     InstallRKLoader(target_loader, info.target_zip, info)
   else:
-    print "loader unchanged; skipping"
+    print("loader unchanged; skipping")
 
   try:
     vendor_boot_target = info.target_zip.read("IMAGES/vendor_boot.img")
@@ -306,10 +306,10 @@ def IncrementalOTA_InstallEnd(info):
     vendor_boot_source = None
 
   if (vendor_boot_target != None) and (vendor_boot_target != vbmeta_source):
-    print "write vendor_boot now..."
+    print("write vendor_boot now...")
     InstallVendorBoot(vendor_boot_target, info.target_zip, info)
   else:
-    print "vendor_boot unchanged; skipping"
+    print("vendor_boot unchanged; skipping")
 
 
 def GetUserImages(input_tmp, input_zip):
