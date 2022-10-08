@@ -31,6 +31,7 @@ USERIMAGE_PARTITIONS = [
     "system_ext",
     "vendor_dlkm",
     "odm_dlkm",
+    "system_dlkm",
 ]
 
 def FullOTA_Assertions(info):
