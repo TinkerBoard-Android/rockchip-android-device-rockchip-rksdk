@@ -429,6 +429,8 @@ BOARD_MEMTRACK_SUPPORT ?= false
 
 PRODUCT_DEFAULT_DEV_CERTIFICATE := device/rockchip/common/security/testkey
 
+PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
     ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
