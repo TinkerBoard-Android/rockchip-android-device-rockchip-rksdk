@@ -54,6 +54,7 @@ FLASH_CONFIG_FILE=${TARGET_DEVICE_DIR}/config.cfg_ab
 FLASH_CONFIG_FILE_GKI=${TARGET_DEVICE_DIR}/config.cfg_ab_gki
 
 KERNEL_SRC_PATH=`grep TARGET_PREBUILT_KERNEL ${BOARD_CONFIG} |grep "^\s*TARGET_PREBUILT_KERNEL *:= *[\w]*\s" |awk  '{print $3}'`
+KERNEL_PATH=`get_build_var PRODUCT_KERNEL_PATH`
 
 [ $(id -u) -eq 0 ] || FAKEROOT=fakeroot
 
@@ -78,6 +79,16 @@ BOOT_OTA="ota"
         fi
     fi
 
+copy_images() {
+if [ ! -f "$1" ]; then
+    echo "skip copy images: $1"
+else
+    echo "create $2..."
+    cp -a $1 $2
+    echo "done."
+fi
+}
+
 copy_images_from_out() {
 if [ ! -f "$OUT/$1" ]; then
     echo "skip copy images: $1"
@@ -97,7 +108,8 @@ fi
 cp -a $BOARD_DTBO_IMG $IMAGE_PATH/dtbo.img
 echo "done."
 
-
+copy_images $KERNEL_PATH/resource.img $IMAGE_PATH/resource.img
+copy_images_from_out init_boot.img
 copy_images_from_out boot.img
 copy_images_from_out boot-debug.img
 copy_images_from_out vendor_boot.img
@@ -219,7 +231,7 @@ fi
 
 SHARED_LIBRARIES_DIR=out/host/linux-x86/lib64
 JAVA_LIBRARIES_DIR=out/host/linux-x86/framework
-OTA_KEY_DIR=build/target/product/security
+OTA_KEY_DIR=device/rockchip/common/security
 
 if [ $TARGET == $BOOT_OTA ]; then
     echo "create update_loader.zip.."
