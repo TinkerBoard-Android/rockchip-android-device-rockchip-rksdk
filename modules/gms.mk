@@ -20,12 +20,14 @@
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
+# For FRP
+ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
+  PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/by-name/frp
+endif
+
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
-  ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-      ro.frp.pst=/dev/block/by-name/frp
-  endif
   ifeq ($(strip $(TARGET_BUILD_VARIANT)), user)
     ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
       $(warning ****************************************)
