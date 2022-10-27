@@ -897,12 +897,13 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-rockchip.recovery
 
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
-ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION_WITH_GKI_ENABLE)),true)
+ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION)),true)
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 $(call inherit-product, \
-    $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+    $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_with_xor.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_retrofit.mk)
 endif
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
