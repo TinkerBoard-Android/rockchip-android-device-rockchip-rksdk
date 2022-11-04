@@ -184,14 +184,57 @@ if [ "$BUILD_ANDROID" = true ] ; then
             echo "make ab image and generate ota package"
             make installclean
             make -j$BUILD_JOBS
+            # check the result of make
+            if [ $? -eq 0 ]; then
+                echo "Build android ok!"
+            else
+                echo "Build android failed!"
+                exit 1
+            fi
+
             make dist -j$BUILD_JOBS
+            # check the result of make
+            if [ $? -eq 0 ]; then
+                echo "Build android ok!"
+            else
+                echo "Build android failed!"
+                exit 1
+            fi
             ./mkimage_ab.sh ota
+            # check the result of make
+            if [ $? -eq 0 ]; then
+                echo "Build android ok!"
+            else
+                echo "Build android failed!"
+                exit 1
+            fi
         else
             echo "generate ota package"
 	    make installclean
 	    make -j$BUILD_JOBS
+            # check the result of make
+            if [ $? -eq 0 ]; then
+                echo "Build android ok!"
+            else
+                echo "Build android failed!"
+                exit 1
+            fi
 	    make dist -j$BUILD_JOBS
+            # check the result of make
+            if [ $? -eq 0 ]; then
+                echo "Build android ok!"
+            else
+                echo "Build android failed!"
+                exit 1
+            fi
             ./mkimage.sh ota
+            # check the result of make
+            if [ $? -eq 0 ]; then
+                echo "Build android ok!"
+            else
+                echo "Build android failed!"
+                exit 1
+            fi
         fi
         cp $OUT/$INTERNAL_OTA_PACKAGE_TARGET $IMAGE_PATH/
         cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
