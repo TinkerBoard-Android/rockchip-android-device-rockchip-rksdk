@@ -1059,3 +1059,7 @@ endif
 # neon transform library
 PRODUCT_PACKAGES += \
 	librockchipxxx
+
+# set defaut color saturation
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.sf.color_saturation=1.0
