@@ -74,9 +74,11 @@ else
                 BOARD_SUPER_PARTITION_SIZE := 5372903424
                 BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) / 2 - 4194304)
             endif
+ifdef BOARD_BOOT_HEADER_VERSION
             ifeq (0,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
                 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
             endif
+endif
         endif
     endif
 endif
