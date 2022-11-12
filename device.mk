@@ -213,9 +213,11 @@ PRODUCT_PACKAGES += \
 #audio
 $(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_config/rk_audio.mk)
 
-# SDCardFS deprecate
+# SDCardFS deprecate for Android R+
 # https://source.android.google.cn/devices/storage/sdcardfs-deprecate
+ifneq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),30),)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+endif
 
 ifeq ($(BOARD_NFC_SUPPORT),true)
 PRODUCT_COPY_FILES += \
