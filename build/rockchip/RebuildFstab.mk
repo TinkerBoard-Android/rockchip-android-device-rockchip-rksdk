@@ -23,7 +23,7 @@ endif
 endif # BOARD_AVB_ENABLE
 
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
-str_addon := "/dev/block/by-name/init_boot /init_boot emmc defaults $(fstab_addon)first_stage_ramdisk"
+str_addon := "/dev/block/by-name/init_boot /init_boot emmc defaults $(fstab_addon)first_stage_mount"
 else
 str_addon := none
 endif
