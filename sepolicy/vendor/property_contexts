@@ -77,3 +77,6 @@ persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
 vendor.usb.config          u:object_r:vendor_usb_config_prop:s0
 vendor.usb.                u:object_r:vendor_usb_prop:s0
 persist.vendor.usb.        u:object_r:vendor_usb_prop:s0
+
+persist.vendor.tvinput.   u:object_r:vendor_tv_input_prop:s0
+vendor.tvinput.           u:object_r:vendor_tv_input_prop:s0

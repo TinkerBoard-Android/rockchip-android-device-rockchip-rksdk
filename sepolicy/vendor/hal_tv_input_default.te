@@ -1,0 +1,13 @@
+hal_client_domain(hal_tv_input_default,hal_graphics_allocator);
+rw_rockchip_graphic_device(hal_tv_input_default);
+
+allow hal_tv_input_default video_device:chr_file { read write open ioctl };
+allow hal_tv_input_default rk_output_hal_service:hwservice_manager { find };
+allow hal_tv_input_default device:dir { search open read };
+allow hal_tv_input_default gpu_device:chr_file { open read write };
+allow hal_tv_input_default hal_graphics_mapper_hwservice:hwservice_manager { find };
+allow hal_tv_input_default hal_graphics_mapper_hwservice:binder { call transfer };
+get_prop(hal_tv_input_default,vendor_tv_input_prop)
+set_prop(hal_tv_input_default,vendor_tv_input_prop)
+get_prop(hal_tv_input_default,vendor_hwc_prop)
+get_prop(hal_tv_input_default,vendor_system_public_prop)

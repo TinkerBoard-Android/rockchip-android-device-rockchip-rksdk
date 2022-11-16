@@ -17,8 +17,7 @@
 PRODUCT_PACKAGES += \
     TvProvider \
     rkCamera2 \
-    PartnerSupportSampleTvInput \
-    RkHdmiInAudio
+    PartnerSupportSampleTvInput
 
 # JNI
 PRODUCT_PACKAGES += \
@@ -30,8 +29,8 @@ PRODUCT_COPY_FILES += \
 
 # Build tv_input HAL
 PRODUCT_PACKAGES += \
-    android.hardware.tv.input@1.0-service \
-    android.hardware.tv.input@1.0-impl \
+    rockchip.hardware.tv.input@1.0-service \
+    rockchip.hardware.tv.input@1.0-impl \
     tv_input.rockchip
 
 # Use tv_input.rockchip
@@ -39,4 +38,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.tv_input=rockchip
 
 # Add manifest
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/rockchip/common/manifests/frameworks/rockchip.hardware.tv.input@1.0-service.xml
 DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.tv.input@1.0-service.xml
