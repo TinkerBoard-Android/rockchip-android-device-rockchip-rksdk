@@ -360,12 +360,22 @@ endif # BOARD_USE_DYNAMIC_PARTITIONS
 # define MPP_BUF_TYPE_ION_404 3
 # define MPP_BUF_TYPE_ION_419 4
 # define MPP_BUF_TYPE_DMA_BUF 5
+
+ifeq ($(TARGET_RK_GRALLOC_AIDL),true)
+# Gralloc AIDL
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator-V1-service \
+    android.hardware.graphics.allocator-V1-$(BOARD_VENDOR_GPU_PLATFORM) \
+    android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM)
+
+DEVICE_MANIFEST_FILE += \
+    device/rockchip/common/manifests/android.hardware.graphics.mapper@4.0.xml
+else # Use HIDL
 ifeq ($(TARGET_RK_GRALLOC_VERSION),4)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.mpp_buf_type=1
 # Gralloc HAL
 PRODUCT_PACKAGES += \
-    arm.graphics-V1-ndk_platform.so \
     android.hardware.graphics.allocator@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
     android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
     android.hardware.graphics.allocator@4.0-service
@@ -385,6 +395,7 @@ PRODUCT_PACKAGES += \
 DEVICE_MANIFEST_FILE += \
     device/rockchip/common/manifests/android.hardware.graphics.mapper@2.1.xml \
     device/rockchip/common/manifests/android.hardware.graphics.allocator@2.0.xml
+endif
 endif
 
 PRODUCT_PACKAGES += \
