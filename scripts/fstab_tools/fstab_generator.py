@@ -105,7 +105,11 @@ def main(argv):
         pos = str_append.find('file:')
         if pos == 0:
             # cat file
-            append = open(str_append[pos + len('file:'):]).read()
+            file_name = str_append[pos + len('file:'):]
+            if os.path.exists(file_name):
+                append = open(file_name).read()
+            else:
+                append = ''
         else:
             append = str_append
         template_fstab_in += append
