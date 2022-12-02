@@ -22,7 +22,6 @@
             <attachedDevices>
                 <item>Speaker</item>
                 <item>Built-In Mic</item>
-                <item>HDMIIn</item>
             </attachedDevices>
             <defaultOutputDevice>Speaker</defaultOutputDevice>
             <mixPorts>
@@ -55,8 +54,6 @@
                 </devicePort>
                 <devicePort tagName="BT SCO Headset Mic" type="AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET" role="source">
                 </devicePort>
-                <devicePort tagName="HDMIIn" type="AUDIO_DEVICE_IN_HDMI" role="source">
-                </devicePort>
             </devicePorts>
             <routes>
                 <route type="mix" sink="Speaker"
@@ -72,7 +69,7 @@
                 <route type="mix" sink="BT SCO Car Kit"
                        sources="primary output"/>
                 <route type="mix" sink="primary input"
-                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic,HDMIIn"/>
+                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic"/>
             </routes>
         </module>
 
@@ -91,14 +88,23 @@
                              samplingRates="32000 44100 48000 96000 176400 192000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
                 </mixPort>
+                <mixPort name="hdmi input" role="sink">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO"/>
+                </mixPort>
             </mixPorts>
             <devicePorts>
                 <devicePort tagName="HDMI Out" type="AUDIO_DEVICE_OUT_AUX_DIGITAL" role="sink">
+                </devicePort>
+                <devicePort tagName="HDMIIn" type="AUDIO_DEVICE_IN_HDMI" role="source">
                 </devicePort>
             </devicePorts>
             <routes>
                 <route type="mix" sink="HDMI Out"
                        sources="hdmi_default_output,hdmi output"/>
+                <route type="mix" sink="hdmi input"
+                       sources="HDMIIn"/>
             </routes>
         </module>
 

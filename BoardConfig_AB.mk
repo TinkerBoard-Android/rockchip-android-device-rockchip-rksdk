@@ -18,8 +18,10 @@ AB_OTA_UPDATER := true
 TARGET_NO_RECOVERY := true
 
 BOARD_USES_RECOVERY_AS_BOOT := true
+ifdef BOARD_BOOT_HEADER_VERSION
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 BOARD_USES_RECOVERY_AS_BOOT :=
+endif
 endif
 
 USE_AB_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter_ab.txt && echo true)
@@ -73,7 +75,9 @@ else
                 BOARD_SUPER_PARTITION_SIZE := 5372903424
                 BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) / 2 - 4194304)
             endif
-            BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
+            ifeq (0,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+                BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
+            endif
         endif
     endif
 endif

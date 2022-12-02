@@ -95,7 +95,7 @@ ifneq ($(filter true yes, $(BUILD_WITH_GOOGLE_MARKET) $(PRODUCT_USE_PREBUILT_GTV
       endif
 
       PRODUCT_PROPERTY_OVERRIDES += \
-        ro.cpuvulkan.version=4198400
+        ro.cpuvulkan.version=4202496
 
       PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \

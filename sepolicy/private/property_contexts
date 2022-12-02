@@ -1,6 +1,9 @@
 # for cts_gts
 cts_gts.            u:object_r:test_harness_prop:s0
 
+# for log catcher
+sys.tombstone.      u:object_r:debug_prop:s0
+
 # for Express build
 ro.base_build   u:object_r:exported_default_prop:s0
 ro.boot.noril   u:object_r:debug_prop:s0

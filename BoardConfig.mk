@@ -20,7 +20,7 @@ TARGET_BOARD_HARDWARE ?= rk30board
 PRODUCT_KERNEL_VERSION ?= 4.19
 PRODUCT_KERNEL_PATH ?= kernel-$(PRODUCT_KERNEL_VERSION)
 
-# value: tablet,box,phone
+# value: tablet,box,phone,vehicle
 # It indicates whether to be tablet platform or not
 
 # Export this prop for Mainline Modules.
@@ -32,7 +32,15 @@ else
 ifneq ($(filter %vr, $(TARGET_PRODUCT)), )
 TARGET_BOARD_PLATFORM_PRODUCT ?= vr
 else
+ifneq ($(filter %vehicle, $(TARGET_PRODUCT)), )
+TARGET_BOARD_PLATFORM_PRODUCT ?= vehicle
+else
+ifneq ($(filter %car, $(TARGET_PRODUCT)), )
+TARGET_BOARD_PLATFORM_PRODUCT ?= car
+else
 TARGET_BOARD_PLATFORM_PRODUCT ?= tablet
+endif
+endif
 endif
 endif
 
@@ -107,6 +115,7 @@ ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \<= 3)))
 BOARD_KERNEL_CMDLINE += $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
 else # Boot header 4 requires bootconfig
 BOARD_BOOTCONFIG := $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
+BOARD_KERNEL_CMDLINE += 8250.nr_uarts=10
 endif
 
 # For Header V2, set resource.img as second.
@@ -412,6 +421,10 @@ BOARD_USER_FAKETOUCH ?= true
 endif
 
 ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), tablet)
+BOARD_SUPPORT_MULTIAUDIO ?= true
+endif
+
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), vehicle)
 BOARD_SUPPORT_MULTIAUDIO ?= true
 endif
 

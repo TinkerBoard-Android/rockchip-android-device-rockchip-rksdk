@@ -32,7 +32,8 @@ PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi tvdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 
 PRODUCT_PACKAGES += \
-    ExactCalculator
+    ExactCalculator \
+    wakeup-alarmalign-whitelist.xml
 
 ifdef TARGET_PREBUILT_KERNEL
 # Copy kernel if exists
@@ -42,7 +43,7 @@ endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR11
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR12
 
 TARGET_SYSTEM_PROP += device/rockchip/common/build/rockchip/rksdk.prop
 
@@ -72,6 +73,8 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
 
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
   $(call inherit-product, device/rockchip/common/tv/tv_base.mk)
+else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), car)
+  $(call inherit-product, device/rockchip/common/car/car.mk)
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
   # For arm Go tablet.
   $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
@@ -296,7 +299,7 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
 else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/laptop_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/laptop_core_hardware.xml
-else ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
+else
 ifneq ($(strip $(BUILD_WITH_GO_OPT)),true)
     PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
@@ -313,7 +316,7 @@ PRODUCT_PACKAGES += \
     librs_jni \
     libjni_pinyinime
 
-ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+ifeq ($(filter atv box car, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 # Sensor HAL
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
@@ -857,11 +860,13 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product, device/rockchip/common/modules/rockchip_apps.mk)
 
+ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), car)
 ifneq ($(BUILD_WITH_GOOGLE_MARKET), true)
 PRODUCT_PACKAGES += \
     InProcessNetworkStack \
     com.android.tethering.inprocess
 endif
+endif # car without InProcessNetworkStack
 endif # tablet without GMS-Express
 endif
 
@@ -882,6 +887,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.logd.kernel=1
+PRODUCT_COPY_FILES += \
+    device/rockchip/common/zmodem/rz:$(TARGET_COPY_OUT_VENDOR)/bin/rz \
+    device/rockchip/common/zmodem/sz:$(TARGET_COPY_OUT_VENDOR)/bin/sz
 PRODUCT_PACKAGES += io
 endif
 
@@ -1057,6 +1065,18 @@ ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
 $(call inherit-product, device/rockchip/common/modules/memtrack.mk)
 endif
 
+ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT))|$(strip $(BOARD_USES_LIBPQ)) ,true|true)
+    #Build pq and iep lib
+    PRODUCT_PACKAGES += \
+        libpq \
+        libiep
+
+    #no afbc
+    PRODUCT_PROPERTY_OVERRIDES += \
+        vendor.gralloc.no_afbc_for_fb_target_layer=1
+
+endif
+
 PRODUCT_PACKAGES += \
 	libbaseparameter
 
@@ -1079,3 +1099,7 @@ PRODUCT_PACKAGES += \
 	rkaiq_3A_server
 endif
 endif
+
+# neon transform library
+PRODUCT_PACKAGES += \
+	librockchipxxx

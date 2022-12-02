@@ -52,8 +52,8 @@ $(rebuild_parameter) : $(PRODUCT_PARAMETER_TEMPLATE) $(ROCKCHIP_PARAMETER_TOOLS)
 	$(ROCKCHIP_PARAMETER_TOOLS) --input $(PRODUCT_PARAMETER_TEMPLATE) \
 	--start-offset 8192 \
 	--firmware-version $(BOARD_PLATFORM_VERSION) \
-	--machine-model $(PRODUCT_MODEL) \
-	--manufacturer $(PRODUCT_MANUFACTURER) \
+	--machine-model "$(PRODUCT_MODEL)" \
+	--manufacturer "$(PRODUCT_MANUFACTURER)" \
 	--machine $(PRODUCT_DEVICE) \
 	--partition-list $(partition_list) \
 	--output $(rebuild_parameter)
