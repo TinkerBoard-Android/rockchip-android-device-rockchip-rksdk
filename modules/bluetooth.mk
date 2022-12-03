@@ -20,11 +20,12 @@ PRODUCT_PACKAGES += \
     libbt-vendor \
     android.hardware.bluetooth@1.0-impl \
     android.hardware.bluetooth@1.0-service \
-    android.hardware.bluetooth@1.0-service.rc
+    android.hardware.bluetooth@1.0-service.rc \
+    libbluetooth_audio_session \
+    libbluetooth_audio_session_aidl \
+    android.hardware.bluetooth.audio-impl \
+    audio.bluetooth.default
 
-# Prebuilt A2DP libs
-PRODUCT_PACKAGES += \
-    audio.a2dp.rk30board
 
 # Set supported Bluetooth profiles to enabled
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -64,6 +65,10 @@ endif
 # A2DP audio policy
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml
+
+# bluetooth audio policy
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration_7_0.xml
 
 # bt config for ap bt
 PRODUCT_COPY_FILES += \
