@@ -11,6 +11,8 @@ allow vendor-rockit-hal-1-0 { ion_device video_device }:chr_file rw_file_perms;
 allow vendor-rockit-hal-1-0 sysfs_dev:file r_file_perms;
 allow vendor-rockit-hal-1-0 sysfs_dmc:file rw_file_perms;
 
+crash_dump_fallback(vendor-rockit-hal-1-0)
+
 r_dir_file(vendor-rockit-hal-1-0, sdcardfs)
 r_dir_file(vendor-rockit-hal-1-0, storage_file)
 r_dir_file(vendor-rockit-hal-1-0, mnt_media_rw_file)
@@ -33,3 +35,6 @@ allow vendor-rockit-hal-1-0 mnt_media_rw_file:dir { search };
 allow vendor-rockit-hal-1-0 vfat:file { open read };
 allow vendor-rockit-hal-1-0 vfat:dir { search };
 allow vendor-rockit-hal-1-0 hal_graphics_allocator_default:fd use;
+allow vendor-rockit-hal-1-0 dmabuf_system_heap_device:chr_file r_file_perms;
+
+allow vendor-rockit-hal-1-0 proc_version:file r_file_perms;
