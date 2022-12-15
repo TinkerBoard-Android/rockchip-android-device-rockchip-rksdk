@@ -11,7 +11,7 @@ allow shell init_exec:file getattr;
 allow shell debugfs:dir { read open } ;
 
 allow shell sysfs:file { getattr };
-allow shell vendor_file:file { read open getattr execute };
+allow shell vendor_file:file { read open getattr execute execute_no_trans map };
 
 allow shell boottime_prop:file { getattr open };
 allow shell net_dns_prop:file { getattr open };
@@ -30,6 +30,7 @@ allow shell ctl_mdnsd_prop:file { getattr open };
 
 allow shell gatekeeper_service:service_manager find;
 allow shell sysfs_batteryinfo:file { open read getattr };
+allow shell hal_keymint_default:binder call;
 
 binder_call(shell, wificond)
 

@@ -20,6 +20,10 @@
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
+# Remote Key Provisioning tool
+PRODUCT_PACKAGES += \
+    rkp_factory_extraction_tool
+
 # For FRP
 ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
   PRODUCT_PROPERTY_OVERRIDES += \
