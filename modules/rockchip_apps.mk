@@ -20,5 +20,4 @@ PRODUCT_PACKAGES += \
     RkVideoPlayer \
     RkExplorer \
     StressTest \
-    RKUpdateService \
-    RKLogsTool
+    RKUpdateService
