@@ -35,7 +35,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 # PRODUCT_BUILD_BOOT_IMAGE := true
 TARGET_NO_KERNEL := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-
+# Android 13+ required LZ4 ramdisk
+BOARD_RAMDISK_USE_LZ4 := true
 # Build GSI avb keys to vendor-ramdisk
 BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 
