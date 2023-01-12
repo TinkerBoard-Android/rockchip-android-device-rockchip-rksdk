@@ -48,7 +48,7 @@
             <limit name="id">h264</limit>
             <limit name="resolution">1920x1080</limit>
             <limit name="format">yuv420p,yuv420sp</limit>
-            </codec>
+        </codec>
 
         <codec name="hevc_1080">
             <limit name="id">hevc</limit>
@@ -212,6 +212,9 @@
             <include name="vp9_8k_10bit,av1_8k_10bit"/>
             <include name="avs+"/>
             <include name="avs2"/>
+        </chip>
+        <chip name="RK3562">
+            <include name="h264_1080,hevc_4k_8bit,vp9_4k_8bit"/>
         </chip>
     </decoder>
 
