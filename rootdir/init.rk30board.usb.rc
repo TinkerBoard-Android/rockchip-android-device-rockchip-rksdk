@@ -92,6 +92,8 @@ on early-boot
     mount functionfs mtp /dev/usb-ffs/mtp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
     mount functionfs ptp /dev/usb-ffs/ptp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
 
+    mkdir /config/usb_gadget/g1/functions/ncm.gs7
+
     # chown file/folder permission
     chown system system /config/usb_gadget/
     chown system system /config/usb_gadget/g1
@@ -116,6 +118,7 @@ on early-boot
     chown system system /config/usb_gadget/g1/functions/rndis.gs4
     chown system system /config/usb_gadget/g1/functions/midi.gs5
     chown system system /config/usb_gadget/g1/functions/uvc.gs6
+    chown system system /config/usb_gadget/g1/functions/ncm.gs7
 
     setprop sys.usb.mtp.device_type 3
     setprop sys.usb.configfs 1
@@ -180,3 +183,10 @@ on property:sys.usb.config=accessory && property:sys.usb.configfs=1
 on property:sys.usb.config=accessory,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x18d1
     write /config/usb_gadget/g1/idProduct 0x2d01
+
+on property:sys.usb.config=ncm && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0x000A
+
+on property:sys.usb.config=ncm,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/os_desc/use 1
+    write /config/usb_gadget/g1/idProduct 0x001A
