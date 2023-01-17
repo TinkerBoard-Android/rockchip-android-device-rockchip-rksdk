@@ -42,7 +42,7 @@ endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR3
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR4
 
 TARGET_SYSTEM_PROP += device/rockchip/common/build/rockchip/rksdk.prop
 
