@@ -74,12 +74,6 @@
             <limit name="format">yuv420p,yuv420sp</limit>
         </codec>
 
-        <codec name="avs2">
-            <limit name="id">avs2</limit>
-            <limit name="resolution">4096x2160</limit>
-            <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
-        </codec>
-
         <codec name="vp9_4k_8bit">
             <limit name="id">vp9</limit>
             <limit name="resolution">4096x2160</limit>
@@ -151,6 +145,12 @@
             <limit name="resolution">8192x4320</limit>
             <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
         </codec>
+
+        <codec name="avs2_8k_10bit">
+            <limit name="id">avs2</limit>
+            <limit name="resolution">8192x4320</limit>
+            <limit name="format">yuv420p,yuv420sp,yuv420p10le</limit>
+        </codec>
     </codeclist>
 
     <decoder>
@@ -207,11 +207,17 @@
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
             <include name="vp9_4k_10bit"/>
         </chip>
+        <chip name="RK3528">
+            <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
+            <include name="vp9_8k_10bit"/>
+	    <include name="avs+"/>
+            <include name="avs2_8k_10bit"/>
+        </chip>
         <chip name="RK3588">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
             <include name="vp9_8k_10bit,av1_8k_10bit"/>
             <include name="avs+"/>
-            <include name="avs2"/>
+            <include name="avs2_8k_10bit"/>
         </chip>
         <chip name="RK3562">
             <include name="h264_1080,hevc_4k_8bit,vp9_4k_8bit"/>
