@@ -28,7 +28,7 @@ PRODUCT_PACKAGES += \
     android.hardware.weaver@1.0-service \
     android.hardware.weaver@1.0-impl
 
-ifneq ($(filter rk3326 rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk3326 rk3528 rk356x rk3562 rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 
 PRODUCT_PACKAGES += \
     0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta \
