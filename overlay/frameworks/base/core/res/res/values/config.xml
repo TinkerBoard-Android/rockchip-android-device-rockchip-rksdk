@@ -72,69 +72,6 @@
          radio is unable to find any MCC information to infer wifi country code from -->
     <bool translatable="false" name="config_wifi_revert_country_code_on_cellular_loss">true</bool>
 
-    <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
-         The N entries of this array define N + 1 control points as follows:
-         (1-based arrays)
-
-         Point 1:            (0, value[1]):             lux <= 0
-         Point 2:     (level[1], value[2]):  0        < lux <= level[1]
-         Point 3:     (level[2], value[3]):  level[2] < lux <= level[3]
-         ...
-         Point N+1: (level[N], value[N+1]):  level[N] < lux
-
-         The control points must be strictly increasing.  Each control point
-         corresponds to an entry in the brightness backlight values arrays.
-         For example, if LUX == level[1] (first element of the levels array)
-         then the brightness will be determined by value[2] (second element
-         of the brightness values array).
-
-         Spline interpolation is used to determine the auto-brightness
-         backlight values for LUX levels between these control points.
-
-         Must be overridden in platform specific overlays -->
-    <integer-array name="config_autoBrightnessLevels">
-        <item>10</item>
-        <item>40</item>
-        <item>90</item>
-        <item>125</item>
-        <item>160</item>
-        <item>190</item>
-        <item>225</item>
-        <item>290</item>
-        <item>350</item>
-        <item>500</item>
-        <item>640</item>
-        <item>1300</item>
-        <item>2600</item>
-        <item>5000</item>
-        <item>10000</item>
-    </integer-array>
-
-    <!-- Array of output values for LCD backlight corresponding to the LUX values
-         in the config_autoBrightnessLevels array.  This array should have size one greater
-         than the size of the config_autoBrightnessLevels array.
-         The brightness values must be between 0 and 255 and be non-decreasing.
-         This must be overridden in platform specific overlays -->
-    <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <!-- This will be converted to kernel brightness level in light HAL -->
-        <item>1</item>     <!--  18 nit -->
-        <item>17</item>    <!--  57 nit -->
-        <item>33</item>    <!--  68 nit -->
-        <item>49</item>    <!--  91 nit -->
-        <item>65</item>    <!-- 125 nit -->
-        <item>81</item>    <!-- 148 nit -->
-        <item>97</item>    <!-- 170 nit -->
-        <item>113</item>   <!-- 193 nit -->
-        <item>129</item>   <!-- 216 nit -->
-        <item>145</item>   <!-- 239 nit -->
-        <item>161</item>   <!-- 273 nit -->
-        <item>177</item>   <!-- 307 nit -->
-        <item>193</item>   <!-- 364 nit -->
-        <item>209</item>   <!-- 409 nit -->
-        <item>225</item>   <!-- 455 nit -->
-        <item>241</item>   <!-- 500 nit -->
-    </integer-array>
-
     <!-- Default supported concurrent socket keepalive slots per transport type, used by
          ConnectivityManager.createSocketKeepalive() for calculating the number of keepalive
          offload slots that should be reserved for privileged access. This string array should be
