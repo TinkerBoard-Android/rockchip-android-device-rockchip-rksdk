@@ -49,13 +49,11 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
   TMP_GMS_VAR := gms
   TMP_MAINLINE_VAR := mainline_modules
   ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
-    TMP_GMS_VAR := $(TMP_GMS_VAR)_go
+    # 2G A Go
+    TMP_GMS_VAR := $(TMP_GMS_VAR)_go_2gb
     # Mainline partner build config - low RAM
     TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
-    OVERRIDE_TARGET_FLATTEN_APEX := true
-    PRODUCT_PROPERTY_OVERRIDES += ro.apex.updatable=false
-    # 2G A Go
-    #TMP_GMS_VAR := $(TMP_GMS_VAR)_2gb
+    PRODUCT_PACKAGES += SystemUIGo
   else
     PRODUCT_PACKAGES += RockchipTetheringConfigOverlay
     PRODUCT_PACKAGES += RockchipNetworkStackConfigOverlay
