@@ -93,7 +93,7 @@ $(call inherit-product, device/rockchip/common/modules/pcba.mk)
 # Optee
 $(call inherit-product, device/rockchip/common/modules/optee.mk)
 # Sepolicy
-$(call inherit-product, device/rockchip/common/modules/sepolicy.mk)
+$(call inherit-product, device/rockchip/common/modules/android_sepolicy.mk)
 # TWRP
 $(call inherit-product, device/rockchip/common/modules/twrp.mk)
 # GMS
@@ -331,6 +331,9 @@ $(call inherit-product, device/rockchip/common/modules/usb.mk)
 
 # GKI modules
 $(call inherit-product, device/rockchip/common/modules/gki_common.mk)
+
+# rknn modules
+$(call inherit-product, device/rockchip/common/modules/rknn.mk)
 
 # Power AIDL
 PRODUCT_PACKAGES += \

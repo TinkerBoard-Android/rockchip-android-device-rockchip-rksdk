@@ -1,0 +1,2 @@
+# rknn_server
+/vendor/bin/rknn_server u:object_r:rknn_server_exec:s0

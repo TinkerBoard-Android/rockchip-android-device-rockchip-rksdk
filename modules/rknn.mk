@@ -14,16 +14,18 @@
 # limitations under the License.
 #
 
-PRODUCT_SEPOLICY_SPLIT := true
-BOARD_SEPOLICY_DIRS ?= \
-    device/rockchip/common/sepolicy/vendor \
-    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy_vendor
-#SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy/public
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS ?= \
-    device/rockchip/common/sepolicy/private \
-    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy
+ifeq ($(BOARD_RKNN_SUPPORT),true)
 
-ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
-    BOARD_SEPOLICY_DIRS += \
-        device/rockchip/common/box/sepolicy/vendor
+BOARD_SEPOLICY_DIRS += \
+    device/rockchip/common/sepolicy/rknn \
+    vendor/rockchip/hardware/interfaces/neuralnetworks/1.0/default/sepolicy
+
+PRODUCT_PACKAGES += \
+    rknn_server \
+    public.libraries-rockchip \
+    librknn_api_android \
+    librknnhal_bridge.rockchip \
+    rockchip.hardware.neuralnetworks@1.0-impl \
+    rockchip.hardware.neuralnetworks@1.0-service
+
 endif
