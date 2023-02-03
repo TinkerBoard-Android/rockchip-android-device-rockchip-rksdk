@@ -17,8 +17,7 @@
 PRODUCT_PACKAGES := \
     TvProvider \
     TvSettings \
-    SettingsIntelligence \
-    tv_input.default
+    SettingsIntelligence
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += Traceur

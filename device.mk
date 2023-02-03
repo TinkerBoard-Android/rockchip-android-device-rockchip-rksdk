@@ -308,7 +308,7 @@ PRODUCT_PACKAGES += \
     librs_jni \
     libjni_pinyinime
 
-ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+ifeq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 # Sensor HAL
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
@@ -688,22 +688,9 @@ ifeq ($(strip $(BOARD_WITH_RKTOOLBOX)),true)
 $(call inherit-product-if-exists, external/rktoolbox/rktoolbox.mk)
 endif
 endif
-
-# hdmi cec
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-BOARD_SHOW_HDMI_SETTING := true
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
-	$(LOCAL_PATH)/tv/permissions/privapp-permissions-tv-common.xml:system/etc/permissions/privapp-permissions-tv-common.xml
-
-PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
-PRODUCT_PACKAGES += \
-	hdmi_cec.$(TARGET_BOARD_PLATFORM)
-
-# HDMI CEC HAL
-PRODUCT_PACKAGES += \
-    android.hardware.tv.cec@1.0-impl \
-    android.hardware.tv.cec@1.0-service
+#hdmi cec
+ifeq ($(BOARD_SUPPORT_HDMI_CEC),true)
+  $(call inherit-product, device/rockchip/common/modules/hdmi_cec.mk)
 endif
 
 ifeq ($(strip $(BOARD_SHOW_HDMI_SETTING)), true)
@@ -843,7 +830,7 @@ endif # tablet without GMS-Express
 endif
 
 #only box and atv using our audio policy(write by rockchip)
-ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+ifneq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 USE_CUSTOM_AUDIO_POLICY := 1
 PRODUCT_PACKAGES += \
     libaudiopolicymanagercustom

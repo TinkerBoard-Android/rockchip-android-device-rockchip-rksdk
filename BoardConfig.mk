@@ -251,6 +251,7 @@ BOARD_HAVE_FLASH ?= true
 
 #HDMI support
 BOARD_SUPPORT_HDMI ?= true
+BOARD_SUPPORT_HDMI_CEC ?= false
 
 # gralloc 4.0
 include device/rockchip/common/gralloc.device.mk
