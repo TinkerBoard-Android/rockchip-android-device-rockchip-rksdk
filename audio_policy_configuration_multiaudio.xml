@@ -192,7 +192,9 @@
         <xi:include href="usb_audio_policy_configuration.xml"/>
 
         <!-- Remote Submix Audio HAL -->
-        <xi:include href="r_submix_audio_policy_configuration.xml"/>
+	<xi:include href="r_submix_audio_policy_configuration.xml"/>
+
+	<xi:include href="bluetooth_audio_policy_configuration_7_0.xml"/>
 
     </modules>
 
