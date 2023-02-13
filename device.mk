@@ -423,6 +423,14 @@ else
 BUILD_IEP := false
 endif
 
+# rkvtunnel
+ifneq ($(filter rk3528, $(strip $(TARGET_BOARD_PLATFORM))), )
+PRODUCT_PACKAGES += \
+    librkvt \
+    librkvt.vendor \
+    librkvt_win
+endif
+
 # Health/Battery & Charger
 $(call inherit-product, device/rockchip/common/modules/health.mk)
 

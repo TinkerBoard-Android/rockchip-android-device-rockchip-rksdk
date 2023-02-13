@@ -40,6 +40,7 @@
 /dev/vepu                 0666   system     system
 /dev/h265e                0666   system     system
 /dev/avsd                 0666   system     system
+/dev/rkvtunnel            0666   system     system
 
 # for Sensor HAL
 /dev/akm8973              0660   system     system
