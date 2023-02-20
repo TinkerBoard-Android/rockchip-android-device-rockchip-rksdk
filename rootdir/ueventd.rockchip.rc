@@ -67,16 +67,13 @@
 /dev/hidraw0              0660   audio  audio
 
 # for radio
-/dev/ttyUSB0              0660   radio		radio
-/dev/ttyUSB1              0660   radio		radio
-/dev/ttyUSB2              0660   radio		radio
-/dev/ttyUSB3              0660   radio		radio
-/dev/ttyUSB4              0660   radio		radio
-/dev/ttyUSB5              0660   radio		radio
-/dev/ttyUSB6              0660   radio		radio
-/dev/ttyUSB7              0660   radio		radio
-/dev/ttyUSB8              0660   radio		radio
-/dev/ttyUSB9              0660   radio		radio
+/dev/ttyUSB*                    0660       radio	radio
+/dev/cdc-wdm*             	0660       radio  	radio
+/dev/qcqmi*               	0660       radio  	radio
+/dev/cdc-acm*             	0660       radio  	radio
+/dev/mhi_DUN              	0660       radio  	radio
+/dev/mhi_QMI0             	0660       radio  	radio
+/sys/class/net/wwan0/qmi/raw_ip 0660 	   system       system
 
 # for mali-t764
 /dev/mali0           	  0666   system   	 system
