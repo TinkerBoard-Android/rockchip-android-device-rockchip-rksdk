@@ -125,7 +125,7 @@
                 </mixPort>
             </mixPorts>
             <devicePorts>
-                <devicePort tagName="HDMI_1 Out" type="AUDIO_DEVICE_OUT_HDMI_1" role="sink">
+                <devicePort tagName="HDMI_1 Out" type="VX_ROCKCHIP_OUT_HDMI0" role="sink">
                 </devicePort>
             </devicePorts>
             <routes>
@@ -177,7 +177,7 @@
                 </mixPort>
             </mixPorts>
             <devicePorts>
-                <devicePort tagName="SPDIF_1 Out" type="AUDIO_DEVICE_OUT_SPDIF_1" role="sink">
+                <devicePort tagName="SPDIF_1 Out" type="VX_ROCKCHIP_OUT_SPDIF0" role="sink">
                 </devicePort>
             </devicePorts>
             <routes>
