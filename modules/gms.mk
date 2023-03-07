@@ -54,6 +54,7 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
     # Mainline partner build config - low RAM
     TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
     PRODUCT_PACKAGES += SystemUIGo
+    MAINLINE_COMPRESS_APEX_ALL := false
   else
     PRODUCT_PACKAGES += RockchipTetheringConfigOverlay
     PRODUCT_PACKAGES += RockchipNetworkStackConfigOverlay
