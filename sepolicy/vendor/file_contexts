@@ -105,6 +105,7 @@
 /vendor/bin/rk_store_keybox                     u:object_r:rk_store_keybox_exec:s0
 
 /dev/block/mmcblk[0-9]                          u:object_r:uboot_block_device:s0
+/dev/block/mmcblk[0-9]boot0                     u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb                      u:object_r:rpmb_block_device:s0
 /dev/mmcblk[0-9]rpmb                            u:object_r:rpmb_block_device:s0
 
@@ -240,3 +241,10 @@
 /dev/hl_dev[0-1]*         u:object_r:hdcp2_device:s0
 /vendor/bin/hdcp2_tx_rx   u:object_r:hdcp2_exec:s0
 /sys/devices/virtual/misc/hdmirx_hdcp/status   u:object_r:sysfs_hdmirx:s0
+<<<<<<< HEAD   (020a06 gms: only use swiftshader for rk3399 vulkan.)
+=======
+
+#hdmi in
+/(vendor|system/vendor)/bin/hw/rockchip\.hardware\.tv\.input@1\.0-service   u:object_r:hal_tv_input_default_exec:s0
+/sys/devices/virtual/misc/hdmirx_hdcp/test_key1x   u:object_r:sysfs_hdmirx:s0
+>>>>>>> CHANGE (618583 sepolicy: add hdcp2 permission)

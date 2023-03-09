@@ -9,3 +9,6 @@ allow hdcp2 hdcp2_device:chr_file { read write open };
 allow hdcp2 hdcp2_device:chr_file { ioctl };
 allow hdcp2 storage_device:chr_file { read write open ioctl };
 allow hdcp2 sysfs_hdmirx:file { open read };
+allow hdcp2 block_device:dir { search };
+allow hdcp2 uboot_block_device:blk_file { read search write };
+allowxperm hdcp2 hdcp2_device:chr_file ioctl { 0x4811 0x4812 0x4813 0x4814 0x4815 0x4816 0x4817 0x4818 0x4819 0x481a 0x481b };
