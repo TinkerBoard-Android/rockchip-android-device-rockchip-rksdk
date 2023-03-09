@@ -2,7 +2,7 @@
 <sound>
   <decode setting="yes">
     <!-- decode_pcm or multi_pcm-->
-    <mode>multi_pcm</mode>
+    <mode>pcm</mode>
     <devices>
       <device>speaker</device>
       <device>hdmi</device>
@@ -25,7 +25,7 @@
       <format>FLAC</format>
     </formats>
   </decode>
-  <bitstream setting="no">
+  <bitstream setting="yes">
     <!-- auto or manual-->
     <mode>auto</mode>
     <devices>
@@ -37,7 +37,6 @@
       <format>EAC3</format>
       <format>DTSHD</format>
       <format>TRUEHD</format>
-      <format>MLP</format>
     </formats>
   </bitstream>
 </sound>
