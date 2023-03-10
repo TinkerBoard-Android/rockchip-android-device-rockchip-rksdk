@@ -71,8 +71,7 @@
 /dev/cdc-wdm*             	0660       radio  	radio
 /dev/qcqmi*               	0660       radio  	radio
 /dev/cdc-acm*             	0660       radio  	radio
-/dev/mhi_DUN              	0660       radio  	radio
-/dev/mhi_QMI0             	0660       radio  	radio
+/dev/mhi_*			0660	   radio	radio
 /sys/class/net/wwan0/qmi/raw_ip 0660 	   system       system
 
 # for mali-t764
