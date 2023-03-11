@@ -412,9 +412,8 @@ ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 BOARD_USER_FAKETOUCH ?= true
 endif
 
-ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), tablet)
+# disable BOARD_SUPPORT_MULTIAUDIO default
 BOARD_SUPPORT_MULTIAUDIO ?= false
-endif
 
 #for Camera autofocus support
 CAMERA_SUPPORT_AUTOFOCUS ?= false
