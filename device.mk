@@ -1062,7 +1062,7 @@ ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	media-ctl \
 	v4l2-ctl
-ifneq (,$(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))))
+ifneq (,$(filter rk356x rk3588 rk3562, $(strip $(TARGET_BOARD_PLATFORM))))
 PRODUCT_PACKAGES += \
 	rkaiq_tool_server \
 	rkaiq_demo \
