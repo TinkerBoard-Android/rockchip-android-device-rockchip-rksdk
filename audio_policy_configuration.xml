@@ -31,20 +31,35 @@
                              samplingRates="44100 48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="spdif_passthrough" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                    <profile name="ac3" format="AUDIO_FORMAT_AC3"
                              samplingRates="32000 44100 48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-                    <profile name="" format="AUDIO_FORMAT_IEC61937"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_3POINT1 AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_SURROUND AUDIO_CHANNEL_OUT_PENTA AUDIO_CHANNEL_OUT_5POINT1"/>
+                    <profile name="dts" format="AUDIO_FORMAT_DTS"
+                             samplingRates="22050 24000 32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_QUAD_BACK AUDIO_CHANNEL_OUT_QUAD_SIDE AUDIO_CHANNEL_OUT_5POINT1"/>
+                    <profile name="iec" format="AUDIO_FORMAT_IEC61937"
                              samplingRates="32000 44100 48000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="hdmi" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="32000 44100 48000 96000 176400 192000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="" format="AUDIO_FORMAT_IEC61937"
-                             samplingRates="32000 44100 48000 96000 176400 192000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
+                <mixPort name="hdmi_bitstream" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
+                    <profile name="ac3" format="AUDIO_FORMAT_AC3"
+                             samplingRates="32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_3POINT1 AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_SURROUND AUDIO_CHANNEL_OUT_PENTA AUDIO_CHANNEL_OUT_5POINT1"/>
+                    <profile name="eac3" format="AUDIO_FORMAT_E_AC3"
+                             samplingRates="16000 22050 24000 32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_3POINT1 AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_SURROUND AUDIO_CHANNEL_OUT_PENTA AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="eac3-joc" format="AUDIO_FORMAT_E_AC3_JOC"
+                             samplingRates="16000 22050 24000 32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO,AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_3POINT1 AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_SURROUND AUDIO_CHANNEL_OUT_PENTA AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="dts" format="AUDIO_FORMAT_DTS"
+                             samplingRates="22050 24000 32000 44100 48000 88200 96000 192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_QUAD_BACK AUDIO_CHANNEL_OUT_QUAD_SIDE AUDIO_CHANNEL_OUT_5POINT1"/>
+                    <profile name="dtshd" format="AUDIO_FORMAT_DTS_HD"
+                             samplingRates="22050 24000 32000 44100 48000 88200 96000 192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO,AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_QUAD AUDIO_CHANNEL_OUT_QUAD_BACK AUDIO_CHANNEL_OUT_QUAD_SIDE AUDIO_CHANNEL_OUT_PENTA AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="iec" format="AUDIO_FORMAT_IEC61937"
+                             samplingRates="8000 11025 16000 22050 24000 32000 44100 48000 128000 176400 192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
                 </mixPort>
                 <mixPort name="primary input" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
@@ -93,10 +108,9 @@
                 <route type="mix" sink="BT SCO Car Kit"
                        sources="primary output"/>
                 <route type="mix" sink="HDMI Out"
-                       sources="primary output,hdmi"/>
+                       sources="primary output,hdmi_bitstream"/>
                 <route type="mix" sink="SPDIF Out"
                        sources="primary output,spdif_passthrough"/>
-
                 <route type="mix" sink="primary input"
                        sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic,HDMIIn"/>
             </routes>
