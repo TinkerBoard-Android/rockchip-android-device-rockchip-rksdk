@@ -19,6 +19,9 @@ binder_call(hal_camera_default,hal_hdmi_default)
 
 rw_rockchip_graphic_device(hal_camera_default)
 
+# For camera hal to control priority of current process
+allow hal_camera_default self:capability sys_nice;
+
 get_prop(hal_camera_default, vendor_base_prop)
 get_prop(hal_camera_default, vendor_camera_prop)
 get_prop(hal_camera_default, vendor_omx_prop)
