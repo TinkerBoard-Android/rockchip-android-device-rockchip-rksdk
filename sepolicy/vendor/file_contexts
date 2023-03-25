@@ -180,9 +180,6 @@
 /vendor/bin/init\.insmod\.sh                                         u:object_r:init-insmod-sh_exec:s0
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 
-#for healthd
-/sys/devices/virtual/power_supply(/.*)?                              u:object_r:sysfs_power:s0
-
 /dev/rtkbt_dev       u:object_r:rtkbt_device:s0
 
 #weaver hal
