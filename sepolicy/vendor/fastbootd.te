@@ -2,4 +2,5 @@ recovery_only(`
     #allow fastbootd self:capability { dac_read_search };
     allow fastbootd sysfs:dir r_dir_perms;
     allow fastbootd sysfs_batteryinfo:dir r_dir_perms;
+    allow fastbootd vbmeta_block_device:blk_file rw_file_perms;
 ')
