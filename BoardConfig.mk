@@ -85,57 +85,9 @@ BUILD_WITH_GO_OPT ?= false
 
 ifeq ($(BUILD_WITH_GO_OPT), true)
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab_go.in
-PRODUCT_KERNEL_CONFIG += android-13-go.config
 else
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
-PRODUCT_KERNEL_CONFIG += android-13.config
 endif
-
-ifeq ($(TARGET_BUILD_VARIANT), user)
-PRODUCT_KERNEL_CONFIG += non_debuggable.config
-endif
-
-ROCKCHIP_ANDROID_BOOT_CMDLINE ?= androidboot.console=ttyFIQ0 androidboot.wificountrycode=CN
-ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.hardware=$(TARGET_BOARD_HARDWARE)
-ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.boot_devices=$(PRODUCT_BOOT_DEVICE)
-
-BOARD_KERNEL_CMDLINE := console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
-BOARD_KERNEL_CMDLINE += loop.max_part=7
-
-ifneq ($(BOARD_SELINUX_ENFORCING), true)
-ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.selinux=permissive
-endif
-
-ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \<= 3)))
-BOARD_KERNEL_CMDLINE += $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
-else # Boot header 4 requires bootconfig
-BOARD_BOOTCONFIG := $(ROCKCHIP_ANDROID_BOOT_CMDLINE)
-BOARD_KERNEL_CMDLINE += 8250.nr_uarts=10
-endif
-
-# For Header V2, set resource.img as second.
-# For Header V3, add vendor_boot and resource.
-ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \<= 2)))
-BOARD_MKBOOTIMG_ARGS += --second $(TARGET_PREBUILT_RESOURCE)
-endif
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-
-# Always use header v2 for recovery image,
-# - header v4 is using bootconfig, always override cmdline in recovery;
-# - header v3+ is used for virtual A/B and GKI;
-# - header v2 used for the device with recovery;
-ifneq ($(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE), true)
-ifneq ($(BOARD_USES_AB_IMAGE), true)
-BOARD_RECOVERY_MKBOOTIMG_ARGS ?= --second $(TARGET_PREBUILT_RESOURCE) \
-    --header_version 2 \
-    --cmdline "$(BOARD_KERNEL_CMDLINE) $(ROCKCHIP_ANDROID_BOOT_CMDLINE)"
-ifeq ($(BOARD_AVB_ENABLE), true)
-BOARD_USES_FULL_RECOVERY_IMAGE := true
-endif
-endif
-endif
-BOARD_INCLUDE_RECOVERY_DTBO ?= true
-BOARD_INCLUDE_DTB_IN_BOOTIMG ?= true
 
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true

@@ -19,7 +19,7 @@ TARGET_NO_RECOVERY := true
 
 BOARD_BOOT_HEADER_VERSION ?= 2
 BOARD_USES_RECOVERY_AS_BOOT := true
-ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+ifeq ($(BOARD_BUILD_GKI),true)
 BOARD_USES_RECOVERY_AS_BOOT :=
 endif
 
@@ -52,7 +52,7 @@ ifeq ($(strip $(USE_AB_PARAMETER)), true)
     BOARD_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt boot_a)
     BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt dtbo_a)
     # Header V3, add vendor_boot
-    ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+    ifeq ($(BOARD_BUILD_GKI),true)
         BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter_ab.txt vendor_boot_a)
     endif
     #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter_ab.txt)
@@ -74,11 +74,9 @@ else
                 BOARD_SUPER_PARTITION_SIZE := 5372903424
                 BOARD_ROCKCHIP_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) / 2 - 4194304)
             endif
-ifdef BOARD_BOOT_HEADER_VERSION
-            ifeq (0,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+            ifneq ($(BOARD_BUILD_GKI),true)
                 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
             endif
-endif
         endif
     endif
 endif
