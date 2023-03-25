@@ -53,7 +53,7 @@ ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
   BOARD_DTBOIMG_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt dtbo)
   BOARD_RECOVERYIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt recovery)
   # Header V3, add vendor_boot
-  ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+  ifeq ($(BOARD_BUILD_GKI),true)
     BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor_boot)
   endif
   #$(info Calculated BOARD_SYSTEMIMAGE_PARTITION_SIZE=$(BOARD_SYSTEMIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
@@ -74,7 +74,7 @@ else
   BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 100663296
   BOARD_DTBOIMG_PARTITION_SIZE ?= 4194304
   # Header V3, add vendor_boot
-  ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
+  ifeq ($(BOARD_BUILD_GKI),true)
     BOARD_BOOTIMAGE_PARTITION_SIZE ?= 67108864
     BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE ?= 41943040
     BOARD_RESOURCEIMAGE_PARTITION_SIZE ?= 16777216
