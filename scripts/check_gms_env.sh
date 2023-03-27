@@ -61,7 +61,7 @@ assert_value_in_string() {
     if [[ "$2" =~ "$1" ]] ; then
         echo -e "\033[32m [Pass] \033[0m \t\"$1\" Check OK!"
     else
-        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$1\" FOUND, But was NOT FOUND"
+        echo -e "\033[31m [Failed] \033[0m \t\"$1\" Check Failed! Expect \"$1\" FOUND, But was $2"
         echo -e "\033[31m \"$3\" \033[0m"
     fi
 }
@@ -106,7 +106,8 @@ check_GMS_BUNDLE() {
     assert_env_value BUILD_WITH_GOOGLE_MARKET true "Core var should be enabled."
     assert_env_value BUILD_WITH_GOOGLE_MARKET_ALL false "WIFI-Only device should not enable this Var."
     assert_env_value BUILD_WITH_GOOGLE_GMS_EXPRESS true "We recommend that you use GMS Express."
-    assert_env_value PRODUCT_HAVE_RKAPPS false "Do not enable this on user build."
+    # Do not need this from now
+    # assert_env_value PRODUCT_HAVE_RKAPPS false "Do not enable this on user build."
     assert_env_value BUILD_WITH_GOOGLE_FRP true "Frp MUST be enabled."
 }
 
@@ -147,12 +148,37 @@ check_AAPT_CONFIG() {
     assert_value_in_string $TMP_DPI $define_api "ro.sf.lcd_density MUST correspond to PRODUCT_AAPT_PREF_CONFIG, please set property to $TMP_DPI or change PRODUCT_AAPT_PREF_CONFIG"
 }
 
+check_GKI_enabled() {
+    log "Checking GKI enabled or not..."
+    assert_env_value BOARD_BUILD_GKI true "GKI MUST be enabled on kernel 5.10+"
+    assert_env_value BOARD_BOOT_HEADER_VERSION 4 "Boot header MUST be 4 on kernel 5.10+"
+    assert_config_in_file "CONFIG_XBC=y" u-boot/.config "XBC MUST be enabled on GKI."
+    assert_env_value BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION true "Virtual A/B compression MUST be enabled on GKI."
+    assert_env_value BOARD_BOOTIMAGE_PARTITION_SIZE 67108864 "Boot partition size MUST be 64M on GKI."
+}
+
+check_gralloc_version() {
+    log "Checking gralloc version..."
+    assert_env_value TARGET_RK_GRALLOC_AIDL true "Gralloc AIDL MUST be enabled on Android 13+"
+}
+
+check_userdata_format() {
+    log "Checking userdata format..."
+    FSTAB_FILE=`get_build_var PRODUCT_FSTAB_TEMPLATE`
+    assert_env_value BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE f2fs "f2fs MUST be enabled on Android 10+, only f2fs supports Apex updates."
+}
+
 check_Uboot
-check_kernel_config
-check_widevine
+# Should not check this on GKI
+# check_kernel_config
+# May use L1
+# check_widevine
 #check_EEA_type
 check_GMS_BUNDLE
 check_OPTEE
 check_AB_AVB
+check_GKI_enabled
+check_gralloc_version
+check_userdata_format
 check_SELINUX
 check_AAPT_CONFIG
