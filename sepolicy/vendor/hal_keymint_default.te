@@ -1,0 +1,2 @@
+allow hal_keymint_default proc_cmdline:file r_file_perms;
+allow hal_keymint_default proc_bootconfig:file r_file_perms;
