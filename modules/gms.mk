@@ -92,7 +92,7 @@ ifneq ($(filter true yes, $(BUILD_WITH_GOOGLE_MARKET) $(PRODUCT_USE_PREBUILT_GTV
     frameworks/native/data/etc/android.software.opengles.deqp.level-2022-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level-2022-03-01.xml
   ifeq ($(strip $(TARGET_ARCH)), arm64)
     ifneq ($(strip $(BUILD_WITH_GO_OPT)), true)
-      ifeq (,$(filter rk356x rk3588, $(TARGET_BOARD_PLATFORM)))
+      ifeq ($(strip $(TARGET_BOARD_PLATFORM)), rk3399)
         # for swiftshader, vulkan v1.1 test.
         PRODUCT_PACKAGES += \
           vulkan.pastel
