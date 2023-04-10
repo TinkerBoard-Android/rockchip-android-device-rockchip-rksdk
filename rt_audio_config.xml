@@ -32,11 +32,6 @@
       <device>hdmi</device>
     </devices>
     <formats>
-      <format>AC3</format>
-      <format>DTS</format>
-      <format>EAC3</format>
-      <format>DTSHD</format>
-      <format>TRUEHD</format>
     </formats>
   </bitstream>
 </sound>
