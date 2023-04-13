@@ -1,5 +1,9 @@
 # do mount_all early can imporve boot time when FBE
 # is enabled
+on init
+    start vendor.keymint-default
+    start vendor.keymaster-4-0
+
 on early-fs
     start vold
 
@@ -14,6 +18,6 @@ on late-fs
     start surfaceflinger
     start bootanim
 
-    exec_start wait_for_keymaster
+    exec_start wait_for_optee
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.hardware} --late

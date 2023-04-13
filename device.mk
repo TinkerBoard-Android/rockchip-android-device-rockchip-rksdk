@@ -103,6 +103,8 @@ endif
 $(call inherit-product, device/rockchip/common/modules/pcba.mk)
 # Optee
 $(call inherit-product, device/rockchip/common/modules/optee.mk)
+# Check optee
+$(call inherit-product, hardware/rockchip/keymaster4/wait_for_tee/wait_for_tee.mk)
 # Sepolicy
 $(call inherit-product, device/rockchip/common/modules/android_sepolicy.mk)
 # TWRP
