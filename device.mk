@@ -378,6 +378,7 @@ ifeq ($(TARGET_RK_GRALLOC_AIDL),true)
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator-V1-service \
     android.hardware.graphics.allocator-V1-$(BOARD_VENDOR_GPU_PLATFORM) \
+    android.hardware.graphics.allocator-V1-arm \
     android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM)
 
 DEVICE_MANIFEST_FILE += \
