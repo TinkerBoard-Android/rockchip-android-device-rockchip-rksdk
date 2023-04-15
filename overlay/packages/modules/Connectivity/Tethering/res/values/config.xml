@@ -28,4 +28,12 @@
     <!-- Which USB function should be enabled when TETHERING_USB is requested. 0: RNDIS, 1: NCM.
          -->
     <integer translatable="false" name="config_tether_usb_functions">1</integer>
+
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         USB interfaces.  If the device doesn't want to support tethering over USB this should
+         be empty.  An example would be "usb.*" -->
+    <string-array translatable="false" name="config_tether_usb_regexs">
+        <item>"ncm\\d"</item>
+        <item>"rndis\\d"</item>
+    </string-array>
 </resources>
