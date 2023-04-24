@@ -67,7 +67,7 @@
 /dev/hidraw0              0660   audio  audio
 
 # for radio
-/dev/ttyUSB*                    0660       radio	radio
+/dev/ttyUSB*                    0666       radio	radio
 /dev/cdc-wdm*             	0660       radio  	radio
 /dev/qcqmi*               	0660       radio  	radio
 /dev/cdc-acm*             	0660       radio  	radio
