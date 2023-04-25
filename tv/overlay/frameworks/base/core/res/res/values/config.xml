@@ -23,6 +23,9 @@
     <!-- Disable AUDIO_BECOMING_NOISY notifications. -->
     <bool name="config_sendAudioBecomingNoisy">false</bool>
 
+    <!-- Handle volume keys directly in Window Manager without passing them to the foreground app -->
+    <bool name="config_handleVolumeKeysInWindowManager">true</bool>
+
     <!-- This device is data-only. -->
     <bool name="config_voice_capable">false</bool>
 
