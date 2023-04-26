@@ -44,6 +44,13 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	bluetooth.profile.pbap.server.enabled?=true \
 	bluetooth.profile.sap.server.enabled?=true
 
+ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+override PRODUCT_PRODUCT_PROPERTIES += bluetooth.core.gap.le.privacy.enabled=false
+override PRODUCT_PRODUCT_PROPERTIES += bluetooth.profile.hfp.ag.enabled=false
+override PRODUCT_PRODUCT_PROPERTIES += bluetooth.profile.map.server.enabled=false
+override PRODUCT_PRODUCT_PROPERTIES += bluetooth.profile.pbap.server.enabled=false
+endif
+
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH)),true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.bt_enable=true
 else
