@@ -987,3 +987,7 @@ PRODUCT_PACKAGES += \
 # set defaut color saturation
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0
+
+PRODUCT_PACKAGES += \
+	androidx.window.extensions \
+	androidx.window.sidecar
