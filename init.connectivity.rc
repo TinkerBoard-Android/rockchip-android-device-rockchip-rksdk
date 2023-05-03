@@ -17,7 +17,6 @@ on zygote-start
     chown bluetooth net_bt ro.bt.bdaddr_path
     setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
-    chmod 0660 /dev/ttyS0
     chmod 0660 /dev/ttyS1
     chmod 0660 /dev/ttyS7
     chmod 0660 /dev/ttyS8
@@ -26,7 +25,6 @@ on zygote-start
     chmod 0664 /dev/vendor_storage
     chown bluetooth net_bt /dev/vflash
     chown bluetooth net_bt /dev/vendor_storage
-    chown bluetooth net_bt /dev/ttyS0
     chown bluetooth net_bt /dev/ttyS1
     chown bluetooth net_bt /dev/ttyS7
     chown bluetooth net_bt /dev/ttyS8
