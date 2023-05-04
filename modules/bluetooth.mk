@@ -62,6 +62,10 @@ ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_RTK)), true)
 include hardware/realtek/rtkbt/rtkbt.mk
 endif
 
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_AIC)), true)
+PRODUCT_PACKAGES += libbt-vendor-aic
+endif
+
 # A2DP audio policy
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml
