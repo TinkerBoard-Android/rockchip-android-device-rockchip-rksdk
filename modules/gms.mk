@@ -20,10 +20,6 @@
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
-# Remote Key Provisioning tool
-PRODUCT_PACKAGES += \
-    rkp_factory_extraction_tool
-
 # For FRP
 ifeq ($(strip $(BUILD_WITH_GOOGLE_FRP)), true)
   PRODUCT_PROPERTY_OVERRIDES += \
@@ -32,6 +28,9 @@ endif
 
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+  # RKP service
+  $(call inherit-product, hardware/rockchip/keymaster4/rockchip_rkp_service/rockchip_rkp_service.mk)
+
   ifeq ($(strip $(TARGET_BUILD_VARIANT)), user)
     ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
       $(warning ****************************************)
