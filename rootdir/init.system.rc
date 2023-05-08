@@ -1,2 +1,3 @@
 on post-fs-data
     mkdir /data/misc/cfg_rockchip 0755 system system encryption=Require
+    mkdir /data/vendor/rkalgo 0755 system system encryption=Require
