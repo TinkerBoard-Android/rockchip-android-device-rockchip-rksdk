@@ -13,10 +13,14 @@ allow rk_output_hal hidl_base_hwservice:hwservice_manager add;
 allow rk_output_hal property_socket:sock_file { read write };
 allow rk_output_hal init:unix_stream_socket { connectto };
 allow rk_output_hal vendor_system_public_prop:property_service { set };
+allow rk_output_hal vendor_data_file:dir { read open write getattr create add_name remove_name };
+allow rk_output_hal vendor_data_file:file { read open write create getattr unlink };
+allow rk_output_hal vendor_tv_input_prop:property_service { set };
 binder_call(rk_output_hal,hwservicemanager)
 binder_call(rk_output_hal,system_server)
 get_prop(rk_output_hal,hwservicemanager_prop)
 get_prop(rk_output_hal,vendor_hwc_prop)
+get_prop(rk_output_hal,vendor_tv_input_prop)
 
 rw_rockchip_graphic_device(rk_output_hal)
 vndbinder_use(rk_output_hal)
