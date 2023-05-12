@@ -18,7 +18,10 @@
 ifeq ($(strip $(TARGET_ROCKCHIP_PCBATEST)), true)
 PRODUCT_PACKAGES += \
     pcba_core \
-    bdt
+    bdt \
+    iwlist.recovery \
+    iwconfig.recovery \
+    media-ctl.recovery
 
 PRODUCT_COPY_FILES += \
    $(TARGET_DEVICE_DIR)/bt_vendor.conf:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/bt_vendor.conf \
