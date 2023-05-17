@@ -80,7 +80,7 @@
 # for A/B
 /dev/block/by-name/boot_[ab]                    u:object_r:boot_block_device:s0
 /dev/block/by-name/init_boot_[ab]               u:object_r:boot_block_device:s0
-/dev/block/by-name/resource_boot_[ab]           u:object_r:boot_block_device:s0
+/dev/block/by-name/resource_[ab]                u:object_r:boot_block_device:s0
 /dev/block/by-name/vendor_boot_[ab]             u:object_r:boot_block_device:s0
 /dev/block/by-name/uboot_[ab]                   u:object_r:uboot_block_device:s0
 /dev/block/by-name/trust_[ab]                   u:object_r:uboot_block_device:s0
