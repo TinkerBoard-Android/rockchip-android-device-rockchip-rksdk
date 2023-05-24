@@ -208,9 +208,9 @@ TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
 ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
-ifneq ($(BOARD_HAS_RK_4G_MODEM), true)
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_wifi_only
-endif
+#ifneq ($(BOARD_HAS_RK_4G_MODEM), true)
+#DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_wifi_only
+#endif
 endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/rockchip/common
