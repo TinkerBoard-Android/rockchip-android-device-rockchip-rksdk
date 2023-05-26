@@ -196,7 +196,7 @@ BUILD_WITH_DRMSERVICE :=true
 BOARD_USES_GENERIC_AUDIO ?= true
 
 # Wifi&Bluetooth
-include device/rockchip/common/wifi_bt_common.mk
+#include device/rockchip/common/wifi_bt_common.mk
 
 #Camera flash
 BOARD_HAVE_FLASH ?= true
@@ -379,7 +379,7 @@ BOARD_DEFAULT_CAMERA_HAL_VERSION ?=3.3
 BOARD_WITH_RKTOOLBOX ?=true
 BOARD_MEMTRACK_SUPPORT ?= false
 
-PRODUCT_DEFAULT_DEV_CERTIFICATE := device/rockchip/common/security/testkey
+#PRODUCT_DEFAULT_DEV_CERTIFICATE := device/rockchip/common/security/testkey
 
 PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 

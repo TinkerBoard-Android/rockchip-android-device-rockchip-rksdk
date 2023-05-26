@@ -72,5 +72,3 @@ genfscon sysfs /devices/platform/1021c000.dwmmc                                 
 genfscon sysfs /devices/platform/fe330000.sdhci                                                     u:object_r:sysfs_mmc:s0
 
 genfscon sysfs_wakeup / u:object_r:sysfs_wakeup:s0
-
-genfscon fuseblk / u:object_r:fuseblk:s0

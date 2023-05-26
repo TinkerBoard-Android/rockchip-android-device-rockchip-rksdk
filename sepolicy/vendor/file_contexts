@@ -46,11 +46,6 @@
 # sysfs_rtc
 /sys/devices/platform/rtc-fake/rtc -- u:object_r:sysfs_rtc:s0
 
-#for support ntfs
-/system/bin/ntfs-3g  u:object_r:vold_exec:s0
-/system/bin/mkntfs   u:object_r:vold_exec:s0
-/system/bin/ntfsfix  u:object_r:fsck_exec:s0
-
 #for media
 /sys/firmware/devicetree/base/compatible     u:object_r:sysfs_dev:s0
 
@@ -215,9 +210,6 @@
 
 #read pcie info
 /vendor/bin/read_pcie_info.sh u:object_r:read_pcie_info_exec:s0
-
-#samba
-/system/bin/cifsmanager.sh     u:object_r:vold_exec:s0
 
 #rockchip audiosetting
 

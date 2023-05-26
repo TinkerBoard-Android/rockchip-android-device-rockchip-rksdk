@@ -58,7 +58,7 @@ PRODUCT_PACKAGES += \
     vndservicemanager
 
 # Prebuild apps
-$(call inherit-product, device/rockchip/common/modules/preinstall.mk)
+#$(call inherit-product, device/rockchip/common/modules/preinstall.mk)
 $(call inherit-product, device/rockchip/common/modules/optimize.mk)
 $(call inherit-product, device/rockchip/common/modules/build_dm.mk)
 

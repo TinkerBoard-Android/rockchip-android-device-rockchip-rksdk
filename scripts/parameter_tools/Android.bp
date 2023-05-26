@@ -2,10 +2,10 @@ python_binary_host {
     name: "parameter_tools",
     version: {
         py2: {
-            enabled: true,
+            enabled: false,
         },
         py3: {
-            enabled: false,
+            enabled: true,
         },
     },
 

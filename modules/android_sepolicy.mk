@@ -15,8 +15,8 @@
 #
 PRODUCT_SEPOLICY_SPLIT := true
 BOARD_SEPOLICY_DIRS := \
-    device/rockchip/common/sepolicy/vendor \
-    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy_vendor
+    device/rockchip/common/sepolicy/vendor
+#    device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy_vendor
 
 #SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS ?= device/rockchip/common/sepolicy/public
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS ?= \
