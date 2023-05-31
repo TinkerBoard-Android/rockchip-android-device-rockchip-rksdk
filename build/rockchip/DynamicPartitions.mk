@@ -3,8 +3,8 @@
 # Android Q -> api_level 29, Pie or earlier should not include this makefile
 
 # Default FS type
-ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= erofs
-#ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= ext4
+#ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= erofs
+ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= ext4
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
