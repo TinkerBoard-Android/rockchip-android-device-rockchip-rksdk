@@ -20,7 +20,7 @@ ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.boot_devices=$(PRODUCT_BOOT_DEVICE)
 
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware init=/init rootwait ro
 BOARD_KERNEL_CMDLINE += loop.max_part=7
-# BOARD_KERNEL_CMDLINE += printk.devkmsg=on
+BOARD_KERNEL_CMDLINE += printk.devkmsg=on
 
 ifneq ($(BOARD_SELINUX_ENFORCING), true)
 ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.selinux=permissive
