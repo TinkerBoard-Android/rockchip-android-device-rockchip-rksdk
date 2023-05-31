@@ -171,22 +171,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.connectivity.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.connectivity.rc
 endif
 
-
-ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy_configuration_multiaudio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
-else
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-    frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-
 ifndef PRODUCT_FSTAB_TEMPLATE
 $(warning Please add fstab.in with PRODUCT_FSTAB_TEMPLATE in your product.mk)
 # To use fstab auto generator, define fstab.in in your product.mk,
@@ -201,17 +185,6 @@ PRODUCT_COPY_FILES += \
     $(TARGET_DEVICE_DIR)/fstab.rk30board:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.$(TARGET_BOARD_HARDWARE)
 endif
 endif # Use PRODUCT_FSTAB_TEMPLATE
-
-# For audio-recoard 
-PRODUCT_PACKAGES += \
-    libsrec_jni
-
-# For tts test
-PRODUCT_PACKAGES += \
-    libwebrtc_audio_coding
-
-#audio
-$(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_config/rk_audio.mk)
 
 # SDCardFS deprecate for Android R+
 # https://source.android.google.cn/devices/storage/sdcardfs-deprecate
@@ -453,30 +426,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 PRODUCT_CHARACTERISTICS := $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))
 
-ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
-PRODUCT_PACKAGES += \
-    audio.hdmi.$(TARGET_BOARD_HARDWARE) \
-    audio.hdmi_1.$(TARGET_BOARD_HARDWARE) \
-    audio.spdif.$(TARGET_BOARD_HARDWARE) \
-    audio.spdif_1.$(TARGET_BOARD_HARDWARE)
-endif
-
-# audio lib
-PRODUCT_PACKAGES += \
-    audio_policy.$(TARGET_BOARD_HARDWARE) \
-    audio.primary.$(TARGET_BOARD_HARDWARE) \
-    audio.alsa_usb.$(TARGET_BOARD_HARDWARE) \
-    audio.r_submix.default \
-    libaudioroute \
-    audio.usb.default \
-    audio.usbv2.default \
-    libanr
-
-PRODUCT_PACKAGES += \
-    android.hardware.audio.service \
-    android.hardware.audio@7.1-impl \
-    android.hardware.audio.effect@7.0-impl
-
 # Filesystem management tools
 # EXT3/4 support
 PRODUCT_PACKAGES += \
@@ -485,28 +434,8 @@ PRODUCT_PACKAGES += \
     tune2fs \
     resize2fs
 
-# audio lib
-PRODUCT_PACKAGES += \
-    libasound \
-    alsa.default \
-    acoustics.default \
-    libtinyalsa \
-    tinymix \
-    tinyplay \
-    tinycap \
-    tinypcminfo
-
-PRODUCT_PACKAGES += \
-	alsa.audio.primary.$(TARGET_BOARD_HARDWARE)\
-	alsa.audio_policy.$(TARGET_BOARD_HARDWARE)
-
-$(call inherit-product-if-exists, external/alsa-lib/copy.mk)
-$(call inherit-product-if-exists, external/alsa-utils/copy.mk)
-
-
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=false 
-
 
 ifeq ($(strip $(BOARD_HAVE_FLASH)), true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=true
@@ -847,13 +776,6 @@ endif
 endif # tablet without GMS-Express
 endif
 
-#only box and atv using our audio policy(write by rockchip)
-ifneq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-USE_CUSTOM_AUDIO_POLICY := 1
-PRODUCT_PACKAGES += \
-    libaudiopolicymanagercustom
-endif
-
 # By default, enable zram; experiment can toggle the flag,
 # which takes effect on boot
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -866,8 +788,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.logd.kernel=1
 PRODUCT_PACKAGES += io
 endif
-
-USE_XML_AUDIO_POLICY_CONF := 1
 
 ifeq ($(strip $(BOARD_USE_DRM)),true)
 PRODUCT_PACKAGES += \
