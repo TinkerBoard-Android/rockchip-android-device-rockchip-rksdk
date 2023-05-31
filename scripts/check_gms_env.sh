@@ -87,7 +87,7 @@ check_GO_config() {
 
 check_kernel_config() {
     assert_config_in_file "clang version" $KERNEL_PATH/.config "Kernel MUST be compiled with clang."
-    assert_config_in_file "CONFIG_ANDROID_BINDERFS=y" $KERNEL_PATH/.config "Did you compile the kernel with android-13.config?"
+    assert_config_in_file "CONFIG_ANDROID_BINDERFS=y" $KERNEL_PATH/.config "Did you compile the kernel with android-14.config?"
     assert_config_in_file "# CONFIG_DEBUG_FS is not set" $KERNEL_PATH/.config "Did you compile the kernel with non_debuggable.config?"
 }
 

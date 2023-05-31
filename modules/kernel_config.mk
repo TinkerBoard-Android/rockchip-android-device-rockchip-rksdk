@@ -19,9 +19,9 @@ PRODUCT_KERNEL_CONFIG := gki_defconfig rockchip_gki.config
 else # Regular build
 PRODUCT_KERNEL_CONFIG := rockchip_defconfig
 ifeq ($(BUILD_WITH_GO_OPT), true)
-PRODUCT_KERNEL_CONFIG += android-13-go.config
+PRODUCT_KERNEL_CONFIG += android-14-go.config
 else
-PRODUCT_KERNEL_CONFIG += android-13.config
+PRODUCT_KERNEL_CONFIG += android-14.config
 endif
 
 ifeq ($(TARGET_BUILD_VARIANT), user)
