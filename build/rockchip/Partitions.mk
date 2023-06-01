@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
 ROCKCHIP_READ_ONLY_FILE_SYSTEM_TYPE ?= ext4
 endif
 
