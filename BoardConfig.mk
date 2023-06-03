@@ -44,7 +44,7 @@ TARGET_CPU_ABI2 ?= armeabi
 TARGET_CPU_VARIANT ?= cortex-a9
 TARGET_CPU_SMP ?= true
 
-BOARD_PLATFORM_VERSION := 12.0
+BOARD_PLATFORM_VERSION := 14.0
 
 # Enable android verified boot 2.0
 BOARD_AVB_ENABLE ?= false
