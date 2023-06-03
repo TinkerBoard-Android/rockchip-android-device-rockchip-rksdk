@@ -56,6 +56,8 @@ PRODUCT_PACKAGES += \
     fsck_f2fs
 PRODUCT_PACKAGES += \
     vndservicemanager
+
+$(call inherit-product, device/rockchip/common/modules/audio.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Prebuild apps
 #$(call inherit-product, device/rockchip/common/modules/preinstall.mk)
