@@ -57,6 +57,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vndservicemanager
 
+# TEMP: Hack for mali gles
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.common-V3-ndk.vendor
+
 $(call inherit-product, device/rockchip/common/modules/audio.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Prebuild apps
