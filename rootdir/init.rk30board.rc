@@ -27,6 +27,8 @@ on init
     #eink
     chown root system /dev/ebc
     chmod 0666 /dev/ebc
+    # vtunnel
+    chmod 0777 /dev/rkvtunnel
 
 on boot
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
