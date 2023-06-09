@@ -43,10 +43,10 @@ PRODUCT_PACKAGES += \
 $(call inherit-product-if-exists, hardware/rockchip/audio/tinyalsa_hal/codec_config/rk_audio.mk)
 ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
 PRODUCT_PACKAGES += \
-    audio.hdmi.$(TARGET_BOARD_HARDWARE) \
-    audio.hdmi_1.$(TARGET_BOARD_HARDWARE) \
-    audio.spdif.$(TARGET_BOARD_HARDWARE) \
-    audio.spdif_1.$(TARGET_BOARD_HARDWARE)
+    audio.ext_1.$(TARGET_BOARD_HARDWARE) \
+    audio.ext_2.$(TARGET_BOARD_HARDWARE) \
+    audio.ext_3.$(TARGET_BOARD_HARDWARE) \
+    audio.ext_4.$(TARGET_BOARD_HARDWARE)
 endif
 
 # audio lib

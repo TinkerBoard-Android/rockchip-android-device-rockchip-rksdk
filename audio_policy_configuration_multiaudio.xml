@@ -73,8 +73,8 @@
             </routes>
         </module>
 
-        <!--Hdmi Audio HAL-->
-        <module name="hdmi" halVersion="2.0">
+        <!--1 extend Audio HAL-->
+        <module name="ext_1" halVersion="2.0">
             <mixPorts>
                 <mixPort name="hdmi_default_output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
@@ -108,8 +108,8 @@
             </routes>
         </module>
 
-        <!--Hdmi 1 Audio HAL-->
-        <module name="hdmi_1" halVersion="2.0">
+        <!--2 extend Audio HAL-->
+        <module name="ext_2" halVersion="2.0">
             <mixPorts>
                 <mixPort name="hdmi_1_default_output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
@@ -134,8 +134,8 @@
             </routes>
         </module>
 
-        <!--Spdif Audio HAL-->
-        <module name="spdif" halVersion="2.0">
+        <!--3 extend Audio HAL-->
+        <module name="ext_3" halVersion="2.0">
             <mixPorts>
                 <mixPort name="spdif_default_output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
@@ -160,8 +160,8 @@
             </routes>
         </module>
 
-        <!--Spdif 1 Audio HAL-->
-        <module name="spdif_1" halVersion="2.0">
+        <!--4 extend Audio HAL-->
+        <module name="ext_4" halVersion="2.0">
             <mixPorts>
                 <mixPort name="spdif_1_default_output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
