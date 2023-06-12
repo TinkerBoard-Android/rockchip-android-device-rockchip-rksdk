@@ -439,3 +439,5 @@ endif
 BOARD_USES_LIBSVEP_SR ?= false
 # MEMC enable macro
 BOARD_USES_LIBSVEP_MEMC ?= false
+#biometric face
+BOARD_BIOMETRICS_FACE ?= false

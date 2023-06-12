@@ -873,3 +873,8 @@ ifneq (,$(filter true, $(strip $(BOARD_USES_LIBSVEP_SR)) $(strip $(BOARD_USES_LI
         debug.sf.disable_frame_pending_by_svep_running=1
 
 endif
+# Biometrics face
+ifeq ($(strip $(BOARD_BIOMETRICS_FACE)), true)
+$(call inherit-product, device/rockchip/common/modules/biometrics.mk)
+endif
+
