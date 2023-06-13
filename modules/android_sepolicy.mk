@@ -27,3 +27,8 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     BOARD_SEPOLICY_DIRS += \
         device/rockchip/common/box/sepolicy/vendor
 endif
+
+ifeq ($(ENABLE_EVS_SAMPLE), true)
+    BOARD_SEPOLICY_DIRS += \
+        device/rockchip/common/sepolicy/car/evs
+endif
