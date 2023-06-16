@@ -400,6 +400,10 @@ endif
 PRODUCT_PACKAGES += \
     rkhelper
 
+#For CTS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.has_HDR_display=false
+
 # For EGL
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.egl=${TARGET_BOARD_HARDWARE_EGL}
