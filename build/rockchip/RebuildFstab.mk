@@ -23,9 +23,16 @@ endif
 endif # BOARD_AVB_ENABLE
 
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 4)))
-str_addon := "/dev/block/by-name/init_boot /init_boot emmc defaults $(fstab_addon)first_stage_mount"
+fstab_init_boot := "/dev/block/by-name/init_boot /init_boot emmc defaults $(fstab_addon)first_stage_mount"
 else
-str_addon := none
+fstab_init_boot := none
+endif
+
+# metadata partition
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
+fstab_metadata += "/dev/block/by-name/metadata /metadata f2fs noatime,nosuid,nodev,sync wait,check,formattable,first_stage_mount"
+else
+fstab_metadata += "/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard,sync wait,check,formattable,first_stage_mount"
 endif
 # Add partition to fstab_dynamic_list
 # $1 part
@@ -72,7 +79,8 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-f $(fstab_flags) \
 	-d $(fstab_dynamic_list) \
 	-c $(fstab_chained) \
-	-a $(str_addon) \
+	-a $(fstab_init_boot) \
+	-a $(fstab_metadata) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 

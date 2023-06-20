@@ -62,7 +62,8 @@ def main(argv):
         elif opt in ("-o", "--ofile"):
             fstab_file = arg;
         elif opt in ("-a", "--append"):
-            str_append = arg;
+            if arg != 'none':
+                str_append += arg + '\n';
         else:
             print (usage)
             sys.exit(2)
@@ -73,16 +74,6 @@ def main(argv):
         flags = ''
     if chained_flags == 'none':
         chained_flags = ''
-    if str_append == 'none':
-        str_append = ''
-
-    temp_addon_fstab = ''
-    if part_list != 'none':
-        temp_addon_fstab += '\n'
-        list_partitions = part_list.split(',')
-        for cur_part in list_partitions:
-            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' erofs ro           ${_flags},first_stage_mount\n'
-            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + '  ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
 
     # add vbmeta parts name at here
     list_flags = list(flags);
@@ -98,21 +89,30 @@ def main(argv):
     file_fstab_in = open(ifile)
     template_fstab_in = file_fstab_in.read()
 
-    if type == 'fstab':
-        template_fstab_in += temp_addon_fstab
-
-    if str_append != 'none':
-        pos = str_append.find('file:')
-        if pos == 0:
-            # cat file
-            file_name = str_append[pos + len('file:'):]
-            if os.path.exists(file_name):
-                append = open(file_name).read()
-            else:
-                append = ''
+    # Handle append content
+    pos = str_append.find('file:')
+    if pos == 0:
+        # cat file
+        file_name = str_append[pos + len('file:'):]
+        if os.path.exists(file_name):
+            append = open(file_name).read()
         else:
-            append = str_append
-        template_fstab_in += append
+            append = ''
+    else:
+        append = str_append
+    template_fstab_in += append
+    # End of processing
+
+    # Handle dynamic partitions
+    if type == 'fstab' and part_list != 'none':
+        temp_addon_fstab = '\n'
+        list_partitions = part_list.split(',')
+        for cur_part in list_partitions:
+            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + ' erofs ro           ${_flags},first_stage_mount\n'
+            temp_addon_fstab += '${_block_prefix}' + cur_part + ' /' + cur_part + '  ext4 ro,barrier=1 ${_flags},first_stage_mount\n'
+
+        template_fstab_in += temp_addon_fstab
+    # End of processing
 
     fstab_in_t = Template(template_fstab_in)
 
