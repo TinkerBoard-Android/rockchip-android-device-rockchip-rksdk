@@ -46,6 +46,7 @@ do
             ;;
         K)
             echo "will build kernel"
+            BUILD_KERNEL_WITH_CLANG=true
             BUILD_KERNEL=true
             ;;
         A)
@@ -109,11 +110,6 @@ fi
 LOCAL_KERNEL_PATH=kernel-$KERNEL_VERSION
 echo "-------------------KERNEL_VERSION:$KERNEL_VERSION"
 echo "-------------------KERNEL_DTS:$KERNEL_DTS"
-
-if [ "$KERNEL_VERSION" = "5.10" ] ; then
-echo "Force use clang and llvm to build kernel-$KERNEL_VERSION"
-BUILD_KERNEL_WITH_CLANG=true
-fi
 
 PACK_TOOL_DIR=RKTools/linux/Linux_Pack_Firmware
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
