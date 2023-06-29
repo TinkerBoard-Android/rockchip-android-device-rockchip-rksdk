@@ -18,8 +18,7 @@
 # Set BOARD_ROCKCHIP_THERMAL := true to build thermal HAL support.
 ifeq ($(BOARD_ROCKCHIP_THERMAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-impl \
-    android.hardware.thermal@2.0-service.rockchip
+    android.hardware.thermal-service.rockchip
 
 BOARD_SEPOLICY_DIRS += hardware/rockchip/thermal/sepolicy
 endif
