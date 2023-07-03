@@ -16,8 +16,8 @@
 
 # Health hardware impl
 PRODUCT_PACKAGES += \
-    android.hardware.health-service.example \
-    android.hardware.health-service.example_recovery
+    android.hardware.health-service.rockchip \
+    android.hardware.health-service.rockchip_recovery
 
 # Charger resource
 PRODUCT_PACKAGES += \
