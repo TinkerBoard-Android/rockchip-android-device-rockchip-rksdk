@@ -152,6 +152,20 @@ else
     echo "Build kernel failed!"
     exit 1
 fi
+# build exteranl wifi driver
+LOCAL_EXT_WIFI_DRIVER_PATH=external/wifi_driver
+if [ -d $LOCAL_EXT_WIFI_DRIVER_PATH ]; then
+source $LOCAL_EXT_WIFI_DRIVER_PATH/set_android_version.sh $LOCAL_EXT_WIFI_DRIVER_PATH
+echo "Start build exteranl wifi driver"
+cd $LOCAL_EXT_WIFI_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C ../../$LOCAL_KERNEL_PATH M=$PWD clean && cd -
+cd $LOCAL_EXT_WIFI_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C ../../$LOCAL_KERNEL_PATH M=$PWD -j$BUILD_JOBS && cd -
+if [ $? -eq 0 ]; then
+    echo "Build exteranl wifi driver ok!"
+else
+    echo "Build exteranl wifi driver failed!"
+    exit 1
+fi
+fi
 
 if [ "$KERNEL_ARCH" = "arm64" ]; then
     KERNEL_DEBUG=$LOCAL_KERNEL_PATH/arch/arm64/boot/Image
