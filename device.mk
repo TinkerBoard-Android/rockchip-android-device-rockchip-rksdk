@@ -156,10 +156,10 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service-lazy
+    android.hardware.wifi-service-lazy
 else
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi-service
 endif
 
 ifeq ($(PRODUCT_HAVE_DLNA),true)

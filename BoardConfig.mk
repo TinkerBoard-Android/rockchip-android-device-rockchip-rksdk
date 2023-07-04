@@ -196,7 +196,7 @@ BUILD_WITH_DRMSERVICE :=true
 BOARD_USES_GENERIC_AUDIO ?= true
 
 # Wifi&Bluetooth
-#include device/rockchip/common/wifi_bt_common.mk
+include device/rockchip/common/wifi_bt_common.mk
 
 #Camera flash
 BOARD_HAVE_FLASH ?= true
