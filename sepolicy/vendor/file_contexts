@@ -202,6 +202,7 @@
 
 #camera hal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.[0-9]+-virtual-service          u:object_r:hal_camera_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider-V1-external-service-rk          u:object_r:hal_camera_default_exec:s0
 
 /(vendor|system/vendor)/bin/hw/rockchip\.hardware\.hdmi@1\.0-service       u:object_r:hal_hdmi_default_exec:s0
 

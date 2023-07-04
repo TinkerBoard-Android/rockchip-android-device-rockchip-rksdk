@@ -863,7 +863,11 @@ endif
 
 # Camera support
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
+ifeq ($(BOARD_CAMERA_AIDL),true)
+$(call inherit-product, device/rockchip/common/modules/camera_aidl.mk)
+else
 $(call inherit-product, device/rockchip/common/modules/camera.mk)
+endif
 endif
 
 # Rockchip HALs
