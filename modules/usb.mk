@@ -16,6 +16,8 @@
 
 PRODUCT_PACKAGES += \
     android.hardware.usb-service.rockchip \
+    android.hardware.usb.gadget-service.rockchip \
     rockchip_udc_detector \
     recovery_udc_detector
 BOARD_SEPOLICY_DIRS += hardware/rockchip/usb/udc_set/sepolicy
+BOARD_SEPOLICY_DIRS += hardware/rockchip/usb/gadget/sepolicy
