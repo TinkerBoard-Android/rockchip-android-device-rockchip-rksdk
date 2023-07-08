@@ -112,6 +112,8 @@ $(call inherit-product, device/rockchip/common/modules/android_go.mk)
 $(call inherit-product, device/rockchip/common/modules/avb.mk)
 # init.rc files
 $(call inherit-product, device/rockchip/common/rootdir/rootdir.mk)
+# swap fstab files
+$(call inherit-product, device/rockchip/common/rootdir/swap/swap.mk)
 ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT)), true)
     $(call inherit-product, device/rockchip/common/modules/hdmi_in.mk)
 endif

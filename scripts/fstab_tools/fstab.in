@@ -21,7 +21,6 @@ ${_block_prefix}odm     /odm      ext4 ro,barrier=1 ${_flags},first_stage_mount
 # For pcie ssd
 /devices/platform/*.pcie* auto vfat defaults voldmanaged=pcie:auto
 
-/dev/block/zram0                                none                swap      defaults                                              zramsize=50%
 # For sdmmc
 /devices/platform/${_sdmmc_device}/mmc_host*        auto  auto    defaults        voldmanaged=sdcard1:auto
 #  Full disk encryption has less effect on rk3326, so default to enable this.

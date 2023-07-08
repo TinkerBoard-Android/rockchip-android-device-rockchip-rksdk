@@ -83,11 +83,10 @@ TARGET_BOARD_HARDWARE_EGL ?= mali
 #Android GO configuration
 BUILD_WITH_GO_OPT ?= false
 
-ifeq ($(BUILD_WITH_GO_OPT), true)
-PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab_go.in
-else
 PRODUCT_FSTAB_TEMPLATE ?= device/rockchip/common/scripts/fstab_tools/fstab.in
-endif
+
+# Set var for building swap fstab files
+$(call soong_config_set,fstab_rockchip,low_ram,$(BUILD_WITH_GO_OPT))
 
 # default.prop & build.prop split
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true

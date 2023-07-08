@@ -40,6 +40,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += service.sf.prime_shader_cache=0
 # remove the llkd process
 PRODUCT_PROPERTY_OVERRIDES += ro.llk.enable=false
 
+# Write back
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.ext_ram=256
+
 # Overlay configs
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_go
 

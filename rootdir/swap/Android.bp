@@ -1,0 +1,125 @@
+//
+// Copyright (C) 2023 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+soong_config_module_type {
+    name: "fstab_rockchip_soong_gen_defaults",
+    module_type: "genrule_defaults",
+    config_namespace: "fstab_rockchip",
+    bool_variables: ["low_ram"],
+    properties: ["cmd"],
+}
+
+fstab_rockchip_soong_gen_defaults {
+    name: "fstab_gen_defaults",
+    soong_config_variables: {
+        low_ram: {
+            cmd: "sed -e s/@ZRAM_SIZE@/75%/ $(in) > $(out)",
+            conditions_default: {
+                cmd: "sed -e s/@ZRAM_SIZE@/50%/ $(in) > $(out)",
+            },
+        },
+    },
+}
+
+genrule {
+    name: "gen_fstab_swap.zram_size",
+    defaults: ["fstab_gen_defaults"],
+    srcs: ["fstab_swap.in"],
+    out: ["fstab_swap.zram_size"],
+}
+
+genrule {
+    name: "gen_fstab_swap.ext256",
+    srcs: [":gen_fstab_swap.zram_size"],
+    out: ["fstab_swap.ext256"],
+    cmd: "sed -e s/@ZRAM_BACKING_SIZE@/,max_comp_streams=4,zram_backingdev_size=256M/ $(in) > $(out)",
+}
+
+genrule {
+    name: "gen_fstab_swap.ext512",
+    srcs: [":gen_fstab_swap.zram_size"],
+    out: ["fstab_swap.ext512"],
+    cmd: "sed -e s/@ZRAM_BACKING_SIZE@/,max_comp_streams=4,zram_backingdev_size=512M/ $(in) > $(out)",
+}
+
+genrule {
+    name: "gen_fstab_swap.ext1024",
+    srcs: [":gen_fstab_swap.zram_size"],
+    out: ["fstab_swap.ext1024"],
+    cmd: "sed -e s/@ZRAM_BACKING_SIZE@/,max_comp_streams=4,zram_backingdev_size=1024M/ $(in) > $(out)",
+}
+
+genrule {
+    name: "gen_fstab_swap.ext2048",
+    srcs: [":gen_fstab_swap.zram_size"],
+    out: ["fstab_swap.ext2048"],
+    cmd: "sed -e s/@ZRAM_BACKING_SIZE@/,max_comp_streams=4,zram_backingdev_size=2048M/ $(in) > $(out)",
+}
+
+genrule {
+    name: "gen_fstab_swap.ext4096",
+    srcs: [":gen_fstab_swap.zram_size"],
+    out: ["fstab_swap.ext4096"],
+    cmd: "sed -e s/@ZRAM_BACKING_SIZE@/,max_comp_streams=4,zram_backingdev_size=4096M/ $(in) > $(out)",
+}
+
+genrule {
+    name: "gen_fstab_swap.extnone",
+    srcs: [":gen_fstab_swap.zram_size"],
+    out: ["fstab_swap.extnone"],
+    cmd: "sed -e s/@ZRAM_BACKING_SIZE@// $(in) > $(out)",
+}
+
+prebuilt_etc {
+    name: "fstab_swap.ext256",
+    src: ":gen_fstab_swap.ext256",
+    vendor: true,
+    vendor_ramdisk_available: true,
+}
+
+prebuilt_etc {
+    name: "fstab_swap.ext512",
+    src: ":gen_fstab_swap.ext512",
+    vendor: true,
+    vendor_ramdisk_available: true,
+}
+
+prebuilt_etc {
+    name: "fstab_swap.ext1024",
+    src: ":gen_fstab_swap.ext1024",
+    vendor: true,
+    vendor_ramdisk_available: true,
+}
+
+prebuilt_etc {
+    name: "fstab_swap.ext2048",
+    src: ":gen_fstab_swap.ext2048",
+    vendor: true,
+    vendor_ramdisk_available: true,
+}
+
+prebuilt_etc {
+    name: "fstab_swap.ext4096",
+    src: ":gen_fstab_swap.ext4096",
+    vendor: true,
+    vendor_ramdisk_available: true,
+}
+
+prebuilt_etc {
+    name: "fstab_swap.extnone",
+    src: ":gen_fstab_swap.extnone",
+    vendor: true,
+    vendor_ramdisk_available: true,
+}
