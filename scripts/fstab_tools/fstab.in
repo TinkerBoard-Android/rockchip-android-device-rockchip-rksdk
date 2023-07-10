@@ -9,9 +9,13 @@ ${_block_prefix}vendor  /vendor   ext4 ro,barrier=1 ${_flags},first_stage_mount
 ${_block_prefix}odm     /odm     erofs ro           ${_flags},first_stage_mount
 ${_block_prefix}odm     /odm      ext4 ro,barrier=1 ${_flags},first_stage_mount
 
-/dev/block/by-name/boot     /boot       emmc defaults     ${_flags_chained}first_stage_mount
 /dev/block/by-name/cache    /cache      ext4 noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard    wait,check
-/dev/block/by-name/misc     /misc       emmc defaults     defaults
+
+/dev/block/by-name/boot         /boot               emmc    defaults    ${_flags_chained}first_stage_mount
+/dev/block/by-name/misc         /misc               emmc    defaults    defaults
+/dev/block/by-name/backup       /backup             emmc    defaults    defaults
+/dev/block/by-name/baseparamer  /baseparamer        emmc    defaults    defaults
+/dev/block/mmcblk0p1            /mnt/external_sd    vfat    defaults    recoveryonly
 
 /devices/platform/*usb*   auto vfat defaults      voldmanaged=usb:auto
 

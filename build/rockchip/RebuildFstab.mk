@@ -30,9 +30,15 @@ endif
 
 # metadata partition
 ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
-fstab_metadata += "/dev/block/by-name/metadata /metadata f2fs noatime,nosuid,nodev,sync wait,check,formattable,first_stage_mount"
+fstab_metadata := "/dev/block/by-name/metadata /metadata f2fs noatime,nosuid,nodev,sync wait,check,formattable,first_stage_mount"
 else
-fstab_metadata += "/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard,sync wait,check,formattable,first_stage_mount"
+fstab_metadata := "/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard,sync wait,check,formattable,first_stage_mount"
+endif
+
+ifeq ($(BUILD_WITH_GOOGLE_FRP), true)
+fstab_frp := "/dev/block/by-name/frp /frp emmc defaults defaults"
+else
+fstab_frp := none
 endif
 # Add partition to fstab_dynamic_list
 # $1 part
@@ -68,7 +74,7 @@ endif
 
 intermediates := $(call intermediates-dir-for,FAKE,rockchip_fstab)
 rebuild_fstab := $(intermediates)/fstab.$(TARGET_BOARD_HARDWARE)
-
+TARGET_RECOVERY_FSTAB := $(intermediates)/fstab.$(TARGET_BOARD_HARDWARE)
 ROCKCHIP_FSTAB_TOOLS := $(SOONG_HOST_OUT_EXECUTABLES)/fstab_tools
 
 $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
@@ -81,6 +87,7 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-c $(fstab_chained) \
 	-a $(fstab_init_boot) \
 	-a $(fstab_metadata) \
+	-a $(fstab_frp) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 
