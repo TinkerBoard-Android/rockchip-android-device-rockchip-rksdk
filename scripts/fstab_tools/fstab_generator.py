@@ -63,7 +63,11 @@ def main(argv):
             fstab_file = arg;
         elif opt in ("-a", "--append"):
             if arg != 'none':
-                str_append += arg + '\n';
+                pos = arg.find('file:')
+                if pos != 0:
+                    str_append += arg + '\n'
+                else:
+                    str_append = arg
         else:
             print (usage)
             sys.exit(2)
