@@ -15,11 +15,14 @@
 #
 
 ifeq ($(strip $(BOARD_AVB_ENABLE)),true)
+# Only copy gsi_keys for Android 10+, Android 9 use system as root.
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),29),true)
 #$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 PRODUCT_PACKAGES += \
     r-gsi.avbpubkey \
     s-gsi.avbpubkey \
     t-gsi.avbpubkey
+endif
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
