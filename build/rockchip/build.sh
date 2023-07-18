@@ -254,12 +254,9 @@ if [ "$BUILD_ANDROID" = true ] ; then
             exit 1
         fi
     fi
-else # repack v2 boot
-    echo "Repacking header 2 boot..."
-    BOOT_CMDLINE=`get_build_var BOARD_KERNEL_CMDLINE`
-    SECURITY_LEVEL=`get_build_var PLATFORM_SECURITY_PATCH`
-    mkbootfs -d $OUT/system $OUT/ramdisk | minigzip > $OUT/ramdisk.img
-    mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk.img --dtb $OUT/dtb.img --cmdline "$BOOT_CMDLINE" --os_version 12 --os_patch_level $SECURITY_LEVEL --second $LOCAL_KERNEL_PATH/resource.img --header_version 2 --output $OUT/boot.img
+else # repack boot
+    make bootimage
+    make bootimage_debug
 fi
 
 if [ "$BUILD_OTA" != true ] ; then
