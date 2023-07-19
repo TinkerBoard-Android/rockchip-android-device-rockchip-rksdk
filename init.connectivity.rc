@@ -40,7 +40,8 @@ on zygote-start
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-    
+    export TMP /data/local/tmp
+
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
 
 #for nfc
