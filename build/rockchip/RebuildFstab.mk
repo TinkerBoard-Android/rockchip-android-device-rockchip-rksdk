@@ -40,6 +40,25 @@ fstab_frp := "/dev/block/by-name/frp /frp emmc defaults defaults"
 else
 fstab_frp := none
 endif
+
+ifneq ($(strip $(BOARD_USES_AB_IMAGE)),true)
+fstab_uboot := "/dev/block/by-name/uboot /uboot emmc defaults defaults"
+fstab_recovery := "/dev/block/by-name/recovery /recovery emmc defaults defaults"
+fstab_vbmeta := "/dev/block/by-name/vbmeta /vbmeta emmc defaults defaults"
+fstab_dtbo := "/dev/block/by-name/dtbo /dtbo emmc defaults defaults"
+ifneq ($(strip $(BOARD_ROCKCHIP_TRUST_MERGE_TO_UBOOT)),true)
+fstab_trust := "/dev/block/by-name/trust /trust emmc defaults defaults"
+else
+fstab_trust := none
+endif #BOARD_ROCKCHIP_TRUST_MERGE_TO_UBOOT
+else
+fstab_uboot := none
+fstab_recovery := none
+fstab_vbmeta := none
+fstab_dtbo := none
+fstab_trust := none
+endif #BOARD_USES_AB_IMAGE
+
 # Add partition to fstab_dynamic_list
 # $1 part
 # Do not add ',' to head
@@ -88,6 +107,11 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-a $(fstab_init_boot) \
 	-a $(fstab_metadata) \
 	-a $(fstab_frp) \
+	-a $(fstab_uboot) \
+	-a $(fstab_recovery) \
+	-a $(fstab_vbmeta) \
+	-a $(fstab_dtbo) \
+	-a $(fstab_trust) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 
