@@ -290,12 +290,9 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 ifeq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-# Sensor HAL
+# Sensor AIDL
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-service \
-    android.hardware.sensors@1.0-impl \
-    sensors.$(TARGET_BOARD_HARDWARE)
-
+    com.rockchip.hardware.sensors
 endif
 
 # Include thermal HAL module
