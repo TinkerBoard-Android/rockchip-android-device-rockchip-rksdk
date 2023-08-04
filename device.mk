@@ -873,9 +873,7 @@ endif
 
 ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT))|$(strip $(BOARD_USES_LIBPQ)) ,true|true)
     #Build pq and iep lib
-    PRODUCT_PACKAGES += \
-        libpq \
-        libiep
+    $(call inherit-product, hardware/rockchip/libpq/libpq.mk)
 
     #no afbc
     PRODUCT_PROPERTY_OVERRIDES += \
