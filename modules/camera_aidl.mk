@@ -68,6 +68,16 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(CAMERA_SUPPORT_HDMI),true)
 PRODUCT_PACKAGES += \
+    android.hardware.camera.provider-V1-hdmi-service \
     rockchip.hardware.hdmi@1.0-service \
     rockchip.hardware.hdmi@1.0-impl
 endif #CAMERA_SUPPORT_HDMI
+
+ifeq ($(CAMERA_SUPPORT_VIRTUAL),true)
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider-V1-virtual-service \
+    libdata_bridge \
+    rockchip.hardware.hdmi@1.0-service \
+    rockchip.hardware.hdmi@1.0-impl
+$(call inherit-product-if-exists, hardware/rockchip/camera_aidl/etc/camera_etc.mk)
+endif #CAMERA_SUPPORT_VIRTUAL
