@@ -152,6 +152,8 @@
 /vendor/bin/hw/android\.hardware\.lights-service\.rockchip              u:object_r:hal_light_default_exec:s0
 /vendor/bin/hw/android\.hardware\.health-service\.rockchip              u:object_r:hal_health_default_exec:s0
 
+/vendor/bin/hw/android\.hardware\.graphics\.composer3-service\.rockchip         u:object_r:hal_graphics_composer_default_exec:s0
+
 # Incremental file system driver
 /(vendor|vendor_dlkm)/lib/modules/incrementalfs\.ko                     u:object_r:vendor_incremental_module:s0
 
