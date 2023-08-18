@@ -19,6 +19,7 @@ $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/etc/camera_etc.mk)
 
+ifneq (true, $(BOARD_CAMERA_SUPPORT_AUTOMOTIVE))
 # EXT
 # Camera external
 ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
@@ -40,6 +41,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider-V1-external-service-rk \
 
 endif #BOARD_CAMERA_SUPPORT_EXT
+endif #BOARD_CAMERA_SUPPORT_AUTOMOTIVE
 
 # Camera Autofocus
 ifeq ($(CAMERA_SUPPORT_AUTOFOCUS),true)
