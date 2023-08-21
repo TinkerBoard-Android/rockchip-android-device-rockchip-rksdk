@@ -767,7 +767,7 @@ PRODUCT_PACKAGES += \
     Music \
     WallpaperPicker
 
-#$(call inherit-product, device/rockchip/common/modules/rockchip_apps.mk)
+$(call inherit-product, device/rockchip/common/modules/rockchip_apps.mk)
 
 ifneq ($(BUILD_WITH_GOOGLE_MARKET), true)
 PRODUCT_PACKAGES += \
