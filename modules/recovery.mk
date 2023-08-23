@@ -76,11 +76,10 @@ PRODUCT_PACKAGES += \
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION)),true)
 ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
-$(call inherit-product, \
-    $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_with_xor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_t_baseline.mk)
+PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_retrofit.mk)
 endif
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
