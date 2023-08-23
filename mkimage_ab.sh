@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-. build/envsetup.sh >/dev/null && setpaths
+. build/envsetup.sh >/dev/null
 
 export PATH=$ANDROID_BUILD_PATHS:$PATH
 TARGET_PRODUCT=`get_build_var TARGET_PRODUCT`
