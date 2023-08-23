@@ -40,7 +40,7 @@ $(rebuild_dts) : $(ROCKCHIP_FSTAB_TOOLS) $(PRODUCT_DTBO_TEMPLATE)
 
 $(rebuild_dtbo_img) : $(rebuild_dts) $(AOSP_DTC_TOOL) $(AOSP_MKDTIMG_TOOL)
 	@echo "Building dtbo img file $@."
-	$(AOSP_DTC_TOOL) -@ -O dtb -o $(rebuild_dtbo_dtb) $(rebuild_dts)
+	$(AOSP_DTC_TOOL) -@ -a 4096 -O dtb -o $(rebuild_dtbo_dtb) $(rebuild_dts)
 	$(AOSP_MKDTIMG_TOOL) create $(rebuild_dtbo_img) $(rebuild_dtbo_dtb)
 
 INSTALLED_RK_DTBO_IMAGE := $(PRODUCT_OUT)/$(notdir $(rebuild_dtbo_img))
