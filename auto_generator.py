@@ -50,8 +50,8 @@ def main(argv):
         if os.path.exists(android_path):
             os.remove(android_path)
 
-        includefile = file(include_path, 'w')
-        androidfile = file(android_path, 'w')
+        includefile = open(include_path, 'w')
+        androidfile = open(android_path, 'w')
 
         androidfile.write("include $(call all-subdir-makefiles)\n\n")
 
@@ -73,7 +73,7 @@ def main(argv):
                         os.makedirs(include_apk_path)
                         apkpath = preinstall_dir + '/' + found.group() + '/'
                         shutil.move(apk,apkpath)
-                        makefile = file(makefile_path,'w')
+                        makefile = open(makefile_path,'w')
                         makefile.write("LOCAL_PATH := $(my-dir)\n\n")
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
                         continue
@@ -82,7 +82,7 @@ def main(argv):
                         if os.path.exists(include_apk_path):
                             shutil.rmtree(include_apk_path)
                         os.makedirs(include_apklib_path)
-                        makefile = file(makefile_path,'w')
+                        makefile = open(makefile_path,'w')
                         makefile.write("LOCAL_PATH := $(my-dir)\n\n")
                         apkpath = preinstall_dir + '/' + found.group() + '/'
                     if target_arch == 'arm64':
@@ -101,19 +101,19 @@ def main(argv):
                                 if (os.path.isdir(libfile)):
                                     continue
                                 else:
-                                    includelib = file(libfile, 'w')
+                                    includelib = open(libfile, 'w')
                                     includelib.write(data)
                         try:
-                            if cmp(isfound, 'not_found_lib'):
+                            if (isfound == 'not_found_lib'):
                                 include_apklib_path_arm64 = include_apk_path + '/lib/arm64'
                                 os.rename(include_apklib_path, include_apklib_path_arm64)
                         except Exception as e:
-                            logging.warning('rename dir faild for:' + e)
-                    if not cmp(isfound,'not_found_lib'):
+                            logging.warning('rename dir faild ')
+                    if not (isfound == 'not_found_lib'):
                         for lib_name in zfile.namelist():
                             lib = re.compile(r'\A(lib/armeabi-v7a/)+?')
                             find_name = 'lib/armeabi-v7a/'
-                            #if not cmp(lib_name,find_name):
+                            #if not (lib_name == find_name):
                             #    continue
                             if lib_name.find(find_name) == -1:
                                 continue
@@ -127,13 +127,13 @@ def main(argv):
                                 if(os.path.isdir(libfile)):
                                     continue
                                 else:
-                                    includelib = file(libfile,'w')
+                                    includelib = open(libfile,'w')
                                     includelib.write(data)
-                    if not cmp(isfound,'not_found_lib'):
+                    if not (isfound == 'not_found_lib'):
                         for lib_name in zfile.namelist():
                             lib = re.compile(r'\A(lib/armeabi/)+?')
                             find_name = 'lib/armeabi/'
-                            #if not cmp(lib_name,find_name):
+                            #if not (lib_name == find_name):
                             #    continue
                             if lib_name.find(find_name) == -1:
                                 continue
@@ -144,12 +144,12 @@ def main(argv):
                                 libfile = include_apklib_path + '/' + string[1]
                                 MY_LOCAL_PREBUILT_JNI_LIBS += '\t' + 'lib/arm' + '/' + string[1] + '\\' + '\n'
                                 if(os.path.isdir(libfile)):
-				        continue
-				else:
-                                    includelib = file(libfile,'w')
+                                    continue
+                                else:
+                                    includelib = open(libfile,'w')
                                     includelib.write(data)
                     tmp_jni_libs = '\\' + '\n'
-                    if not cmp(MY_LOCAL_PREBUILT_JNI_LIBS,tmp_jni_libs):
+                    if not (MY_LOCAL_PREBUILT_JNI_LIBS == tmp_jni_libs):
                         nolibpath = preinstall_dir + '/' + found.group() + '/lib'
                         shutil.rmtree(nolibpath)
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
