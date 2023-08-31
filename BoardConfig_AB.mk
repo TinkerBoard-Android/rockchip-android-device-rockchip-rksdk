@@ -17,6 +17,9 @@
 AB_OTA_UPDATER := true
 TARGET_NO_RECOVERY := true
 
+#bootctrl
+BOARD_BOOTCTRL_AIDL ?= true
+
 BOARD_BOOT_HEADER_VERSION ?= 2
 BOARD_USES_RECOVERY_AS_BOOT := true
 ifeq ($(BOARD_BUILD_GKI),true)
@@ -80,4 +83,3 @@ else
         endif
     endif
 endif
-TARGET_RECOVERY_FSTAB := $(TARGET_DEVICE_DIR)/recovery.fstab_AB

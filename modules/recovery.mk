@@ -67,11 +67,18 @@ AB_OTA_PARTITIONS += \
 endif
 
 endif
+
+ifeq ($(strip $(BOARD_BOOTCTRL_AIDL)),true)
+# Boot control AIDL
+PRODUCT_PACKAGES += \
+    android.hardware.boot-service.default
+else
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-service \
     android.hardware.boot@1.2-impl-rockchip \
     android.hardware.boot@1.2-impl-rockchip.recovery
+endif
 
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE)),true)
 ifeq ($(strip $(BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION)),true)
