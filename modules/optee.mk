@@ -31,8 +31,7 @@ PRODUCT_PACKAGES += \
     tee-supplicant \
     android.hardware.gatekeeper-service.optee \
     android.hardware.security.keymint-service.optee \
-    android.hardware.weaver@1.0-service \
-    android.hardware.weaver@1.0-impl
+    android.hardware.weaver-service.optee
 
 ifneq ($(filter rk3326 rk3528 rk356x rk3562 rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 

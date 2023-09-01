@@ -187,6 +187,7 @@
 
 #weaver hal
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service                u:object_r:weaver-hal-1-0_exec:s0
+/vendor/bin/hw/android\.hardware\.weaver-service\.optee              u:object_r:weaver-hal-1-0_exec:s0
 
 #rockit hw hal
 /vendor/bin/hw/rockchip\.hardware\.rockit\.hw@1\.0-service           u:object_r:vendor-rockit-hal-1-0_exec:s0
