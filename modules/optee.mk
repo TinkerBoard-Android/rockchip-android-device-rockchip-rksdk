@@ -29,7 +29,7 @@ endif
 
 PRODUCT_PACKAGES += \
     tee-supplicant \
-    android.hardware.gatekeeper@1.0-service.optee \
+    android.hardware.gatekeeper-service.optee \
     android.hardware.security.keymint-service.optee \
     android.hardware.weaver@1.0-service \
     android.hardware.weaver@1.0-impl
