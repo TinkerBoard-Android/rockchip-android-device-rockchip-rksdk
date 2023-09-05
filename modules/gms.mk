@@ -54,6 +54,7 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
     TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
     PRODUCT_PACKAGES += SystemUIGo
     PRODUCT_PACKAGES += CaptivePortalLoginFrameworkOverlayGo
+    PRODUCT_PACKAGES += RockchipNetworkStackConfigGoOverlay
     MAINLINE_COMPRESS_APEX_ALL := false
   else
     PRODUCT_PACKAGES += RockchipTetheringConfigOverlay
