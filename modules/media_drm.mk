@@ -36,10 +36,10 @@ PRODUCT_PACKAGES += \
     move_widevine_data.sh
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.drm-service-lazy.widevine
+    com.google.android.widevine.lazy
 else
 PRODUCT_PACKAGES += \
-    android.hardware.drm-service.widevine
+    com.google.android.widevine.nonupdatable
 endif
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
     PRODUCT_PACKAGES += \
