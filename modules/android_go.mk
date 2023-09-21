@@ -58,10 +58,4 @@ MALLOC_SVELTE := true
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.foreground-heap-growth-multiplier=2.0 \
     ro.zram.mark_idle_delay_mins=60
-
-# Use inprocess modules for Go devices
-# Go mainline will override these
-PRODUCT_PACKAGES += \
-    InProcessNetworkStack \
-    com.android.tethering.inprocess
 endif

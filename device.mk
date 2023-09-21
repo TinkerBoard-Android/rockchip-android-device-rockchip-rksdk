@@ -769,16 +769,10 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product, device/rockchip/common/modules/rockchip_apps.mk)
 
-ifneq ($(BUILD_WITH_GOOGLE_MARKET), true)
-PRODUCT_PACKAGES += \
-    InProcessNetworkStack \
-    com.android.tethering.inprocess
-
 # Setup brightness for AOSP devices
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_brightness
 endif
 endif # tablet without GMS-Express
-endif
 
 # By default, enable zram; experiment can toggle the flag,
 # which takes effect on boot
