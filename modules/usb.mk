@@ -21,3 +21,9 @@ PRODUCT_PACKAGES += \
     recovery_udc_detector
 BOARD_SEPOLICY_DIRS += hardware/rockchip/usb/udc_set/sepolicy
 BOARD_SEPOLICY_DIRS += hardware/rockchip/usb/gadget/sepolicy
+
+ifeq ($(ROCKCHIP_USB_OTG), true)
+PRODUCT_PACKAGES += \
+    android.hardware.usb-service.rockchip_otg
+BOARD_SEPOLICY_DIRS += hardware/rockchip/usb/otg/sepolicy
+endif
