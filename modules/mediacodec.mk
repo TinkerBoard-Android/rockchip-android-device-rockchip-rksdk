@@ -16,14 +16,7 @@
 
 # OMX/Camera omx-plugin vpu libion_rockchip_ext
 PRODUCT_PACKAGES += \
-    libomxvpu_enc \
-    libomxvpu_dec \
-    libRkOMX_Resourcemanager \
-    libOMX_Core \
-    libvpu \
-    libstagefrighthw \
-    libgralloc_priv_omx \
-    libion_ext
+    libgralloc_priv_omx
 
 # Rockit player service
 PRODUCT_PACKAGES += \
@@ -35,6 +28,7 @@ PRODUCT_PACKAGES += \
     android.hardware.media.c2@1.1-service \
     libcodec2_rk_component
 
-# Vendor OMX seccomp policy files for media components:
-PRODUCT_COPY_FILES += \
-    device/rockchip/common/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+# Use C2 to obtain surface
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.stagefright.c2inputsurface=-1 \
+    debug.stagefright.ccodec=4
