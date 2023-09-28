@@ -206,6 +206,25 @@ BOARD_HAVE_FLASH ?= true
 #HDMI support
 BOARD_SUPPORT_HDMI ?= true
 BOARD_SUPPORT_HDMI_CEC ?= false
+# Address  Device
+# 0        TV
+# 1        Recording Device 1
+# 2        Recording Device 2
+# 3        Tuner 1
+# 4        Playback Device 1
+# 5        Audio System
+# 6        Tuner 2
+# 7        Tuner 3
+# 8        Playback Device 2
+# 9        Recording Device 3
+# 10       Tuner 4
+# 11       Playback Device 3
+# 12       Reserved
+# 13       Reserved
+# 14       Specific Use
+# 15       Unregistered (as Initiator address)
+#          Broadcast (as Destination address)
+BOARD_HDMI_CEC_TYPE ?= 4
 
 # gralloc 4.0
 include device/rockchip/common/gralloc.device.mk
