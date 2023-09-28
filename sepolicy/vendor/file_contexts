@@ -240,6 +240,7 @@
 
 #hdmi in
 /(vendor|system/vendor)/bin/hw/rockchip\.hardware\.tv\.input@1\.0-service   u:object_r:hal_tv_input_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.tv\.input-service\.rockchip u:object_r:hal_tv_input_default_exec:s0
 
 #for hdcp2
 /dev/hl_dev[0-1]*         u:object_r:hdcp2_device:s0

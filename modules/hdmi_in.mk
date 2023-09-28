@@ -29,14 +29,8 @@ PRODUCT_COPY_FILES += \
 
 # Build tv_input HAL
 PRODUCT_PACKAGES += \
-    rockchip.hardware.tv.input@1.0-service \
-    rockchip.hardware.tv.input@1.0-impl \
-    tv_input.rockchip
+    android.hardware.tv.input-service.rockchip
 
 # Use tv_input.rockchip
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.tv_input=rockchip
-
-# Add manifest
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/rockchip/common/manifests/frameworks/rockchip.hardware.tv.input@1.0-service.xml
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.tv.input@1.0-service.xml
+    vendor.hwc.enable_sideband_stream_2_mode=1
