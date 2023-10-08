@@ -95,9 +95,9 @@ $(call soong_config_set,fstab_rockchip,low_ram,$(BUILD_WITH_GO_OPT))
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 
 DEVICE_MANIFEST_FILE ?= device/rockchip/common/manifests/manifest_level_$(ROCKCHIP_LUNCHING_API_LEVEL).xml
-ifeq (1,$(strip $(shell expr $(ROCKCHIP_LUNCHING_API_LEVEL) \>= 31)))
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),31),true)
 # Android S deprecate schedulerservice, use ioprio in init.rc
-DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix_level_31.xml
+DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix_level_$(ROCKCHIP_LUNCHING_API_LEVEL).xml
 else
 # For Android R and older versions.
 DEVICE_MATRIX_FILE   ?= device/rockchip/common/manifests/compatibility_matrix.xml
