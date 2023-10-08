@@ -413,3 +413,8 @@ ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
     endif
         BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
 endif
+
+# Enable AIDL CAMERA HAL for Android14
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
+    BOARD_CAMERA_AIDL ?= true
+endif
