@@ -19,13 +19,13 @@ PRODUCT_VENDOR_PROPERTIES += drm.service.enabled=true
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.2-service-lazy
+    android.hardware.cas-service.example-lazy
 
 # Media Drm clearkey
 $(call inherit-product, frameworks/av/drm/mediadrm/plugins/clearkey/service-lazy.mk)
 else
 PRODUCT_PACKAGES += \
-    android.hardware.cas@1.2-service
+    com.android.hardware.cas
 
 # Media Drm clearkey
 $(call inherit-product, frameworks/av/drm/mediadrm/plugins/clearkey/service.mk)
