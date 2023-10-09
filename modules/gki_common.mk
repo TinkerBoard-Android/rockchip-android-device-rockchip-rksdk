@@ -63,4 +63,7 @@ PRODUCT_PACKAGES += \
 
 # Build all KOs
 $(call inherit-product, mkcombinedroot/modular_kernel.mk)
+
+# Uboot enabled AB config
+PRODUCT_UBOOT_CONFIG += gki.config
 endif

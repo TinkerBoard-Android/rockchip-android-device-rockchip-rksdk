@@ -125,8 +125,8 @@ export STUB_PATCH_PATH=$STUB_PATH/PATCHES
 
 # build uboot
 if [ "$BUILD_UBOOT" = true ] ; then
-echo "start build uboot"
-cd u-boot && make clean &&  make mrproper &&  make distclean && ./make.sh $UBOOT_DEFCONFIG && cd -
+echo "start build uboot: $UBOOT_DEFCONFIG"
+cd u-boot && make clean &&  make mrproper &&  make distclean && make $UBOOT_DEFCONFIG && ./make.sh && cd -
 if [ $? -eq 0 ]; then
     echo "Build uboot ok!"
 else
