@@ -15,7 +15,10 @@ allow mediaserver vendor-rockit-hal_hwservice:hwservice_manager { find };
 allow mediaserver sysfs_dmc:dir r_dir_perms;
 allow mediaserver sysfs_dmc:file rw_file_perms;
 allow mediaserver sysfs_dmc:lnk_file r_file_perms;
+allow mediaserver proc_version:file r_file_perms;
 
 rw_rockchip_graphic_device(mediaserver)
+
 get_prop(mediaserver, ctl_start_prop)
+get_prop(mediaserver, vendor_omx_prop)
 set_prop(mediaserver, ctl_start_prop)

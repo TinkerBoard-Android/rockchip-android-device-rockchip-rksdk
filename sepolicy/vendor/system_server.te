@@ -21,6 +21,7 @@ add_service(system_server,drm_device_management_service)
 
 binder_call(system_server, rk_output_hal)
 binder_call(system_server, zygote)
+binder_call(system_server, hal_sensors_default)
 
 rw_rockchip_graphic_device(system_server)
 
