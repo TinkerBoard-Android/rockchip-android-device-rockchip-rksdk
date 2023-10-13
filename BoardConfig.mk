@@ -191,9 +191,6 @@ TARGET_USES_MKE2FS ?= true
 RECOVERY_BOARD_ID ?= false
 # RECOVERY_BOARD_ID ?= true
 
-# for drmservice
-BUILD_WITH_DRMSERVICE :=true
-
 # Audio
 BOARD_USES_GENERIC_AUDIO ?= true
 

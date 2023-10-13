@@ -67,9 +67,6 @@ vendor.boot_completed                   u:object_r:vendor_boot_complete_prop:s0
 # for vendor/build.prop
 vendor.all.modules.ready                u:object_r:vendor_system_public_prop:s0
 
-# drmservice
-persist.vendor.sys.hid                  u:object_r:vendor_drmservice_prop:s0
-
 # power aidl configs
 ro.vendor.power.                        u:object_r:vendor_power_prop:s0
 

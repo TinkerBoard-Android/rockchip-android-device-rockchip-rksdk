@@ -494,14 +494,6 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
-
-########################################################
-# build with drmservice
-########################################################
-ifeq ($(strip $(BUILD_WITH_DRMSERVICE)),true)
-PRODUCT_PACKAGES += rockchip.drmservice
-endif
-
 ########################################################
 # this product has GPS or not
 ########################################################
