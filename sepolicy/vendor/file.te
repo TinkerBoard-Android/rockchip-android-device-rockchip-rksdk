@@ -13,3 +13,4 @@ type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
 type debugfs_sw_sync, fs_type, debugfs_type;
 type sysfs_dmc, fs_type, sysfs_type;
 type sysfs_mmc, fs_type, sysfs_type;
+type sysfs_udc, fs_type, sysfs_type;
