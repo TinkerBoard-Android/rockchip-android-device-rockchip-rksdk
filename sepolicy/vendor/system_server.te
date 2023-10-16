@@ -18,6 +18,7 @@ allow system_server zygote:process { getsched setsched };
 allow system_server sysfs_hdmi:file { read open getattr };
 
 add_service(system_server,drm_device_management_service)
+add_service(system_server,rkbox_management_service)
 
 binder_call(system_server, rk_output_hal)
 binder_call(system_server, zygote)
