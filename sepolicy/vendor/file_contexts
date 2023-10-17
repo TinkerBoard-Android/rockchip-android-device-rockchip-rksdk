@@ -101,7 +101,7 @@
 /vendor/bin/rk_store_keybox                     u:object_r:rk_store_keybox_exec:s0
 
 /dev/block/mmcblk[0-9]                          u:object_r:uboot_block_device:s0
-/dev/block/mmcblk[0-9]boot0                     u:object_r:uboot_block_device:s0
+/dev/block/mmcblk[0-9]boot[0-9]                 u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb                      u:object_r:rpmb_block_device:s0
 /dev/mmcblk[0-9]rpmb                            u:object_r:rpmb_block_device:s0
 
