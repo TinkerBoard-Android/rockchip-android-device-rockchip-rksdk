@@ -348,7 +348,8 @@ ifeq ($(strip $(BOARD_SUPER_PARTITION_GROUPS)),rockchip_dynamic_partitions)
 # Fastbootd HAL
 # TODO: develop a hal for GMS...
 PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.0-impl-rockchip \
+    android.hardware.fastboot-service.rockchip_recovery \
+    android.hardware.boot-service.default_recovery \
     fastbootd
 endif # BOARD_USE_DYNAMIC_PARTITIONS
 
