@@ -414,6 +414,22 @@ ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
         BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
 endif
 
+ifeq ($(strip $(BOARD_BUILD_GKI)), true)
+    # AB image definition
+    BOARD_USES_AB_IMAGE := true
+    BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := true
+    BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION_WITH_GKI_ENABLE := true
+else
+    BOARD_USES_AB_IMAGE := false
+    BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := false
+    BOARD_ROCKCHIP_VIRTUAL_AB_COMPRESSION_WITH_GKI_ENABLE := false
+endif
+
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+    include device/rockchip/common/BoardConfig_AB.mk
+endif
+
+
 # Enable AIDL CAMERA HAL for Android14
 ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
     BOARD_CAMERA_AIDL ?= true
