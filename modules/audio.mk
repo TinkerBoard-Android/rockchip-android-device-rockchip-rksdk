@@ -18,11 +18,14 @@ RKSDK_PATH=device/rockchip/common
 
 ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
 PRODUCT_COPY_FILES += \
-    $(RKSDK_PATH)/audio_policy_configuration_multiaudio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+    $(RKSDK_PATH)/audio_policy_configuration_multihal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_multihal.xml
 else
 PRODUCT_COPY_FILES += \
-    $(RKSDK_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+    $(RKSDK_PATH)/audio_policy_configuration_singlehal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_singlehal.xml
 endif
+
+PRODUCT_COPY_FILES += \
+    $(RKSDK_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
     $(RKSDK_PATH)/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
