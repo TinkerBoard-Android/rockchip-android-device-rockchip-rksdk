@@ -14,9 +14,6 @@ on post-fs
     #cpu sampling time set to 8ms, default value is 32ms
     write /proc/sys/kernel/sched_pelt_period 8
 
-    # set RLIMIT_MEMLOCK to 64MB
-    setrlimit 8 67108864 67108864
-
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /system/bin/watchdogd 10 20
     class core
