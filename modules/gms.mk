@@ -44,7 +44,6 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
   endif
   $(warning Please set client id with your own MADA ID!)
   TARGET_SYSTEM_PROP += vendor/rockchip/common/gms/gms.prop
-  MAINLINE_INCLUDE_WIFI_MODULE := false
   TMP_GMS_VAR := gms
   TMP_MAINLINE_VAR := mainline_modules
   ifeq ($(strip $(BUILD_WITH_GO_OPT)),true)
@@ -67,6 +66,9 @@ ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
   ifneq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
     TMP_GMS_VAR := $(TMP_GMS_VAR)-mandatory
   endif # BUILD_WITH_GOOGLE_MARKET_ALL
+  ifeq ($(DEVICE_IS_64BIT_ONLY), true)
+    TMP_GMS_VAR := $(TMP_GMS_VAR)_64bit_only
+  endif
   PRODUCT_PACKAGE_OVERLAYS += vendor/rockchip/common/gms/gms_overlay
   $(call inherit-product, vendor/partner_gms/products/$(TMP_GMS_VAR).mk)
   $(call inherit-product, vendor/partner_modules/build/$(TMP_MAINLINE_VAR).mk)
