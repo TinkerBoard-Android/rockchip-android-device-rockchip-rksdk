@@ -860,6 +860,11 @@ $(call inherit-product, device/rockchip/common/modules/camera.mk)
 endif
 endif
 
+ifeq ($(BOARD_ROCKCHIP_PKVM), true)
+# pKVM
+$(call inherit-product, device/rockchip/common/modules/pkvm.mk)
+endif
+
 # Rockchip HALs
 $(call inherit-product, device/rockchip/common/manifests/frameworks/vintf.mk)
 

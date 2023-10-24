@@ -51,12 +51,17 @@ fstab_trust := "/dev/block/by-name/trust /trust emmc defaults defaults"
 else
 fstab_trust := none
 endif #BOARD_ROCKCHIP_TRUST_MERGE_TO_UBOOT
-else
+else #A/B
 fstab_uboot := none
 fstab_recovery := none
 fstab_vbmeta := none
 fstab_dtbo := none
 fstab_trust := none
+ifeq ($(BOARD_ROCKCHIP_PKVM),true)
+fstab_pvmfw := "/dev/block/by-name/pvmfw /pvmfw emmc defaults wait,slotselect,avb=pvmfw,first_stage_mount"
+else
+fstab_pvmfw := none
+endif
 endif #BOARD_USES_AB_IMAGE
 
 # Add partition to fstab_dynamic_list
@@ -112,6 +117,7 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-a $(fstab_vbmeta) \
 	-a $(fstab_dtbo) \
 	-a $(fstab_trust) \
+	-a $(fstab_pvmfw) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 

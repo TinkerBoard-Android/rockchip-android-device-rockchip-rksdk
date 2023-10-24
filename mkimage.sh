@@ -85,6 +85,7 @@ echo "done."
 
 copy_images $KERNEL_PATH/resource.img $IMAGE_PATH/resource.img
 copy_images_from_out init_boot.img
+copy_images_from_out pvmfw.img
 copy_images_from_out boot.img
 copy_images_from_out boot-debug.img
 copy_images_from_out vendor_boot.img
