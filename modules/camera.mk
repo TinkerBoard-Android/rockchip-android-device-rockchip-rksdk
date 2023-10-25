@@ -83,7 +83,6 @@ PRODUCT_COPY_FILES += \
 
 # Camera HAL
 PRODUCT_PACKAGES += \
-    camera.$(TARGET_BOARD_HARDWARE) \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
@@ -91,6 +90,11 @@ PRODUCT_PACKAGES += \
     librkisp_aec \
     librkisp_af \
     librkisp_awb
+
+ifneq ($(strip $(PRODUCT_ASUS_NAME)), Tinker_Board_3N)
+PRODUCT_PACKAGES += \
+    camera.$(TARGET_BOARD_HARDWARE)
+endif
 
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 #if enable usb camera, can not use lazy mode
