@@ -229,6 +229,10 @@ on boot
     chmod 0666 /sys/devices/platform/rkcif-mipi-lvds2/compact_test
     chmod 0666 /sys/devices/platform/rkcif-mipi-lvds3/compact_test
 
+    #for GKI pm_domains protect is always on in kernel, need to release here 
+    write /sys/module/pm_domains/parameters/keepon_startup 0
+
+
 on property:sys.boot_completed=1
     # if data is encrypt, when start gps too early, gpsd crashed
     start gpsd
