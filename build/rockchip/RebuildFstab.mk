@@ -6,6 +6,7 @@ fstab_prefix := /dev/block/by-name/
 fstab_dynamic_list :=
 fstab_chained := recoveryonly,
 fstab_addon := recoveryonly,
+fstab_pvmfw := none
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     fstab_flags := $(fstab_flags),slotselect
     fstab_chained := slotselect,
@@ -59,8 +60,6 @@ fstab_dtbo := none
 fstab_trust := none
 ifeq ($(BOARD_ROCKCHIP_PKVM),true)
 fstab_pvmfw := "/dev/block/by-name/pvmfw /pvmfw emmc defaults wait,slotselect,avb=pvmfw,first_stage_mount"
-else
-fstab_pvmfw := none
 endif
 endif #BOARD_USES_AB_IMAGE
 
