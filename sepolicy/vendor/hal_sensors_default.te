@@ -8,7 +8,7 @@ allow hal_sensors_default iio_device:chr_file { open read };
 allow hal_sensors_default sysfs:file write;
 allow hal_sensors_default device:chr_file ioctl;
 
-allow hal_sensors_default hal_graphics_allocator_default_tmpfs:file r_file_perms;
+allow hal_sensors_default hal_graphics_allocator_default_tmpfs:file rw_file_perms;
 
 binder_call(hal_sensors_default, system_server)
 
