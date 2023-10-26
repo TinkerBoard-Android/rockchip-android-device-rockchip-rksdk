@@ -882,6 +882,10 @@ ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT))|$(strip $(BOARD_USES_LIBPQ)) ,true|true)
 
 endif
 
+ifeq ($(BOARD_USES_HWC_PROXY_SERVICE),true)
+$(call inherit-product, hardware/rockchip/hwc_proxy_service/hwc_proxy_service.mk)
+endif
+
 PRODUCT_PACKAGES += \
 	libbaseparameter
 
