@@ -45,15 +45,18 @@ def main(argv):
         android_path = preinstall_dir + '/Android.mk'
         target_arch = argv[4]
 
+        includefile = open(include_path)
+        androidfile = open(android_path)
         if os.path.exists(include_path):
-            os.remove(include_path)
+            preinstallmk = includefile.read()
         if os.path.exists(android_path):
-            os.remove(android_path)
+            androidmk = androidfile.read()
 
-        includefile = open(include_path, 'w')
-        androidfile = open(android_path, 'w')
-
-        androidfile.write("include $(call all-subdir-makefiles)\n\n")
+        androidmk_holder = "include $(call all-subdir-makefiles)\n\n"
+        if androidmk != androidmk_holder:
+            androidfile.close()
+            androidfile = open(android_path, "w");
+            androidfile.write(androidmk_holder)
 
         MY_LOCAL_PREBUILT_JNI_LIBS = '\\' + '\n'
 
@@ -163,11 +166,18 @@ def main(argv):
                     MY_LOCAL_PREBUILT_JNI_LIBS = '\\' + '\n'
                     makefile.close()
             break
+        preinstallmk_new = ""
         for root, dirs,files in os.walk(preinstall_dir):
             for dir_file in dirs:
-                includefile.write('PRODUCT_PACKAGES += %s\n' %dir_file)
+                preinstallmk_new += 'PRODUCT_PACKAGES += %s\n' %dir_file
             break
+        if preinstallmk_new != preinstallmk:
+            # print("different content, rewrite this one ", include_path)
+            includefile.close()
+            includefile = open(include_path,"w")
+            includefile.write(preinstallmk_new)
         includefile.close()
+        androidfile.close()
 
 if __name__=="__main__":
   main(sys.argv)
