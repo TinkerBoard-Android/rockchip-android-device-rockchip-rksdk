@@ -28,8 +28,13 @@ endif
 
 # Add for function frp
 ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
-  # RKP service
-  $(call inherit-product, hardware/rockchip/keymaster4/rockchip_rkp_service/rockchip_rkp_service.mk)
+# RKP service
+$(call inherit-product, hardware/rockchip/keymaster4/rockchip_rkp_service/rockchip_rkp_service.mk)
+
+# RKPD
+PRODUCT_PRODUCT_PROPERTIES += \
+    remote_provisioning.enable_rkpd=true \
+    remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
   ifeq ($(strip $(TARGET_BUILD_VARIANT)), user)
     ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
