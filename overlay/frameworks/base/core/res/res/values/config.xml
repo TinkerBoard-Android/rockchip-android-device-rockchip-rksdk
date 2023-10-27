@@ -27,7 +27,7 @@
     <string name="config_defaultSms" translatable="false"></string>
 
     <!-- This device does not allow sms service. -->
-    <bool name="config_sms_capable">false</bool>
+    <bool name="config_sms_capable">true</bool>
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
