@@ -99,8 +99,10 @@ endif
 ifeq ($(ROCKCHIP_USE_LAZY_HAL),true)
 #if enable usb camera, can not use lazy mode
 ifeq ($(BOARD_CAMERA_SUPPORT_EXT),true)
+ifneq ($(strip $(PRODUCT_ASUS_NAME)), Tinker_Board_3N)
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service
+endif
 else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.enableLazyHal=true
@@ -113,8 +115,10 @@ PRODUCT_PACKAGES += \
 endif
 endif
 else
+ifneq ($(strip $(PRODUCT_ASUS_NAME)), Tinker_Board_3N)
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service
+endif
 endif
 
 ifeq ($(CAMERA_SUPPORT_HDMI),true)
