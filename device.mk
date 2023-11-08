@@ -15,15 +15,6 @@
 #
 include vendor/rockchip/common/BoardConfigVendor.mk
 
-# mali-G610 的 GPU 架构实际上是 Mali valhall, 但 ARM 对 bifrost 和 valhall 提供同一套的 gralloc 和 DDK 源码.
-ifneq (,$(filter  mali-tDVx mali-G52 mali-G610, $(TARGET_BOARD_PLATFORM_GPU)))
-BOARD_VENDOR_GPU_PLATFORM := bifrost
-endif
-
-ifneq (,$(filter  mali-t860 mali-t760, $(TARGET_BOARD_PLATFORM_GPU)))
-BOARD_VENDOR_GPU_PLATFORM := midgard
-endif
-
 ifeq ($(strip $(TARGET_ARCH)), arm64)
 ifeq ($(DEVICE_IS_64BIT_ONLY), true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
@@ -62,16 +53,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vndservicemanager
 
-# TEMP: Hack for mali gles
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.common-V3-ndk.vendor
-
 $(call inherit-product, device/rockchip/common/modules/audio.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Prebuild apps
 $(call inherit-product, device/rockchip/common/modules/preinstall.mk)
 $(call inherit-product, device/rockchip/common/modules/optimize.mk)
 $(call inherit-product, device/rockchip/common/modules/build_dm.mk)
+
+# HWC/Gralloc
+$(call inherit-product, device/rockchip/common/modules/graphics.mk)
 
 # Inherit product config
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), atv)
@@ -124,20 +114,12 @@ $(call inherit-product, device/rockchip/common/rootdir/swap/swap.mk)
 ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT)), true)
     $(call inherit-product, device/rockchip/common/modules/hdmi_in.mk)
 endif
-# For screen hw rotation
-ifneq ($(filter 90 180 270, $(strip $(SF_PRIMARY_DISPLAY_ORIENTATION))), )
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.surface_flinger.primary_display_orientation=ORIENTATION_$(SF_PRIMARY_DISPLAY_ORIENTATION)
-endif
 
 PRODUCT_COPY_FILES += \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
     device/rockchip/common/ff680030_pwm.kl:system/usr/keylayout/ff680030_pwm.kl \
     device/rockchip/common/alarm_filter.xml:system/etc/alarm_filter.xml \
     device/rockchip/common/ff420030_pwm.kl:system/usr/keylayout/ff420030_pwm.kl
-
-PRODUCT_COPY_FILES += \
-    hardware/rockchip/libgraphicpolicy/graphic_profiles.conf:$(TARGET_COPY_OUT_VENDOR)/etc/graphic/graphic_profiles.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_config.txt:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_config.txt \
@@ -254,13 +236,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml
 endif
 
-# opengl aep feature
-ifeq ($(BOARD_OPENGL_AEP),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
-endif
-
-
 # USB HOST
 ifeq ($(BOARD_USB_HOST_SUPPORT),true)
 PRODUCT_COPY_FILES += \
@@ -352,66 +327,6 @@ PRODUCT_PACKAGES += \
     android.hardware.boot-service.default_recovery \
     fastbootd
 endif # BOARD_USE_DYNAMIC_PARTITIONS
-
-# define MPP_BUF_TYPE_DRM 1
-# define MPP_BUF_TYPE_ION_LEGACY 2
-# define MPP_BUF_TYPE_ION_404 3
-# define MPP_BUF_TYPE_ION_419 4
-# define MPP_BUF_TYPE_DMA_BUF 5
-
-ifeq ($(TARGET_RK_GRALLOC_AIDL),true)
-# Gralloc AIDL
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator-V1-service \
-    android.hardware.graphics.allocator-V1-$(BOARD_VENDOR_GPU_PLATFORM) \
-    android.hardware.graphics.allocator-V1-arm \
-    android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM)
-
-DEVICE_MANIFEST_FILE += \
-    device/rockchip/common/manifests/android.hardware.graphics.mapper@4.0.xml
-else # Use HIDL
-ifeq ($(TARGET_RK_GRALLOC_VERSION),4)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.mpp_buf_type=1
-# Gralloc HAL
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
-    android.hardware.graphics.mapper@4.0-impl-$(BOARD_VENDOR_GPU_PLATFORM) \
-    android.hardware.graphics.allocator@4.0-service
-
-DEVICE_MANIFEST_FILE += \
-    device/rockchip/common/manifests/android.hardware.graphics.mapper@4.0.xml \
-    device/rockchip/common/manifests/android.hardware.graphics.allocator@4.0.xml
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.mpp_buf_type=1
-PRODUCT_PACKAGES += \
-    gralloc.$(TARGET_BOARD_HARDWARE) \
-    android.hardware.graphics.mapper@2.0-impl-2.1 \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.allocator@2.0-service
-
-DEVICE_MANIFEST_FILE += \
-    device/rockchip/common/manifests/android.hardware.graphics.mapper@2.1.xml \
-    device/rockchip/common/manifests/android.hardware.graphics.allocator@2.0.xml
-endif
-endif
-
-PRODUCT_PACKAGES += \
-    rkhelper
-
-#For CTS
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.has_HDR_display=false
-
-# For EGL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.egl=${TARGET_BOARD_HARDWARE_EGL}
-
-# HW Composer
-PRODUCT_PACKAGES += \
-    hwcomposer.$(TARGET_BOARD_HARDWARE) \
-    android.hardware.graphics.composer3-service.rockchip
 
 # iep
 ifneq ($(filter rk3188 rk3190 rk3026 rk3288 rk312x rk3126c rk3128 px3se rk3368 rk3326 rk356x rk3328 rk3366 rk3399, $(strip $(TARGET_BOARD_PLATFORM))), )

@@ -372,15 +372,6 @@ ENABLE_CPUSETS := true
 # Enable sparse system image
 BOARD_USE_SPARSE_SYSTEM_IMAGE ?= false
 
-#Use HWC2
-TARGET_USES_HWC2 ?= true
-
-#Use HWC3-AIDL
-TARGET_USES_HWC3_AIDL := true
-
-# for gralloc 0.3
-TARGET_RK_GRALLOC_VERSION ?= 1
-
 # CTS require faketouch
 ifneq ($(TARGET_BOARD_PLATFORM_PRODUCT), atv)
 BOARD_USER_FAKETOUCH ?= true
@@ -430,8 +421,17 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     include device/rockchip/common/BoardConfig_AB.mk
 endif
 
+# Use HWC2
+TARGET_USES_HWC2 ?= true
 
-# Enable AIDL CAMERA HAL for Android14
+# for gralloc 0.3
+TARGET_RK_GRALLOC_VERSION ?= 1
+
+# Android 14 and above
 ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
+    # Enable AIDL CAMERA HAL for Android14
     BOARD_CAMERA_AIDL ?= true
+    # Use HWC3-AIDL for Android14
+    TARGET_USES_HWC3_AIDL := true
 endif
+
