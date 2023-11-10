@@ -77,3 +77,6 @@ persist.vendor.usb.        u:object_r:vendor_usb_prop:s0
 
 persist.vendor.tvinput.   u:object_r:vendor_tv_input_prop:s0
 vendor.tvinput.           u:object_r:vendor_tv_input_prop:s0
+
+# zram configs
+vendor.ext_ram              u:object_r:vendor_base_prop:s0

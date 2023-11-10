@@ -23,4 +23,4 @@ PRODUCT_PACKAGES += \
     fstab_swap.extnone
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ext_ram?=none
+    vendor.ext_ram?=none
