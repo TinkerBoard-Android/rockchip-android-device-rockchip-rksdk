@@ -22,5 +22,12 @@ PRODUCT_PACKAGES += \
     fstab_swap.ext4096 \
     fstab_swap.extnone
 
+# Set to none as default,
+# GSI can also use this prop to mount the swap.
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.ext_ram?=none
+
+# Use this to config write back if needed:
+# PRODUCT_PRODUCT_PROPERTIES += persist.sys.ext_ram=256
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.ext_ram?=none
