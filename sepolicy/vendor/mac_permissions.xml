@@ -24,10 +24,4 @@
     <signer signature="@GOOGLE" >
       <seinfo value="google" />
     </signer>
-
-    <!-- rockchip-platform apps key -->
-    <signer signature="@PLATFORM" >
-      <seinfo value="platform" />
-    </signer>
-
 </policy>
