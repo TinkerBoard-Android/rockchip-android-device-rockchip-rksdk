@@ -56,7 +56,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     TMP_GMS_VAR := $(TMP_GMS_VAR)_go_2gb
     # Mainline partner build config - low RAM
     TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
-    PRODUCT_PACKAGES += SystemUIGo
     PRODUCT_PACKAGES += CaptivePortalLoginFrameworkOverlayGo
     PRODUCT_PACKAGES += RockchipNetworkStackConfigGoOverlay
     MAINLINE_COMPRESS_APEX_ALL := false
