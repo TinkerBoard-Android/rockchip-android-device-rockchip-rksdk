@@ -19,6 +19,11 @@ PRODUCT_PACKAGES += \
     rkCamera2 \
     PartnerSupportSampleTvInput
 
+# pcie
+#PRODUCT_PACKAGES += \
+    lib_rk_pcie_rc.vendor \
+    lib_rk_pcie_ep.vendor
+
 # JNI
 PRODUCT_PACKAGES += \
     libmedia_tv_tuner

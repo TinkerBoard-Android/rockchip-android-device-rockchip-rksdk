@@ -9,10 +9,17 @@ allow hal_tv_input_default hal_graphics_mapper_hwservice:hwservice_manager { fin
 allow hal_tv_input_default hal_graphics_mapper_hwservice:binder { call transfer };
 allow hal_tv_input_default vendor_data_file:dir { read open write getattr create add_name };
 allow hal_tv_input_default vendor_data_file:file { read open write create getattr };
-allow hal_tv_input_default sysfs:file { read };
+allow hal_tv_input_default pcie_device:chr_file rw_file_perms;
+allow hal_tv_input_default pcie_device:dir r_dir_perms;
+allow hal_tv_input_default proc_meminfo:file { read open getattr };
+allow hal_tv_input_default unlabeled:file { read map };
+allow hal_tv_input_default hal_tv_input_default:capability { sys_admin };
+allow hal_tv_input_default sysfs:dir { read open };
+allow hal_tv_input_default sysfs:file { read open getattr write map };
 allow hal_tv_input_default sysfs_dev:file { read open };
 allow hal_tv_input_default block_device:dir { search open };
 allow hal_tv_input_default baseparameter_block_device:blk_file rw_file_perms;
+dontaudit hal_tv_input_default self:capability { dac_override sys_rawio };
 get_prop(hal_tv_input_default,vendor_tv_input_prop)
 set_prop(hal_tv_input_default,vendor_tv_input_prop)
 get_prop(hal_tv_input_default,vendor_hwc_prop)

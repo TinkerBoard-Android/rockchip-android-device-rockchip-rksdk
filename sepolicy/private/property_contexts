@@ -47,3 +47,4 @@ persist.vendor.rk_vulkan                u:object_r:debug_prop:s0
 #For hdmiin tvinput
 tvinput.hdmiin.type         u:object_r:debug_prop:s0
 tvinput.hdmiin.buff_type    u:object_r:debug_prop:s0
+tvinput.hdmiin.pcie_mode    u:object_r:debug_prop:s0
