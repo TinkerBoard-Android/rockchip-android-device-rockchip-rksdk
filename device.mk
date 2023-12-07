@@ -921,8 +921,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0
 
+# Window Extensions
 ifneq ($(strip $(BUILD_WITH_GO_OPT)),true)
-PRODUCT_PACKAGES += \
-	androidx.window.extensions \
-	androidx.window.sidecar
+$(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 endif
