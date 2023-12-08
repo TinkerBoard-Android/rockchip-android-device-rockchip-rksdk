@@ -84,6 +84,8 @@ endif
 ifeq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/gms-express.xml:system/etc/sysconfig/gms-express.xml
+
+$(call inherit-product, vendor/partner_gms/express/express_plus_configs.mk)
 endif
 
 # GTVS
