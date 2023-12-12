@@ -35,4 +35,8 @@
          some devices it does not work well, particularly with noisy touchscreens. Note
          that disabling it may increase the rate of unintentional unlocks. -->
     <bool name="config_lockscreenAntiFalsingClassifierEnabled">false</bool>
+    <!-- Whether the multi-user switch on the keyguard opens QS user panel. If false, clicking the
+         user switch on the keyguard will replace the notifications and status area with the user
+         switcher. The multi-user switch is only shown if config_keyguardUserSwitcher=false. -->
+    <bool name="config_keyguard_user_switch_opens_qs_details">true</bool>
 </resources>

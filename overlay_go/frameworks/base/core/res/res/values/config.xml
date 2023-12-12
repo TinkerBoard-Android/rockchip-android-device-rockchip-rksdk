@@ -55,8 +55,18 @@
     <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">64</integer>
     <string translatable="false" name="config_ntpServer">asia.pool.ntp.org</string>
 
-    <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">1</integer>
+    <!--  Maximum number of supported users; must be 2 or greater users for
+         Guest mode switching; 2 is recommended -->
+    <integer name="config_multiuserMaximumUsers">2</integer>
+
+    <!--  Whether Multiuser UI should be shown -->
+    <bool name="config_enableMultiUserUI">true</bool>
+
+    <!-- Set to true to enable the user switcher on the keyguard. -->
+    <bool name="config_keyguardUserSwitcher">true</bool>
+
+    <!-- If true, show multiuser switcher by default unless the user specifically disables it. -->
+    <bool name="config_showUserSwitcherByDefault">true</bool>
 
     <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.8</item>
     <item name="config_lowResTaskSnapshotScale" format="float"  type="dimen">0.3</item>

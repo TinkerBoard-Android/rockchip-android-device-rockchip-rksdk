@@ -34,6 +34,10 @@ ROCKCHIP_USE_LAZY_HAL := true
 PRODUCT_COPY_FILES += \
     device/rockchip/common/permissions/android.hardware.ram.low.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ram.low.xml
 
+# Android 13 + 2GB requires managed user
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.managed_users.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.managed_users.xml
+
 # Disable surfaceflinger prime_shader cache to improve post boot memory.
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += service.sf.prime_shader_cache=0
 
