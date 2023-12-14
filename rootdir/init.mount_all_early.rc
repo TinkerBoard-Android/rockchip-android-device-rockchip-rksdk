@@ -1,6 +1,7 @@
 # do mount_all early can imporve boot time when FBE
 # is enabled
-on init && property:ro.boot.mode=normal
+on init
+    start tee-supplicant
     start vendor.keymint-default
     start vendor.keymaster-4-0
 
