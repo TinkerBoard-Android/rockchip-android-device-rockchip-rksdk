@@ -43,6 +43,7 @@ ro.vendor.frameratelock                 u:object_r:vendor_system_public_prop:s0
 ro.vendor.hdmi_settings                 u:object_r:vendor_system_public_prop:s0
 ro.vendor.hdmirotationlock              u:object_r:vendor_system_public_prop:s0
 ro.vendor.mpp_buf_type                  u:object_r:vendor_system_public_prop:s0
+ro.vendor.picture_settings              u:object_r:vendor_system_public_prop:s0
 ro.vendor.rk_sdk                        u:object_r:vendor_system_public_prop:s0
 ro.vendor.sdkversion                    u:object_r:vendor_system_public_prop:s0
 

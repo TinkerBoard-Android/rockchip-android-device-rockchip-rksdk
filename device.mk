@@ -925,3 +925,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ifneq ($(strip $(BUILD_WITH_GO_OPT)),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 endif
+
+# picture settings
+ifeq ($(strip $(BOARD_SHOW_PICTURE_SETTING)), true)
+	PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.picture_settings=true
+endif
