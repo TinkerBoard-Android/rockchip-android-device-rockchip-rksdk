@@ -70,4 +70,7 @@ PRODUCT_UBOOT_CONFIG += gki.config
 # system_dlkm modules
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/rootdir/init.insmod_gki.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod_gki.cfg
+
+# for Gamma，3D Lut，HDCP
+BOARD_USES_HWC_PROXY_SERVICE := true
 endif
