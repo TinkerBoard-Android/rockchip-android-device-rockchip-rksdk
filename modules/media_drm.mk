@@ -42,6 +42,8 @@ PRODUCT_PACKAGES += \
     com.google.android.widevine.nonupdatable
 endif
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
+    PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
+        vendor/widevine/libwvdrmengine/apex/device/linker.config.json
     PRODUCT_PACKAGES += \
         liboemcrypto
     ifneq ($(filter rk3326 rk3562 rk356x rk3576 rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
