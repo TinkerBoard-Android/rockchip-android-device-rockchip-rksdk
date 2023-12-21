@@ -33,7 +33,12 @@ on zygote-start
     chown bluetooth net_bt /dev/ttyS9
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt /sys/class/rfkill/rfkill0/name
     chmod 0664 /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt /sys/class/rfkill/rfkill1/type
+    chown bluetooth net_bt /sys/class/rfkill/rfkill1/state
+    chown bluetooth net_bt /sys/class/rfkill/rfkill1/name
+    chmod 0664 /sys/class/rfkill/rfkill1/state
 
 # for wifi
 
