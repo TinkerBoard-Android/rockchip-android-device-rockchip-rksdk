@@ -23,6 +23,10 @@ ifneq (,$(filter  mali-t860 mali-t760, $(TARGET_BOARD_PLATFORM_GPU)))
 BOARD_VENDOR_GPU_PLATFORM := midgard
 endif
 
+#For CTS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.has_HDR_display=false
+
 # For EGL
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.egl=${TARGET_BOARD_HARDWARE_EGL}
