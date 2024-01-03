@@ -123,4 +123,9 @@
     <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
 
+    <string-array translatable="false" name="config_ntpServers">
+        <item>ntp://time.android.com</item>
+        <item>ntp://asia.pool.ntp.org</item>
+    </string-array>
+
 </resources>
