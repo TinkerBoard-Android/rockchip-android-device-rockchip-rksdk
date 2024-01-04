@@ -54,8 +54,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 
 # Auto modules
 PRODUCT_PACKAGES += \
-            android.hardware.broadcastradio-service.default \
+            android.hardware.broadcastradio-service.default
+
+ifneq ($(strip $(SOONG_CONFIG_rvcam_has_vhal)), true)
+PRODUCT_PACKAGES += \
             android.hardware.automotive.vehicle@V1-default-service
+endif
 
 # Additional selinux policy
 BOARD_SEPOLICY_DIRS += device/rockchip/common/car/sepolicy
