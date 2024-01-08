@@ -22,6 +22,14 @@ BOARD_KERNEL_CMDLINE := console=ttyFIQ0 firmware_class.path=/vendor/etc/firmware
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_KERNEL_CMDLINE += printk.devkmsg=on
 
+ifeq ($(BOARD_BUILD_GKI),true)
+# When GKI enable, pass param to usb through cmdline
+# ref:Documentation/admin-guide/kernel-parameters.txt
+BOARD_KERNEL_CMDLINE += usbcore.autosuspend=-1
+BOARD_KERNEL_CMDLINE += usbcore.quirks=325d:6410:k,21c4:0cd1:k,0951:1666:k,058f:6387:e
+BOARD_KERNEL_CMDLINE += usb-storage.quirks=174c:x55aa:f,152d:0583:f,0bc2:2321:u,05e3:0749:mr
+endif
+
 ifneq ($(BOARD_SELINUX_ENFORCING), true)
 ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.selinux=permissive
 endif
