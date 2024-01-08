@@ -178,6 +178,12 @@
 /sys/class/rfkill(/.*)?                 u:object_r:sysfs_bluetooth_writable:s0
 /proc/bluetooth/sleep/lpm               u:object_r:sysfs_bluetooth_writable:s0
 
+#seekwave
+/dev/BTCMD           u:object_r:skwbt_device:s0
+/dev/BTDATA          u:object_r:skwbt_device:s0
+/dev/BTAUDIO         u:object_r:skwbt_device:s0
+/dev/BTBOOT          u:object_r:skwbt_device:s0
+
 #data
 /data/vendor/mediadrm(/.*)?             u:object_r:mediadrm_vendor_data_file:s0
 

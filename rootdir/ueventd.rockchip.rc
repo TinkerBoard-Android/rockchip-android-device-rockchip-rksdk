@@ -84,6 +84,12 @@ import /vendor/etc/ueventd.car.rc
 # for mali-t764
 /dev/mali0           	  0666   system   	 system
 
+#seekwave wifi6 bt
+/dev/BTCMD                0666   bluetooth  net_bt
+/dev/BTDATA               0666   bluetooth  net_bt
+/dev/BTAUDIO              0666   bluetooth  net_bt
+/dev/BTBOOT               0666   bluetooth  net_bt
+
 # for mali
 /dev/mali           	  0666   system   	 graphics
 /dev/ump            	  0666   system   	 system
