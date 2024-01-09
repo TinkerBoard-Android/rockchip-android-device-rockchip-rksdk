@@ -56,7 +56,7 @@ PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
 # Save space but slow down device.
 # DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
 # Config jemalloc for low memory
-MALLOC_SVELTE := true
+#MALLOC_SVELTE := true
 
 # Reduces GC frequency of foreground apps by 50%
 PRODUCT_PROPERTY_OVERRIDES += \
