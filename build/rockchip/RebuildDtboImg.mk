@@ -42,6 +42,9 @@ $(rebuild_dtbo_img) : $(rebuild_dts) $(AOSP_DTC_TOOL) $(AOSP_MKDTIMG_TOOL)
 	@echo "Building dtbo img file $@."
 	$(AOSP_DTC_TOOL) -@ -a 4096 -O dtb -o $(rebuild_dtbo_dtb) $(rebuild_dts)
 	$(AOSP_MKDTIMG_TOOL) create $(rebuild_dtbo_img) $(rebuild_dtbo_dtb)
+ifneq ($(strip $(BOARD_AVB_ENABLE)), true)
+	truncate -s $(BOARD_DTBOIMG_PARTITION_SIZE) $(rebuild_dtbo_img)
+endif
 
 INSTALLED_RK_DTBO_IMAGE := $(PRODUCT_OUT)/$(notdir $(rebuild_dtbo_img))
 $(INSTALLED_RK_DTBO_IMAGE) : $(rebuild_dtbo_img)
