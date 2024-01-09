@@ -15,6 +15,7 @@ on late-fs
     # Start services for bootanim
     start servicemanager
     start vendor.gralloc-v1
+    start vendor.rockchip_hwcproxy_aidl
     start hwcomposer-3
     start surfaceflinger
     start bootanim
