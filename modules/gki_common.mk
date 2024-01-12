@@ -19,6 +19,9 @@ ifeq ($(BOARD_BUILD_GKI),true)
 # BOARD_BOOT_HEADER_VERSION is set to 4 due to BOARD_BUILD_GKI being set.
 BOARD_BOOT_HEADER_VERSION := 4
 
+#disbaled pcba which will affect the boot time
+TARGET_ROCKCHIP_PCBATEST := false
+
 # init_boot partition size is recommended to be 8MB, it can be larger.
 # When this variable is set, init_boot.img will be built with the generic
 # ramdisk, and that ramdisk will no longer be included in boot.img.

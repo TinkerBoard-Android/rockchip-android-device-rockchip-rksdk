@@ -23,9 +23,15 @@ PRODUCT_PACKAGES += \
     iwconfig.recovery \
     media-ctl.recovery
 
+HAVE_EXT_WIFI_KO_FILE := $(shell test -d $(TOPDIR)external/wifi_driver/ && echo yes)
+ifeq ($(HAVE_EXT_WIFI_KO_FILE),yes)
+EXT_WIFI_KO_FILES := $(shell find $(TOPDIR)external/wifi_driver -name "*.ko" -type f)
+BOARD_RECOVERY_KERNEL_MODULES += \
+         $(foreach file, $(EXT_WIFI_KO_FILES), $(file))
+endif
+
 PRODUCT_COPY_FILES += \
    $(TARGET_DEVICE_DIR)/bt_vendor.conf:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/bt_vendor.conf \
    $(call find-copy-subdir-files,*,bootable/recovery/pcba_core/res,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba) \
-   $(call find-copy-subdir-files,"*.ko",external/wifi_driver/,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules/rkwifi) \
     $(call find-copy-subdir-files,*,vendor/rockchip/common/wifi/firmware,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/firmware)
 endif
