@@ -23,6 +23,17 @@ if [ -f $cfg_gki_file ]; then
   done < $cfg_gki_file
 fi
 
+vendor_modules="/vendor_dlkm/lib/modules/modules.load"
+if [ -f $vendor_modules ]; then
+  while IFS= read -r name
+  do
+	if [ -f /vendor_dlkm/lib/modules/$name ]; then
+          insmod /vendor_dlkm/lib/modules/$name
+        fi
+  done < $vendor_modules
+fi
+
+
 if [[ -e "/vendor/etc/init.insmod_charger.cfg" && "$(getprop ro.boot.mode)" == "charger" ]]; then
   cfg_file="/vendor/etc/init.insmod_charger.cfg"
 else
