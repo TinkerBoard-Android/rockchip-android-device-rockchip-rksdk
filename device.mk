@@ -366,7 +366,7 @@ PRODUCT_PACKAGES += \
     resize2fs
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.strictmode.visual=false 
+    persist.sys.strictmode.visual=false
 
 ifeq ($(strip $(BOARD_HAVE_FLASH)), true)
     PRODUCT_PROPERTY_OVERRIDES += ro.rk.flash_enable=true
@@ -402,7 +402,7 @@ ifeq ($(strip $(BUILD_WITH_CDROM)),true)
 PRODUCT_PROPERTY_OVERRIDES +=                 \
     ro.factory.hasUMS=cdrom                   \
     ro.factory.cdrom=$(BUILD_WITH_CDROM_PATH) \
-    persist.sys.usb.config=mass_storage,adb 
+    persist.sys.usb.config=mass_storage,adb
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.rockchip.hasCDROM.true.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_BOARD_HARDWARE).environment.rc
@@ -459,7 +459,7 @@ else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.without_battery=false
 endif
- 
+
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
@@ -589,7 +589,7 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), vr)
 PRODUCT_COPY_FILES += \
-       device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml 
+       device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml
 endif
 
 #if force app can see udisk
@@ -612,14 +612,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 
-#boot video enable 
+#boot video enable
 ifeq ($(strip $(BOOT_VIDEO_ENABLE)),true)
 include device/rockchip/common/bootvideo/bootvideo.mk
 endif
 
 ifeq ($(strip $(BOARD_ENABLE_PMS_MULTI_THREAD_SCAN)), true)
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.pms.multithreadscan=true		
+	ro.pms.multithreadscan=true
 endif
 
 #add for hwui property
@@ -808,8 +808,14 @@ endif
 PRODUCT_PACKAGES += \
 	libbaseparameter
 
+USE_PRODUCT_DISPLAY_SETTINGS := $(shell test -f $(TARGET_DEVICE_DIR)/displays/display_settings.xml && echo true)
+ifeq ($(strip $(USE_PRODUCT_DISPLAY_SETTINGS)), true)
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+    $(TARGET_DEVICE_DIR)/displays/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+else
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+endif
 
 # build libmpimmz for rknn
 PRODUCT_PACKAGES += \
