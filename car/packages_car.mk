@@ -292,30 +292,3 @@ endif # USE_CAR_FRAMEWORK_APEX
 # Disable Prime Shader Cache in SurfaceFlinger to make it available faster
 PRODUCT_PROPERTY_OVERRIDES += \
     service.sf.prime_shader_cache=0
-
-# From Android12 device/rockchip/common/device.mk
-ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), car)
-    ifeq ($(wildcard $(TARGET_DEVICE_DIR)/car_audio_configuration.xml),)
-        PRODUCT_COPY_FILES += $(LOCAL_PATH)/car_audio_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/car_audio_configuration.xml
-    else
-        PRODUCT_COPY_FILES += $(TARGET_DEVICE_DIR)/car_audio_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/car_audio_configuration.xml
-    endif
-    ifeq ($(wildcard $(TARGET_DEVICE_DIR)/audio_policy_configuration.xml),)
-        PRODUCT_COPY_FILES += $(LOCAL_PATH)/car_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
-    else
-        PRODUCT_COPY_FILES += $(TARGET_DEVICE_DIR)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
-    endif
-    ifeq ($(wildcard $(TARGET_DEVICE_DIR)/audio_policy_volumes.xml),)
-        PRODUCT_COPY_FILES += $(LOCAL_PATH)/car_audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
-    else
-        PRODUCT_COPY_FILES += $(TARGET_DEVICE_DIR)/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
-    endif
-    ifeq ($(wildcard $(TARGET_DEVICE_DIR)/default_volume_tables.xml),)
-        PRODUCT_COPY_FILES += $(LOCAL_PATH)/car_default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
-    else
-        PRODUCT_COPY_FILES += $(TARGET_DEVICE_DIR)/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
-    endif
-else
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
-endif
