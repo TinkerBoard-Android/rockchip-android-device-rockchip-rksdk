@@ -29,13 +29,15 @@ PRODUCT_PACKAGES += \
     libmedia_tv_tuner
 
 # Frameworks service
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.live_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.live_tv.xml
 
 # Build tv_input HAL
 PRODUCT_PACKAGES += \
     android.hardware.tv.input-service.rockchip
 
-# Use tv_input.rockchip
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.hwc.enable_sideband_stream_2_mode=1
+
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.tvinput.hdmiin.enable=true
