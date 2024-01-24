@@ -6,10 +6,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=$(BOARD_HDMI_CEC_TYPE)
 PRODUCT_PACKAGES += \
-	hdmi_cec.$(TARGET_BOARD_PLATFORM)
+        hdmi_connection.rk30board \
+	hdmi_cec.rk30board
 
-# HDMI CEC HAL
+# HDMI CEC AIDL
 PRODUCT_PACKAGES += \
-	android.hardware.tv.cec@1.0-impl \
-	android.hardware.tv.cec@1.0-service
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.cec@1.0-service.xml
+        android.hardware.tv.hdmi.connection-service \
+	android.hardware.tv.hdmi.cec-service
