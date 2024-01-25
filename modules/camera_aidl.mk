@@ -81,3 +81,8 @@ PRODUCT_PACKAGES += \
     rockchip.hardware.hdmi@1.0-impl
 $(call inherit-product-if-exists, hardware/rockchip/camera_aidl/etc/camera_etc.mk)
 endif #CAMERA_SUPPORT_VIRTUAL
+
+#enable eptz
+ifeq ($(PRODUCT_HAVE_EPTZ),true)
+PRODUCT_VENDOR_PROPERTIES += vendor.camera.eptz.mode=1
+endif

@@ -118,3 +118,8 @@ PRODUCT_PACKAGES += \
     rockchip.hardware.hdmi@1.0-service \
     rockchip.hardware.hdmi@1.0-impl
 endif
+
+#enable eptz
+ifeq ($(PRODUCT_HAVE_EPTZ),true)
+PRODUCT_VENDOR_PROPERTIES += vendor.camera.eptz.mode=1
+endif
