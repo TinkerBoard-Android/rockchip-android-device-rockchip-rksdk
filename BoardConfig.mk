@@ -435,3 +435,8 @@ ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
     TARGET_USES_HWC3_AIDL := true
 endif
 
+# SVEP for Android.mk
+# SR enable macro
+BOARD_USES_LIBSVEP_SR ?= false
+# MEMC enable macro
+BOARD_USES_LIBSVEP_MEMC ?= false

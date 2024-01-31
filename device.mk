@@ -854,3 +854,12 @@ ifeq ($(strip $(BOARD_SHOW_PICTURE_SETTING)), true)
 	PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.picture_settings=true
 endif
+
+
+# SVEP
+ifneq (,$(filter true, $(strip $(BOARD_USES_LIBSVEP_SR)) $(strip $(BOARD_USES_LIBSVEP_MEMC)) $(strip $(BOARD_USES_LIBSVEP))))
+    # will disable frame pending by svep running
+    PRODUCT_PROPERTY_OVERRIDES += \
+        debug.sf.disable_frame_pending_by_svep_running=1
+
+endif
