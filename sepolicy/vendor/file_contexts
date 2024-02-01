@@ -72,6 +72,7 @@
 /dev/block/by-name/misc                         u:object_r:misc_block_device:s0
 /dev/block/by-name/security                     u:object_r:security_block_device:s0
 /dev/block/by-name/baseparameter                u:object_r:baseparameter_block_device:s0
+/dev/block/by-name/autopq                       u:object_r:autopq_block_device:s0
 /dev/block/by-name/super                        u:object_r:super_block_device:s0
 
 # for A/B

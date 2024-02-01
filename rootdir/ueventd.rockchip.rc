@@ -176,6 +176,9 @@
 #for baseparameter function
 /dev/block/by-name/baseparameter 0660 system system
 
+#for autopq function
+/dev/block/by-name/autopq 0660 system system
+
 /dev/cpu_state 0666 system system
 /dev/chip_state 0666 system system
 /dev/i2c-1 0660 system system

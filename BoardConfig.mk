@@ -406,6 +406,11 @@ ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
         BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M
 endif
 
+ifeq ($(strip $(BOARD_AUTOPQ_SUPPORT)), true)
+    TARGET_AUTO_PQ_IMAGE ?= device/rockchip/common/autopq/autopq.img
+    BOARD_WITH_SPECIAL_PARTITIONS := autopq:1M
+endif
+
 ifeq ($(strip $(BOARD_BUILD_GKI)), true)
     # AB image definition
     BOARD_USES_AB_IMAGE := true
