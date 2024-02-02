@@ -844,6 +844,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0
 
+ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+    # enable retriever during video playing
+    PRODUCT_PROPERTY_OVERRIDES += \
+        rt_retriever_enable=1
+endif
+
 # Window Extensions
 ifneq ($(strip $(BUILD_WITH_GO_OPT)),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
