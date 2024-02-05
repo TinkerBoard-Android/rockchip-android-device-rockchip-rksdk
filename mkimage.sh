@@ -13,6 +13,7 @@ BOARD_AVB_ENABLE=`get_build_var BOARD_AVB_ENABLE`
 PRODUCT_USE_DYNAMIC_PARTITIONS=`get_build_var PRODUCT_USE_DYNAMIC_PARTITIONS`
 KERNEL_SRC_PATH=`get_build_var TARGET_PREBUILT_KERNEL`
 KERNEL_PATH=`get_build_var PRODUCT_KERNEL_PATH`
+BUILD_GKI=`get_build_var BOARD_BUILD_GKI`
 
 echo TARGET_PRODUCT=$TARGET_PRODUCT
 echo TARGET_BASE_PARAMETER_IMAGE==$TARGET_BASE_PARAMETER_IMAGE
@@ -34,8 +35,21 @@ echo system filesysystem is $FSTYPE
 BOARD_CONFIG=device/rockchip/common/device.mk
 
 PARAMETER=${TARGET_DEVICE_DIR}/parameter.txt
-FLASH_CONFIG_FILE=${TARGET_DEVICE_DIR}/config.cfg
 
+if [ "$BUILD_GKI" = "true" ]; then
+	if [ -f ${TARGET_DEVICE_DIR}/config_gki.cfg ]; then
+		FLASH_CONFIG_FILE=${TARGET_DEVICE_DIR}/config_gki.cfg
+	else
+		FLASH_CONFIG_FILE=device/rockchip/common/build/rockchip/config_gki.cfg
+	fi
+
+else
+	if [ -f ${TARGET_DEVICE_DIR}/config.cfg ]; then
+		FLASH_CONFIG_FILE=${TARGET_DEVICE_DIR}/config.cfg
+	else
+		FLASH_CONFIG_FILE=device/rockchip/common/build/rockchip/config.cfg
+	fi
+fi
 
 [ $(id -u) -eq 0 ] || FAKEROOT=fakeroot
 
