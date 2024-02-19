@@ -19,6 +19,7 @@ on zygote-start
 
     chmod 0660 /dev/ttyS0
     chmod 0660 /dev/ttyS1
+    chmod 0660 /dev/ttyS4
     chmod 0660 /dev/ttyS7
     chmod 0660 /dev/ttyS8
     chmod 0660 /dev/ttyS9
@@ -28,6 +29,7 @@ on zygote-start
     chown bluetooth net_bt /dev/vendor_storage
     chown bluetooth net_bt /dev/ttyS0
     chown bluetooth net_bt /dev/ttyS1
+    chown bluetooth net_bt /dev/ttyS4
     chown bluetooth net_bt /dev/ttyS7
     chown bluetooth net_bt /dev/ttyS8
     chown bluetooth net_bt /dev/ttyS9
