@@ -25,8 +25,8 @@ PRODUCT_PACKAGES += \
     lib_rk_pcie_ep.vendor
 
 # JNI
-PRODUCT_PACKAGES += \
-    libmedia_tv_tuner
+#PRODUCT_PACKAGES += \
+#    libmedia_tv_tuner
 
 # Frameworks service
 #PRODUCT_COPY_FILES += \
