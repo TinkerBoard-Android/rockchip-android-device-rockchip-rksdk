@@ -60,6 +60,8 @@ PRODUCT_PACKAGES += \
     carbugreportd \
     vehicle_binding_util \
 
+ENABLE_EVS_SERVICE ?= true
+
 # ENABLE_CAMERA_SERVICE must be set as true from the product's makefile if it wants to support
 # Android Camera service.
 ifneq ($(ENABLE_CAMERA_SERVICE), true)
