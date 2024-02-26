@@ -17,11 +17,11 @@ func isContain(items []string, item string) bool {
 }
 
 func getOpteePrefix(platform string) string {
-    var optee_v2_list = []string{"rk3326", "rk3528", "rk356x","rk3562","rk3576","rk3588"}
-    if isContain(optee_v2_list, platform) {
-        return "v2/"
-    } else {
+    var optee_v1_list = []string{"rk312x", "rk322x", "rk3288","rk3328","rk322xh","rk3368","rk3399","rk3399pro"}
+    if isContain(optee_v1_list, platform) {
         return "v1/"
+    } else {
+        return "v2/"
     }
 }
 

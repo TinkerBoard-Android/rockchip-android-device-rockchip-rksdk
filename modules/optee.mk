@@ -33,19 +33,19 @@ PRODUCT_PACKAGES += \
     android.hardware.security.keymint-service.optee \
     android.hardware.weaver-service.optee
 
-ifneq ($(filter rk3326 rk3528 rk356x rk3562 rk3576 rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
-
-PRODUCT_PACKAGES += \
-    0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta \
-    258be795-f9ca-40e6-a869-9ce6886c5d5d.ta \
-    481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta
-
-else
+ifneq ($(filter rk312x rk322x rk3288 rk3328 rk322xh rk3368 rk3399 rk3399pro, $(strip $(TARGET_BOARD_PLATFORM))), )
 
 PRODUCT_PACKAGES += \
     0b82bae5-0cd0-49a5-9521516dba9c43ba.ta \
     258be795-f9ca-40e6-a8699ce6886c5d5d.ta \
     481a57df-aec8-47ad-92f5eb9fc24f64a6.ta
+
+else
+
+PRODUCT_PACKAGES += \
+    0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta \
+    258be795-f9ca-40e6-a869-9ce6886c5d5d.ta \
+    481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta
 
 #Choose TEE storage type
 #auto (storage type decide by storage chip emmc:rpmb nand:rkss)
