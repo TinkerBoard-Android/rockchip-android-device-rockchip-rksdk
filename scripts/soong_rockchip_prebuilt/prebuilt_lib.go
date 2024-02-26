@@ -17,7 +17,7 @@ func isContain(items []string, item string) bool {
 }
 
 func getOpteePrefix(platform string) string {
-    var optee_v2_list = []string{"rk3326", "rk3528", "rk356x","rk3562","rk3588"}
+    var optee_v2_list = []string{"rk3326", "rk3528", "rk356x","rk3562","rk3576","rk3588"}
     if isContain(optee_v2_list, platform) {
         return "v2/"
     } else {
