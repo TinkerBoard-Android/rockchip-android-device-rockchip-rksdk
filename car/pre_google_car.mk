@@ -37,7 +37,7 @@ GOOGLE_CAR_SERVICE_OVERLAY += CarServiceOverlayPhoneCarGoogle
 # All components inherited here go to system image
 # Skip this for 64 bit only devices
 ifneq ($(DEVICE_IS_64BIT_ONLY),true)
-    $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 $(call inherit-product, device/rockchip/common/car/packages_generic_system.mk)
 
