@@ -167,6 +167,22 @@ else
 fi
 fi
 
+# build rvcam driver
+LOCAL_EXT_RVCAM_DRIVER_PATH=$PROJECT_TOP/hardware/rockchip/rvcam/drivers
+if [ -d $LOCAL_EXT_RVCAM_DRIVER_PATH ]; then
+echo "Start build exteranl rvcam driver"
+cd $LOCAL_EXT_RVCAM_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C $PROJECT_TOP/$LOCAL_KERNEL_PATH M=$PWD clean && cd -
+cd $LOCAL_EXT_RVCAM_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C $PROJECT_TOP/$LOCAL_KERNEL_PATH M=$PWD modules -j$BUILD_JOBS && cd -
+if [ $? -eq 0 ]; then
+    mkdir -p $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION
+    find $LOCAL_EXT_RVCAM_DRIVER_PATH -name "*.ko" | xargs -i cp -rf {} $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION/
+    echo "Build exteranl rvcam driver ok!"
+else
+    echo "Build exteranl rvcam driver failed!"
+    # exit 1
+fi
+fi
+
 if [ "$KERNEL_ARCH" = "arm64" ]; then
     KERNEL_DEBUG=$LOCAL_KERNEL_PATH/arch/arm64/boot/Image
 else
