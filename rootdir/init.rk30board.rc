@@ -28,6 +28,8 @@ on init
     #eink
     chown root system /dev/ebc
     chmod 0666 /dev/ebc
+    chown root system /dev/waveform
+    chmod 0666 /dev/waveform
     # vtunnel
     chmod 0777 /dev/rkvtunnel
 
