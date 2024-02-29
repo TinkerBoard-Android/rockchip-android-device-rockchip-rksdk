@@ -162,6 +162,7 @@ PRODUCT_PACKAGES += \
     libcarservicehelperjni \
     com.android.car.procfsinspector \
     com.android.permission \
+    MultiDisplaySecondaryHomeTestLauncher \
 
 # RROs
 PRODUCT_PACKAGES += \
