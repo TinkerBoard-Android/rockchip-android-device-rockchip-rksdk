@@ -154,11 +154,14 @@ else
 fi
 # build exteranl wifi driver
 LOCAL_EXT_WIFI_DRIVER_PATH=external/wifi_driver
+LOCAL_WIFI_DRIVER_PATH=$LOCAL_KERNEL_PATH/drivers/net/wireless/rockchip_wlan
 if [ -d $LOCAL_EXT_WIFI_DRIVER_PATH ]; then
 source $LOCAL_EXT_WIFI_DRIVER_PATH/set_android_version.sh $LOCAL_EXT_WIFI_DRIVER_PATH
 echo "Start build exteranl wifi driver"
 cd $LOCAL_EXT_WIFI_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C ../../$LOCAL_KERNEL_PATH M=$PWD clean && cd -
 cd $LOCAL_EXT_WIFI_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C ../../$LOCAL_KERNEL_PATH M=$PWD -j$BUILD_JOBS && cd -
+find $LOCAL_EXT_WIFI_DRIVER_PATH -name "*.ko" > $LOCAL_EXT_WIFI_DRIVER_PATH/wifi.load
+find $LOCAL_WIFI_DRIVER_PATH -name "*.ko" >> $LOCAL_EXT_WIFI_DRIVER_PATH/wifi.load
 if [ $? -eq 0 ]; then
     echo "Build exteranl wifi driver ok!"
 else

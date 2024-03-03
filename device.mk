@@ -134,6 +134,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_ssv.conf \
 
+PRODUCT_COPY_FILES += \
+    external/wifi_driver/wifi.load:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wifi.load
+
 PRODUCT_PACKAGES += \
     iperf \
     libiconv \
