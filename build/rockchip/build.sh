@@ -178,7 +178,7 @@ cd $LOCAL_EXT_RVCAM_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C $PROJEC
 cd $LOCAL_EXT_RVCAM_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C $PROJECT_TOP/$LOCAL_KERNEL_PATH M=$PWD modules -j$BUILD_JOBS && cd -
 if [ $? -eq 0 ]; then
     mkdir -p $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION
-    find $LOCAL_EXT_RVCAM_DRIVER_PATH -name "*.ko" | xargs -i cp -rf {} $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION/
+    find $LOCAL_EXT_RVCAM_DRIVER_PATH -type f -not -path "$LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/*" -name "*.ko" | xargs -i cp -rf {} $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION/
     echo "Build exteranl rvcam driver ok!"
 else
     echo "Build exteranl rvcam driver failed!"
