@@ -851,6 +851,11 @@ ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     # enable retriever during video playing
     PRODUCT_PROPERTY_OVERRIDES += \
         rt_retriever_enable=1
+
+    ifneq ($(filter rk3576, $(TARGET_BOARD_PLATFORM)), )
+        PRODUCT_PROPERTY_OVERRIDES += \
+            rt_vdec_fbc_disable=1
+    endif
 endif
 
 # Window Extensions
