@@ -25,6 +25,13 @@ func getOpteePrefix(platform string) string {
     }
 }
 
+func isOpteeCopy(prefix string, module_name string) bool {
+    if (prefix == "v1/" && module_name == "libckteec.so") {
+        return false;
+    }
+    return true;
+}
+
 func getVpuPrefix(platform string) string {
     var vpu_v1_list = []string{"rk3126c", "rk3288", "rk3368"}
     if isContain(vpu_v1_list, platform) {
@@ -82,6 +89,9 @@ func ChangeSrcsPath(ctx android.LoadHookContext) {
     p := &props{}
     if (ctx.ContainsProperty("optee")) {
         prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        if (!isOpteeCopy(prefix, module_name)) {
+            return;
+        }
     }
     if (strings.EqualFold(ctx.AConfig().DevicePrimaryArchType().String(),"arm64")) {
         prefix += "arm64/"
@@ -170,6 +180,9 @@ func configArm64Lib(ctx android.LoadHookContext) (Ex_multilibType) {
     if (ctx.ContainsProperty("optee")) {
         prefix64 = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
         prefix32 = prefix64
+        if (!isOpteeCopy(prefix32, module_name)) {
+            return multilib;
+        }
     }
     prefix64 += "arm64/"
     prefix32 += "arm/"
@@ -191,6 +204,9 @@ func configArmLib(ctx android.LoadHookContext) ([]string) {
     var module_name string = ctx.ModuleName()[9:] + ".so"
     if (ctx.ContainsProperty("optee")) {
         prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        if (!isOpteeCopy(prefix, module_name)) {
+            return srcs;
+        }
     }
     prefix += "arm/"
     if (ctx.ContainsProperty("vpu")) {
