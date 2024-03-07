@@ -118,6 +118,11 @@ def InstallEbookLogo(logo_bin, input_zip, info):
   info.script.Print("Writing logo image..")
   info.script.WriteRawImage("/logo", "logo.img")
 
+def InstallEbookWaveform(waveform_bin, input_zip, info):
+  common.ZipWriteStr(info.output_zip, "waveform.img", waveform_bin)
+  info.script.Print("Writing waveform image..")
+  info.script.WriteRawImage("/waveform", "waveform.img")
+
 def FullOTA_InstallEnd(info):
   try:
     trust = info.input_zip.read("trust.img")
@@ -201,6 +206,13 @@ def FullOTA_InstallEnd(info):
     InstallEbookLogo(logo, info.input_zip, info)
   except KeyError:
     print("info: no logo image; ignore it.")
+
+  try:
+    waveform = info.input_zip.read("IMAGES/waveform.img")
+    print("wirte waveform now...")
+    InstallEbookWaveform(waveform, info.input_zip, info)
+  except KeyError:
+    print("info: no waveform image; ignore it.")
 
 
 def IncrementalOTA_InstallEnd(info):
@@ -368,6 +380,22 @@ def IncrementalOTA_InstallEnd(info):
     InstallEbookLogo(logo_target, info.target_zip, info)
   else:
     print("logo unchanged; skipping")
+
+  try:
+    waveform_target = info.target_zip.read("IMAGES/waveform.img")
+  except KeyError:
+    waveform_target = None
+
+  try:
+    waveform_source = info.source_zip.read("IMAGES/waveform.img")
+  except KeyError:
+    waveform_source = None
+
+  if (waveform_target != None) and (waveform_target != waveform_source):
+    print("write waveform now...")
+    InstallEbookWaveform(waveform_target, info.target_zip, info)
+  else:
+    print("waveform unchanged; skipping")
 
 
 def GetUserImages(input_tmp, input_zip):
