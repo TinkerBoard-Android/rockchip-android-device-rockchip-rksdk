@@ -398,7 +398,7 @@ PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
-    ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+    ifneq ($(filter rk356x rk3588 rk3576, $(strip $(TARGET_BOARD_PLATFORM))), )
         TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v2.0/baseparameter.img
     else
         TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v1.0/baseparameter.img
