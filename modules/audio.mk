@@ -23,7 +23,9 @@ else
     ifneq ($(filter car, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
         PRODUCT_COPY_FILES += \
             $(TARGET_DEVICE_DIR)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-            $(TARGET_DEVICE_DIR)/audio/car_audio_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/car_audio_configuration.xml
+            $(TARGET_DEVICE_DIR)/audio/car_audio_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/car_audio_configuration.xml \
+            $(TARGET_DEVICE_DIR)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+            $(TARGET_DEVICE_DIR)/audio/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
     else
         PRODUCT_COPY_FILES += \
             $(RKSDK_PATH)/audio_policy_configuration_singlehal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_singlehal.xml
