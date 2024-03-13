@@ -164,10 +164,6 @@ PRODUCT_PACKAGES += \
     DLNA
 endif
 
-ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
-$(call inherit-product, device/rockchip/common/modules/4g_modem.mk)
-endif
-
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.connectivity.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.connectivity.rc
