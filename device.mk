@@ -792,8 +792,8 @@ ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
 $(call inherit-product, device/rockchip/common/modules/memtrack.mk)
 endif
 
-ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT))|$(strip $(BOARD_USES_LIBPQ)) ,true|true)
-    #Build pq and iep lib
+ifneq (,$(filter true, $(strip $(BOARD_HDMI_IN_SUPPORT)) $(strip $(BOARD_USES_LIBPQ)))))
+    #Build pq
     $(call inherit-product, hardware/rockchip/libpq/libpq.mk)
 
     #no afbc

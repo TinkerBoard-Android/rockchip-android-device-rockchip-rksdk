@@ -41,3 +41,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.tvinput.hdmiin.enable=true
+
+# Build libiep
+PRODUCT_PACKAGES += \
+    libiep
