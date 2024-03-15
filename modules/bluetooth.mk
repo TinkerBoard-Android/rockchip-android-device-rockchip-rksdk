@@ -70,6 +70,7 @@ include hardware/realtek/rtkbt/rtkbt.mk
 endif
 
 ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_AIC)), true)
+-include hardware/aic/device-aic.mk
 PRODUCT_PACKAGES += libbt-vendor-aic
 endif
 
