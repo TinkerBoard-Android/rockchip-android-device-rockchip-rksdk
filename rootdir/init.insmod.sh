@@ -7,22 +7,6 @@
 ### ...                               ###
 #########################################
 
-cfg_gki_file="/vendor/etc/init.insmod_gki.cfg"
-
-if [ -f $cfg_gki_file ]; then
-  while IFS=" " read -r action name
-  do
-    case $action in
-      "insmod")
-        if [ -f $name ]; then
-          insmod $name
-        fi
-        ;;
-      "setprop") setprop $name 1 ;;
-    esac
-  done < $cfg_gki_file
-fi
-
 system_modules="/system_dlkm/lib/modules/modules.load"
 if [ -f $system_modules ]; then
   while IFS= read -r name
