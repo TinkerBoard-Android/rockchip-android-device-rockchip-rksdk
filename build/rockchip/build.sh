@@ -27,6 +27,7 @@ BUILD_UPDATE_IMG=false
 BUILD_OTA=false
 BUILD_PACKING=false
 BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
+BUILD_GKI=`get_build_var BOARD_BUILD_GKI`
 KERNEL_DTS=""
 BUILD_VERSION=""
 BUILD_JOBS=16
@@ -151,6 +152,15 @@ if [ $? -eq 0 ]; then
 else
     echo "Build kernel failed!"
     exit 1
+fi
+if [ "$BUILD_GKI" = true ] ; then
+	cd mkcombinedroot && ./copy_moduls.sh && cd -
+	if [ $? -eq 0 ]; then
+    		echo "copy kernel modules succeed!"
+	else
+    		echo "copy kernel modules failed!"
+    		exit 1
+	fi
 fi
 # build exteranl wifi driver
 LOCAL_EXT_WIFI_DRIVER_PATH=external/wifi_driver
