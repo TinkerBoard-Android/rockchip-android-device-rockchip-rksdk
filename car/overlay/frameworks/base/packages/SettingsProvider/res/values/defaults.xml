@@ -17,8 +17,10 @@
  */
 -->
 <resources>
+    <bool name="def_lockscreen_disabled">true</bool>
     <integer name="def_user_rotation">0</integer>
 
     <!-- Default for Settings.Secure.SYNC_PARENT_SOUNDS -->
     <bool name="def_sync_parent_sounds">false</bool>
+    <integer name="def_screen_off_timeout">0x7FFFFFFF</integer>
 </resources>
