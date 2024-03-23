@@ -16,6 +16,7 @@
 
 # Base platform for car builds
 # car packages should be added to car.mk instead of here
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/car/overlay
 
 ifeq ($(DISABLE_CAR_PRODUCT_CONFIG_OVERLAY),)
 DEVICE_PACKAGE_OVERLAYS += packages/services/Car/car_product/overlay
@@ -25,7 +26,6 @@ ifeq ($(DISABLE_CAR_PRODUCT_VISUAL_OVERLAY),)
 DEVICE_PACKAGE_OVERLAYS += packages/services/Car/car_product/overlay-visual
 endif
 
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/car/overlay
 
 PRODUCT_PACKAGES += \
     com.android.wifi \
