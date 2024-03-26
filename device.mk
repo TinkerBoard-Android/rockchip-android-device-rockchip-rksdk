@@ -795,11 +795,6 @@ endif
 ifneq (,$(filter true, $(strip $(BOARD_HDMI_IN_SUPPORT)) $(strip $(BOARD_USES_LIBPQ)))))
     #Build pq
     $(call inherit-product, hardware/rockchip/libpq/libpq.mk)
-
-    #no afbc
-    PRODUCT_PROPERTY_OVERRIDES += \
-        vendor.gralloc.no_afbc_for_fb_target_layer=1
-
 endif
 
 ifeq ($(BOARD_USES_HWC_PROXY_SERVICE),true)
