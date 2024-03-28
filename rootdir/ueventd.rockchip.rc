@@ -196,6 +196,8 @@ import /vendor/etc/ueventd.car.rc
 
 /dev/media*          0660   media      camera
 
+#for vehicle
+/dev/vehicle         0660   media      camera
 
 # for sensors
 /dev/input/event*    0666   input system
