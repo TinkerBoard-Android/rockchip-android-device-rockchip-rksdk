@@ -126,6 +126,11 @@
     <!-- True if the device supports persisting security logs across reboots. -->
     <bool name="config_supportPreRebootSecurityLogs">true</bool>
 
+    <!-- Whether this device is supporting the software microphone toggle -->
+    <bool name="config_supportsMicToggle">true</bool>
+    <!-- Whether this device is supporting the camera toggle -->
+    <bool name="config_supportsCamToggle">true</bool>
+
     <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
 
