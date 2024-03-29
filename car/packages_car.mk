@@ -53,6 +53,8 @@ PRODUCT_PACKAGES += \
     RailwayReferenceApp \
     CarHotwordDetectionServiceOne \
 
+PRODUCT_PROPERTY_OVERRIDES += persist.logd.size=10M
+
 # SEPolicy for test apps / services
 BOARD_SEPOLICY_DIRS += packages/services/Car/car_product/sepolicy/test
 endif
