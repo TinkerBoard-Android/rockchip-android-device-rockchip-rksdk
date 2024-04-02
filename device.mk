@@ -212,6 +212,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 endif
 
+# Sensor configurations
+$(call soong_config_set,sensor_rockchip,gravity,$(BOARD_GRAVITY_SENSOR_SUPPORT))
+$(call soong_config_set,sensor_rockchip,compass,$(BOARD_COMPASS_SENSOR_SUPPORT))
+$(call soong_config_set,sensor_rockchip,gyroscope,$(BOARD_GYROSCOPE_SENSOR_SUPPORT))
+$(call soong_config_set,sensor_rockchip,proximity,$(BOARD_PROXIMITY_SENSOR_SUPPORT))
+$(call soong_config_set,sensor_rockchip,light,$(BOARD_LIGHT_SENSOR_SUPPORT))
+$(call soong_config_set,sensor_rockchip,pressure,$(BOARD_PRESSURE_SENSOR_SUPPORT))
+$(call soong_config_set,sensor_rockchip,temperature,$(BOARD_TEMPERATURE_SENSOR_SUPPORT))
+
 ifeq ($(BOARD_COMPASS_SENSOR_SUPPORT),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml
