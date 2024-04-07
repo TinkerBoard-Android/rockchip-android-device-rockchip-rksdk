@@ -30,6 +30,11 @@ BOARD_KERNEL_CMDLINE += usbcore.quirks=325d:6410:k,21c4:0cd1:k,0951:1666:k,058f:
 BOARD_KERNEL_CMDLINE += usb-storage.quirks=174c:x55aa:f,152d:0583:f,0bc2:2321:u,05e3:0749:mr
 endif
 
+# If pKvm is not enabled, disable kvm, which reduces the memory on the GKI by 16MiB.
+ifneq ($(BOARD_ROCKCHIP_PKVM),true)
+BOARD_KERNEL_CMDLINE += kvm-arm.mode=none
+endif
+
 ifneq ($(BOARD_SELINUX_ENFORCING), true)
 ROCKCHIP_ANDROID_BOOT_CMDLINE += androidboot.selinux=permissive
 endif
