@@ -17,6 +17,7 @@
 # Base platform for car builds
 # car packages should be added to car.mk instead of here
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/car/overlay
+DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 
 ifeq ($(DISABLE_CAR_PRODUCT_CONFIG_OVERLAY),)
 DEVICE_PACKAGE_OVERLAYS += packages/services/Car/car_product/overlay
@@ -136,3 +137,8 @@ include packages/services/Car/cpp/powerpolicy/product/carpowerpolicy.mk
 ifeq ($(ENABLE_CARTELEMETRY_SERVICE), true)
 include packages/services/Car/cpp/telemetry/cartelemetryd/products/telemetry.mk
 endif
+
+# When GetDisplayIdentificationData enabled, SurfaceFlinger will generate unique id for every display, which are unpredictable.
+# RK car platform and projector platform may need id like 0,1,2,3.
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.hwc.enable_edid_report=0 \
