@@ -68,6 +68,7 @@ def main(argv):
                     include_apk_path = preinstall_dir + '/' + found.group()
                     makefile_path = include_apk_path + '/Android.mk'
                     apk = preinstall_dir + '/' + found.group() + '.apk'
+                    logging.info(apk)
                     try:
                         zfile = zipfile.ZipFile(apk,'r')
                     except:
@@ -104,15 +105,15 @@ def main(argv):
                                 if (os.path.isdir(libfile)):
                                     continue
                                 else:
-                                    includelib = open(libfile, 'w')
+                                    includelib = open(libfile, 'wb')
                                     includelib.write(data)
                         try:
-                            if (isfound == 'not_found_lib'):
+                            if isfound != 'not_found_lib':
                                 include_apklib_path_arm64 = include_apk_path + '/lib/arm64'
                                 os.rename(include_apklib_path, include_apklib_path_arm64)
                         except Exception as e:
-                            logging.warning('rename dir faild ')
-                    if not (isfound == 'not_found_lib'):
+                            logging.warning('rename dir faild ' + str(e))
+                    if isfound == 'not_found_lib':
                         for lib_name in zfile.namelist():
                             lib = re.compile(r'\A(lib/armeabi-v7a/)+?')
                             find_name = 'lib/armeabi-v7a/'
@@ -130,9 +131,9 @@ def main(argv):
                                 if(os.path.isdir(libfile)):
                                     continue
                                 else:
-                                    includelib = open(libfile,'w')
+                                    includelib = open(libfile,'wb')
                                     includelib.write(data)
-                    if not (isfound == 'not_found_lib'):
+                    if isfound == 'not_found_lib':
                         for lib_name in zfile.namelist():
                             lib = re.compile(r'\A(lib/armeabi/)+?')
                             find_name = 'lib/armeabi/'
@@ -149,10 +150,10 @@ def main(argv):
                                 if(os.path.isdir(libfile)):
                                     continue
                                 else:
-                                    includelib = open(libfile,'w')
+                                    includelib = open(libfile,'wb')
                                     includelib.write(data)
                     tmp_jni_libs = '\\' + '\n'
-                    if not (MY_LOCAL_PREBUILT_JNI_LIBS == tmp_jni_libs):
+                    if MY_LOCAL_PREBUILT_JNI_LIBS == tmp_jni_libs:
                         nolibpath = preinstall_dir + '/' + found.group() + '/lib'
                         shutil.rmtree(nolibpath)
                         makefile.write(templet % (found.group(),argv[3],'None',MY_LOCAL_PREBUILT_JNI_LIBS,argv[3]))
