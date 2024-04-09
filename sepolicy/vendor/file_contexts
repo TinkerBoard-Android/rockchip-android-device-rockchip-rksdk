@@ -34,8 +34,8 @@
 # camera
 /dev/rk803           u:object_r:camera_device:s0
 /dev/drm_dp_aux[0-9] u:object_r:camera_device:s0
-/dev/media[0-9]      u:object_r:camera_device:s0
-/dev/v4l-subdev[0-9] u:object_r:camera_device:s0
+/dev/media[0-9]      u:object_r:video_device:s0
+/dev/v4l-subdev[0-9] u:object_r:video_device:s0
 /sys/devices/platform/rkcif-mipi-lvds[^/]+/compact_test u:object_r:sysfs_camera:s0
 
 #usb
