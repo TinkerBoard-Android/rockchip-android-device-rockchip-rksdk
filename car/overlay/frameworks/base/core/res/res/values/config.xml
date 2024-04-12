@@ -83,4 +83,7 @@
 
     <!-- config safe media volume usb to max -->
     <integer name="config_safe_media_volume_usb_mB">-900</integer>
+
+    <!-- The name of the package that will hold the dialer role by default. -->
+    <string name="config_defaultDialer" translatable="false">com.android.car.dialer</string>
 </resources>
