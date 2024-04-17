@@ -142,3 +142,6 @@ endif
 # RK car platform and projector platform may need id like 0,1,2,3.
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.hwc.enable_edid_report=0 \
+
+# Disable PCBA test for default in AAOS
+TARGET_ROCKCHIP_PCBATEST := false
