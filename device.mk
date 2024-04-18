@@ -854,8 +854,7 @@ ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 
     ifneq ($(filter rk3576, $(TARGET_BOARD_PLATFORM)), )
         PRODUCT_PROPERTY_OVERRIDES += \
-            rt_vdec_fbc_disable=1 \
-            codec2_fbc_disable=1
+            rt_vdec_fbc_min_stride=4096
     endif
 endif
 
