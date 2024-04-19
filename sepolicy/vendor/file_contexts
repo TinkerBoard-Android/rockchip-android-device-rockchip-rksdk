@@ -159,6 +159,8 @@
 
 /vendor/bin/hw/android\.hardware\.graphics\.composer3-service\.rockchip         u:object_r:hal_graphics_composer_default_exec:s0
 
+/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss-service.rk        u:object_r:hal_gnss_default_exec:s0
+
 # Incremental file system driver
 /(vendor|vendor_dlkm)/lib/modules/incrementalfs\.ko                     u:object_r:vendor_incremental_module:s0
 

@@ -400,12 +400,14 @@ endif
 # this product has GPS or not
 ########################################################
 ifeq ($(strip $(BOARD_HAS_GPS)),true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.factory.hasGPS=true
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.factory.hasGPS=false
+PRODUCT_PACKAGES += \
+    android.hardware.gnss-service.rk \
+    gps.default
+
+# gps.default.so  source codes: hardware/rockchip/gnss/libgps/
 endif
+
+
 ########################################################
 # this product has Ethernet or not
 ########################################################
