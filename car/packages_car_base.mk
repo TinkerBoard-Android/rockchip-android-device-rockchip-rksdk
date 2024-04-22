@@ -143,5 +143,9 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.hwc.enable_edid_report=0 \
 
+# Use FUSE passthrough
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.fuse.passthrough.enable=true \
+
 # Disable PCBA test for default in AAOS
 TARGET_ROCKCHIP_PCBATEST := false
