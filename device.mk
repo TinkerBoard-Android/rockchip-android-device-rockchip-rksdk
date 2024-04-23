@@ -282,9 +282,18 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 ifeq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+# Android 14+ use sensor AIDL
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
 # Sensor AIDL
 PRODUCT_PACKAGES += \
     com.rockchip.hardware.sensors
+else
+# Sensor HAL
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-service \
+    android.hardware.sensors@1.0-impl \
+    sensors.$(TARGET_BOARD_HARDWARE)
+endif
 endif
 
 # Include thermal HAL module
