@@ -142,4 +142,7 @@
     <!-- Default component for QR code scanner -->
     <string name="config_defaultQrCodeComponent">com.android.camera2/com.android.camera.RKScannerQRCodeActivity</string>
 
+    <!-- Enable doze mode
+         ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
+    <string translatable="false" name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 </resources>
