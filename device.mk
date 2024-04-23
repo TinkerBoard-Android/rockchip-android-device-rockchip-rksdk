@@ -212,38 +212,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 endif
 
-# Sensor configurations
-$(call soong_config_set,sensor_rockchip,gravity,$(BOARD_GRAVITY_SENSOR_SUPPORT))
-$(call soong_config_set,sensor_rockchip,compass,$(BOARD_COMPASS_SENSOR_SUPPORT))
-$(call soong_config_set,sensor_rockchip,gyroscope,$(BOARD_GYROSCOPE_SENSOR_SUPPORT))
-$(call soong_config_set,sensor_rockchip,proximity,$(BOARD_PROXIMITY_SENSOR_SUPPORT))
-$(call soong_config_set,sensor_rockchip,light,$(BOARD_LIGHT_SENSOR_SUPPORT))
-$(call soong_config_set,sensor_rockchip,pressure,$(BOARD_PRESSURE_SENSOR_SUPPORT))
-$(call soong_config_set,sensor_rockchip,temperature,$(BOARD_TEMPERATURE_SENSOR_SUPPORT))
-
-ifeq ($(BOARD_COMPASS_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml
-endif
-
 ifeq ($(BOARD_USER_FAKETOUCH),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.faketouch.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.faketouch.xml
-endif
-
-ifeq ($(BOARD_GYROSCOPE_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml
-endif
-
-ifeq ($(BOARD_PROXIMITY_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml
-endif
-
-ifeq ($(BOARD_LIGHT_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml
 endif
 
 # USB HOST
@@ -282,18 +253,8 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 ifeq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-# Android 14+ use sensor AIDL
-ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),34),true)
-# Sensor AIDL
-PRODUCT_PACKAGES += \
-    com.rockchip.hardware.sensors
-else
-# Sensor HAL
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-service \
-    android.hardware.sensors@1.0-impl \
-    sensors.$(TARGET_BOARD_HARDWARE)
-endif
+# Include sensor module for tablet
+$(call inherit-product, device/rockchip/common/modules/sensors.mk)
 endif
 
 # Include thermal HAL module
