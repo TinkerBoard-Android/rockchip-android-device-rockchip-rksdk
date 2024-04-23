@@ -56,7 +56,7 @@ endif
 # define MPP_BUF_TYPE_ION_404 3
 # define MPP_BUF_TYPE_ION_419 4
 # define MPP_BUF_TYPE_DMA_BUF 5
-
+$(call soong_config_set,gralloc_rockchip,aidl,$(TARGET_RK_GRALLOC_AIDL))
 ifeq ($(TARGET_RK_GRALLOC_AIDL),true)
 # Gralloc AIDL
 PRODUCT_PACKAGES += \
