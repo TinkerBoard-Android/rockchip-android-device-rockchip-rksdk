@@ -74,9 +74,17 @@ PRODUCT_PACKAGES += \
     audio.usbv2.default \
     libanr
 
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),33),true)
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
-    android.hardware.audio@7.1-impl \
+    android.hardware.audio@7.1-impl
+else
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-service \
+    android.hardware.audio@7.0-impl
+endif
+
+PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl
 
 # audio lib
