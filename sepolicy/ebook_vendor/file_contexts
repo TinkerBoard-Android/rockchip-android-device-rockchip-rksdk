@@ -1,0 +1,4 @@
+/vendor/media(/.*)?             u:object_r:same_process_hal_file:s0
+/dev/ebc                        u:object_r:gpu_device:s0
+/dev/waveform                   u:object_r:gpu_device:s0
+/sys/power/mem_sleep            u:object_r:sysfs_power:s0
