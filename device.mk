@@ -738,7 +738,7 @@ ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter.img
     # savBaseParameter tool
     ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-        PRODUCT_PACKAGES += saveBaseParameter
+        #PRODUCT_PACKAGES += saveBaseParameter
     endif
     DEVICE_FRAMEWORK_MANIFEST_FILE := device/rockchip/common/manifest_framework_override.xml
 endif
