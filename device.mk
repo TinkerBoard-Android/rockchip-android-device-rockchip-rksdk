@@ -413,6 +413,13 @@ ifeq ($(strip $(BOARD_HS_ETHERNET)),true)
 PRODUCT_PROPERTY_OVERRIDES += ro.rk.ethernet_settings=true
 endif
 
+########################################################
+# this product is an Ebook or not
+# ########################################################
+ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
+PRODUCT_PROPERTY_OVERRIDES += ro.rk.ebook_settings=true
+endif
+
 #######################################################
 #build system support ntfs?
 ########################################################
