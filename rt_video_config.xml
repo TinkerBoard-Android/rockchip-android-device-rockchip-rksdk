@@ -201,11 +201,13 @@
         <chip name="RK3328,RK3399">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_4k_10bit,hevc_4k_10bit"/>
             <include name="vp9_4k_8bit"/>
+            <forbid  name="flv1"/>
         </chip>
 
         <chip name="RK3566,RK3567,RK3568">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
             <include name="vp9_4k_10bit"/>
+            <forbid  name="flv1"/>
         </chip>
         <chip name="RK3528">
             <include name="mpeg1,mpeg2,mpeg4,vp8,h264_8k_10bit_high422,hevc_8k_10bit"/>
