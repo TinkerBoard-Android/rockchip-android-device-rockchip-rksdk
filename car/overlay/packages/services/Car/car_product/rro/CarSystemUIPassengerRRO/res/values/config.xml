@@ -22,5 +22,5 @@
 
     <!-- If BottomSystemBar is disabled, config'noticationPanelViewMediator needs to be set to null. -->
     <string name="config_notificationPanelViewMediator" translatable="false">
-      com.android.systemui.car.notification.TopNotificationPanelViewMediator</string>
+      com.android.systemui.car.notification.BottomNotificationPanelViewMediator</string>
 </resources>
