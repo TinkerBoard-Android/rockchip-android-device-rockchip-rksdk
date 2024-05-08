@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 PRODUCT_SEPOLICY_SPLIT := true
-BOARD_SEPOLICY_DIRS := \
+BOARD_SEPOLICY_DIRS += \
     device/rockchip/common/sepolicy/vendor \
     device/rockchip/$(TARGET_BOARD_PLATFORM)/sepolicy_vendor
 
@@ -27,3 +27,4 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
     BOARD_SEPOLICY_DIRS += \
         device/rockchip/common/box/sepolicy/vendor
 endif
+
