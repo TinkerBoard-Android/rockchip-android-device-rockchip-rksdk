@@ -1,0 +1,27 @@
+
+on post-fs-data
+    mkdir /mnt/linux/proc
+    mkdir /mnt/linux/sys
+    mkdir /mnt/linux/dev
+    mkdir /mnt/linux/dev/pts
+    mkdir /mnt/linux/dev/shm
+    mkdir /mnt/linux/dev/binderfs
+    mount proc proc /mnt/linux/proc
+    mount sysfs sysfs /mnt/linux/sys
+    mount devfs /dev /mnt/linux/dev bind
+    mount devpts devpts /mnt/linux/dev/pts
+    mount tmpfs tmpfs /mnt/linux/dev/shm
+    mount binder binder /mnt/linux/dev/binderfs
+
+service sshd /vendor/bin/asl -s /sbin/sshd 
+    seclabel u:r:init:s0
+    class core
+    user root
+    group root
+    disabled
+
+on property:sys.boot_completed=1
+    start sshd
+
+on early-fs
+    mkdir /mnt/linux 0666 system system

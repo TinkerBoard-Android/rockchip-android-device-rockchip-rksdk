@@ -1,0 +1,15 @@
+
+cc_binary {
+    name: "asl",
+    srcs: ["asl.cc"],
+    cflags: ["-Wall", "-Werror"],
+    init_rc: ["init.linux.rc"],
+    vendor: true,
+
+    shared_libs: [
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libutils",
+    ],
+}

@@ -46,9 +46,14 @@ else # BOARD_USE_DYNAMIC_PARTITIONS
 partition_list := $(partition_list),system:$(BOARD_SYSTEMIMAGE_PARTITION_SIZE),vendor:$(BOARD_VENDORIMAGE_PARTITION_SIZE),odm:$(BOARD_ODMIMAGE_PARTITION_SIZE)
 endif
 
+ifeq ($(strip $(BOARD_HAVE_SUB_LINUX)), true)
+partition_list := $(partition_list),linux:8G
+endif
+
 ifdef BOARD_USERDATAIMAGE_PARTITION_SIZE
 partition_list := $(partition_list),data:$(BOARD_USERDATAIMAGE_PARTITION_SIZE)
 endif
+
 
 intermediates := $(call intermediates-dir-for,FAKE,rockchip_parameter)
 rebuild_parameter := $(intermediates)/parameter.txt

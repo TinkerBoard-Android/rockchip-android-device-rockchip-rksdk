@@ -441,3 +441,5 @@ BOARD_USES_LIBSVEP_SR ?= false
 BOARD_USES_LIBSVEP_MEMC ?= false
 #biometric face
 BOARD_BIOMETRICS_FACE ?= false
+# Android Sub Linux
+BOARD_HAVE_SUB_LINUX ?= false

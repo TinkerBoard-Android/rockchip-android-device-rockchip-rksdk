@@ -116,6 +116,9 @@ $(call inherit-product, device/rockchip/common/rootdir/swap/swap.mk)
 ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT)), true)
     $(call inherit-product, device/rockchip/common/modules/hdmi_in.mk)
 endif
+ifeq ($(strip $(BOARD_HAVE_SUB_LINUX)), true)
+    $(call inherit-product, device/rockchip/common/asl/asl.mk)
+endif
 
 PRODUCT_COPY_FILES += \
     device/rockchip/common/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
