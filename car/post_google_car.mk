@@ -30,8 +30,6 @@ PRODUCT_PACKAGES_DEBUG += \
     android.hardware.automotive.occupant_awareness@1.0-service \
     android.hardware.automotive.occupant_awareness@1.0-service_mock
 
-BOARD_SEPOLICY_DIRS += device/rockchip/common/car/sepolicy
-
 # Sepolicy for occupant awareness system
 include packages/services/Car/car_product/occupant_awareness/OccupantAwareness.mk
 

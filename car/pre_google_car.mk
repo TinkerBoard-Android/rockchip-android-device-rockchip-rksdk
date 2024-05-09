@@ -61,9 +61,6 @@ PRODUCT_PACKAGES += \
             android.hardware.automotive.vehicle@V1-default-service
 endif
 
-# Additional selinux policy
-BOARD_SEPOLICY_DIRS += device/rockchip/common/car/sepolicy
-
 # Car init.rc
 PRODUCT_COPY_FILES += \
             packages/services/Car/car_product/init/init.bootstat.rc:root/init.bootstat.rc \
