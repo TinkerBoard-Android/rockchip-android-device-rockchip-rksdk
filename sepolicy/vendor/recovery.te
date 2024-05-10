@@ -40,6 +40,7 @@ recovery_only(`
     allow recovery sysfs_mmc:file {open read getattr};
     allow recovery sensor_device:chr_file {open read ioctl};
     allow recovery rtc_device:chr_file {open read write ioctl};
+    allow recovery device:chr_file {append};
 
     allow recovery proc_meminfo:file {open read};
     allow recovery self:capability { fsetid };
