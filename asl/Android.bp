@@ -4,12 +4,8 @@ cc_binary {
     srcs: ["asl.cc"],
     cflags: ["-Wall", "-Werror"],
     init_rc: ["init.linux.rc"],
-    vendor: true,
-
+    //vendor: true, // no permission to mount
     shared_libs: [
-        "libbinder",
-        "libcutils",
         "liblog",
-        "libutils",
     ],
 }

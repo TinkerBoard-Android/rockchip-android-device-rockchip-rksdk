@@ -23,19 +23,72 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <vector>
+#include <sstream>
+#include <fstream>
 
-#include <binder/IPCThreadState.h>
-
+#define ROOTDIR "/mnt/linux"
 #define UNUSED(x) (void)(x)
+#define DEBUG 0
+
+
+struct args_t {
+    bool bPrintUsage;
+    bool bAndroidServerMode;
+    bool bHasCommands;
+    std::string sPidFile;
+    std::string sCommandName;
+    std::vector<std::string> vCommandArgs; 
+};
 
 void usage() {
     printf("Usage:\n");
     printf(" asl\n");
     printf(" asl <linux-bin>\n");
-    printf(" asl -s <linux-bin>\n");
+    printf(" asl -s -p <pid_file> <linux-bin>\n");
     printf("Arguments:\n");
     printf(" -s : android server mode.\n");
+    printf(" -p : linux pid file path.\n");
     printf(" linux-bin : abs path in linux root.\n");
+}
+
+args_t parse(int argc, char *argv[]) {
+    args_t args = {};
+    for (int i = 1; i < argc; ++i) {
+        if (std::string(argv[i]) == std::string("-h")) {
+            args.bPrintUsage = true;
+            return std::move(args);
+        } else if (std::string(argv[i]) == std::string("-s")) {
+            args.bAndroidServerMode = true;
+        } else if (std::string(argv[i]) == std::string("-p")) {
+            if (i + 1 >= argc) {    // ERR
+                args.bPrintUsage = true;
+                return std::move(args);
+            }
+            args.sPidFile = argv[++i];
+        } else {  /** Command In Chroot **/
+            args.bHasCommands = true;
+            args.sCommandName = argv[i++];
+            for (; i < argc ; ++i) {
+                args.vCommandArgs.push_back(argv[i]);
+            }
+        }
+    }
+    return std::move(args);
+}
+
+int readpid(const std::string &pid_file) {
+    std::ifstream file(pid_file);
+    int pid = -1;
+    if (!file.good()) {
+        ALOGE("pid file %s is not exsited!", pid_file.c_str());
+    } else if (file.is_open()) {
+        file >> pid;
+        file.close();
+        ALOGI("pid file %s is opened! pid=%d", pid_file.c_str(), pid);
+        return pid;
+    }
+    return pid;
 }
 
 void setenvs() {
@@ -65,25 +118,31 @@ void setenvs() {
     }
 }
 
-void execute(int size, char *argv[]) {
+void execute(bool bHasCommands, const std::string &commands, const std::vector<std::string> &parms) {
     const char *BASH = "/bin/bash";
 
-    char *args[size + 4];
+    char *args[6];
     int cst = 0;
     args[cst++] = (char*)"bash";
     args[cst++] = (char*)"--rcfile";
     args[cst++] = (char*)"~/.bashrc";
     args[cst++] = (char*)"-c";
-    for (int i = 1; i < size; ++i) {
-        args[cst + i - 1] = argv[i];
+    std::stringstream ss;
+    ss << commands;
+    for (int i = 0; i < parms.size(); ++i) {
+        ss << " " << parms[i];
     }
-    args[size + cst] = NULL;
+    args[cst++] = (char*)ss.str().c_str();
+    args[cst++] = NULL;
 
-    /*for (int i = 0; i < size + cst; ++i) {
+#if DEBUG
+    printf("--- linux command ---\n");
+    for (int i = 0; i < cst; ++i) {
         printf("[%d] %s\n", i, args[i]);
-    }*/
+    }
+#endif
 
-    if (size == 1) {
+    if (!bHasCommands) {
         execl(BASH, "bash", NULL);
     } else {
         execvp(BASH, args);
@@ -96,22 +155,20 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    bool bAndroidServerMode = false;
-    char *process_name = NULL;
-    if (argc > 1) {
-        if (std::string(argv[1]) == std::string("-s")) {
-            bAndroidServerMode = true;
-            process_name = argv[2];
-        } else if (std::string(argv[1]) == std::string("-h")) {
-            usage();
-            exit(EXIT_SUCCESS);
-        }
-        process_name = argv[1];
+    args_t args = parse(argc, argv);
+#if DEBUG
+    printf("* print usage: %d\n", args.bPrintUsage);
+    printf("* android server mode: %d\n", args.bAndroidServerMode);
+    printf("* has linux command: %d\n", args.bHasCommands);
+    printf("* linux pid file path: %s\n", args.sPidFile.c_str());
+    printf("* linux command: %s\n", args.sCommandName.c_str());
+#endif
+    if (args.bPrintUsage) {
+        usage();
+        exit(EXIT_SUCCESS);
     }
-    printf("Running asl as server=%d\n", bAndroidServerMode);
 
-    const char *new_root = "/mnt/linux";
-    if (chroot(new_root) == -1) {
+    if (chroot(ROOTDIR) == -1) {
         perror("chroot");
         exit(EXIT_FAILURE);
     }
@@ -127,9 +184,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     } else if (pid == 0) { // sub process
         setenvs();
-        execute(
-            bAndroidServerMode? argc - 1 : argc, 
-            bAndroidServerMode? argv + 1 : argv);
+        execute(args.bHasCommands, args.sCommandName, args.vCommandArgs);
         perror("exec");
         exit(EXIT_FAILURE);
     } else { // father process
@@ -140,9 +195,21 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (bAndroidServerMode) {
-        android::IPCThreadState::self()->joinThreadPool();
-        ALOGI("ASL shutting down");
+    if (args.bAndroidServerMode) {
+        sleep(1);
+        int fpid = readpid(args.sPidFile);
+        while (1) {
+            if (kill(fpid, 0) == -1) {
+                if (errno == ESRCH) {
+                    ALOGI("server exited %d\n", fpid);
+                    break;
+                } else {
+                    perror("kill");
+                    exit(EXIT_FAILURE);
+                }
+            }
+            sleep(1);
+        }
     }
 
     exit(EXIT_SUCCESS);

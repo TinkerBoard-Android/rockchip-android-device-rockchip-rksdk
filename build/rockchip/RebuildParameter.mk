@@ -47,7 +47,7 @@ partition_list := $(partition_list),system:$(BOARD_SYSTEMIMAGE_PARTITION_SIZE),v
 endif
 
 ifeq ($(strip $(BOARD_HAVE_SUB_LINUX)), true)
-partition_list := $(partition_list),linux:8G
+partition_list := $(partition_list),linux:$(BOARD_LINUX_PARTITION_SIZE)
 endif
 
 ifdef BOARD_USERDATAIMAGE_PARTITION_SIZE

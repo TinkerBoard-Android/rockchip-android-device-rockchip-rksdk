@@ -75,12 +75,6 @@ fstab_logo := none
 fstab_waveform := none
 endif #BOARD_USES_AB_IMAGE
 
-ifeq ($(strip $(BOARD_HAVE_SUB_LINUX)), true)
-fstab_linux := "/dev/block/by-name/linux /mnt/linux ext4 defaults defaults,check"
-else
-fstab_linux := none
-endif #BOARD_HAVE_SUB_LINUX
-
 # Add partition to fstab_dynamic_list
 # $1 part
 # Do not add ',' to head
@@ -137,7 +131,6 @@ $(rebuild_fstab) : $(PRODUCT_FSTAB_TEMPLATE) $(ROCKCHIP_FSTAB_TOOLS)
 	-a $(fstab_pvmfw) \
 	-a $(fstab_logo) \
 	-a $(fstab_waveform) \
-	-a $(fstab_linux) \
 	-s $(fstab_sdmmc_device) \
 	-o $(rebuild_fstab)
 
