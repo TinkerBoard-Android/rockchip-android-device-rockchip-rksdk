@@ -1,3 +1,4 @@
 persist.vendor.ebook. 	u:object_r:vendor_ebook_prop:s0
 persist.vendor.rkcfa.   u:object_r:vendor_ebook_prop:s0
 vendor.ebook. 	u:object_r:vendor_ebook_prop:s0
+vendor.rkcfa.   u:object_r:vendor_ebook_prop:s0

@@ -22,6 +22,7 @@ dontaudit hal_graphics_composer_default debugfs_sw_sync:dir r_dir_perms;
 allow hal_graphics_composer_default mediaserver:fd {use};
 allow hal_graphics_composer_default zygote:fd use;
 allow hal_graphics_composer_default hal_camera_default:fd use;
+allow hal_graphics_composer_default kernel:fd { use };
 allow hal_graphics_composer_default vendor_data_file:dir { read open write getattr create add_name };
 allow hal_graphics_composer_default vendor_data_file:file { read open write create getattr };
 
