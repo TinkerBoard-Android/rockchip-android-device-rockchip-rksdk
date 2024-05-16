@@ -27,7 +27,7 @@
 
     <!-- Which USB function should be enabled when TETHERING_USB is requested. 0: RNDIS, 1: NCM.
          -->
-    <integer translatable="false" name="config_tether_usb_functions">1</integer>
+    <integer translatable="false" name="config_tether_usb_functions">0</integer>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tethering over USB this should
