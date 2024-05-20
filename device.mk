@@ -831,11 +831,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     # enable retriever during video playing
-    PRODUCT_PROPERTY_OVERRIDES += \
+    PRODUCT_PRODUCT_PROPERTIES += \
         rt_retriever_enable=1
 
     ifneq ($(filter rk3576, $(TARGET_BOARD_PLATFORM)), )
-        PRODUCT_PROPERTY_OVERRIDES += \
+        PRODUCT_PRODUCT_PROPERTIES += \
             rt_vdec_fbc_min_stride=4096
     endif
 endif
