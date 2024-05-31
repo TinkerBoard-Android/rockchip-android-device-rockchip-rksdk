@@ -9,8 +9,12 @@ init_daemon_domain(hal_hdmi_default)
 allow hal_hdmi_default vndbinder_device:chr_file { read write open ioctl map};
 allow hal_hdmi_default hidl_base_hwservice:hwservice_manager add;
 allow hal_hdmi_default hal_hdmi_hwservice:hwservice_manager {add find};
+allow hal_hdmi_default device:dir {read open};
+allow hal_hdmi_default camera_device:chr_file rw_file_perms;
+allow hal_hdmi_default video_device:chr_file rw_file_perms;
 
 binder_call(hal_hdmi_default, platform_app)
+binder_call(hal_hdmi_default, system_app)
 binder_call(hal_hdmi_default, hwservicemanager)
 
 
@@ -19,3 +23,4 @@ allow cameraserver hal_hdmi_hwservice:hwservice_manager { find };
 allow hal_camera_default hal_hdmi_hwservice:hwservice_manager { find };
 
 get_prop(hal_hdmi_default, hwservicemanager_prop)
+get_prop(hal_hdmi_default, vendor_system_public_prop)

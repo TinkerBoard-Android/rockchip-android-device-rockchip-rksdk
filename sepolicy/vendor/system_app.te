@@ -49,6 +49,8 @@ hal_client_domain(system_app, hal_health)
 binder_call(system_app, hal_keymint_default)
 binder_call(system_app, hal_usb_impl)
 binder_call(system_app, update_engine)
+binder_call(system_app, hal_hdmi_default)
+allow system_app hal_hdmi_hwservice:hwservice_manager { find };
 allow system_app proc_pagetypeinfo:file r_file_perms;
 
 allow system_app mnt_sdcard_file:lnk_file r_file_perms;
