@@ -56,12 +56,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
     TMP_GMS_VAR := $(TMP_GMS_VAR)_go_2gb
     # Mainline partner build config - low RAM
     TMP_MAINLINE_VAR := $(TMP_MAINLINE_VAR)_low_ram
-    PRODUCT_PACKAGES += CaptivePortalLoginFrameworkOverlayGo
-    PRODUCT_PACKAGES += RockchipNetworkStackConfigGoOverlay
     MAINLINE_COMPRESS_APEX_ALL := false
-  else
-    PRODUCT_PACKAGES += RockchipTetheringConfigOverlay
-    PRODUCT_PACKAGES += RockchipNetworkStackConfigOverlay
   endif
   ifeq ($(strip $(BUILD_WITH_EEA)),true)
     BUILD_WITH_GOOGLE_MARKET_ALL := true
@@ -78,6 +73,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
   $(call inherit-product, vendor/partner_modules/build/$(TMP_MAINLINE_VAR).mk)
   # add this for zerotouch warpper.
   #$(call inherit-product, vendor/rockchip/common/gms/zerotouch.mk)
+  $(call inherit-product, vendor/rockchip/common/gms/gms.mk)
 endif
 
 #GOOGLE EXPRESS PLUS CONFIGURATION
