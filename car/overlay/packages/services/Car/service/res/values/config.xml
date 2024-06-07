@@ -151,4 +151,6 @@
        -->
     <bool name="config_enablePassengerDisplayPowerSaving">false</bool>
 
+    <!-- A configuration flag to adjust Wifi for suspend. -->
+    <bool name="config_wifiAdjustmentForSuspend">true</bool>
 </resources>
