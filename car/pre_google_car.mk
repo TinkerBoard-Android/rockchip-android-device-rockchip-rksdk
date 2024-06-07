@@ -56,6 +56,8 @@ $(call inherit-product, device/rockchip/common/car/packages_generic_system.mk)
 PRODUCT_PACKAGES += \
             android.hardware.broadcastradio-service.default
 
+SOONG_CONFIG_rvcam_has_vhal := false
+
 ifneq ($(strip $(SOONG_CONFIG_rvcam_has_vhal)), true)
 PRODUCT_PACKAGES += \
             android.hardware.automotive.vehicle@V1-default-service
