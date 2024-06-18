@@ -14,6 +14,8 @@ allow kernel device:dir { remove_name write add_name create rmdir };
 allow kernel kernel:system { module_request };
 allow kernel vendor_file:file { open read };
 
+allow kernel init-insmod-sh:key search;
+
 # for diag over socket
 userdebug_or_eng(`
   allow kernel self:socket create;

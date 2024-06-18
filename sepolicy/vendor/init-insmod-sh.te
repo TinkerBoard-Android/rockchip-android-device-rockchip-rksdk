@@ -17,5 +17,6 @@ allow init-insmod-sh self:capability sys_module;
 allow init-insmod-sh system_dlkm_file:dir r_dir_perms;
 allow init-insmod-sh system_dlkm_file:file r_file_perms;
 allow init-insmod-sh system_dlkm_file:system module_load;
+allow init-insmod-sh self:key write;
 
 set_prop(init-insmod-sh, vendor_system_public_prop)
