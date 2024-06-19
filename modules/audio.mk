@@ -74,6 +74,12 @@ PRODUCT_PACKAGES += \
     audio.usbv2.default \
     libanr
 
+# audio effect
+ifeq ($(strip $(BOARD_USE_AUDIO_EQDRC)), true)
+PRODUCT_PACKAGES += \
+    librkeqdrc
+endif
+
 ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),33),true)
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
