@@ -5,6 +5,7 @@ import /vendor/etc/init/hw/init.${ro.board.platform}.rc
 import /vendor/etc/init/hw/init.${ro.target.product}.rc
 import /vendor/etc/init/hw/init.car.rc
 import /vendor/etc/init/hw/init.optee.rc
+import /vendor/etc/init/hw/init.rvcam.rc
 
 on post-fs-data
     chmod 0664 /sys/class/display/HDMI/color
@@ -27,6 +28,8 @@ on init
     #eink
     chown root system /dev/ebc
     chmod 0666 /dev/ebc
+    chown root system /dev/waveform
+    chmod 0666 /dev/waveform
     # vtunnel
     chmod 0777 /dev/rkvtunnel
 

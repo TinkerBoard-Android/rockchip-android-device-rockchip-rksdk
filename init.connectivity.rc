@@ -5,13 +5,13 @@ on zygote-start
     # bluetooth LPM
     chmod 0220 /proc/bluetooth/sleep/lpm
     chmod 0220 /proc/bluetooth/sleep/btwrite
-    chown bluetooth net_bt /proc/bluetooth/sleep/lpm
-    chown bluetooth net_bt /proc/bluetooth/sleep/btwrite    
+    chown bluetooth system /proc/bluetooth/sleep/lpm
+    chown bluetooth system /proc/bluetooth/sleep/btwrite
 
     chmod 0660 /dev/rtk_btusb
-    chown bluetooth net_bt /dev/rtk_btusb
+    chown bluetooth system /dev/rtk_btusb
     chmod 0660 /dev/rtkbt_dev
-    chown bluetooth net_bt /dev/rtkbt_dev
+    chown bluetooth system /dev/rtkbt_dev
 
     # bluetooth MAC address programming
     chown bluetooth net_bt ro.bt.bdaddr_path
@@ -19,25 +19,27 @@ on zygote-start
 
     chmod 0660 /dev/ttyS0
     chmod 0660 /dev/ttyS1
+    chmod 0660 /dev/ttyS4
     chmod 0660 /dev/ttyS7
     chmod 0660 /dev/ttyS8
     chmod 0660 /dev/ttyS9
     chmod 0660 /dev/vflash
     chmod 0664 /dev/vendor_storage
-    chown bluetooth net_bt /dev/vflash
-    chown bluetooth net_bt /dev/vendor_storage
-    chown bluetooth net_bt /dev/ttyS0
-    chown bluetooth net_bt /dev/ttyS1
-    chown bluetooth net_bt /dev/ttyS7
-    chown bluetooth net_bt /dev/ttyS8
-    chown bluetooth net_bt /dev/ttyS9
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/name
+    chown bluetooth system /dev/vflash
+    chown bluetooth system /dev/vendor_storage
+    chown bluetooth system /dev/ttyS0
+    chown bluetooth system /dev/ttyS1
+    chown bluetooth system /dev/ttyS4
+    chown bluetooth system /dev/ttyS7
+    chown bluetooth system /dev/ttyS8
+    chown bluetooth system /dev/ttyS9
+    chown bluetooth system /sys/class/rfkill/rfkill0/type
+    chown bluetooth system /sys/class/rfkill/rfkill0/state
+    chown bluetooth system /sys/class/rfkill/rfkill0/name
     chmod 0664 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt /sys/class/rfkill/rfkill1/type
-    chown bluetooth net_bt /sys/class/rfkill/rfkill1/state
-    chown bluetooth net_bt /sys/class/rfkill/rfkill1/name
+    chown bluetooth system /sys/class/rfkill/rfkill1/type
+    chown bluetooth system /sys/class/rfkill/rfkill1/state
+    chown bluetooth system /sys/class/rfkill/rfkill1/name
     chmod 0664 /sys/class/rfkill/rfkill1/state
 
 # for wifi

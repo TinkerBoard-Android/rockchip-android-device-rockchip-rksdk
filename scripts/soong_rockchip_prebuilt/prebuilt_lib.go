@@ -17,12 +17,19 @@ func isContain(items []string, item string) bool {
 }
 
 func getOpteePrefix(platform string) string {
-    var optee_v2_list = []string{"rk3326", "rk3528", "rk356x","rk3562","rk3588"}
+    var optee_v2_list = []string{"rk3326", "rk3528", "rk356x","rk3562","rk3576","rk3588"}
     if isContain(optee_v2_list, platform) {
         return "v2/"
     } else {
         return "v1/"
     }
+}
+
+func isOpteeCopy(prefix string, module_name string) bool {
+    if (prefix == "v1/" && module_name == "libckteec.so") {
+        return false;
+    }
+    return true;
 }
 
 func getVpuPrefix(platform string) string {
@@ -82,6 +89,9 @@ func ChangeSrcsPath(ctx android.LoadHookContext) {
     p := &props{}
     if (ctx.ContainsProperty("optee")) {
         prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        if (!isOpteeCopy(prefix, module_name)) {
+            return;
+        }
     }
     if (strings.EqualFold(ctx.AConfig().DevicePrimaryArchType().String(),"arm64")) {
         prefix += "arm64/"
@@ -170,6 +180,9 @@ func configArm64Lib(ctx android.LoadHookContext) (Ex_multilibType) {
     if (ctx.ContainsProperty("optee")) {
         prefix64 = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
         prefix32 = prefix64
+        if (!isOpteeCopy(prefix32, module_name)) {
+            return multilib;
+        }
     }
     prefix64 += "arm64/"
     prefix32 += "arm/"
@@ -191,6 +204,9 @@ func configArmLib(ctx android.LoadHookContext) ([]string) {
     var module_name string = ctx.ModuleName()[9:] + ".so"
     if (ctx.ContainsProperty("optee")) {
         prefix = getOpteePrefix(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"))
+        if (!isOpteeCopy(prefix, module_name)) {
+            return srcs;
+        }
     }
     prefix += "arm/"
     if (ctx.ContainsProperty("vpu")) {
@@ -210,7 +226,7 @@ func configArm64LibStatic(ctx android.LoadHookContext) (Ex_multilibType) {
     var suffix string = "."
     if (ctx.ContainsProperty("aiq")) {
         var platform = ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM")
-        var rkaiq_list = []string{"rk356x", "rk3588", "rk3562"}
+        var rkaiq_list = []string{"rk356x", "rk3588", "rk3562", "rk3576"}
         if isContain(rkaiq_list, platform) {
             suffix += platform[2:]
         } else {

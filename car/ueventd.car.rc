@@ -1,0 +1,4 @@
+import /vendor/etc/init/ueventd.rvcam.rc
+
+# for GPS
+/dev/ttyS7                0600   gps        gps

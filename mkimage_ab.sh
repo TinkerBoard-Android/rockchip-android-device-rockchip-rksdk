@@ -295,4 +295,16 @@ if [ $IS_EBOOK == "true" ]; then
     fi
 fi
 
+IS_SUPPORT_LOGO_OTA=`get_build_var BOARD_SUPPORT_LOGO_OTA`
+if [ "$IS_SUPPORT_LOGO_OTA" = "true" ]; then
+    echo "Logo OTA Support Enable"
+    cp -rf $IMAGE_PATH/logo.img ${TARGET_DEVICE_DIR}/ota/logo.img
+fi
+
+IS_SUPPORT_WAVEFORM_OTA=`get_build_var BOARD_SUPPORT_WAVEFORM_OTA`
+if [ "$IS_SUPPORT_WAVEFORM_OTA" = "true" ]; then
+    echo "Waveform OTA Support Enable"
+    cp -rf $IMAGE_PATH/waveform.img ${TARGET_DEVICE_DIR}/ota/waveform.img
+fi
+
 chmod a+r -R $IMAGE_PATH/

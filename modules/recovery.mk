@@ -66,6 +66,16 @@ AB_OTA_PARTITIONS += \
     init_boot
 endif
 
+ifeq ($(strip $(BOARD_SUPPORT_LOGO_OTA)),true)
+AB_OTA_PARTITIONS += \
+    logo
+endif
+
+ifeq ($(strip $(BOARD_SUPPORT_WAVEFORM_OTA)),true)
+AB_OTA_PARTITIONS += \
+    waveform
+endif
+
 # Only GKI can use pKVM
 ifneq ($(BOARD_ROCKCHIP_PKVM),false)
 AB_OTA_PARTITIONS += pvmfw

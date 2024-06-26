@@ -27,6 +27,7 @@ BUILD_UPDATE_IMG=false
 BUILD_OTA=false
 BUILD_PACKING=false
 BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
+BUILD_GKI=`get_build_var BOARD_BUILD_GKI`
 KERNEL_DTS=""
 BUILD_VERSION=""
 BUILD_JOBS=16
@@ -152,18 +153,46 @@ else
     echo "Build kernel failed!"
     exit 1
 fi
+if [ "$BUILD_GKI" = true ] ; then
+	cd mkcombinedroot && ./copy_moduls.sh && cd -
+	if [ $? -eq 0 ]; then
+    		echo "copy kernel modules succeed!"
+	else
+    		echo "copy kernel modules failed!"
+    		exit 1
+	fi
+fi
 # build exteranl wifi driver
 LOCAL_EXT_WIFI_DRIVER_PATH=external/wifi_driver
+LOCAL_WIFI_DRIVER_PATH=$LOCAL_KERNEL_PATH/drivers/net/wireless/rockchip_wlan
 if [ -d $LOCAL_EXT_WIFI_DRIVER_PATH ]; then
 source $LOCAL_EXT_WIFI_DRIVER_PATH/set_android_version.sh $LOCAL_EXT_WIFI_DRIVER_PATH
 echo "Start build exteranl wifi driver"
 cd $LOCAL_EXT_WIFI_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C ../../$LOCAL_KERNEL_PATH M=$PWD clean && cd -
 cd $LOCAL_EXT_WIFI_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C ../../$LOCAL_KERNEL_PATH M=$PWD -j$BUILD_JOBS && cd -
+find $LOCAL_EXT_WIFI_DRIVER_PATH -name "*.ko" > $LOCAL_EXT_WIFI_DRIVER_PATH/wifi.load
+find $LOCAL_WIFI_DRIVER_PATH -name "*.ko" >> $LOCAL_EXT_WIFI_DRIVER_PATH/wifi.load
 if [ $? -eq 0 ]; then
     echo "Build exteranl wifi driver ok!"
 else
     echo "Build exteranl wifi driver failed!"
     exit 1
+fi
+fi
+
+# build rvcam driver
+LOCAL_EXT_RVCAM_DRIVER_PATH=$PROJECT_TOP/hardware/rockchip/rvcam/drivers
+if [ -d $LOCAL_EXT_RVCAM_DRIVER_PATH ]; then
+echo "Start build exteranl rvcam driver"
+cd $LOCAL_EXT_RVCAM_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C $PROJECT_TOP/$LOCAL_KERNEL_PATH M=$PWD clean && cd -
+cd $LOCAL_EXT_RVCAM_DRIVER_PATH && make $ADDON_ARGS ARCH=$KERNEL_ARCH -C $PROJECT_TOP/$LOCAL_KERNEL_PATH M=$PWD modules -j$BUILD_JOBS && cd -
+if [ $? -eq 0 ]; then
+    mkdir -p $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION
+    find $LOCAL_EXT_RVCAM_DRIVER_PATH -type f -not -path "$LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/*" -name "*.ko" | xargs -i cp -rf {} $LOCAL_EXT_RVCAM_DRIVER_PATH/prebuilts/$KERNEL_VERSION/
+    echo "Build exteranl rvcam driver ok!"
+else
+    echo "Build exteranl rvcam driver failed!"
+    # exit 1
 fi
 fi
 
@@ -177,6 +206,12 @@ fi
 
 echo "package resoure.img with charger images"
 cd u-boot && ./scripts/pack_resource.sh ../$LOCAL_KERNEL_PATH/resource.img && cp resource.img ../$LOCAL_KERNEL_PATH/resource.img && cd -
+
+IS_VEHICLE=`get_build_var BOARD_ROCKCHIP_VEHICLE`
+LOGO_VEHICLE_PATH=`get_build_var TARGET_DEVICE_DIR`
+if [ "$IS_VEHICLE" = true ]; then
+./$LOGO_VEHICLE_PATH/pack_resource.sh ./$LOCAL_KERNEL_PATH/resource.img && cp resource.img ./$LOCAL_KERNEL_PATH/resource.img
+fi
 
 # build android
 if [ "$BUILD_ANDROID" = true ] ; then

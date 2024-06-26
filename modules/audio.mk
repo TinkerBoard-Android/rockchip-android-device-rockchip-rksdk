@@ -17,15 +17,26 @@
 RKSDK_PATH=device/rockchip/common
 
 ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
-PRODUCT_COPY_FILES += \
-    $(RKSDK_PATH)/audio_policy_configuration_multihal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_multihal.xml
+    PRODUCT_COPY_FILES += \
+        $(RKSDK_PATH)/audio_policy_configuration_multihal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_multihal.xml
 else
-PRODUCT_COPY_FILES += \
-    $(RKSDK_PATH)/audio_policy_configuration_singlehal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_singlehal.xml
+    ifneq ($(filter car, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+        PRODUCT_COPY_FILES += \
+            $(TARGET_DEVICE_DIR)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+            $(TARGET_DEVICE_DIR)/audio/car_audio_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/car_audio_configuration.xml \
+            $(TARGET_DEVICE_DIR)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+            $(TARGET_DEVICE_DIR)/audio/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
+    else
+        PRODUCT_COPY_FILES += \
+            $(RKSDK_PATH)/audio_policy_configuration_singlehal.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_singlehal.xml
+    endif
 endif
 
-PRODUCT_COPY_FILES += \
-    $(RKSDK_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+ifeq ($(filter car, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+    PRODUCT_COPY_FILES += \
+        $(RKSDK_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+endif
+
 
 PRODUCT_COPY_FILES += \
     $(RKSDK_PATH)/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
@@ -63,9 +74,17 @@ PRODUCT_PACKAGES += \
     audio.usbv2.default \
     libanr
 
+ifeq ($(call math_gt_or_eq,$(ROCKCHIP_LUNCHING_API_LEVEL),33),true)
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
-    android.hardware.audio@7.1-impl \
+    android.hardware.audio@7.1-impl
+else
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-service \
+    android.hardware.audio@7.0-impl
+endif
+
+PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl
 
 # audio lib

@@ -75,6 +75,9 @@
 
         <!--1 extend Audio HAL-->
         <module name="ext_1" halVersion="2.0">
+            <attachedDevices>
+                <item>HDMIIn</item>
+            </attachedDevices>
             <mixPorts>
                 <mixPort name="hdmi_default_output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"

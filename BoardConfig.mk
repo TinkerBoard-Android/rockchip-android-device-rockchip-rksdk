@@ -156,7 +156,7 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 TARGET_BOOTLOADER_BOARD_NAME ?= rk30sdk
 TARGET_NO_BOOTLOADER ?= true
-ifeq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
+ifeq ($(filter atv box car, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay
 #ifneq ($(BOARD_HAS_RK_4G_MODEM), true)
 #DEVICE_PACKAGE_OVERLAYS += device/rockchip/common/overlay_wifi_only
@@ -346,9 +346,6 @@ BOARD_BLUETOOTH_SUPPORT ?= true
 BOARD_BLUETOOTH_LE_SUPPORT ?= true
 BOARD_WIFI_SUPPORT ?= true
 
-#for rk 4g modem
-BOARD_HAS_RK_4G_MODEM ?= false
-
 #for rk DLNA
 PRODUCT_HAVE_DLNA ?= false
 
@@ -398,7 +395,7 @@ PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 
 BOARD_BASEPARAMETER_SUPPORT ?= true
 ifeq ($(strip $(BOARD_BASEPARAMETER_SUPPORT)), true)
-    ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+    ifneq ($(filter rk356x rk3588 rk3576, $(strip $(TARGET_BOARD_PLATFORM))), )
         TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v2.0/baseparameter.img
     else
         TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/v1.0/baseparameter.img
@@ -445,3 +442,5 @@ endif
 BOARD_USES_LIBSVEP_SR ?= false
 # MEMC enable macro
 BOARD_USES_LIBSVEP_MEMC ?= false
+#biometric face
+BOARD_BIOMETRICS_FACE ?= false

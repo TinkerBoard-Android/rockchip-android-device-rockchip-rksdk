@@ -33,7 +33,7 @@ PRODUCT_PACKAGES += \
     android.hardware.security.keymint-service.optee \
     android.hardware.weaver-service.optee
 
-ifneq ($(filter rk3326 rk3528 rk356x rk3562 rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk3326 rk3528 rk356x rk3562 rk3576 rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 
 PRODUCT_PACKAGES += \
     0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta \

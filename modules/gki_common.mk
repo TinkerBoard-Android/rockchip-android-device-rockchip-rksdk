@@ -70,9 +70,12 @@ $(call inherit-product, mkcombinedroot/modular_kernel.mk)
 # Uboot enabled AB config
 PRODUCT_UBOOT_CONFIG += gki.config
 
-# system_dlkm modules
-PRODUCT_COPY_FILES += \
-	device/rockchip/common/rootdir/init.insmod_gki.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod_gki.cfg
+#build init.gki.rc
+HAVE_GKI_INIT_RC := $(shell test -f device/rockchip/$(TARGET_BOARD_PLATFORM)/init.gki.rc && echo true)
+ifeq ($(strip $(HAVE_GKI_INIT_RC)), true)
+  PRODUCT_COPY_FILES += \
+      device/rockchip/$(TARGET_BOARD_PLATFORM)/init.gki.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gki.rc
+endif
 
 # for Gamma，3D Lut，HDCP
 BOARD_USES_HWC_PROXY_SERVICE := true

@@ -21,7 +21,6 @@ PRODUCT_PACKAGES := \
     RKDeviceTest \
     RKTvLauncher \
     PinyinIME \
-    WifiDisplay \
     DLNA
 
 ifneq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)

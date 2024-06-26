@@ -25,6 +25,12 @@
     <!-- This device does not allow sms service. -->
     <bool name="config_sms_capable">false</bool>
 
+    <!-- Flag indicating whether the current device allows data.
+	 If true, this means that the device supports data connectivity through
+	 the telephony network.
+	 This can be overridden to false for devices that support voice and/or sms . -->
+    <bool name="config_mobile_data_capable">false</bool>
+
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
@@ -120,6 +126,11 @@
     <!-- True if the device supports persisting security logs across reboots. -->
     <bool name="config_supportPreRebootSecurityLogs">true</bool>
 
+    <!-- Whether this device is supporting the software microphone toggle -->
+    <bool name="config_supportsMicToggle">true</bool>
+    <!-- Whether this device is supporting the camera toggle -->
+    <bool name="config_supportsCamToggle">true</bool>
+
     <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
 
@@ -131,4 +142,7 @@
     <!-- Default component for QR code scanner -->
     <string name="config_defaultQrCodeComponent">com.android.camera2/com.android.camera.RKScannerQRCodeActivity</string>
 
+    <!-- Enable doze mode
+         ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
+    <string translatable="false" name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 </resources>

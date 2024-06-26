@@ -38,7 +38,7 @@ endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR3
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR4
 
 TARGET_SYSTEM_PROP += device/rockchip/common/build/rockchip/rksdk.prop
 
@@ -134,6 +134,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/rockchip/common/wifi/ssv6xxx/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_ssv.conf \
 
+PRODUCT_COPY_FILES += \
+    external/wifi_driver/wifi.load:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wifi.load
+
 PRODUCT_PACKAGES += \
     iperf \
     libiconv \
@@ -159,10 +162,6 @@ ifeq ($(PRODUCT_HAVE_DLNA),true)
 PRODUCT_PACKAGES += \
     MediaCenter \
     DLNA
-endif
-
-ifeq ($(strip $(BOARD_HAS_RK_4G_MODEM)),true)
-$(call inherit-product, device/rockchip/common/modules/4g_modem.mk)
 endif
 
 ifeq ($(filter MediaTek_mt7601 MediaTek RealTek Espressif, $(strip $(BOARD_CONNECTIVITY_VENDOR))), )
@@ -213,29 +212,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 endif
 
-ifeq ($(BOARD_COMPASS_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml
-endif
-
 ifeq ($(BOARD_USER_FAKETOUCH),true)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.faketouch.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.faketouch.xml
-endif
-
-ifeq ($(BOARD_GYROSCOPE_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml
-endif
-
-ifeq ($(BOARD_PROXIMITY_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml
-endif
-
-ifeq ($(BOARD_LIGHT_SENSOR_SUPPORT),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml
 endif
 
 # USB HOST
@@ -274,9 +253,8 @@ PRODUCT_PACKAGES += \
     libjni_pinyinime
 
 ifeq ($(filter atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
-# Sensor AIDL
-PRODUCT_PACKAGES += \
-    com.rockchip.hardware.sensors
+# Include sensor module for tablet
+$(call inherit-product, device/rockchip/common/modules/sensors.mk)
 endif
 
 # Include thermal HAL module
@@ -730,7 +708,7 @@ ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
     TARGET_BASE_PARAMETER_IMAGE ?= device/rockchip/common/baseparameter/baseparameter.img
     # savBaseParameter tool
     ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-        PRODUCT_PACKAGES += saveBaseParameter
+        #PRODUCT_PACKAGES += saveBaseParameter
     endif
     DEVICE_FRAMEWORK_MANIFEST_FILE := device/rockchip/common/manifest_framework_override.xml
 endif
@@ -793,14 +771,9 @@ ifeq ($(BOARD_MEMTRACK_SUPPORT),true)
 $(call inherit-product, device/rockchip/common/modules/memtrack.mk)
 endif
 
-ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT))|$(strip $(BOARD_USES_LIBPQ)) ,true|true)
-    #Build pq and iep lib
+ifneq (,$(filter true, $(strip $(BOARD_HDMI_IN_SUPPORT)) $(strip $(BOARD_USES_LIBPQ)))))
+    #Build pq
     $(call inherit-product, hardware/rockchip/libpq/libpq.mk)
-
-    #no afbc
-    PRODUCT_PROPERTY_OVERRIDES += \
-        vendor.gralloc.no_afbc_for_fb_target_layer=1
-
 endif
 
 ifeq ($(BOARD_USES_HWC_PROXY_SERVICE),true)
@@ -848,6 +821,11 @@ ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     # enable retriever during video playing
     PRODUCT_PROPERTY_OVERRIDES += \
         rt_retriever_enable=1
+
+    ifneq ($(filter rk3576, $(TARGET_BOARD_PLATFORM)), )
+        PRODUCT_PROPERTY_OVERRIDES += \
+            rt_vdec_fbc_min_stride=4096
+    endif
 endif
 
 # Window Extensions
@@ -869,3 +847,8 @@ ifneq (,$(filter true, $(strip $(BOARD_USES_LIBSVEP_SR)) $(strip $(BOARD_USES_LI
         debug.sf.disable_frame_pending_by_svep_running=1
 
 endif
+# Biometrics face
+ifeq ($(strip $(BOARD_BIOMETRICS_FACE)), true)
+$(call inherit-product, device/rockchip/common/modules/biometrics.mk)
+endif
+

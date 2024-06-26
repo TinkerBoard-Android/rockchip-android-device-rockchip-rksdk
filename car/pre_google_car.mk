@@ -37,25 +37,29 @@ GOOGLE_CAR_SERVICE_OVERLAY += CarServiceOverlayPhoneCarGoogle
 # All components inherited here go to system image
 # Skip this for 64 bit only devices
 ifneq ($(DEVICE_IS_64BIT_ONLY),true)
-    $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 $(call inherit-product, device/rockchip/common/car/packages_generic_system.mk)
 
 #
 # All components inherited here go to system_ext image
 #
-$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
 
 #
 # All components inherited here go to product image
 #
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 
 # Auto modules
 PRODUCT_PACKAGES += \
-            android.hardware.broadcastradio-service.default \
+            android.hardware.broadcastradio-service.default
+
+ifneq ($(strip $(SOONG_CONFIG_rvcam_has_vhal)), true)
+PRODUCT_PACKAGES += \
             android.hardware.automotive.vehicle@V1-default-service
+endif
 
 # Additional selinux policy
 BOARD_SEPOLICY_DIRS += device/rockchip/common/car/sepolicy
@@ -104,7 +108,7 @@ PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
 
 # Include EVS reference implementations
-ENABLE_EVS_SAMPLE := true
+ENABLE_EVS_SAMPLE ?= true
 
 #
 # All components inherited here go to vendor image

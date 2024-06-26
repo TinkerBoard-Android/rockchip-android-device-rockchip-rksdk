@@ -34,8 +34,8 @@
 # camera
 /dev/rk803           u:object_r:camera_device:s0
 /dev/drm_dp_aux[0-9] u:object_r:camera_device:s0
-/dev/media[0-9]      u:object_r:camera_device:s0
-/dev/v4l-subdev[0-9] u:object_r:camera_device:s0
+/dev/media[0-9]      u:object_r:video_device:s0
+/dev/v4l-subdev[0-9] u:object_r:video_device:s0
 /sys/devices/platform/rkcif-mipi-lvds[^/]+/compact_test u:object_r:sysfs_camera:s0
 
 #usb
@@ -106,6 +106,7 @@
 /dev/block/mmcblk[0-9]boot[0-9]                 u:object_r:uboot_block_device:s0
 /dev/block/mmcblk[0-9]rpmb                      u:object_r:rpmb_block_device:s0
 /dev/mmcblk[0-9]rpmb                            u:object_r:rpmb_block_device:s0
+/dev/block/by-name/sda                          u:object_r:uboot_block_device:s0
 
 # Vendor file tag
 /vendor/lib(64)?/android\.hardware\.graphics\.allocator-V1-ndk\.so                          u:object_r:same_process_hal_file:s0
@@ -214,6 +215,8 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider-V1-hdmi-service                 u:object_r:hal_camera_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider-V1-virtual-service                 u:object_r:hal_camera_default_exec:s0
 
+/(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider-V1-automotive-service                 u:object_r:hal_camera_default_exec:s0
+
 /(vendor|system/vendor)/bin/hw/rockchip\.hardware\.hdmi@1\.0-service       u:object_r:hal_hdmi_default_exec:s0
 
 #abc
@@ -252,3 +255,4 @@
 /vendor/bin/hdcp2_tx_rx   u:object_r:hdcp2_exec:s0
 /sys/devices/virtual/misc/hdmirx_hdcp/status   u:object_r:sysfs_hdmirx:s0
 /sys/devices/virtual/misc/hdmirx_hdcp/test_key1x   u:object_r:sysfs_hdmirx:s0
+
