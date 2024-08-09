@@ -1,0 +1,2 @@
+/system/bin/asl u:object_r:asl_exec:s0
+/mnt/linux(/.*)? u:object_r:system_data_file:s0

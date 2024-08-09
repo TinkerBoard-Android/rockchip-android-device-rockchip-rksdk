@@ -23,7 +23,7 @@ recovery_only(`
     allow recovery kmsg_device:chr_file rw_file_perms;
 
     allow recovery sysfs:dir {read open};
-    allow recovery sysfs:file {read open write};
+    allow recovery sysfs:file {read open write getattr};
     allow recovery sysfs_batteryinfo:dir { search };
 
     allow recovery ctl_bootanim_prop:file {open getattr};
@@ -40,6 +40,7 @@ recovery_only(`
     allow recovery sysfs_mmc:file {open read getattr};
     allow recovery sensor_device:chr_file {open read ioctl};
     allow recovery rtc_device:chr_file {open read write ioctl};
+    allow recovery device:chr_file {append};
 
     allow recovery proc_meminfo:file {open read};
     allow recovery self:capability { fsetid };

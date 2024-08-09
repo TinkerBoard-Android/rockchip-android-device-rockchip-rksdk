@@ -74,6 +74,10 @@ ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_AIC)), true)
 PRODUCT_PACKAGES += libbt-vendor-aic
 endif
 
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_SEEKWAVE)), true)
+include hardware/seekwave/skwbt/skwbt.mk
+endif
+
 # A2DP audio policy
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml

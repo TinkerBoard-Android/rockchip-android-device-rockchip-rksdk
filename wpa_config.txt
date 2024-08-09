@@ -36,3 +36,9 @@
 -O/data/vendor/wifi/wpa/sockets
 -puse_p2p_group_interface=1
 -g@android:wpa_wlan0
+
+[seekwave]
+/vendor/bin/hw/wpa_supplicant
+-O/data/vendor/wifi/wpa/sockets
+-puse_p2p_group_interface=1
+-g@android:wpa_wlan0

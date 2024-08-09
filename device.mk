@@ -38,7 +38,7 @@ endif
 
 # SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR4
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR5
 
 TARGET_SYSTEM_PROP += device/rockchip/common/build/rockchip/rksdk.prop
 
@@ -115,6 +115,9 @@ $(call inherit-product, device/rockchip/common/rootdir/rootdir.mk)
 $(call inherit-product, device/rockchip/common/rootdir/swap/swap.mk)
 ifeq ($(strip $(BOARD_HDMI_IN_SUPPORT)), true)
     $(call inherit-product, device/rockchip/common/modules/hdmi_in.mk)
+endif
+ifeq ($(strip $(BOARD_HAVE_SUB_LINUX)), true)
+    $(call inherit-product, device/rockchip/common/asl/asl.mk)
 endif
 
 PRODUCT_COPY_FILES += \
@@ -400,17 +403,26 @@ endif
 # this product has GPS or not
 ########################################################
 ifeq ($(strip $(BOARD_HAS_GPS)),true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.factory.hasGPS=true
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.factory.hasGPS=false
+PRODUCT_PACKAGES += \
+    android.hardware.gnss-service.rk \
+    gps.default
+
+# gps.default.so  source codes: hardware/rockchip/gnss/libgps/
 endif
+
+
 ########################################################
 # this product has Ethernet or not
 ########################################################
 ifeq ($(strip $(BOARD_HS_ETHERNET)),true)
 PRODUCT_PROPERTY_OVERRIDES += ro.rk.ethernet_settings=true
+endif
+
+########################################################
+# this product is an Ebook or not
+# ########################################################
+ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
+PRODUCT_PROPERTY_OVERRIDES += ro.rk.ebook_settings=true
 endif
 
 #######################################################
@@ -421,7 +433,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.factory.storage_suppntfs=true
 
 PRODUCT_PACKAGES += \
-   ntfs-3g \
+   ntfs-3g-compart \
    ntfsfix \
    mkntfs
 else
@@ -819,11 +831,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ifneq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
     # enable retriever during video playing
-    PRODUCT_PROPERTY_OVERRIDES += \
+    PRODUCT_PRODUCT_PROPERTIES += \
         rt_retriever_enable=1
 
     ifneq ($(filter rk3576, $(TARGET_BOARD_PLATFORM)), )
-        PRODUCT_PROPERTY_OVERRIDES += \
+        PRODUCT_PRODUCT_PROPERTIES += \
             rt_vdec_fbc_min_stride=4096
     endif
 endif

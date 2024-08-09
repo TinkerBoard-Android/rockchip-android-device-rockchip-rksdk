@@ -1,0 +1,4 @@
+type asl, domain, coredomain;
+type asl_exec, exec_type, file_type, system_file_type;
+
+init_daemon_domain(asl)

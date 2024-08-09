@@ -149,3 +149,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Disable PCBA test for default in AAOS
 TARGET_ROCKCHIP_PCBATEST := false
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config_three_fingers.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/config_three_fingers.xml

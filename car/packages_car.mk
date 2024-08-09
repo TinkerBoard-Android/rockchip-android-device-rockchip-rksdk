@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     StatementService \
     SystemUpdater \
     Gallery2 \
+    WifiDisplay \
 
 PRODUCT_PACKAGES += \
     pppd \

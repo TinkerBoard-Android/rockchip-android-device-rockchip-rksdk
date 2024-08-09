@@ -1,0 +1,24 @@
+
+on post-fs-data
+    mkdir /mnt/linux 0666 system system
+    mount ext4 /dev/block/by-name/linux /mnt/linux
+    restorecon_recursive /mnt/linux
+    mkdir /mnt/linux/proc root 0755
+    mkdir /mnt/linux/sys root 0755
+    mkdir /mnt/linux/dev root 0755
+    mount proc proc /mnt/linux/proc
+    mount sysfs sysfs /mnt/linux/sys
+    mount devfs /dev /mnt/linux/dev bind
+    mount devpts devpts /mnt/linux/dev/pts
+    mount tmpfs tmpfs /mnt/linux/dev/shm
+    mount binder binder /mnt/linux/dev/binderfs
+
+service sshd /system/bin/asl -s -p /run/sshd.pid /etc/init.d/ssh start
+    seclabel u:r:su:s0
+    class main
+    user root
+    group root
+    disabled
+
+on property:sys.boot_completed=1
+    start sshd

@@ -40,3 +40,6 @@ type hdcp2_device, dev_type;
 
 #for pcie
 type pcie_device, dev_type;
+
+#for seekwave wifi
+type skwbt_device, dev_type;

@@ -317,7 +317,7 @@ int main(int argc, char** argv){
     if(resolution != NULL){
         if(strcmp(resolution, "auto")){
             int hdisplay, vdisplay, vrefresh, hsync_start, hsync_end, htotal, vsync_start, vsync_end, vtotal, vscan, flags, clock;
-            sscanf(resolution, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", &hdisplay, &vdisplay, &vrefresh, &hsync_start, &hsync_end, &htotal, &vsync_start, &vsync_end, &vtotal, &vscan, &flags, &clock);
+	    sscanf(resolution, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", &hdisplay, &vdisplay, &vrefresh, &hsync_start, &hsync_end, &htotal, &vsync_start, &vsync_end, &vtotal, &vscan, &flags, &clock);
             util->setResolution(hdisplay, vdisplay, vrefresh, hsync_start, hsync_end, htotal, vsync_start, vsync_end, vtotal, vscan, flags, clock, 0);
         }else{
             util->setResolution(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, RESOLUTION_AUTO);

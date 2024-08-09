@@ -1,0 +1,4 @@
+allow hal_audiocontrol_default boot_status_prop:file read;
+allow hal_audiocontrol_default carpowerpolicyd_service:service_manager find;
+allow hal_audiocontrol_default carpowerpolicyd:binder call;
+allow hal_audiocontrol_default carpowerpolicyd:binder transfer;

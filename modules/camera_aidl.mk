@@ -18,6 +18,7 @@
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/rk32xx_camera.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/Config/user.mk)
 $(call inherit-product-if-exists, hardware/rockchip/camera/etc/camera_etc.mk)
+$(call inherit-product-if-exists, hardware/rockchip/camera_aidl/etc/camera_etc.mk)
 
 ifneq (true, $(BOARD_CAMERA_SUPPORT_AUTOMOTIVE))
 # EXT
@@ -81,7 +82,6 @@ PRODUCT_PACKAGES += \
     libdata_bridge \
     rockchip.hardware.hdmi@1.0-service \
     rockchip.hardware.hdmi@1.0-impl
-$(call inherit-product-if-exists, hardware/rockchip/camera_aidl/etc/camera_etc.mk)
 endif #CAMERA_SUPPORT_VIRTUAL
 
 #enable eptz

@@ -4,3 +4,6 @@ allow system_app config_gz:file r_file_perms;
 # For Rockchip configs
 allow system_app rockchip_config_data_file:dir rw_dir_perms;
 allow system_app rockchip_config_data_file:file create_file_perms;
+
+# For Wfd Sink
+allow system_app proc_net:file { read open getattr };

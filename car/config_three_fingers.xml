@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <!-- option value:
+        OFF : don't use this feature
+        PARTIAL : only white app list can use
+        FULL : only black app list don't user
+     -->
+    <log-enable>true</log-enable>
+    <enable>OFF</enable>
+    <finger-num>3</finger-num>
+    <min-swipe-distance-ratio>0.05</min-swipe-distance-ratio>
+    <effective-distance-ratio>0.5</effective-distance-ratio>
+    <white-app-lists>
+        <package>com.bilibili.bilithings</package>
+        <package>com.android.car.settings</package>
+        <package>android.rk.RockVideoPlayer</package>
+    </white-app-lists>
+    <black-app-lists>
+        <package>com.android.car.carlauncher</package>
+        <package>com.android.car.mapsplaceholder</package>
+        <package>com.android.systemui</package>
+        <package>com.android.permissioncontroller</package>
+        <package>com.android.car.developeroptions</package>
+    </black-app-lists>
+    <location>
+        <display>
+            <uniqueId>local:0</uniqueId>
+            <top>local:1</top>
+            <left>local:2</left>
+            <right>local:3</right>
+            <bottom>local:0</bottom>
+        </display>
+        <display>
+            <uniqueId>local:1</uniqueId>
+            <top>local:2</top>
+            <left>local:3</left>
+            <right>local:1</right>
+            <bottom>local:0</bottom>
+        </display>
+        <display>
+            <uniqueId>local:2</uniqueId>
+            <top>local:3</top>
+            <left>local:2</left>
+            <right>local:0</right>
+            <bottom>local:1</bottom>
+        </display>
+        <display>
+            <uniqueId>local:3</uniqueId>
+            <top>local:3</top>
+            <left>local:0</left>
+            <right>local:1</right>
+            <bottom>local:2</bottom>
+        </display>
+    </location>
+</config>

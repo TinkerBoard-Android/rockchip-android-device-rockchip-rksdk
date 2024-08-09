@@ -36,6 +36,6 @@ PRODUCT_COPY_FILES += \
 
 # Default env for test.
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_PRODUCT_PROPERTIES += \
     persist.dbg.keep_debugfs_mounted=1
 endif

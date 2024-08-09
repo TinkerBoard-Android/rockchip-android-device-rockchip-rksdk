@@ -1,0 +1,2 @@
+allowxperm vold vold_device:blk_file ioctl { 0x1271 };
+allow vold fuseblkd_exec:file { read getattr execute open execute_no_trans map };

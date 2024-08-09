@@ -28,6 +28,18 @@ ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),box)
         device/rockchip/common/box/sepolicy/vendor
 endif
 
+ifeq ($(BUILD_WITH_RK_EBOOK), true)
+    BOARD_SEPOLICY_DIRS += \
+        device/rockchip/common/sepolicy/ebook_vendor
+    SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+        device/rockchip/common/sepolicy/ebook_system
+endif
+
+ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT), car)
+    BOARD_SEPOLICY_DIRS += \
+        device/rockchip/common/sepolicy/car/vendor
+endif
+
 ifeq (true, $(ENABLE_EVS_SERVICE))
 ifeq (true, $(filter true, $(ENABLE_EVS_SAMPLE) $(SOONG_CONFIG_rvcam_has_evs)))
     BOARD_SEPOLICY_DIRS += \
