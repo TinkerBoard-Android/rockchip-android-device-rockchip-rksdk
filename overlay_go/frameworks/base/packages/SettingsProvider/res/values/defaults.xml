@@ -17,7 +17,8 @@
  */
 -->
 <resources>
-    <integer name="def_screen_off_timeout">60000</integer>
+    <!-- Set the screen timeout to Never -->
+    <integer name="def_screen_off_timeout">0x7fffffff</integer>
    <!-- Initial value for the Settings.Secure.IMMERSIVE_MODE_CONFIRMATIONS setting,
          which is a comma separated list of packages that no longer need confirmation
          for immersive mode.
