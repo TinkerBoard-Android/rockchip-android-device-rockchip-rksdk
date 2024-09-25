@@ -64,7 +64,7 @@ PRODUCT_PACKAGES += \
     librkisp_af \
     librkisp_awb
 
-ifneq ($(strip $(PRODUCT_ASUS_NAME)), Tinker_Board_3N)
+ifeq ($(filter Tinker_Board_3 Tinker_Board_3N Sanden_CM Sanden_VM, $(strip $(PRODUCT_ASUS_NAME))), )
 PRODUCT_PACKAGES += \
     camera.$(TARGET_BOARD_HARDWARE)
 endif
