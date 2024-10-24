@@ -31,8 +31,12 @@ endif
 PRODUCT_AAPT_CONFIG ?= normal large xlarge hdpi tvdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 
+ifneq ($(strip $(TARGET_PRODUCT)), RVMON7_CTRL_PCB)
+  PRODUCT_PACKAGES += \
+    ExactCalculator
+endif
+
 PRODUCT_PACKAGES += \
-    ExactCalculator \
     wakeup-alarmalign-whitelist.xml
 
 ifdef TARGET_PREBUILT_KERNEL
@@ -851,12 +855,20 @@ else ifeq ($(TARGET_BOARD_PLATFORM_PRODUCT),atv)
   $(call inherit-product, device/rockchip/common/modules/rockchip_apps_box.mk)
 
 else # tablet
+
+ifneq ($(strip $(TARGET_PRODUCT)), RVMON7_CTRL_PCB)
   PRODUCT_PACKAGES += \
-        SoundRecorder
+    SoundRecorder
+endif
+
 ifneq ($(strip $(BUILD_WITH_GOOGLE_GMS_EXPRESS)),true)
 PRODUCT_PACKAGES += \
-    Music \
     WallpaperPicker
+
+ifneq ($(strip $(TARGET_PRODUCT)), RVMON7_CTRL_PCB)
+  PRODUCT_PACKAGES += \
+    Music
+endif
 
 $(call inherit-product, device/rockchip/common/modules/rockchip_apps.mk)
 
@@ -1055,7 +1067,9 @@ PRODUCT_COPY_FILES += \
 
 # Camera support
 ifeq ($(BOARD_CAMERA_SUPPORT),true)
+ifneq ($(strip $(TARGET_PRODUCT)), RVMON7_CTRL_PCB)
 $(call inherit-product, device/rockchip/common/modules/camera.mk)
+endif
 endif
 
 # Rockchip HALs

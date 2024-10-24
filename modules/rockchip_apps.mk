@@ -16,8 +16,12 @@
 PRODUCT_PACKAGES += \
     RKDeviceTest \
     Lightning \
-    LiveWallpapersPicker \
-    RkVideoPlayer \
     RkExplorer \
     StressTest \
     RKUpdateService
+
+ifneq ($(strip $(TARGET_PRODUCT)), RVMON7_CTRL_PCB)
+  PRODUCT_PACKAGES += \
+    LiveWallpapersPicker \
+    RkVideoPlayer
+endif
