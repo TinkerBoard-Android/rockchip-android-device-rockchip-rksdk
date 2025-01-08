@@ -88,7 +88,11 @@ else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm)
 else ifeq ($(strip $(BUILD_WITH_GO_OPT))|$(strip $(TARGET_ARCH)) ,true|arm64)
   # For arm64 Go tablet
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-  PRODUCT_PACKAGES += Launcher3QuickStepGo
+  ifeq ($(strip $(TARGET_PRODUCT)), RVMON7_CTRL_PCB)
+    PRODUCT_PACKAGES += Launcher3QuickStep
+  else
+    PRODUCT_PACKAGES += Launcher3QuickStepGo
+  endif
 else
 # Normal tablet, add QuickStep for normal product only.
   $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
